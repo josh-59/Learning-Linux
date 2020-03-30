@@ -67,25 +67,32 @@
       However, a few facts are relevant to us.
     </p>
 
+    <div class="aside_right">
+      <h3>Aside:</h3>
+      <i>Teletype</i> was a trade name of the Teletype Corporation, and was subsequently abbreviated to <i>tty</i>.
+      <a href="http://www.pdp8.net/asr33/videos.shtml">The Model 33</a> was among the most popular of these,
+      with around 600,000 units produced (Libes, 129).
+    </div>
+
     <p>
       First, computers of the 1960's and 70's were expensive.
-      The "Programmed Data Processor-7," which the first inklings of Unix can be traced to(Kernighan, 27),
+      The "Programmed Data Processor-7," which the first inklings of Unix can be traced to (Kernighan, 27),
       would have cost the equivalent of about $600,000 in 2020, and shipped with 18 kilobytes of memory.
       They were bought and maintained by
       organizations, with the idea of developing timesharing (i.e., multiuser) operating systems.
-      It was once envisioned that computing would be sold as a utility[1],
-      piped into homes and businesses like telephone or electricity;
-      this vision formed the impetus of Multics, the precursor to Unix.
+      In fact, it was once envisioned that computing would be offered as a utility,
+      piped into homes and businesses like telephone or electricity.
+      This vision formed the impetus of Multics, the precursor to Unix (Kernighan, 31).
     </p>
 
     <p>
       Second, the technological state of the 1960's included the <a href="https://mysite.du.edu/~jcalvert/tel/teletype.htm"<i>teletypewriter</i></a>,
       a device for sending telegrams.
-      These were, essentially, remote-controlled typewriters; in the 1960's, they were repurposed to interface with computers, and
-      the resulting abstraction formed the basis of the input/output mechanism of early interactive computing.
-      <i>Teletype</i> was a trade name of the Teletype Corporation, and was subsequently abbreviated to <i>tty</i>.
-      <a href="http://www.pdp8.net/asr33/videos.shtml">The Model 33</a> was among the most popular of these, with around 600,000 units produced (Libes, 129).
-      Paper-based terminals persisted well into the 1970's; later (c. 1980) electronic typewriters
+      These were, essentially, remote-controlled typewriters, and in the 1960's, they were repurposed to
+      interface with computers.
+      The resulting abstraction formed the basis of the input/output mechanism of early interactive computing.
+
+      Paper-based terminals persisted well into the 1970's; later electronic typewriters
       <a href="https://www.youtube.com/watch?v=z-u4kUeIqDI">sometimes support "terminal mode,"</a>
       allowing them to interface with computers via serial cable.
     </p>
@@ -129,10 +136,11 @@
     <p>
       It's worth noting that the idea of mainframe-driven utility computation suggests that the computational structure
       forms a tree:
-      End-users correspond to leaf (terminal) nodes, and there exists a privileged user at the root.
+      The "root user" would sit at the root of this tree, exercising super-user priveledges over the machine,
+      while end-users would be positioned at the leaves of the tree.
       Concurrently, although "console" and "terminal" both denote the same hardware, they differ in their relation to
-      software:  Kernel errors were, traditionally, piped to the console<sup>[42]</sup>.
-      Thus, the "root user" would sit at the "console", and had the responsibility of maintaining the mainframe for terminal users.
+      software:  Kernel errors were traditionally piped to the console<sup>[42]</sup>, so that the console
+      would be the domain of the root user.
     </p>
 
     <br>
@@ -147,16 +155,17 @@
   <p>
     The typical terminal is connected to a computer by a full-duplex communication pipeline.
     In days' past, this was a serial port.
-    The Unix environment presents an abstraction of this connection as a special device file;
-    located in <tt>/dev</tt>, the tty files are available to each user-space process:
+    The Unix environment presents an abstraction of this connection as a special device file.
+    Located in <tt>/dev</tt>, the tty files are available to each user-space process:
     A program can open, read from and write to these devices, with the operating system
     being responsible for the details.
     By this method, a user-space program has access to nontrivial, if elementary, input and output,
-    by the trivial method of file access.
+    by the uniform method of file access.
     Moreover, for a Unix system accessed via terminal, the flow of data through the /dev/tty.* files represents the entirety of input and output.
   </p>
 
-
+  <p>
+    Within the <tt>/dev</tt> directory,
 
   tty: Print the file name of the terinal connect to standard input
     /dev/pts/0 ??
