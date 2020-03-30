@@ -2,6 +2,13 @@ body {
   margin: 0;
 }
 
+#nav_home {
+  margin: 0;
+  padding: 0;
+  width: 240px;
+  overflow: auto;
+}
+
 #nav_bar_1 {
   margin: 0;
   padding: 0;
