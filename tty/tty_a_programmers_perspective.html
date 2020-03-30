@@ -1,0 +1,653 @@
+<!--
+  TODO
+    If it's not a translation: Email a copy of your derivative work
+    (in a format LDP accepts) to the author(s) and maintainer (could be
+    the same person).  If you don't get a response then email the LDP
+    (Linux Documentation Project): submit@en.tldp.org.
+
+
+  READ:
+  https://en.wikipedia.org/wiki/ANSI_escape_code
+  http://heather.cs.ucdavis.edu/~matloff/UnixAndC/CLanguage/Curses.pdf
+
+    http://www.samhallas.co.uk/repository/telegraph/teletype_story.pdf
+
+  https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios/
+
+  Cite three Wiki-commons photos
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8"/>
+
+<html>
+<head>
+  <link href="../style.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
+  <title>tty: A Programmer's Perspective </title>
+</head>
+
+<div id="nav_bar_1" class="nav">
+  <ul>
+    <li> <a href="../index.html">NKN Home</a></li>
+    <li> <a class="active" href="#about">tty: A Programm- er's Perspective</a></li>
+  </ul>
+</div>
+
+<div id="nav_bar_2" class="nav">
+  <ul>
+    <li><a href="#history"> History </a></li>
+    <li><a href="#two_way_flow"> Two-Way Flow </a></li>
+    <li><a href="#controlling_the_terminal"> Controlling the Terminal </a></li>
+    <li><a href="#emulation"> Emulation </a></li>
+    <li><a href="#references"> References </a></li>
+    <li><a href="#credits">Credits and Licenses</a></li>
+  </ul>
+</div>
+
+<div id="text_terminals" class="content">
+  <h1> Text Terminals </h1>
+    <p>
+      A text terminal is a computer peripheral similar to a mouse and keyboard combination.
+      However, whereas a modern monitor receives a pixel-wise description of output to display
+      from the computer several times a second, a text terminal receives a description of
+      the characters to display only once, and uses an onboard buffer to store that information.
+      Text terminals are an archaic and largely obsolete technology, but were instrumental to the
+      development of modern Linux.
+      This paper looks at the technology and its ramifications seen in Linux today.
+    </p>
+  </div>
+
+  <div id="history" class="content">
+    <h2> History </h2>
+    <p>
+      The history of Unix is well outside the scope of this discussion.
+      However, a few facts are relevant to us.
+    </p>
+
+    <p>
+      First, computers of the 1960's and 70's were expensive.
+      The "Programmed Data Processor-7," which the first inklings of Unix can be traced to(Kernighan, 27),
+      would have cost the equivalent of about $600,000 in 2020, and shipped with 18 kilobytes of memory.
+      They were bought and maintained by
+      organizations, with the idea of developing timesharing (i.e., multiuser) operating systems.
+      It was once envisioned that computing would be sold as a utility[1],
+      piped into homes and businesses like telephone or electricity;
+      this vision formed the impetus of Multics, the precursor to Unix.
+    </p>
+
+    <p>
+      Second, the technological state of the 1960's included the <a href="https://mysite.du.edu/~jcalvert/tel/teletype.htm"<i>teletypewriter</i></a>,
+      a device for sending telegrams.
+      These were, essentially, remote-controlled typewriters; in the 1960's, they were repurposed to interface with computers, and
+      the resulting abstraction formed the basis of the input/output mechanism of early interactive computing.
+      <i>Teletype</i> was a trade name of the Teletype Corporation, and was subsequently abbreviated to <i>tty</i>.
+      <a href="http://www.pdp8.net/asr33/videos.shtml">The Model 33</a> was among the most popular of these, with around 600,000 units produced (Libes, 129).
+      Paper-based terminals persisted well into the 1970's; later (c. 1980) electronic typewriters
+      <a href="https://www.youtube.com/watch?v=z-u4kUeIqDI">sometimes support "terminal mode,"</a>
+      allowing them to interface with computers via serial cable.
+    </p>
+
+    <center>
+      <a href="http://bitsavers.org/pdf/dataTerminalsAndCommunications/DTC-302_Brochure.pdf">
+        <img height=500 src="terminal.jpeg" href="http://bitsavers.org/pdf/dataTerminalsAndCommunications/DTC-302_Brochure.pdf"> </img>
+      <br>
+      </a>
+       DTC-302 HyWriter, released 1976
+    </center>
+
+    <p>
+      As interactive computing became more popular, hard-copy terminals were phased out in favor of
+      screen-based entities.
+      The resulting devices, referred to as <i>text terminals,</i> consisted of a monitor and a keyboard;
+      the monitor was unlike a modern monitor in that it contained a buffer, on the order of a few kilobytes,
+      which maintained the text currently on screen, and a character-to-bitmap font table to be referenced
+      when drawing each character; that is, it included its own font.
+    </p>
+
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/VT78.jpg/300px-VT78.jpg" class="img_left"> </img>
+
+    <p>
+      The computer itself was not required to draw each character on-screen; that was the responsibility of
+      the terminal.
+      Rather, the mainframe was only expected to tell the terminal <i>which</i> characters to draw, once.
+      Users would sit at a terminal, connected to a (possibly distant) machine, would type in
+      programs, issue commands, enter data, etc.; a serial cable connected this I/O device to the computer,
+      and it was termed a <i>terminal,</i> since it was located at the terminal end of this cable.
+    </p>
+
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/VT420_with_German_keyboard.jpg/320px-VT420_with_German_keyboard.jpg" class="img_right"> </img>
+
+    <p>
+      The text terminal <a href="https://www.vt100.net/dec/vt_history">was used for decades</a> as the principle means of interactive computing.
+      Today, text terminals are obsolete, but the abstraction persists in both modern Linux and Unix,
+      via emulated terminals, virtual terminals, tty device files, and the associated software required to support them.
+    </p>
+
+    <p>
+      It's worth noting that the idea of mainframe-driven utility computation suggests that the computational structure
+      forms a tree:
+      End-users correspond to leaf (terminal) nodes, and there exists a privileged user at the root.
+      Concurrently, although "console" and "terminal" both denote the same hardware, they differ in their relation to
+      software:  Kernel errors were, traditionally, piped to the console<sup>[42]</sup>.
+      Thus, the "root user" would sit at the "console", and had the responsibility of maintaining the mainframe for terminal users.
+    </p>
+
+    <br>
+    <center>
+      <img width=100% src="https://upload.wikimedia.org/wikipedia/commons/e/ee/Email_terminals_at_Oulu_uni_2008.jpg" class="img_cntr"> </img>
+    </center>
+
+</div>
+
+<div id="two_way_flow" class="content">
+  <h2> Two-Way Flow </h2>
+  <p>
+    The typical terminal is connected to a computer by a full-duplex communication pipeline.
+    In days' past, this was a serial port.
+    The Unix environment presents an abstraction of this connection as a special device file;
+    located in <tt>/dev</tt>, the tty files are available to each user-space process:
+    A program can open, read from and write to these devices, with the operating system
+    being responsible for the details.
+    By this method, a user-space program has access to nontrivial, if elementary, input and output,
+    by the trivial method of file access.
+    Moreover, for a Unix system accessed via terminal, the flow of data through the /dev/tty.* files represents the entirety of input and output.
+  </p>
+
+
+
+  tty: Print the file name of the terinal connect to standard input
+    /dev/pts/0 ??
+    /dev/pts/1 ??
+
+  stty: Print or change terminal characteristics
+
+  such as /dev/tty
+
+
+  A list of Linux devices
+  (the stuff in the /dev directory) may be found in "Linux Allocated Devices" which should be
+  included with kernel sources. It "describes" what each device used for in only a word or two but doesn't tell you how to use them.
+  7.1 Serial Port Terminals
+
+  The computer considers each serial port to be a "device". It's sometimes called a terminal device since at
+  one time terminals were the most common use for a serial port. For each such serial port there is a special
+  file in the /dev (device) directory. /dev/ttyS0) is the special file for the serial port known as COM1 in the DOS/Windows world.
+
+  To send text to a terminal you may redirect standard output of some command-line command to the appropriate
+  special file. For example typing "echo test > /dev/ttyS1" at the command prompt should send the word "test"
+  to the terminal on ttyS1 (COM2) provided you have write permission on /dev/ttyS1. Similarly, typing
+  "cat my_file > /dev/ttyS0" will send the contents of the file my_file to COM1 (ttyS0).
+
+
+
+  It's best to think of the tty devices today as first-generation i/o;
+  we have moved away from terminals, but have retained the basic structure of interactive computing.
+
+  PC's today emulate terminals
+
+  When the host computer starts up it runs the program getty. (or agetty)
+  The getty program runs the "login" program to log people in.
+  A "login:" prompt appears on the screen.
+  People at the terminals and/or console log in (after giving their passwords)
+  and then have (limited) access to the computer.
+  When it's time to shut the terminal down, everyone must log off and
+  (and power off their terminal). See Login Restrictions regarding
+  restricting logins (including allowing the root user to log in at terminal). (shutdown can send a message to all logged-in users)
+
+  "Port" from "serial port".  The ports have names/numbers. The first few are: ttyS0, ttyS1, ttyS2, etc.
+
+  are represented by special files found in the /dev (device) directory.
+
+  7.3 The Controlling Terminal /dev/tty
+
+  /dev/tty stands for the controlling terminal (if any) for the current process.
+  To find out which tty's are attached to which processes use the "ps -a" command at the
+  shell prompt (command line). Look at the "tty" column. For the shell process you're in,
+  /dev/tty is the terminal you are now using. Type "tty" at the shell prompt to see what it is
+  (see manual pg. tty(1)). /dev/tty is something like a link to the actually terminal device name with
+  some additional features for C-programmers: see the manual page tty(4).
+  7.4 /dev/ttyIN "Terminals"
+
+  N stands for an integer. One use of these in Linux is with the ISDN driver package: isdn4linux. The ttyIN is something like ttySN but it emulates a modem and can be given modem commands.
+  7.5 The Console: ttyN or vc/N
+
+  In Linux the PC monitor is usually called the console and has several device special files associated with it: vc/0 (tty0), vc/1 (tty1), vc/2 (tty2), etc. When you log in you are on vc/1. To go to vc/2 (on the same screen) press down the 2 keys Alt(left)-F3. For vc/3 use Left Alt-F3, etc. These (vc/1, vc/2, vc/3, etc.) are called "virtual terminals". vc/0 (tty0) is just an alias for the current virtual terminal and it's where messages from the system are sent. Thus messages from the system will be seen on the console (monitor) regardless of which virtual terminal it is displaying.
+
+  You may log in to different virtual terminals and thus have a few different sessions with the computer going on at the same time. Only the system or the root user may write to /dev/vc/0 to which /dev/console is sometimes linked. For more info on the console see The Linux Console.
+  7.6 Creating a Device with "mknod"
+
+  The /dev directory comes supplied with many device special files. If you need something
+  that's not there you may try to create it with the "mknod" command.
+  See the manual page ttys(4) for how to do this for serial ports.
+  To use mknod you must know the major and minor device numbers. You might be able
+  to infer the numbers you need by using the "ls -l" command in the /dev directory.
+  It will display the major and minor numbers of existing special files.
+  Next Previous Contents
+
+  Just for fun, try pressing CTRL-ALT-F5, logging in, and they calling the <tt>who</tt> command.
+
+
+
+      https://history-computer.com/index.html
+</div>
+
+<div id="controlling_the_terminal" class="content">
+  <h2> Controlling the Terminal </h2>
+
+  Modern Library:
+  #include <termios.h>
+    See man termios,
+
+  <p>
+    For all text terminals, bytes flow from the keyboard to the computer, and bytes flow from the computer to the screen.
+    In particular, bytes do not flow from the keyboard to the terminal's monitor;
+    the reflection of typed characters on-screen is a function of the computer itself,
+    and not a function of the terminal.
+    We can shut off this functionality by the following:
+  </p>
+
+  <p>
+    From the shell,
+    <div class="code">
+      stty -echo
+    </div>
+  </p>
+
+  <p>
+    Or, in a Posix-conforming environment,
+    <div class="code">
+      #import &lt;termios.h&gt;<br>
+      <br>
+      [...]<br>
+      <br>
+      // Turn off echo, so typed user input does not show up<br>
+    	assert( tcgetattr(STDIN_FILENO, &term) >= 0 );<br>
+    	term.c_lflag &amp;= ~ECHO;<br>
+    	assert( tcsetattr(STDIN_FILENO, TCSANOW, &term) >= 0 );<br>
+    </div>
+  </p>
+
+  <p>
+    This is useful for writing "interactive" or menu-driven programs;
+    in either case, we must remember to turn it back on again:
+    (<tt>stty echo</tt> or <a href="http://www.apuebook.com/apue3e.html">Advanced Programming in the Unix Environment</a>).
+  </p>
+
+  <p>
+    It's worth repeating at this point that the terminal <i>proper</i> only sends a stream of bytes, and
+    merely receives a stream of bytes.
+    In particular, there does not exist any computer-accessible data structure
+    within the monitor:  The only method of sending data to the monitor is via the same channel as
+    printable characters.
+    In the US, printable characters were traditionally mapped via ASCII, with the exception of <a href="https://en.wikipedia.org/wiki/EBCDIC"> some early IBM mainframes</a>.
+    The first 32 ASCII characters are control characters, rather than printable;
+    they include the famous "bell" character, and both "tab" (horizontal tab) and "newline" (linefeed).
+    Because most of these control characters quickly became antiquated, they are not widely used.
+  </p>
+
+  <p>
+    For instance, ASCII alone does not provide provisions for moving the cursor or scrolling.
+    As a consequence, ANSI escape sequences were implemented in the terminals.
+    These begin with the ASCII "escape" control character (decimal 27)
+    and the left-bracket "<tt>[</tt>" printable<sup><a href="#references">[2]</a></sup>, and are entirely ASCII sequences.
+    Technically, these sequences are terminal-specific, but they are still viable today because modern emulators <a href="https://unix.stackexchange.com/questions/43945/whats-the-difference-between-various-term-variables">implement a superset</a> of deprecated terminals' escape sequences.
+    Within C, to print <tt>Hello World!</tt> in reverse, we could do
+
+    <div class="code">
+      #include &lt;stdio.h&gt;<br>
+      <br>
+      int main() {<br>
+        	&emsp;&emsp;&emsp;&emsp;printf("\033[7m Hello World! \033[m"); <br>
+      }<br>
+    </div>
+  </p>
+
+  <p>
+    So, by merely printing a special sequence through stdout to the terminal, we have
+    modified the behavior (state) of the recipient terminal.
+    A few notes:
+    <ol>
+      <li> <tt>033</tt> above is octal format, with decimal equivalent 27. </li>
+      <li> This "setting" persists (try omitting the trailing <tt>\033[m</tt> ) </li>
+      <li> I'm such a dork </li>
+      <li> To send an escape sequence via console, type CTRL+V, then ESC; <br>you should see <tt>^[</tt></li>
+      <li> Why can't you just type <tt>^[</tt>?  <a href="http://unixwiz.net/techtips/termios-vmin-vtime.html"> Don't ask.</a> </li>
+    </ol>
+  </p>
+
+  <p>
+    <a href="http://ascii-table.com/ansi-escape-sequences-vt-100.php"> There are often hundreds of such escaped sequences</a>,
+    including such novelties as "set smooth scroll"; most real terminals can even change fonts.
+    Some escape sequences may take parameters such as coordinates;
+    the parameters become part of the escape sequence.
+  </p>
+
+  <p>
+    Terminal input is a different animal.
+    To explain, we must start at the root.
+    The terminal keyboard sends <i>scancodes</i> to the computer<sup><a href="#references">[3]</a></sup>.
+    These are received and interpreted by the terminal device driver, yielding <i>keycodes</i>, then, within the same driver, ASCII.
+    The settings for this driver can sometimes be accessed via operating-system settings but are typically one-time-only configuration settings.
+  </p>
+
+  <p>
+    The information is then passed, within the kernel, to the famous "terminal line discipline,"
+    purveyor of headaches, which is a kernel module tasked with the majority of computer-side terminal interpretation, and home to the <a href="http://man7.org/linux/man-pages/man3/termios.3.html">termios struct.</a>
+    By default it is set to "Cannonical" mode so that, for instance, echo is on and input is buffered line-wise (among many, many other things).
+    Getting your hands on a termios struct demands a system call; for more information, see <a href="http://www.apuebook.com/apue3e.html">Advanced Programming in the Unix Environment</a>.
+  </p>
+
+  <p>
+    The terminal line discipline is positioned between the keyboard's hardware driver and the read/write system call interface provided by the kernel;
+    concurrently, it receives all characters coming from the driver (in particular, character combinations such as CTRL+S and CTRL+D).
+    It is the terminal line discipline's job to map some of these onto special characters.
+    Special characters are control sequences, but in the other direction.
+  </p>
+
+  <p>
+    For instance, the CTRL+S key combination is often mapped to the STOP special character;
+    upon receiving the input bound to this special character, the terminal line discipline stops (and stores) all input and output
+    to and from the terminal.
+    This can make it appear as though the terminal emulator has frozen, but it has not.
+    Neither input nor output is discarded; pressing CTRL+Q (START) will send all queued input to the kernel's <tt>read()</tt> system call,
+    and continue sending information out to the terminal monitor.
+    The terminal then resumes normal operation.
+  </p>
+
+  <p>
+    This was more useful in times' past, when the terminal was connected via phone line and its speed relatively slow;
+    the effect of STOP was to pause scrolling.
+    In addition, the bell character was traditionally sounded when output was stopped and the terminal
+    line discipline's buffer became full, thereby warning the user that data was being discarded.
+    From the command prompt, we can list special characters (and other terminal attributes) by,
+  </p>
+
+  <div class="code">
+    <tt> stty -a </tt>
+  </div>
+
+  <p>
+    This lists all bindings to special characters, in addition to other terminal attributes, such as speed.
+    There are eleven Posix-defined special characters, and most of them can be remapped through the <tt>termios</tt> struct; see APUE for more information.
+    In particular, the terminal line discipline is responsible for mapping characters to signals, such as CTRL-D to <tt>EOF</tt>;
+    the terminal line discipline is where keyboard signals are generated.
+  </p>
+
+  <p>
+    The termios struct is often manipulated in text-based programs
+
+  </p>
+
+  <p>
+    Application programs may utilize this database by calling certain C-Library functions. One large set of such programs
+    (over 200) is named "ncurses" and are listed in the manual page for "ncurses" which comes with a developer's ncurses package.
+    ncurses-examples, available in the Debian package management:
+      sudo apt install ncurses-example
+      then located in /usr/lib/ncurses/examples
+      documentation avaialble via sudo gunzip README.gz
+      </p>
+
+    <p>
+      NCURSES not only creates a wrapper over terminal capabilities, but also gives a robust framework to create nice
+      looking UI (User Interface)s in text mode. It provides functions to create windows etc. Its sister libraries
+      <tt>panel</tt>, <tt>menu</tt> and <tt>form</tt> provide an extension to the basic curses library.
+
+          ncurses was originally released in the mid-1990's (explains a lot, really)
+
+    </p>
+
+    <img width=100% src="xmas.gif">
+
+      <center style="font-size: 12pt;">
+      Example from ncurses library
+    </center>
+
+    </div>
+
+      <div id="emulation" class="content">
+        <h2> Emulation </h2>
+        <center><i>"Abandon all hope, ye who enter here"</i></center>
+        -- xterm documentation README
+
+        <p>
+          Terminal Emulation is not easy.
+          harder than it looks https://invisible-mirror.net/archives/shuford/terminal/emulation_how_to_news.txt
+
+          Common Emulators
+            vt100:
+              Not *just* ANSI-compatible, but also vt100-compatible
+                Source: https://invisible-mirror.net/archives/shuford/terminal/first_principles.html
+                almost everything is vt100-compatible today
+
+            xterm:
+            Synopsis: https://invisible-island.net/xterm/
+              The xterm program is a terminal emulator for the X Window System. It provides DEC VT102 and Tektronix 4014 compatible terminals for programs that can't use the window system directly.
+              This version implements ISO/ANSI colors using the "new" color model (i.e., background color erase). It also implements most of the control sequences for VT220, as well as selected features from other DEC terminals such as VT320, VT420 and VT520.
+
+            xterm-256color
+
+            https://stackoverflow.com/questions/10003136/what-is-the-difference-between-xterm-color-xterm-256color
+
+
+
+          6.8 Emulation
+
+          Most terminals today have more than one emulation (personality or "terminal mode"). The terminal model
+          numbers of terminals formerly made by DEC (Digital Equipment Corporation now Compaq) start with VT (e.g. VT100).
+           Many other terminals which are not VT100 may be set up to emulate a VT100. Wyse was a major terminal manufacturer
+           until about 2005. Most of their terminals can emulate various DEC terminals such at VT100 and VT220.
+           Thus if you want to, say, use a VT320 terminal you may either use a real VT320 in "native" personality or
+           possibly use some other terminal capable of emulating a VT320.
+
+          The "native" personalities usually have more capabilities so, other things being equal, "native" is usually
+          the best to use. But other things may not be equal. Since the Linux console emulates a VT102 it you may want
+          to have a terminal emulate this (or something close to it such as VT100). This will help insure that some
+          programs that may not handle terminals properly will still work OK on your terminal. Some programs will assume
+          that you are using a VT102 if the program can't find a terminfo for your terminal (or can't find a certain capability). Thus the failure of a program to work correctly with your non-vt102 terminal may well be your fault if you don't provide a good terminfo file for your terminal. Using "native" and then reporting any bugs will help discover and fix bugs which might not otherwise get detected.
+
+          The most common type of emulation is to use a PC like it was a vt100 terminal (or the like).
+          Programs loaded into the PC's memory do the emulation. In Linux (unless you're in X Window) the PC monitor
+          (called the console) emulates a terminal of type "Linux" (close to vt100). Even certain windows within X Window emulate terminals. See Terminal Emulation.
+
+          6.9 The Console
+          On a PC, the monitor is normally the console. It emulates a terminal of type "Linux".
+          One logs on to it as a virtual terminal. See The Console. It receives messages from the kernel
+          regarding booting and shutdown progress. One may have the messages that normally go to the console,
+          go to the terminal. To get this you must manually patch the kernel, except that for kernel 2.2 (or higher)
+          it is a "make config" option. See Make a Serial Terminal the Console.
+          Next Previous Contents
+
+
+
+          CAREFUL:
+          https://invisible-mirror.net/archives/shuford/terminal/pc_emulation.html
+
+          """
+          The VT100 was the first product of DEC built to understand a set of
+          control codes compatible with ANSI X3.64. The VT100 became a very popular product,
+          and many other companies essentially copied it, such that many terminal products
+          on the market were not merely "ANSI compatible" but were more specifically "VT100
+          compatible", copying the layout of the keyboard, etc. (Yet the VT100 had in it a
+          feature to help people who had started out with VT52s: the VT100 could be set to
+          act as though it were a VT52, in an emulation mode.)
+          """FROM  https://invisible-mirror.net/archives/shuford/terminal/first_principles.html
+
+          """
+
+          """
+
+          https://st.suckless.org/
+
+          https://invisible-island.net/xterm/xterm.faq.html#who_did_it
+
+
+
+          6.7 The Interface
+
+          The environment variable TERM is the type of terminal Linux thinks you are using.
+          Most application programs use this to look up the capabilities in the terminfo database so
+          TERM needs to be set correctly.
+
+          But there is more to a correct interface than the computer
+          knowing about the capabilities of the terminal.
+
+          For bytes to flow from the computer to the terminal the terminal must be set to
+          receive the bytes at the same baud rate (bits per second) as they are sent out
+          from the terminal. If the terminal is set to receive at 19,200 baud and the computer
+          sends out characters at 9600 baud, only garbage (or perhaps nothing) will be seen on the
+          screen. One selects the baud rate for a terminal (as well as many other features) from the
+          terminals "set-up" menus at the terminal. Most terminals have a large number of options in
+          their "set-up" menus (see Terminal Set-Up (Configure) Details). The computer serial port has options also and these options must be set up in a compatible way (see Computer Set-Up (Configure) Details.
+
+
+          6.6 Lack of Standardization Solved by Terminfo
+          Most terminals made in the US used the same ASCII to encode characters;
+          however, no ASCII did not stipulate escape sequences
+
+          To overcome these problems a database called "termcap" (meaning "terminal capabilities") was established. Termcap
+          was later superceded by "terminfo". This database resides in certain files on the computer and has a section of it
+          (sometimes a separate file) for each model of terminal. For each model (such as VT100) a list of capabilities is
+          provided including a list of certain escape sequences available. For example blink=\E5m means that to make the cursor
+          start blinking the terminal must be sent: Escape 5 m.
+
+
+
+          For a pseudo terminal pair such as ptyp3 and ttyp3, the pty... is the master or controlling terminal and the tty... is the slave.
+
+          There are only 16 ttyp's: ttyp0-ttypf (f is a hexadecimal digit). To get more pairs, more letters such as q, r, s are used instead of p. For example the pair ttys8, ptys8 is a pseudo terminal pair. Later on, even more letters were added so as to allow even more pseudo terminals. And when z was reached, they wrapped around to a. This is confusing but old habits are difficult to change. Today Linux allow say ttyp189 but it's not used. The device file system, which was abandoned in 2004, would have used tty/s189. Be sure not to type say ttys2 if you mean ttyS2 (a real serial port).
+
+          The master and slave are really the same "port" but the slave is used by the application program and the master is used by a network program (or the like) which supplies (and gets) data to/from the slave port. The program using the slave port can run "as is" since it thinks it is talking to a serial port.
+
+          Unix98 pseudo terminals (available on Linux) is more advanced than the above but the basic concepts are the same (only the device names and methods of creating them change). It creates pseudo terminal devices on request so there is no need to check if the pseudo terminal you might want to use in in use. By opening /dev/ptmx a new pseudo terminal pair is created. The master doesn't show up as a device but is just a file descriptor number passed to the computer program that opened /dev/ptmx. But the slave is put into the /dev/pts directory: for example" /dev/pts/3.
+
+          The /dev/pts directory is considered to be a file system of type devpts and appears in the lists of mounted filesystems. While the "file" /dev/pts/3 looks like an entry in the now obsolete device filesystem, /dev/pts Is really a wholly different kind of filesystem.
+
+          See the Linux manual pages "pty" and "pts" (Unix 98 style) for more details. For programmers there's the man-page openpty/forkpty (either name displays the same man-page) which assumes that you already understand pseudo terminals. There is a usr/include/pty.h file for use by programmers. In earlier versions of Linux there was a pty.o module, but it now seems that it's been built into the kernel. Here's an example of some options available when you are compiling a Linux 2.6 kernel:
+
+          CONFIG_UNIX98_PTYS=y CONFIG_LEGACY_PTYS=y
+          CONFIG_LEGACY_PTY_COUNT=256
+
+        Text terminals proper were never popular with PC's, for obvious reasons.
+
+        It is still possible to use Linux as a multi-user operating system, though the economics involved make the practice, largely, obsolete.
+        Moreover, they do not offer high-speed graphic
+
+        You know, on second thought, this could make a comeback.
+
+        In particular, the font and the resolution of the terminal were independant of the computer itself.
+
+        The text interface that remains today
+
+        xterm, gnome-terminal, or konsole (KDE) use software to emulate a real terminal.
+
+
+        The terminal is like a "window" into the computer just like
+        a monitor (and keyboard) are.
+        You may have already used virtual terminals in Linux (by pressing Left Alt-F2, etc.).
+
+        In contrast to using a virtual terminal at the console (monitor), this
+        allows another person to sit at another real terminal and use the same
+        computer simultaneously with others.
+
+
+https://www.kernel.org/doc/html/latest/driver-api/serial/n_gsm.html?highlight=tty
+
+
+        7.2 Pseudo Terminals
+        Pseudo terminals are pairs of devices such as /dev/ptyp3 and /dev/ttyp3. There is no physical device directly
+        associated with either of them, not even a serial port connector. But if a program treats ttyp3 like
+        it was a serial port, what is read and written to that port appears on the other member of the pair ptyp3
+        which another program uses to read and write to. Thus two programs talk to each other via this method and one
+        program on ttyp3 thinks it's talking to a serial port. It's something like a "pipe" between these two tty's.
+
+        For talking to ttyp3, any program designed to talk to a serial port will do. But for the other program that
+        talks to ptyp3, it must have been specially written to talk to it. It's mainly programmers that must concern
+        themselves with pseudo terminals and most users don't need to worry about them.
+
+        Here's an example: If someone connects via telnet to your computer over a network (you are a telnet server),
+        the part of the telnet program handling this connection on your computer may wind up connected to the pseudo
+        terminal ptyp2. A getty program should be running on the corresponding ttyp2. Getty thinks it's talking to a
+        terminal. When telnet gets a character from the remote client, it goes thru ptyp2 to ttyp2 to getty which then
+        sends back "login:" routed via ttyp2, ptyp2, your server telnet program, and then out to the network back to the
+        client. Here the login program and the telnet server program talk to each other via a "pseudo terminal". Note that
+        there is no pseudo terminal used on the client computer, just telnet. Of course the server allocates a
+        pseudo terminal (on the server) for each client.
+
+        In X Window, the terminal emulator programs (such as xterm) use pseudo terminals. Ham radio programs under
+        Linux also use them. By using certain application software, it is possible to have 2 or more pseudo terminals attached to the same physical serial port.
+
+        Windows bash-like terminal emulator-ish:
+          https://cmder.net/
+      </div>
+
+
+
+
+
+
+    <div id="lgc_video" class="content">
+      <iframe width=100% height="650" src="https://www.youtube.com/embed/RuZUPpmXfT0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <div id="references" class="content">
+        <h2> References </h2>
+
+        <br>
+        [1] Unix: A History and a Memoir. Brian Kernighan.  Published 2020, by Brian W. Kernighan via Kindle Direct Publishing.
+        <br>
+        [2] Small Computer Systems Handbook. Sol Libes.
+        <br>
+        [2] http://ascii-table.com/ansi-escape-sequences-vt-100.php
+        <br>
+        [3] http://www.tldp.org/HOWTO/Keyboard-and-Console-HOWTO-2.html
+        <br>
+        <a href="http://www.apuebook.com/apue3e.html"> Advanced Programming in the Unix Environment </a>
+        <br>
+        https://history-computer.com/ModernComputer/Electronic/PDP-1.html
+        <br>
+        <p>[1] The New York Times, https://www.nytimes.com/1970/04/05/archives/maxi-computers-face-mini-conflict-mini-trend-reaching-computers.html
+        <br>
+        Image: https://en.wikipedia.org/wiki/Teleprinter#/media/File:Telex_machine_ASR-32.jpg
+        <br>
+        <i>Understanding Unix/Linux Programming:  A Guide to Theory and Practice </i> by Bruce Molay.
+        <br>
+        <a href="http://www.apuebook.com/apue3e.html"> Advanced Programming in the Unix Environment </a>
+        <br>
+        Termios man page: man 3 termios
+        <br>
+        http://www.tldp.org/HOWTO/Keyboard-and-Console-HOWTO-5.html
+        <br>
+        https://en.wikibooks.org/wiki/Serial_Programming/termios
+        <br>
+        http://unixwiz.net/techtips/termios-vmin-vtime.html
+        <br>
+        https://invisible-island.net/ncurses/announce.html#h2-overview
+        <br>
+        http://tldp.org/HOWTO/NCURSES-Programming-HOWTO/awordwindows.html
+        <br>
+        http://www.tldp.org/HOWTO/Keyboard-and-Console-HOWTO.html#toc5
+        <br>
+        [42] https://superuser.com/questions/144666/what-is-the-difference-between-shell-console-and-terminal
+    </div>
+
+
+
+
+
+
+  <div id="credits" class="content">
+    <h2> Credits and Licensure </h2>
+    <p>
+      This was written by Josh Timmons, and is a derivate work of The Linux Documentation Project's
+      <a href="https://tldp.org/HOWTO/Text-Terminal-HOWTO-1.html"><i>Text Terminal How-To</i></a>, by David S. Lawyer.
+      It is released under the <a href="https://creativecommons.org/licenses/by-nc/4.0/"> Creative Commons Attribution-ShareAlike 4.0 International license </a>.
+      Please send any corrections or comments to
+    </p>
+
+
+  </div>
+  <script src="../jquery-3.4.1.min.js"> </script>
+  <script src="../animate-nav-2.js"> </script>
+</html>
