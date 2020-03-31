@@ -155,12 +155,14 @@
     A program can open, read from and write to these devices, with the operating system
     being responsible for the details.
     By this method, a user-space program has access to nontrivial, if elementary, input and output,
-    by the uniform method of file access.
-    Moreover, for a Unix system accessed through a terminal, the flow of data through the /dev/tty.* files represents the entirety of input and output.
+    by the trivial method of file access.
+    Moreover, for a Unix system accessed through a terminal, the flow of data
+    through the /dev/tty.* files represents the entirety of input and output.
   </p>
 
   <div class="aside_left" style="width: 30%;">
     <center><b><tt>/dev</tt></b></center>
+    /dev/tty&emsp;Controlling Terminal <br>
     /dev/tty0		Current virtual console <br>
     /dev/tty1		First Virtual Console <br>
     /dev/tty2   Second Virtual Console <br>
@@ -185,26 +187,65 @@
     </center>
   </div>
 
+
   <p>
-    Within the <tt>/dev</tt> directory,
+    Each teletype file in <tt>/dev</tt> is a character special device file.
+    To send text to a terminal you may redirect standard output of a command to an appropriate
+    special file.
+    The files differ in what they represent, what they are connected to, and who owns them.
+    We'll start with the most useful (and most interesting).
+  </p>
 
-  tty: Print the file name of the terinal connect to standard input
-    /dev/pts/0 ??
-    /dev/pts/1 ??
+  <h3>The Controlling Terminal: /dev/tty </h3>
+  <p>
+    This is the process's current tty device, if it exists <sup>[500]</sup>.
+    It is a process-specific file: For any process connected to a terminal,
+    it is connected here., by default, both standard in and standard out
+    are connected here.
+    "It is a synonym for the controlling terminal of a process, if any." -- man 4 tty
+  </p>
 
-  stty: Print or change terminal characteristics
+  <p>
+  /dev/tty stands for the controlling terminal (if any) for the current process.
+  To find out which tty's are attached to which processes use the "ps -a" command at the
+  shell prompt (command line). Look at the "tty" column. For the shell process you're in,
+  /dev/tty is the terminal you are now using. Type "tty" at the shell prompt to see what it is
+  (see manual pg. tty(1)). /dev/tty is something like a link to the actually terminal device name with
+  some additional features for C-programmers: see the manual page tty(4).
+  </p>
 
-  such as /dev/tty
+  <h4> Demonstration </h4>
+    <ol>
+      <li> Open up two terminal emulators</li>
+      <li> Navigate each to <tt>/dev</tt></li>
+      <li> In each, confirm that <tt>tty</tt> exists, and is a character device</li>
+      <li> In each, confirm that writing to <tt>tty</tt> does not write to the other</li>
+    </ol>
 
 
-  A list of Linux devices
-  (the stuff in the /dev directory) may be found in "Linux Allocated Devices" which should be
-  included with kernel sources. It "describes" what each device used for in only a word or two but doesn't tell you how to use them.
-  7.1 Serial Port Terminals
+  <h3> The Commander's Chair: Console </h3>
+  <p>
 
+    /dev/console
+        Superuser device
+
+        ls -lF /dev/console
+        crw------- 1 root root 5, 1 Mar 31 05:33 /dev/console
+
+
+        https://unix.stackexchange.com/questions/60641/linux-difference-between-dev-console-dev-tty-and-dev-tty0
+        just that it was the "commander's chair".
+
+
+
+
+
+
+  Serial Port Terminals
   The computer considers each serial port to be a "device". It's sometimes called a terminal device since at
   one time terminals were the most common use for a serial port. For each such serial port there is a special
-  file in the /dev (device) directory. /dev/ttyS0) is the special file for the serial port known as COM1 in the DOS/Windows world.
+  file in the /dev (device) directory.
+  /dev/ttyS0) is the special file for the serial port known as COM1 in the DOS/Windows world.
 
   To send text to a terminal you may redirect standard output of some command-line command to the appropriate
   special file. For example typing "echo test > /dev/ttyS1" at the command prompt should send the word "test"
@@ -213,38 +254,21 @@
 
 
 
-  It's best to think of the tty devices today as first-generation i/o;
-  we have moved away from terminals, but have retained the basic structure of interactive computing.
 
-  PC's today emulate terminals
 
-  When the host computer starts up it runs the program getty. (or agetty)
-  The getty program runs the "login" program to log people in.
-  A "login:" prompt appears on the screen.
-  People at the terminals and/or console log in (after giving their passwords)
-  and then have (limited) access to the computer.
-  When it's time to shut the terminal down, everyone must log off and
-  (and power off their terminal). See Login Restrictions regarding
-  restricting logins (including allowing the root user to log in at terminal). (shutdown can send a message to all logged-in users)
 
-  "Port" from "serial port".  The ports have names/numbers. The first few are: ttyS0, ttyS1, ttyS2, etc.
 
-  are represented by special files found in the /dev (device) directory.
-
-  7.3 The Controlling Terminal /dev/tty
-
-  /dev/tty stands for the controlling terminal (if any) for the current process.
-  To find out which tty's are attached to which processes use the "ps -a" command at the
-  shell prompt (command line). Look at the "tty" column. For the shell process you're in,
-  /dev/tty is the terminal you are now using. Type "tty" at the shell prompt to see what it is
-  (see manual pg. tty(1)). /dev/tty is something like a link to the actually terminal device name with
-  some additional features for C-programmers: see the manual page tty(4).
   7.4 /dev/ttyIN "Terminals"
 
   N stands for an integer. One use of these in Linux is with the ISDN driver package: isdn4linux. The ttyIN is something like ttySN but it emulates a modem and can be given modem commands.
   7.5 The Console: ttyN or vc/N
 
-  In Linux the PC monitor is usually called the console and has several device special files associated with it: vc/0 (tty0), vc/1 (tty1), vc/2 (tty2), etc. When you log in you are on vc/1. To go to vc/2 (on the same screen) press down the 2 keys Alt(left)-F3. For vc/3 use Left Alt-F3, etc. These (vc/1, vc/2, vc/3, etc.) are called "virtual terminals". vc/0 (tty0) is just an alias for the current virtual terminal and it's where messages from the system are sent. Thus messages from the system will be seen on the console (monitor) regardless of which virtual terminal it is displaying.
+  In Linux the PC monitor is usually called the console and has several device special files associated with it:
+  vc/0 (tty0), vc/1 (tty1), vc/2 (tty2), etc. When you log in you are on vc/1. To go to vc/2 (on the same screen)
+  press down the 2 keys Alt(left)-F3. For vc/3 use Left Alt-F3, etc. These (vc/1, vc/2, vc/3, etc.) are called
+  "virtual terminals". vc/0 (tty0) is just an alias for the current virtual terminal and it's where messages
+  from the system are sent. Thus messages from the system will be seen on the console (monitor) regardless of
+  which virtual terminal it is displaying.
 
   You may log in to different virtual terminals and thus have a few different sessions with the computer going on at the same time. Only the system or the root user may write to /dev/vc/0 to which /dev/console is sometimes linked. For more info on the console see The Linux Console.
   7.6 Creating a Device with "mknod"
@@ -438,6 +462,10 @@
       <center style="font-size: 12pt;">
       Example from ncurses library
     </center>
+
+    <p>
+      For another example of nCurses usage, check out AlsaMixer (probably already installed)
+    </p>
 
     </div>
 
