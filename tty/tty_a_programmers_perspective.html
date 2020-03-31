@@ -7,14 +7,11 @@
 
 
   READ:
-  https://en.wikipedia.org/wiki/ANSI_escape_code
   http://heather.cs.ucdavis.edu/~matloff/UnixAndC/CLanguage/Curses.pdf
 
     http://www.samhallas.co.uk/repository/telegraph/teletype_story.pdf
 
   https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios/
-
-  Cite three Wiki-commons photos
 -->
 
 <!DOCTYPE html>
@@ -159,11 +156,11 @@
     being responsible for the details.
     By this method, a user-space program has access to nontrivial, if elementary, input and output,
     by the uniform method of file access.
-    Moreover, for a Unix system accessed via terminal, the flow of data through the /dev/tty.* files represents the entirety of input and output.
+    Moreover, for a Unix system accessed through a terminal, the flow of data through the /dev/tty.* files represents the entirety of input and output.
   </p>
 
   <div class="aside_left" style="width: 30%;">
-    <center><tt>/dev</tt></center>
+    <center><b><tt>/dev</tt></b></center>
     /dev/tty0		Current virtual console <br>
     /dev/tty1		First Virtual Console <br>
     /dev/tty2   Second Virtual Console <br>
@@ -176,6 +173,7 @@
     <br>
     /dev/ttyS0	First Serial Port <br>
     /dev/ttyS1	Second Serial Port <br>
+    /dev/ttyS2	Third Serial Port <br>
     &emsp;&emsp;&emsp;.<br>
     &emsp;&emsp;&emsp;.<br>
     &emsp;&emsp;&emsp;.<br>
@@ -311,12 +309,16 @@
   <p>
     It's worth repeating at this point that the terminal <i>proper</i> only sends a stream of bytes, and
     merely receives a stream of bytes.
-    In particular, there does not exist any computer-accessible data structure
-    within the monitor:  The only method of sending data to the monitor is via the same channel as
+    That is, there does not exist any computer-accessible data structure
+    within the monitor:  The only method of sending data to the monitor is by the same channel as
     printable characters.
+    As a consequence, it is necessary to establish some common standard for communicating to the terminal
+    non-printable, or control, characters, such as "newline."
     In the US, printable characters were traditionally mapped via ASCII, with the exception of <a href="https://en.wikipedia.org/wiki/EBCDIC"> some early IBM mainframes</a>.
     The first 32 ASCII characters are control characters, rather than printable;
     they include the famous "bell" character, and both "tab" (horizontal tab) and "newline" (linefeed).
+    In particular, in order to delete previously written text, one can print the backspace
+    character (typically, "<tt>\b</tt>").
     Because most of these control characters quickly became antiquated, they are not widely used.
   </p>
 
@@ -685,3 +687,5 @@ https://www.kernel.org/doc/html/latest/driver-api/serial/n_gsm.html?highlight=tt
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"> </script>
   <script src="../animate-nav-2.js"> </script>
 </html>
+
+  <!-- Thanks for playing! https://www.youtube.com/watch?v=wvUQcnfwUUM -->

@@ -2,6 +2,10 @@ body {
   margin: 0;
 }
 
+ol {
+  margin-left: 10%;
+}
+
 #nav_home {
   margin: 0;
   padding: 0;
@@ -112,14 +116,16 @@ body {
 
 .img_left {
   float: left;
-  margin: 20px;
+  margin-right: 20px;
+  margin-left: 0;
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
 .img_right {
   float: right;
-  margin: 20px;
+  margin-right: 0;
+  margin-left: 20px;
   margin-top: 5px;
   margin-bottom: 5px;
 }
@@ -131,7 +137,10 @@ body {
 
 .aside_right {
   float: right;
-  margin: 20px;
+  margin-right: 0;
+  margin-left: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   width: 20%;
   outline: 2px solid black;
   background-color: #f1f1f1;
@@ -141,7 +150,10 @@ body {
 
 .aside_left {
   float: left;
-  margin: 20px;
+  margin-right: 20px;
+  margin-left: 0;
+  margin-top: 5px;
+  margin-bottom: 5px;
   width: 20%;
   outline: 2px solid black;
   background-color: #f1f1f1;
