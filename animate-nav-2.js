@@ -15,7 +15,7 @@ $(document).ready(function () {
         currLink.addClass("active");
       } else if ( elemTop < screenTop && elemBottom > screenBottom ) { // Are in the middle
         currLink.addClass("active");
-      } else if ( elemBottom > screenTop && elemBottom < screenBottom ) { // Can see bottom
+      } else if ( elemBottom - 10 > screenTop && elemBottom < screenBottom ) { // Can see bottom
         currLink.addClass("active");
       } else {
           currLink.removeClass("active");
@@ -41,7 +41,7 @@ $(document).on("scroll", function() {
           currLink.addClass("active");
         } else if ( elemTop < screenTop && elemBottom > screenBottom ) { // Are in the middle
           currLink.addClass("active");
-        } else if ( elemBottom > screenTop && elemBottom < screenBottom ) { // Can see bottom
+        } else if ( elemBottom - 10 > screenTop && elemBottom < screenBottom ) { // Can see bottom
           currLink.addClass("active");
         } else {
             currLink.removeClass("active");
