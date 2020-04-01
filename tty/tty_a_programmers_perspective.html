@@ -46,6 +46,7 @@
 
 <div id="text_terminals" class="content">
   <h1> Text Terminals </h1>
+  <h4> Under Construction! </h4>
     <p>
       A text terminal is a computer peripheral similar to a mouse and keyboard combination.
       However, whereas a modern monitor receives a pixel-wise description of output to display
@@ -162,7 +163,7 @@
 
   <div class="aside_left" style="width: 30%;">
     <center><b><tt>/dev</tt></b></center>
-    /dev/tty&emsp;Controlling Terminal <br>
+    /dev/tty&emsp;Controlling Console <br>
     /dev/tty0		Current virtual console <br>
     /dev/tty1		First Virtual Console <br>
     /dev/tty2   Second Virtual Console <br>
@@ -173,13 +174,8 @@
     /dev/tty63	63rd Virtual Console <br>
     <br>
     <br>
-    /dev/ttyS0	First Serial Port <br>
-    /dev/ttyS1	Second Serial Port <br>
-    /dev/ttyS2	Third Serial Port <br>
-    &emsp;&emsp;&emsp;.<br>
-    &emsp;&emsp;&emsp;.<br>
-    &emsp;&emsp;&emsp;.<br>
-    /dev/ttyS191	192nd serial port <br>
+    /dev/console System Console<br>
+    /dev/pts/ &emsp;&emsp;PTY slaves<br>
     <br>
     <center>
     Source: <br>
@@ -196,22 +192,20 @@
     We'll start with the most useful (and most interesting).
   </p>
 
-  <h3>The Controlling Terminal: /dev/tty </h3>
+  <h3>The Controlling Terminal:<br> /dev/tty </h3>
   <p>
-    This is the process's current tty device, if it exists <sup>[500]</sup>.
-    It is a process-specific file: For any process connected to a terminal,
-    it is connected here., by default, both standard in and standard out
-    are connected here.
-    "It is a synonym for the controlling terminal of a process, if any." -- man 4 tty
+    <tt>/dev/tty</tt> is a handle to the process's current tty device, if it exists <sup>[500]</sup>.
+    It is effectively a process-specific file: Any process that is connected to a terminal,
+    is connected here.
   </p>
 
   <p>
-  /dev/tty stands for the controlling terminal (if any) for the current process.
-  To find out which tty's are attached to which processes use the "ps -a" command at the
-  shell prompt (command line). Look at the "tty" column. For the shell process you're in,
-  /dev/tty is the terminal you are now using. Type "tty" at the shell prompt to see what it is
-  (see manual pg. tty(1)). /dev/tty is something like a link to the actually terminal device name with
-  some additional features for C-programmers: see the manual page tty(4).
+    /dev/tty stands for the controlling terminal (if any) for the current process.
+    To find out which tty's are attached to which processes use the "ps -a" command at the
+    shell prompt (command line). Look at the "tty" column. For the shell process you're in,
+    /dev/tty is the terminal you are now using. Type "tty" at the shell prompt to see what it is
+    (see manual pg. tty(1)). /dev/tty is something like a link to the actually terminal device name with
+    some additional features for C-programmers: see the manual page tty(4).
   </p>
 
   <h4> Demonstration </h4>
@@ -219,73 +213,146 @@
       <li> Open up two terminal emulators</li>
       <li> Navigate each to <tt>/dev</tt></li>
       <li> In each, confirm that <tt>tty</tt> exists, and is a character device</li>
-      <li> In each, confirm that writing to <tt>tty</tt> does not write to the other</li>
+      <li> In each, confirm that writing to <tt>tty</tt> does not write to the other
+        <br>&emsp;&emsp; For example, <tt>sleep 5; echo hello</tt> </li>
+
     </ol>
 
 
-  <h3> The Commander's Chair: Console </h3>
+  <h3> The Commander's Chair: <br>console </h3>
+    <p>
+      <tt>/dev/console</tt> is the superuser device.
+      Only the root user can read or write to this file:
+    </p>
+
+    <div class="code">
+      ls -lF /dev/console<br>
+      crw------- 1 root root 5, 1 Mar 31 05:33 /dev/console
+    </div>
+
+    <h3> Pseudoterminals: <br>pts/ </h3>
+    <p>
+      From <a href="https://www.kernel.org/doc/html/v5.4/admin-guide/devices.html">
+        Kernel.org Documentation</a>,
+      "Pseudoterminals are used to create login sessions or provide other capabilities
+      requiring a TTY line discipline to arbitrary data-generation processes."
+      Pseudoterminals have no physical devices connected; rather, they connect
+      one user-space process to another by piping information through two
+      distinct device files: The <i>master</i>, <tt>/dev/ptmx</tt>, and the
+      <i>slave</i>, a file with an integral filename, found in <tt>/dev/pts</tt>.
+      </p>
+
+      <p>
+        Between these two files, the data is piped through a kernel module
+        called the <i>terminal line discipline</i>, which provides features such
+        as a line-buffering.
+        The result is that a process can open the master side, and then treat
+        the file descriptor the kernel returns as a terminal device;
+        any data sent into this file appears as output of the slave file.
+      </p>
+
+      <p>
+        Formally, a user-space process opens the common "master" side, <tt>/dev/ptmx</tt>,
+        as an ordinary file.
+        The kernel responds by returning a new file descriptor,
+        and also by creating a new <i>slave</i> device file in <tt>/dev/pts</tt>.
+        The process can then call <tt>ptsname(int fd)</tt>, passing the file
+        descriptor given by opening the master side, whereby the kernel will return
+        the pathname to the corresponding slave (terminal) device file.
+      </p>
+
+      <p>
+        At this point, the process can treat the slave side of the pipe
+        as a tty device, and the kernel will modify the stream as
+        appropriate.
+        The most common use of pseudoterminals is by terminal emulator programs.
+        See <a href="https://linux.die.net/man/4/ptmx"> man 4 ptmx </a> and
+        <a href="https://linux.die.net/man/3/ptsname"> man 3 ptsname </a>
+        for more information.
+      </p>
+
+    <p>
+      There are a lot of things you can do with pseudoterminals, and studying
+      them goes a long way towards understanding the Unix filesystem concept.
+      What you're doing is, you're piping a stream of characters through the kernel,
+      and requesting that the kernel modify this stream in a way peculiar to
+      a kernel module called the "terminal line discipline."
+      We'll get into more detail about the terminal line discipline in the
+      next section.
+    </p>
+
+    <h4> Demonstration </h4>
+    <ol>
+      <li> Open exactly two terminal emulators</li>
+      <li> and navigate one to <tt>/dev/pts</tt></li>
+      <li>
+      <li> List the directory contents and note its entries (should be nonempty)</li>
+      <li> For each integral entry, <tt>echo hello &lt;entry&gt;</tt>
+    </ol>
+
+
+    <div class="aside_right">
+      <h4> Aside </h4>
+      <center> <tt>/dev/fb</tt> </center>
+      <p>
+        The modern alologue to tty device files seems to be
+        this framebuffer file.
+        This file is readable and writable, and rumor has it
+        that if you were to copy its contents, you would be,
+        effectively, taking a screenshot.
+
+        Source: <a href="https://www.kernel.org/doc/Documentation/fb/framebuffer.txt"> Kernel.org</a>
+      </p>
+    </div>
+
+    <h3> Virtual Terminals: <br><tt>/dev/tty1</tt> thru <tt>/dev/tty63</tt> </h3>
+    You may log in to different virtual terminals and thus have a few different
+    sessions with the computer going on at the same time.
+    Note that 'josh' (me) owns the second virtual terminal
+    (in fact, it's because I'm signed in there!).
+
+    <div class="code">
+    ls -lF /dev/tty[0-9] <br>
+    crw--w---- 1 root tty 4, 0 Mar 31 06:29 /dev/tty0 <br>
+    crw--w---- 1 root tty 4, 1 Mar 31 05:33 /dev/tty1 <br>
+    crw------- 1 josh tty 4, 2 Mar 31 06:28 /dev/tty2 <br>
+    crw--w---- 1 root tty 4, 3 Mar 31 05:33 /dev/tty3 <br>
+    crw--w---- 1 root tty 4, 4 Mar 31 05:33 /dev/tty4 <br>
+    crw--w---- 1 root tty 4, 5 Mar 31 05:33 /dev/tty5 <br>
+    crw--w---- 1 root tty 4, 6 Mar 31 05:33 /dev/tty6 <br>
+    crw--w---- 1 root tty 4, 7 Mar 31 05:33 /dev/tty7 <br>
+    crw--w---- 1 root tty 4, 8 Mar 31 05:33 /dev/tty8 <br>
+    crw--w---- 1 root tty 4, 9 Mar 31 05:33 /dev/tty9 <br>
+        </div>
+
+    <p>
+      You can switch to each of these via CTRL+ALT+F[1-9];
+      the default is usually <tt>tty7</tt> (i.e., you are, probably, currently logged in through
+      <tt>/dev/tty7</tt>).
+      After you switch to one, you can fire up the display manager by switching to root
+      (<tt> sudo bash -i</tt>), then <tt>startx</tt>.
+      Of these, <tt>tty0</tt> is special, in that it is always the current
+      virtual console.
+      That is, you cannot
+
+  <h3>Serial Port Terminals</h3>
   <p>
-
-    /dev/console
-        Superuser device
-
-        ls -lF /dev/console
-        crw------- 1 root root 5, 1 Mar 31 05:33 /dev/console
-
-
-        https://unix.stackexchange.com/questions/60641/linux-difference-between-dev-console-dev-tty-and-dev-tty0
-        just that it was the "commander's chair".
-
-
-
-
-
-
-  Serial Port Terminals
-  The computer considers each serial port to be a "device". It's sometimes called a terminal device since at
-  one time terminals were the most common use for a serial port. For each such serial port there is a special
-  file in the /dev (device) directory.
-  /dev/ttyS0) is the special file for the serial port known as COM1 in the DOS/Windows world.
-
-  To send text to a terminal you may redirect standard output of some command-line command to the appropriate
-  special file. For example typing "echo test > /dev/ttyS1" at the command prompt should send the word "test"
-  to the terminal on ttyS1 (COM2) provided you have write permission on /dev/ttyS1. Similarly, typing
-  "cat my_file > /dev/ttyS0" will send the contents of the file my_file to COM1 (ttyS0).
-
-
-
-
-
-
-
-  7.4 /dev/ttyIN "Terminals"
-
-  N stands for an integer. One use of these in Linux is with the ISDN driver package: isdn4linux. The ttyIN is something like ttySN but it emulates a modem and can be given modem commands.
-  7.5 The Console: ttyN or vc/N
-
-  In Linux the PC monitor is usually called the console and has several device special files associated with it:
-  vc/0 (tty0), vc/1 (tty1), vc/2 (tty2), etc. When you log in you are on vc/1. To go to vc/2 (on the same screen)
-  press down the 2 keys Alt(left)-F3. For vc/3 use Left Alt-F3, etc. These (vc/1, vc/2, vc/3, etc.) are called
-  "virtual terminals". vc/0 (tty0) is just an alias for the current virtual terminal and it's where messages
-  from the system are sent. Thus messages from the system will be seen on the console (monitor) regardless of
-  which virtual terminal it is displaying.
-
-  You may log in to different virtual terminals and thus have a few different sessions with the computer going on at the same time. Only the system or the root user may write to /dev/vc/0 to which /dev/console is sometimes linked. For more info on the console see The Linux Console.
-  7.6 Creating a Device with "mknod"
-
-  The /dev directory comes supplied with many device special files. If you need something
-  that's not there you may try to create it with the "mknod" command.
-  See the manual page ttys(4) for how to do this for serial ports.
-  To use mknod you must know the major and minor device numbers. You might be able
-  to infer the numbers you need by using the "ls -l" command in the /dev directory.
-  It will display the major and minor numbers of existing special files.
-  Next Previous Contents
+    The computer considers each serial port to be a "device."
+    It's sometimes called a terminal device since at one time terminals were the most
+    common use for a serial port.
+    For each such serial port there is a special file in the /dev (device) directory:
+    <tt>/dev/ttyS0</tt> thru <tt>/dev/ttyS191</tt>.
+  </p>
 
   Just for fun, try pressing CTRL-ALT-F5, logging in, and they calling the <tt>who</tt> command.
 
 
 
-      https://history-computer.com/index.html
+  Many thanks to
+    <a href="https://unix.stackexchange.com/questions/60641/linux-difference-between-dev-console-dev-tty-and-dev-tt">
+    this stack exchange post</a>, which helped a great deal in sorting this section out.
+
+
 </div>
 
 <div id="controlling_the_terminal" class="content">
@@ -423,19 +490,27 @@
     From the command prompt, we can list special characters (and other terminal attributes) by,
   </p>
 
+  <div class = "aside_right">
+    <h4> Aside: X Window Server </h4>
+    The X Window Server serves a role roughly analgous the "terminal line discipline."
+    It facilitates the interaction between mouse, keyboard and monitors with application programs;
+    it is a "local server" in the sense that it's a daemon process which controls system resources,
+    and provides an interface that programs interact with<sup>[20]</sup>.
+  </div>
+
   <div class="code">
     <tt> stty -a </tt>
   </div>
 
   <p>
     This lists all bindings to special characters, in addition to other terminal attributes, such as speed.
-    There are eleven Posix-defined special characters, and most of them can be remapped through the <tt>termios</tt> struct; see APUE for more information.
+    There are eleven Posix-defined special characters, and most of them can be remapped through the <tt>termios</tt> struct<sup>[21]</sup>; see APUE for more information.
     In particular, the terminal line discipline is responsible for mapping characters to signals, such as CTRL-D to <tt>EOF</tt>;
     the terminal line discipline is where keyboard signals are generated.
   </p>
 
   <p>
-    The termios struct is often manipulated in text-based programs
+    The termios struct is often manipulated by text-based programs
 
   </p>
 
@@ -475,23 +550,10 @@
         -- xterm documentation README
 
         <p>
-          Terminal Emulation is not easy.
+          Terminal emulation is not easy.
           harder than it looks https://invisible-mirror.net/archives/shuford/terminal/emulation_how_to_news.txt
 
-          Common Emulators
-            vt100:
-              Not *just* ANSI-compatible, but also vt100-compatible
-                Source: https://invisible-mirror.net/archives/shuford/terminal/first_principles.html
-                almost everything is vt100-compatible today
 
-            xterm:
-            Synopsis: https://invisible-island.net/xterm/
-              The xterm program is a terminal emulator for the X Window System. It provides DEC VT102 and Tektronix 4014 compatible terminals for programs that can't use the window system directly.
-              This version implements ISO/ANSI colors using the "new" color model (i.e., background color erase). It also implements most of the control sequences for VT220, as well as selected features from other DEC terminals such as VT320, VT420 and VT520.
-
-            xterm-256color
-
-            https://stackoverflow.com/questions/10003136/what-is-the-difference-between-xterm-color-xterm-256color
 
 
 
@@ -618,31 +680,26 @@
 https://www.kernel.org/doc/html/latest/driver-api/serial/n_gsm.html?highlight=tty
 
 
-        7.2 Pseudo Terminals
-        Pseudo terminals are pairs of devices such as /dev/ptyp3 and /dev/ttyp3. There is no physical device directly
-        associated with either of them, not even a serial port connector. But if a program treats ttyp3 like
-        it was a serial port, what is read and written to that port appears on the other member of the pair ptyp3
-        which another program uses to read and write to. Thus two programs talk to each other via this method and one
-        program on ttyp3 thinks it's talking to a serial port. It's something like a "pipe" between these two tty's.
 
-        For talking to ttyp3, any program designed to talk to a serial port will do. But for the other program that
-        talks to ptyp3, it must have been specially written to talk to it. It's mainly programmers that must concern
-        themselves with pseudo terminals and most users don't need to worry about them.
 
-        Here's an example: If someone connects via telnet to your computer over a network (you are a telnet server),
-        the part of the telnet program handling this connection on your computer may wind up connected to the pseudo
-        terminal ptyp2. A getty program should be running on the corresponding ttyp2. Getty thinks it's talking to a
-        terminal. When telnet gets a character from the remote client, it goes thru ptyp2 to ttyp2 to getty which then
-        sends back "login:" routed via ttyp2, ptyp2, your server telnet program, and then out to the network back to the
-        client. Here the login program and the telnet server program talk to each other via a "pseudo terminal". Note that
-        there is no pseudo terminal used on the client computer, just telnet. Of course the server allocates a
-        pseudo terminal (on the server) for each client.
+          Common Emulators
+            vt100:
+              Not *just* ANSI-compatible, but also vt100-compatible
+                Source: https://invisible-mirror.net/archives/shuford/terminal/first_principles.html
+                almost everything is vt100-compatible today
 
-        In X Window, the terminal emulator programs (such as xterm) use pseudo terminals. Ham radio programs under
-        Linux also use them. By using certain application software, it is possible to have 2 or more pseudo terminals attached to the same physical serial port.
+            xterm:
+            Synopsis: https://invisible-island.net/xterm/
+              The xterm program is a terminal emulator for the X Window System. It provides DEC VT102 and Tektronix 4014 compatible terminals for programs that can't use the window system directly.
+              This version implements ISO/ANSI colors using the "new" color model (i.e., background color erase). It also implements most of the control sequences for VT220, as well as selected features from other DEC terminals such as VT320, VT420 and VT520.
 
-        Windows bash-like terminal emulator-ish:
-          https://cmder.net/
+            xterm-256color
+
+            https://stackoverflow.com/questions/10003136/what-is-the-difference-between-xterm-color-xterm-256color
+
+            Windows bash-like terminal emulator-ish:
+              https://cmder.net/
+
       </div>
 
 
@@ -677,7 +734,7 @@ https://www.kernel.org/doc/html/latest/driver-api/serial/n_gsm.html?highlight=tt
         <br>
         <i>Understanding Unix/Linux Programming:  A Guide to Theory and Practice </i> by Bruce Molay.
         <br>
-        <a href="http://www.apuebook.com/apue3e.html"> Advanced Programming in the Unix Environment </a>
+        [21] <a href="http://www.apuebook.com/apue3e.html"> Advanced Programming in the Unix Environment </a>
         <br>
         Termios man page: man 3 termios
         <br>
@@ -694,6 +751,10 @@ https://www.kernel.org/doc/html/latest/driver-api/serial/n_gsm.html?highlight=tt
         http://www.tldp.org/HOWTO/Keyboard-and-Console-HOWTO.html#toc5
         <br>
         [42] https://superuser.com/questions/144666/what-is-the-difference-between-shell-console-and-terminal
+        <br>
+        [20] https://askubuntu.com/questions/7881/what-is-the-x-server
+        <br>
+        https://history-computer.com/index.html
     </div>
 
 
