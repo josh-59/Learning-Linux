@@ -53,7 +53,7 @@
       from the computer several times a second, a text terminal receives a description of
       the characters to display only once, and uses an onboard buffer to store that information.
       Text terminals are an archaic and largely obsolete technology, but were instrumental to the
-      development of modern Linux.
+      development of modern GNU/Linux.
       This paper looks at the technology and its ramifications seen in Linux today.
     </p>
   </div>
@@ -131,7 +131,7 @@
 
     <p>
       It's worth noting that the idea of mainframe-driven utility computation suggests that the computational structure
-      forms a tree:
+      forms a mathematical tree:
       The "root user" would sit at the root of this tree, exercising super-user priveledges over the machine,
       while end-users would be positioned at the leaves of the tree.
       Concurrently, although "console" and "terminal" both denote the same hardware, they differ in their relation to
@@ -524,10 +524,8 @@
 
     <p>
       NCURSES not only creates a wrapper over terminal capabilities, but also gives a robust framework to create nice
-      looking UI (User Interface)s in text mode. It provides functions to create windows etc. Its sister libraries
-      <tt>panel</tt>, <tt>menu</tt> and <tt>form</tt> provide an extension to the basic curses library.
-
-          ncurses was originally released in the mid-1990's (explains a lot, really)
+      looking user interfaces in text mode.
+      Its sister libraries <tt>panel</tt>, <tt>menu</tt> and <tt>form</tt> provide an extension to the basic curses library.
 
     </p>
 
@@ -772,7 +770,10 @@ https://www.kernel.org/doc/html/latest/driver-api/serial/n_gsm.html?highlight=tt
 
 
   </div>
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"> </script>
+  <script
+			  src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+			  integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+			  crossorigin="anonymous"></script>
   <script src="../animate-nav-2.js"> </script>
 </html>
 
