@@ -5,6 +5,8 @@
     the same person).  If you don't get a response then email the LDP
     (Linux Documentation Project): submit@en.tldp.org.
 
+    Translate man-page references to
+      http://man7.org/linux/man-pages/man7/boot.7.html
 
   READ:
   http://heather.cs.ucdavis.edu/~matloff/UnixAndC/CLanguage/Curses.pdf
@@ -12,6 +14,10 @@
     http://www.samhallas.co.uk/repository/telegraph/teletype_story.pdf
 
   https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios/
+
+  https://en.wikipedia.org/wiki/Linux_console
+
+  https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/tty/Kconfig?id=HEAD
 -->
 
 <!DOCTYPE html>
@@ -134,9 +140,6 @@
       forms a mathematical tree:
       The "root user" would sit at the root of this tree, exercising super-user priveledges over the machine,
       while end-users would be positioned at the leaves of the tree.
-      Concurrently, although "console" and "terminal" both denote the same hardware, they differ in their relation to
-      software:  Kernel errors were traditionally piped to the console<sup>[42]</sup>, so that the console
-      would be the domain of the root user.
     </p>
 
     <br>
@@ -218,15 +221,76 @@
     </ol>
 
 
-  <h3> The Commander's Chair: <br>console </h3>
+    <h3> Virtual Terminals: <br><tt>/dev/tty1</tt> thru <tt>/dev/tty63</tt> </h3>
     <p>
-      <tt>/dev/console</tt> is the superuser device.
-      Only the root user can read or write to this file:
+      Virtual terminals are the closest re-imaging of the classical terminal
+      interface to be found in modern operating systems.
+      They are full-screen terminal displays on the system video monitor,
+      and are accessible by pressing the key combination CTRL+ALT+F[1-9]
+      You may log in to different virtual terminals simultaneously,
+      and thus have a few different sessions with the computer going on at the same time.
+      Note that 'josh' (me) owns the second virtual terminal
+      (in fact, it's because I'm signed in there!).
+
+    <div class="code">
+      ls -lF /dev/tty[0-9] <br>
+      crw--w---- 1 root tty 4, 0 Mar 31 06:29 /dev/tty0 <br>
+      crw--w---- 1 root tty 4, 1 Mar 31 05:33 /dev/tty1 <br>
+      crw------- 1 josh tty 4, 2 Mar 31 06:28 /dev/tty2 <br>
+      crw--w---- 1 root tty 4, 3 Mar 31 05:33 /dev/tty3 <br>
+      crw--w---- 1 root tty 4, 4 Mar 31 05:33 /dev/tty4 <br>
+      crw--w---- 1 root tty 4, 5 Mar 31 05:33 /dev/tty5 <br>
+      crw--w---- 1 root tty 4, 6 Mar 31 05:33 /dev/tty6 <br>
+      crw--w---- 1 root tty 4, 7 Mar 31 05:33 /dev/tty7 <br>
+      crw--w---- 1 root tty 4, 8 Mar 31 05:33 /dev/tty8 <br>
+      crw--w---- 1 root tty 4, 9 Mar 31 05:33 /dev/tty9 <br>
+    </div>
+
+    <p>
+      Virtual terminals are more than just a throwback to multiuser operating
+      system days:  They allow access to the machine
+      without a graphical user interface and, in particular, without the associated
+      software (namely, X Window System, a window manager, and a desktop environment).
+      In modern desktop GNU/Linux distributions, it is often the case that
+      GUI-based system software is merely
+      an additional front-end layer to command-line tools
+      (for instance, <a href="https://www.nongnu.org/synaptic/">
+      Synaptic Package Manager</a>).
+      That is, the command line often offers more and finer control over
+      the machine, through less and more robust software;
+      virtual terminals are still relevant within the context of server applications.
+    </p>
+
+    <p>
+      Boot sequence:  Kernel launches root-user-space process http://man7.org/linux/man-pages/man7/boot.7.html
+      There are various init systems, including Init, systemd and Upstart (deprecated).
+      From virtual terminal 7, this process launches the GUI (reference required)
+      This process launches the gui      https://www.freedesktop.org/software/systemd/man/bootup.html
+    </p>
+
+
+    <h3> The Commander's Chair: <br><tt>/dev/console</tt> </h3>
+    <p>
+      This is the superuser's device.
+      Kernel error and other messages are sent here<sup>45</sup>, and the device
+      is owned entirely by the root user:
     </p>
 
     <div class="code">
       ls -lF /dev/console<br>
       crw------- 1 root root 5, 1 Mar 31 05:33 /dev/console
+    </div>
+
+    <div class="aside_right">
+      <h4> Aside </h4>
+      <p>
+        Historically, there have been
+        <a href="https://www.tldp.org/HOWTO/Text-Terminal-HOWTO-2.html">many names for terminal devices.</a>
+        This essay develops <i>terminal</i> as a distinct concept, for the sake of
+        clarity and relevance in the modern domain.
+        The only other synonym in common usage is "console," as in, <i><tt>/dev/tty1</tt>
+        through <tt>/dev/tty7</tt> are virtual consoles</i>.<sup>[19]<sup>
+      </p>
     </div>
 
     <h3> Pseudoterminals: <br>pts/ </h3>
@@ -270,25 +334,24 @@
         for more information.
       </p>
 
-    <p>
-      There are a lot of things you can do with pseudoterminals, and studying
-      them goes a long way towards understanding the Unix filesystem concept.
-      What you're doing is, you're piping a stream of characters through the kernel,
-      and requesting that the kernel modify this stream in a way peculiar to
-      a kernel module called the "terminal line discipline."
-      We'll get into more detail about the terminal line discipline in the
-      next section.
-    </p>
+      <p>
+        There are a lot of things you can do with pseudoterminals, and studying
+        them goes a long way towards understanding the Unix filesystem concept.
+        What you're doing is, you're piping a stream of characters through the kernel,
+        and requesting that the kernel modify this stream in a way peculiar to
+        a kernel module called the "terminal line discipline."
+        We'll get into more detail about the terminal line discipline in the
+        next section.
+      </p>
 
-    <h4> Demonstration </h4>
-    <ol>
-      <li> Open exactly two terminal emulators</li>
-      <li> and navigate one to <tt>/dev/pts</tt></li>
-      <li>
-      <li> List the directory contents and note its entries (should be nonempty)</li>
-      <li> For each integral entry, <tt>echo hello &lt;entry&gt;</tt>
-    </ol>
-
+      <h4> Demonstration </h4>
+      <ol>
+        <li> Open exactly two terminal emulators</li>
+        <li> and navigate one to <tt>/dev/pts</tt></li>
+        <li>
+        <li> List the directory contents and note its entries (should be nonempty)</li>
+        <li> For each integral entry, <tt>echo hello &lt;entry&gt;</tt>
+      </ol>
 
     <div class="aside_right">
       <h4> Aside </h4>
@@ -304,35 +367,7 @@
       </p>
     </div>
 
-    <h3> Virtual Terminals: <br><tt>/dev/tty1</tt> thru <tt>/dev/tty63</tt> </h3>
-    You may log in to different virtual terminals and thus have a few different
-    sessions with the computer going on at the same time.
-    Note that 'josh' (me) owns the second virtual terminal
-    (in fact, it's because I'm signed in there!).
 
-    <div class="code">
-    ls -lF /dev/tty[0-9] <br>
-    crw--w---- 1 root tty 4, 0 Mar 31 06:29 /dev/tty0 <br>
-    crw--w---- 1 root tty 4, 1 Mar 31 05:33 /dev/tty1 <br>
-    crw------- 1 josh tty 4, 2 Mar 31 06:28 /dev/tty2 <br>
-    crw--w---- 1 root tty 4, 3 Mar 31 05:33 /dev/tty3 <br>
-    crw--w---- 1 root tty 4, 4 Mar 31 05:33 /dev/tty4 <br>
-    crw--w---- 1 root tty 4, 5 Mar 31 05:33 /dev/tty5 <br>
-    crw--w---- 1 root tty 4, 6 Mar 31 05:33 /dev/tty6 <br>
-    crw--w---- 1 root tty 4, 7 Mar 31 05:33 /dev/tty7 <br>
-    crw--w---- 1 root tty 4, 8 Mar 31 05:33 /dev/tty8 <br>
-    crw--w---- 1 root tty 4, 9 Mar 31 05:33 /dev/tty9 <br>
-        </div>
-
-    <p>
-      You can switch to each of these via CTRL+ALT+F[1-9];
-      the default is usually <tt>tty7</tt> (i.e., you are, probably, currently logged in through
-      <tt>/dev/tty7</tt>).
-      After you switch to one, you can fire up the display manager by switching to root
-      (<tt> sudo bash -i</tt>), then <tt>startx</tt>.
-      Of these, <tt>tty0</tt> is special, in that it is always the current
-      virtual console.
-      That is, you cannot
 
   <h3>Serial Port Terminals</h3>
   <p>
@@ -490,12 +525,12 @@
   </p>
 
   <div class = "aside_right">
-    <h4> Aside: X Window Server </h4>
-    The X Window Server serves a role roughly analgous to the terminal line discipline:
+    <h4> Aside: X Window System </h4>
+    The X Window System serves a role roughly analgous to the terminal line discipline:
     It facilitates the interaction between mouse, keyboard and monitors with application programs,
     though it exists in user-space rather than kernel-space.
-    It is a "local server" in the sense that it's a daemon process which controls system resources,
-    and provides an interface that programs interact with<sup>[20]</sup>.
+    It is a "network-transparent window system" in the sense that
+    it controls system resources, and provides an interface for other programs to interact with.[20]
   </div>
 
   <div class="code">
@@ -750,15 +785,20 @@ https://www.kernel.org/doc/html/latest/driver-api/serial/n_gsm.html?highlight=tt
         <br>
         [42] https://superuser.com/questions/144666/what-is-the-difference-between-shell-console-and-terminal
         <br>
-        [20] https://askubuntu.com/questions/7881/what-is-the-x-server
+        [20] https://linux.die.net/man/7/x
         <br>
         https://history-computer.com/index.html
+        <br>
+        [45] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/tty/Kconfig?id=HEAD
+        <br>
+        [19] https://www.kernel.org/doc/html/v5.4/admin-guide/devices.html
+
     </div>
 
   <div id="credits" class="content">
     <h2> Credits and Licensure </h2>
     <p>
-      This was written by Josh Timmons, and is a derivate work of The Linux Documentation Project's
+      This was written by Josh Timmons, and was inspired by The Linux Documentation Project's
       <a href="https://tldp.org/HOWTO/Text-Terminal-HOWTO-1.html"><i>Text Terminal How-To</i></a>, by David S. Lawyer.
       It is released under the <a href="https://creativecommons.org/licenses/by-nc/4.0/"> Creative Commons Attribution-ShareAlike 4.0 International license </a>.
       Please send any corrections or comments to <a href="mailto:josh.591536@gmail.com"> Josh Timmons</a>.
