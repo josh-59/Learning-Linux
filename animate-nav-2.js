@@ -2,8 +2,6 @@ $(document).ready(function () {
   var screenTop = $(document).scrollTop();
   var screenBottom = screenTop + $(window).height();
 
-  console.log(screenTop);
-
   $('#nav_bar_2 a').each(function () {
       var currLink = $(this);
       var refElement = $(currLink.attr("href"));
@@ -26,8 +24,6 @@ $(document).ready(function () {
 $(document).on("scroll", function() {
     var screenTop = $(document).scrollTop();
     var screenBottom = screenTop + $(window).height();
-
-    console.log(screenTop);
 
     $('#nav_bar_2 a').each(function () {
         var currLink = $(this);
