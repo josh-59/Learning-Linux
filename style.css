@@ -164,8 +164,9 @@ ol {
 
 .code {
     width: inherit;
-    padding-top: 20px;
-    padding-left: 7%;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    padding-left: 10%;
     margin: auto;
     font-family: 'Source Code Pro', monospace;
     font-size: 15pt;

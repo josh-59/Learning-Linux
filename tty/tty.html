@@ -13,7 +13,7 @@
 
     http://www.samhallas.co.uk/repository/telegraph/teletype_story.pdf
 
-  https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios/
+
 
   https://en.wikipedia.org/wiki/Linux_console
 
@@ -150,20 +150,8 @@
 
 <div id="two_way_flow" class="content">
   <h2> Two-Way Flow </h2>
-  <p>
-    The typical terminal is connected to a computer by a full-duplex communication pipeline.
-    In days' past, this was a serial port.
-    The Unix environment presents an abstraction of this connection as a special device file.
-    Located in <tt>/dev</tt>, the tty files are available to each user-space process:
-    A program can open, read from and write to these devices, with the operating system
-    being responsible for the details.
-    By this method, a user-space program has access to nontrivial, if elementary, input and output,
-    by the trivial method of file access.
-    Moreover, for a Unix system accessed through a terminal, the flow of data
-    through the /dev/tty.* files represents the entirety of input and output.
-  </p>
 
-  <div class="aside_left" style="width: 30%;">
+  <div class="aside_right" style="width: 30%;">
     <center><b><tt>/dev</tt></b></center>
     /dev/tty&emsp;Controlling Console <br>
     /dev/tty0		Current virtual console <br>
@@ -172,12 +160,12 @@
     /dev/tty3		Third Virtual Console <br>
     &emsp;&emsp;&emsp;.<br>
     &emsp;&emsp;&emsp;.<br>
-    &emsp;&emsp;&emsp;.<br>
     /dev/tty63	63rd Virtual Console <br>
     <br>
     <br>
     /dev/console System Console<br>
-    /dev/pts/ &emsp;&emsp;PTY slaves<br>
+    /dev/ptmx/ &emsp;PTY Master
+    /dev/pts/ &emsp;&emsp;PTY Slaves<br>
     <br>
     <center>
     Source: <br>
@@ -185,39 +173,28 @@
     </center>
   </div>
 
-
   <p>
-    Each teletype file in <tt>/dev</tt> is a character special device file.
-    To send text to a terminal you may redirect standard output of a command to an appropriate
-    special file.
-    The files differ in what they represent, what they are connected to, and who owns them.
-    We'll start with the most useful (and most interesting).
+    The typical terminal is connected to a computer by a full-duplex communication pipeline.
+    In days' past, this was a serial port.
+    The Unix environment presents an abstraction of this connection as a special device file.
+    Located in <tt>/dev</tt>, these files are available to each user-space process
+    using a terminal for input or output.
+    A program can open, read from and write to a tty file, with the operating system
+    being responsible for the details.
+    By this method, a user-space program has access to nontrivial, if elementary, input and output,
+    by the trivial method of file access.
+    Moreover, for a Unix system accessed through a terminal, the flow of data
+    through the <tt>/dev/tty.*</tt> files represents the entirety of input and output.
   </p>
 
-  <h3>The Controlling Terminal:<br> /dev/tty </h3>
-  <p>
-    <tt>/dev/tty</tt> is a handle to the process's current tty device, if it exists <sup>[500]</sup>.
-    It is effectively a process-specific file: Any process that is connected to a terminal,
-    is connected here.
-  </p>
+
 
   <p>
-    /dev/tty stands for the controlling terminal (if any) for the current process.
-    To find out which tty's are attached to which processes use the "ps -a" command at the
-    shell prompt (command line). Look at the "tty" column. For the shell process you're in,
-    /dev/tty is the terminal you are now using. Type "tty" at the shell prompt to see what it is
-    (see manual pg. tty(1)). /dev/tty is something like a link to the actually terminal device name with
-    some additional features for C-programmers: see the manual page tty(4).
+    Common to all tty devices is the application of a kernel module called
+    the <i>terminal line discipline</i>, which serves to interpret
+    input and produce a more human-amiable interface.
+    This is discussed in more detail in the next section, Controlling the Terminal.
   </p>
-
-  <h4> Demonstration </h4>
-    <ol>
-      <li> Open up two terminal emulators</li>
-      <li> Navigate each to <tt>/dev</tt></li>
-      <li> In each, confirm that <tt>tty</tt> exists, and is a character device</li>
-      <li> In each, confirm that writing to <tt>tty</tt> does not write to the other
-        <br>&emsp;&emsp; For example, <tt>sleep 5; echo hello</tt> </li>
-    </ol>
 
 
     <h3> Virtual Terminals: <br><tt>/dev/tty1</tt> thru <tt>/dev/tty63</tt> </h3>
@@ -225,10 +202,10 @@
       Virtual terminals are the closest re-imaging of the classical terminal
       interface to be found in modern operating systems.
       They are full-screen terminal displays on the system video monitor,
-      and are accessible by pressing the key combination CTRL+ALT+F[1-9]
+      and are accessible by pressing the key combination CTRL+ALT+F[1-9].
       You may log in to different virtual terminals simultaneously,
       and thus have a few different sessions with the computer going on at the same time.
-      Note that 'josh' (me) owns the second virtual terminal
+      In the example below, 'josh' (me) owns the second virtual terminal
       (in fact, it's because I'm signed in there!).
 
     <div class="code">
@@ -249,23 +226,118 @@
       Virtual terminals are more than just a throwback to multiuser operating
       system days:  They allow access to the machine
       without a graphical user interface and, in particular, without the associated
-      software (namely, X Window System, a window manager, and a desktop environment).
+      software (namely, without a window server, window manager, and desktop environment).
       In modern desktop GNU/Linux distributions, it is often the case that
       GUI-based system software is merely
       an additional front-end layer to command-line tools
       (for instance, <a href="https://www.nongnu.org/synaptic/">
       Synaptic Package Manager</a>).
-      That is, the command line often offers more and finer control over
+      That is, the command-line interface often offers more and finer control over
       the machine, through less and more robust software;
       virtual terminals are still relevant within the context of server applications.
     </p>
 
     <p>
-      Boot sequence:  Kernel launches root-user-space process http://man7.org/linux/man-pages/man7/boot.7.html
-      There are various init systems, including Init, systemd and Upstart (deprecated).
-      From virtual terminal 7, this process launches the GUI (reference required)
-      This process launches the gui      https://www.freedesktop.org/software/systemd/man/bootup.html
+      The user of a modern GNU/Linux distribution running a GUI is usually logged into the
+      seventh virtual terminal, <tt>/dev/tty7</tt>.
+      For completeness' sake, we will briefly explore how it is that the system arrives in this
+      state.
+      At the end of the kernel's boot sequence, the kernel launches a single
+      user-space process with root permissions<sup>[501]</sup><sup>[502]</sup> (commonly, <i>systemd</i>).
+      This process then launches the local window system, which, in turn, logs in at
+      an empty virtual terminal.
+      Usually, the "local window system" is X Window Server (and is started by
+      one of <tt>startx</tt> or <tt>xinit</tt>); X usually logs in to tty7,
+      and then launches the graphical user interface[401].
+      One can emulate this sequence by logging into a virtual terminal as root and launching
+      the system's window server, on this machine, by <tt>startx</tt>.
     </p>
+
+    <p>
+      <tt>/dev/tty0</tt> is a somewhat special virtual terminal device files because it is
+      a synonym for the current virtual terminal.
+      That is, if you are currently looking at the second virtual terminal, <tt>tty2</tt>, then data sent to <tt>tty0</tt>
+      is sent to <tt>tty2</tt> (and not any other terminal).
+    </p>
+
+    <h3>The Controlling Terminal:<br> /dev/tty </h3>
+    <p>
+      <tt>/dev/tty</tt> is a handle to the process's current tty device, if it exists<sup>[500]</sup>.
+      It is, effectively, a process-specific file: Any process that is connected to a terminal
+      may access its terminal here.
+       see the manual page tty(4).
+    </p>
+
+    <h4> Demonstration </h4>
+      <ol>
+        <li> Open up two terminal emulators</li>
+        <li> Navigate each to <tt>/dev</tt></li>
+        <li> In each, confirm that <tt>tty</tt> exists, is a character device, and has universal write permissions</li>
+        <li> In each, confirm that writing to <tt>tty</tt> (e.g. <tt>echo "stuff" > tty</tt>) does not write to the other
+      </ol>
+
+    <h3> Pseudoterminals: <br>pts/ </h3>
+      <p>
+        From <a href="https://www.kernel.org/doc/html/v5.4/admin-guide/devices.html">
+          Kernel.org Documentation</a>,
+        "Pseudoterminals are used to create login sessions or provide other capabilities
+        requiring a TTY line discipline to arbitrary data-generation processes."
+        Pseudoterminals have no physical devices connected; rather, they are
+        intended to pipe information through the kernel's terminal line discipline
+        by connecting two distinct points in the file system,
+        a <i>master</i>, <tt>/dev/ptmx</tt>, and a
+        <i>slave</i>, a file with an integral filename, found in <tt>/dev/pts</tt>.
+        </p>
+
+        <div class="aside_right">
+          <h4> Aside </h4>
+          <p>
+            Historically, there have been
+            <a href="https://www.tldp.org/HOWTO/Text-Terminal-HOWTO-2.html">many names for terminal devices.</a>
+            This essay develops <i>terminal</i> exclusively, for the sake of
+            clarity and relevance in the modern domain.
+            The only other synonym in common usage is "console," as in, <i><tt>/dev/tty1</tt>
+            through <tt>/dev/tty7</tt> are virtual consoles</i>.<sup>[19]<sup>
+          </p>
+        </div>
+
+        <p>
+          Formally, a user-space process opens the common "master" side, <tt>/dev/ptmx</tt>,
+          as an ordinary file.
+          The kernel responds by returning a new file descriptor,
+          and also by creating a new <i>slave</i> device file in <tt>/dev/pts</tt>.
+          The process can then call <tt>ptsname(int fd)</tt>, passing the file
+          descriptor given by opening the master side, whereby the kernel will return
+          the pathname to the corresponding slave (terminal) device file.
+        </p>
+
+        <p>
+          At this point, the process can treat the slave side of the pipe
+          as a tty device, and the kernel will modify the stream as
+          appropriate.
+          The most common use of pseudoterminals is by terminal emulator programs.
+          See <a href="https://linux.die.net/man/4/ptmx"> man 4 ptmx </a> and
+          <a href="https://linux.die.net/man/3/ptsname"> man 3 ptsname </a>
+          for more information.
+        </p>
+
+        <p>
+          There are a lot of things you can do with pseudoterminals, and studying
+          them goes a long way towards understanding the Unix filesystem concept.
+          What you're doing is, you're piping a stream of characters through the kernel,
+          and requesting that the kernel modify this stream in a way peculiar to
+          a kernel module called the "terminal line discipline."
+          We'll get into more detail about the terminal line discipline in the
+          next section.
+        </p>
+
+        <h4> Demonstration </h4>
+        <ol>
+          <li> Open exactly two terminal emulators</li>
+          <li> Navigate one to <tt>/dev/pts</tt></li>
+          <li> List the directory contents and note its entries (should be nonempty)</li>
+          <li> For each integral entry, write a string to the file, (e.g., <tt>echo hello &lt;entry&gt;</tt>)
+        </ol>
 
 
     <h3> The Commander's Chair: <br><tt>/dev/console</tt> </h3>
@@ -280,111 +352,14 @@
       crw------- 1 root root 5, 1 Mar 31 05:33 /dev/console
     </div>
 
-    <div class="aside_right">
-      <h4> Aside </h4>
-      <p>
-        Historically, there have been
-        <a href="https://www.tldp.org/HOWTO/Text-Terminal-HOWTO-2.html">many names for terminal devices.</a>
-        This essay develops <i>terminal</i> as a distinct concept, for the sake of
-        clarity and relevance in the modern domain.
-        The only other synonym in common usage is "console," as in, <i><tt>/dev/tty1</tt>
-        through <tt>/dev/tty7</tt> are virtual consoles</i>.<sup>[19]<sup>
-      </p>
-    </div>
-
-    <h3> Pseudoterminals: <br>pts/ </h3>
-    <p>
-      From <a href="https://www.kernel.org/doc/html/v5.4/admin-guide/devices.html">
-        Kernel.org Documentation</a>,
-      "Pseudoterminals are used to create login sessions or provide other capabilities
-      requiring a TTY line discipline to arbitrary data-generation processes."
-      Pseudoterminals have no physical devices connected; rather, they connect
-      one user-space process to another by piping information through two
-      distinct device files: The <i>master</i>, <tt>/dev/ptmx</tt>, and the
-      <i>slave</i>, a file with an integral filename, found in <tt>/dev/pts</tt>.
-      </p>
-
-      <p>
-        Between these two files, the data is piped through a kernel module
-        called the <i>terminal line discipline</i>, which provides features such
-        as a line-buffering.
-        The result is that a process can open the master side, and then treat
-        the file descriptor the kernel returns as a terminal device;
-        any data sent into this file appears as output of the slave file.
-      </p>
-
-      <p>
-        Formally, a user-space process opens the common "master" side, <tt>/dev/ptmx</tt>,
-        as an ordinary file.
-        The kernel responds by returning a new file descriptor,
-        and also by creating a new <i>slave</i> device file in <tt>/dev/pts</tt>.
-        The process can then call <tt>ptsname(int fd)</tt>, passing the file
-        descriptor given by opening the master side, whereby the kernel will return
-        the pathname to the corresponding slave (terminal) device file.
-      </p>
-
-      <p>
-        At this point, the process can treat the slave side of the pipe
-        as a tty device, and the kernel will modify the stream as
-        appropriate.
-        The most common use of pseudoterminals is by terminal emulator programs.
-        See <a href="https://linux.die.net/man/4/ptmx"> man 4 ptmx </a> and
-        <a href="https://linux.die.net/man/3/ptsname"> man 3 ptsname </a>
-        for more information.
-      </p>
-
-      <p>
-        There are a lot of things you can do with pseudoterminals, and studying
-        them goes a long way towards understanding the Unix filesystem concept.
-        What you're doing is, you're piping a stream of characters through the kernel,
-        and requesting that the kernel modify this stream in a way peculiar to
-        a kernel module called the "terminal line discipline."
-        We'll get into more detail about the terminal line discipline in the
-        next section.
-      </p>
-
-      <h4> Demonstration </h4>
-      <ol>
-        <li> Open exactly two terminal emulators</li>
-        <li> and navigate one to <tt>/dev/pts</tt></li>
-        <li>
-        <li> List the directory contents and note its entries (should be nonempty)</li>
-        <li> For each integral entry, <tt>echo hello &lt;entry&gt;</tt>
-      </ol>
-
-    <div class="aside_right">
-      <h4> Aside </h4>
-      <center> <tt>/dev/fb</tt> </center>
-      <p>
-        The modern alologue to tty device files seems to be
-        this framebuffer file.
-        This file is readable and writable, and rumor has it
-        that if you were to copy its contents, you would be,
-        effectively, taking a screenshot.
-
-        Source: <a href="https://www.kernel.org/doc/Documentation/fb/framebuffer.txt"> Kernel.org</a>
-      </p>
-    </div>
-
-
-
   <h3>Serial Port Terminals</h3>
   <p>
     The computer considers each serial port to be a "device."
-    It's sometimes called a terminal device since at one time terminals were the most
-    common use for a serial port.
+    In times' past, <i>serial port</i> was synonymous with <i>terminal device</i>
+    since terminals were the most common use for such a port.
     For each such serial port there is a special file in the /dev (device) directory:
     <tt>/dev/ttyS0</tt> thru <tt>/dev/ttyS191</tt>.
   </p>
-
-  Just for fun, try pressing CTRL-ALT-F5, logging in, and they calling the <tt>who</tt> command.
-
-
-
-  Many thanks to
-    <a href="https://unix.stackexchange.com/questions/60641/linux-difference-between-dev-console-dev-tty-and-dev-tt">
-    this stack exchange post</a>, which helped a great deal in sorting this section out.
-
 
 </div>
 
@@ -497,6 +472,13 @@
     By default it is set to "Cannonical" mode so that, for instance, echo is on and input is buffered line-wise (among many, many other things).
     Getting your hands on a termios struct demands a system call; for more information, see <a href="http://www.apuebook.com/apue3e.html">Advanced Programming in the Unix Environment</a>.
   </p>
+
+  <div class="aside_right">
+    <h4> Aside </h4>
+    <p>
+      Actually, early implementations of Unix were ran without line-discipline, https://www.bell-labs.com/usr/dmr/www/
+    </p>
+  </div>
 
   <p>
     The terminal line discipline is positioned between the keyboard's hardware driver and the read/write system call interface provided by the kernel;
@@ -791,6 +773,14 @@ https://www.kernel.org/doc/html/latest/driver-api/serial/n_gsm.html?highlight=tt
         [45] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/tty/Kconfig?id=HEAD
         <br>
         [19] https://www.kernel.org/doc/html/v5.4/admin-guide/devices.html
+        <br>
+        [500] man 4 tty http://man7.org/linux/man-pages/man4/tty.4.html
+        <br>
+        [501] man 7 boot
+        <br>
+        [502] man 7 bootup
+        <Br>
+          [401] https://askubuntu.com/questions/27339/what-is-tty7-in-the-commandline
 
     </div>
 
