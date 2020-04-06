@@ -481,8 +481,8 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
             The X Window System serves a role roughly analgous to the terminal line discipline:
             It facilitates the interaction between mouse, keyboard and monitors with application programs,
             though it exists in user-space rather than kernel-space.
-            It is a "network-transparent window system" in the sense that
-            it controls system resources, and provides an interface for other programs to interact with.[20]
+            It is <i>server</i> it controls system resources,
+            and provides an interface for other programs to interact with.[20]
           </div>
 
           <p>
@@ -547,19 +547,30 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
             appears within the operating system's environment as data from an ordinary file.
           </p>
 
+          <div class="aside_right">
+            <h4> Aside </h4>
+            <p>
+              Desktop environments serve a role analagous to shells, but in GUI-based environments.
+              In fact, they are sometimes called <i><a href="https://en.wikipedia.org/wiki/Shell_(computing)#GUI">Graphical Shells</a>.</i>
+              My favorite is Cinnamon!  Which one is yours?
+            </p>
+          </div>
+
           <h3> Shell </h3>
           <p>
-            Typically, when "interacting" with a computer, data from a tty file is sent to a particular program called
-            a <i>shell</i>.  There are many variants, such as the antiquated <tt>sh</tt>, its modern successor, <tt>bash</tt>,
+            Typically, when "interacting" with a computer, data from a tty file is read by a particular program called
+            a <i>shell</i>.  There are many variants, such as the antiquated <tt>sh</tt>, its modern successor <tt>bash</tt>,
             the disused <tt>csh</tt> and the feature-laden <tt>zsh</tt>.
             Each of these are ordinary programs, and exist within a running operating system as an
             ordinary user-space processes; they have no special attributes or permissions.
             They simply read from a file (which might or might-not be your tty file) and execute commands; the commands they "know" are determined
             <i>by the shell itself</i>, and can be determined by looking at the <tt>PATH</tt> environment
             variable:
+
+            <center><tt>echo $PATH</tt></center>
           </p>
 
-          <p><center><tt>echo $PATH</tt></center></p>
+
 
           <p>
             Each shell command exists as an executable binary file in one of the resulting colon-separated directories.
@@ -572,14 +583,14 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
             The ANSI-standard escape sequences (which are still relevant today)
             were usurped almost immediately by the capabilities of DEC's VT-100 terminal.
             In almost every case, a new model implemented a superset of a previous model's features,
-            so that a VT200-series terminal can-do anything a VT100 could-do (and the VT100 was ANSI-compatible)<sup><a href="https://invisible-mirror.net/archives/shuford/terminal/first_principles.html">[25]</a></sup>.
+            so that a VT200-series terminal can-do anything a VT100 could-do<sup><a href="https://invisible-mirror.net/archives/shuford/terminal/first_principles.html">[25]</a></sup>
+             (and the VT100 was ANSI-compatible).
           </p>
 
           <p>
             Information about the capabilities of supported terminals is stored locally in a database known as <tt>terminfo</tt><sup><a href="http://man7.org/linux/man-pages/man5/terminfo.5.html">[29]</a></sup>.
             Terminal emulators are typically backward-compatable with a VT100 (xterm is backward compatable with the VT220<sup><a href="https://invisible-island.net/xterm/xterm.faq.html#what_is_vt220">[27]</a></sup>,
-            but often additionally have an entry in terminfo.
-            Terminal emulators today typically support color printing.
+            but often support additional capabilities, such as color, and have a distinct entry in the terminfo database.
           </p>
 
           <h3> Emulators </h3>
