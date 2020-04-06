@@ -9,22 +9,22 @@ ol {
 #nav_home {
   margin: 0;
   padding: 0;
-  width: 240px;
+  width: 260px;
   overflow: auto;
 }
 
 #nav_bar_1 {
   margin: 0;
   padding: 0;
-  width: 115px;
+  width: 130px;
   height: 100%;
   overflow: auto;
 }
 
 #nav_bar_2 {
-  margin-left: 115px;
+  margin-left: 130px;
   padding: 0;
-  width: 125px;
+  width: 130px;
   height: 100%;
   overflow: auto;
 }
@@ -61,7 +61,7 @@ ol {
 
 .content {
   padding-top: 10px;
-  margin-left: 300px;
+  margin-left: 340px;
   margin-right: 40px;
   max-width: 1000px;
   font-size: 15pt;

@@ -15,7 +15,9 @@ http://heather.cs.ucdavis.edu/~matloff/UnixAndC/CLanguage/Curses.pdf
 
 http://www.samhallas.co.uk/repository/telegraph/teletype_story.pdf
 
-
+Modern Library:
+#include <termios.h>
+  See man termios,
 
 https://en.wikipedia.org/wiki/Linux_console
 
@@ -30,13 +32,13 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
 <head>
   <link href="../style.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
-  <title>tty: A Programmer's Perspective </title>
+  <title>tty: A Practical Introduction</title>
 </head>
 
 <div id="nav_bar_1" class="nav">
   <ul>
     <li> <a href="../index.html">Home</a></li>
-    <li> <a class="active" href="#about">tty: A Programm- er's Perspective</a></li>
+    <li> <a class="active" href="#about">tty: A Practical Intro-<br>duction</a></li>
   </ul>
 </div>
 
@@ -45,7 +47,7 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
     <li><a href="#history"> History </a></li>
     <li><a href="#two_way_flow"> Two-Way Flow </a></li>
     <li><a href="#controlling_the_terminal"> Controlling the Terminal </a></li>
-    <li><a href="#emulation"> Emulation </a></li>
+    <li><a href="#closing_notes"> Closing Notes </a></li>
     <li><a href="#lgr_video"> An LGR Thing </a></li>
     <li><a href="#references"> References </a></li>
     <li><a href="#credits">Credits and Licenses</a></li>
@@ -70,25 +72,25 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
   <h2> History </h2>
   <p>
     The history of Unix is well outside the scope of this discussion.
-    However, a few facts are relevant to us.
+    However, a few facets are relevant to us.
   </p>
 
   <div class="aside_right">
     <h4>Aside:</h4>
     <i>Teletype</i> was a trade name of the Teletype Corporation, and was subsequently abbreviated to <i>tty</i>.
     <a href="http://www.pdp8.net/asr33/videos.shtml">The Model 33</a> was among the most popular of these,
-    with around 600,000 units sold (Libes, 129).
+    with around 600,000 units sold (Libes, 1978).
   </div>
 
   <p>
     First, computers of the 1960's and 70's were expensive.
-    The "Programmed Data Processor-7," which the first inklings of Unix can be traced to (Kernighan, 27),
+    The "Programmed Data Processor-7," which the first inklings of Unix can be traced to (Kernighan, 2020),
     would have cost the equivalent of about $600,000 in 2020, and shipped with 18 kilobytes of memory.
-    They were bought and maintained by
+    These computers were bought and maintained by
     organizations, with the idea of developing timesharing (i.e., multiuser) operating systems.
     In fact, it was once envisioned that computing would be offered as a utility,
     piped into homes and businesses like telephone or electricity.
-    This vision formed the impetus of Multics, the precursor to Unix (Kernighan, 31).
+    This vision formed the impetus of Multics, the precursor to Unix (Kernighan, 2020).
   </p>
 
   <p>
@@ -98,7 +100,7 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
     interface with computers.
     The resulting abstraction formed the basis of the input/output mechanism of early interactive computing.
 
-    Paper-based terminals persisted well into the 1970's; later electronic typewriters
+    Paper-based terminals persisted well into the 1970's, and later electronic typewriters
     <a href="https://www.youtube.com/watch?v=z-u4kUeIqDI">sometimes support "terminal mode,"</a>
     allowing them to interface with computers via serial cable.
   </p>
@@ -115,8 +117,8 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
     As interactive computing became more popular, hard-copy terminals were phased out in favor of
     screen-based entities.
     The resulting devices, referred to as <i>text terminals,</i> consisted of a monitor and a keyboard;
-    the monitor was unlike a modern monitor in that it contained a buffer, on the order of a few kilobytes,
-    which maintained the text currently on screen, and a character-to-bitmap font table to be referenced
+    the monitor was unlike a modern monitor in that it contained a buffer (on the order of a few kilobytes<sup>100</sup>)
+    which maintained the text currently on screen, and in that it contained a character-to-bitmap font table to be referenced
     when drawing each character; that is, it included its own font.
   </p>
   <a class="img_left" title="The original uploader was Frotz at English Wikipedia. / CC BY-SA (http://creativecommons.org/licenses/by-sa/3.0/)" href="https://commons.wikimedia.org/wiki/File:VT78.jpg"><img width="300" alt="VT78" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/VT78.jpg/512px-VT78.jpg"></a>
@@ -134,12 +136,12 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
   <p>
     The text terminal <a href="https://www.vt100.net/dec/vt_history">was used for decades</a> as the principle means of interactive computing.
     Today, text terminals are obsolete, but the abstraction persists in both modern Linux and Unix,
-    via emulated terminals, virtual terminals, tty device files, and the associated software required to support them.
+    via emulated terminals, virtual terminals, tty device files, and the associated back-end software required to support them.
   </p>
 
   <p>
-    It's worth noting that the idea of mainframe-driven utility computation suggests that the computational structure
-    forms a mathematical tree:
+    It's worth noting that the idea of mainframe-driven utility computation suggests that the computer's organization
+    follows the sctructure of a mathematical tree:
     The "root user" would sit at the root of this tree, exercising super-user priveledges over the machine,
     while end-users would be positioned at the leaves of the tree.
   </p>
@@ -178,7 +180,7 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
   <p>
     The typical terminal is connected to a computer by a full-duplex communication pipeline.
     In days' past, this was a serial port.
-    The Unix environment presents an abstraction of this connection as a special device file.
+    The Unix environment presents abstractions of these connections as special device files.
     Located in <tt>/dev</tt>, these files are available to each user-space process
     using a terminal for input or output.
     A program can open, read from and write to a tty file, with the operating system
@@ -186,7 +188,7 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
     By this method, a user-space program has access to nontrivial, if elementary, input and output,
     by the trivial method of file access.
     Moreover, for a Unix system accessed through a terminal, the flow of data
-    through the <tt>/dev/tty.*</tt> files represents the entirety of input and output.
+    through the tty files represents the entirety of input and output.
   </p>
 
   <p>
@@ -228,11 +230,11 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
     without a graphical user interface and, in particular, without the associated
     software (namely, without a window server, window manager, and desktop environment).
     In modern desktop GNU/Linux distributions, it is often the case that
-    GUI-based system software is merely
+    GUI-based systems software is merely
     an additional front-end layer to command-line tools
-    (for instance,
+    (a common example is the
     <a href="https://www.nongnu.org/synaptic/"> Synaptic Package Manager</a>).
-    That is, the command-line interface often offers more and finer control over
+    That is, the command-line interface usually offers more and finer control over
     the machine, through less and more robust software;
     virtual terminals are still relevant within the context of server applications.
   </p>
@@ -246,11 +248,10 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
     user-space process with root permissions<sup>[501]</sup><sup>[502]</sup> (commonly, <i>systemd</i>).
     This process then launches the local window system, which, in turn, logs in at
     an empty virtual terminal.
-    Usually, the "local window system" is X Window Server (and is started by
-    one of <tt>startx</tt> or <tt>xinit</tt>); X usually logs in to tty7,
+    Usually, this process is X Window Server; X usually logs in to tty7,
     and then launches the graphical user interface[401].
     One can emulate this sequence by logging into a virtual terminal as root and launching
-    the system's window server, on this machine, by <tt>startx</tt>.
+    the system's window server by, on this machine, <tt>startx</tt>.
   </p>
 
   <p>
@@ -258,14 +259,15 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
     a synonym for the current virtual terminal.
     That is, if you are currently looking at the second virtual terminal, <tt>tty2</tt>, then data sent to <tt>tty0</tt>
     is sent to <tt>tty2</tt> (and not any other terminal).
+    See <a href="https://unix.stackexchange.com/questions/60641/linux-difference-between-dev-console-dev-tty-and-dev-tty0">
+      this unix.stackexchange answer</a> for more information, and a demonstration.
   </p>
 
   <h3>The Controlling Terminal:<br> /dev/tty </h3>
   <p>
     <tt>/dev/tty</tt> is a handle to the process's current tty device, if it exists<sup>[500]</sup>.
     It is, effectively, a process-specific file: Any process that is connected to a terminal
-    may access its terminal here.
-    see the manual page tty(4).
+    may access its terminal here<sup>[505]</sup>.
   </p>
 
   <h4> Demonstration </h4>
@@ -336,7 +338,7 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
       <li> Open exactly two terminal emulators</li>
       <li> Navigate one to <tt>/dev/pts</tt></li>
       <li> List the directory contents and note its entries (should be nonempty)</li>
-      <li> For each integral entry, write a string to the file, (e.g., <tt>echo hello &lt;entry&gt;</tt>) </li>
+      <li> For each integral entry, write a string to the file, (e.g., <tt>echo hello &gt; 2</tt>) </li>
       </ol>
 
 
@@ -357,9 +359,7 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
       <div id="controlling_the_terminal" class="content">
         <h2> Controlling the Terminal </h2>
 
-        Modern Library:
-        #include <termios.h>
-          See man termios,
+
 
           <p>
             For all text terminals, bytes flow from the keyboard to the computer, and bytes flow from the computer to the screen.
@@ -392,24 +392,22 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
 
           <p>
             This is useful for writing "interactive" or menu-driven programs;
-            in either case, we must remember to turn it back on again:
-            (<tt>stty echo</tt> or <a href="http://www.apuebook.com/apue3e.html">Advanced Programming in the Unix Environment</a>).
+            in either case, we must remember to turn it back on again.
           </p>
 
           <p>
             It's worth repeating at this point that the terminal <i>proper</i> only sends a stream of bytes, and
             merely receives a stream of bytes.
-            That is, there does not exist any computer-accessible data structure
-            within the monitor:  The only method of sending data to the monitor is by the same channel as
+            That is, the only method of sending data to the monitor is by the same channel as
             printable characters.
             As a consequence, it is necessary to establish some common standard for communicating to the terminal
             non-printable, or control, characters, such as "newline."
-            In the US, printable characters were traditionally mapped via ASCII, with the exception of <a href="https://en.wikipedia.org/wiki/EBCDIC"> some early IBM mainframes</a>.
+            In the US, printable characters were traditionally mapped via ASCII (with the exception of <a href="https://en.wikipedia.org/wiki/EBCDIC"> some early IBM mainframes</a>).
             The first 32 ASCII characters are control characters, rather than printable;
-            they include the famous "bell" character, and both "tab" (horizontal tab) and "newline" (linefeed).
+            they include the famous <i>bell</i> character, and both <i>tab</i> and <i>newline</i> (aka, "linefeed").
             In particular, in order to delete previously written text, one can print the backspace
             character (typically, "<tt>\b</tt>").
-            Because most of these control characters quickly became antiquated, they are not widely used.
+            Most of these control characters quickly became antiquated, so that the majority are not widely used.
           </p>
 
           <p>
@@ -446,7 +444,7 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
             <a href="http://ascii-table.com/ansi-escape-sequences-vt-100.php"> There are often hundreds of such escaped sequences</a>,
             including such novelties as "set smooth scroll"; most real terminals can even change fonts.
             Some escape sequences may take parameters such as coordinates;
-            the parameters become part of the escape sequence.
+            the parameters become part of the escape sequence<sup>[403]</sup>.
           </p>
 
           <p>
@@ -467,7 +465,7 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
           <div class="aside_right">
             <h4> Aside </h4>
             <p>
-              Actually, early implementations of Unix were ran without line-discipline, https://www.bell-labs.com/usr/dmr/www/
+              The first implemen- tations of Unix were ran without line-discipline, aka "raw mode." https://www.bell-labs.com/usr/dmr/www/
             </p>
           </div>
 
@@ -477,6 +475,15 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
             It is the terminal line discipline's job to map some of these onto special characters.
             Special characters are control sequences, but in the other direction.
           </p>
+
+          <div class = "aside_left">
+            <h4> Aside: X Window System </h4>
+            The X Window System serves a role roughly analgous to the terminal line discipline:
+            It facilitates the interaction between mouse, keyboard and monitors with application programs,
+            though it exists in user-space rather than kernel-space.
+            It is a "network-transparent window system" in the sense that
+            it controls system resources, and provides an interface for other programs to interact with.[20]
+          </div>
 
           <p>
             For instance, the CTRL+S key combination is often mapped to the STOP special character;
@@ -496,45 +503,20 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
             From the command prompt, we can list special characters (and other terminal attributes) by,
           </p>
 
-          <div class = "aside_right">
-            <h4> Aside: X Window System </h4>
-            The X Window System serves a role roughly analgous to the terminal line discipline:
-            It facilitates the interaction between mouse, keyboard and monitors with application programs,
-            though it exists in user-space rather than kernel-space.
-            It is a "network-transparent window system" in the sense that
-            it controls system resources, and provides an interface for other programs to interact with.[20]
-          </div>
-
-          <div class="code">
-            <tt> stty -a </tt>
-          </div>
+            <center><tt> stty -a </tt></center>
 
           <p>
             This lists all bindings to special characters, in addition to other terminal attributes, such as speed.
-            There are eleven Posix-defined special characters, and most of them can be remapped through the <tt>termios</tt> struct<sup>[21]</sup>; see APUE for more information.
+            There are eleven Posix-defined special characters, and most of them can be remapped through the <tt>termios</tt> struct<sup>[21]</sup>.
             In particular, the terminal line discipline is responsible for mapping characters to signals, such as CTRL-D to <tt>EOF</tt>;
-            the terminal line discipline is where keyboard signals are generated.
+            the terminal line discipline is where keyboard signals originate from.
           </p>
 
           <p>
-            The termios struct is often manipulated by text-based programs
-
-          </p>
-
-          <p>
-            Application programs may utilize this database by calling certain C-Library functions. One large set of such programs
-            (over 200) is named "ncurses" and are listed in the manual page for "ncurses" which comes with a developer's ncurses package.
-            ncurses-examples, available in the Debian package management:
-            sudo apt install ncurses-example
-            then located in /usr/lib/ncurses/examples
-            documentation avaialble via sudo gunzip README.gz
-          </p>
-
-          <p>
-            NCURSES not only creates a wrapper over terminal capabilities, but also gives a robust framework to create nice
-            looking user interfaces in text mode.
+            The termios struct is often manipulated by text-based programs,
+            for instance, to turn off line-buffering and generate an interactive program.
+            A common library for facilitating this is <a href="http://www.tldp.org/HOWTO/NCURSES-Programming-HOWTO/intro.html">NCURSES</a>.
             Its sister libraries <tt>panel</tt>, <tt>menu</tt> and <tt>form</tt> provide an extension to the basic curses library.
-
           </p>
 
           <img width=100% src="tty_xmas.gif">
@@ -549,168 +531,71 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
 
         </div>
 
-        <div id="emulation" class="content">
-          <h2> Emulation </h2>
-          <center><i>"Abandon all hope, ye who enter here"</i></center>
-          -- xterm documentation README
+        <div id="closing_notes" class="content">
+          <h2> Closing Notes </h2>
+          <p>
+            Because the purpose of this article is to provide a practical introduction to terminals in general,
+            I thought it appropriate to cover some of the key points of terminal use in Linux today.
+          </p>
 
           <p>
-            Terminal emulation is not easy.
-            harder than it looks https://invisible-mirror.net/archives/shuford/terminal/emulation_how_to_news.txt
+            The most novel thing to recognize about terminals is that they exist, from the operating system's
+            perspective, as an ordinary file.
+            That <i>you read</i> from it is merely coincidental to what the file is connected to&mdash; namely,
+            a buffer within a monitor or emulator.
+            Likewise, data sent from the keyboard is not treated "specially" either&mdash; it, too,
+            appears within the operating system's environment as data from an ordinary file.
+          </p>
 
+          <h3> Shell </h3>
+          <p>
+            Typically, when "interacting" with a computer, data from a tty file is sent to a particular program called
+            a <i>shell</i>.  There are many variants, such as the antiquated <tt>sh</tt>, its modern successor, <tt>bash</tt>,
+            the disused <tt>csh</tt> and the feature-laden <tt>zsh</tt>.
+            Each of these are ordinary programs, and exist within a running operating system as an
+            ordinary user-space processes; they have no special attributes or permissions.
+            They simply read from a file (which might or might-not be your tty file) and execute commands; the commands they "know" are determined
+            <i>by the shell itself</i>, and can be determined by looking at the <tt>PATH</tt> environment
+            variable:
+          </p>
 
+          <p><center><tt>echo $PATH</tt></center></p>
 
+          <p>
+            Each shell command exists as an executable binary file in one of the resulting colon-separated directories.
+          </p>
 
+          <h3> Emulation </h3>
+          <p>
+            Terminal emulation is notoriously difficult,
+            and is characterized by <i>which</i> terminal device you are emulating.
+            The ANSI-standard escape sequences (which are still relevant today)
+            were usurped almost immediately by the capabilities of DEC's VT-100 terminal.
+            In almost every case, a new model implemented a superset of a previous model's features,
+            so that a VT200-series terminal can-do anything a VT100 could-do (and the VT100 was ANSI-compatible)<sup><a href="https://invisible-mirror.net/archives/shuford/terminal/first_principles.html">[25]</a></sup>.
+          </p>
 
-            6.8 Emulation
+          <p>
+            Information about the capabilities of supported terminals is stored locally in a database known as <tt>terminfo</tt><sup><a href="http://man7.org/linux/man-pages/man5/terminfo.5.html">[29]</a></sup>.
+            Terminal emulators are typically backward-compatable with a VT100 (xterm is backward compatable with the VT220<sup><a href="https://invisible-island.net/xterm/xterm.faq.html#what_is_vt220">[27]</a></sup>,
+            but often additionally have an entry in terminfo.
+            Terminal emulators today typically support color printing.
+          </p>
 
-            Most terminals today have more than one emulation (personality or "terminal mode"). The terminal model
-            numbers of terminals formerly made by DEC (Digital Equipment Corporation now Compaq) start with VT (e.g. VT100).
-            Many other terminals which are not VT100 may be set up to emulate a VT100. Wyse was a major terminal manufacturer
-            until about 2005. Most of their terminals can emulate various DEC terminals such at VT100 and VT220.
-            Thus if you want to, say, use a VT320 terminal you may either use a real VT320 in "native" personality or
-            possibly use some other terminal capable of emulating a VT320.
+          <h3> Emulators </h3>
 
-            The "native" personalities usually have more capabilities so, other things being equal, "native" is usually
-            the best to use. But other things may not be equal. Since the Linux console emulates a VT102 it you may want
-            to have a terminal emulate this (or something close to it such as VT100). This will help insure that some
-            programs that may not handle terminals properly will still work OK on your terminal. Some programs will assume
-            that you are using a VT102 if the program can't find a terminfo for your terminal (or can't find a certain capability). Thus the failure of a program to work correctly with your non-vt102 terminal may well be your fault if you don't provide a good terminfo file for your terminal. Using "native" and then reporting any bugs will help discover and fix bugs which might not otherwise get detected.
+          <p>
+            Some fun and interesting terminal emulators from around the web (suggestions/recommendations welcome!).
+          </p>
 
-            The most common type of emulation is to use a PC like it was a vt100 terminal (or the like).
-            Programs loaded into the PC's memory do the emulation. In Linux (unless you're in X Window) the PC monitor
-            (called the console) emulates a terminal of type "Linux" (close to vt100). Even certain windows within X Window emulate terminals. See Terminal Emulation.
-
-            6.9 The Console
-            On a PC, the monitor is normally the console. It emulates a terminal of type "Linux".
-            One logs on to it as a virtual terminal. See The Console. It receives messages from the kernel
-            regarding booting and shutdown progress. One may have the messages that normally go to the console,
-            go to the terminal. To get this you must manually patch the kernel, except that for kernel 2.2 (or higher)
-            it is a "make config" option. See Make a Serial Terminal the Console.
-            Next Previous Contents
-
-
-
-            CAREFUL:
-            https://invisible-mirror.net/archives/shuford/terminal/pc_emulation.html
-
-            """
-            The VT100 was the first product of DEC built to understand a set of
-            control codes compatible with ANSI X3.64. The VT100 became a very popular product,
-            and many other companies essentially copied it, such that many terminal products
-            on the market were not merely "ANSI compatible" but were more specifically "VT100
-            compatible", copying the layout of the keyboard, etc. (Yet the VT100 had in it a
-            feature to help people who had started out with VT52s: the VT100 could be set to
-            act as though it were a VT52, in an emulation mode.)
-            """FROM  https://invisible-mirror.net/archives/shuford/terminal/first_principles.html
-
-            """
-
-            """
-
-            https://st.suckless.org/
-
-            https://invisible-island.net/xterm/xterm.faq.html#who_did_it
-
-
-
-            6.7 The Interface
-
-            The environment variable TERM is the type of terminal Linux thinks you are using.
-            Most application programs use this to look up the capabilities in the terminfo database so
-            TERM needs to be set correctly.
-
-            But there is more to a correct interface than the computer
-            knowing about the capabilities of the terminal.
-
-            For bytes to flow from the computer to the terminal the terminal must be set to
-            receive the bytes at the same baud rate (bits per second) as they are sent out
-            from the terminal. If the terminal is set to receive at 19,200 baud and the computer
-            sends out characters at 9600 baud, only garbage (or perhaps nothing) will be seen on the
-            screen. One selects the baud rate for a terminal (as well as many other features) from the
-            terminals "set-up" menus at the terminal. Most terminals have a large number of options in
-            their "set-up" menus (see Terminal Set-Up (Configure) Details). The computer serial port has options also and these options must be set up in a compatible way (see Computer Set-Up (Configure) Details.
-
-
-            6.6 Lack of Standardization Solved by Terminfo
-            Most terminals made in the US used the same ASCII to encode characters;
-            however, no ASCII did not stipulate escape sequences
-
-            To overcome these problems a database called "termcap" (meaning "terminal capabilities") was established. Termcap
-            was later superceded by "terminfo". This database resides in certain files on the computer and has a section of it
-            (sometimes a separate file) for each model of terminal. For each model (such as VT100) a list of capabilities is
-            provided including a list of certain escape sequences available. For example blink=\E5m means that to make the cursor
-            start blinking the terminal must be sent: Escape 5 m.
-
-
-
-            For a pseudo terminal pair such as ptyp3 and ttyp3, the pty... is the master or controlling terminal and the tty... is the slave.
-
-            There are only 16 ttyp's: ttyp0-ttypf (f is a hexadecimal digit). To get more pairs, more letters such as q, r, s are used instead of p. For example the pair ttys8, ptys8 is a pseudo terminal pair. Later on, even more letters were added so as to allow even more pseudo terminals. And when z was reached, they wrapped around to a. This is confusing but old habits are difficult to change. Today Linux allow say ttyp189 but it's not used. The device file system, which was abandoned in 2004, would have used tty/s189. Be sure not to type say ttys2 if you mean ttyS2 (a real serial port).
-
-            The master and slave are really the same "port" but the slave is used by the application program and the master is used by a network program (or the like) which supplies (and gets) data to/from the slave port. The program using the slave port can run "as is" since it thinks it is talking to a serial port.
-
-            Unix98 pseudo terminals (available on Linux) is more advanced than the above but the basic concepts are the same (only the device names and methods of creating them change). It creates pseudo terminal devices on request so there is no need to check if the pseudo terminal you might want to use in in use. By opening /dev/ptmx a new pseudo terminal pair is created. The master doesn't show up as a device but is just a file descriptor number passed to the computer program that opened /dev/ptmx. But the slave is put into the /dev/pts directory: for example" /dev/pts/3.
-
-            The /dev/pts directory is considered to be a file system of type devpts and appears in the lists of mounted filesystems. While the "file" /dev/pts/3 looks like an entry in the now obsolete device filesystem, /dev/pts Is really a wholly different kind of filesystem.
-
-            See the Linux manual pages "pty" and "pts" (Unix 98 style) for more details. For programmers there's the man-page openpty/forkpty (either name displays the same man-page) which assumes that you already understand pseudo terminals. There is a usr/include/pty.h file for use by programmers. In earlier versions of Linux there was a pty.o module, but it now seems that it's been built into the kernel. Here's an example of some options available when you are compiling a Linux 2.6 kernel:
-
-            CONFIG_UNIX98_PTYS=y CONFIG_LEGACY_PTYS=y
-            CONFIG_LEGACY_PTY_COUNT=256
-
-            Text terminals proper were never popular with PC's, for obvious reasons.
-
-            It is still possible to use Linux as a multi-user operating system, though the economics involved make the practice, largely, obsolete.
-            Moreover, they do not offer high-speed graphic
-
-            You know, on second thought, this could make a comeback.
-
-            In particular, the font and the resolution of the terminal were independant of the computer itself.
-
-            The text interface that remains today
-
-            xterm, gnome-terminal, or konsole (KDE) use software to emulate a real terminal.
-
-
-            The terminal is like a "window" into the computer just like
-            a monitor (and keyboard) are.
-            You may have already used virtual terminals in Linux (by pressing Left Alt-F2, etc.).
-
-            In contrast to using a virtual terminal at the console (monitor), this
-            allows another person to sit at another real terminal and use the same
-            computer simultaneously with others.
-
-
-            https://www.kernel.org/doc/html/latest/driver-api/serial/n_gsm.html?highlight=tty
-
-
-
-
-            Common Emulators
-            vt100:
-            Not *just* ANSI-compatible, but also vt100-compatible
-            Source: https://invisible-mirror.net/archives/shuford/terminal/first_principles.html
-            almost everything is vt100-compatible today
-
-            xterm:
-            Synopsis: https://invisible-island.net/xterm/
-            The xterm program is a terminal emulator for the X Window System. It provides DEC VT102 and Tektronix 4014 compatible terminals for programs that can't use the window system directly.
-            This version implements ISO/ANSI colors using the "new" color model (i.e., background color erase). It also implements most of the control sequences for VT220, as well as selected features from other DEC terminals such as VT320, VT420 and VT520.
-
-            xterm-256color
-
-            https://stackoverflow.com/questions/10003136/what-is-the-difference-between-xterm-color-xterm-256color
-
-            Windows bash-like terminal emulator-ish:
-            https://cmder.net/
-
+          <p>
+            <ul>
+              <li> <a href="https://invisible-island.net/xterm/xterm.faq.html">xterm</a>&mdash; The standard terminal emulator for X Window System </li>
+              <li> <a href="https://st.suckless.org/"> suckless st</a>&mdash; A terminal emulator that Sucks Less </li>
+              <li> <a href="https://github.com/alacritty/alacritty "> alacritty</a>&mdash; GPU-accelerated terminal emulator </li>
+              <li> <a href="https://github.com/GitSquared/edex-ui#screenshots">edex-ui</a>&mdash; A terminal emulator designed to make you look <i>insanely badass</i> </li>
+          <p>
           </div>
-
-
-
-
-
 
           <div id="lgr_video" class="content">
             <h2> An LGR Thing </h2>
@@ -723,7 +608,7 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
             <br>
             [1] Unix: A History and a Memoir. Brian Kernighan.  Published 2020, by Brian W. Kernighan via Kindle Direct Publishing.
             <br>
-            [2] Small Computer Systems Handbook. Sol Libes.
+            [2] Small Computer Systems Handbook. Sol Libes.  Published 1978, by Hayden Book Co.
             <br>
             [2] http://ascii-table.com/ansi-escape-sequences-vt-100.php
             <br>
@@ -765,13 +650,19 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
               <br>
               [19] https://www.kernel.org/doc/html/v5.4/admin-guide/devices.html
               <br>
+              [100] https://tldp.org/HOWTO/Text-Terminal-HOWTO-8.html
+              <br>
               [500] man 4 tty http://man7.org/linux/man-pages/man4/tty.4.html
               <br>
               [501] man 7 boot
               <br>
               [502] man 7 bootup
-              <Br>
-                [401] https://askubuntu.com/questions/27339/what-is-tty7-in-the-commandline
+              <br>
+              [401] https://askubuntu.com/questions/27339/what-is-tty7-in-the-commandline
+              <br>
+              [403] http://tldp.org/HOWTO/Text-Terminal-HOWTO-8.html#ss8.3
+              <br>
+              [505] man 4 tty
 
               </div>
 
