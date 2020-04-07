@@ -79,18 +79,18 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
     <h4>Aside:</h4>
     <i>Teletype</i> was a trade name of the Teletype Corporation, and was subsequently abbreviated to <i>tty</i>.
     <a href="http://www.pdp8.net/asr33/videos.shtml">The Model 33</a> was among the most popular of these,
-    with around 600,000 units sold (Libes, 1978).
+    with around 600,000 units sold<sup><a href=#references style="text-decoration: none">[2]</a></sup>.
   </div>
 
   <p>
     First, computers of the 1960's and 70's were expensive.
-    The "Programmed Data Processor-7," which the first inklings of Unix can be traced to (Kernighan, 2020),
+    The "Programmed Data Processor-7," which the first inklings of Unix can be traced to<sup><a href=#references style="text-decoration: none">[1]</a></sup>,
     would have cost the equivalent of about $600,000 in 2020, and shipped with 18 kilobytes of memory.
     These computers were bought and maintained by
     organizations, with the idea of developing timesharing (i.e., multiuser) operating systems.
     In fact, it was once envisioned that computing would be offered as a utility,
     piped into homes and businesses like telephone or electricity.
-    This vision formed the impetus of Multics, the precursor to Unix (Kernighan, 2020).
+    This vision formed the impetus of Multics, the precursor to Unix<sup><a href=#references style="text-decoration: none">[1]</a></sup>.
   </p>
 
   <p>
@@ -117,7 +117,8 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
     As interactive computing became more popular, hard-copy terminals were phased out in favor of
     screen-based entities.
     The resulting devices, referred to as <i>text terminals,</i> consisted of a monitor and a keyboard;
-    the monitor was unlike a modern monitor in that it contained a buffer (on the order of a few kilobytes<sup>100</sup>)
+    the monitor was unlike a modern monitor in that it contained a buffer
+    (on the order of a few kilobyte<sup><a href=#references style="text-decoration: none">[3]</a></sup>)
     which maintained the text currently on screen, and in that it contained a character-to-bitmap font table to be referenced
     when drawing each character; that is, it included its own font.
   </p>
@@ -245,11 +246,15 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
     For completeness' sake, we will briefly explore how it is that the system arrives in this
     state.
     At the end of the kernel's boot sequence, the kernel launches a single
-    user-space process with root permissions<sup>[501]</sup><sup>[502]</sup> (commonly, <i>systemd</i>).
+    user-space process with root permissions
+    <sup><a href=#references style="text-decoration: none">[4]</a></sup>
+    <sup><a href=#references style="text-decoration: none">[5]</a></sup>
+    (commonly, <i>systemd</i>).
     This process then launches the local window system, which, in turn, logs in at
     an empty virtual terminal.
     Usually, this process is X Window Server; X usually logs in to tty7,
-    and then launches the graphical user interface[401].
+    and then launches the graphical user interface
+    <sup><a href=#references style="text-decoration: none">[6]</a></sup>.
     One can emulate this sequence by logging into a virtual terminal as root and launching
     the system's window server by, on this machine, <tt>startx</tt>.
   </p>
@@ -265,9 +270,11 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
 
   <h3>The Controlling Terminal:<br> /dev/tty </h3>
   <p>
-    <tt>/dev/tty</tt> is a handle to the process's current tty device, if it exists<sup>[500]</sup>.
+    <tt>/dev/tty</tt> is a handle to the process's current tty device, if it exists
+    <sup><a href=#references style="text-decoration: none">[7]</a></sup>.
     It is, effectively, a process-specific file: Any process that is connected to a terminal
-    may access its terminal here<sup>[505]</sup>.
+    may access its terminal here
+    <sup><a href=#references style="text-decoration: none">[8]</a></sup>.
   </p>
 
   <h4> Demonstration </h4>
@@ -299,7 +306,8 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
       This essay develops <i>terminal</i> exclusively, for the sake of
       clarity and relevance in the modern domain.
       The only other synonym in common usage is "console," as in, <i><tt>/dev/tty1</tt>
-      through <tt>/dev/tty7</tt> are virtual consoles</i>.<sup>[19]<sup>
+      through <tt>/dev/tty7</tt> are virtual consoles</i>
+      <sup><a href=#references style="text-decoration: none">[9]</a></sup>.
       </p>
     </div>
 
@@ -345,7 +353,8 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
       <h3> The Commander's Chair: <br><tt>/dev/console</tt> </h3>
       <p>
         This is the superuser's device.
-        Kernel error and other messages are sent here<sup>45</sup>, and the device
+        Kernel error and other messages are sent here
+        <sup><a href=#references style="text-decoration: none">[9]</a></sup>, and the device
         is owned entirely by the root user:
       </p>
 
@@ -414,7 +423,7 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
             For instance, ASCII alone does not provide provisions for moving the cursor or scrolling.
             As a consequence, ANSI escape sequences were implemented in the terminals.
             These begin with the ASCII "escape" control character (decimal 27)
-            and the left-bracket "<tt>[</tt>" printable<sup><a href="#references">[2]</a></sup>, and are entirely ASCII sequences.
+            and the left-bracket "<tt>[</tt>" printable<sup><a href="#references">[10]</a></sup>, and are entirely ASCII sequences.
             Technically, these sequences are terminal-specific, but they are still viable today because modern emulators <a href="https://unix.stackexchange.com/questions/43945/whats-the-difference-between-various-term-variables">implement a superset</a> of deprecated terminals' escape sequences.
             Within C, to print <tt>Hello World!</tt> in reverse, we could do
 
@@ -444,13 +453,12 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
             <a href="http://ascii-table.com/ansi-escape-sequences-vt-100.php"> There are often hundreds of such escaped sequences</a>,
             including such novelties as "set smooth scroll"; most real terminals can even change fonts.
             Some escape sequences may take parameters such as coordinates;
-            the parameters become part of the escape sequence<sup>[403]</sup>.
+            the parameters become part of the escape sequence<sup><a href="#references">[11]</a></sup>.
           </p>
 
           <p>
-            Terminal input is a different animal.
-            To explain, we must start at the root.
-            The terminal keyboard sends <i>scancodes</i> to the computer<sup><a href="#references">[3]</a></sup>.
+            Terminal input is a different animal. To explain, we must start at the root.
+            The terminal keyboard sends <i>scancodes</i> to the computer<sup><a href="#references">[12]</a></sup>.
             These are received and interpreted by the terminal device driver, yielding <i>keycodes</i>, then, within the same driver, ASCII.
             The settings for this driver can sometimes be accessed via operating-system settings but are typically one-time-only configuration settings.
           </p>
@@ -465,7 +473,7 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
           <div class="aside_right">
             <h4> Aside </h4>
             <p>
-              The first implemen- tations of Unix were ran without line-discipline, aka "raw mode." https://www.bell-labs.com/usr/dmr/www/
+              The first implemen- tations of Unix were ran without line-discipline, aka "raw mode."<sup><a href="#references">[13]</a></sup>
             </p>
           </div>
 
@@ -482,7 +490,7 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
             It facilitates the interaction between mouse, keyboard and monitors with application programs,
             though it exists in user-space rather than kernel-space.
             It is <i>server</i> it controls system resources,
-            and provides an interface for other programs to interact with.[20]
+            and provides an interface for other programs to interact with<sup><a href="#references">[14]</a></sup>.
           </div>
 
           <p>
@@ -507,7 +515,7 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
 
           <p>
             This lists all bindings to special characters, in addition to other terminal attributes, such as speed.
-            There are eleven Posix-defined special characters, and most of them can be remapped through the <tt>termios</tt> struct<sup>[21]</sup>.
+            There are eleven Posix-defined special characters, and most of them can be remapped through the <tt>termios</tt> struct<sup><a href="#references">[15]</a></sup>.
             In particular, the terminal line discipline is responsible for mapping characters to signals, such as CTRL-D to <tt>EOF</tt>;
             the terminal line discipline is where keyboard signals originate from.
           </p>
@@ -583,13 +591,16 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
             The ANSI-standard escape sequences (which are still relevant today)
             were usurped almost immediately by the capabilities of DEC's VT-100 terminal.
             In almost every case, a new model implemented a superset of a previous model's features,
-            so that a VT200-series terminal can-do anything a VT100 could-do<sup><a href="https://invisible-mirror.net/archives/shuford/terminal/first_principles.html">[25]</a></sup>
-             (and the VT100 was ANSI-compatible).
+            so that a VT200-series terminal can-do anything a VT100 could-do
+            <sup><a href="#references">[16]</a></sup>
+            (and the VT100 was ANSI-compatible).
           </p>
 
           <p>
-            Information about the capabilities of supported terminals is stored locally in a database known as <tt>terminfo</tt><sup><a href="http://man7.org/linux/man-pages/man5/terminfo.5.html">[29]</a></sup>.
-            Terminal emulators are typically backward-compatable with a VT100 (xterm is backward compatable with the VT220<sup><a href="https://invisible-island.net/xterm/xterm.faq.html#what_is_vt220">[27]</a></sup>,
+            Information about the capabilities of supported terminals is stored locally in a database known as <tt>terminfo</tt>
+            <sup><a href="#references">[17]</a></sup>.
+            Terminal emulators are typically backward-compatable with a VT100 (xterm is backward compatable with the VT220
+            <sup><a href="#references">[18]</a></sup>,
             but often support additional capabilities, such as color, and have a distinct entry in the terminfo database.
           </p>
 
@@ -615,84 +626,46 @@ https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/
 
           <div id="references" class="content">
             <h2> References </h2>
+            <p>
+              <ol>
+                <li> Kernighan, Brian. <i>Unix: A History and a Memoir.</i>  Published 2020, by Brian W. Kernighan via Kindle Direct Publishing. </li>
+                <li> Libes, Sol.  <i>Small Computer Systems Handbook</i>.  Published 1978, by Hayden Book Co. </li>
+                <li> Lawyer, David S. <i>Text-Terminal-HOWTO</i> <a href="https://tldp.org/HOWTO/Text-Terminal-HOWTO-8.html"> https://tldp.org/HOWTO/Text-Terminal-HOWTO-8.html</a>.  The Linux Documentation Project.  Retrieved April 6, 2020. </li>
+                <li> <a href="http://man7.org/linux/man-pages/man7/boot.7.html">man 7 boot</a>. The Linux Man-Pages Project. Written March 11, 2015.</li>
+                <li> <a href="http://man7.org/linux/man-pages/man7/bootup.7.html">man 7 bootup</a>. The Linux Man-Pages Project.
+                <li> <a href="https://askubuntu.com/questions/27339/what-is-tty7-in-the-commandline">"What is tty7 in the command line?"</a>.  AskUbuntu question, posed by Fusky.</li>
+                <li> <a href="http://man7.org/linux/man-pages/man4/tty.4.html">man 4 tty</a>. The Linux Man-Pages Project. Published March 6, 2019.</li>
+                <li> <a href="git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/tty/Kconfig?id=HEAD">Kernel Driver Source</a>.  Maintained by Linux Torvalds.</li>
+                <li> <a href="https://www.kernel.org/doc/html/v5.4/admin-guide/devices.html">The Kernel Administrators Guide; Linux Allocated Devices</a>. </li>
+                <li> <a href="http://ascii-table.com/ansi-escape-sequences-vt-100.php">ANSI Escape Sequences</a>. ASCII-Table.com.  Retrieved April 6, 2020.</li>
+                <li> Lawyer, David S. <a href="http://tldp.org/HOWTO/Text-Terminal-HOWTO-8.html#ss8.3"><i>Text-Terminal-HOWTO, Section 8.3: Escape Sequences and Control Codes</i></a>.</li>
+                <li> Brouwer, Andries. <a href="http://www.tldp.org/HOWTO/Keyboard-and-Console-HOWTO-2.html"><i>The Linux Keyboard and Console HOWTO</i></a>. Published October 12, 2002.</li>
+                <li> Ritchie, Dennis M.  <a href="https://www.bell-labs.com/usr/dmr/www/hist.pdf"><i>The Evolution of the Unix Time-sharing System*</i></a>.  Bell Laboratories, Murray Hill, New Jersey 07975.</li>
+                <li> <a href="https://linux.die.net/man/7/x"> man 7 x </a>.  Written by X.Org Foundation, LLc.  Hosted by die.net hosting.</li>
+                <li> Stevens, W. Richard. <i><a href="http://www.apuebook.com/apue3e.html"> Advanced Programming in the Unix Environment.</a></i> Pearson Eduction, 2013.</li>
+                <li> Shuford, Richard S. <a href="https://invisible-mirror.net/archives/shuford/terminal/first_principles.html"><i>First Thoughts about Terminal Emulation</i></a>. </li>
+                <li> Ben-Halim, Zeyd M., Raymond, Eric S., Dickey, Thomas E. <a href="http://man7.org/linux/man-pages/man5/terminfo.5.html">man 5 terminfo</a>.  The Linux Man-Pages Project. Retrieved April 6, 2020.</li>
+                <li> Dickey, Thomas E.  <a href="https://invisible-island.net/xterm/xterm.faq.html#what_is_vt220"><i>"What is a VT220?"</i></a>. Retrieved April 6, 2020.</li>
+              </ol>
+            </p>
+          </div>
 
-            <br>
-            [1] Unix: A History and a Memoir. Brian Kernighan.  Published 2020, by Brian W. Kernighan via Kindle Direct Publishing.
-            <br>
-            [2] Small Computer Systems Handbook. Sol Libes.  Published 1978, by Hayden Book Co.
-            <br>
-            [2] http://ascii-table.com/ansi-escape-sequences-vt-100.php
-            <br>
-            [3] http://www.tldp.org/HOWTO/Keyboard-and-Console-HOWTO-2.html
-            <br>
-            <a href="http://www.apuebook.com/apue3e.html"> Advanced Programming in the Unix Environment </a>
-            <br>
-            https://history-computer.com/ModernComputer/Electronic/PDP-1.html
-            <br>
-            <p>[1] The New York Times, https://www.nytimes.com/1970/04/05/archives/maxi-computers-face-mini-conflict-mini-trend-reaching-computers.html
-              <br>
-              Image: https://en.wikipedia.org/wiki/Teleprinter#/media/File:Telex_machine_ASR-32.jpg
-              <br>
-              <i>Understanding Unix/Linux Programming:  A Guide to Theory and Practice </i> by Bruce Molay.
-              <br>
-              [21] <a href="http://www.apuebook.com/apue3e.html"> Advanced Programming in the Unix Environment </a>
-              <br>
-              Termios man page: man 3 termios
-              <br>
-              http://www.tldp.org/HOWTO/Keyboard-and-Console-HOWTO-5.html
-              <br>
-              https://en.wikibooks.org/wiki/Serial_Programming/termios
-              <br>
-              http://unixwiz.net/techtips/termios-vmin-vtime.html
-              <br>
-              https://invisible-island.net/ncurses/announce.html#h2-overview
-              <br>
-              http://tldp.org/HOWTO/NCURSES-Programming-HOWTO/awordwindows.html
-              <br>
-              http://www.tldp.org/HOWTO/Keyboard-and-Console-HOWTO.html#toc5
-              <br>
-              [42] https://superuser.com/questions/144666/what-is-the-difference-between-shell-console-and-terminal
-              <br>
-              [20] https://linux.die.net/man/7/x
-              <br>
-              https://history-computer.com/index.html
-              <br>
-              [45] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/tty/Kconfig?id=HEAD
-              <br>
-              [19] https://www.kernel.org/doc/html/v5.4/admin-guide/devices.html
-              <br>
-              [100] https://tldp.org/HOWTO/Text-Terminal-HOWTO-8.html
-              <br>
-              [500] man 4 tty http://man7.org/linux/man-pages/man4/tty.4.html
-              <br>
-              [501] man 7 boot
-              <br>
-              [502] man 7 bootup
-              <br>
-              [401] https://askubuntu.com/questions/27339/what-is-tty7-in-the-commandline
-              <br>
-              [403] http://tldp.org/HOWTO/Text-Terminal-HOWTO-8.html#ss8.3
-              <br>
-              [505] man 4 tty
-
-              </div>
-
-              <div id="credits" class="content">
-                <h2> Credits and Licensure </h2>
-                <p>
-                  This was written by Josh Timmons, and was inspired by The Linux Documentation Project's
-                  <a href="https://tldp.org/HOWTO/Text-Terminal-HOWTO-1.html"><i>Text Terminal How-To</i></a>, by David S. Lawyer.
-                  It is released under the <a href="https://creativecommons.org/licenses/by-nc/4.0/"> Creative Commons Attribution-ShareAlike 4.0 International license </a>.
-                  Please send any corrections or comments to <a href="mailto:josh.591536@gmail.com"> Josh Timmons</a>.
-                </p>
+          <div id="credits" class="content">
+            <h2> Credits and Licensure </h2>
+            <p>
+              This was written by Josh Timmons, and was inspired by The Linux Documentation Project's
+              <a href="https://tldp.org/HOWTO/Text-Terminal-HOWTO-1.html"><i>Text Terminal How-To</i></a>, by David S. Lawyer.
+              It is released under the <a href="https://creativecommons.org/licenses/by-nc/4.0/"> Creative Commons Attribution-ShareAlike 4.0 International license </a>.
+              Please send any corrections or comments to <a href="mailto:josh.591536@gmail.com"> Josh Timmons</a>.
+            </p>
 
 
-              </div>
-              <script
-              src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-              integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
-              crossorigin="anonymous"></script>
-              <script src="../animate-nav-2.js"> </script>
-              </html>
+          </div>
+          <script
+          src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+          integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+          crossorigin="anonymous"></script>
+          <script src="../animate-nav-2.js"> </script>
+          </html>
 
               <!-- Thanks for playing! https://www.youtube.com/watch?v=wvUQcnfwUUM -->
