@@ -1,0 +1,138 @@
+TODO
+
+Regular Files
+  Data contents are not, in the general case, the business of the operating system;
+  operating system is only tasked with preserving the data in a bit-perfect
+  manner.
+  That means that the Linux kernel treats text files, binaries, movies,
+  source code, pdf's, etc., identically, (a concept new for its time),
+  and, that any "special treatment," is implemented by user-space processes.
+  As Brian Kerninghan puts it, "If applying a program to a file doesn't make sense&mdash; for
+  example, trying to compile a Fortran source file as if it were C&mdash; that doesn't have anything
+  to do with the operating system."  (Kernigham, p 63)
+
+   (for instance, the desktop environment).
+
+"dotfiles"
+https://fedoramagazine.org/take-back-your-dotfiles-with-chezmoi/
+  Used to store text-based configuration files; there are many in
+  the home directory and many in the ~/.config folder
+
+  chmod +x:
+    Change the way the operating system handles a file;
+    <i>in addition</i> to the above, the operating system can now
+    "execute" the file:
+    Binary
+    #! /usr/bin/XXXXXXX
+    Bash's behavior by default
+
+    For instance, the ruby interpreter is a program, existant in my filesystem
+    as a binary file compiled from C source code; to execute a ruby program,
+    I pass the argument <tt>ruby my_example_program.rb </tt> to bash,
+    causing the kernel to launch ruby with the argument file <tt>my_example_program.rb</tt>.
+
+Directories
+  Are called "directories" rather than "folders" because they are files&mdash;
+  think of a Unix <i>directory</i> as a page in a telephone book.
+
+  Process Working Directory
+    The kernel itself supports the notion of a process having a <i>current</i>
+    directory(APUE p135
+
+    is set at login to the home directory specified in /etc/passwd
+
+    /proc/self/cwd
+    char *getcwd(char *buf, size_t size);
+      // Starts at current directory, gets name via '.', then travels up (via '..'),
+      and repeats.
+
+    +x "search" permission
+
+Device Files
+Pseudo Filesystems
+Meta-Persistent Filesystems
+
+
+Abstracting away from machine state;
+  in particular we are IGNORING running programs.
+This amounts to ignoring half of the operating system,
+but it is appropriate because files are static with
+respect to processes.
+
+
+
+regular files:
+
+
+
+directories:
+  There is no conflict if the data in the directory is stored in
+  an otherwise-normal file.
+
+pipes:
+  A Beautiful Abstraction
+
+  The file-first mentality projected by Unix lets you work with the output of
+  programs as though they were files.
+  For instance,
+    ls /dev > dev_listing
+  doesn't make any sense because the output of "ls /dev" is conceptually identical to
+  a file anyways.
+
+
+Linux files as variables:
+  Names
+    Found in directories
+    Can have aliases
+  Addresses
+    Disk block locations
+  Value
+    Data
+  Type
+    Ordinary file
+    Directory
+    Special device file
+    etc
+  Lifetime
+    Static wrt system:
+      /etc/passwd
+      /home
+    Static wrt programs:
+      program-specific binaries
+    User-defined:
+      User-owned files
+    Runtime-only
+  Scope
+
+
+inode:
+  Sources:
+    man inode
+    APUE
+    The Design of the Unix Operating System
+
+
+  File "handle"
+  Placed at the beginning of the logical partition
+
+  For each file these exists a unique inode containing metadata about the file:
+    owner
+    group
+    type
+    permissions
+    last-accessed time and date
+    last-modified time and date
+    inode-modified time and date
+    size
+    number of links to the file
+    disk addresses
+      (The design of the unix operating system)
+
+  inode number -> index into array
+  Since neither links nor data addresses can cross disk partition
+  boundaries, the inode number is sufficient to uniquely identify an inode.
+
+SOURCES
+
+https://www.tldp.org/LDP/Linux-Filesystem-Hierarchy/html/dev.html
+https://unix.stackexchange.com/questions/18239/understanding-dev-and-its-subdirs-and-files
