@@ -50,10 +50,13 @@ body {
   font-style: italic;
 }
 
-
-
 .content p a {
     text-decoration: none;
+}
+
+.content .narrow {
+  width: 75%;
+  margin: auto;
 }
 
 ol {
