@@ -1,4 +1,7 @@
-TODO
+In the beginning, there was a filesystem.
+
+directory tree, per find man page
+virtual filesystem, 
 
 Regular Files
   Data contents are not, in the general case, the business of the operating system;
@@ -79,7 +82,6 @@ pipes:
   doesn't make any sense because the output of "ls /dev" is conceptually identical to
   a file anyways.
 
-
 Linux files as variables:
   Names
     Found in directories
@@ -103,6 +105,13 @@ Linux files as variables:
       User-owned files
     Runtime-only
   Scope
+
+locate:
+  Considers files by name
+
+GNU Find:
+  Considers files as such
+  A much deeper search
 
 
 inode:
@@ -136,3 +145,5 @@ SOURCES
 
 https://www.tldp.org/LDP/Linux-Filesystem-Hierarchy/html/dev.html
 https://unix.stackexchange.com/questions/18239/understanding-dev-and-its-subdirs-and-files
+
+http://www.tldp.org/LDP/intro-linux/html/sect_03_01.html

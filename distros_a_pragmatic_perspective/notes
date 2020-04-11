@@ -1,27 +1,27 @@
 
-Ultimately, an operating system exists to support user-space processes.
+The Role of An Operating System
+  Operating Systems in General
+  1) Stability
 
 
-Operating Systems in General
-1) Stability
+  2) Software Availability
 
 
-2) Software Availability
+  3) Out-of-the-box functionality
+    Printers and scanners
+      To make Linux truly viable in an everyday environment, fix this.
 
-
-3) Out-of-the-box functionality
-  Printers and scanners
-    To make Linux truly viable in an everyday environment, fix this.
-
-GNU/Linux in Particular
-Pretty similar across the board.
-  Filesystem,
-  The way they <i>treat</i> files
+  GNU/Linux in Particular
+  Pretty similar across the board.
+    Filesystem,
+    The way they <i>treat</i> files
 
 
 
-Recommendations:
-  Ubuntu
+  Recommendations:
+    Ubuntu
+
+How do Distros fit in?
 
 
 <!-- Thanks for playing!  https://www.youtube.com/watch?v=b6RwHjlqsx4 -->

@@ -2,6 +2,60 @@ body {
   margin: 0;
 }
 
+.content {
+  padding-top: 10px;
+  margin-left: 340px;
+  margin-right: 40px;
+  max-width: 1000px;
+  font-size: 15pt;
+}
+
+.content h1 {
+	text-align: center;
+	font-size: 23pt;
+}
+
+.content h2 {
+  text-align: center;
+	font-size: 20pt;
+}
+
+.content h3 {
+  text-align: center;
+  font-size: 15pt;
+  text-decoration: none;
+  margin-bottom: 0;
+}
+
+.content h4 {
+  text-align: center;
+  font-size: 15pt;
+  text-decoration: none;
+  font-weight: normal;
+  font-style: italic;
+  margin: 5px;
+  margin-top: 0;
+}
+
+.content ul {
+}
+
+.content ul li {
+  padding-top: 5pt;
+}
+
+.sub-h1 {
+  text-align: center;
+  font-size: 15;
+  font-style: italic;
+}
+
+
+
+.content p a {
+    text-decoration: none;
+}
+
 ol {
   margin-left: 10%;
 }
@@ -59,57 +113,16 @@ ol {
   color: white;
 }
 
-.content {
-  padding-top: 10px;
-  margin-left: 340px;
-  margin-right: 40px;
-  max-width: 1000px;
-  font-size: 15pt;
-}
-
-.content h1 {
-	text-align: center;
-	font-size: 23pt;
-}
-
-.content ul {
-}
-
-.content ul li {
-  padding-top: 5pt;
-}
-
-.sub-h1 {
+#pro-tip {
+  width: 50%;
+  margin: auto;
+  padding: 0;
   text-align: center;
-  font-size: 15;
-  font-style: italic;
+  outline: solid;
 }
 
-.content h2 {
-  text-align: center;
-	font-size: 20pt;
-}
 
-.content h3 {
-  text-align: center;
-  font-size: 15pt;
-  text-decoration: none;
-  margin-bottom: 0;
-}
 
-.content h4 {
-  text-align: center;
-  font-size: 15pt;
-  text-decoration: none;
-  font-weight: normal;
-  font-style: italic;
-  margin: 5px;
-  margin-top: 0;
-}
-
-.content p a {
-    text-decoration: none;
-}
 
 .img_left {
   float: left;
