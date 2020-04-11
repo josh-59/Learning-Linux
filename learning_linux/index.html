@@ -86,10 +86,39 @@
 <div id="man-pages" class="content">
   <h2> Man Pages </h2>
   <p>
-    The most useful asset in the Linux documentation chain is the man pages.
-    In fact, these date back to the very first implementations of Unix,
-    No joke, <tt>man man</tt> is useful.
-    In particular, it contains
+    The most useful assets in the Linux documentation chain are the
+    manual ("man") pages:
+    They are concise and immediately available&mdash;
+    they are stored locally on your machine, and they
+    usually comes with each installed application.
+    They are accessed at the command line so:
+  </p>
+
+  <div class="code">
+    man app
+  </div>
+
+  </p>
+    Once within the <tt>man</tt> utility, you can search the man pages
+    by typing a forward slash, then your search term:
+  </p>
+
+    <div class="code">
+      /&lt;search-term&gt;
+    </div>
+
+  <p>
+    Many of the controls of the man-pages coincide with those of
+    the <tt>less</tt> paging utility, and with those of the <tt>vi/vim</tt>
+    text editor, so they're worth learning.
+    For instance, move down the page one line by typing <b>j</b>.
+    Move up the page one line by typing <b>k</b>.
+    And, move down a screenful by hitting the spacebar.
+  </p>
+
+  <p>
+    These actually date back to the first implementations of Unix,
+    where they served as the principle user manual for the system.
   </p>
 
 </div>
