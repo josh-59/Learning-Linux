@@ -1,7 +1,7 @@
 In the beginning, there was a filesystem.
 
 directory tree, per find man page
-virtual filesystem, 
+virtual filesystem,
 
 Regular Files
   Data contents are not, in the general case, the business of the operating system;
@@ -72,6 +72,9 @@ directories:
   There is no conflict if the data in the directory is stored in
   an otherwise-normal file.
 
+stdin / stdout
+  lsof - list open files
+
 pipes:
   A Beautiful Abstraction
 
@@ -82,7 +85,11 @@ pipes:
   doesn't make any sense because the output of "ls /dev" is conceptually identical to
   a file anyways.
 
+Kernighan: Commands are verbs, and files
+are nouns, p 71
+
 Linux files as variables:
+  "A file has an owner, a modification time, a size, a type, and other attributes." --Understanding Unix/Linux Programming:  A Guide to Theory and Practice
   Names
     Found in directories
     Can have aliases
@@ -113,6 +120,11 @@ GNU Find:
   Considers files as such
   A much deeper search
 
+grep:
+
+STDIN / STDOUT
+vis:
+  use argument '-' to create an interactive filter
 
 inode:
   Sources:
@@ -147,3 +159,6 @@ https://www.tldp.org/LDP/Linux-Filesystem-Hierarchy/html/dev.html
 https://unix.stackexchange.com/questions/18239/understanding-dev-and-its-subdirs-and-files
 
 http://www.tldp.org/LDP/intro-linux/html/sect_03_01.html
+
+embed:
+https://www.youtube.com/watch?v=mV_8GbzwZMM
