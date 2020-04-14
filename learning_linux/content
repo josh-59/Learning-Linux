@@ -1,0 +1,157 @@
+<!--
+  short_title: Learning Linux
+  long_title: Learning Linux How-To
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8"/>
+
+<html>
+<head>
+  <link href="../style.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
+  <title>Learning Linux How-To</title>
+</head>
+
+
+<!--
+  include: nav_bar_2
+-->
+
+<div id="nav_bar_2" class="nav">
+  <ul>
+    <li><a href="#learning-linux"> Learning Linux </a></li>
+    <li><a href="#how-to"> How-To </a></li>
+    <li><a href="#man-pages"> Man-Pages </a></li>
+    <!--<li><a href="#references"> References </a></li> -->
+    <li><a href="#credits">Credits and Licenses</a></li>
+  </ul>
+</div>
+
+<div id="learning-linux" class="content">
+  <h2>Learning Linux How-to</h2>
+  <h4>Under Construction!</h4>
+
+  <p>
+    Learning GNU/Linux is not necessarily easy.
+    Although there exists many sources of documentation, they are not,
+    in general, well-organized, so that searching for the right source can be hard.
+    This paper aims to give an overview of available resources,
+    some useful pointers for each, and links, as appropriate.
+  </p>
+
+</div>
+
+<div id="how-to" class="content">
+  <h2>How-to</h2>
+
+  <p>
+    Steps:
+
+    <ol>
+      <li> <i>Figure out what your question is.</i>
+
+      <p>
+        This can be more difficult than you might guess, because you might
+        honestly not know how to phrase your question.
+        Be specific!
+        Things are very well-defined in computers, and this stands in great
+        contrast to the novice's intuitive understanding of their operation.
+    </li>
+      <li> <i>How you can get an answer to it? </i>
+        <ul>
+          <li>What is an appropriate source?</li>
+          <ul>
+            <li> Man page </li>
+            <li> Official Documentation </li>
+            <li> Reference Manual </li>
+          </ul>
+          <li>The application's manual?</li>
+          <li>Do you need more information than that?</li>
+          <li>Would an example be helpful?</li>
+          <li>Do you need more specific information or more general information?</li>
+        </ul>
+      </li>
+
+      <li> <i>Find good sources to answer that question. </i>
+
+      <p>
+        Do not settle for the first mediocre, ad-ridden techno-blog that
+        Google serves up!
+        If you want to get better at this stuff,
+      </p>
+        </li>
+    </ol>
+</div>
+
+<div id="man-pages" class="content">
+  <h2> Man Pages </h2>
+  <p>
+    The most useful assets in the Linux documentation chain are the
+    manual ("man") pages:
+    They are concise and immediately available&mdash;
+    they are stored locally on your machine, and they
+    usually comes with each installed application.
+    They are accessed at the command line so:
+  </p>
+
+  <div class="code">
+    man app
+  </div>
+
+  </p>
+    Once within the <tt>man</tt> utility, you can search the man pages
+    by typing a forward slash, then your search term:
+  </p>
+
+    <div class="code">
+      /&lt;search-term&gt;
+    </div>
+
+  <p>
+    Many of the controls of the man-pages coincide with those of
+    the <tt>less</tt> paging utility, and with those of the <tt>vi/vim</tt>
+    text editor, so they're worth learning.
+    For instance, move down the page one line by typing <b>j</b>.
+    Move up the page one line by typing <b>k</b>.
+    And, move down a screenful by hitting the spacebar.
+  </p>
+
+  <p>
+    Man pages actually date back to the first implementations of Unix,
+    where they served as the principle user manual for the system.
+  </p>
+
+  <h3> Links </h3>
+  <ul class="narrow">
+    <li><a href="https://www.kernel.org/doc/man-pages/"> The Linux Man-Pages </a></li>
+    <li><a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html"> Man Pages First Edition </a></li>
+
+</div>
+
+<div id="books" class="content">
+  <h2> Free Books </h2>
+  <p>
+
+
+
+
+<div id="credits" class="content">
+  <h2> Credits and Licensure </h2>
+  <p>
+    This was written by Josh Timmons, and is released under the
+    <a href="https://creativecommons.org/licenses/by-nc/4.0/"> Creative Commons Attribution-ShareAlike 4.0 International license </a>.
+    Please send any corrections or comments to <a href="mailto:josh.591536@gmail.com"> Josh Timmons</a>.
+  </p>
+</div>
+
+<script
+src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+crossorigin="anonymous"></script>
+<script src="../animate-nav-2.js"> </script>
+</html>
+
+<!-- Iiiiiii just want to tell you how I'm feeling-
+  gotta make you understand! -->

@@ -1,3 +1,7 @@
+<!--
+  long_title: Home
+  short_title: Home
+-->
 
 
 <!DOCTYPE html>
@@ -11,13 +15,9 @@
     <title> Need to Know: Linux </title>
   </head>
 
-<div id="nav_home" class="nav">
-	<ul>
-		<li> <a class="active" href=".">Home</a> </li>
-		<li> <a href="text-terminals">Text Terminals: A Practical Introduction</a> </li>
-		<li> <a href="learning_linux">Learning Linux How-To</a> </li>
-	</ul>
-</div>
+<!--
+  include: nav_home
+-->
 
   <div id="welcome" class="content">
     <h1> Need to Know </h1>
