@@ -153,6 +153,22 @@ inode:
   Since neither links nor data addresses can cross disk partition
   boundaries, the inode number is sufficient to uniquely identify an inode.
 
+  <div id="conclusion" class="content">
+    <h2> Conclusion </h2>
+    <p>
+      A text terminal is a device that lets a user "peer into" the computer
+      by reading the contents of a special file.
+      In days' past, the text terminal was physical; these days, the
+      device has been replaced by emulation.
+      The most novel thing to recognize about terminals is that they exist, from the operating system's
+      perspective, as an ordinary file.
+      That <i>you read</i> from it is merely coincidental to what that file is connected to&mdash; namely,
+      a buffer within a monitor or emulator.
+      Likewise, data sent from the keyboard appears, to a user-space process,
+      as the contents of an ordinary file.
+    </p>
+  </div>
+  
 SOURCES
 
 https://www.tldp.org/LDP/Linux-Filesystem-Hierarchy/html/dev.html
