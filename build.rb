@@ -4,7 +4,7 @@
 # To-Do:
 #     Finish implementation so script builds all webpages
 #     Generalize implementation by separating "Search file for instruction"
-#
+#         ...and also by possibly building a proper datastructure for each webpage
 
 # Locate all directories that are candidates for being built
 directories = []
