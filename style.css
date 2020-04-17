@@ -3,7 +3,7 @@ body {
 }
 
 .content {
-  margin-left: 340px;
+  margin-left: 240pt;
   margin-right: 40px;
   max-width: 1000px;
   font-size: 15pt;
@@ -70,14 +70,14 @@ ol {
 #nav_home {
   margin: 0;
   padding: 0;
-  width: 260px;
+  width: 200pt;
   overflow: auto;
 }
 
 #nav_bar_1 {
   margin: 0;
   padding: 0;
-  width: 130px;
+  width: 100pt;
   height: 100%;
   overflow: auto;
 }
@@ -85,7 +85,7 @@ ol {
 #nav_bar_2 {
   margin-left: 130px;
   padding: 0;
-  width: 130px;
+  width: 100pt;
   height: 100%;
   overflow: auto;
 }
