@@ -33,7 +33,7 @@ the same person).  If you don't get a response then email the LDP
         <li><a href="#device_files"> Device Files </a></li>
         <li><a href="#escape_sequences"> Escape Sequences </a></li>
         <li><a href="#shell"> Shell </a></li>
-        <li><a href="#termios"> Termios </a></li>
+        <li><a href="#terminal_line_discipline"> Terminal Line Discipline </a></li>
         <li><a href="#signals"> Signals </a></li>
         <li><a href="#lgr_video"> An LGR Thing </a></li>
         <li><a href="#references"> References </a></li>
@@ -543,12 +543,12 @@ the same person).  If you don't get a response then email the LDP
                     </p>
                 </div>
 
-                <div id="termios" class="content">
-                    <h2> Termios </h2>
+                <div id="terminal_line_discipline" class="content">
+                    <h2> Terminal Line Discipline </h2>
 
                     <p>
                         For all text terminals, bytes flow from the keyboard to the computer, and bytes flow from the computer to the screen.
-                        In particular, bytes do not flow from the keyboard to the terminal's monitor;
+                        In particular, bytes do not flow directly from the keyboard to the terminal's monitor;
                         the reflection of typed characters on-screen is a function of the computer itself,
                         and not a function of the terminal.
                         We can shut off this functionality by the following:
