@@ -647,6 +647,12 @@ the same person).  If you don't get a response then email the LDP
 
                 <div id="signals" class="content">
                     <h2>Signals</h2>
+                    <p>
+                        Signals are like escape sequences, but in the other
+                        direction.  That is, they
+                        are sent from the terminal (keyboard) to the computer, rather than
+                        being sent from the computer to the terminal.
+                    </p>
 
                     <p>
                         There are eleven Posix-defined special
@@ -654,14 +660,14 @@ the same person).  If you don't get a response then email the LDP
                         can be remapped by manipulating the <code>termios</code> struct.
                         For instance, the CTRL+S combination is often mapped to the STOP special character;
                         upon receiving the input bound to this special character, the terminal line
-                        discipline stops (and attempts to store) all data to and from the terminal.
-                        This can make it appear as though the terminal emulator has frozen, but it has not.
+                        discipline stops, and attempts to store, all data to and from the terminal.
+                        This can make it appear as though the terminal has frozen, but it has not.
                         Neither input nor output is discarded; pressing CTRL+Q (START) will send all queued input and output where
                         it's supposed to go, and then resume normal operation.
                     </p>
 
                     <p>
-                        This was more useful in times' past: The effect of STOP was to pause scrolling.
+                        This particular signal was more useful in times' past: The effect of STOP was to pause scrolling.
                         In addition, the bell character was traditionally sounded when output was stopped and the terminal
                         line discipline's buffer became full, thereby warning the user that data was being discarded.
                         From the command prompt, we can list all bindings to special characters, in addition to other terminal attributes by,
@@ -670,8 +676,7 @@ the same person).  If you don't get a response then email the LDP
                     <center><code> stty -a </code></center>
 
                     <p>
-                        So, if you ever wanted to know how the End-of-File
-                        signal was generated, now you know!
+                        Hope you enjoyed this&mdash; more to come!
                     </p>
                 </div>
 
