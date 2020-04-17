@@ -13,22 +13,24 @@ the same person).  If you don't get a response then email the LDP
 <html>
 <head>
   <link href="../style.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
   <title>Text Terminals: A Practical Introduction</title>
 </head>
 
 <div id="nav_bar_1" class="nav">
   <ul>
     <li> <a href="..">Home</a></li>
-    <li> <a class="active" href="#text-terminals">Text Terminals: A Practical Intro-<br>duction</a></li>
-    <li> <a href="../learning_linux"> Learning Linux How-to </a></li>
+    <li> <a class="active" href="#text-terminals">Text Terminals</a></li>
+    <li> <a href="../learning_linux"> Learning Linux</a></li>
   </ul>
 </div>
 
 <div id="nav_bar_2" class="nav">
   <ul>
-    <li><a href="#text-terminals"> Text Terminals </a></li>
-    <li><a href="#two_way_flow"> Two-Way Flow </a></li>
+    <li><a href="#introduction"> Introduction </a></li>
+    <li><a href="#history"> History </a></li>
+    <li><a href="#terminals"> Terminals </a></li>
+    <li><a href="#device_files"> Device Files </a></li>
     <li><a href="#controlling_the_terminal"> Controlling the Terminal </a></li>
     <li><a href="#shell"> Shell </a></li>
     <li><a href="#lgr_video"> An LGR Thing </a></li>
@@ -37,8 +39,8 @@ the same person).  If you don't get a response then email the LDP
   </ul>
 </div>
 
-<div id="text-terminals" class="content">
-  <h1 style="margin-bottom: 5px"> Text Terminals: </h1>
+<div id="introduction" class="content">
+  <h1 style="margin-bottom: 5px; margin-top: 25px"> Text Terminals </h1>
   <h4> A Practical Introduction </h4>
   <p>
     A text terminal is a computer peripheral similar to a mouse and keyboard combination.
@@ -49,8 +51,10 @@ the same person).  If you don't get a response then email the LDP
     development of modern GNU/Linux.
     This paper looks at the technology and its ramifications seen in Linux today.
   </p>
+  </div>
 
-  <h3> History </h3>
+ <div id="history" class = "content">
+  <h2> History </h2>
   <p>
     The history of Unix is well outside the scope of this discussion.
     However, a few facets are relevant to us.
@@ -93,7 +97,11 @@ the same person).  If you don't get a response then email the LDP
     DTC-302 HyWriter, released 1976
   </center>
 
-  <h3> Terminals </h3>
+  </div>
+
+  <div id="terminals" class="content">
+
+  <h2> Terminals </h2>
 
   <p>
     As interactive computing became more popular, hard-copy terminals were phased out in favor of
@@ -165,8 +173,8 @@ the same person).  If you don't get a response then email the LDP
   <p>
 </div>
 
-<div id="two_way_flow" class="content">
-  <h2> Two-Way Flow </h2>
+<div id="device_files" class="content">
+  <h2> Device Files </h2>
 
   <p>
     A terminal is connected to a computer by a full-duplex communication pipeline.
