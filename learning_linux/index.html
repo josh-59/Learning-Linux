@@ -21,7 +21,10 @@
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#how-to"> How-To </a></li>
-        <li><a href="#man-pages"> Man-Pages </a></li>
+        <li><a href="#man-pages"> Man Pages </a></li>
+        <li><a href="#official-documentation"> Official</a></li>
+        <li><a href="#unofficial-documentation"> Unofficial</a></li>
+        <li><a href="#videos"> Videos </a></li>
         <!--<li><a href="#references"> References </a></li> -->
         <li><a href="#credits">Credits and Licenses</a></li>
     </ul>
@@ -76,94 +79,201 @@
                 </ul>
             </li>
 
-                <li> <i>Find good sources to answer that question. </i>
-                    <li>Do you need more specific information?  Or more general information?</li>
+            <li> <i>Find good sources to answer that question. </i>
+                <li>Do you need more specific information?  Or more general information?</li>
+            </li>
+        </ol>
+    </div>
+
+    <div id="man-pages" class="content">
+        <h2> Man Pages </h2>
+        <p>
+            By far the most useful asset in the Linux documentation chain is the
+            manual ("man") pages.
+            They are concise, immediately available,
+            and generally answer as many questions as possible in as short a space
+            as possible.
+            They often include examples, hints, and useful suggestions
+            (such as <a href="http://man7.org/linux/man-pages/man2/getdents.2.html">"These are not the interfaces you are intered in."</a>).
+        </p>
+
+        <p>
+            They are accessed at the command line so:
+        </p>
+
+        <div class="code">
+            man app
+        </div>
+
+        <p>
+            A bit of history:  The man pages
+            <a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html"> date back to the first implementations of Unix</a>,
+            where they were the primary documentation for command-line operations.
+            They often included practical notes such as known bugs (and some still do).
+            The structure of the manual is worth learning, as well as the
+            structure of any given page.
+            For instance, the manual is divided into sections (<tt>man man</tt> for more information),
+            and within pages, the command syntax specification is a minor language of its own.
+            It's often helpful to look at the "See Also" section just to figure out what's available.
+        </p>
+
+        <p>
+            You can search through available man pages with the <tt>apropos</tt> command,
+            as in,
+        </p>
+
+        <div class="code">
+            apropos decompress
+        </div>
+
+        <p>
+            Technically speaking, this utility searches the single-line, "short description"
+            of each man page, and prints out the names and descriptions of programs that match your search
+            (<tt>man apropos</tt> for more information).
+        </p>
+
+        <p>
+            Once within the <tt>man</tt> utility, you can search the current page
+            by typing a forward slash, then your search term:
+        </p>
+
+        <div class="code">
+            /&lt;search-term&gt;
+        </div>
+
+        <p>
+            Then type a single <b>n</b> to jump to the next result.
+            Many of the controls of the man-pages coincide with those of
+            the <tt>less</tt> paging utility, and with those of the <tt>vi/vim</tt>
+            text editor, so they're worth learning.
+            For instance, move down the page one line by typing <b>j</b>.
+            Move up the page one line by typing <b>k</b>.
+            And, move down a screenful by hitting the spacebar.
+        </p>
+    </div>
+
+    <div id="official-documentation" class="content">
+        <h2> Official Documentation </h2>
+
+        <p>
+            By far my favorite form of documentation, official documentation
+            is positioned to be authoritative over the subject at hand.
+            Nothing makes me feel warmer and fuzzier than downloading
+            the <i>Official ______ _______ Reference Manual</i>.
+            However, it's unreasonable to expect people to produce
+            good documentation in multiple formats, such as
+            HTML, PDF, etc. (though GNU does an admirable job).
+            As a consequence, the best official documentation of open-source
+            projects is typically found in web-page format.
+        </p>
+
+        <p>
+            Several awesome sources spring to mind:
+            <ul>
+                <li>
+                    <a href="https://wiki.archlinux.org/"> Arch Linux's Wiki</a> is great,
+                    and almost always applies to distributions outside of Arch (for instance,
+                    <a href="https://wiki.archlinux.org/index.php/Systemd">systemd</a>).
                 </li>
-            </ol>
-        </div>
+                <li>
+                    Mozilla's Rust Project book is a case study in good documentation and
+                    technical excellence.
+                </li>
+                <li>
+                    <a href="https://www.gnu.org/doc/doc.html"> GNU's official documentation </a> is superemely authoritative.
+                </li>
+                <li>
+                    K&R
+                </li>
+                <li>
+                    Mozilla's HTML/CSS Guides
+                </li>
+        </p>
 
-        <div id="man-pages" class="content">
-            <h2> Man Pages </h2>
-            <p>
-                By far the most useful asset in the Linux documentation chain is the
-                manual ("man") pages.
-                They are concise, immediately available,
-                and generally answer as many questions as possible in as short a space
-                as possible.
-                They often include examples, hints, and useful suggestions
-                (such as <a href="http://man7.org/linux/man-pages/man2/getdents.2.html">"These are not the interfaces you are intered in."</a>).
-            </p>
+    </div>
 
-            <p>
-                They are accessed at the command line so:
-            </p>
+    <div id="unofficial-documentation" class="content">
+        <h2> Unofficial Documentation </h2>
 
-            <div class="code">
-                man app
-            </div>
+        <p>
+            Unofficial documentation is often hit-and-miss.
+            Examples include this website, websites like it, books that are
+            <i>about</i> without being authoritative, Youtube videos, etc..
+        </p>
 
-            <p>
-                A bit of history:  The man pages
-                <a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html"> date back to the first implementations of Unix</a>,
-                where they were the primary documentation for command-line operations.
-                They often included practical notes such as known bugs (and some still do).
-                The structure of the manual is worth learning, as well as the
-                structure of any given page.
-                For instance, the manual is divided into sections (<tt>man man</tt> for more information),
-                and within pages, the command syntax specification is a minor language of its own.
-                It's often helpful to look at the "See Also" section just to figure out what's available.
-            </p>
+        <p>
+            Good sources of unofficial documentation:
+            <ul>
+                <li>
+                    <a href="http://tldp.org/"> The Linux Documentation Project</a>&mdash; Sadly, this project is not maintained anymore
+                </li>
+                <li>
+                    <a href="http://w3schools.com">w3schools</a>&mdash; I have used their HTML documentation extensively
+                </li>
+                <li>
+                    <a href="http://www.linuxcommand.org/tlcl.php"> The Linux Command Line</a>&mdash; An Introduction to Linux
+                </li>
+            </ul>
+        </p>
 
-            <p>
-                You can search through available man pages with the <tt>apropos</tt> command,
-                as in,
-            </p>
+        <p>
+            These sources (and the many like them) are not necessarily authoritative.
+            Hence, they tend to be more beginner-friendly, than absolute reference works.
+        </p>
 
-            <div class="code">
-                apropos decompress
-            </div>
+    </div>
 
-            <p>
-                Technically speaking, this utility searches the single-line, "short description"
-                of each man page, and prints out the names and descriptions of programs that match your search
-                (<tt>man apropos</tt> for more information).
-            </p>
+    <div id="videos" class="content">
+        <h2> Videos </h2>
 
-            <p>
-                Once within the <tt>man</tt> utility, you can search the current page
-                by typing a forward slash, then your search term:
-            </p>
+        <p>
+            A form of unofficial documenation; videos, also, are relatively hit-or-miss.
+            It's very difficult
+            to produce an <i>entertaining</i> video that also provides
+            serious content.  That is, videos are difficult to do, if your
+            aim is to describe the underlying theory without generating
+            a lecture.
+        </p>
 
-            <div class="code">
-                /&lt;search-term&gt;
-            </div>
+        <p>
+            Cool Videos:
+            <ul>
+                <li>
+                    <a href="https://www.youtube.com/channel/UCrUL8K81R4VBzm-KOYwrcxQ"> Engineer Man</a>&mdash; Linux-related content.
+                    Engineer Man got me off the couch and into some Linux; for this I am very grateful!
+                </li>
 
-            <p>
-                Then type a single <b>n</b> to jump to the next result.
-                Many of the controls of the man-pages coincide with those of
-                the <tt>less</tt> paging utility, and with those of the <tt>vi/vim</tt>
-                text editor, so they're worth learning.
-                For instance, move down the page one line by typing <b>j</b>.
-                Move up the page one line by typing <b>k</b>.
-                And, move down a screenful by hitting the spacebar.
-            </p>
-        </div>
+                <li>
+                    <a href="https://youtu.be/mAbG8Oi-SvQ"> HeartBeast</a>&mdash; Introductory game development
+                </li>
+            </ul>
+        </p>
+    </div>
 
-        <div id="credits" class="content">
-            <h2> Credits and Licensure </h2>
-            <p>
-                This was written by Josh Timmons, and is released under the
-                <a href="https://creativecommons.org/licenses/by-nc/4.0/"> Creative Commons Attribution-ShareAlike 4.0 International license </a>.
-                Please send any corrections or comments to <a href="mailto:josh.591536@gmail.com"> Josh Timmons</a>.
-            </p>
-        </div>
+    <div id="try-it" class="content">
+        <h2> Try It! </h2>
 
-        <script
-        src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
-        crossorigin="anonymous"></script>
-        <script src="../animate-nav-2.js"> </script>
-        </html>
+        <p>
+            Honestly, the best way to learn is just to do it!
+        </p>
 
-        <!-- Iiiiiii just want to tell you how I'm feeling-
-        gotta make you understand! -->
+    </div>
+
+    <div id="credits" class="content">
+        <h2> Credits and Licensure </h2>
+        <p>
+            This was written by Josh Timmons, and is released under the
+            <a href="https://creativecommons.org/licenses/by-nc/4.0/"> Creative Commons Attribution-ShareAlike 4.0 International license </a>.
+            Please send any corrections or comments to <a href="mailto:josh.591536@gmail.com"> Josh Timmons</a>.
+        </p>
+    </div>
+
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+    crossorigin="anonymous"></script>
+    <script src="../animate-nav-2.js"> </script>
+    </html>
+
+    <!-- Iiiiiii just want to tell you how I'm feeling-
+    gotta make you understand! -->
