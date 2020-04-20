@@ -193,3 +193,12 @@ ol {
 #lgr_movie {
 
 }
+
+.content .big-list {
+    margin-left: 10%;
+    width: 75%;
+}
+
+.content .big-list li {
+    padding-top: 25px;
+}
