@@ -25,6 +25,8 @@
         <li><a href="#official-documentation"> Official</a></li>
         <li><a href="#unofficial-documentation"> Unofficial</a></li>
         <li><a href="#videos"> Videos </a></li>
+        <li><a href="#guides"> Guides </a></li>
+        <li><a href="#try-it"> Try It! </a></li>
         <!--<li><a href="#references"> References </a></li> -->
         <li><a href="#credits">Credits and Licenses</a></li>
     </ul>
@@ -108,8 +110,8 @@
         <p>
             A bit of history:  The man pages
             <a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html"> date back to the first implementations of Unix</a>,
-            where they were the primary documentation for command-line operations.
-            They often included practical notes such as known bugs (and some still do).
+            where they were the primary manual for the newly-minted Unix operating system.
+            They often included practical notes such as known bugs.
             The structure of the manual is worth learning, as well as the
             structure of any given page.
             For instance, the manual is divided into sections (<tt>man man</tt> for more information),
@@ -158,38 +160,54 @@
         <p>
             By far my favorite form of documentation, official documentation
             is uniquely positioned to be authoritative over the subject at hand, and
-            is akin to <a href="https://en.wikipedia.org/wiki/Primary_source"> primary sources </a>
+            is akin to so-called
+            <i><a href="https://en.wikipedia.org/wiki/Primary_source"> primary sources </a></i>
             found in the study of history.
             Nothing makes me feel warmer and fuzzier than downloading
             the <i>Official ______ _______ Reference Manual</i>.
             However, it's unreasonable to expect people to produce
-            good documentation in multiple formats, such as
-            HTML, PDF, etc. (though GNU does an admirable job).
+            such technically meritorious documentation in multiple formats simultaneously, such as
+            HTML, PDF, etc..
             As a consequence, the best official documentation of open-source
-            projects is typically found in web-page format.
+            projects is typically found in web-page format (and is often
+            community-driven).
         </p>
 
         <p>
             Several awesome sources spring to mind:
             <ul>
                 <li>
-                    <a href="https://wiki.archlinux.org/"> Arch Linux's Wiki</a> is great,
-                    and almost always applies to distributions outside of Arch (for instance,
-                    <a href="https://wiki.archlinux.org/index.php/Systemd">systemd</a>).
-                </li>
-                <li>
-                    Mozilla's Rust Project book is a case study in good documentation and
+                    <a href="https://doc.rust-lang.org/stable/book/">
+                        The Rust Progamming Language</a>
+                    book is a case study in good documentation and
                     technical excellence.
                 </li>
                 <li>
-                    <a href="https://www.gnu.org/doc/doc.html"> GNU's official documentation </a> is superemely authoritative.
+                    <a href="https://godotengine.org/">
+                        Godot Open Source Game Engine</a>&mdash;
+                    Godot is an MIT-licensed open source game engine (and, I daresay, the one you're looking for).
+                    <a href="https://docs.godotengine.org/en/stable/">Its official documentation</a> is community-driven.
                 </li>
                 <li>
-                    K&R
+                    <a href="https://www.gnu.org/doc/doc.html"> GNU's official documentation</a> is superemely authoritative.
                 </li>
                 <li>
-                    Mozilla's HTML/CSS Guides
+                    <a href="https://en.wikipedia.org/wiki/The_C_Programming_Language"> The C Programming Language</a>,
+                    a.k.a <i>K&R</i>.  For several years (before C became ANSI-standardized), this was the
+                    reference manual for C compiler writers.
+                    <a href="https://github.com/torvalds/linux/blob/master/Documentation/process/coding-style.rst">
+                    As Linus Torvalds says,</a> "...all right-thinking people know that (a) K&R are <b>right</b>[sic] and (b) K&R are right."</a>
                 </li>
+                <li>
+                    <a href="https://wiki.archlinux.org/"> Arch Linux's Wiki</a> is great,
+                    and almost always applies to distributions outside of Arch.
+                </li>
+                <li>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML">Mozilla's HTML Docs</a>&mdash;
+                    Mozilla <a href="https://html.spec.whatwg.org/multipage/introduction.html#history-2"> sits on the board</a>
+                    defining HTML, and hence, represent an official voice with respect to HTML5.
+                </li>
+            </ul>
         </p>
 
     </div>
@@ -198,22 +216,19 @@
         <h2> Unofficial Documentation </h2>
 
         <p>
-            Most documenation is from unofficial, or secondary, sources.
+            Most documenation is from unofficial, secondary sources.
             Examples include this website, websites like it, books that are
-            <i>about</i> without being authoritative, Youtube videos, etc..
-            They're more like commentary of the subject at hand;
+            <i>about</i> without being authoritative (which is most of them),
+            Youtube videos, etc.. Think of them like commentary of the subject at hand;
             unofficial documentation is often hit-and-miss, and whether it
             represents a hit for you is largely a matter of taste.
         </p>
 
         <p>
-            Good sources of unofficial documentation:
+            Examples of good, unofficial documentation:
             <ul>
                 <li>
                     <a href="http://tldp.org/"> The Linux Documentation Project</a>&mdash; Sadly, this project is not maintained anymore
-                </li>
-                <li>
-                    <a href="http://w3schools.com">w3schools</a>&mdash; I have used their HTML documentation extensively
                 </li>
                 <li>
                     <a href="http://www.linuxcommand.org/tlcl.php"> The Linux Command Line</a>&mdash; An Introduction to Linux; Good, but not to my taste
@@ -227,6 +242,8 @@
         </p>
 
     </div>
+
+
 
     <div id="videos" class="content">
         <h2> Videos </h2>
@@ -247,12 +264,36 @@
                     <a href="https://www.youtube.com/channel/UCrUL8K81R4VBzm-KOYwrcxQ"> Engineer Man</a>&mdash; Linux-related content.
                     Engineer Man got me off the couch and into some Linux; for this I am very grateful!
                 </li>
+            </ul>
+        </p>
+    </div>
+
+    <div id="guides" class="content">
+        <h2> Guides </h2>
+
+        <p>
+            This.  If you're looking to produce some useful documentation,
+            and you're unsure of your technical expertise, produce guides.
+        </p>
+
+        <p>
+            Good examples:
+            <ul>
+                <li>
+                    <a href="https://guides.rubygems.org/make-your-own-gem/">
+                        Making Your Own Ruby Gems</a> &mdash; Walks you through
+                        the creation of a Ruby software package (a.k.a., 'gem').
+                </li>
 
                 <li>
-                    <a href="https://youtu.be/mAbG8Oi-SvQ"> HeartBeast</a>&mdash; Introductory game development
+                    <a href="https://youtu.be/mAbG8Oi-SvQ"> Make an Action RPG in Godot 3.2</a>&mdash;</a>
+                        A Youtube tutorial for building your own Godot 3.2 game (note, the Godot supplied
+                        via Debian repository was outdated, at the time of this writing [April 2020], so you might
+                        need to check your version to get it to work.).
                 </li>
             </ul>
         </p>
+
     </div>
 
     <div id="try-it" class="content">
@@ -260,6 +301,11 @@
 
         <p>
             Honestly, the best way to learn is just to do it!
+        </p>
+
+        <p>
+            "...we believe strongly that the way to learn a new language is to
+            write programs in it." -- K&R, page 3
         </p>
 
     </div>
