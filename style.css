@@ -196,9 +196,9 @@ ol {
 }
 
 .content .big-list {
+    margin: auto;
     margin-top: -20pt;
-    margin-left: 10%;
-    width: 75%;
+    width: 70%;
 }
 
 .content .big-list li {
