@@ -19,8 +19,9 @@ body {
 }
 
 .content h2 {
-  text-align: center;
-	font-size: 18pt;
+    text-align: center;
+    font-size: 18pt;
+    margin-top: 20pt;
 
 }
 
@@ -195,6 +196,7 @@ ol {
 }
 
 .content .big-list {
+    margin-top: -20pt;
     margin-left: 10%;
     width: 75%;
 }

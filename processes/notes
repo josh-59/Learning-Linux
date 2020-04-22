@@ -1,0 +1,39 @@
+The kernel is home to many processes.
+The kernel does this by starting one process explicitly;
+this process then invites all of its friends.
+
+Bash async:
+        Invite friend to stay
+    synchronous:
+        Invite friend, they are expected to do something and then leave,
+        so you wait for them to leave
+            This is appropriate for things like, "list files in current directory"
+            or "move this file over there"
+
+Commands:
+    ps - Who have I invited in
+    ps -e - Who's here
+    pstree- Who invited who
+    vmstat- Who's using what
+
+Signals
+
+kill:
+    That's when you really don't like your friends
+
+This analogy preserves the idea that each process is separate; that
+    once Bash invites LS in, neither can "do anything" to the other.
+Moreover, it preserves the notion that each process is <i>essentially equal</i>,
+It preserves the idea that each process shares the same living-space
+    (namely, the environment provided by the kernel)
+
+Downside to analogies:  Represent a "local maximum"
+
+Process-specific environments
+    Each process has its own environment;
+        environment variables
+        virtual memory (address) space
+
+        Command: Printenv: can be called by any process,
+                            prints the environment inherited from that process
+                            (which is given to printenv).
