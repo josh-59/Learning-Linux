@@ -27,7 +27,6 @@
         <li><a href="#theory"> Theory </a></li>
         <li><a href="#videos"> Videos </a></li>
         <li><a href="#tutorials"> Tutorials </a></li>
-        <li><a href="#try-it"> Try It! </a></li>
         <li><a href="#chris-titus-tech"> Chris Titus Tech </a></li>
         <li><a href="#references"> References </a></li>
         <li><a href="#credits">Credits and Licenses</a></li>
@@ -36,7 +35,7 @@
 
 <div id="introduction" class="content">
     <h1>Learning Linux </h1>
-    <h4>Under Construction!</h4>
+    <h4>A Tour Through Documentation</h4>
 
     <p>
         Linux is a very large subject.
@@ -46,7 +45,6 @@
         This paper aims to give an overview of available resources,
         some useful pointers for each, and links, as appropriate.
     </p>
-
 </div>
 
 <div id="how-to" class="content">
@@ -76,7 +74,7 @@
                 <li> An Example </li>
                 <li> A Precise, Detailed Explanation</li>
                 <li> A Description </li>
-                <li> Theoretical Discussion </li>
+                <li> Theoretical Comprehension </li>
             </ul>
             <p>
             </p>
@@ -117,7 +115,7 @@
     </div>
 
     <p>
-        You can search through available man pages with the <tt>apropos</tt> command,
+        You can search through available man pages with the <code>apropos</code> command,
         as in,
     </p>
 
@@ -128,11 +126,11 @@
     <p>
         Technically speaking, this utility searches the single-line, "short description"
         of each man page, and prints out the names and descriptions of programs that match your search
-        (<tt>man apropos</tt> for more information).
+        (<code>man apropos</code> for more information).
     </p>
 
     <p>
-        Once within the <tt>man</tt> utility, you can search the current page
+        Once within the <code>man</code> utility, you can search the current page
         by typing a forward slash, then your search term:
     </p>
 
@@ -143,7 +141,7 @@
     <p>
         Then type a single <b>n</b> to jump to the next result.
         Many of the controls of the man-pages coincide with those of
-        the <tt>less</tt> paging utility, and with those of the <tt>vi/vim</tt>
+        the <code>less</code> paging utility, and with those of the <code>vi/vim</code>
         text editor, so they're worth learning.
         For instance, move down the page one line by typing <b>j</b>.
         Move up the page one line by typing <b>k</b>.
@@ -159,7 +157,7 @@
         For instance, just by the location of a page within the manual, one
         can tell if it's a program that can be called from the command-line,
         a system call, or a C library function;
-        <tt>man man</tt> for more information.
+        <code>man man</code> for more information.
         Similarly, the structure of the man-pages themselves is worth learning.
         For instance, each page has has a "See Also" section near the bottom,
         which is useful for finding out what else is available.
@@ -273,6 +271,7 @@
                 about "university" (which deal primarily in theory).
                 Theory is worth studying insofar as it yields practical insight
                 (or entertainment).
+                I like studying languages and mathematics, myself.
             </p>
 
             <p>
@@ -308,7 +307,7 @@
                             channel, one of my favorites.
                         </li>
                         <li>
-                            <a href="https://youtu.be/fWHKAn5W2CA">DistroTube</a>&mdash; All about distro's.
+                            <a href="https://www.youtube.com/channel/UCVls1GmFKf6WlTraIb_IaJg">DistroTube</a>&mdash; Linux distro's, user-space applications.
                         </li>
                     </ul>
                 </p>
@@ -319,7 +318,8 @@
 
                 <p>
                     This.  Probably the best form of unofficial documentation
-                    is the tutorial, because it is informative, concise, and relevant.
+                    is the tutorial, because it is informative, concise, and relevant;
+                    and, it jumps right in to the subject at hand.
                 </p>
 
                 <p>
@@ -344,54 +344,37 @@
                         </li>
                     </ul>
                 </p>
+            </div>
 
-                </div>
+            <div id="chris-titus-tech" class="content">
+                <h2>Chris Titus Tech</h2>
+                <iframe src="https://www.youtube.com/embed/fWHKAn5W2CA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
 
-                <div id="try-it" class="content">
-                    <h2> Try It! </h2>
+            <div id="references" class="content">
+                <h2> References </h2>
+                <ol style="margin-left: 0">
+                    <li> <i>Unix Programmer's Manual, First Edition.</i>  <a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html"> https://www.bell-labs.com/usr/dmr/www/1stEdman.html </a> </li>
+                    <li> WHATWG HTML Living Standard Section 1.6, History. <a href="https://html.spec.whatwg.org/multipage/introduction.html#history-2">https://html.spec.whatwg.org/multipage/introduction.html#history-2</a> </li>
+                </ol>
+            </div>
 
-                    <p>
-                        By far the best way to learn something is simply to do it.
-                        Give it a shot!
-                    </p>
+            <div id="credits" class="content">
+                <h2> Credits and Licensure </h2>
+                <p>
+                    This was written by Josh Timmons, and is released under the
+                    <a href="https://creativecommons.org/licenses/by-nc/4.0/"> Creative Commons Attribution-ShareAlike 4.0 International license</a>.
+                    Last updated April 2020.
+                    Please send any corrections or comments to <a href="mailto:josh.591536@gmail.com"> Josh Timmons</a>.
+                </p>
+            </div>
 
-                    <p>
-                        "...we believe strongly that the way to learn a new language is to
-                        write programs in it." --Kirnigham and Ritchie, <i>The C Programming Language</i>, page 3.
-                    </p>
+            <script
+            src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+            crossorigin="anonymous"></script>
+            <script src="../animate-nav-2.js"> </script>
+            </html>
 
-
-                </div>
-
-                <div id="chris-titus-tech" class="content">
-                    <h2>Chris Titus Tech</h2>
-                        <iframe src="https://www.youtube.com/embed/fWHKAn5W2CA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-
-                <div id="references" class="content">
-                    <h2> References </h2>
-                    <ol style="margin-left: 0">
-                        <li> <i>Unix Programmer's Manual, First Edition.</i>  <a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html"> https://www.bell-labs.com/usr/dmr/www/1stEdman.html </a> </li>
-                        <li> WHATWG HTML Living Standard Section 1.6, History. <a href="https://html.spec.whatwg.org/multipage/introduction.html#history-2">https://html.spec.whatwg.org/multipage/introduction.html#history-2</a> </li>
-                    </ol>
-                </div>
-
-                <div id="credits" class="content">
-                    <h2> Credits and Licensure </h2>
-                    <p>
-                        This was written by Josh Timmons, and is released under the
-                        <a href="https://creativecommons.org/licenses/by-nc/4.0/"> Creative Commons Attribution-ShareAlike 4.0 International license</a>.
-                        Last updated April 2020.
-                        Please send any corrections or comments to <a href="mailto:josh.591536@gmail.com"> Josh Timmons</a>.
-                    </p>
-                </div>
-
-                <script
-                src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-                integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
-                crossorigin="anonymous"></script>
-                <script src="../animate-nav-2.js"> </script>
-                </html>
-
-                <!-- Iiiiiii just want to tell you how I'm feeling-
-                gotta make you understand! -->
+            <!-- Iiiiiii just want to tell you how I'm feeling-
+            gotta make you understand! -->
