@@ -191,10 +191,6 @@ ol {
     font-size: 15pt;
 }
 
-#lgr_movie {
-
-}
-
 .content .big-list {
     margin: auto;
     margin-top: -20pt;
@@ -203,4 +199,9 @@ ol {
 
 .content .big-list li {
     padding-top: 25px;
+}
+
+iframe {
+    width: 100%;
+    height: 600px;
 }
