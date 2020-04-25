@@ -1,58 +1,51 @@
 body {
-  margin: 0;
+    margin: 0;
 }
 
 .content {
-  margin-left: 240pt;
-  margin-right: 40px;
-  max-width: 1000px;
-  font-size: 15pt;
-}
-
-#introduction {
-    padding-top: 10px;
+    padding-top: 10pt;
+    margin-left: 240pt;
+    margin-right: 40px;
+    max-width: 1000px;
+    font-size: 14pt;
 }
 
 .content h1 {
-	text-align: center;
-	font-size: 23pt;
+    text-align: center;
+    font-size: 23pt;
 }
 
 .content h2 {
     text-align: center;
     font-size: 18pt;
     margin-top: 20pt;
-
 }
 
 .content h3 {
-  text-align: center;
-  font-size: 15pt;
-  text-decoration: none;
-  margin-bottom: 0;
+    text-align: center;
+    font-size: 15pt;
+    text-decoration: none;
+    margin-bottom: 0;
 }
 
 .content h4 {
-  text-align: center;
-  font-size: 15pt;
-  text-decoration: none;
-  font-weight: normal;
-  font-style: italic;
-  margin: 5px;
-  margin-top: 0;
-}
-
-.content ul {
-}
-
-.content ul li {
-  padding-top: 5pt;
+    text-align: center;
+    font-size: 15pt;
+    text-decoration: none;
+    font-weight: normal;
+    font-style: italic;
+    margin: 5px;
+    margin-top: 0;
 }
 
 .sub-h1 {
-  text-align: center;
-  font-size: 15;
-  font-style: italic;
+    text-align: center;
+    font-size: 15;
+    font-style: italic;
+}
+
+.content ul li {
+    padding-top: 5pt;
 }
 
 .content p a {
@@ -60,124 +53,90 @@ body {
 }
 
 .content .narrow {
-  width: 75%;
-  margin: auto;
+    width: 75%;
+    margin: auto;
 }
 
 ol {
-  margin-left: 10%;
-}
-
-#nav_home {
-  margin: 0;
-  padding: 0;
-  width: 200pt;
-  overflow: auto;
-}
-
-#nav_bar_1 {
-  margin: 0;
-  padding: 0;
-  width: 100pt;
-  height: 100%;
-  overflow: auto;
-}
-
-#nav_bar_2 {
-  margin-left: 130px;
-  padding: 0;
-  width: 100pt;
-  height: 100%;
-  overflow: auto;
+    margin-left: 10%;
 }
 
 .nav ul {
-  list-style-type: none;
-  background-color: #f1f1f1;
-  position: fixed;
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: inherit; /* Inherit from containing element */
-  overflow: auto; /* Allow scrollbar automatically */
+    list-style-type: none;
+    background-color: #f1f1f1;
+    position: fixed;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: inherit; /* Inherit from containing element */
+    overflow: auto; /* Allow scrollbar automatically */
 }
 
 /* Inactive page */
 .nav li a {
-  display: block;
-  color: #000;
-  padding: 8px 16px;
-  text-decoration: none;
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
 }
 
 /* Active page */
 .nav li a.active {
-  background-color: #4CAF50;
-  color: white;
+    background-color: #4CAF50;
+    color: white;
 }
 
 .nav li a:hover:not(.active) {
-  background-color: #555;
-  color: white;
+    background-color: #555;
+    color: white;
 }
-
-#pro-tip {
-  width: 50%;
-  margin: auto;
-  padding: 0;
-  text-align: center;
-  outline: solid;
-}
-
-
-
 
 .img_left {
-  float: left;
-  margin-right: 20px;
-  margin-left: 0;
-  margin-top: 5px;
-  margin-bottom: 5px;
+    float: left;
+    margin-right: 20px;
+    margin-left: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .img_right {
-  float: right;
-  margin-right: 0;
-  margin-left: 20px;
-  margin-top: 5px;
-  margin-bottom: 5px;
+    float: right;
+    margin-right: 0;
+    margin-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .img_ctr {
-  display: block;
-  margin: 0px auto;
+    display: block;
+    margin: 0px auto;
 }
 
 .aside_right {
-  float: right;
-  margin-right: 0;
-  margin-left: 20px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  width: 20%;
-  outline: 2px solid black;
-  background-color: #f1f1f1;
-  padding: 20px;
-  font-size: 13pt;
+    float: right;
+    margin-right: 0;
+    margin-left: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 20%;
+    outline: 2px solid black;
+    background-color: #f1f1f1;
+    padding: 20px;
+    font-size: 13pt;
 
 }
 
 .aside_left {
-  float: left;
-  margin-right: 20px;
-  margin-left: 0;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  width: 20%;
-  outline: 2px solid black;
-  background-color: #f1f1f1;
-  padding: 20px;
-  font-size: 13pt;
+    float: left;
+    margin-right: 20px;
+    margin-left: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 20%;
+    outline: 2px solid black;
+    background-color: #f1f1f1;
+    padding: 20px;
+    font-size: 13pt;
 
 }
 
@@ -201,9 +160,44 @@ ol {
     padding-top: 25px;
 }
 
-iframe {
+.content .video {
     width: 100%;
     height: 600px;
+}
+
+#pro-tip {
+    width: 50%;
+    margin: auto;
+    padding: 0;
+    text-align: center;
+    outline: solid;
+}
+
+#nav_home {
+    margin: 0;
+    padding: 0;
+    width: 200pt;
+    overflow: auto;
+}
+
+#nav_bar_1 {
+    margin: 0;
+    padding: 0;
+    width: 100pt;
+    height: 100%;
+    overflow: auto;
+}
+
+#nav_bar_2 {
+    margin-left: 130px;
+    padding: 0;
+    width: 100pt;
+    height: 100%;
+    overflow: auto;
+}
+
+#introduction {
+    padding-top: 10px;
 }
 
 #introduction h1 {
