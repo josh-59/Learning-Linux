@@ -25,8 +25,8 @@
         <li><a href="#official-documentation"> Official</a></li>
         <li><a href="#unofficial-documentation"> Unofficial</a></li>
         <li><a href="#theory"> Theory </a></li>
-        <li><a href="#videos"> Videos </a></li>
         <li><a href="#tutorials"> Tutorials </a></li>
+        <li><a href="#videos"> Videos </a></li>
         <li><a href="#chris-titus-tech"> Chris Titus Tech </a></li>
         <li><a href="#references"> References </a></li>
         <li><a href="#credits">Credits and Licenses</a></li>
@@ -43,13 +43,12 @@
         in general, well-organized, so that finding the right information
         can be hard.
         This paper aims to give an overview of available resources,
-        some useful pointers for each, and links, as appropriate.
+        some examples of each, and useful pointers, where appropriate.
     </p>
 </div>
 
 <div id="how-to" class="content">
     <h2>How-to</h2>
-
     <p>
         It's one of the great failings of modern computer culture to
         suggest that being new or trying to learn is embarassing.
@@ -100,8 +99,7 @@
         By far the most useful asset in the Linux documentation chain is the
         manual ("man") pages.
         They are concise, immediate,
-        and generally answer as many questions as possible in as short a space
-        as possible.
+        and generally aim to answer as many questions as quickly as possible.
         They often include examples, hints, and useful suggestions
         (such as <a href="http://man7.org/linux/man-pages/man2/getdents.2.html">"These are not the interfaces you are intered in."</a>).
     </p>
@@ -148,11 +146,27 @@
         And, move down a screenful by hitting the spacebar.
     </p>
 
+    <div class="aside_right">
+        <h4>Manual Sections:</h4>
+        <ol style="margin-left:0">
+            <li> Shell Commands </li>
+            <li> Systems Calls </li>
+            <li> C Library Functions </li>
+            <li> Special Files </li>
+            <li> File Formats and Conventions </li>
+            <li> Games </li>
+            <li> Miscellaneous</li>
+        </ol>
+    </div>
+
     <p>
         Man pages date back to the first implementations of Unix,<sup><a href="#references">[1]</a></sup>
         where they were the user's primary documentation of the newly-minted Unix operating system.
         They are filled with useful notes, but tend to be more "handy" than
-        "exhaustive," and often refer the reader to outside documentation.
+        "exhaustive," and often refer the reader to external documentation.
+    </p>
+
+    <p>
         The structure of the manual is worth learning.
         For instance, just by the location of a page within the manual, one
         can tell if it's a program that can be called from the command-line,
@@ -222,7 +236,6 @@
                     the HTML living standard,<sup><a href="#references">[2]</a></sup> and hence, represents an official voice with respect to modern HTML.
                 </li>
             </ul>
-
         </div>
 
         <div id="unofficial-documentation" class="content">
@@ -232,7 +245,7 @@
                 Most documenation is from unofficial, secondary sources.
                 Examples include this website, websites like it, books that are
                 <i>about</i> without being authoritative (which is most of them),
-                Youtube videos, etc..
+                Youtube videos, podcasts etc..
                 Unofficial documentation is hit-or-miss, and whether it
                 represents a hit for you is largely a matter of taste.
                 Think of them like commentary of the subject at hand.
@@ -259,9 +272,8 @@
                 Honestly, the biggest problem with this sort of documentation
                 is that there's just too much of it.
                 As my professor said, "There are a gazzillion books on Linux."
-                The above sources (and the many like them) are not necessarily authoritative.
+                Moreover, the above sources (and the many like them) are not necessarily authoritative.
             </p>
-
         </div>
 
         <div id="theory" class="content">
@@ -293,33 +305,13 @@
                 </ul>
             </div>
 
-            <div id="videos" class="content">
-                <h2> Videos </h2>
-                <p>
-                    Some channels I like:
-                    <ul class="big-list">
-                        <li>
-                            <a href="https://www.youtube.com/channel/UCrUL8K81R4VBzm-KOYwrcxQ"> Engineer Man</a>&mdash; Linux-related programming content.
-                            Engineer Man got me off the couch and into some Linux; he's awesome!
-                        </li>
-                        <li>
-                            <a href="https://www.youtube.com/channel/UCOWcZ6Wicl-1N34H0zZe38w"> Level1Linux</a>&mdash; Very cool
-                            channel, one of my favorites.
-                        </li>
-                        <li>
-                            <a href="https://www.youtube.com/channel/UCVls1GmFKf6WlTraIb_IaJg">DistroTube</a>&mdash; Linux distro's, user-space applications.
-                        </li>
-                    </ul>
-                </p>
-            </div>
-
             <div id="tutorials" class="content">
                 <h2> Tutorials </h2>
 
                 <p>
                     This.  Probably the best form of unofficial documentation
-                    is the tutorial, because it is informative, concise, and relevant;
-                    and, it jumps right in to the subject at hand.
+                    is the tutorial, because it is informative, concise, and relevant.
+                    Moreover, it jumps right in to the subject at hand.
                 </p>
 
                 <p>
@@ -341,6 +333,27 @@
                             <a href="https://guides.rubygems.org/make-your-own-gem/">
                                 Making Your Own Ruby Gems</a> &mdash; Walks you through
                                 the creation of a Ruby software package (a.k.a., 'gem').
+                        </li>
+                    </ul>
+                </p>
+            </div>
+
+            <div id="videos" class="content">
+                <h2> Videos </h2>
+
+                <p>
+                    Some channels I like:
+                    <ul class="big-list">
+                        <li>
+                            <a href="https://www.youtube.com/channel/UCrUL8K81R4VBzm-KOYwrcxQ"> Engineer Man</a>&mdash; Linux-related programming content.
+                            Engineer Man got me off the couch and into some Linux; he's awesome!
+                        </li>
+                        <li>
+                            <a href="https://www.youtube.com/channel/UCOWcZ6Wicl-1N34H0zZe38w"> Level1Linux</a>&mdash; Very cool
+                            channel, one of my favorites.
+                        </li>
+                        <li>
+                            <a href="https://www.youtube.com/channel/UCVls1GmFKf6WlTraIb_IaJg">DistroTube</a>&mdash; Linux distro's, user-space applications.
                         </li>
                     </ul>
                 </p>
