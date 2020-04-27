@@ -1,5 +1,7 @@
 In the beginning, there was a filesystem.
 
+A Heirarchical structure, with some files holding listings of other files.
+
 directory tree, per find man page
 virtual filesystem,
 
@@ -168,7 +170,7 @@ inode:
       as the contents of an ordinary file.
     </p>
   </div>
-  
+
 SOURCES
 
 https://www.tldp.org/LDP/Linux-Filesystem-Hierarchy/html/dev.html
