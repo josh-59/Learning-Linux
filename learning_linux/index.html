@@ -22,8 +22,8 @@
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#how-to"> How-To </a></li>
         <li><a href="#man-pages"> Man Pages </a></li>
-        <li><a href="#official-documentation"> Official</a></li>
-        <li><a href="#unofficial-documentation"> Unofficial</a></li>
+        <li><a href="#unofficial-documentation"> Unofficial Documen-<br>tation</a></li>
+        <li><a href="#official-documentation"> Official Documen-<br>tation</a></li>
         <li><a href="#theory"> Theory </a></li>
         <li><a href="#tutorials"> Tutorials </a></li>
         <li><a href="#videos"> Videos </a></li>
@@ -188,13 +188,59 @@
     </p>
 </div>
 
+<div id="unofficial-documentation" class="content">
+    <h2> Unofficial Documentation </h2>
+    <p>
+        As the Linux project grew out of Unix, documentation of the
+        software also became open and free.
+        "In the beginning," the <a href="http://tldp.org/history.html"> Linux Documentation Project</a> tells us, "most of
+        the documentation was in one big file, split into sections, called the
+        <i>Linux FAQ</i>."<sup><a href="#references">[2]</a></sup>
+    </p>
+
+    <p>
+        Most documenation is from unofficial, secondary sources.
+        Examples include this website, websites like it, books that are
+        <i>about</i> without being authoritative (which is most of them),
+        Youtube videos, podcasts, etc..
+        Unofficial documentation is hit-or-miss, and whether it
+        represents a hit for you is largely a matter of taste.
+        Think of them like commentary of the subject at hand.
+    </p>
+
+    <p>
+        Examples of good, unofficial documentation:
+        <ul class="big-list">
+            <li>
+                <a href="http://tldp.org/"> The Linux Documentation Project</a>&mdash; Sadly, this project is not maintained anymore.
+            </li>
+            <li>
+                <a href="http://www.linuxcommand.org/tlcl.php"> The Linux Command Line</a> by William Shotts&mdash; An Introduction to Linux.
+            </li>
+            <li>
+                <a href="https://wps.prenhall.com/esm_molay_UNIXProg_1/"> Understanding Unix/Linux Programming: A Guide to Theory and Practice</a>
+                by Bruce Molay&mdash;
+                A personal favorite.  It walks the reader through the structure of Linux via programming tutorials.
+            </li>
+        </ul>
+    </p>
+
+    <p>
+        There are two big problems with this sort of documentation.
+        First, it isn't necessarily authoritative; rather, it tends
+        to cater to the beginner.
+        As a consequence,
+        Second, there's there's just too much of it.
+        As my professor said, "There are a gazzillion books on Linux."
+    </p>
+</div>
+
 <div id="official-documentation" class="content">
     <h2> Official Documentation </h2>
 
     <p>
-        Official documentation
-        originates from the group or organization that is producing
-        the work.
+        Official documentation originates from the group or organization
+        that is producing the work.
         It is suitably positioned to be both exhaustive and authoritative over the subject at hand.
         Think of offical documentation like the
         <a href="https://en.wikipedia.org/wiki/Primary_source"> primary sources </a>
@@ -224,190 +270,165 @@
                 this book is the main documentation of the Rust language.
                 I think it's a great book, especially for its
                 technical excellence.
-            </li>
-            <li>
-                <a href="https://godotengine.org/">
-                    Godot Open Source Game Engine</a>&mdash;
-                    Godot is an MIT-licensed open source game engine (and, I daresay, the one you're looking for).
-                    <a href="https://docs.godotengine.org/en/stable/">Its official documentation</a> is community-driven.
-                </li>
-                <li>
-                    <a href="https://www.gnu.org/doc/doc.html"> GNU's official documentation</a> is
-                    both superemely authoritative and exhaustive.
-                </li>
+        </li>
+        <li>
+            <a href="https://godotengine.org/">
+                Godot Open Source Game Engine</a>&mdash;
+                Godot is an MIT-licensed open source game engine (and, I daresay, the one you're looking for).
+                <a href="https://docs.godotengine.org/en/stable/">Its official documentation</a> is community-driven.
+        </li>
+        <li>
+            <a href="https://www.gnu.org/doc/doc.html"> GNU's official documentation</a> is
+            both superemely authoritative and exhaustive.
+        </li>
+        <li>
+            <a href="https://wiki.archlinux.org/"> Arch Linux's Wiki</a> is great,
+            and almost always applies to distributions outside of Arch.
+        </li>
+        <li>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/HTML">Mozilla's HTML Docs</a>&mdash;
+            Mozilla helps to define
+            the HTML living standard,<sup><a href="#references">[3]</a></sup> and hence, represents an official voice with respect to modern HTML.
+        </li>
+    </ul>
 
-                <li>
-                    <a href="https://wiki.archlinux.org/"> Arch Linux's Wiki</a> is great,
-                    and almost always applies to distributions outside of Arch.
-                </li>
-                <li>
-                    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML">Mozilla's HTML Docs</a>&mdash;
-                    Mozilla helps to define
-                    the HTML living standard,<sup><a href="#references">[2]</a></sup> and hence, represents an official voice with respect to modern HTML.
-                </li>
-            </ul>
-        </div>
+    <p>
+        In a lot of ways, official documentation reflects the health
+        of an open-source project.
+        Nobody is going to use your awesome new Widget API if they
+        must read the source code to do so; those days are past
+        (in my opinion).
+        If they don't use it, they're not going to improve it.
+        A big reason I use the Bourne-again shell is that the reference
+        manual is extremely good.
+    </p>
+</div>
 
-        <div id="unofficial-documentation" class="content">
-            <h2> Unofficial Documentation </h2>
 
-            <p>
-                Most documenation is from unofficial, secondary sources.
-                Examples include this website, websites like it, books that are
-                <i>about</i> without being authoritative (which is most of them),
-                Youtube videos, podcasts, etc..
-                Unofficial documentation is hit-or-miss, and whether it
-                represents a hit for you is largely a matter of taste.
-                Think of them like commentary of the subject at hand.
-            </p>
 
-            <p>
-                Examples of good, unofficial documentation:
-                <ul class="big-list">
-                    <li>
-                        <a href="http://tldp.org/"> The Linux Documentation Project</a>&mdash; Sadly, this project is not maintained anymore.
-                    </li>
-                    <li>
-                        <a href="http://www.linuxcommand.org/tlcl.php"> The Linux Command Line</a> by William Shotts&mdash; An Introduction to Linux.
-                    </li>
-                    <li>
-                        <a href="https://wps.prenhall.com/esm_molay_UNIXProg_1/"> Understanding Unix/Linux Programming: A Guide to Theory and Practice</a>
-                        by Bruce Molay&mdash;
-                        A personal favorite.  It walks the reader through the structure of Linux via programming tutorials.
-                    </li>
-                </ul>
-            </p>
+<div id="theory" class="content">
+    <h2> Theory </h2>
+    <p>
+        I put "theory" into its own category in order to avoid talking
+        directly about "college" (which deal primarily in theory).
+        Theory is worth studying insofar as it yields practical insight
+        (or entertainment).
+        It should underpin what you already know, and thereby serve
+        as a foundation for practice.
+    </p>
 
-            <p>
-                Honestly, the biggest problem with this sort of documentation
-                is that there's just too much of it.
-                As my professor said, "There are a gazzillion books on Linux."
-                Moreover, the above sources (and the many like them) are not necessarily authoritative.
-            </p>
-        </div>
+    <p>
+        Two classes are part of each computer science curriculum.
+        They are <i>Data Structures</i> and <i>Discrete Mathematics</i>.
+        To do well in a data structures course, you should be dominant in
+        whatever language the material is presented in&ndash; you must be
+        able to express yourself in that language, in order to comprehend
+        the ideas being phrased in it.
+    </p>
 
-        <div id="theory" class="content">
-            <h2> Theory </h2>
-            <p>
-                I put "theory" into its own category in order to avoid talking
-                directly about "college" (which deal primarily in theory).
-                Theory is worth studying insofar as it yields practical insight
-                (or entertainment).
-                It should underpin what you already know, and thereby serve
-                as a foundation for practice.
-            </p>
+    <ul class="big-list">
+        <li> <a href="https://github.com/papers-we-love/papers-we-love/blob/master/languages-theory/fundamental-concepts-in-programming-languages.pdf">
+            Fundamental Concepts in Programming Languages</a> by Christopher Stauchey.
+        </li>
+        <li>
+            <a href="https://opendatastructures.org/"> Open Data Structures</a> by Pat Morin.
+        </li>
+        <li>
+            <a href="http://discrete.openmathbooks.org/dmoi3.html"> Discrete Mathematics</a> by Oscar Levin.
+        </li>
+    </ul>
 
-            <p>
-                Two classes are part of each computer science curriculum.
-                They are <i>Data Structures</i> and <i>Discrete Mathematics</i>.
-                To do well in a data structures course, you should be dominant in
-                whatever language the material is presented in&ndash; you must be
-                able to express yourself in that language, in order to comprehend
-                the ideas being phrased in it.
-            </p>
+</div>
 
+    <div id="tutorials" class="content">
+        <h2> Tutorials </h2>
+
+        <p>
+            This.  Probably the best form of unofficial documentation
+            is the tutorial, because it is informative, concise, and relevant.
+            Moreover, it jumps right in to the subject at hand.
+            However, a good tutorial is limited in scope (and therefore
+            usefulness), and it's possible to produce a tutorial that
+            no-one needs (like, "How to Write a Flight Simulator by Hand").
+        </p>
+
+        <p>
+            Good examples:
             <ul class="big-list">
-                <li> <a href="https://github.com/papers-we-love/papers-we-love/blob/master/languages-theory/fundamental-concepts-in-programming-languages.pdf">
-                    Fundamental Concepts in Programming Languages</a> by Christopher Stauchey.
-                </li>
                 <li>
-                    <a href="https://opendatastructures.org/"> Open Data Structures</a> by Pat Morin.
+                    <a href="https://youtu.be/mAbG8Oi-SvQ"> Make an Action RPG in Godot 3.2</a>&mdash;
+                    A Youtube tutorial for building your own Godot 3.2 game (note, the Godot supplied
+                    via Debian repository was outdated, at the time of this writing [April 2020], so you might
+                    need to check your version to get it to work.).
                 </li>
+
                 <li>
-                    <a href="http://discrete.openmathbooks.org/dmoi3.html"> Discrete Mathematics</a> by Oscar Levin.
+                    <a href="https://www.markdowntutorial.com"> Learn Markdown</a>&mdash;
+                    A tutorial guide to markdown.
+                </li>
+
+                <li>
+                    <a href="https://guides.rubygems.org/make-your-own-gem/">
+                        Making Your Own Ruby Gems</a> &mdash; Walks you through
+                        the creation of a Ruby software package (a.k.a., 'gem').
                 </li>
             </ul>
+        </p>
+    </div>
 
-        </div>
+    <div id="videos" class="content">
+        <h2> Videos </h2>
 
-            <div id="tutorials" class="content">
-                <h2> Tutorials </h2>
+        <p>
+            Some channels I like:
+            <ul class="big-list">
+                <li>
+                    <a href="https://www.youtube.com/channel/UCrUL8K81R4VBzm-KOYwrcxQ"> Engineer Man</a>&mdash; Linux-related programming content.
+                    Engineer Man got me off the couch and into some Linux; he's awesome!
+                </li>
+                <li>
+                    <a href="https://www.youtube.com/channel/UCOWcZ6Wicl-1N34H0zZe38w"> Level1Linux</a>&mdash; Very cool
+                    channel, one of my favorites.
+                </li>
+                <li>
+                    <a href="https://www.youtube.com/channel/UCVls1GmFKf6WlTraIb_IaJg">DistroTube</a>&mdash; Linux distro's, user-space applications.
+                </li>
+            </ul>
+        </p>
+    </div>
 
-                <p>
-                    This.  Probably the best form of unofficial documentation
-                    is the tutorial, because it is informative, concise, and relevant.
-                    Moreover, it jumps right in to the subject at hand.
-                    However, a good tutorial is limited in scope (and therefore
-                    usefulness), and it's possible to produce a tutorial that
-                    no-one needs (like, "How to Write a Flight Simulator by Hand").
-                </p>
+    <div id="chris-titus-tech" class="content">
+        <h2>Chris Titus Tech</h2>
+        <iframe class="video" src="https://www.youtube.com/embed/fWHKAn5W2CA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
 
-                <p>
-                    Good examples:
-                    <ul class="big-list">
-                        <li>
-                            <a href="https://youtu.be/mAbG8Oi-SvQ"> Make an Action RPG in Godot 3.2</a>&mdash;
-                            A Youtube tutorial for building your own Godot 3.2 game (note, the Godot supplied
-                            via Debian repository was outdated, at the time of this writing [April 2020], so you might
-                            need to check your version to get it to work.).
-                        </li>
+    <div id="references" class="content">
+        <h2> References </h2>
+        <ol>
+            <li> <i>Unix Programmer's Manual, First Edition.</i>  <a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html"> https://www.bell-labs.com/usr/dmr/www/1stEdman.html </a> </li>
+            <li> The Linux Documentation Project: <i>History</i>. <a href="http://tldp.org/history.html">http://tldp.org/history.html</a>.  Retrieved May 1, 2020.</li>
+            <li> WHATWG HTML Living Standard Section 1.6, History. <a href="https://html.spec.whatwg.org/multipage/introduction.html#history-2">https://html.spec.whatwg.org/multipage/introduction.html#history-2</a> </li>
+        </ol>
+    </div>
 
-                        <li>
-                            <a href="https://www.markdowntutorial.com"> Learn Markdown</a>&mdash;
-                            A tutorial guide to markdown.
-                        </li>
+    <div id="credits" class="content">
+        <h2> Credits </h2>
+        <p>
+            This work was written by Josh Timmons and is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+            Last updated May 2020.
+            Please send any corrections or comments to <a href="mailto:josh.591536@gmail.com"> Josh Timmons</a>.
+            <br>
+            <br>
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
+        </p>
+    </div>
 
-                        <li>
-                            <a href="https://guides.rubygems.org/make-your-own-gem/">
-                                Making Your Own Ruby Gems</a> &mdash; Walks you through
-                                the creation of a Ruby software package (a.k.a., 'gem').
-                        </li>
-                    </ul>
-                </p>
-            </div>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+    crossorigin="anonymous"></script>
+    <script src="../animate-nav-2.js"> </script>
+    </html>
 
-            <div id="videos" class="content">
-                <h2> Videos </h2>
-
-                <p>
-                    Some channels I like:
-                    <ul class="big-list">
-                        <li>
-                            <a href="https://www.youtube.com/channel/UCrUL8K81R4VBzm-KOYwrcxQ"> Engineer Man</a>&mdash; Linux-related programming content.
-                            Engineer Man got me off the couch and into some Linux; he's awesome!
-                        </li>
-                        <li>
-                            <a href="https://www.youtube.com/channel/UCOWcZ6Wicl-1N34H0zZe38w"> Level1Linux</a>&mdash; Very cool
-                            channel, one of my favorites.
-                        </li>
-                        <li>
-                            <a href="https://www.youtube.com/channel/UCVls1GmFKf6WlTraIb_IaJg">DistroTube</a>&mdash; Linux distro's, user-space applications.
-                        </li>
-                    </ul>
-                </p>
-            </div>
-
-            <div id="chris-titus-tech" class="content">
-                <h2>Chris Titus Tech</h2>
-                <iframe class="video" src="https://www.youtube.com/embed/fWHKAn5W2CA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-
-            <div id="references" class="content">
-                <h2> References </h2>
-                <ol style="margin-left: 0">
-                    <li> <i>Unix Programmer's Manual, First Edition.</i>  <a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html"> https://www.bell-labs.com/usr/dmr/www/1stEdman.html </a> </li>
-                    <li> WHATWG HTML Living Standard Section 1.6, History. <a href="https://html.spec.whatwg.org/multipage/introduction.html#history-2">https://html.spec.whatwg.org/multipage/introduction.html#history-2</a> </li>
-                </ol>
-            </div>
-
-            <div id="credits" class="content">
-                <h2> Credits </h2>
-                <p> <center>
-                    This work was written by Josh Timmons and is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-                    Last updated May 2020.
-                    Please send any corrections or comments to <a href="mailto:josh.591536@gmail.com"> Josh Timmons</a>.
-                    <br>
-                    <br>
-                    <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a></center><br />
-                </p>
-            </div>
-
-            <script
-            src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-            integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
-            crossorigin="anonymous"></script>
-            <script src="../animate-nav-2.js"> </script>
-            </html>
-
-            <!-- Iiiiiii just want to tell you how I'm feeling-
-            gotta make you understand! -->
+    <!-- Iiiiiii just want to tell you how I'm feeling-
+    gotta make you understand! -->
