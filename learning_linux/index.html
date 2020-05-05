@@ -22,11 +22,12 @@
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#how-to"> How-To </a></li>
         <li><a href="#man-pages"> Man Pages </a></li>
-        <li><a href="#unofficial-documentation"> Unofficial Documen-<br>tation</a></li>
         <li><a href="#official-documentation"> Official Documen-<br>tation</a></li>
-        <li><a href="#theory"> Theory </a></li>
+        <li><a href="#unofficial-documentation"> Unofficial Documen-<br>tation</a></li>
         <li><a href="#tutorials"> Tutorials </a></li>
         <li><a href="#videos"> Videos </a></li>
+        <li><a href="#reference"> Reference </a></li>
+        <li><a href="#theory"> Theory </a></li>
         <li><a href="#chris-titus-tech"> Chris Titus Tech </a></li>
         <li><a href="#references"> References </a></li>
         <li><a href="#credits">Credits </a></li>
@@ -95,6 +96,7 @@
                 Skill accrues.
                 Answer one question at a time.
             </p>
+        </li>
     </ol>
 </div>
 
@@ -103,14 +105,14 @@
     <p>
         By far the most useful asset in the Linux documentation chain is the
         manual ("man") pages.
-        They are concise, immediate,
-        and generally aim to answer as many questions as quickly as possible.
-        They often include examples, hints, and useful suggestions
-        (such as <a href="http://man7.org/linux/man-pages/man2/getdents.2.html">"These are not the interfaces you are intered in."</a>).
+        They are concise, immediate, and generally aim to answer as many
+        questions as quickly as possible.
+        However, they tend to be more "handy" than "exhaustive," so they might
+        not answer your question.
     </p>
 
     <p>
-        They are accessed at the command line so:
+        Man pages are accessed at the command line so:
     </p>
 
     <div class="code">
@@ -167,8 +169,8 @@
     <p>
         Man pages date back to the first implementations of Unix,<sup><a href="#references">[1]</a></sup>
         where they were the user's primary documentation of the newly-minted Unix operating system.
-        They are filled with useful notes, but tend to be more "handy" than
-        "exhaustive," and often refer the reader to external documentation.
+        They often include examples, hints, and useful suggestions
+        (such as <a href="http://man7.org/linux/man-pages/man2/getdents.2.html">"These are not the interfaces you are intered in."</a>).
     </p>
 
     <p>
@@ -188,53 +190,6 @@
     </p>
 </div>
 
-<div id="unofficial-documentation" class="content">
-    <h2> Unofficial Documentation </h2>
-    <p>
-        As the Linux project grew out of Unix, documentation of the
-        software also became open and free.
-        "In the beginning," the <a href="http://tldp.org/history.html"> Linux Documentation Project</a> tells us, "most of
-        the documentation was in one big file, split into sections, called the
-        <i>Linux FAQ</i>."<sup><a href="#references">[2]</a></sup>
-    </p>
-
-    <p>
-        Most documenation is from unofficial, secondary sources.
-        Examples include this website, websites like it, books that are
-        <i>about</i> without being authoritative (which is most of them),
-        Youtube videos, podcasts, etc..
-        Unofficial documentation is hit-or-miss, and whether it
-        represents a hit for you is largely a matter of taste.
-        Think of them like commentary of the subject at hand.
-    </p>
-
-    <p>
-        Examples of good, unofficial documentation:
-        <ul class="big-list">
-            <li>
-                <a href="http://tldp.org/"> The Linux Documentation Project</a>&mdash; Sadly, this project is not maintained anymore.
-            </li>
-            <li>
-                <a href="http://www.linuxcommand.org/tlcl.php"> The Linux Command Line</a> by William Shotts&mdash; An Introduction to Linux.
-            </li>
-            <li>
-                <a href="https://wps.prenhall.com/esm_molay_UNIXProg_1/"> Understanding Unix/Linux Programming: A Guide to Theory and Practice</a>
-                by Bruce Molay&mdash;
-                A personal favorite.  It walks the reader through the structure of Linux via programming tutorials.
-            </li>
-        </ul>
-    </p>
-
-    <p>
-        There are two big problems with this sort of documentation.
-        First, it isn't necessarily authoritative; rather, it tends
-        to cater to the beginner.
-        As a consequence,
-        Second, there's there's just too much of it.
-        As my professor said, "There are a gazzillion books on Linux."
-    </p>
-</div>
-
 <div id="official-documentation" class="content">
     <h2> Official Documentation </h2>
 
@@ -245,18 +200,19 @@
         Think of offical documentation like the
         <a href="https://en.wikipedia.org/wiki/Primary_source"> primary sources </a>
         from history class.
-        This is by far my favorite form of documentation&mdash;
+        This is by far my favorite form of documentation.
         Nothing makes me feel warmer and fuzzier than downloading
         the <i>Official ________ _________ Reference Manual</i>.
     </p>
 
     <p>
         However, it's unreasonable to expect people to produce
-        such technically meritorious documentation in multiple formats simultaneously, such as
+        such technically meritorious writing in multiple formats simultaneously, such as
         HTML, PDF, etc. (although GNU does an admirable job).
         As a consequence, official documentation
-        is typically found in web-page format (and is often
-        community-driven).
+        is typically found in web-page format.
+        Moreover, like the projects they are part of,
+        official documentation is often community-driven.
     </p>
 
     <p>
@@ -288,147 +244,220 @@
         <li>
             <a href="https://developer.mozilla.org/en-US/docs/Web/HTML">Mozilla's HTML Docs</a>&mdash;
             Mozilla helps to define
-            the HTML living standard,<sup><a href="#references">[3]</a></sup> and hence, represents an official voice with respect to modern HTML.
+            the HTML living standard,<sup><a href="#references">[2]</a></sup> and hence, represents an official voice with respect to modern HTML.
         </li>
     </ul>
 
+</div>
+
+<div id="unofficial-documentation" class="content">
+    <h2> Unofficial Documentation </h2>
+
     <p>
-        In a lot of ways, official documentation reflects the health
-        of an open-source project.
-        Nobody is going to use your awesome new Widget API if they
-        must read the source code to do so; those days are past
-        (in my opinion).
-        If they don't use it, they're not going to improve it.
-        A big reason I use the Bourne-again shell is that the reference
-        manual is extremely good.
+        Most documenation is from unofficial, secondary sources.
+        Examples include this website, websites like it, question/answer sites,
+        books that are <i>about</i> Linux without being authoritative (which is most of them),
+        Youtube videos, podcasts, etc..
+        Unofficial documentation is very hit-or-miss, and whether it
+        represents a hit for you is largely a matter of taste.
+        Think of them like commentary on the subject at hand.
+    </p>
+
+    <p>
+        Examples of good, unofficial documentation:
+        <ul class="big-list">
+            <li>
+                <a href="http://tldp.org/"> The Linux Documentation Project</a>&mdash; Sadly, this project is not maintained anymore.
+            </li>
+            <li>
+                <a href="http://www.linuxcommand.org/tlcl.php"> The Linux Command Line</a> by William Shotts&mdash; An Introduction to Linux.
+            </li>
+            <li>
+                <a href="https://wps.prenhall.com/esm_molay_UNIXProg_1/"> Understanding Unix/Linux Programming: A Guide to Theory and Practice</a>
+                by Bruce Molay&mdash;
+                A personal favorite.  It walks the reader through the structure of Linux via programming tutorials.
+                Dated.
+            </li>
+        </ul>
+    </p>
+
+    <p>
+        There are two big problems with this sort of documentation.
+        First, it isn't necessarily authoritative.
+        Since it doesn't spring from the source, it is not moderated by the
+        creators of the project.
+        Second, there's there's just too much of it.
+        As my professor said, "There are a gazzillion books on Linux."
     </p>
 </div>
 
+<div id="tutorials" class="content">
+    <h2> Tutorials </h2>
 
+    <p>
+        Tutorials are usually unofficial.
+        That being said, they
+        are probably the best form of unofficial documentation,
+        because they are informative, concise, and relevant.
+        Moreover, a tutorial jumps right in to the subject at hand.
+        However, it's possible to produce a tutorial that is impractical,
+        such as, <i>How to Write a Flight Simulator From Scratch</i>.
+    </p>
+
+    <p>
+        Good examples:
+        <ul class="big-list">
+            <li>
+                <a href="https://youtu.be/mAbG8Oi-SvQ"> Make an Action RPG in Godot 3.2</a>&mdash;
+                A Youtube tutorial for building your own Godot 3.2 game (note, the Godot supplied
+                via Debian repository was outdated, at the time of this writing [April 2020], so you might
+                need to check your version to get it to work.).
+            </li>
+
+            <li>
+                <a href="https://www.markdowntutorial.com"> Learn Markdown</a>&mdash;
+                A tutorial guide to markdown.
+            </li>
+
+            <li>
+                <a href="https://guides.rubygems.org/make-your-own-gem/">
+                    Making Your Own Ruby Gems</a> &mdash; Walks you through
+                    the creation of a Ruby software package (a.k.a., 'gem').
+            </li>
+        </ul>
+    </p>
+</div>
+
+<div id="videos" class="content">
+    <h2> Videos </h2>
+    <p>
+        Again, usually unofficial.
+        Videos are addictive because they're easy to digest, but, real
+        understanding only comes out of real study.
+        Read, study, do!
+    </p>
+
+    <p>
+        Some channels I like:
+        <ul class="big-list">
+            <li>
+                <a href="https://www.youtube.com/channel/UCrUL8K81R4VBzm-KOYwrcxQ"> Engineer Man</a>&mdash; Linux-related programming content.
+                Engineer Man got me off the couch and into some Linux; he's awesome!
+            </li>
+            <li>
+                <a href="https://www.youtube.com/user/teksyndicate"> Level1Techs</a>&mdash; Tech news, mostly.
+            </li>
+            <li>
+                <a href="https://www.youtube.com/channel/UCVls1GmFKf6WlTraIb_IaJg">DistroTube</a>&mdash; Linux distro's, applications.
+            </li>
+        </ul>
+    </p>
+</div>
+
+<div id="reference" class="content">
+    <h2> Reference </h2>
+
+    <p>
+        There exists one last category of documentation, reference material.
+        Technically speaking, it's unofficial documentation.
+        That can't stop someone from doing their homework (so to speak).
+        Reference material is characterized by being well-researched.
+        <i>Good</i>
+        reference material is characterized by being laid out well, and
+        presenting material that is pragmatically useful.
+    </p>
+
+    <div class="aside_right" style="margin-left: 25pt; padding-bottom: 0">
+        <h4> Aside: College </h4>
+        <p>
+            Two classes are part of each computer science curriculum.
+            They are <i>Data Structures</i> and <i>Discrete Mathematics</i>.
+            To do well in a data structures course, you should be dominant in
+            whatever language the material is presented in&ndash; you must be
+            able to express yourself in that language, in order to comprehend
+            the ideas being phrased in it.
+            Practice Practice Practice!
+        </p>
+    </div>
+
+    <p>
+        Some Suggestions:
+        <ul class="big-list" style="margin-left: 0; margin-bottom: 50px;">
+            <li>
+                <a href="http://www.man7.org/tlpi/index.html"> The Linux Programming Interface </a>by Michael Kerrisk&mdash;
+                My recommendation
+            </li>
+            <li>
+                <a href="https://www.amazon.com/Design-UNIX-Operating-System/dp/0132017997"> The Design of the Unix Operating System</a>
+                by Maurice J. Bach&mdash; Old-school, somewhat dated.
+            </li>
+            <li>
+                <a href="http://www.apuebook.com/apue3e.html">Advanced Programming in the Unix Environment</a>, by W. Richard Stevens and Stephen A. Rago&mdash;
+                Highly theoretical, it covers the programming interface (system calls) across various standards.
+            </li>
+        </ul>
+    </p>
+
+    <p>
+        These are enormous books, most appropriate to the professional, the
+        aspiring professional, or the insanely curious.
+        As my professor said, these are the sorts of books that you read over
+        the course of six months or a year, but can define your career.
+    </p>
+
+</div>
 
 <div id="theory" class="content">
     <h2> Theory </h2>
-    <p>
-        I put "theory" into its own category in order to avoid talking
-        directly about "college" (which deal primarily in theory).
-        Theory is worth studying insofar as it yields practical insight
-        (or entertainment).
-        It should underpin what you already know, and thereby serve
-        as a foundation for practice.
-    </p>
 
     <p>
-        Two classes are part of each computer science curriculum.
-        They are <i>Data Structures</i> and <i>Discrete Mathematics</i>.
-        To do well in a data structures course, you should be dominant in
-        whatever language the material is presented in&ndash; you must be
-        able to express yourself in that language, in order to comprehend
-        the ideas being phrased in it.
+        I love books, especially free ones.  Some favorites:
     </p>
 
-    <ul class="big-list">
+    <ul class="big-list" style="margin-left: 0; margin-bottom: 50px;">
         <li> <a href="https://github.com/papers-we-love/papers-we-love/blob/master/languages-theory/fundamental-concepts-in-programming-languages.pdf">
             Fundamental Concepts in Programming Languages</a> by Christopher Stauchey.
         </li>
         <li>
-            <a href="https://opendatastructures.org/"> Open Data Structures</a> by Pat Morin.
+            <a href="https://opendatastructures.org/"> Open Data Structures</a> by Pat Morin&mdash; Best I've ever read on data structures.
         </li>
         <li>
-            <a href="http://discrete.openmathbooks.org/dmoi3.html"> Discrete Mathematics</a> by Oscar Levin.
+            <a href="http://discrete.openmathbooks.org/dmoi3.html"> Discrete Mathematics</a> by Oscar Levin&mdash; Very clear and lucid presentation.
         </li>
     </ul>
-
 </div>
 
-    <div id="tutorials" class="content">
-        <h2> Tutorials </h2>
 
-        <p>
-            This.  Probably the best form of unofficial documentation
-            is the tutorial, because it is informative, concise, and relevant.
-            Moreover, it jumps right in to the subject at hand.
-            However, a good tutorial is limited in scope (and therefore
-            usefulness), and it's possible to produce a tutorial that
-            no-one needs (like, "How to Write a Flight Simulator by Hand").
-        </p>
 
-        <p>
-            Good examples:
-            <ul class="big-list">
-                <li>
-                    <a href="https://youtu.be/mAbG8Oi-SvQ"> Make an Action RPG in Godot 3.2</a>&mdash;
-                    A Youtube tutorial for building your own Godot 3.2 game (note, the Godot supplied
-                    via Debian repository was outdated, at the time of this writing [April 2020], so you might
-                    need to check your version to get it to work.).
-                </li>
+<div id="chris-titus-tech" class="content">
+    <h2>Chris Titus Tech</h2>
+    <iframe class="video" src="https://www.youtube.com/embed/fWHKAn5W2CA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
-                <li>
-                    <a href="https://www.markdowntutorial.com"> Learn Markdown</a>&mdash;
-                    A tutorial guide to markdown.
-                </li>
+<div id="references" class="content">
+    <h2> References </h2>
+    <ol>
+        <li> <i>Unix Programmer's Manual, First Edition.</i>  <a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html"> https://www.bell-labs.com/usr/dmr/www/1stEdman.html </a> </li>
+        <li> WHATWG HTML Living Standard Section 1.6, History. <a href="https://html.spec.whatwg.org/multipage/introduction.html#history-2">https://html.spec.whatwg.org/multipage/introduction.html#history-2</a> </li>
+        <li> The Linux Documentation Project: <i>History</i>. <a href="http://tldp.org/history.html">http://tldp.org/history.html</a>.  Retrieved May 1, 2020.</li>
+    </ol>
+</div>
 
-                <li>
-                    <a href="https://guides.rubygems.org/make-your-own-gem/">
-                        Making Your Own Ruby Gems</a> &mdash; Walks you through
-                        the creation of a Ruby software package (a.k.a., 'gem').
-                </li>
-            </ul>
-        </p>
-    </div>
+<div id="credits" class="content">
+    <h2> Credits </h2>
+    <p>
+        This work was written by Josh Timmons and is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+        Last updated May 2020.
+        Please send any corrections or comments to <a href="mailto:josh.591536@gmail.com"> Josh Timmons</a>.
+        <br>
+        <br>
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
+    </p>
+</div>
 
-    <div id="videos" class="content">
-        <h2> Videos </h2>
-
-        <p>
-            Some channels I like:
-            <ul class="big-list">
-                <li>
-                    <a href="https://www.youtube.com/channel/UCrUL8K81R4VBzm-KOYwrcxQ"> Engineer Man</a>&mdash; Linux-related programming content.
-                    Engineer Man got me off the couch and into some Linux; he's awesome!
-                </li>
-                <li>
-                    <a href="https://www.youtube.com/channel/UCOWcZ6Wicl-1N34H0zZe38w"> Level1Linux</a>&mdash; Very cool
-                    channel, one of my favorites.
-                </li>
-                <li>
-                    <a href="https://www.youtube.com/channel/UCVls1GmFKf6WlTraIb_IaJg">DistroTube</a>&mdash; Linux distro's, user-space applications.
-                </li>
-            </ul>
-        </p>
-    </div>
-
-    <div id="chris-titus-tech" class="content">
-        <h2>Chris Titus Tech</h2>
-        <iframe class="video" src="https://www.youtube.com/embed/fWHKAn5W2CA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-
-    <div id="references" class="content">
-        <h2> References </h2>
-        <ol>
-            <li> <i>Unix Programmer's Manual, First Edition.</i>  <a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html"> https://www.bell-labs.com/usr/dmr/www/1stEdman.html </a> </li>
-            <li> The Linux Documentation Project: <i>History</i>. <a href="http://tldp.org/history.html">http://tldp.org/history.html</a>.  Retrieved May 1, 2020.</li>
-            <li> WHATWG HTML Living Standard Section 1.6, History. <a href="https://html.spec.whatwg.org/multipage/introduction.html#history-2">https://html.spec.whatwg.org/multipage/introduction.html#history-2</a> </li>
-        </ol>
-    </div>
-
-    <div id="credits" class="content">
-        <h2> Credits </h2>
-        <p>
-            This work was written by Josh Timmons and is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-            Last updated May 2020.
-            Please send any corrections or comments to <a href="mailto:josh.591536@gmail.com"> Josh Timmons</a>.
-            <br>
-            <br>
-            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
-        </p>
-    </div>
-
-    <script
-    src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
-    crossorigin="anonymous"></script>
-    <script src="../animate-nav-2.js"> </script>
-    </html>
-
-    <!-- Iiiiiii just want to tell you how I'm feeling-
-    gotta make you understand! -->
+<script
+src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+crossorigin="anonymous"></script>
+<script src="../animate-nav-2.js"> </script>
+</html>
