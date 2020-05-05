@@ -1,0 +1,32 @@
+Structure of a package:
+    Data
+    Metadata
+
+Nice Source:
+https://www.debian.org/doc/manuals/debian-reference/ch02.en.html
+"""
+    The apt command is a high-level commandline interface for package management.
+    It is basically a wrapper of apt-get, apt-cache and similar commands,
+    originally intended as an end-user interface and enables some options
+    better suited for interactive usage by default.
+    apt provides a friendly progress bar when installing packages using apt install.
+    apt will remove cached .deb packages by default after sucessful installation of downloaded packages.
+
+    Users are recommended to use the new apt(8) command for
+    interactive usage and use the apt-get(8) and apt-cache(8) commands in the shell script.
+"""
+
+
+
+Don't like:
+apt search golang -> Returns over 1000 results; can't locate compiler;                      "76,000?  Those are rookie numbers."
+    github repositories on Debian packages?
+    Poor solution: Detracts from usability of command-line package management
+    Also, is this even checked?
+
+    Also, Go has it's own package manager, "go-get".
+
+
+How to install random .deb:
+    navigate shell to containing directory
+    sudo apt install <my_random_unsafe_package>.deb
