@@ -2,7 +2,6 @@ In the beginning, there was a filesystem.
 
 A Heirarchical structure, with some files holding listings of other files.
 
-directory tree, per find man page
 virtual filesystem,
 
 Regular Files
