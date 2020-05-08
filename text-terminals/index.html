@@ -38,13 +38,14 @@
     <h1>Text Terminals </h1>
     <h4>A Historical Perspective </h4>
     <p>
-        A <i>text terminal</i> is a computer peripheral similar to a mouse and keyboard combination.
+        A <i>text terminal</i> is a computer peripheral similar to a mouse and keyboard combination
+        (<a href="https://tldp.org/HOWTO/Text-Terminal-HOWTO-1.html#ss1.6">Lawyer, Section 1.6</a>).
         However, whereas a modern monitor receives a pixel-wise description of output to display
         from the computer several times a second, a text terminal receives a description of
         the characters to display only once, and uses an onboard buffer to store that information.
         Text terminals are an archaic and largely obsolete technology, but were instrumental to the
         development of modern GNU/Linux.
-        This paper looks at the technology and its ramifications seen in Linux today.
+        This paper looks at the technology and its ramifications as seen in Linux today.
     </p>
 </div>
 
@@ -59,8 +60,8 @@
     <div class="aside_right">
         <h4>Aside:</h4>
         <i>Teletype</i> was a trade name of the Teletype Corporation, and was subsequently abbreviated to <i>tty</i>.
-        <a href="http://www.pdp8.net/asr33/videos.shtml">The Model 33</a> was among the most popular of these,
-        with around 600,000 units sold<sup><a href=#references style="text-decoration: none">[2]</a></sup>.
+        <a href="http://www.pdp8.net/asr33/videos.shtml">The Model 33</a> was among the most popular hard-copy terminals,
+        with around 600,000 units sold (<a href="#references">Libes 129</a>).
     </div>
 
     <p>
@@ -146,7 +147,7 @@
         These are user-space processes that, well, emulate an old terminal!
         Specifically, they provide a GUI-compatable front-end to an old-school interface.
         Terminal emulation is notoriously difficult,
-        and is characterized by <i>which</i> terminal device you are emulating.<sup><a href=#references style="text-decoration: none">[3]</a></sup>
+        and is characterized by <i>which</i> terminal device you are emulating (Shuford).
     </p>
 
     <p>
@@ -687,7 +688,7 @@
             <ol>
                 <li> Kernighan, Brian. <i>Unix: A History and a Memoir.</i>  Published 2020, by Brian W. Kernighan via Kindle Direct Publishing. </li>
                 <li> Libes, Sol.  <i>Small Computer Systems Handbook</i>.  Published 1978, by Hayden Book Co. </li>
-                <li> Lawyer, David S. <i>Text-Terminal-HOWTO</i> <a href="https://tldp.org/HOWTO/Text-Terminal-HOWTO-8.html"> https://tldp.org/HOWTO/Text-Terminal-HOWTO-8.html</a>.  The Linux Documentation Project.  Retrieved April 6, 2020. </li>
+                <li> Lawyer, David S. <i>Text-Terminal-HOWTO</i> <a href="https://tldp.org/HOWTO/Text-Terminal-HOWTO.html#toc1"> https://tldp.org/HOWTO/Text-Terminal-HOWTO-8.html</a>.  The Linux Documentation Project.  Retrieved April 6, 2020. </li>
                 <li> Shuford, Richard S. <a href="https://invisible-mirror.net/archives/shuford/terminal/first_principles.html"><i>First Thoughts about Terminal Emulation</i></a>. </li>
                 <li> Ben-Halim, Zeyd M., Raymond, Eric S., Dickey, Thomas E. <a href="http://man7.org/linux/man-pages/man5/terminfo.5.html">man 5 terminfo</a>.  The Linux Man-Pages Project. Retrieved April 6, 2020.</li>
                 <li> Dickey, Thomas E.  <a href="https://invisible-island.net/xterm/xterm.faq.html#what_is_vt220"><i>"What is a VT220?"</i></a>. Retrieved April 6, 2020.</li>
