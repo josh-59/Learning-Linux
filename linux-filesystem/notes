@@ -2,7 +2,6 @@ In the beginning, there was a filesystem.
 
 A Heirarchical structure, with some files holding listings of other files.
 
-virtual filesystem,
 
 Regular Files
   Data contents are not, in the general case, the business of the operating system;
@@ -17,23 +16,24 @@ Regular Files
 
    (for instance, the desktop environment).
 
+   chmod +x:
+     Change the way the operating system handles a file;
+     <i>in addition</i> to the above, the operating system can now
+     "execute" the file:
+     Binary
+     #! /usr/bin/XXXXXXX
+     Bash's behavior by default
+
+     For instance, the ruby interpreter is a program, existant in my filesystem
+     as a binary file compiled from C source code; to execute a ruby program,
+     I pass the argument <tt>ruby my_example_program.rb </tt> to bash,
+     causing the kernel to launch ruby with the argument file <tt>my_example_program.rb</tt>.
+
 "dotfiles"
+Configuration files
 https://fedoramagazine.org/take-back-your-dotfiles-with-chezmoi/
   Used to store text-based configuration files; there are many in
   the home directory and many in the ~/.config folder
-
-  chmod +x:
-    Change the way the operating system handles a file;
-    <i>in addition</i> to the above, the operating system can now
-    "execute" the file:
-    Binary
-    #! /usr/bin/XXXXXXX
-    Bash's behavior by default
-
-    For instance, the ruby interpreter is a program, existant in my filesystem
-    as a binary file compiled from C source code; to execute a ruby program,
-    I pass the argument <tt>ruby my_example_program.rb </tt> to bash,
-    causing the kernel to launch ruby with the argument file <tt>my_example_program.rb</tt>.
 
 Directories
   Are called "directories" rather than "folders" because they are files&mdash;
@@ -53,9 +53,11 @@ Directories
     +x "search" permission
 
 Device Files
+
 Pseudo Filesystems
 Meta-Persistent Filesystems
 
+virtual filesystem,
 
 Abstracting away from machine state;
   in particular we are IGNORING running programs.
@@ -63,15 +65,6 @@ This amounts to ignoring half of the operating system,
 but it is appropriate because files are static with
 respect to processes.
 
-
-
-regular files:
-
-
-
-directories:
-  There is no conflict if the data in the directory is stored in
-  an otherwise-normal file.
 
 stdin / stdout
   lsof - list open files
@@ -154,21 +147,29 @@ inode:
   Since neither links nor data addresses can cross disk partition
   boundaries, the inode number is sufficient to uniquely identify an inode.
 
-  <div id="conclusion" class="content">
-    <h2> Conclusion </h2>
-    <p>
-      A text terminal is a device that lets a user "peer into" the computer
-      by reading the contents of a special file.
-      In days' past, the text terminal was physical; these days, the
-      device has been replaced by emulation.
-      The most novel thing to recognize about terminals is that they exist, from the operating system's
-      perspective, as an ordinary file.
-      That <i>you read</i> from it is merely coincidental to what that file is connected to&mdash; namely,
-      a buffer within a monitor or emulator.
-      Likewise, data sent from the keyboard appears, to a user-space process,
-      as the contents of an ordinary file.
-    </p>
-  </div>
+
+
+
+Shell:
+    A text terminal is a device that lets a user "peer into" the computer
+    by reading on a monitor the data written to a special file.
+    In days' past, the text terminal was physical; these days, the
+    device has been replaced by emulation.
+    The most novel thing to recognize about terminals is that they exist, from the operating system's
+    perspective, as an ordinary file.
+    That <i>you read</i> from it is merely coincidental to what that file is connected to&mdash; namely,
+    a buffer within a monitor or emulator.
+    Likewise, data sent from the keyboard appears, to a user-space process,
+    as the contents of an ordinary file.
+
+    PATH environment variable:
+    Kernighan page 132:
+        Invented by John Mashey and introduced in the 6th edition shell,
+        it was a workaround so that non-expert users could
+        share their own sets of commands by lab, department and group.
+
+    Kernighan:
+
 
 SOURCES
 
