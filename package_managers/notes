@@ -30,3 +30,9 @@ apt search golang -> Returns over 1000 results; can't locate compiler;          
 How to install random .deb:
     navigate shell to containing directory
     sudo apt install <my_random_unsafe_package>.deb
+
+From Arch Wiki:
+    The pacman package manager is one of the major distinguishing features of Arch Linux.
+
+meta-packages:
+    Existant throughout package managers
