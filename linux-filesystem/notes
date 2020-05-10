@@ -1,18 +1,59 @@
-In the beginning, there was a filesystem.
 
-A Heirarchical structure, with some files holding listings of other files.
+
+
+
+A filesystem is a systematic method of organizing data on disk.
+        https://developer.ibm.com/technologies/systems/tutorials/l-linux-filesystem/
+        https://en.wikipedia.org/wiki/File_system
+Conceptually, it is similar to a data structure in that it defines a convention
+to be followed, in the storage and retrieval of data.
+
+Directory tree:
+    A hierarchical structure containing files.
+
+Common filesystems:
+    EXT4    A Great filesystem;
+            the most common filesystem used on Linux
+            EXT4 in-depth:
+                    https://ext4.wiki.kernel.org/index.php/Ext4_Disk_Layout
+    ZFS     New-er, incorporates fancier features that are, generally,
+            out of place on the working-man's Linux Desktop.
+            Intended for the enterprise use.
+                    https://en.wikipedia.org/wiki/ZFS#Inappropriately_specified_systems
+            Also, not free:
+                    https://wiki.archlinux.org/index.php/ZFS
+    FAT32   "File Allcoation Table"
+            DOS-era filesystem;
+            Widely supported, though antiquated; often used to hold the bootloader,
+            in the "EFI System"-type partition
+
+In particular, each filesystem defines a <em>block size</em>, which is the
+smallest addressable unit of data.
+Typically, this is 4KiB = 4096 Bytes.
+This imposition forces the operating system to conduct disk operations
+4K at a time; this, in turn, forces the drive to serve up 4K at a time--
+    a larger block size prevents fragmentation of files, and also
+    promotes sequential reading and writing, which is faster, especially on mechanical hard-drives.
+This comes at a cost, though:
+    Each file saved on the drive will consume at least one block;
 
 
 Regular Files
   Data contents are not, in the general case, the business of the operating system;
-  operating system is only tasked with preserving the data in a bit-perfect
+  In Linux, the operating system is only tasked with preserving the data in a bit-perfect
   manner.
+  This was actually an innovation at the time of Unix creation; before that,
+  operating systems had many different interfaces for dealing with many different files
+  (around the same time, an "Operating System" was little more than a collection of
+  library functions).
   That means that the Linux kernel treats text files, binaries, movies,
   source code, pdf's, etc., identically, (a concept new for its time),
   and, that any "special treatment," is implemented by user-space processes.
   As Brian Kerninghan puts it, "If applying a program to a file doesn't make sense&mdash; for
   example, trying to compile a Fortran source file as if it were C&mdash; that doesn't have anything
   to do with the operating system."  (Kernigham, p 63)
+
+  Most files (approx 80%) are "regular files"- APUE p 98
 
    (for instance, the desktop environment).
 
@@ -36,6 +77,7 @@ https://fedoramagazine.org/take-back-your-dotfiles-with-chezmoi/
   the home directory and many in the ~/.config folder
 
 Directories
+    *Using the filesystem to implement the directory tree*
   Are called "directories" rather than "folders" because they are files&mdash;
   think of a Unix <i>directory</i> as a page in a telephone book.
 
@@ -53,6 +95,11 @@ Directories
     +x "search" permission
 
 Device Files
+    Requires:
+        Directory tree
+        Filesystem
+
+    Block devices vs Character Devices
 
 lsblk:
     /dev/sda        Denotes the entire drive
@@ -63,7 +110,27 @@ lsblk:
     /dev/nvme0np1   Denotes the first partition
     /dev/nvme0np2   Denotes the second partition
 
-    etc
+    *** BEGIN
+    For instructional purposes, let's have a look at
+    Jeremy "Jay" LaCroix's disk partition layout.
+    Notes from "Arch Linux Full Installation Walkthrough"
+    https://www.youtube.com/watch?v=a00wbjy2vns&t=727s
+
+    lsblk
+    NAME        MAJ:MIN RM    SIZE RO TYPE MOUNTPOINT
+    nvme0n1     259:0    0    477G  0 disk
+    ├─nvme0n1p1 259:1    0    500M  0 part
+    ├─nvme0n1p2 259:2    0     30G  0 part
+    └─nvme0n1p3 259:3    0  446.5G  0 part
+
+    /dev/nvme0n1p1      500-MB      Boot Partition     mounted to /boot/efi     formatted FAT32
+    /dev/nvme0n1p2      30-GB       Root Filesystem    mounted to /             formatted EXT4
+    /dev/nvme0n1p3      446.5GB     Home               mounted to /home/        formatted EXT4
+
+    swap file, of 2 GB, mounted to /swapfile
+
+    *** END
+
 
 Pseudo Filesystems
 Meta-Persistent Filesystems
@@ -90,8 +157,7 @@ pipes:
   doesn't make any sense because the output of "ls /dev" is conceptually identical to
   a file anyways.
 
-Kernighan: Commands are verbs, and files
-are nouns, p 71
+Kernighan: Commands are verbs, and files are nouns, p 71
 
 Linux files as variables:
   "A file has an owner, a modification time, a size, a type, and other attributes." --Understanding Unix/Linux Programming:  A Guide to Theory and Practice
@@ -181,32 +247,11 @@ Shell:
 
     Kernighan:
 
-*** BEGIN
-For instructional purposes, let's have a look at
-Jeremy "Jay" LaCroix's disk partition layout.
-Notes from "Arch Linux Full Installation Walkthrough"
-https://www.youtube.com/watch?v=a00wbjy2vns&t=727s
-
-lsblk
-NAME        MAJ:MIN RM    SIZE RO TYPE MOUNTPOINT
-nvme0n1     259:0    0    477G  0 disk
-├─nvme0n1p1 259:1    0    500M  0 part
-├─nvme0n1p2 259:2    0     30G  0 part
-└─nvme0n1p3 259:3    0  446.5G  0 part
-
-
-/dev/nvme0n1p1      500-MB      Boot Partition     mounted to /boot/efi     formatted FAT32
-/dev/nvme0n1p2      30-GB       Root Filesystem    mounted to /             formatted EXT4
-/dev/nvme0n1p3      446.5GB     Home               mounted to /home/        formatted EXT4
-
-swap file, of 2 GB, mounted to /swapfile
-
-*** END
 
 
 SOURCES
 
-https://www.tldp.org/LDP/Linux-Filesystem-Hierarchy/html/dev.html
+// Unreadable       https://www.tldp.org/LDP/Linux-Filesystem-Hierarchy/html/dev.html
 https://unix.stackexchange.com/questions/18239/understanding-dev-and-its-subdirs-and-files
 
 http://www.tldp.org/LDP/intro-linux/html/sect_03_01.html
