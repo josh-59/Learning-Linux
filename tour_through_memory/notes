@@ -1,2 +1,0 @@
-MANY virtual address spaces
-get mapped SPARINGLY onto a SINGLE physical address space.
