@@ -21,6 +21,7 @@
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
+        <li><a href="#filesystems"> Filesystems </a></li>
         <li><a href="#regular-files"> Regular Files </a></li>
         <li><a href="#dotfiles"> Dotfiles </a></li>
         <li><a href="#references"> References </a></li>
@@ -35,7 +36,7 @@
 
     <p>
         Unix began life as a filesystem; on top of this was created the means
-        of interacting with it, including an <code>exec</code>
+        of interacting with it, initially composed of an <code>exec</code>
         function, shell, text editor and assembler (Kernighan 33-34).
         Created by Ken Thompson, this small software suite formed the nexus of
         the time-sharing operating system that would eventually be called
@@ -46,49 +47,123 @@
         This file-first approach to operating system design is found in
         the implementation as well as the history of Unix and its derivatives;
         concurrently, there is a lot to be said about files.
-        This paper aims to describe the structure of the Unix filesystem, and
-        the various uses that it's put to.
-        We'll start off pretty pedestrian, with regular files and
-        their uses.
-        Then we will progress to directories, which are files that
-        list other files, and eventually cover virtual filesystems, which
-        exist at run-time alone, and are used, for instance,
-        to make available information about running processes.
+        This paper aims to introduce the notion of a filesystem, and
+        describe the structure and uses of the file hierarchy.
     </p>
 </div>
 
-<div id="regular-files" class="content">
-    <h2>Regular Files</h2>
-
-</div>
-
-<div id="dotfiles" class="content">
-    <h2>Dotfiles</h2>
-
-</div>
-
-<div id="references" class="content">
-    <h2> References </h2>
-        <ol>
-            <li>Kernighan, Brian W. <em>Unix: a History and a Memoir.</em> Kindle Direct Publishing, 2020. </li>
-        </ol>
-
-</div>
-
-<div id="credits" class="content">
-    <h2> Credits </h2>
+<div id="filesystems" class="content">
+    <h2> Filesystems </h2>
     <p>
-        This work was written by Josh Timmons and is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-        Last updated May 2020.
-        Please send any corrections or comments to <a href="mailto:josh.591536@gmail.com"> Josh Timmons</a>.
-        <br>
-        <br>
-        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
+        A filesystem is a systematic method of organizing data on disk.<sup><a href="https://wiki.osdev.org/Filesystem">[1]</a><a href="https://wiki.archlinux.org/index.php/File_systems">[2]</a></sup>
+        Conceptually, it is similar to a data structure, in that it defines a convention
+        to be followed to store and retrieve data.
+        Preparing a drive (address space) for use by a particular filesystem <a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">is known as formatting</a>.
     </p>
+
+    <ul>
+        <h3>Some Common Filesystems:</h3>
+        <li>
+            <p>
+                EXT4:
+                Introduced in 2008, EXT4 is the most common filesystem used on Linux
+                today.  It is an evolutionary enhancement on EXT3,
+                supporting larger filesizes, deeper subdirectory support,
+                faster handling of large files, along with many other improvements.<sup><a href="https://ext4.wiki.kernel.org/index.php/Ext4_Disk_Layout">[3]</a></sup>
+                It is mature, fast, and stable.
+            </p>
+        </li>
+
+        <li>
+            <p>
+                ZFS: Introduced in 2005, ZFS incorporates fancier features that are generally
+                out of place on the working-man's Linux Desktop.
+                ZFS was developed by Sun Microsystems, now Oracle, and is intended for the enterprise use;
+                it's <a href="https://en.wikipedia.org/wiki/ZFS#Inappropriately_specified_systems">relatively easy to configure improperly.</a>
+                Also, it is <a href="https://wiki.archlinux.org/index.php/ZFS">not free.</a>
+            </p>
+        </li>
+
+        <li>
+            <p>
+                FAT32: The "File Allcoation Table 32-bit" is a DOS-era filesystem,
+                and is widely supported, though antiquated.
+                It is often used to hold the bootloader,
+                since it is virtually guaranteed to be recognizable by firmware.
+            </p>
+        </li>
+    </ul>
 </div>
-<script
-src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
-crossorigin="anonymous"></script>
-<script src="../animate-nav-2.js"> </script>
-</html>
+
+    Filesystem Hierarchy Standard
+    https://www.pathname.com/fhs/pub/fhs-2.3.pdf
+    -Is stable
+    Directory tree:
+    A hierarchical structure containing files.
+
+    <div id="regular-files" class="content">
+        <h2>Regular Files</h2>
+
+        <p>
+            Regular files contain data.
+            The contents of a regulard file are not, in the general case, the business of the operating system;
+            as such, the operating system is only tasked with preserving data in a bit-perfect
+            manner.
+            This was actually an innovation at the time of Unix creation; before that,
+            operating systems had many different interfaces for dealing with many different files
+            (around the same time, an "Operating System" was little more than a collection of
+            library functions).
+            That means that the Linux kernel treats text files, binaries, movies,
+            source code, pdf's, etc., identically, (a concept new for its time),
+            and, that any "special treatment," is implemented by user-space processes.
+            As Brian Kerninghan puts it, "If applying a program to a file doesn't make sense&mdash; for
+            example, trying to compile a Fortran source file as if it were C&mdash; that doesn't have anything
+            to do with the operating system."  (Kernigham, p 63)
+
+            Most files (approx 80%) are "regular files"- APUE p 98
+
+
+            chmod +x:
+            Change the way the operating system handles a file;
+            <i>in addition</i> to the above, the operating system can now
+            "execute" the file:
+            Binary
+            #! /usr/bin/XXXXXXX
+            Bash's behavior by default
+
+            For instance, the ruby interpreter is a program, existant in my filesystem
+            as a binary file compiled from C source code; to execute a ruby program,
+            I pass the argument <tt>ruby my_example_program.rb </tt> to bash,
+            causing the kernel to launch ruby with the argument file <tt>my_example_program.rb</tt>.
+        </div>
+
+        <div id="dotfiles" class="content">
+            <h2>Dotfiles</h2>
+
+        </div>
+
+        <div id="references" class="content">
+            <h2> References </h2>
+            <ol>
+                <li>Kernighan, Brian W. <em>Unix: a History and a Memoir.</em> Kindle Direct Publishing, 2020. </li>
+            </ol>
+
+        </div>
+
+        <div id="credits" class="content">
+            <h2> Credits </h2>
+            <p>
+                This work was written by Josh Timmons and is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+                Last updated May 2020.
+                Please send any corrections or comments to <a href="mailto:josh.591536@gmail.com"> Josh Timmons</a>.
+                <br>
+                <br>
+                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
+            </p>
+        </div>
+        <script
+        src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+        crossorigin="anonymous"></script>
+        <script src="../animate-nav-2.js"> </script>
+        </html>
