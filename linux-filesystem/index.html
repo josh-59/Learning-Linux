@@ -66,7 +66,7 @@
         <li>
             <p>
                 EXT4:
-                Introduced in 2008<sup><a href="https://en.wikipedia.org/wiki/Ext4">[1]</a></sup>, EXT4 is the most common filesystem used on Linux
+                Introduced in 2008,<sup><a href="https://en.wikipedia.org/wiki/Ext4">[1]</a></sup> EXT4 is the most common filesystem used on Linux
                 today.  It is an evolutionary enhancement on EXT3,
                 supporting larger filesizes, deeper subdirectory support,
                 faster handling of large files, along with many other improvements.<sup><a href="https://ext4.wiki.kernel.org/index.php/Ext4_Disk_Layout">[3]</a></sup>
@@ -76,20 +76,25 @@
 
         <li>
             <p>
-                ZFS: Introduced in 2005<sup><a href="https://en.wikipedia.org/wiki/ZFS">[2]</a></sup>, ZFS incorporates fancier features that are generally
+                ZFS: Introduced in 2005,<sup><a href="https://en.wikipedia.org/wiki/ZFS">[2]</a></sup> ZFS incorporates fancier features that are generally
                 out of place on the working-man's Linux Desktop.
-                ZFS was developed by Sun Microsystems, now Oracle, and is intended for the enterprise use;
-                it's <a href="https://en.wikipedia.org/wiki/ZFS#Inappropriately_specified_systems">relatively easy to configure improperly.</a>
+                ZFS was developed by Sun Microsystems, and became closed-source with Sun's acquisition by
+                Oracle.<sup><a href="https://en.wikipedia.org/wiki/ZFS">[2]</a></sup>
+                It is intended for enterprise use, and is
+                <a href="https://en.wikipedia.org/wiki/ZFS#Inappropriately_specified_systems">relatively easy to configure improperly.</a>
+
                 Also, it is <a href="https://wiki.archlinux.org/index.php/ZFS">not free.</a>
             </p>
         </li>
 
         <li>
             <p>
-                FAT32: The "File Allcoation Table 32-bit" is a DOS-era filesystem,
+                FAT32: The "File Allcoation Table 32-bit" is a DOS-era filesystem,<sup><a href="https://en.wikipedia.org/wiki/File_Allocation_Table#FAT32">[3]</a></sup>
                 and is widely supported, though antiquated.
-                It is often used to hold the bootloader,
-                since it is virtually guaranteed to be recognizable by firmware.
+                In particular, it is not a <a href="https://en.wikipedia.org/wiki/Journaling_file_system">journaling filesystem</a>,
+                so that changes to data are not recorded before being carried out (increasing the likelihood of
+                corruption in the event of, say, power outage).
+                It is often used to hold the bootloader, since it is virtually guaranteed to be supported by firmware.
             </p>
         </li>
     </ul>
