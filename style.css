@@ -85,7 +85,7 @@ ol {
     color: white;
 }
 
-.img_left {
+.img-left {
     float: left;
     margin-right: 20px;
     margin-left: 0;
@@ -93,7 +93,7 @@ ol {
     margin-bottom: 5px;
 }
 
-.img_right {
+.img-right {
     float: right;
     margin-right: 0;
     margin-left: 20px;
@@ -101,12 +101,12 @@ ol {
     margin-bottom: 5px;
 }
 
-.img_ctr {
+.img-ctr {
     display: block;
     margin: 0px auto;
 }
 
-.aside_right {
+.aside-right {
     float: right;
     margin-right: 0;
     margin-left: 20px;
@@ -120,7 +120,7 @@ ol {
 
 }
 
-.aside_left {
+.aside-left {
     float: left;
     margin-right: 20px;
     margin-left: 0;
@@ -136,8 +136,8 @@ ol {
 
 .code {
     width: inherit;
-    padding-top: 10px;
-    padding-bottom: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     padding-left: 10%;
     margin: auto;
     font-family: 'Roboto Mono', monospace;
