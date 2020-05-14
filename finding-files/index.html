@@ -33,7 +33,7 @@
 
 <div id="introduction" class="content">
     <h1>A Primer on Finding Files</h1>
-    <!-- <h4>In the beginning, there was a filesystem.</h4> -->
+    <!-- <h4>An Example-Driven Expose.</h4> -->
     <h4>Under Construction!</h4>
 
     <p>
@@ -41,9 +41,6 @@
         available are very powerful, but not new-user friendly.
         We will cover GNU's <code>locate</code>, <code>find</code>, and <code>grep</code>
         utilities.
-        This material builds upon the <a href="../linux-filesystem/"> Linux Filesystem</a>
-        essay.
-        Our running example will be, "Find all directories named <em>bin</em>."
     </p>
 
 </div>
@@ -90,10 +87,11 @@
 </div>
 
 <div id="locate" class="content">
-    <h2> locate </h2>
+    <h2> Locate </h2>
     <p>
         Starting out, your best bet is the <code>locate</code> command.
         <code> locate</code> finds files by name.<sup><a href="http://www.man7.org/linux/man-pages/man1/locate.1.html">[1]</a></sup>
+        By default, <code>locate</code> matches your pattern against the pathname of each file.
         Now, this command references a database of information about the files
         on the system.
         As such, it is very fast. However, if you have done some operation on the filesystem and
@@ -108,20 +106,20 @@
     <h3>Examples</h3>
 
 
-        <div class=aside_right>
-            <h4>Aside</h4>
-            It is often the case that commands written to the command-line are built up
-            by trial and error, rather than written all at once.
-            A nice pro-tip is to use the "echo" command to view exactly what a line will
-            expand to, before executing it.
-        </div>
+    <div class=aside-right>
+        <h4>Aside</h4>
+        It is often the case that commands written to the command-line are built up
+        by trial and error, rather than written all at once.
+        A nice pro-tip is to use the "echo" command to view exactly what a line will
+        expand to, before executing it.
+    </div>
     <p>
         <div class="code">
             $ locate bin
         </div>
 
         prints all files currently in the database whose pathname includes
-        the string "bin."
+        the string "bin".
         This is not what you want; this system reports 56677 files which match.
         For instance,
 
@@ -136,37 +134,162 @@
         </div>
 
         and
-        
+
         <div class="code">
             /var/lib/gems/2.5.0/<strong>bin</strong>/rdoc
         </div>
+    </p>
 
     <p>
-        For example, to find all files on the system with name "bin,"
-        we could use,
+        The first thing we can do to narrow this list down is specify that
+        <code>locate</code> match against the basename alone, rather than
+        the full pathname.
+        This is done with either <code> -b </code> or <code> --basename </code>
+        options:
+    </p>
+
+    <div class="code">
+        $ locate --basename bin
+    </div>
+
+    <p>
+        This reduces the number of matches by half, but still matches such things as
+
+        <div class="code">
+            /var/lib/gems/2.5.0/gems/sassc-2.3.0/ext/libsass/src/<strong>bin</strong>d.hpp
+        </div>
+    </p>
+
+    <p>
+        Our final modification to this command will be to match with an expression
+        that can specify the beginning of the line as well as the end of the line:
         <div class="code">
             $ locate --basename --regex ^bin$
         </div>
-
-        where <code>--basename</code> specifies that we are matching the basename of the file,
-        <code>--regex</code> specifies that our match pattern is a regular expression
-        (as opposed to the shell globbing mechanism),
-        <code>^</code> anchors the next character to the beginning of the string, and
-        <code>$</code> anchors the previous character to the end of the string.
     </p>
 
     <p>
-        <code> man locate</code> for more information.
+        This gives the desired results.
     </p>
+
+    <p>
+        The <code>locate</code> command is limited to searching the entire directory
+        tree of the current system.  We could work around this, though, in two ways.
+        Suppose we wished to find all files named <code>bin</code> in my home directory,
+        <code>/home/josh/</code>.
+    </p>
+
+    <p>
+        First, we could pipe each line through <code>grep</code>:
+
+        <div class="code">
+            $ locate --basename --regex ^bin$ | grep '/home/josh/'
+        </div>
+
+        Each file in the database that has basename of exactly <code>bin</code> is printed; each line
+        is then sent through <code>grep</code>, which will print the line only if it matches
+        <code>/home/josh/</code> as well.
+    </p>
+
+    <p>
+        Second, we could specify a suitable regex expression against the entire pathname:
+
+        <div class="code">
+            $ locate --regex ^/home/josh.*/bin$
+        </div>
+
+        Where <code>.*</code> matches any character (the period) zero-or-more times (the asterisk).
+        A video by Engineer Man introducing Regex is below.
+    </p>
+
 </div>
 
 <div id="find" class="content">
 
-    <h2> find </h2>
+    <h2> Find </h2>
     <p>
         GNU's <code>find</code> utility is much more powerful.
         It searches the directory tree itself, rather than a database built
-        upon it, so it is slower.  However, it allows the
+        upon it, so it is slower.  It allows the user to query attributes of each file beyond
+        its name.
+    </p>
+
+    <p>
+        The <code>find</code> utility works by beginning at the starting point(s)
+        specified, and comparing each file it finds there against a sequence of tests,
+        specified by you, the user.
+        Then it descends, and repeats.
+        If no starting point is specified, then <code>.</code> is implied.
+    </p>
+
+    <div class="code">
+        find [starting-point...] [expression...]
+    </div>
+
+   <p>
+       <code>[expression...]</code> may be contain options, tests, or actions.
+       Options affect global behavior, such as "descend n levels from starting point."
+       Each file that find encounters is evaluated against the tests provided;
+       if no tests are specified, then each file by default passes.
+       If a file passes all tests, then <code>find</code> will carry out the action(s) specified by the user;
+       if no action is specified, then -print is implied.
+   </p>
+
+   <p>
+       For instance, we can count all files on the system by,
+   </p>
+
+   <div class="code">
+       $ sudo find / | wc -l
+   </div>
+
+   <p>
+       We find 4.1 million files.
+       We require superuser privileges to carry out the above task because
+       some directories are not searchable by ordinary users.
+   </p>
+
+   <p>
+       <code>find</code>
+
+   <div class="code">
+       $ sudo find / -size -4k | wc -l
+       2746999
+   </div>
+
+   <p>
+
+   </p>
+
+   <p>
+       <code>find</code> treats each query as a sequence of tests.
+       The most common among the tests is <code>-name <em>pattern</em></code>,
+       which matches the given shell globbing pattern against each file's basename.
+       To find all files on the system named "bin" on the system, we could execute,
+   </p>
+
+   <div class="code">
+       $ sudo find / -name bin
+   </div>
+
+   <p>
+       To restrict the search to files in my home directory, we could carry out,
+   </p>
+
+   <div class="code">
+       $ cd /home/josh<br>
+       $ find -name bin
+   </div>
+
+   <p>
+       Note that this does not require superuser privileges, because I own
+       all the files in this directory, and also that
+
+
+
+    <p>
+        <strong>See Also:</strong> <a href="https://www.gnu.org/software/findutils/manual/find.html"> GNU Findutils Official Documentation </a>
+    </p>
     </div>
 
     <div id="engineer-man" class="content">
