@@ -100,12 +100,71 @@
     </ul>
 </div>
 
-    Filesystem Hierarchy Standard
-    https://www.pathname.com/fhs/pub/fhs-2.3.pdf
-    -Is stable
-    Directory tree:
-    A hierarchical structure containing files.
+<div id="directory-structure" class="content">
+    <h2> Directory Structure</h2>
 
+    <p>
+        On Linux and other Unix-like systems, the directory tree begins at <em>root</em>,
+        <code>/</code>, and contains all files on the system.
+        This directory structure is defined by the
+        <a href="https://www.pathname.com/fhs/pub/fhs-2.3.pdf">Linux Filesystem Heirarchy Standard</a>,
+        which is maintained by the Linux Foundation.
+    </p>
+
+    <p>
+        Within any GNU/Linux distribution, some common themes are found.
+        <code>bin</code> directories are found in several places, such as
+        <code>/bin</code> and <code>/sbin</code>, along with <code>/usr/bin</code> and often
+        <code>/home/user/bin</code>.
+        This system reports no less that 89 directories named "bin."
+        Each of these contain executable files (programs)
+        that are ran as commands from the shell.
+    </p>
+
+    <p>
+        As per the standard, <code>/etc</code> (usually read "<em>et</em>-c") contains host-specific
+        system configuration files; as a consequence, you can expect to mess around
+        in this directory when configuring the system for the first time
+        (or otherwise).
+        It contains, for instance, files describing the configuration of the system's package
+        manager (if any), printers, and, well, etcetera.
+    </p>
+
+    <p>
+        Unlike Windows systems, which mount a new, distinct directory tree
+        for each storage device on the system (<code>C:\, D:\</code>, etc.),
+        Linux and other Unix-like systems mount new devices on the existing
+        directory tree, using the "mount" command.
+        Although the directory hierarchy has two distinct places to facilitate this,
+        <code>/mnt</code> and <code>/media</code>, as super-user, one is free
+        to mount a new filesystem just about anywhere.
+
+        So, for instance,
+
+        <div class="code">
+            $ sudo mount /dev/sda2 /home/josh
+        </div>
+
+        would mount the second partition of the device "sda" to
+        <code>/home/josh</code>; its contents would then be available there.
+    </p>
+
+    <p>
+        This mounting facility is often used to separate logically distinct
+        data, by keeping them on physically different partitions.
+        For instance, user data, contained in the <code>/home/</code> directories,
+        can be separated from system data by keeping it on a different partition;
+        by mounting the partition at <code>/home/</code>, this
+        separation is transparent to any user.
+    </p>
+
+    <p>
+        Pretty spiffy!
+    </p>
+
+</div>
+
+</div>
     <div id="regular-files" class="content">
         <h2>Regular Files</h2>
 
