@@ -25,6 +25,7 @@
         <li><a href="#basename"> Pathnames and Basenames </a></li>
         <li><a href="#locate"> Locate </a></li>
         <li><a href="#find"> Find </a></li>
+        <li><a href="#grep"> Grep </a></li>
         <li><a href="#engineer-man"> Engineer Man </a></li>
         <li><a href="#references"> References </a></li>
         <li><a href="#credits">Credits and Licenses</a></li>
@@ -92,6 +93,7 @@
         Starting out, your best bet is the <code>locate</code> command.
         <code> locate</code> finds files by name.<sup><a href="http://www.man7.org/linux/man-pages/man1/locate.1.html">[1]</a></sup>
         By default, <code>locate</code> matches your pattern against the pathname of each file.
+        If it does match, then the file's pathname is printed on a new line.
         Now, this command references a database of information about the files
         on the system.
         As such, it is very fast. However, if you have done some operation on the filesystem and
@@ -103,7 +105,12 @@
         $ sudo updatedb
     </div>
 
-    <h3>Examples</h3>
+
+    <p>
+        By default, <code>locate</code> is fairly permissive, matching things that
+        you wouldn't want matched.
+        For instance,
+    </p>
 
 
     <div class=aside-right>
@@ -224,9 +231,8 @@
     <h2> Find </h2>
     <p>
         GNU's <code>find</code> utility is much more powerful.
-        It searches the directory tree itself, rather than a database built
-        upon it, so it is slower.  It allows the user to query attributes of each file beyond
-        its name.
+        It searches the directory tree itself, and allows the user
+        to query attributes of each file beyond its name.
     </p>
 
     <p>
@@ -309,12 +315,20 @@
 
     <p>
         Note that this is equivalent to <code>--regex ^bin$</code>, as given above.
+        To restrict the search to directories alone, we add an appropriate test:
+    </p>
+
+    <div class="code">
+        $ sudo find / -name bin -type d
+    </div>
+
+    <p>
         To restrict the search to files in my home directory, we could carry out,
     </p>
 
     <div class="code">
         $ cd /home/josh<br>
-        $ find -name bin
+        $ find -name bin -type d
     </div>
 
     <p>
@@ -322,8 +336,24 @@
         Note that this does not require superuser privileges, because I own
         all the files in this directory.
         To learn yet more about <code>find</code>, I recommend
-        <a href="https://www.gnu.org/software/findutils/manual/find.html"> GNU Findutils Official Documentation </a>.
+        <a href="https://www.gnu.org/software/findutils/manual/find.html"> GNU Findutils Official Documentation</a>.
     </p>
+    </div>
+
+    <div id="grep" class="content">
+        <h2>Grep</h2>
+
+        <p>
+            I'm pretty sure that <code>find</code> will let you test against
+            any possible system-level attribute that a file may have.
+            To go any deeper, we must look inside each file, and that is what
+            <code>grep</code> will allow us to do.
+        </p>
+
+        <p>
+            Grep was 
+        </p>
+
     </div>
 
     <div id="engineer-man" class="content">
