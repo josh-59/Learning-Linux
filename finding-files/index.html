@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8"/>
+
+<html>
+<head>
+    <link href="../style.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
+    <title> A Primer on Finding Files</title>
+</head>
+
+<div id="nav_bar_1" class="nav">
+    <ul>
+        <li> <a href="..">Home</a></li>
+        <li> <a href="../learning-linux"> Learning Linux</a></li>
+        <li> <a href="../text-terminals">Text Terminals</a></li>
+        <li> <a href="../linux-filesystem">Linux Filesystem</a></li>
+        <li> <a class="active" href="#introduction">Finding Files</a></li>
+    </ul>
+</div>
+
+<div id="nav_bar_2" class="nav">
+    <ul>
+        <li><a href="#introduction"> Introduction </a></li>
+        <li><a href="#basename"> Pathnames and Basenames </a></li>
+        <li><a href="#locate"> Locate </a></li>
+        <li><a href="#find"> Find </a></li>
+        <li><a href="#references"> References </a></li>
+        <li><a href="#credits">Credits and Licenses</a></li>
+    </ul>
+</div>
+
+<div id="introduction" class="content">
+    <h1>A Primer on Finding Files</h1>
+    <!-- <h4>In the beginning, there was a filesystem.</h4> -->
+    <h4>Under Construction!</h4>
+
+    <p>
+        Finding files is a very common operation in Linux, and the tools
+        available are powerful, but not easy to learn.
+        This material builds upon the <a href="../linux-filesystem/"> Linux Filesystem</a>
+        essay.
+        Our running example will be, "Find all directories named <em>bin</em>."
+    </p>
+
+</div>
+
+<div id="basename" class="content">
+    <h2> Pathnames and Basenames</h2>
+    <p>
+        To start, we must make a clear distinction between a file's
+        <em>pathname</em> and a file's <em>basename</em>, because
+        our search tools will often make a distinction between these two:
+    </p>
+
+    <center><img src="pathname-basename.png"></center>
+
+    <p>
+        Every file in the system has a pathname, which begins at root.
+        This is also known as an <em>absolute filename</em>.
+        Each pathname denotes a unique point in the directory tree.
+        In Unix-like systems, a single file can have more than one pathname.
+    </p>
+
+    <p> The command <code>readlink</code> can report to us the pathname of an
+        arbitrary file:
+
+        <div class="code">
+            $ cd /home/josh<br>
+            $ readlink -f bin<br>
+            /home/josh/documents
+        </div>
+    </p>
+
+    <p>
+        Every file in the system also has a basename.
+        The command <code> basename</code> isolates this name for us:
+        <div class="code">
+            $ basename /home/josh/studies/merge.c<br>
+            merge.c
+        </div>
+    </p>
+
+    <p>
+        Now, on to finding files!
+    </p>
+</div>
+
+<div id="locate" class="content">
+    <h2> locate </h2>
+    <p>
+        Starting out, your best bet is the <code>locate</code> command.
+        <code> locate</code> finds files by name.<sup><a href="http://www.man7.org/linux/man-pages/man1/locate.1.html">[1]</a></sup>
+        Now, this command references a database of information about the files
+        on the system.
+        As such, it is very fast.
+        However, if you have done some operation on the filesystem and
+        the files you are looking for are new, then you must update this
+        database:
+
+        <div class="code">
+            $ sudo updatedb
+        </div>
+    </p>
+
+    <p>
+        For example, to find all files on the system with name "bin,"
+        we could use,
+        <div class="code">
+            $ locate --basename --regex ^bin$
+        </div>
+
+        where <code>--basename</code> specifies that we are matching the basename of the file,
+        <code>--regex</code> specifies that our match pattern is a regular expression
+        (as opposed to the shell globbing mechanism),
+        <code>^</code> anchors the next character to the beginning of the string, and
+        <code>$</code> anchors the previous character to the end of the string.
+    </p>
+
+    <p>
+        <code> man locate</code> for more information.
+    </p>
+</div>
+
+<div id="find" class="content">
+
+    <h3> find </h3>
+    <p>
+        GNU's <code>find</code> utility is much more powerful.
+    </div>
+
+
+    <div id="references" class="content">
+        <h2> References </h2>
+        <ol>
+            <li>Kernighan, Brian W. <em>Unix: a History and a Memoir.</em> Kindle Direct Publishing, 2020. </li>
+        </ol>
+
+    </div>
+    
+    <div id="credits" class="content">
+        <h1> Credits </h1>
+        <p>
+            This work was written by Josh Timmons and is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+            <a href="https://github.com/josh-59/Book-Like">Site template available</a> under MIT Open Source License.
+            Last updated May 2020.
+            Please send any corrections or comments to <a href="mailto:josh.591536@gmail.com"> Josh Timmons</a>.
+            <br>
+            <br>
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
+        </p>
+    </div>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+    crossorigin="anonymous"></script>
+    <script src="../animate-nav-2.js"> </script>
+    </html>
