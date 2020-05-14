@@ -34,8 +34,7 @@
 
 <div id="introduction" class="content">
     <h1>A Primer on Finding Files</h1>
-    <!-- <h4>An Example-Driven Expose.</h4> -->
-    <h4>Under Construction!</h4>
+    <h4>An Example-Driven Expose</h4>
 
     <p>
         Finding files is a very common operation in Linux, and the tools
@@ -92,7 +91,8 @@
     <p>
         Starting out, your best bet is the <code>locate</code> command.
         <code> locate</code> finds files by name.<sup><a href="http://www.man7.org/linux/man-pages/man1/locate.1.html">[1]</a></sup>
-        By default, <code>locate</code> matches your pattern against the pathname of each file.
+        By default, <code>locate</code> matches your pattern against the pathname of each file;
+        it's rather inclusive in the sense that it matches-by-default.
         If it does match, then the file's pathname is printed on a new line.
         Now, this command references a database of information about the files
         on the system.
@@ -105,13 +105,11 @@
         $ sudo updatedb
     </div>
 
-
     <p>
         By default, <code>locate</code> is fairly permissive, matching things that
         you wouldn't want matched.
         For instance,
     </p>
-
 
     <div class=aside-right>
         <h4>Aside</h4>
@@ -129,7 +127,9 @@
 
         prints all files currently in the database whose pathname includes
         the string "bin".
-        This is not what you want; this system reports 56677 files which match.
+        If we wanted to find all directories in the system named <code>bin</code>,
+        then this is not what we want.
+        On this system, we matched 56677 files.
         For instance,
     </p>
 
@@ -182,13 +182,13 @@
     </div>
 
     <p>
-        This gives the desired result (an introduction to regex is given below).
+        This gives the desired result; an introduction to regex is given in a video below.
     </p>
 
     <p>
         The <code>locate</code> command is limited to searching the entire directory
         tree of the current system.  We could work around this, though, in two ways.
-        Suppose we wished to find all files named <code>bin</code> in my home directory,
+        Suppose we wish to find all files named <code>bin</code> in my home directory,
         <code>/home/josh/</code>.
     </p>
 
@@ -196,7 +196,7 @@
         First, we could pipe each line through <code>grep</code>:
     </p>
 
-    <div class="code">
+    <div id="example" class="code">
         $ locate --basename --regex ^bin$ | grep '/home/josh/'
     </div>
 
@@ -215,7 +215,7 @@
     </div>
 
     <p>
-        Where <code>.*</code> matches any character (the period) zero-or-more times (the asterisk).
+        Where <code>.*</code> matches any-character (the period) zero-or-more-times (the asterisk).
     </p>
 
     <p>
@@ -232,7 +232,9 @@
     <p>
         GNU's <code>find</code> utility is much more powerful.
         It searches the directory tree itself, and allows the user
-        to query attributes of each file beyond its name.
+        to query attributes of each file besides its name.
+        Annoyingly, <code>find</code> is unique in that each long/multi-character
+        option is specified with a single hyphen.
     </p>
 
     <p>
@@ -248,11 +250,11 @@
     </div>
 
     <p>
-        <code>[expression...]</code> may be contain options, tests, or actions.
+        <code>[expression...]</code> may contain options, tests, or actions.
         Options affect global behavior, such as "descend n levels from starting point."
-        Each file that find encounters is evaluated against the tests provided;
-        if no tests are specified, then each file by default passes.
-        If a file passes all tests, then <code>find</code> will carry out the action(s) specified by the user;
+        Each file that <code>find</code> encounters is evaluated against the tests provided;
+        if no tests are specified, then each file passes.
+        If a file passes all tests given, then <code>find</code> will carry out the action(s) specified by the user;
         if no action is specified, then -print is implied.
     </p>
 
@@ -277,7 +279,7 @@
     </p>
 
     <div class="code">
-        $ sudo find / -size -4k | wc -l
+        $ sudo find / -size -4k | wc -l<br>
         2746999
     </div>
 
@@ -304,8 +306,14 @@
         The default logical operator between tests is <code>-and</code>,
         but <code>-or</code> and <code>-not</code> are also supported, along
         with parenthesis to allow grouping.
-        The most common among the tests is <code>-name <em>pattern</em></code>,
+        The most common among the tests is <code>-name</code>,
         which matches the given shell globbing pattern against each file's basename.
+        In contrast to <code>locate</code>'s inclusive pattern-matching,
+        <code>find</code>'s pattern matching is exclusive;
+        <code>find</code> also supports <code>-regex</code>.
+    </p>
+
+    <p>
         To find all files on the system named "bin" on the system, we could execute,
     </p>
 
@@ -351,9 +359,64 @@
         </p>
 
         <p>
-            Grep was 
+            By default, <code>grep</code> is simple enough:  It reads a file,
+            and if a line in the file matches a given pattern, it prints the line.<sup><a href="http://www.man7.org/linux/man-pages/man1/grep.1.html">[2]</a></sup>
+            If no files are given, then standard-in is assumed; we used this
+            in <a href="#example">an example above</a>.
+            Grep's synopsis is,
         </p>
 
+        <div class="code">
+            grep [OPTION...] PATTERNS [FILE...]
+        </div>
+
+        <p>
+            Of note, each <code>PATTERN</code> is regex by default, and
+            must either terminate with a newline, or else be explicitly specified by
+            using the <code>-e</code> option, as in,
+        </p>
+
+        <div class="code">
+            $ grep -e "hello" -e "world" file1.c file2.c
+        </div>
+
+        <p>
+            Will print each line in files <code>file1.c</code> or <code>file2.c</code>
+            which match either <em>hello</em> or <em>world</em> or both.
+        </p>
+
+        <p>
+            Of <code>grep's</code> options, we are particularly interested in
+            <code>-l</code> (list), <code>-C</code> (context), and <code>-r</code> (recurse).
+            The <code>-r</code> option specifies that, if a file is a directory,
+            recursively descend into it (and continue searching).
+            So,
+        </p>
+
+        <div class="code">
+            $ grep . -r -e "hello" -e "world"
+        </div>
+
+        <p>
+            will print all lines matching either <em>hello</em> or <em>world</em>,
+            starting at the current directory, and working downwards.
+            But, rather than the line, we might be interested in the context within
+            which that expression is found.  In that case,
+        </p>
+
+        <div class="code">
+            $ grep . -r -C 5 -e "hello" -e "world"
+        </div>
+
+        <p>
+            This will print five lines before, as well as five lines after, each match.
+            Finally, to print out just the name of the file, we specify that
+            <code>grep</code> list the match, with <code>-l</code>:
+        </p>
+
+        <div class="code">
+            $ grep . -rl -e "hello" -e "world"
+        </div>
     </div>
 
     <div id="engineer-man" class="content">
@@ -366,7 +429,10 @@
     <div id="references" class="content">
         <h2> References </h2>
         <ol>
-            <li>Kernighan, Brian W. <em>Unix: a History and a Memoir.</em> Kindle Direct Publishing, 2020. </li>
+            <li><code><a href="http://www.man7.org/linux/man-pages/man1/locate.1.html"> man 1 locate</a></code></li>
+            <li><code><a href="http://www.man7.org/linux/man-pages/man1/grep.1.html">man 1 grep</a></code></li>
+            <li><a href="https://www.gnu.org/software/findutils/manual/find.html"> GNU Findutils Official Documentation</a></li>
+            <li><code><a href="http://man7.org/linux/man-pages/man7/regex.7.html"> man 7 regex </a></code></li>
         </ol>
 
     </div>
