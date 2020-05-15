@@ -1,0 +1,417 @@
+---
+layout: default
+title: Learning Linux
+---
+
+<div id="nav_bar_2" class="nav">
+    <ul>
+        <li><a href="#introduction"> Introduction </a></li>
+        <li><a href="#how-to"> How-To </a></li>
+        <li><a href="#man-pages"> Man Pages </a></li>
+        <li><a href="#official-documentation"> Official Documen-<br>tation</a></li>
+        <li><a href="#unofficial-documentation"> Unofficial Documen-<br>tation</a></li>
+        <li><a href="#tutorials"> Tutorials </a></li>
+        <li><a href="#videos"> Videos </a></li>
+        <li><a href="#reference"> Reference </a></li>
+        <li><a href="#theory"> Theory </a></li>
+        <li><a href="#chris-titus-tech"> Chris Titus Tech </a></li>
+        <li><a href="#references"> References </a></li>
+        <li><a href="#credits">Credits </a></li>
+    </ul>
+</div>
+
+<div id="introduction" class="content">
+    <h1>Learning Linux </h1>
+    <h4>A Tour Through Documentation</h4>
+
+    <p>
+        Linux is a very large subject.
+        Although there are many sources of documentation, they are not,
+        in general, well-organized, so that finding the right information
+        can be hard.
+        This paper aims to give an overview of available resources,
+        some examples of each, and useful pointers, where appropriate.
+    </p>
+</div>
+
+<div id="how-to" class="content">
+    <h2>How-to</h2>
+    <p>
+        It's one of the great failings of modern computer culture to
+        suggest that being new or trying to learn is embarassing.
+    </p>
+
+    <ol class="big-list">
+        <li>
+            <i>Figure out what your question is.</i>
+            <p>
+                This can be more difficult than you might guess, because you might
+                honestly not know how to phrase your question.
+                Be specific!
+                Things are very well-defined in computers.
+                This stands in great
+                contrast to intuitive conceptions of their operation.
+            </p>
+        </li>
+
+        <li>
+            <i>What would answer your question?  </i>
+            <ul style="list-style-type: '- '">
+                <li> An Example </li>
+                <li> A Precise Explanation</li>
+                <li> A Detailed Description </li>
+                <li> Theoretical Discussion </li>
+            </ul>
+            <p>
+            </p>
+        </li>
+        <li>
+            <i>Revise.</i>
+            <p>
+                Do you need more information? Or less?
+                You might need something immediately
+                useful rather than theoretically correct.
+                Conversely, you might find that your practical knowledge is
+                lacking some kind of <i>body</i>; in this case, you are
+                looking to frame your knowledge in appropriate theory.
+            </p>
+        </li>
+        <li>
+            <i>Be Patient.</i>
+            <p>
+                Skill accrues.
+                Answer one question at a time.
+            </p>
+        </li>
+    </ol>
+</div>
+
+<div id="man-pages" class="content">
+    <h2> Man Pages </h2>
+    <p>
+        By far the most useful asset in the Linux documentation chain is the
+        manual ("man") pages.
+        They are concise, immediate, and generally aim to answer as many
+        questions as quickly as possible.
+        However, they tend to be more "handy" than "exhaustive," so they might
+        not answer your question.
+    </p>
+
+    <p>
+        Man pages are accessed at the command line so:
+    </p>
+
+    <div class="code">
+        man app
+    </div>
+
+    <p>
+        You can search through available man pages with the <code>apropos</code> command,
+        as in,
+    </p>
+
+    <div class="code">
+        apropos decompress
+    </div>
+
+    <p>
+        Technically speaking, this utility searches the single-line, "short description"
+        of each man page, and prints out the names and descriptions of programs that match your search
+        (<code>man apropos</code> for more information).
+    </p>
+
+    <p>
+        Once within the <code>man</code> utility, you can search the current page
+        by typing a forward slash, then your search term:
+    </p>
+
+    <div class="code">
+        /&lt;search-term&gt;
+    </div>
+
+    <p>
+        Then type a single <b>n</b> to jump to the next result.
+        Many of the controls of the man-pages coincide with those of
+        the <code>less</code> paging utility, and with those of the <code>vi/vim</code>
+        text editor, so they're worth learning.
+        For instance, move down the page one line by typing <b>j</b>.
+        Move up the page one line by typing <b>k</b>.
+        And, move down a screenful by hitting the spacebar.
+    </p>
+
+    <div class="aside-right" style="margin-left: 25pt; padding-bottom: 0">
+        <h4>Manual Sections:</h4>
+        <ol style="margin-left:0">
+            <li> Shell Commands </li>
+            <li> Systems Calls </li>
+            <li> C Library Functions </li>
+            <li> Special Files </li>
+            <li> File Formats and Conventions </li>
+            <li> Games </li>
+            <li> Miscellaneous</li>
+        </ol>
+    </div>
+
+    <p>
+        Man pages date back to the first implementations of Unix,<sup><a href="#references">[1]</a></sup>
+        where they were the user's primary documentation of the newly-minted Unix operating system.
+        They often include examples, hints, and useful suggestions
+        (such as <a href="http://man7.org/linux/man-pages/man2/getdents.2.html">"These are not the interfaces you are intered in."</a>).
+    </p>
+
+    <p>
+        The structure of the manual is worth learning.
+        For instance, the manual is divided into sections, so that
+        just by looking at the location of a page within the manual, one
+        can tell if it's a program that can be called from the command-line,
+        a system call, or a C library function;
+        <code>man man</code> for more information.
+    </p>
+
+    <p>
+        Similarly, knowing the structure of the man-pages themselves has
+        proven useful.
+        For instance, each page has a "See Also" section near the bottom,
+        which lists similar or related man pages.
+    </p>
+</div>
+
+<div id="official-documentation" class="content">
+    <h2> Official Documentation </h2>
+
+    <p>
+        Official documentation originates from the group or organization
+        that is producing the work.
+        It is suitably positioned to be both exhaustive and authoritative over the subject at hand.
+        Think of offical documentation like the
+        <a href="https://primarysources.yale.edu/"> primary sources </a>
+        from history class.
+        This is by far my favorite form of documentation.
+        Nothing makes me feel warmer and fuzzier than downloading
+        the <i>Official ________ _________ Reference Manual</i>.
+    </p>
+
+    <p>
+        However, it's unreasonable to expect people to produce
+        such technically meritorious writing in multiple formats simultaneously, such as
+        HTML, PDF, etc. (although GNU does an admirable job).
+        As a consequence, official documentation
+        is typically found in web-page format.
+        Moreover, like the projects they are part of,
+        official documentation is often community-driven.
+    </p>
+
+    <p>
+        Several awesome examples spring to mind:
+    </p>
+    <ul class="big-list">
+        <li>
+            <a href="https://doc.rust-lang.org/stable/book/">
+                The Rust Progamming Language</a>&mdash;
+                Written by Steve Klabnik and Carol Nichols with updates from the community,
+                this book is the main documentation of the Rust language.
+                I think it's a great book, especially for its
+                technical excellence.
+        </li>
+        <li>
+            <a href="https://godotengine.org/">
+                Godot Open Source Game Engine</a>&mdash;
+                Godot is an MIT-licensed open source game engine (and, I daresay, the one you're looking for).
+                <a href="https://docs.godotengine.org/en/stable/">Its official documentation</a> is community-driven.
+        </li>
+        <li>
+            <a href="https://www.gnu.org/doc/doc.html"> GNU's official documentation</a> is
+            both supremely authoritative and exhaustive.
+        </li>
+        <li>
+            <a href="https://wiki.archlinux.org/"> Arch Linux's Wiki</a> is great,
+            and almost always applies to distributions outside of Arch.
+        </li>
+        <li>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/HTML">Mozilla's HTML Docs</a>&mdash;
+            Mozilla produces excellent documentation, primarily about web technologies.
+            In addition, they help define
+            the HTML living standard,<sup><a href="#references">[2]</a></sup>
+            and hence, represent an official voice with respect to modern HTML.
+        </li>
+    </ul>
+
+</div>
+
+<div id="unofficial-documentation" class="content">
+    <h2> Unofficial Documentation </h2>
+
+    <p>
+        Most documentation is from unofficial, secondary sources.
+        Examples include this website, websites like it, question/answer sites,
+        books that are <i>about</i> Linux without being authoritative (which is most of them),
+        Youtube videos, podcasts, etc..
+        Unofficial documentation is very hit-or-miss, and whether it
+        represents a hit for you is largely a matter of taste.
+        Think of them like commentary on the subject at hand.
+    </p>
+
+    <p>
+        Examples of good, unofficial documentation:
+        <ul class="big-list">
+            <li>
+                <a href="http://tldp.org/"> The Linux Documentation Project</a>&mdash; Sadly, this project is not maintained anymore.
+            </li>
+            <li>
+                <a href="http://www.linuxcommand.org/tlcl.php"> The Linux Command Line</a> by William Shotts&mdash; An Introduction to Linux.
+            </li>
+            <li>
+                <a href="https://wps.prenhall.com/esm_molay_UNIXProg_1/"> Understanding Unix/Linux Programming: A Guide to Theory and Practice</a>
+                by Bruce Molay&mdash;
+                A personal favorite, though it is dated.
+                It walks the reader through the structure of Linux via programming tutorials.
+            </li>
+        </ul>
+    </p>
+
+    <p>
+        There are two big problems with this sort of documentation.
+        First, it isn't necessarily authoritative.
+        Since it doesn't spring from the source, it is not moderated by the
+        creators of the project.
+        Second, there's there's just too much of it.
+        As my professor said, "There are a gazzillion books on Linux."
+    </p>
+</div>
+
+<div id="tutorials" class="content">
+    <h2> Tutorials </h2>
+
+    <p>
+        Tutorials are usually unofficial.
+        That being said, they
+        are a great form of unofficial documentation,
+        because they are informative, concise, and relevant.
+        A tutorial jumps right in to the subject at hand.
+        However, it's possible to produce a tutorial that is impractical,
+        such as, <i>How to Write a Flight Simulator From Scratch</i>.
+    </p>
+
+    <p>
+        Good examples:
+        <ul class="big-list">
+            <li>
+                <a href="https://youtu.be/mAbG8Oi-SvQ"> Make an Action RPG in Godot 3.2</a>&mdash;
+                A Youtube tutorial for building your own Godot 3.2 game (note, the Godot supplied
+                via Debian repository was outdated, at the time of this writing [April 2020], so you might
+                need to check your version to get it to work.).
+            </li>
+
+            <li>
+                <a href="https://www.markdowntutorial.com"> Learn Markdown</a>&mdash;
+                A tutorial guide to markdown.
+            </li>
+
+            <li>
+                <a href="https://guides.rubygems.org/make-your-own-gem/">
+                    Making Your Own Ruby Gems</a> &mdash; Walks you through
+                    the creation of a Ruby software package (a.k.a., 'gem').
+            </li>
+        </ul>
+    </p>
+</div>
+
+<div id="videos" class="content">
+    <h2> Videos </h2>
+    <p>
+        Again, these are usually unofficial.
+        Videos are addictive because they're easy to digest, but real
+        understanding only comes out of real study&mdash;
+        Read, study, do!
+    </p>
+
+    <p>
+        Some channels I like:
+        <ul class="big-list">
+            <li>
+                <a href="https://www.youtube.com/channel/UCrUL8K81R4VBzm-KOYwrcxQ"> Engineer Man</a>&mdash; Linux-related programming content.
+                Engineer Man got me off the couch and into some Linux; he's awesome!
+            </li>
+            <li>
+                <a href="https://www.youtube.com/user/teksyndicate"> Level1Techs</a>&mdash; Tech news, mostly.
+            </li>
+            <li>
+                <a href="https://www.youtube.com/channel/UCVls1GmFKf6WlTraIb_IaJg">DistroTube</a>&mdash; Linux distro's, applications.
+            </li>
+        </ul>
+    </p>
+</div>
+
+<div id="reference" class="content">
+    <h2> Reference </h2>
+
+    <p>
+        There exists one last category of documentation, reference material.
+        Technically speaking, it's unofficial documentation.
+        That can't stop someone from doing their homework (so to speak).
+        Reference material is characterized by being well-researched.
+        <i>Good</i>
+        reference material is characterized by being laid out well, and
+        presenting material that is useful to you.
+    </p>
+
+    <p>
+        Some Suggestions:
+        <ul class="big-list">
+            <li>
+                <a href="http://www.man7.org/tlpi/index.html"> The Linux Programming Interface </a>by Michael Kerrisk&mdash;
+                My recommendation
+            </li>
+            <li>
+                <a href="https://www.amazon.com/Design-UNIX-Operating-System/dp/0132017997"> The Design of the Unix Operating System</a>
+                by Maurice J. Bach&mdash; Old-school, somewhat dated.
+            </li>
+            <li>
+                <a href="http://www.apuebook.com/apue3e.html">Advanced Programming in the Unix Environment</a>, by W. Richard Stevens and Stephen A. Rago&mdash;
+                Highly theoretical, it covers the programming interfaces (system calls) of various standards (POSIX, Single Unix Specification, etc..).
+            </li>
+        </ul>
+    </p>
+
+    <p>
+        These are enormous books, most appropriate to the professional, the
+        aspiring professional, or the insanely curious.
+        As my professor said, these are the sorts of books that you read over
+        the course of six months or a year, but which can define your career.
+    </p>
+
+</div>
+
+<div id="theory" class="content">
+    <h2> Programming Theory </h2>
+    <p>
+        I love books, especially free ones.  Some favorites:
+    </p>
+
+    <ul class="big-list">
+        <li> <a href="https://github.com/papers-we-love/papers-we-love/blob/master/languages-theory/fundamental-concepts-in-programming-languages.pdf">
+            Fundamental Concepts in Programming Languages</a> by Christopher Stauchey.
+        </li>
+        <li>
+            <a href="https://opendatastructures.org/"> Open Data Structures</a> by Pat Morin&mdash; Best I've ever read on data structures.
+        </li>
+        <li>
+            <a href="http://discrete.openmathbooks.org/dmoi3.html"> Discrete Mathematics</a> by Oscar Levin&mdash; Very clear and lucid presentation.
+        </li>
+    </ul>
+</div>
+
+
+
+<div id="chris-titus-tech" class="content">
+    <h2>Chris Titus Tech</h2>
+    <iframe class="video" src="https://www.youtube.com/embed/fWHKAn5W2CA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<div id="references" class="content">
+    <h2> References </h2>
+    <ol>
+        <li> <i>Unix Programmer's Manual, First Edition.</i>  <a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html"> https://www.bell-labs.com/usr/dmr/www/1stEdman.html </a> </li>
+        <li> WHATWG HTML Living Standard Section 1.6, History. <a href="https://html.spec.whatwg.org/multipage/introduction.html#history-2">https://html.spec.whatwg.org/multipage/introduction.html#history-2</a> </li>
+    </ol>
+</div>

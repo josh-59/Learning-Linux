@@ -1,25 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<meta charset="utf-8"/>
-
-<html>
 <head>
-    <link href="../style.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
-    <title> A Primer on Finding Files</title>
+    <link href="/assets/css/styles.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title> Finding Files </title>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+    crossorigin="anonymous"></script>
+    <script src="/assets/js/animate-nav-2.js"> </script>
 </head>
+  <body>
+      <!-- This is the leftmost navigation bar on each page. -->
+<!-- It is not animated. -->
+
 
 <div id="nav_bar_1" class="nav">
+
     <ul>
-        <li> <a href="..">Home</a></li>
-        <li> <a href="../learning-linux"> Learning Linux</a></li>
-        <li> <a href="../text-terminals">Text Terminals</a></li>
-        <li> <a class="active" href="#introduction">Finding Files</a></li>
-        <li> <a href="../linux-filesystem">Linux Filesystem</a></li>
+        
+        <li><a href="/">Home</a></li>
+        
+        <li><a href="/learning-linux.html">Learning Linux</a></li>
+        
+        <li><a href="/text-terminals.html">Text Terminals</a></li>
+        
+        <li><a href="/finding-files.html" class="active">Finding Files</a></li>
+        
     </ul>
 </div>
 
-<div id="nav_bar_2" class="nav">
+
+      <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#basename"> Pathnames and Basenames </a></li>
@@ -53,7 +65,7 @@
         our search tools will often make a distinction between these two:
     </p>
 
-    <center><img src="pathname-basename.png"></center>
+    <center><img src="/assets/img/pathname-basename.png"></center>
 
     <p>
         Every file in the system has a pathname, which begins at root.
@@ -435,21 +447,31 @@
 
     </div>
 
-    <div id="credits" class="content">
-        <h2> Credits </h2>
-        <p>
-            This work was written by Josh Timmons and is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-            <a href="https://github.com/josh-59/Book-Like">Site template available</a> under MIT Open Source License.
-            Last updated May 2020.
-            Please send any corrections or comments to <a href="mailto:josh.591536@gmail.com"> Josh Timmons</a>.
-            <br>
-            <br>
-            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
-        </p>
-    </div>
-    <script
-    src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
-    crossorigin="anonymous"></script>
-    <script src="../animate-nav-2.js"> </script>
-    </html>
+
+      <!--
+    A few special cases:
+    On landing page, Credits must be sized h1;
+    otherwise, sized h2.
+    In text-terminal.html,
+    credit must include credit to Mr. Lawyer.
+-->
+
+<div id="credits" class="content">
+    
+    <h2> Credits </h2>
+    
+    <p>
+        
+        This work was written by Josh Timmons and is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+        
+        <a href="https://github.com/josh-59/Book-Like">Site template available</a> under MIT Open Source License.
+        Last updated May 2020.
+        Please send any corrections or comments to <a href="mailto:josh.591536@gmail.com"> Josh Timmons</a>.
+        <br>
+        <br>
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
+    </p>
+</div>
+
+  </body>
+</html>

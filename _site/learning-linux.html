@@ -1,25 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<meta charset="utf-8"/>
-
-<html>
 <head>
-    <link href="../style.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/styles.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <title> Learning Linux: A Tour Through Documentation </title>
+    <title> Learning Linux </title>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+    crossorigin="anonymous"></script>
+    <script src="/assets/js/animate-nav-2.js"> </script>
 </head>
+  <body>
+      <!-- This is the leftmost navigation bar on each page. -->
+<!-- It is not animated. -->
+
 
 <div id="nav_bar_1" class="nav">
+
     <ul>
-        <li> <a href="..">Home</a></li>
-        <li> <a class="active" href="#learning-linux"> Learning Linux</a></li>
-        <li> <a href="../text-terminals">Text Terminals</a></li>
-        <li> <a  href="../finding-files">Finding Files</a></li>
-        <li> <a href="../linux-filesystem"> Linux Filesystem </a></li>
+        
+        <li><a href="/">Home</a></li>
+        
+        <li><a href="/learning-linux.html" class="active">Learning Linux</a></li>
+        
+        <li><a href="/text-terminals.html">Text Terminals</a></li>
+        
+        <li><a href="/finding-files.html">Finding Files</a></li>
+        
     </ul>
 </div>
 
-<div id="nav_bar_2" class="nav">
+
+      <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#how-to"> How-To </a></li>
@@ -432,10 +444,23 @@
     </ol>
 </div>
 
+
+      <!--
+    A few special cases:
+    On landing page, Credits must be sized h1;
+    otherwise, sized h2.
+    In text-terminal.html,
+    credit must include credit to Mr. Lawyer.
+-->
+
 <div id="credits" class="content">
+    
     <h2> Credits </h2>
+    
     <p>
+        
         This work was written by Josh Timmons and is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+        
         <a href="https://github.com/josh-59/Book-Like">Site template available</a> under MIT Open Source License.
         Last updated May 2020.
         Please send any corrections or comments to <a href="mailto:josh.591536@gmail.com"> Josh Timmons</a>.
@@ -445,9 +470,5 @@
     </p>
 </div>
 
-<script
-src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
-crossorigin="anonymous"></script>
-<script src="../animate-nav-2.js"> </script>
+  </body>
 </html>

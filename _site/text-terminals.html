@@ -1,25 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<meta charset="utf-8"/>
-
-<html>
 <head>
-    <link href="../style.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/styles.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <title>Text Terminals: A Historical Perspective</title>
+    <title> Text Terminals </title>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+    crossorigin="anonymous"></script>
+    <script src="/assets/js/animate-nav-2.js"> </script>
 </head>
+  <body>
+      <!-- This is the leftmost navigation bar on each page. -->
+<!-- It is not animated. -->
+
 
 <div id="nav_bar_1" class="nav">
+
     <ul>
-        <li> <a href="..">Home</a></li>
-        <li> <a href="../learning-linux"> Learning Linux</a></li>
-        <li> <a class="active" href="#text-terminals">Text Terminals</a></li>
-        <li> <a  href="../finding-files">Finding Files</a></li>
-        <li> <a href="../linux-filesystem"> Linux Filesystem </a></li>
+        
+        <li><a href="/">Home</a></li>
+        
+        <li><a href="/learning-linux.html">Learning Linux</a></li>
+        
+        <li><a href="/text-terminals.html" class="active">Text Terminals</a></li>
+        
+        <li><a href="/finding-files.html">Finding Files</a></li>
+        
     </ul>
 </div>
 
-<div id="nav_bar_2" class="nav">
+
+      <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#history"> History </a></li>
@@ -89,8 +101,8 @@
 
     <center>
         <a href="http://bitsavers.org/pdf/dataTerminalsAndCommunications/DTC-302_Brochure.pdf">
-            <img height=500 src="tty_terminal.jpeg" href="http://bitsavers.org/pdf/dataTerminalsAndCommunications/DTC-302_Brochure.pdf"
-                title="Data Terminals and Communications HyWriter"> </img>
+            <img height=500 src="/assets/img/tty_terminal.jpeg" href="http://bitsavers.org/pdf/dataTerminalsAndCommunications/DTC-302_Brochure.pdf"
+            title="Data Terminals and Communications HyWriter"> </img>
             <br>
         </a>
         DTC-302 HyWriter, released 1976
@@ -630,7 +642,7 @@
                 Its sister libraries <code>panel</code>, <code>menu</code> and <code>form</code> provide an extension to the basic curses library.
             </p>
 
-            <img width=100% src="tty_xmas.gif">
+            <img width=100% src="/assets/img/tty_xmas.gif">
 
             <center style="font-size: 12pt;">
                 Example from ncurses library
@@ -706,24 +718,32 @@
             </ol>
         </div>
 
-        <div id="credits" class="content">
-            <h2> Credits </h2>
-            <p>
-                This work was written by Josh Timmons, and was inspired by was inspired by David S. Lawyer's
-                <a href="https://tldp.org/HOWTO/Text-Terminal-HOWTO-1.html"><i>Text Terminal How-To</i></a>.
-                It is licensed under the <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-                <a href="https://github.com/josh-59/Book-Like">Site template available</a> under MIT Open Source License.
-                Last updated May 2020.
-                Please send any corrections or comments to <a href="mailto:josh.591536@gmail.com"> Josh Timmons</a>.
-                <br>
-                <br>
-                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
-            </p>
-        </div>
 
-        <script
-        src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
-        crossorigin="anonymous"></script>
-        <script src="../animate-nav-2.js"> </script>
-        </html>
+      <!--
+    A few special cases:
+    On landing page, Credits must be sized h1;
+    otherwise, sized h2.
+    In text-terminal.html,
+    credit must include credit to Mr. Lawyer.
+-->
+
+<div id="credits" class="content">
+    
+    <h2> Credits </h2>
+    
+    <p>
+        
+        This work was written by Josh Timmons, and was inspired by David S. Lawyer's
+        <a href="https://tldp.org/HOWTO/Text-Terminal-HOWTO-1.html"><i>Text Terminal How-To</i></a>.
+        
+        <a href="https://github.com/josh-59/Book-Like">Site template available</a> under MIT Open Source License.
+        Last updated May 2020.
+        Please send any corrections or comments to <a href="mailto:josh.591536@gmail.com"> Josh Timmons</a>.
+        <br>
+        <br>
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
+    </p>
+</div>
+
+  </body>
+</html>

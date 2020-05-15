@@ -1,0 +1,8 @@
+- name: Home
+  link: /
+- name: Learning Linux
+  link: /learning-linux.html
+- name: Text Terminals
+  link: /text-terminals.html
+- name: Finding Files
+  link: /finding-files.html
