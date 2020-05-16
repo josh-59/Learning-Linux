@@ -216,7 +216,7 @@ title: Finding Files
     <p>
         GNU's <code>find</code> utility is much more powerful.
         It searches the directory tree itself, and allows the user
-        to query attributes of each file besides its name.
+        to query attributes of each file besides their names.
     </p>
 
     <p>
@@ -237,7 +237,7 @@ title: Finding Files
         Each file that <code>find</code> encounters is evaluated against the tests provided;
         if no tests are specified, then each file passes.
         If a file passes all tests given, then <code>find</code> will carry out the action(s) specified by the user;
-        if no action is specified, then -print is implied.
+        if no action is specified, then <code>-print</code> is implied.
     </p>
 
     <p>
@@ -252,7 +252,7 @@ title: Finding Files
         We find 4.1 million files.
         We require superuser privileges to carry out the above task because
         some directories are not searchable by ordinary users (this is determined
-        by the "search bit", which is the executable bit of a directory).
+        by the "search bit", which is the "executable" bit of a directory).
     </p>
 
     <p>
@@ -276,7 +276,10 @@ title: Finding Files
     </div>
 
     <p>
-        Note that this includes searchable directories!
+        This reads as, "Beginning at the root directory, print the pathname of each
+        file that is both less than four kilobytes in size and is executable; then, count the lines."
+        Files that will "match" are those that are both less than 4 kilobytes in size, and
+        whose executable bit is set.  Note that this  includes searchable directories!
         To narrow our count down to programs, we must also specify that each file be of "regular" type:
     </p>
 
@@ -285,49 +288,60 @@ title: Finding Files
     </div>
 
     <p>
+        It's very important to think of each query as a sequence of logical tests, because that is how
+        <code>find</code> thinks of it.
         The default logical operator between tests is <code>-and</code>,
         but <code>-or</code> and <code>-not</code> are also supported, along
         with parenthesis to allow grouping.
-        The most common among the tests is <code>-name</code>,
-        which matches the given shell globbing pattern against each file's basename.
-        In contrast to <code>locate</code>'s inclusive pattern-matching,
-        <code>find</code>'s pattern matching is exclusive;
-        <code>find</code> also supports <code>-regex</code>.
     </p>
 
-    <p>
-        To find all files on the system named "bin" on the system, we could execute,
-    </p>
+	<h3>Some Common Tests</h3>
+	<h4>Source: <a href="http://man7.org/linux/man-pages/man1/find.1.html"><code>man 1 find</code></a></h4>
+	<br>
+    <table>
+        <tr><td> <code>-name <em> pattern</em></code></td> 	<td> True if basename of file matches shell pattern</td></tr>
+        <tr><td> <code>-iname  <em>pattern</em></code></td>	<td>Same as -name, but ignores case</td></tr>
+		<tr><td> <code>-regex <em>pattern</em></code></td>	  <td> True if regex expression matches pathname </td></tr>
+		<tr><td> <code>-type f</code> </td>								<td>True if file is of type regular File </td></tr>
+		<tr><td> <code>-type d</code> </td>								<td>True if file is of type Directory </td></tr>
+    </table>
 
-    <div class="code">
-        $ sudo find / -name bin
-    </div>
+        <p>
+            To find all directories on the system named "bin" on the system, we could execute,
+        </p>
 
-    <p>
-        Note that this is equivalent to <code>--regex ^bin$</code>, as given above.
-        To restrict the search to directories alone, we add an appropriate test:
-    </p>
+        <div class="code">
+            $ sudo find / -name bin
+        </div>
 
-    <div class="code">
-        $ sudo find / -name bin -type d
-    </div>
+        <p>
+	        This is equivalent to <code>locate --basename --regex ^bin$</code>, as given above,
+			because <code>-name</code> uses a shell-style matching mechanism.
+            To restrict the search to directories alone, we add an appropriate test:
+        </p>
 
-    <p>
-        To restrict the search to files in my home directory, we could carry out,
-    </p>
+        <div class="code">
+            $ sudo find / -name bin -type d
+        </div>
 
-    <div class="code">
-        $ cd /home/josh<br>
-        $ find -name bin -type d
-    </div>
+        <p>
+            To restrict the search to files in my home directory, we could carry out,
+        </p>
 
-    <p>
-        and rely on the defaults.
-        Note that this does not require superuser privileges, because I own
-        all the files in this directory.
-        To learn yet more about <code>find</code>, I recommend
-        <a href="https://www.gnu.org/software/findutils/manual/find.html"> GNU Findutils Official Documentation</a>.
-    </p>
+        <div class="code">
+            $ cd /home/josh<br>
+            $ find -name bin -type d
+        </div>
+
+        <p>
+            and rely on the defaults.
+            Note that this does not require superuser privileges, because I own
+            all the files in this directory.
+            To learn yet more about <code>find</code>, see
+			<a href="http://man7.org/linux/man-pages/man1/find.1.html"><code>man 1 find</code></a>
+			or
+            <a href="https://www.gnu.org/software/findutils/manual/find.html"> GNU Findutils Official Documentation</a>.
+        </p>
     </div>
 
     <div id="grep" class="content">
