@@ -326,8 +326,6 @@ title: Finding Files
         <p>
             By default, <code>grep</code> is simple enough:  It reads a file,
             and if a line in the file matches a given pattern, it prints the line.<sup><a href="http://www.man7.org/linux/man-pages/man1/grep.1.html">[2]</a></sup>
-            If no files are given, then standard-in is assumed; we used this
-            in <a href="#example">an example above</a>.
             Grep's synopsis is,
         </p>
 
@@ -382,20 +380,21 @@ title: Finding Files
         <div class="code">
             $ grep . -rl -e "hello" -e "world"
         </div>
-    </div>
 
-	<div id="some-more-examples" class="content">
-		<h2>Some More Examples</h2>
-		<h3><code>Locate</code></h3>
 		<p>
-			<code>Locate</code> is restricted to querying the entire filesystem, and matching only by name.
-		    But, suppose we wish to find all files named <code>bin</code> in my home directory,
-		    <code>/home/josh/</code>.
-			We can work around <code>locate</code>'s limitations in two ways.
+            If no files are given, <code>grep</code> applies its craft to standard in.
+			We can also specify standard in explicitly by including a <code>file</code> of <code>-</code> in the
+			tool's positional parameters.
+			In either case, this can be a useful mechanism.
 		</p>
 
 		<p>
-		    First, we could pipe each line through <code>grep</code>:
+			For instance, although <code>locate</code> is restricted to querying the entire filesystem, and matching only by name,
+			it prints the entire pathname.
+			We can, therefore, pass its output to <code>grep</code>, and reduce the number of "hits" dramatically.
+		    Suppose we wish to find all files named <code>bin</code> in my home directory,
+		    <code>/home/josh/</code>.
+			Then,
 		</p>
 
 		<div id="example" class="code">
@@ -403,19 +402,11 @@ title: Finding Files
 		</div>
 
 		<p>
-		    Each file in the database that has basename of exactly <code>bin</code> is printed; each line
+		    Here, each file in the database that has basename of exactly <code>bin</code> is printed; each line
 		    is then sent through <code>grep</code>, which will print the line only if it matches
 		    <code>/home/josh/</code> as well.
 		</p>
-
-		<p>
-		    Second, we could specify a suitable regex expression against the entire pathname:
-		</p>
-
-		<div class="code">
-		    $ locate --regex ^/home/josh.*/bin$
 		</div>
-	</div>
 
     <div id="engineer-man" class="content">
         <h2> Engineer Man </h2>
