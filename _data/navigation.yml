@@ -6,3 +6,5 @@
   link: /text-terminals.html
 - name: Finding Files
   link: /finding-files.html
+- name: The Linux Filesystem
+  link: /linux-filesystem.html
