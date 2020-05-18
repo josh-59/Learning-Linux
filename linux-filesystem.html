@@ -1,24 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<meta charset="utf-8"/>
-
-<html>
-<head>
-    <link href="../style.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
-    <title> The Linux Filesystem </title>
-</head>
-
-<div id="nav_bar_1" class="nav">
-    <ul>
-        <li> <a href="..">Home</a></li>
-        <li> <a href="../learning-linux"> Learning Linux</a></li>
-        <li> <a href="../text-terminals">Text Terminals</a></li>
-        <li> <a  href="../finding-files">Finding Files</a></li>
-        <li> <a class="active" href="#introduction">Linux Filesystem</a></li>
-    </ul>
-</div>
-
+---
+layout: default
+title: The Linux Filesystem
+---
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
@@ -141,11 +124,13 @@
         to mount a new filesystem just about anywhere.
 
         So, for instance,
+	</p>
 
         <div class="code">
             $ sudo mount /dev/sda2 /home/josh
         </div>
 
+	<p>
         would mount the second partition of the device "sda" to
         <code>/home/josh</code>; its contents would then be available there.
     </p>
@@ -171,22 +156,64 @@
 
         <p>
             Regular files contain data.
-            The contents of a regulard file are not, in the general case, the business of the operating system;
-            as such, the operating system is only tasked with preserving data in a bit-perfect
+            The contents of a regular file are not, in the general case, the business of the operating system;
+            the operating system is tasked only with preserving data in a bit-perfect
             manner.
+			That means that the Linux kernel treats text files, binaries, movies,
+            source code, pdf's, etc., identically,
+            and that any "special treatment," is implemented by user-space processes.
+		</p>
+
+		<p>
             This was actually an innovation at the time of Unix creation; before that,
-            operating systems had many different interfaces for dealing with many different files
-            (around the same time, an "Operating System" was little more than a collection of
-            library functions).
-            That means that the Linux kernel treats text files, binaries, movies,
-            source code, pdf's, etc., identically, (a concept new for its time),
-            and, that any "special treatment," is implemented by user-space processes.
+            operating systems had many different interfaces for dealing with many different files.
             As Brian Kerninghan puts it, "If applying a program to a file doesn't make sense&mdash; for
             example, trying to compile a Fortran source file as if it were C&mdash; that doesn't have anything
-            to do with the operating system."  (Kernigham, p 63)
+            to do with the operating system,"  (Kernigham, p 63).
+		</p>
 
-            Most files (approx 80%) are "regular files"- APUE p 98
+		<p>
+            Approximately 80% of files are regular files (Stevens, p 98).
+			We can verify this ourselves, by dividing the number of regular files,
+		</p>
 
+			<div class="code">
+				$ sudo find / -type f | wc -l
+			</div>
+			<p>
+				by the number of total files,
+			</p>
+			<div class="code">
+				$ sudo find / | wc -l
+			</div>
+			<p>
+				I arrive at 76%.
+			</p>
+
+		<p>
+			Each file on the system has nine mode bits,
+			<code>read</code>, <code>write</code> and <code>execute</code> for each,
+			<em>owner</em>, <em>group</em>, <em>everyone else</em>
+			(<a href="https://www.gnu.org/software/coreutils/manual/html_node/File-permissions.html#File-permissions">GNU Coreutils, section 27</a>).
+			These are maintained by the filesystem along with other metadata about the file, such as size and location on-disk.
+		</p>
+
+		<p>
+			Mode bits are viewable with <code>ls -l</code>
+		</p>
+
+		<a href="assets/img/ls-long.pdf"><img src="assets/img/ls-long.png" style="width: 100%" title="Click for printable"></a>
+
+		<div class=aside-right>
+			<h4>Aside: Shebang</h4>
+			Suppose a plaintext file has its executable bit set,
+			and one tries to execute the file.
+			It's clearly a script, right?
+			The first line of such a script is often,
+			<code>
+				 #! /usr/bin/sh
+			 </code>
+		</div>
 
             chmod +x:
             Change the way the operating system handles a file;
@@ -211,25 +238,7 @@
             <h2> References </h2>
             <ol>
                 <li>Kernighan, Brian W. <em>Unix: a History and a Memoir.</em> Kindle Direct Publishing, 2020. </li>
+				<li> Stevens, W. Richard. <i><a href="http://www.apuebook.com/apue3e.html"> Advanced Programming in the Unix Environment.</a></i> Pearson Eduction, 2013.</li>
             </ol>
 
         </div>
-
-        <div id="credits" class="content">
-            <h2> Credits </h2>
-            <p>
-                This work was written by Josh Timmons and is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-                <a href="https://github.com/josh-59/Book-Like">Site template available</a> under MIT Open Source License.
-                Last updated May 2020.
-                Please send any corrections or comments to <a href="mailto:josh.591536@gmail.com"> Josh Timmons</a>.
-                <br>
-                <br>
-                <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
-            </p>
-        </div>
-        <script
-        src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
-        crossorigin="anonymous"></script>
-        <script src="../animate-nav-2.js"> </script>
-        </html>
