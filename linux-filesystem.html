@@ -156,20 +156,12 @@ title: The Linux Filesystem
 
         <p>
             Regular files contain data.
-            The contents of a regular file are not, in the general case, the business of the operating system;
-            the operating system is tasked only with preserving data in a bit-perfect
+            The contents of a regular file are not, in the general case, the business of the operating system.
+            The operating system is tasked only with preserving data in a bit-perfect
             manner.
 			That means that the Linux kernel treats text files, binaries, movies,
             source code, pdf's, etc., identically,
             and that any "special treatment," is implemented by user-space processes.
-		</p>
-
-		<p>
-            This was actually an innovation at the time of Unix creation; before that,
-            operating systems had many different interfaces for dealing with many different files.
-            As Brian Kerninghan puts it, "If applying a program to a file doesn't make sense&mdash; for
-            example, trying to compile a Fortran source file as if it were C&mdash; that doesn't have anything
-            to do with the operating system,"  (Kernigham, p 63).
 		</p>
 
 		<p>
@@ -191,18 +183,24 @@ title: The Linux Filesystem
 			</p>
 
 		<p>
-			Each file on the system has nine mode bits,
+			Each file on the system has nine mode bits:
 			<code>read</code>, <code>write</code> and <code>execute</code> for each,
 			<em>owner</em>, <em>group</em>, <em>everyone else</em>
 			(<a href="https://www.gnu.org/software/coreutils/manual/html_node/File-permissions.html#File-permissions">GNU Coreutils, section 27</a>).
 			These are maintained by the filesystem along with other metadata about the file, such as size and location on-disk.
+			For instance, the operating system will not even consider trying to execute a file if its
+			appropriate executable bit is not set (but will allow you to pass the file as an argument to an executable).
 		</p>
 
 		<p>
 			Mode bits are viewable with <code>ls -l</code>
 		</p>
 
-		<a href="assets/img/ls-long.pdf"><img src="assets/img/ls-long.png" style="width: 100%" title="Click for printable"></a>
+		<a href="assets/img/ls-long.pdf" target="_blank"><img src="assets/img/ls-long.png" style="width: 100%" title="Click for printable" ></a>
+
+		<p>
+			Here we can see that <code>bash</code> is executable by everyone, but only writable by <em>root</em> (click image for printable).
+		</p>
 
 		<div class=aside-right>
 			<h4>Aside: Shebang</h4>
@@ -215,6 +213,9 @@ title: The Linux Filesystem
 			 </code>
 		</div>
 
+		<p>
+			The mode bits can be changed with the <code>chmod</code> utility.
+			A common operation is setting the executable bit:
             chmod +x:
             Change the way the operating system handles a file;
             <i>in addition</i> to the above, the operating system can now
@@ -237,7 +238,6 @@ title: The Linux Filesystem
         <div id="references" class="content">
             <h2> References </h2>
             <ol>
-                <li>Kernighan, Brian W. <em>Unix: a History and a Memoir.</em> Kindle Direct Publishing, 2020. </li>
 				<li> Stevens, W. Richard. <i><a href="http://www.apuebook.com/apue3e.html"> Advanced Programming in the Unix Environment.</a></i> Pearson Eduction, 2013.</li>
             </ol>
 
