@@ -1,34 +1,33 @@
-Chapter Outline:
-
-1)  Introduction
-    Why?  Scope of the work: Linux desktop users
-
-2)  Operating Systems
-    A more theoretical look at different operating systems
-
-3)  Learning Linux
-
-4)  Shells
+Overarching Goal:
+	<em> The Linux Desktop </em>
+	A book-like covering the most important aspects of Linux
+	for use as a desktop operating system, from a technical perspective.
 
 
+Section 1:  Overview
+1)  Operating Systems
+    Why Linux might be a good choice.
+2)  Learning Linux
+	How to learn it
+3)  Distros:
+	A Pragmatic Perspective
 
+Section 2:  Command line
 4)  Package Managers
+5)  Shells
+6)  Text Terminals
 
+Section 3:
 5)  Linux Filesystem
-
 6)  Processes
-    Daemons?
 
 
-5)  Text Terminals
+8) Going Further
 
+Appendix 1) GNU/Linux
+    			A word on 'freedom'
+Appendix 2) Finding Files
+Appendix 3) Shortcomings of the Linux Desktop
 
-n-1) Programming in Linux
-
-n) Going Further
-
-
-Appendix) GNU/Linux
-    A word on 'freedom'
 
 https://www.youtube.com/watch?v=HgtRAbE1nBM

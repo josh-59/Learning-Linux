@@ -1,3 +1,6 @@
+To Cover:
+		Daemons
+
 The kernel is home to many processes.
 The kernel does this by starting one process explicitly;
 this process then invites all of its friends.
