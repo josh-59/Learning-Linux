@@ -6,7 +6,8 @@ Overarching Goal:
 
 Section 1:  Overview
 1)  Operating Systems
-    Why Linux might be a good choice.
+2)  Why linux
+		And also, why it might not be
 2)  Learning Linux
 	How to learn it
 3)  Distros:
