@@ -6,6 +6,7 @@ title: The Linux Filesystem
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#filesystems"> Filesystems </a></li>
+        <li><a href="#directory-structure"> Directory Structure </a></li>
         <li><a href="#regular-files"> Regular Files </a></li>
         <li><a href="#dotfiles"> Dotfiles </a></li>
         <li><a href="#references"> References </a></li>
@@ -87,12 +88,15 @@ title: The Linux Filesystem
 <div id="directory-structure" class="content">
     <h2> Directory Structure</h2>
 
-    <p>
-        On Linux and other Unix-like systems, the directory tree begins at <em>root</em>,
-        <code>/</code>, and contains all files on the system.
-        This directory structure is defined by the
-        <a href="https://www.pathname.com/fhs/pub/fhs-2.3.pdf">Linux Filesystem Heirarchy Standard</a>,
-        which is maintained by the Linux Foundation.
+	<p>
+		On top of a given filesystem, a directory structure is imposed by the operating system.
+        On Linux and other Unix-like systems, the run-time directory tree begins at "root,"
+        which is denoted with a single forward slash, <code>/</code>.
+		Ideally, this would form a <a href="https://en.wikipedia.org/wiki/Tree_(graph_theory)">mathematical tree</a>,
+		but in practice, this is rarely possible, so we must call it a <em>directory structure</em>.
+        For Unix-like operating systems and its derivatives, directory structure is defined
+		by the <a href="https://www.pathname.com/fhs/pub/fhs-2.3.pdf">Linux Filesystem Heirarchy Standard</a>;
+		the standard is maintained by <a href="https://www.linuxfoundation.org/"> The Linux Foundation</a>.
     </p>
 
     <p>
@@ -111,16 +115,18 @@ title: The Linux Filesystem
         in this directory when configuring the system for the first time
         (or otherwise).
         It contains, for instance, files describing the configuration of the system's package
-        manager (if any), printers, and, well, etcetera.
+        manager, printers, and, well, etcetera.
     </p>
 
     <p>
         Unlike Windows systems, which mount a new, distinct directory tree
         for each storage device on the system (<code>C:\, D:\</code>, etc.),
         Linux and other Unix-like systems mount new devices on the existing
-        directory tree, using the "mount" command.
-        Although the directory hierarchy has two distinct places to facilitate this,
-        <code>/mnt</code> and <code>/media</code>, as super-user, one is free
+        directory tree, using the <code>mount</code> command.
+		Files within the freshly mounted filesystem are available at the location
+		stipulated.
+        The directory hierarchy has two distinct places to facilitate this,
+        <code>/mnt</code> and <code>/media</code>; however, as super-user, one is free
         to mount a new filesystem just about anywhere.
 
         So, for instance,
@@ -135,14 +141,47 @@ title: The Linux Filesystem
         <code>/home/josh</code>; its contents would then be available there.
     </p>
 
-    <p>
-        This mounting facility is often used to separate logically distinct
-        data, by keeping them on physically different partitions.
-        For instance, user data, contained in the <code>/home/</code> directories,
-        can be separated from system data by keeping it on a different partition;
-        by mounting the partition at <code>/home/</code>, this
-        separation is transparent to any user.
-    </p>
+	<p>
+		In Unix, the directory tree is used as a general-purpose meeting place;
+		it holds more than just regular files.  The entities in <code>/div</code>,
+		for instance, are called <em>special device files</em>
+		(<a href="https://www.pathname.com/fhs/pub/fhs-2.3.pdf">Linux Filesystem Heirarchy Standard</a>, page 7);
+		each file in <code>/dev</code> represents a device connected to the system (or an aspect of one).
+		<code>/dev/sda</code>, as used above, refers to a SATA hard drive.
+		<code>/dev/sda1</code>, refers to the first partition on that hard drive,
+		<code>/dev/sda2</code>, refers to the second partition on that hard drive,
+		etc..
+	</p>
+
+	<p>
+		This mechanism is general, extensible and allows both users and programmers
+		to access the devices attached to the system easily
+		(that is, it is obvious).  For instance, what can you make from the results of,
+	</p>
+
+	<div class="code">
+		$ ls /dev
+	</div>
+
+	<p>
+		?
+	</p>
+
+	<p>
+		While there is too much going on in the <code>/dev</code> directory
+		to exhaust the subject here,
+		it's worth noting that utilities for displaying the current
+		system's hardware often begin with <code>ls</code>:
+	</p>
+
+	<ul>
+		<li><code><a href="http://man7.org/linux/man-pages/man8/lsblk.8.html">lsblk</a></code> - List block devices (hardrives, CD-drives, etc)</li>
+		<li><code><a href="http://man7.org/linux/man-pages/man1/lscpu.1.html">lscpu</a></code> - Display information about the CPU architecture </li>
+		<li><code><a href="http://man7.org/linux/man-pages/man8/lsusb.8.html">lsusb</a></code> - List usb devices </li>
+		<li><code><a href="http://man7.org/linux/man-pages/man8/lspci.8.html">lspci</a></code> - List all PCI devices </li>
+		<li><code><a href="http://man7.org/linux/man-pages/man8/lsof.8.html">lsof</a>&nbsp;</code> - List open files </li>
+		<li><code><a href="http://man7.org/linux/man-pages/man8/lsmod.8.html">lsmod</a></code> - Show the status of modules in the Linux Kernel </li>
+	</ul>
 
     <p>
         Pretty spiffy!
