@@ -7,23 +7,23 @@ Overarching Goal:
 Section 1:  Overview
 1)  Operating Systems
 2)  Why linux
-		And also, why it might not be
 2)  Learning Linux
-	How to learn it
-3)  Distros:
-	A Pragmatic Perspective
+3)  Distros
 
 Section 2:  Command line
-4)  Package Managers
-5)  Shells
-Finding Files
-6)  Text Terminals
+4)	The Art of the Command Line https://github.com/jlevy/the-art-of-command-line/blob/master/README.md
+5)	An Introduction to Vim
+6)  Package Managers
+7)  Shells
+8)	Finding Files
+9)  Text Terminals
 
-Section 3:
-5)  Linux Filesystem
-6)  Processes
+Section 3:	Programming in Linux
+10) Going Further
+11) Linux Filesystem
+12)	Processes
 
-8) Going Further
+
 
 Appendix 1) GNU/Linux
 Appendix 2) Shortcomings of the Linux Desktop
