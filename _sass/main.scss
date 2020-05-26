@@ -1,3 +1,8 @@
+:root {
+	--nav-color: #4CAF50;
+	--shaded-background: #f1f1f1;
+}
+
 body {
     margin: 0;
 }
@@ -10,26 +15,27 @@ body {
     font-size: 14pt;
 }
 
-.content h1 {
-    text-align: center;
+h1, h2, h3, h4 {
+	text-align: center;
+}
+
+h1 {
     font-size: 23pt;
 }
 
-.content h2 {
-    text-align: center;
+h2 {
     font-size: 18pt;
     margin-top: 20pt;
 }
 
-.content h3 {
-    text-align: center;
+h3 {
     font-size: 15pt;
     text-decoration: none;
     margin-bottom: 0;
 }
 
-.content h4 {
-    text-align: center;
+/* Centered & Italic Header */
+h4 {
     font-size: 15pt;
     text-decoration: none;
     font-weight: normal;
@@ -42,7 +48,9 @@ body {
     padding-top: 5pt;
 }
 
-.content p a {
+/*  In written work and any superscript, no underline. */
+/*	Otherwise, we want underline. */
+.content p a, sup a {
     text-decoration: none;
 }
 
@@ -55,9 +63,10 @@ ol {
     margin-left: 10%;
 }
 
+/* Navigation */
 .nav ul {
     list-style-type: none;
-    background-color: #f1f1f1;
+    background-color: var(--shaded-background);
     position: fixed;
     margin: 0;
     padding: 0;
@@ -76,7 +85,7 @@ ol {
 
 /* Active page */
 .nav li a.active {
-    background-color: #4CAF50;
+    background-color: var(--nav-color);
     color: white;
 }
 
@@ -85,38 +94,46 @@ ol {
     color: white;
 }
 
+
+.img-left, .img-right {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 .img-left {
     float: left;
     margin-right: 20px;
     margin-left: 0;
-    margin-top: 5px;
-    margin-bottom: 5px;
 }
 
 .img-right {
     float: right;
     margin-right: 0;
     margin-left: 20px;
-    margin-top: 5px;
-    margin-bottom: 5px;
 }
 
-.img-ctr {
+.img{
     display: block;
     margin: 0px auto;
+}
+
+.aside-left, .aside-right, table, #pro-tip {
+    background-color: var(--shaded-background);
+	outline: 2px solid black;
+}
+
+.aside-left, .aside-right, {
+	width: 20%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+    padding: 20px;
+    font-size: 13pt;
 }
 
 .aside-right {
     float: right;
     margin-right: 0;
     margin-left: 20px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    width: 20%;
-    outline: 2px solid black;
-    background-color: #f1f1f1;
-    padding: 20px;
-    font-size: 13pt;
 
 }
 
@@ -124,14 +141,12 @@ ol {
     float: left;
     margin-right: 20px;
     margin-left: 0;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    width: 20%;
     outline: 2px solid black;
-    background-color: #f1f1f1;
-    padding: 20px;
-    font-size: 13pt;
+}
 
+table {
+	width: 70%;
+	margin: auto;
 }
 
 .code {
@@ -171,31 +186,30 @@ ol {
     margin: auto;
     padding: 0;
     text-align: center;
-    outline: solid;
-	background-color: #f1f1f1;
+	font-size: 16pt;
+}
+
+#nav_home, #nav_bar_1, #nav_bar_2 {
+	padding: 0;
+	overflow: auto;
 }
 
 #nav_home {
     margin: 0;
-    padding: 0;
     width: 200pt;
-    overflow: auto;
+
 }
 
 #nav_bar_1 {
     margin: 0;
-    padding: 0;
     width: 100pt;
     height: 100%;
-    overflow: auto;
 }
 
 #nav_bar_2 {
     margin-left: 100pt;
-    padding: 0;
     width: 100pt;
     height: 100%;
-    overflow: auto;
 }
 
 #introduction {
@@ -214,12 +228,4 @@ ol {
 #credits {
     text-align: center;
     padding-bottom: 25px;
-}
-
-table {
-	width: 100%;
-}
-
-sup a {
-	text-decoration: none;
 }
