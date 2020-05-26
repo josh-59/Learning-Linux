@@ -12,51 +12,65 @@ title: Home
 </div>
 
 <div class="content">
-    <h1> Pro Tip</h1>
-    <div id="pro-tip" style="background-color: #f1f1f1;">
+    <h1> Command-Line Pro Tip</h1>
+    <div id="pro-tip" style="width: 70%;">
         <br>
-        Find Files with Grep:
+        Find man pages by section:
 
         <p>
         <code>
-            grep -rl . -e PATTERN
+            apropos -s 3 printf
         </code>
         </p>
 
         <p>
-            Grep will search each file from "here" downwards,
-            and, if the contents of that file match PATTERN,
-            print the name of the file.
+            Apropos will restrict its search to
+			<a href="https://unix.stackexchange.com/questions/3586/what-do-the-numbers-in-a-man-page-mean">the manual section</a>
+			given.
         </p>
 
         Option Summary:
         <ul style="list-style: none; margin: 0; padding: 0">
-            <li><code>-r</code> Recursively descend through directory tree </li>
-            <li><code>-l</code> List files; do not print matching line </li>
-            <li><code>.</code> Begin at current directory </li>
-            <li><code>-e</code>   What follows is a PATTERN
-            </li>
+            <li><code><b>-s</b> <u>list</u>, <b>--sections</b> <u>list</u>, <b>--section</b> <u>list</u></code>
+				<br>
+				Search only the given manual sections.  <u>list</u> is a colon- or comma-separated list of sections.
+				If  an  entry  in
+              <u>list</u> is a simple section, for example "3", then the displayed
+			  list of descriptions will include pages in sections
+			  "3", "3perl", "3x", and so on; while if an entry
+              in <u>list</u> has an extension, for example "3perl", then  the
+              list  will  only include pages in that exact part of the
+              manual section.
+			  </li>
         </ul>
         <br>
-
+		Source: <a href="http://man7.org/linux/man-pages/man1/apropos.1.html"><code>apropos(1)</code></a>
+		<br><br>
     </div>
 </div>
 
 
 <div id="directory" class="content">
-    <h1> Directory </h1>
+    <h1> My Handy Directory </h1>
 
     <h3> GNU/Linux </h3>
     <ul class="directory">
+		<li><a href="http://www.linfo.org/index.html"> The Linux Information Project </a></li>
         <li><a href="https://www.gnu.org/software/bash/manual"> GNU Bash Reference Manual </a> </li>
         <li><a href="https://debian-handbook.info/"> Debian Administrator's Handbook </a></li>
     </ul>
 
-    <h3> The C Programming Language </h3>
+    <h3> Programming in Linux </h3>
     <ul class="directory">
         <li> &emsp;&emsp;&emsp;&emsp;<a href="https://en.wikipedia.org/wiki/The_C_Programming_Language">The C Programming Language</a><sup>(Not Free)</sup></li>
         <li><a href="https://modernc.gforge.inria.fr/"> Modern C </a></li>
+		<li>&emsp;&emsp;&emsp;&emsp;<a href="http://www.man7.org/tlpi/index.html">The Linux Programming Interface</a><sup>(Not Free)</sup></li>
     </ul>
+
+	<h3> Web Development </h3>
+	<ul class="directory">
+		<li><a href="https://www.theodinproject.com">The Oden Project</a></li>
+		<li><a href="https://www.mathjax.org/">MathJax</a></li>
 
     <h3> General Computer Science </h3>
     <ul class="directory">
@@ -65,7 +79,7 @@ title: Home
         <li>&emsp;&emsp;&emsp;&emsp;<a href="http://www.csapp.cs.cmu.edu/">Computer Systems: A Programmer's Perspective</a><sup>(Not Free)</sup></li>
     </ul>
 
-    <h3> Open Textbooks </h3>
+    <h3> Free Textbooks </h3>
     <ul class="directory">
         <li><a href="https://open.umn.edu/opentextbooks"> Open Textbook Library </a></li>
         <li><a href="https://openstax.org/"> OpenStax </a></li>
@@ -81,8 +95,7 @@ title: Home
 
     <h3> Unrelated but Awesome! </h3>
     <ul class="directory">
-        <li><a href="https://www.windy.com"> Windy.com</a></li>
-        <li><a href="https://rx-resume.web.app/"> A Resume Builder</a></li>
-        <li><a href="https://www.theodinproject.com"> Open Webdev Courses </a></li>
+        <li><a href="https://www.windy.com"> Windy: Wind Map & Weather Forecast</a></li>
+        <li><a href="https://rx-resume.web.app/">Reactive Resume</a></li>
     </ul>
 </div>
