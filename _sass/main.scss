@@ -7,20 +7,15 @@ body {
     margin: 0;
 }
 
-.content {
-    padding-top: 10pt;
-    margin-left: 240pt;
-    margin-right: 40px;
-    max-width: 1000px;
-    font-size: 14pt;
-}
-
 h1, h2, h3, h4 {
 	text-align: center;
+	text-decoration: none;
 }
 
 h1 {
     font-size: 23pt;
+	margin-bottom: 5px;
+	margin-top: 25px;
 }
 
 h2 {
@@ -30,22 +25,16 @@ h2 {
 
 h3 {
     font-size: 15pt;
-    text-decoration: none;
     margin-bottom: 0;
 }
 
 /* Centered & Italic Header */
 h4 {
     font-size: 15pt;
-    text-decoration: none;
     font-weight: normal;
     font-style: italic;
     margin: 5px;
     margin-top: 0;
-}
-
-.content ul li {
-    padding-top: 5pt;
 }
 
 /*  In written work and any superscript, no underline. */
@@ -117,6 +106,7 @@ ol {
     margin: 0px auto;
 }
 
+/* Uniform background and shading*/
 .aside-left, .aside-right, table, #pro-tip {
     background-color: var(--shaded-background);
 	outline: 2px solid black;
@@ -149,14 +139,24 @@ table {
 	margin: auto;
 }
 
-.code {
-    width: inherit;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 10%;
+#pro-tip {
+    width: 50%;
     margin: auto;
-    font-family: 'Roboto Mono', monospace;
-    font-size: 15pt;
+    padding: 0;
+    text-align: center;
+	font-size: 16pt;
+}
+
+/* To facilitate the animated navigation, each section */
+/* is placed in a div of class "content"; this allows */
+/* us to identify the beginning and end of each */
+/* section in a script */
+.content {
+    padding-top: 10pt;
+    margin-left: 240pt;
+    margin-right: 40px;
+    max-width: 1000px;
+    font-size: 14pt;
 }
 
 .content .big-list {
@@ -181,46 +181,41 @@ table {
     height: 600px;
 }
 
-#pro-tip {
-    width: 50%;
+.content .code {
+    width: inherit;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 10%;
     margin: auto;
-    padding: 0;
-    text-align: center;
-	font-size: 16pt;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 15pt;
+}
+
+.content ul li {
+    padding-top: 5pt;
 }
 
 #nav_home, #nav_bar_1, #nav_bar_2 {
 	padding: 0;
+	margin: 0;
 	overflow: auto;
 }
 
-#nav_home {
-    margin: 0;
-    width: 200pt;
-
-}
-
-#nav_bar_1 {
-    margin: 0;
+#nav_bar_1, #nav_bar_2 {
     width: 100pt;
-    height: 100%;
 }
 
+/* Same as nav_bar_1, but shifted right 100pt */
 #nav_bar_2 {
     margin-left: 100pt;
-    width: 100pt;
-    height: 100%;
 }
 
-#introduction {
-    padding-top: 10px;
+/* Wide nav bar on landing*/
+#nav_home {
+    width: 200pt;
 }
 
-#introduction h1 {
-    margin-bottom: 5px;
-    margin-top: 25px;
-}
-
+/* Shift left */
 #references ol {
     margin-left: 0;
 }
