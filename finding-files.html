@@ -10,7 +10,7 @@ title: Finding Files
         <li><a href="#locate"> Locate </a></li>
         <li><a href="#find"> Find </a></li>
         <li><a href="#grep"> Grep </a></li>
-        <li><a href="#engineer-man"> Engineer Man </a></li>
+        <li><a href="#distro-tube"> DistroTube </a></li>
         <li><a href="#references"> References </a></li>
         <li><a href="#credits">Credits and Licenses</a></li>
     </ul>
@@ -33,7 +33,7 @@ title: Finding Files
     <p>
         To start, we must make a clear distinction between a file's
         <em>pathname</em> and a file's <em>basename</em>, because
-        our search tools will often make a distinction between these two:
+        our search tools will often make a distinction between these two.
     </p>
 
     <center><img src="./assets/img/pathname-basename.png"></center>
@@ -44,21 +44,13 @@ title: Finding Files
         Each pathname denotes a unique point in the directory tree.
 		</p>
 
-		<div class=aside-right>
-			<h4>Aside</h4>
-	        In Linux, a single file can have more than one pathname.
-			Each pathname is known as a <em>link</em>, and the kernel only deletes a file when it has no links.
-			This is why the system call used to delete files is called <a href="http://man7.org/linux/man-pages/man2/unlink.2.html"><em>unlink</em></a>.
-			Moreover, this is the reason that the directory structure is not, strictly speaking, a mathematical tree.
-		</div>
-
     <p> The command <code>readlink</code> can report to us the pathname of an
         arbitrary file:
 
         <div class="code">
             $ cd /home/josh<br>
             $ readlink -f bin<br>
-            /home/josh/documents
+            /home/josh/bin
         </div>
     </p>
 
@@ -87,14 +79,13 @@ title: Finding Files
 	</div>
 
 	<p>
-        By default, <code>locate</code> matches <em>*pattern*</em> against the pathname of each file;
-        if it does match, then the file's pathname is printed on a new line.
+        By default, <code>locate</code> matches <em>*pattern*</em> against the pathname of each file,
+		using shell globbing to interpret the asterisks, <code>*</code> .
+		If a file matches, then the file's pathname is printed on a new line.
+	</p>
 
 
     <p>
-		Moreover, <code>locate</code> is restricted to finding files by name.
-        By default, <code>locate</code> is fairly permissive, matching things that
-        you wouldn't want matched.
         For instance,
     </p>
 
@@ -102,14 +93,20 @@ title: Finding Files
         $ locate bin
     </div>
 
+	<div class=aside-right>
+		<h4>Aside</h4>
+		<p>
+	        In Linux, a single file can have more than one pathname.
+			Each pathname is known as a <em>link</em>, and the kernel only deletes a file when it has no links (and is not in use by a process).
+			This is why the system call used to delete files is called <a href="http://man7.org/linux/man-pages/man2/unlink.2.html"><em>unlink</em></a>.
+			Moreover, this is the reason that the directory structure is not, strictly speaking, a mathematical tree.
+		</p>
+	</div>
+
     <p>
 
         prints all files currently in the database whose pathname includes
-        the string "bin".
-        If we wanted to find all directories in the system named <code>bin</code>,
-        then this is not what we want.
-        On this system, we matched 56677 files.
-        For instance,
+        the string "bin", so that
     </p>
 
     <div class="code">
@@ -133,6 +130,12 @@ title: Finding Files
     </div>
 
     <p>
+		On this system, we matched 56677 files.
+        If we wanted to print only directories in the system named <code>bin</code>,
+        then this is not what we want.
+	</p>
+
+	<p>
         The first thing we can do to narrow this list down is specify that
         <code>locate</code> match against the basename alone, rather than
         the full pathname.
@@ -161,7 +164,10 @@ title: Finding Files
     </div>
 
     <p>
-        This gives the desired result; an introduction to regex is given in a video below.
+        This gives the desired result.
+	</p>
+
+	<p>
 		Now for a bit of minutia:
 		<code>locate</code> references a database of information about the files
         on the system, and not the directories themselves.
@@ -178,8 +184,7 @@ title: Finding Files
         The <code>locate</code> command is restricted in two ways:
 		First, it searches the entire file hierarchy at each invocation, so
 		restricting a search to a particular directory requires a workaround.
-		In addition, <code>locate</code> only has the name of each file
-		at its disposal.
+		In addition, <code>locate</code> only inspects the pathname of each file.
 		To search with greater fidelity, we must look elsewhere.
 	</p>
 
@@ -191,34 +196,27 @@ title: Finding Files
     <p>
         GNU's <a href="http://man7.org/linux/man-pages/man1/find.1.html"><code>find</code></a> utility is much more powerful.
         It searches the directory tree itself (no database), and allows the user
-        to query attributes files besides their names.
+        to query attributes of files besides their names.
     </p>
 
 	    <div class="code">
-	        find [starting-point...] [expression...]
+	        find [starting-point...] [expression]
 	    </div>
 
     <p>
         The <code>find</code> utility works by beginning at the starting point(s)
-        specified, and comparing the attributes of each file found there against a sequence of tests,
-        specified by you, the user.
-        Then it descends, and repeats.
+        specified, inspecting the attributes of each file found there
+		against the tests in <code>[expression]</code>.
         If no starting point is specified, then <code>.</code> is implied.
+		If the tests pass, then the action stipulated is carried out.
+        <code>find</code> then descends into each directory and repeats.
     </p>
 
-    <p>
-        <code>[expression...]</code> may contain options, tests, or actions.
-		Each <code>expression</code> evaluates to <em>true</em> or <em>false</em> for each file inspected.
-		In particular, <code>-print</code> always evaluates to true.
-		The <code>[expression...]</code> list is evaluated left-to-right, and a file is no longer inspected
-		after it is determined to not match.
-	</p>
-
 	<p>
-        Options affect global behavior, such as "descend n levels from starting point."
-        Each file that <code>find</code> encounters is evaluated against the tests provided;
-        if no tests are specified, then each file passes.
-        If a file passes all tests given, then <code>find</code> will carry out the action(s) specified by the user;
+		The given expression is evaluated left-to-right, and a file is no longer inspected
+		once it is known to either pass or fail.
+        If the tests in <code>[expression]</code> evaluate to true, then
+		<code>find</code> will carry out the action(s) specified;
         if no action is specified, then <code>-print</code> is implied.
     </p>
 
@@ -232,15 +230,22 @@ title: Finding Files
 
     <p>
         We find 4.1 million files.
-        We require superuser privileges to carry out the above task because
-        some directories are not searchable by ordinary users (this is determined
-        by the "search bit", which is the "executable" bit of a directory).
     </p>
 
     <p>
-        <code>find</code> supports many tests. For instance, to find all
+        <code>find</code> supports many tests.
+		For instance, to find all
         files of size less-than 4 kilobytes, we could run,
     </p>
+
+	<div class="aside-right">
+		<h4>Aside</h4>
+		<p>
+	        We require superuser privileges to carry out this search because
+	        some directories are not searchable by ordinary users.  This
+			is determined by the "search bit", which is the "executable" bit of a directory).
+		</p>
+	</div>
 
     <div class="code">
         $ sudo find / -size -4k | wc -l<br>
@@ -248,9 +253,8 @@ title: Finding Files
     </div>
 
     <p>
-        Each query is interpreted <em>as a sequence of logical tests</em>.
-        Only when a file passes all of the tests is an action carried out.
-        For instance, to count all executable files with size less than 4 kilobytes, we might,
+		where <code>-4k</code> means "less than 4 kilobytes."
+        Further, to count all executable files with size less than 4 kilobytes, we might,
     </p>
 
     <div class="code">
@@ -271,35 +275,28 @@ title: Finding Files
 
     <p>
         It's very important to think of each query as a sequence of logical tests, because that is how
-        <code>find</code> thinks of it.
-        The default logical operator between tests is <code>-and</code>.
+        <code>find</code> thinks of it:
+        The default logical operator between tests is <code>-and</code>, and
+		the tests are evaluated left-to-right.
 		The operators <code>-or</code> and <code>-not</code> are also supported, along
-        with parenthesis to allow grouping.
+        with parenthesis to allow grouping, but we won't touch on those.
     </p>
 
-	<h3>Some Common Tests</h3>
-
-	<br>
-    <table>
-        <tr><td> <code>-name <em> pattern</em></code></td> 	<td> True if basename of file matches shell pattern</td></tr>
-        <tr><td> <code>-iname  <em>pattern</em></code></td>	<td>Same as -name, but ignores case</td></tr>
-		<tr><td> <code>-regex <em>pattern</em></code></td>	  <td> True if regex expression matches pathname </td></tr>
-		<tr><td> <code>-type f</code> </td>								<td>True if file is of type regular file </td></tr>
-		<tr><td> <code>-type d</code> </td>								<td>True if file is of type directory </td></tr>
-    </table>
+	<p>
+		<code>find</code> is a very complicated and powerful program.  It has 17
+		actions that it can perform on each file, and even offers
+		debugging facilities! This discussion is restricted to printing each
+		filename and reducing the number of files printed by repeatedly using
+		the implied <code>-and</code> operator.
+	</p>
 
         <p>
-            To find all directories on the system named "bin" on the system, we could execute,
+            To find all files on the system named "bin" on the system, we could execute,
         </p>
 
         <div class="code">
             $ sudo find / -name bin
         </div>
-
-        <p>
-	        This is equivalent to <code>locate --basename --regex ^bin$</code>, as given above.
-
-		</p>
 
 		<p>
             To restrict the search to directories alone, we add an appropriate test:
@@ -329,30 +326,31 @@ title: Finding Files
         <p>
             and rely on the defaults.
             To learn yet more about finding files, see
+			<a href="http://man7.org/linux/man-pages/man1/find.1.html"><code>man 1 find</code></a> or
             <a href="https://www.gnu.org/software/findutils/manual/find.html"> GNU Findutils Official Documentation</a>.
         </p>
     </div>
 
     <div id="grep" class="content">
-        <h2>Grep</h2>
+        <h2>Egrep</h2>
 
         <p>
             I'm pretty sure that <code>find</code> will let you test against
             any possible system-level attribute that a file may have.
             To go any deeper, we must look inside each file, and that is what
-            <code>grep</code> will allow us to do.
+            <code>egrep</code> will allow us to do.
         </p>
 
         <div class="code">
-            grep [OPTION...] PATTERNS [FILE...]
+            egrep [OPTION...] PATTERNS [FILE...]
         </div>
 
         <p>
-            By default, <code>grep</code> is simple enough:  It reads each <code>FILE</code>,
-            and if a line matches one of <code>PATTERNS</code>, it prints the line.<sup><a href="http://www.man7.org/linux/man-pages/man1/grep.1.html">[2]</a></sup>
+            By default, <code>egrep</code> is simple enough:  It reads each <code>FILE</code>,
+            and if a line matches one of <code>PATTERNS</code>, it prints the line.<sup><a href="http://www.man7.org/linux/man-pages/man1/grep.1.html">[3]</a></sup>
 			If there's more than one <code>FILE</code>, <code>grep</code> will
-			tell you that, as well.
-			If no file is given, then <code>grep</code> filters standard-in.
+			tell you that as well.
+			If no <code>FILE</code> is given, then <code>grep</code> filters standard-in.
 		</p>
 
         <p>
@@ -374,7 +372,7 @@ title: Finding Files
             Of <code>grep's</code> options, we are particularly interested in
             <code>-l</code> "list", <code>-C</code> "context", and <code>-r</code> "recurse".
             The <code>-r</code> option specifies that, if a file is a directory,
-            recursively descend into it (and continue searching).
+            recursively descend into it, and search all files in it.
             So,
         </p>
 
@@ -383,33 +381,41 @@ title: Finding Files
         </div>
 
         <p>
-            will print all lines matching either <em>hello</em> or <em>world</em>,
-            of all files in the current directory downwards.
-            But, rather than printing only the line which matches, we
-			could instead print the context within
-            which that line is found:
+            will print all lines matching either <em>hello</em> or <em>world</em>
+            found in any of the files of the current directory, downwards.
+			This can be handy for, for instance, locating all C source files that
+			make use of some macro:
+		</p>
+
+		<div class="code">
+			$ grep . -r -e "MACRO"
+		</div>
+
+		<p>
+			We can also print the context within which a matched line occurs:
         </p>
 
         <div class="code">
-            $ grep . -r -C 5 -e hello -e world
+            $ grep . -r -C 3 -e "MACRO"
         </div>
 
         <p>
-            This will print five lines before, as well as five lines after, each match.
+            This will print three lines before, as well as five lines after, each match.
             Finally, to print out just the name of the file, we specify that
-            <code>grep</code> list the match, with <code>-l</code>:
+            <code>grep</code> list the match, with <code>-l</code>.  This
+			could be used to locate the file that defines the macro:
         </p>
 
         <div class="code">
-            $ grep . -rl -e hello -e world
+            $ grep . -rl -e "#define +MACRO"
         </div>
 
 		</div>
 
-    <div id="engineer-man" class="content">
-        <h2> Engineer Man </h2>
+    <div id="distro-tube" class="content">
+        <h2> Distro Tube </h2>
 
-        <iframe class="video" src="https://www.youtube.com/embed/bgBWp9EIlMM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe class="video" src="https://www.youtube.com/embed/BZ5gsFiIKOQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
     </div>
 
@@ -417,6 +423,7 @@ title: Finding Files
         <h2> References </h2>
         <ol>
             <li><code><a href="http://www.man7.org/linux/man-pages/man1/locate.1.html"> man 1 locate</a></code></li>
+			<li><code><a href="http://man7.org/linux/man-pages/man1/find.1.html">man 1 find</a></code></li>
             <li><code><a href="http://www.man7.org/linux/man-pages/man1/grep.1.html">man 1 grep</a></code></li>
             <li><a href="https://www.gnu.org/software/findutils/manual/find.html"> GNU Findutils Official Documentation</a></li>
             <li><code><a href="http://man7.org/linux/man-pages/man7/regex.7.html"> man 7 regex </a></code></li>
