@@ -20,10 +20,10 @@ title: The Linux Filesystem
     <h4>Under Construction!</h4>
 
     <p>
-        Unix began life as a filesystem; on top of this was created the means
-        of interacting with it, initially composed of an <code>exec</code>
-        function, shell, text editor and assembler (Kernighan 33-34).
-        Created by Ken Thompson, this small software suite formed the nexus of
+        Unix began life as a filesystem (Kernighan 33-34).  Shortly thereafter, a means
+        of interacting with it was created&mdash; initially, an <code>exec</code>
+        function, a shell, text editor and assembler.
+        Written entirely by Ken Thompson, these key components formed the nexus of
         the time-sharing operating system that would eventually be called
         <em>Unix</em>.
     </p>
@@ -31,9 +31,10 @@ title: The Linux Filesystem
     <p>
         This file-first approach to operating system design is found in
         the implementation as well as the history of Unix and its derivatives;
-        concurrently, there is a lot to be said about files.
-        This paper aims to introduce the notion of a filesystem, and
-        describe the structure and uses of the file hierarchy.
+	Unix and Linux use files for many things.
+	As such, there is a lot to be said about files.
+        This paper introduces the notion of a filesystem, and
+        discusses the directory structure implemented with it.
     </p>
 </div>
 
@@ -43,7 +44,7 @@ title: The Linux Filesystem
         A filesystem is a systematic method of organizing data on disk.<sup><a href="https://wiki.osdev.org/Filesystem">[1]</a><a href="https://wiki.archlinux.org/index.php/File_systems">[2]</a></sup>
         Conceptually, it is similar to a data structure, in that it defines a convention
         to be followed to store and retrieve data.
-        Preparing a drive (address space) for use by a particular filesystem <a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">is known as formatting</a>.
+        Preparing a drive for use by a particular filesystem <a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">is known as formatting</a>.
     </p>
 
     <ul>
@@ -62,8 +63,8 @@ title: The Linux Filesystem
         <li>
             <p>
                 ZFS: Introduced in 2005,<sup><a href="https://en.wikipedia.org/wiki/ZFS">[2]</a></sup> ZFS incorporates fancier features that are generally
-                out of place on the working-man's Linux Desktop.
-                ZFS was developed by Sun Microsystems, and became closed-source with Sun's acquisition by
+                out of place on an ordinary Linux Desktop.
+                It was developed by Sun Microsystems, and became closed-source with Sun's acquisition by
                 Oracle.<sup><a href="https://en.wikipedia.org/wiki/ZFS">[2]</a></sup>
                 It is intended for enterprise use, and is
                 <a href="https://en.wikipedia.org/wiki/ZFS#Inappropriately_specified_systems">relatively easy to configure improperly.</a>
@@ -79,7 +80,7 @@ title: The Linux Filesystem
                 In particular, it is not a <a href="https://en.wikipedia.org/wiki/Journaling_file_system">journaling filesystem</a>,
                 so that changes to data are not recorded before being carried out (increasing the likelihood of
                 corruption in the event of, say, power outage).
-                It is often used to hold the bootloader, since it is virtually guaranteed to be supported by firmware.
+                This format is often used to hold the bootloader, since it is virtually guaranteed to be supported by firmware.
             </p>
         </li>
     </ul>
