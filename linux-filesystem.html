@@ -21,7 +21,8 @@ title: The Linux Filesystem
 
     <p>
         Unix began life as a filesystem (Kernighan 33-34).  Shortly thereafter, a means
-        of interacting with it was created&mdash; initially, an <code>exec</code>
+        of interacting with it was created&mdash; initially,
+		this consisted of an <code>exec</code>
         function, a shell, text editor and assembler.
         Written entirely by Ken Thompson, these key components formed the nexus of
         the time-sharing operating system that would eventually be called
@@ -30,9 +31,9 @@ title: The Linux Filesystem
 
     <p>
         This file-first approach to operating system design is found in
-        the implementation as well as the history of Unix and its derivatives;
-	Unix and Linux use files for many things.
-	As such, there is a lot to be said about files.
+        the implementation as well as the history of Unix and its derivatives:
+		Unix and its derivatives use files for many things.
+		As such, there is a lot to be said about files.
         This paper introduces the notion of a filesystem, and
         discusses the directory structure implemented with it.
     </p>
@@ -68,7 +69,7 @@ title: The Linux Filesystem
 
 			<p>
 				Introduced in 2005,<sup><a href="https://en.wikipedia.org/wiki/ZFS">[2]</a></sup> ZFS incorporates fancier features that are generally
-                out of place on an ordinary Linux Desktop.
+                out of place on an ordinary Linux desktop.
                 It was developed by Sun Microsystems, and became closed-source with Sun's acquisition by
                 Oracle.<sup><a href="https://en.wikipedia.org/wiki/ZFS">[2]</a></sup>
                 It was intended for enterprise use, and is
@@ -88,6 +89,13 @@ title: The Linux Filesystem
             </p>
         </li>
     </ul>
+
+	<p>
+		By and large, users of Linux don't often interact with the filesystem
+		of their operating systems.
+		The term was developed here to make a precise distinction between
+		<em>filesystem</em> and <em>directory structure</em>.
+	</p>
 </div>
 
 <div id="directory-structure" class="content">
@@ -95,29 +103,37 @@ title: The Linux Filesystem
 
 	<p>
 		On top of a given filesystem, a directory structure is imposed by the operating system.
-        On Linux and other Unix-like systems, the run-time directory tree begins at "root,"
-        which is denoted with a single forward slash, <code>/</code>.
-		Ideally, this would form a <a href="https://en.wikipedia.org/wiki/Tree_(graph_theory)">mathematical tree</a>,
+        On Linux and other Unix-like systems, the directory tree begins at "root,"
+        which is denoted with a single forward slash:
+	</p>
+
+	<div class="code">
+		/
+	</div>
+
+	<p>
+		Ideally, the directory structure would form a
+		pure <a href="https://en.wikipedia.org/wiki/Tree_(graph_theory)">mathematical tree</a>,
 		but in practice, this is rarely possible, so we must call it a <em>directory structure</em>.
-        For Unix-like operating systems and its derivatives, directory structure is defined
+        For Linux operating systems, this directory structure is defined
 		by the <a href="https://www.pathname.com/fhs/pub/fhs-2.3.pdf">Linux Filesystem Heirarchy Standard</a>;
 		the standard is maintained by <a href="https://www.linuxfoundation.org/"> The Linux Foundation</a>.
     </p>
 
     <p>
-        Within any GNU/Linux distribution, some common themes are found.
+        So, within any GNU/Linux distribution, some common themes are found.
         For instance, <code>bin</code> directories are found in several places, such as
         <code>/bin</code> and <code>/sbin</code>, along with <code>/usr/bin</code> and often
         <code>/home/user/bin</code>.
         This system reports no less that 89 directories named "bin."
-        Each of these contain executable files (programs), which
+        Each of these contain binary executable files (programs), which
         can be ran as commands from the shell.
     </p>
 
     <p>
         As per the standard, <code>/etc</code> (usually read "<em>et</em>-c") contains host-specific
-        system configuration files; as a consequence, you can expect to mess around
-        in this directory when configuring the system for the first time
+        system configuration files; as a consequence, you can expect to fiddle
+		with the contents of this directory when configuring the system for the first time
         (or otherwise).
         It contains, for instance, files describing the configuration of the system's package
         manager, printers, and, well, etcetera.
@@ -126,50 +142,55 @@ title: The Linux Filesystem
     <p>
         Unlike Windows systems, which mount a new, distinct directory tree
         for each storage device on the system (<code>C:\, D:\</code>, etc.),
-        Linux and other Unix-like systems mount new devices on the existing
-        directory tree, using the <code>mount</code> command.
-		Files within the freshly mounted filesystem are available at the location
-		stipulated.
-        The directory hierarchy has two distinct places to facilitate this,
-        <code>/mnt</code> and <code>/media</code>; however, as super-user, one is free
-        to mount a new filesystem just about anywhere.
-
-        So, for instance,
+        Linux systems place new filesystems within the existing
+        directory structure, in an operation called <em>mounting</em>.
+		Because the directory structure is not rooted
+		on a drive, it is more abstract than those of
+		Windows lineage; in addition, our directory structure
+		is more stable over the duration of the machine's uptime.
 	</p>
 
-        <div class="code">
-            $ sudo mount /dev/sda2 /home/josh
-        </div>
+	<p>
+		The command to mount is <code>mount</code>, and the unmount command is
+		<code>umount</code>.  Both require superuser privledges.
+	</p>
 
 	<p>
-        would mount the second partition of the device "sda" to
-        <code>/home/josh</code>; its contents would then be available there.
-    </p>
+		Suppose you have a usb stick with some music on it, and you'd
+		like to access it.
+		After it's plugged into your computer, the hardware, then the kernel,
+		recognize it, but it is unaccessible:
+	</p>
+
+	<img style="width:100%" src="/assets/img/mounting.png">
 
 	<p>
-		In Unix, the directory tree is used as a general-purpose meeting place;
-		it holds more than just regular files.  The entities in <code>/div</code>,
+		In practice, most distributions automatically mount
+		usb sticks when they are plugged in.
+		Moreover, no usb stick will be named <code>/dev/usb</code>; that was
+		only a conceptual item.
+		It's more likely to be named <code>/dev/sdb1</code>
+	</p>
+
+	<p>
+		In Unix, the directory tree is used as a general-purpose meeting place:
+		It holds references to hardware drivers, information about running
+		processes, your terminal screen is represented by a file within the hierarchy;
+		all of this in addition to regular files.
+		This mechanism is general, extensible and allows both users and programmers
+		access to the running machine.
+		The only trick is keeping it organized.
+	</p>
+
+	<p>
+		The entities in <code>/dev</code>,
 		for instance, are called <em>special device files</em>
 		(<a href="https://www.pathname.com/fhs/pub/fhs-2.3.pdf">Linux Filesystem Heirarchy Standard</a>, page 7);
 		each file in <code>/dev</code> represents a device connected to the system (or an aspect of one).
-		<code>/dev/sda</code>, as used above, refers to a SATA hard drive.
-		<code>/dev/sda1</code>, refers to the first partition on that hard drive,
-		<code>/dev/sda2</code>, refers to the second partition on that hard drive,
+		<code>/dev/sdb</code>, as used above, refers to a hard-disk driver.
+		<code>/dev/sdb1</code> refers to the first partition on that hard drive;
+		<code>/dev/sdb2</code> refers to the second partition on that hard drive;
 		etc..
-	</p>
-
-	<p>
-		This mechanism is general, extensible and allows both users and programmers
-		to access the devices attached to the system easily
-		(that is, it is obvious).  For instance, what can you make from the results of,
-	</p>
-
-	<div class="code">
-		$ ls /dev
-	</div>
-
-	<p>
-		?
 	</p>
 
 	<p>
@@ -180,19 +201,13 @@ title: The Linux Filesystem
 	</p>
 
 	<ul>
-		<li><code><a href="http://man7.org/linux/man-pages/man8/lsblk.8.html">lsblk</a></code> - List block devices (hardrives, CD-drives, etc)</li>
+		<li><code><a href="http://man7.org/linux/man-pages/man8/lsblk.8.html">lsblk</a></code> - List block devices (hardrives, CD-drives, etc).  Useful to determine what drive to mount.</li>
 		<li><code><a href="http://man7.org/linux/man-pages/man1/lscpu.1.html">lscpu</a></code> - Display information about the CPU architecture </li>
 		<li><code><a href="http://man7.org/linux/man-pages/man8/lsusb.8.html">lsusb</a></code> - List usb devices </li>
 		<li><code><a href="http://man7.org/linux/man-pages/man8/lspci.8.html">lspci</a></code> - List all PCI devices </li>
 		<li><code><a href="http://man7.org/linux/man-pages/man8/lsof.8.html">lsof</a>&nbsp;</code> - List open files </li>
 		<li><code><a href="http://man7.org/linux/man-pages/man8/lsmod.8.html">lsmod</a></code> - Show the status of modules in the Linux Kernel </li>
 	</ul>
-
-    <p>
-        Pretty spiffy!
-    </p>
-
-</div>
 
 </div>
     <div id="regular-files" class="content">
@@ -286,6 +301,7 @@ title: The Linux Filesystem
         <div id="references" class="content">
             <h2> References </h2>
             <ol>
+				<li> Fedora Docs.  <em><a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">An Introduction to Disk Partitions</a></em>.  Retrieved May 27, 2020.
 				<li> Stevens, W. Richard. <i><a href="http://www.apuebook.com/apue3e.html"> Advanced Programming in the Unix Environment.</a></i> Pearson Eduction, 2013.</li>
             </ol>
 
