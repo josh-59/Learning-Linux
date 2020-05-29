@@ -8,7 +8,8 @@ title: The Linux Filesystem
         <li><a href="#filesystems"> Filesystems </a></li>
         <li><a href="#directory-tree"> Directory Tree </a></li>
         <li><a href="#regular-files"> Regular Files </a></li>
-        <li><a href="#dotfiles"> Dotfiles </a></li>
+        <li><a href="#directories"> Directories </a></li>
+		<li><a href="#engineer-man"> Engineer Man </a></li>
         <li><a href="#references"> References </a></li>
         <li><a href="#credits">Credits and Licenses</a></li>
     </ul>
@@ -119,17 +120,12 @@ title: The Linux Filesystem
 
 	<p>
         For Linux operating systems, this directory tree is defined
-		by the <a href="https://www.pathname.com/fhs/pub/fhs-2.3.pdf">Linux Filesystem Heirarchy Standard</a>;
-		the standard is maintained by <a href="https://www.linuxfoundation.org/"> The Linux Foundation</a>.
-    </p>
-
-    <p>
-        So, within any GNU/Linux distribution, some common themes are found.
+		by the <a href="https://www.pathname.com/fhs/pub/fhs-2.3.pdf">Linux Filesystem Heirarchy Standard</a>.
+		As such, within any GNU/Linux distribution, some common themes will be found.
         For instance, <code>bin</code> directories are found in several places, such as
         <code>/bin</code> and <code>/sbin</code>, along with <code>/usr/bin</code> and often
         <code>/home/user/bin</code>.
-        This system reports no less than 89 directories named "bin."
-        Each of these contain binary executable files (programs), which
+		These contain binary executable files (programs), which
         can be ran as commands from the shell.
     </p>
 
@@ -161,7 +157,7 @@ title: The Linux Filesystem
 		recognize it, but it is unaccessible:
 	</p>
 
-	<img style="width:100%" src="assets/img/mounting.png">
+	<img style="width:80%" src="assets/img/mounting.png">
 
 	<p>
 		In practice, most distributions automatically mount
@@ -265,6 +261,7 @@ title: The Linux Filesystem
 		<a href="assets/img/ls-long.pdf" target="_blank"><img src="assets/img/ls-long.png" style="width: 100%" title="Click for printable" ></a>
 
 		<p>
+			(The mode bits in question are leftmost in the entry.)
 			Here we can see that <code>bash</code> is an executable file, and may be executed by
 			everyone, but is only writable by <em>root</em> (click image for printable).
 			File mode bits can be changed with the
@@ -272,19 +269,20 @@ title: The Linux Filesystem
 		</p>
         </div>
 
-        <div id="dotfiles" class="content">
-            <h2>Dotfiles</h2>
-
-        </div>
+		<div id="directories" class="content">
+			<h2>Directories</h2>
+			
+		</div>
 
 		<div id="engineer-man" class="content">
+			<h2>Engineer Man</h2>
 			<iframe class="video" src="https://www.youtube.com/embed/UFIoRLqhFpo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 		</div>
 
         <div id="references" class="content">
             <h2> References </h2>
             <ol>
-				<li> Fedora Docs.  <em><a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">An Introduction to Disk Partitions</a></em>.  Retrieved May 27, 2020.
+				<li> Filesystem Hierarchy Standard Group. <a href="https://www.pathname.com/fhs/pub/fhs-2.3.pdf">The Linux Filesystem Heirarchy Standard</a>.  Retrieved May 29, 2020.</li>
 				<li> Stevens, W. Richard. <i><a href="http://www.apuebook.com/apue3e.html"> Advanced Programming in the Unix Environment.</a></i> Pearson Eduction, 2013.</li>
             </ol>
 
