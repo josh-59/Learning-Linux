@@ -146,11 +146,12 @@ title: The Linux Filesystem
 		<a href="https://www.man7.org/linux/man-pages/man8/mount.8.html"><em>mounting</em></a>.
 		Because the directory structure is not rooted
 		on a drive, it is more abstract than those of
-		Windows lineage; in addition, the standard Linux directory structure
+		Windows lineage; in addition, the Linux directory tree
 		is more stable over the duration of the machine's uptime.
 	</p>
 
 	<p>
+		Let's take a look at the <code>mount</code> operation, for this is new.
 		Suppose you have a usb stick with some music on it, and you'd
 		like to access its contents.
 		After it's plugged into your computer, the hardware, then the kernel,
@@ -313,9 +314,19 @@ title: The Linux Filesystem
 			0421 &emsp;= &emsp;r---w---x
 		</div>
 
+		<p>
+			This shortcut is actually a consequence of the
+			the original <em>creat</em> system call, used for creating new files,
+			and the	C programming language's
+			method of denoting constants (literals beginning with <code>0</code> denote
+			octal; literals beginning with <code>0x</code> denote hexadecimal).
+			It persists, and is recognized by most programs that deal with
+			permission bits of files&mdash; <code>chmod</code>, as well as
+			<code>find</code>, and others.
+		</p>
+
 		<h3>See Also:</h3>
 		<ul>
-			<li> <a href="https://www.man7.org/linux/man-pages/man1/chmod.1.html"<code>chmod(1)</code></a></li>
 			<li> <a href="https://www.man7.org/linux/man-pages/man1/chown.1.html"<code>chown(1)</code></a></li>
 		</ul>
 
@@ -323,6 +334,73 @@ title: The Linux Filesystem
 
 		<div id="directories" class="content">
 			<h2>Directories</h2>
+
+			<p>
+				A directory is implemented in Linux as a file with two columns:
+				Filename and inode number.
+				We list the contents of a directory with the usual <code>ls</code> command;
+				we can list a file's inode number using <code>ls -i</code>:
+			</p>
+
+			<div class="code">
+				/home/josh/studies$ ls -i newfile <br>
+				2112949 newfile
+			</div>
+
+			<p>
+				The inode number serves as the reference to the data a given file contains,
+				in addition to metadata, such as size.
+				Inodes are stored statically, on-disk, in the form
+				of an array at the beginning of the disk partition;
+				the <em>inode number</em> serves as an index into this array.
+			</p>
+
+			<p>
+				In addition, the inode serves as a layer of indirection between
+				a filename and the file's contents (more on this later).
+				The directory tree is the responsibility of the kernel, so that
+				user-space applications do not (cannot) interact with directories
+				directly.
+				Specific system calls exist to
+				create directories,
+				remove directories,
+				and get directory entries.
+			</p>
+
+			<p>
+				Each process has a <em>current working directory</em>, whose
+				value is maintained by the kernel; changing a process's
+				current working directory requires the use of a system call.
+			</p>
+
+			<h3>Hard Links</h3>
+			<p>
+				The inode of a file serves as a layer of indirection between a
+				file's name and its contents:
+				A file (the contents) may have more than one filename referring to it.
+				This means that a file can have
+				more than one entry in the directory tree.
+				Each such name is called a <em>hard link</em>.
+			</p>
+
+			<p>
+				In particular, each directory has the special entry
+				with filename <code>.</code> ("dot"),
+				which refers to that directory itself.
+				In addition, each directory contains the entry <code>..</code> ("dot dot"),
+				which refers to the parent directory (up one level in the hierarchy).
+				The root directory's parent directory is the root directory itself.
+			</p>
+
+			<h3>Symbolic Links</h3>
+			<p>
+				Hard links cannot cross filesystem divisions.
+			</p>
+
+			<h3>See Also:</h3>
+			<ul>
+				<li><a href="https://unix.stackexchange.com/questions/20670/why-do-hard-links-exist">Why do hard links exist?</a></li>
+			</ul>
 
 		</div>
 
