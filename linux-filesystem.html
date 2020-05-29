@@ -189,6 +189,15 @@ title: The Linux Filesystem
 	</p>
 
 	<p>
+		Among device special files, there are two distinct kinds:
+		<em>block</em> special files and <em>character</em> special files.
+		This distinction refers to the way that the kernel reads and writes to these files.
+		Character special files are operated on a single character at a time
+		(e.g., terminal); block special files are operated on a block of
+		bytes (usually, 4096 or 8192) at a time, as in a hard drive.
+	</p>
+
+	<p>
 		While there is too much going on in the <code>/dev</code> directory
 		to exhaust the subject here,
 		it's worth noting that utilities for displaying the current
@@ -200,7 +209,6 @@ title: The Linux Filesystem
 		<li><code><a href="http://man7.org/linux/man-pages/man1/lscpu.1.html">lscpu</a></code> - Display information about the CPU architecture </li>
 		<li><code><a href="http://man7.org/linux/man-pages/man8/lsusb.8.html">lsusb</a></code> - List usb devices </li>
 		<li><code><a href="http://man7.org/linux/man-pages/man8/lspci.8.html">lspci</a></code> - List all PCI devices </li>
-		<li><code><a href="http://man7.org/linux/man-pages/man8/lsof.8.html">lsof</a>&nbsp;</code> - List open files </li>
 		<li><code><a href="http://man7.org/linux/man-pages/man8/lsmod.8.html">lsmod</a></code> - Show the status of modules in the Linux Kernel </li>
 	</ul>
 
@@ -220,7 +228,7 @@ title: The Linux Filesystem
             The contents of a regular file are not, in the general case, the business of the operating system.
             The operating system is tasked only with preserving data in a bit-perfect
             manner.
-			That means that the Linux kernel treats text files, binaries, movies,
+			That means that the Linux kernel treats text files, programs, movies,
             source code, pdf's, etc., identically,
             and that any "special treatment," is implemented by user-space processes.
 		</p>
@@ -263,15 +271,59 @@ title: The Linux Filesystem
 		<p>
 			(The mode bits in question are leftmost in the entry.)
 			Here we can see that <code>bash</code> is an executable file, and may be executed by
-			everyone, but is only writable by <em>root</em> (click image for printable).
+			everyone, but is only writable by <em>root</em>.
 			File mode bits can be changed with the
-			<a href="https://www.man7.org/linux/man-pages/man1/chmod.1.html"><code>chmod(1)</code></a> utility.
+			<a href="https://www.man7.org/linux/man-pages/man1/chmod.1.html"><code>chmod(1)</code></a> utility:
 		</p>
+
+		<h3>A Short Example</h3>
+
+		<div class="code">
+			$ echo "hello world" > newfile <br>
+			$ cat newfile <br>
+			hello world <br>
+			$ chmod -r newfile &emsp;&emsp;&emsp;&emsp; #Remove read permissions on newfile<br>
+			$ cat newfile <br>
+			cat: newfile: Permission denied <br>
+		</div>
+
+		<p>
+			If you use Linux a lot, there's a shortcut as old as Unix itself:
+			Since the access permission bits
+			are a sequence of bits, we can specify them in octal form.
+			We begin our specification with <code>0</code> (zero),
+			which denotes an octal constant.
+			The next digit denotes permissions for the owner of the file,
+			and is the sum of,
+		</p>
+
+		<div class="code">
+				+4, for read  <br>
+				+2, for write  <br>
+				+1, for execute
+		</div>
+
+		<p>
+			We use this pattern to determine the value for each <em>owner</em>, <em>group</em>
+			and <em>everyone else</em>, and end up with the following equivalencies:
+		</p>
+
+		<div class="code">
+			0664 &emsp;= &emsp;rw-rw-r-- <br>
+			0421 &emsp;= &emsp;r---w---x
+		</div>
+
+		<h3>See Also:</h3>
+		<ul>
+			<li> <a href="https://www.man7.org/linux/man-pages/man1/chmod.1.html"<code>chmod(1)</code></a></li>
+			<li> <a href="https://www.man7.org/linux/man-pages/man1/chown.1.html"<code>chown(1)</code></a></li>
+		</ul>
+
         </div>
 
 		<div id="directories" class="content">
 			<h2>Directories</h2>
-			
+
 		</div>
 
 		<div id="engineer-man" class="content">
