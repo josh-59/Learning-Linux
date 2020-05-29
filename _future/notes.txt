@@ -11,6 +11,7 @@ Section 1:  Overview
 3)  Distros
 
 Section 2:  Command line
+ )  An Introduction to Bash
 4)	The Art of the Command Line https://github.com/jlevy/the-art-of-command-line/blob/master/README.md
 5)	An Introduction to Vim
 6)  Package Managers
