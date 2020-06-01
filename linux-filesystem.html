@@ -2,6 +2,8 @@
 layout: default
 title: The Linux Filesystem
 ---
+
+<!-- To Do: Citation needed in "regular files" -> heirarchical filestructure taken from Multics-->
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
@@ -110,8 +112,7 @@ title: The Linux Filesystem
 
 	<p>
 		On top of a given filesystem, a directory structure is imposed by the operating system.
-        On Linux, that structure is a
-		tree of files, also known as a hierarchy, which begins at "root,"
+        On Linux, that structure is a tree of files, also known as a hierarchy, which begins at "root,"
 		denoted with a forward-slash:
 	</p>
 
@@ -221,14 +222,24 @@ title: The Linux Filesystem
 			to be mounted with <code>lsblk</code>, then mount it with <code>sudo mount [DEVICE] [MOUNTPOINT]</code>.
 			The device to be mounted should be a partition, and can usually be determined by its size and
 			its mountpoint (which should be none).
-			Conversely, to unmount a filesystem, we first identify it with <code>lsblk</code>,
+			The Linux Filesystem Hierarchy Standard provides two places to mount temporary
+			filesystems: <code>/mnt</code> and <code>/media/[user]/</code>
+		</p>
+
+		<p>
+			Conversely, to unmount a filesystem, we first identify the correct
+			partition with <code>lsblk</code>,
 			then unmount it with <code>sudo umount</code>.
+		</p>
+
+		<p>
 			A few pesky details:
 			First, device names that appear in <code>/dev</code> or <code>lsblk</code>
 			<em>are not</em> guaranteed to be stable across reboots&mdash; The devices are named in the
-			order that they are found, during system boot.
+			order that they are found.
 			Second, when mounting a new filesystem, if any files exist at the
-			mount point, they will be "hidden" by the files of the new filesystem (they are not deleted).
+			mount point, they will be "hidden" by the files of the new filesystem.
+			They are not deleted, and unmounting the new filesystem will "reveal" them again.
 		</p>
 
 
@@ -243,43 +254,54 @@ title: The Linux Filesystem
     <div id="regular-files" class="content">
         <h2>Regular Files</h2>
 
+		<p>
+			In Unix, a file is a sequence of bytes (Kernighan, 62).
+			This definition is sufficiently abstract to allow, for instance, a keyboard
+			to appear as a file.
+			The kernel facilitates reading and writing of files,
+			and otherwise refrains from interjection.
+			This approach was quite novel for its time; earlier
+			operating systems interposed upon the handling of files, so that
+			some files could only be read by some programs, and not by others (Kernighan, 62).
+			In my opinion, this begins <a href="https://en.wikipedia.org/wiki/Unix_philosophy">"The Unix Philosophy."</a>
+		</p>
+
         <p>
             Regular files contain data.
-            The contents of a regular file are not, in the general case, the business of the operating system.
-            Rather, the operating system is expected only to preserve data files in a bit-perfect
-            manner.
-			That means that the Linux kernel treats text files, programs, movies,
-            source code, pdf's, etc., identically,
-            and that any "special treatment," is implemented by user-space processes.
+			The Linux kernel continues the Unix philosophy by treating text files, programs, movies,
+            source code, pdf's, etc., identically;
+            any "special treatment," is implemented by user-space processes.
+            Approximately 80% of files are regular files (Stevens, 98).
 		</p>
 
 		<p>
-            Approximately 80% of files are regular files (Stevens, p 98).
+			We do interject upon reading and writing for the purposes of security and stability:
+			Each file has an owner, and belongs to a group.
+			Important files are owned by <code>root</code>, the superuser of the system.
+			Because the owner of a given file is permitted to do anything to it, we typically wish
+			to avoid acting as <code>root</code>, and instead use <code>sudo</code> wherever possible.
 		</p>
 
 		<p>
-			Each file on the system has nine mode bits:
+			Each file on the system has nine <em>access permission bits</em>,
+			and the owner of the file can change these.
+			They are:
 			<code>read</code>, <code>write</code> and <code>execute</code> for each,
-			<em>owner</em>, <em>group</em>, <em>everyone else</em>
-			(<a href="https://www.gnu.org/software/coreutils/manual/html_node/File-permissions.html#File-permissions">GNU Coreutils, section 27</a>).
-			This and other meta-data are maintained by the filesystem, sti, along with other metadata about the file, such as size and location, on-disk.
-			For instance, the operating system will not even consider trying to execute a file if its
-			appropriate executable bit is not set (but will allow you to pass the file as an argument to an executable&mdash;
-			an interpreter, say).
+			<em>owner</em>, <em>group</em>, <em>everyone else</em>.
+			These bits and other meta-data are maintained on-disk.
 		</p>
 
 		<p>
-			Mode bits are viewable with <code>ls -l</code>
+			Here we have a typical directory listing:
 		</p>
 
 		<a href="assets/img/ls-long.pdf" target="_blank"><img src="assets/img/ls-long.png" style="width: 100%" title="Click for printable" ></a>
 
 		<p>
-			(The mode bits in question are leftmost in the entry.)
-			Here we can see that <code>bash</code> is an executable file, and may be executed by
-			everyone, but is only writable by <em>root</em>.
+			We see that <code>bash</code> is executable by anybody, but can
+			only be written to by <code>root</code>.
 			File mode bits can be changed with the
-			<a href="https://www.man7.org/linux/man-pages/man1/chmod.1.html"><code>chmod(1)</code></a> utility:
+			<a href="https://www.man7.org/linux/man-pages/man1/chmod.1.html"><code>chmod(1)</code></a> utility.
 		</p>
 
 		<h3>A Short Example</h3>
@@ -293,45 +315,9 @@ title: The Linux Filesystem
 			cat: newfile: Permission denied <br>
 		</div>
 
-		<p>
-			If you use Linux a lot, there's a shortcut as old as Unix itself:
-			Since the access permission bits
-			are a sequence of bits, we can specify them in octal form.
-			We begin our specification with <code>0</code> (zero),
-			which denotes an octal constant.
-			The next digit denotes permissions for the owner of the file,
-			and is the sum of,
-		</p>
-
-		<div class="code">
-				+4, for read  <br>
-				+2, for write  <br>
-				+1, for execute
-		</div>
-
-		<p>
-			We use this pattern to determine the value for each <em>owner</em>, <em>group</em>
-			and <em>everyone else</em>, and end up with the following equivalencies:
-		</p>
-
-		<div class="code">
-			0664 &emsp;= &emsp;rw-rw-r-- <br>
-			0421 &emsp;= &emsp;r---w---x
-		</div>
-
-		<p>
-			This shortcut is actually a consequence of the
-			the original <code>creat(2)</code> system call, used for creating new files,
-			and the	C programming language's
-			method of denoting constants (literals beginning with <code>0</code> denote
-			octal; literals beginning with <code>0x</code> denote hexadecimal).
-			It persists, and is recognized by most programs that deal with
-			permission bits&mdash; <code>chmod</code>, as well as
-			<code>find</code>, and others.
-		</p>
-
 		<h3>See Also:</h3>
 		<ul>
+			<li><a href="https://www.gnu.org/software/coreutils/manual/html_node/File-permissions.html#File-permissions">File Permissions (GNU Coreutils)</a></li>
 			<li> <a href="https://www.man7.org/linux/man-pages/man1/chown.1.html"<code>chown(1)</code></a></li>
 		</ul>
 
@@ -420,7 +406,9 @@ title: The Linux Filesystem
             <h2> References </h2>
             <ol>
 				<li> Filesystem Hierarchy Standard Group. <a href="https://www.pathname.com/fhs/pub/fhs-2.3.pdf">The Linux Filesystem Heirarchy Standard</a>.  Retrieved May 29, 2020.</li>
+				<li> Kernighan, Brian. <i>Unix: A History and a Memoir.</i>  Published 2020, by Brian W. Kernighan via Kindle Direct Publishing. </li>
 				<li> Stevens, W. Richard. <i><a href="http://www.apuebook.com/apue3e.html"> Advanced Programming in the Unix Environment.</a></i> Pearson Eduction, 2013.</li>
-            </ol>
+
+			</ol>
 
         </div>
