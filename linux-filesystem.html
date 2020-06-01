@@ -92,9 +92,9 @@ title: The Linux Filesystem
     </ul>
 
 	<p>
-		By and large, users of Linux don't often interact with the filesystem
+		Users of Linux don't often interact with the filesystem
 		of their operating systems.
-		The term was developed here to make a precise distinction between
+		The term was developed here to make precise the distinction between
 		<em>filesystem</em> and <em>directory tree</em>.
 	</p>
 
@@ -109,7 +109,7 @@ title: The Linux Filesystem
 
 	<p>
 		On top of a given filesystem, a directory structure is imposed by the operating system.
-        On Linux and other Unix-like systems, that structure is a
+        On Linux, that structure is a
 		tree of files, also known as a hierarchy, which begins at "root,"
 		denoted with a forward-slash:
 	</p>
@@ -119,7 +119,7 @@ title: The Linux Filesystem
 	</div>
 
 	<p>
-        For Linux operating systems, this directory tree is defined
+        This directory tree is defined
 		by the <a href="https://www.pathname.com/fhs/pub/fhs-2.3.pdf">Linux Filesystem Heirarchy Standard</a>.
 		As such, within any GNU/Linux distribution, some common themes will be found.
         For instance, <code>bin</code> directories are found in several places, such as
@@ -138,8 +138,10 @@ title: The Linux Filesystem
         manager, printers, and, well, etcetera.
     </p>
 
+	<h3>Mounting and Unmounting</h3>
+
     <p>
-        Unlike Windows systems, which mount a new, distinct directory tree
+        Unlike Windows systems, which create a new, distinct directory tree
         for each storage device on the system (<code>C:\, D:\</code>, etc.),
         Linux systems place new filesystems within the existing
         directory structure, in an operation called
@@ -148,6 +150,8 @@ title: The Linux Filesystem
 		on a drive, it is more abstract than those of
 		Windows lineage; in addition, the Linux directory tree
 		is more stable over the duration of the machine's uptime.
+		Finally, since the directory structure is not rooted in a drive,
+		files may exist here that do not exist on drives.
 	</p>
 
 	<p>
@@ -169,33 +173,32 @@ title: The Linux Filesystem
 	</p>
 
 	<p>
-		In Linux, the directory tree is used as a general-purpose meeting place:
-		It holds references to hardware drivers, information about running
-		processes, your terminal screen is represented by a file within the hierarchy;
-		all of this in addition to regular files.
-		This mechanism is general, extensible and allows both users and programmers
-		access to the running machine.
-		The only trick is keeping it organized.
+		The directory tree is used as a general-purpose meeting place:
+		In addition to regular files, it also holds, for instance, references to hardware drivers,
+		and information about running processes.
+		This mechanism is general, extensible, and allows both users and programmers
+		access to the running machine; the only trick is keeping it organized.
 	</p>
 
+	<div class="aside-right">
+		<h4>Aside</h4>
+		<p>
+			Among device special files, there are two distinct kinds:
+			<em>block</em> and <em>character</em>.
+			The distinction refers to the way that the kernel reads and writes to these files:
+			Character special files are operated on a single character at a time
+			(e.g., terminal screen), while block special files are operated on a block of
+			bytes at a time (usually, 4096 or 8192), as in a hard drive.
+		</p>
+	</div>
+
 	<p>
-		The entities in <code>/dev</code>,
-		for instance, are called <em>special device files</em>
-		(<a href="https://www.pathname.com/fhs/pub/fhs-2.3.pdf">Linux Filesystem Heirarchy Standard</a>, page 7);
-		each file in <code>/dev</code> represents a device connected to the system (or an aspect of one).
+		The entities in <code>/dev</code> are called <em>special device files</em>.<sup><a href="https://www.pathname.com/fhs/pub/fhs-2.3.pdf">[1]</a></sup>
+		Each file in <code>/dev</code> represents a device connected to the system (or an aspect of one).
 		<code>/dev/sdb</code>, as used above, refers to a hard-disk (driver).
 		<code>/dev/sdb1</code> refers to the first partition on that hard drive;
 		<code>/dev/sdb2</code> refers to the second partition on that hard drive;
 		etc..
-	</p>
-
-	<p>
-		Among device special files, there are two distinct kinds:
-		<em>block</em> special files and <em>character</em> special files.
-		This distinction refers to the way that the kernel reads and writes to these files.
-		Character special files are operated on a single character at a time
-		(e.g., terminal); block special files are operated on a block of
-		bytes (usually, 4096 or 8192) at a time, as in a hard drive.
 	</p>
 
 	<p>
@@ -216,8 +219,6 @@ title: The Linux Filesystem
 	<h3>See Also:</h3>
 		<ul>
 			<li><a href="https://www.man7.org/linux/man-pages/man7/file-hierarchy.7.html"><code>file-hierarchy(7)</code></a></li>
-			<li><a href="https://www.man7.org/linux/man-pages/man8/mount.8.html"><code>mount(8)</code></a></li>
-			<li><a href="https://www.man7.org/linux/man-pages/man8/umount.8.html"><code>umount(8)</code></a></li>
 		</ul>
 
 </div>
@@ -227,7 +228,7 @@ title: The Linux Filesystem
         <p>
             Regular files contain data.
             The contents of a regular file are not, in the general case, the business of the operating system.
-            The operating system is tasked only with preserving data in a bit-perfect
+            Rather, the operating system is expected only to preserve data files in a bit-perfect
             manner.
 			That means that the Linux kernel treats text files, programs, movies,
             source code, pdf's, etc., identically,
@@ -257,7 +258,7 @@ title: The Linux Filesystem
 			<code>read</code>, <code>write</code> and <code>execute</code> for each,
 			<em>owner</em>, <em>group</em>, <em>everyone else</em>
 			(<a href="https://www.gnu.org/software/coreutils/manual/html_node/File-permissions.html#File-permissions">GNU Coreutils, section 27</a>).
-			These are maintained by the filesystem along with other metadata about the file, such as size and location on-disk.
+			This and other meta-data are maintained by the filesystem, sti, along with other metadata about the file, such as size and location, on-disk.
 			For instance, the operating system will not even consider trying to execute a file if its
 			appropriate executable bit is not set (but will allow you to pass the file as an argument to an executable&mdash;
 			an interpreter, say).
@@ -316,12 +317,12 @@ title: The Linux Filesystem
 
 		<p>
 			This shortcut is actually a consequence of the
-			the original <em>creat</em> system call, used for creating new files,
+			the original <code>creat(2)</code> system call, used for creating new files,
 			and the	C programming language's
 			method of denoting constants (literals beginning with <code>0</code> denote
 			octal; literals beginning with <code>0x</code> denote hexadecimal).
 			It persists, and is recognized by most programs that deal with
-			permission bits of files&mdash; <code>chmod</code>, as well as
+			permission bits&mdash; <code>chmod</code>, as well as
 			<code>find</code>, and others.
 		</p>
 
