@@ -7,6 +7,7 @@ title: The Linux Filesystem
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#filesystems"> Filesystems </a></li>
         <li><a href="#directory-tree"> Directory Tree </a></li>
+        <li><a href="#mounting-unmounting"> Mounting and Unmounting</a></li>
         <li><a href="#regular-files"> Regular Files </a></li>
         <li><a href="#directories"> Directories </a></li>
 		<li><a href="#engineer-man"> Engineer Man </a></li>
@@ -100,7 +101,7 @@ title: The Linux Filesystem
 
 	<h3> See Also: </h3>
 	<ul>
-		<li> <a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">An Introduction to Disk Partitions </a> </li>
+		<li> <a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">An Introduction to Disk Partitions - Fedora Docs Site </a> </li>
 	</ul>
 </div>
 
@@ -138,40 +139,6 @@ title: The Linux Filesystem
         manager, printers, and, well, etcetera.
     </p>
 
-	<h3>Mounting and Unmounting</h3>
-
-    <p>
-        Unlike Windows systems, which create a new, distinct directory tree
-        for each storage device on the system (<code>C:\, D:\</code>, etc.),
-        Linux systems place new filesystems within the existing
-        directory structure, in an operation called
-		<a href="https://www.man7.org/linux/man-pages/man8/mount.8.html"><em>mounting</em></a>.
-		Because the directory structure is not rooted
-		on a drive, it is more abstract than those of
-		Windows lineage; in addition, the Linux directory tree
-		is more stable over the duration of the machine's uptime.
-		Finally, since the directory structure is not rooted in a drive,
-		files may exist here that do not exist on drives.
-	</p>
-
-	<p>
-		Let's take a look at the <code>mount</code> operation, for this is new.
-		Suppose you have a usb stick with some music on it, and you'd
-		like to access its contents.
-		After it's plugged into your computer, the hardware, then the kernel,
-		recognize it, but it is unaccessible:
-	</p>
-
-	<img style="width:80%" src="assets/img/mounting.png">
-
-	<p>
-		In practice, most distributions automatically mount
-		usb sticks when they are plugged in.
-		Moreover, no usb stick will be named <code>/dev/usb</code>; that was
-		only a conceptual item.
-		It's more likely to be named <code>/dev/sdb1</code>
-	</p>
-
 	<p>
 		The directory tree is used as a general-purpose meeting place:
 		In addition to regular files, it also holds, for instance, references to hardware drivers,
@@ -180,25 +147,23 @@ title: The Linux Filesystem
 		access to the running machine; the only trick is keeping it organized.
 	</p>
 
-	<div class="aside-right">
-		<h4>Aside</h4>
-		<p>
-			Among device special files, there are two distinct kinds:
-			<em>block</em> and <em>character</em>.
-			The distinction refers to the way that the kernel reads and writes to these files:
-			Character special files are operated on a single character at a time
-			(e.g., terminal screen), while block special files are operated on a block of
-			bytes at a time (usually, 4096 or 8192), as in a hard drive.
-		</p>
-	</div>
+	<p>
+		The directory <code>/dev</code> contains files called <em>special device files</em>.<sup><a href="https://www.pathname.com/fhs/pub/fhs-2.3.pdf">[1]</a></sup>
+		Special device files represent a device connected to the system (or an aspect of one).
+		<code>/dev/sdb</code>, for instance, refers to a hard-disk.
+		More precisely, this file is our handle to a specific hard-disk's driver.
+		<code>/dev/sdb1</code> refers to the drive's first partition;
+		<code>/dev/sdb2</code> refers to the drive's second partition;
+		etc..
+	</p>
 
 	<p>
-		The entities in <code>/dev</code> are called <em>special device files</em>.<sup><a href="https://www.pathname.com/fhs/pub/fhs-2.3.pdf">[1]</a></sup>
-		Each file in <code>/dev</code> represents a device connected to the system (or an aspect of one).
-		<code>/dev/sdb</code>, as used above, refers to a hard-disk (driver).
-		<code>/dev/sdb1</code> refers to the first partition on that hard drive;
-		<code>/dev/sdb2</code> refers to the second partition on that hard drive;
-		etc..
+		Among device special files, there are two distinct kinds:
+		<em>block</em> and <em>character</em>.
+		The distinction refers to the way that the kernel reads and writes to these files.
+		Character special files are operated on a single character at a time
+		(e.g., terminal screen), while block special files are operated on a block of
+		bytes at a time (usually, 4096 or 8192), as in a hard drive.
 	</p>
 
 	<p>
@@ -219,7 +184,60 @@ title: The Linux Filesystem
 	<h3>See Also:</h3>
 		<ul>
 			<li><a href="https://www.man7.org/linux/man-pages/man7/file-hierarchy.7.html"><code>file-hierarchy(7)</code></a></li>
+			<li><a href="https://wiki.archlinux.org/index.php/Device_file">Device File - ArchWiki</a></li>
 		</ul>
+	</div>
+
+	<div class="content" id="mounting-unmounting">
+
+		<h2>Mounting and Unmounting</h2>
+
+	    <p>
+	        Unlike Windows systems, which create a new, distinct directory tree
+	        for each storage device on the system (<code>C:\, D:\</code>, etc.),
+	        Linux systems place new filesystems within the existing
+	        directory structure, in an operation called
+			<a href="https://www.man7.org/linux/man-pages/man8/mount.8.html"><em>mounting</em></a>.
+			Because the directory structure is not rooted
+			on a drive, it is more abstract than those of
+			Windows lineage; in addition, the Linux directory tree
+			is more stable over the duration of the machine's uptime.
+			Finally, since the directory structure is not rooted in a drive,
+			files may exist here that do not exist on drives.
+		</p>
+
+		<p>
+			Let's take a look at the <code>mount</code> operation, for this is new.
+			Suppose you have a usb stick with some music on it, and you'd
+			like to access its contents.
+			After it's plugged into your computer, the hardware, then the kernel,
+			recognize it, but it is unaccessible:
+		</p>
+
+		<img style="width:80%" src="assets/img/mounting.png">
+
+		<p>
+			When mounting new devices manually, the usual method is to identify the device
+			to be mounted with <code>lsblk</code>, then mount it with <code>sudo mount [DEVICE] [MOUNTPOINT]</code>.
+			The device to be mounted should be a partition, and can usually be determined by its size and
+			its mountpoint (which should be none).
+			Conversely, to unmount a filesystem, we first identify it with <code>lsblk</code>,
+			then unmount it with <code>sudo umount</code>.
+			A few pesky details:
+			First, device names that appear in <code>/dev</code> or <code>lsblk</code>
+			<em>are not</em> guaranteed to be stable across reboots&mdash; The devices are named in the
+			order that they are found, during system boot.
+			Second, when mounting a new filesystem, if any files exist at the
+			mount point, they will be "hidden" by the files of the new filesystem (they are not deleted).
+		</p>
+
+
+		<p>
+			In practice, most distributions automatically mount
+			usb sticks when they are plugged in.
+		</p>
+
+</div>
 
 </div>
     <div id="regular-files" class="content">
@@ -237,21 +255,7 @@ title: The Linux Filesystem
 
 		<p>
             Approximately 80% of files are regular files (Stevens, p 98).
-			We can verify this ourselves, by dividing the number of regular files,
 		</p>
-
-			<div class="code">
-				$ sudo find / -type f | wc -l
-			</div>
-			<p>
-				by the number of total files,
-			</p>
-			<div class="code">
-				$ sudo find / | wc -l
-			</div>
-			<p>
-				I arrive at 76%.
-			</p>
 
 		<p>
 			Each file on the system has nine mode bits:
@@ -335,6 +339,8 @@ title: The Linux Filesystem
 
 		<div id="directories" class="content">
 			<h2>Directories</h2>
+
+
 
 			<p>
 				A directory is implemented in Linux as a file with two columns:
