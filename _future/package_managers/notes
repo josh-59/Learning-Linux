@@ -16,6 +16,8 @@ https://www.debian.org/doc/manuals/debian-reference/ch02.en.html
     interactive usage and use the apt-get(8) and apt-cache(8) commands in the shell script.
 """
 
+Using apt
+
 
 
 Don't like:
@@ -23,16 +25,12 @@ apt search golang -> Returns over 1000 results; can't locate compiler;          
     github repositories on Debian packages?
     Poor solution: Detracts from usability of command-line package management
     Also, is this even checked?
-
-    Also, Go has it's own package manager, "go-get".
+    Also, Go has it's own package manager, "go-get"!
 
 
 How to install random .deb:
     navigate shell to containing directory
     sudo apt install <my_random_unsafe_package>.deb
-
-From Arch Wiki:
-    The pacman package manager is one of the major distinguishing features of Arch Linux.
 
 meta-packages:
     Existant throughout package managers

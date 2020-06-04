@@ -1,30 +1,29 @@
 Overarching Goal:
-	<em> The Linux Desktop </em>
-	A book-like covering the most important aspects of Linux
-	for use as a desktop operating system, from a technical perspective.
+	<em> Learning Linux </em>
+	A book-like covering the persistent concepts of Linux, for the
+	new user.
 
 
-Section 1:  Overview
 1)  Operating Systems
-2)  Why linux
-2)  Learning Linux
-3)  Distros
-
-Section 2:  Command line
- )  An Introduction to Bash
-4)	The Art of the Command Line https://github.com/jlevy/the-art-of-command-line/blob/master/README.md
-5)	An Introduction to Vim
-6)  Package Managers
-7)  Shells
+	a) What's an OS
+	b) Why Linux
+		<em>Superlative</em> programming environment:  Why this makes sense
+	c) Distros
+		Think of these as flavors of Linux; they mostly share the GNU/Linux
+		kernel / coreutils fundamentals, the same ethos (make small tools and make them well),
+		the same open-ness
+2)  Package Managers -> Up-front and center!
+3)  The Linux Directory Tree
+4)  Everything I Know About BASH
+6)	An Introduction to Vim
+7)  Text Terminals-> Rewrite?
 8)	Finding Files
-9)  Text Terminals
 
-Section 3:	Programming in Linux
-10) Going Further
-11) Linux Filesystem
-12)	Processes
-
-
-
-Appendix 1) GNU/Linux
-Appendix 2) Shortcomings of the Linux Desktop
+9)  Learning Linux
+10)	The Art of the Command Line https://github.com/jlevy/the-art-of-command-line/blob/master/README.md
+11) Going Further: Programming in Linux
+	a) The Importance of C
+	b) Rust?
+	c) Command-line tools vs. Scripting Language
+		Set of wrenches vs ratchet set
+12) Processes
