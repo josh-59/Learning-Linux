@@ -112,8 +112,8 @@ title: The Linux Filesystem
 
 	<p>
 		On top of a given filesystem, a directory structure is imposed by the operating system.
-        On Linux, that structure is a tree of files, also known as a hierarchy, which begins at "root,"
-		denoted with a forward-slash:
+        On Linux, that structure is a tree of files, also known as a hierarchy.
+		It begins at "root," denoted by a forward-slash:
 	</p>
 
 	<div class="code">
@@ -121,9 +121,18 @@ title: The Linux Filesystem
 	</div>
 
 	<p>
-        This directory tree is defined
-		by the <a href="https://www.pathname.com/fhs/pub/fhs-2.3.pdf">Linux Filesystem Heirarchy Standard</a>.
-		As such, within any GNU/Linux distribution, some common themes will be found.
+        The Linux directory tree is defined
+		in the <a href="https://refspecs.linuxfoundation.org/fhs.shtml">Linux Filesystem Heirarchy Standard</a>,
+		but note that this is a "follow along standard":  It attempts to codify the
+		Linux filesystem as it usually appears, and does not aim to arbitrarily impose a
+		standard prior to implementation.
+		In particular, the <code>/proc</code> Linux-specific filesystem has not yet been described.
+		For a more thorough discussion of the directory tree than presented here, see
+		<a href="https://www.tldp.org/LDP/sag/html/dir-tree-overview.html">The Linux System Admintrator's Guide</a>.
+	</p>
+
+	<p>
+		Within any GNU/Linux distribution, some common themes will be found.
         For instance, <code>bin</code> directories are found in several places, such as
         <code>/bin</code> and <code>/sbin</code>, along with <code>/usr/bin</code> and often
         <code>/home/user/bin</code>.
@@ -132,7 +141,7 @@ title: The Linux Filesystem
     </p>
 
     <p>
-        As per the standard, <code>/etc</code> (usually read "<em>et</em>-c") contains host-specific
+        The directory <code>/etc</code> (usually read "<em>et</em>-c") contains host-specific
         system configuration files; as a consequence, you can expect to fiddle
 		with the contents of this directory when configuring the system for the first time
         (or otherwise).
@@ -184,7 +193,7 @@ title: The Linux Filesystem
 
 	<h3>See Also:</h3>
 		<ul>
-			<li><a href="https://www.man7.org/linux/man-pages/man7/file-hierarchy.7.html"><code>file-hierarchy(7)</code></a></li>
+			<li><a href="https://www.tldp.org/LDP/sag/html/dir-tree-overview.html">Overview of the Directory Tree: Linux System Administrator's Guide</a></li>
 			<li><a href="https://wiki.archlinux.org/index.php/Device_file">Device File - ArchWiki</a></li>
 		</ul>
 	</div>
@@ -212,7 +221,7 @@ title: The Linux Filesystem
 			Suppose you have a usb stick with some music on it, and you'd
 			like to access its contents.
 			After it's plugged into your computer, the hardware, then the kernel,
-			recognize it, but it is unaccessible:
+			recognize it, but it may not be accessible:
 		</p>
 
 		<img style="width:80%" src="assets/img/mounting.png">
@@ -229,7 +238,7 @@ title: The Linux Filesystem
 		<p>
 			Conversely, to unmount a filesystem, we first identify the correct
 			partition with <code>lsblk</code>,
-			then unmount it with <code>sudo umount</code>.
+			then unmount it with <code>sudo umount [DEVICE]</code>.
 		</p>
 
 		<p>
@@ -323,6 +332,8 @@ title: The Linux Filesystem
 
 		<div id="directories" class="content">
 			<h2>Directories</h2>
+			<p>
+				Directories form non-leaf nodes in the Unix/Linux directory tree.
 
 
 
