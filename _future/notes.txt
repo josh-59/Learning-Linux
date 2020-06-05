@@ -27,3 +27,14 @@ Overarching Goal:
 	c) Command-line tools vs. Scripting Language
 		Set of wrenches vs ratchet set
 12) Processes
+13) About
+	The Social Contract
+		There is an implicit social contract between the writer of a given work
+		and their reader(s).
+		The deal is, I can't guarantee that what I write is what you want to hear.  What I
+		can guarantee is that <em>if</em> you read this work,
+		I will provide a precise rendition of valuable material.
+
+	Learning Linux
+
+	https://www.youtube.com/watch?v=VetI2lr2LNA&list=RDMMCCY0bAPLZ1w&index=27

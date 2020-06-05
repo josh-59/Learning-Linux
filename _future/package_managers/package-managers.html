@@ -19,15 +19,46 @@ title: Package Managers
 	<p>
 		Package managers facilitate the installation, patching and removal
 		of software; their importance is difficult to overstate.
-		Modern package managers exist for every major open-source project, be it
+		Modern package managers exist for every major open-source project, such as
 		Debian, Python, Ruby, Rust or Arch, to name a few.
-		They make it easy to acquire software to tackle the project at hand.
+		Packages deal in compiled programs, rather than source code.
 	</p>
+
+	<h2> Life Without Package Managers </h2>
+
+	<p>
+		To motivate this discussion, let us consider life without package managers.
+		
 
 	<h2> What is a Package? </h2>
 	<p>
-		
+		From the ArchWiki Pacman page:
+		A package is an archive containing:
 
+		<ul>
+			<li> The compiled files of an application </li>
+	    	<li> Metadata about the application (application name, version, dependencies, etc.) </li>
+			<li> Installation directives for <code>pacman</code> </li>
+			<li> Extra, optional files, such as scripts </li>
+		</ul>
+
+		</p>
+
+		<p>
+			The compiled files that form the core of an application are an obvious
+			component of each package; however, in order to manage packages in
+			an efficient manner, each package must contain metadata describing itself.
+			One method to store this information might be to keep it in the executables themselves&mdash;
+			version numbers appended to the executable filename, say.
+			This would not be extensible, nor pleasant to use.
+
+		</p>
+
+		<p>
+			All modern package
+			A package does not contain copies of common libraries and executables.
+
+	<h2> Arch's Rolling Release Model </h2>
 
 
 
