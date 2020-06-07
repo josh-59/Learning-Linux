@@ -52,7 +52,7 @@ last-updated: June, 2020
     <p>
         A filesystem is a systematic method of organizing data on disk.<sup><a href="https://wiki.osdev.org/Filesystem">[1]</a><a href="https://wiki.archlinux.org/index.php/File_systems">[2]</a></sup>
         Conceptually, it is similar to a data structure, in that it defines a convention
-        to be followed in the storing and retrieval of data.
+        to be followed in the storing and retrieval of data, in the form of files.
         Preparing a drive for use by a particular filesystem is known as formatting.
     </p>
 
@@ -114,7 +114,9 @@ last-updated: June, 2020
     <h2> Directory Tree</h2>
 
 	<p>
-		On top of a given filesystem, a directory structure may be imposed.
+    Filesystems describe how files are stored;
+    among files are directories, which list other files.
+    These listings may be connected in an arbitrary manner, forming a directory structure.
     On Linux, that structure is a tree of files, also known as a hierarchy.
 		It begins at "root," denoted by a forward-slash:
 	</p>
@@ -214,15 +216,9 @@ last-updated: June, 2020
 	    <p>
 	        Unlike Windows systems, which create a new, distinct directory tree
 	        for each storage device on the system (<code>C:\, D:\</code>, etc.),
-	        Linux systems place new filesystems within the existing
-	        directory structure, in an operation called
+	        Linux systems place a new filesystem's directory tree within the existing
+	        directory tree, in an operation called
 			<a href="https://www.man7.org/linux/man-pages/man8/mount.8.html"><em>mounting</em></a>.
-			Because the directory structure is not rooted
-			on a drive, it is more abstract than those of
-			Windows lineage; in addition, the Linux directory tree
-			is more stable over the duration of the machine's uptime.
-			Finally, since the directory structure is not rooted in a drive,
-			files may exist here that do not exist on drives.
 		</p>
 
 		<p>
@@ -241,17 +237,17 @@ last-updated: June, 2020
 			The device to be mounted should be a partition, and can usually be determined by its size and
 			its mountpoint (which should be none).
 			The Linux Filesystem Hierarchy Standard provides two places to mount temporary
-			filesystems: <code>/mnt</code> and <code>/media/[user]/</code>
-		</p>
+			filesystems: <code>/mnt</code> and <code>/media/[user]</code>
+    </p>
 
-		<p>
-			Conversely, to unmount a filesystem, we first identify the correct
+    <p>
+			Similarly, to unmount a filesystem, we first identify the correct
 			partition with <code>lsblk</code>,
-			then unmount it with <code>sudo umount [DEVICE]</code>.
+			then unmount it with <a href="https://linux.die.net/man/8/umount"><code>sudo umount [DEVICE]</code></a>.
 		</p>
 
 		<p>
-			A few pesky details:
+			A few details:
 			First, device names that appear in <code>/dev</code> or <code>lsblk</code>
 			<em>are not</em> guaranteed to be stable across reboots&mdash; The devices are named in the
 			order that they are found.
@@ -265,6 +261,7 @@ last-updated: June, 2020
 			In practice, most distributions automatically mount
 			usb sticks when they are plugged in.
 		</p>
+
 
 </div>
     <div id="regular-files" class="content">
@@ -341,17 +338,12 @@ last-updated: June, 2020
 
 		<div id="directories" class="content">
 			<h2>Directories</h2>
-			<p>
-        Each non-leaf node in the
-				Directories are non-leaf nodes of the Unix/Linux directory tree (Bach, 6).
-
-
 
 			<p>
 				A directory is implemented, conceptually, as a file containing a table with two columns:
 				Filename and inode number.
-				We list the contents of a directory with the usual <code>ls</code> command;
-				we can list a file's inode number using <code>ls -i</code>:
+				We list the contents of a directory with the usual <code>ls</code> command,
+        and can list a file's inode number using <code>ls -i</code>:
 			</p>
 
 			<div class="code">
@@ -360,49 +352,64 @@ last-updated: June, 2020
 			</div>
 
 			<p>
-				The inode number serves as the reference to the data a given file contains,
-				in addition to metadata, such as size.
-				Inodes are stored statically, on-disk, in the form
-				of an array at the beginning of the disk partition;
-				the <em>inode number</em> serves as an index into this array.
+				The inode number serves as an index into an <em>inode table</em>.
+        In <code>ext4</code>, this is a linear array of <br>
+        <code>struct ext4_inode</code>.<sup><a href="https://ext4.wiki.kernel.org/index.php/Ext4_Disk_Layout#Inode_Table">[5]</a></sup>
+				inodes are stored statically, on-disk (usually near the beginning of the partition).
+        Each inode lists the data blocks of the file it describes, as
+        well as metadata about the file, such as size and timestamps.
+        The filename is not contained in the inode, and metadata is not
+        contained in directories.
 			</p>
 
-			<p>
-				In addition, the inode serves as a layer of indirection between
-				a filename and the file's contents (more on this later).
-				The directory tree is the responsibility of the kernel, so that
-				user-space applications do not (cannot) interact with directories
-				directly.
-				Specific system calls exist to
-				create directories,
-				remove directories,
-				and get directory entries.
-			</p>
+      <div class="aside-right">
+        <h4>Aside</h4>
+        <p>
+          The system calls used to delete files are
+          <a href="https://man7.org/linux/man-pages/man2/unlink.2.html"><code>unlink</code> and
+          <code>unlinkat()</code></a>, which remove entries from directories.
+          A file is only removed (deleted) by the kernel when there are no hard
+          links to it, and when there are no processes holding it open.
+        </p>
+      </div>
+
+      <p>
+        From the operating system's point of view, each directory
+        listing is a <em>hard link</em>, since it links a filename
+        (location in the directory tree) to a file (described by the inode).
+        A file may have more than one hard link, and therefore, appear
+        more than once in the directory tree.
+        Additional hard links to a file may be created with
+        <a href="https://www.man7.org/linux/man-pages/man1/ln.1.html"<code>ln</code></a>,
+        and may be removed with
+        <a href="https://www.man7.org/linux/man-pages/man1/unlink.1.html"><code>unlink</code></a> or
+        <a href="https://www.man7.org/linux/man-pages/man1/rm.1.html"><code>rm</code></a>.
+        The number of hard links to a file can be listed with <br>
+        <code>ls -l</code> (see above).
+      </p>
 
 			<p>
-				Each process has a <em>current working directory</em>, whose
-				value is maintained by the kernel; changing a process's
-				current working directory requires the use of a system call.
-			</p>
-
-			<h3>Hard Links</h3>
-			<p>
-				The inode of a file serves as a layer of indirection between a
-				file's name and its contents:
-				A file (the contents) may have more than one filename referring to it.
-				This means that a file can have
-				more than one entry in the directory tree.
-				Each such name is called a <em>hard link</em>.
-			</p>
-
-			<p>
-				In particular, each directory has the special entry
-				with filename <code>.</code> ("dot"),
-				which refers to that directory itself.
-				In addition, each directory contains the entry <code>..</code> ("dot dot"),
-				which refers to the parent directory (up one level in the hierarchy).
+				Each directory has at least two entries, which cannot be changed, and
+        which help define the Linux directory structure.  They are,
+        <code>.</code> ("dot"), which refers to the containing directory itself,
+        and <code>..</code> ("dot dot"), which refers to its parent directory.
 				The root directory's parent directory is the root directory itself.
 			</p>
+
+      <div class="aside-left">
+        <h4>Aside</h4>
+        <p style="margin-bottom: 0">
+          The directory tree is the responsibility of the kernel, so that
+          user-space applications are not permitted to read or write
+          directly to directory files.
+          Specific system calls exist to
+          <ul style="padding-left: 20px; margin-top: 0">
+            <li><a href="https://www.man7.org/linux/man-pages/man2/mkdir.2.html">create directories</a></li>
+            <li><a href="https://www.man7.org/linux/man-pages/man2/rmdir.2.html">remove directories</a></li>
+            <li><a href="https://www.man7.org/linux/man-pages/man2/getdents.2.html">get directory entries</a></li>
+          </ul>
+        </p>
+      </div>
 
 			<h3>Symbolic Links</h3>
 			<p>
