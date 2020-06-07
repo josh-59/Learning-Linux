@@ -37,3 +37,9 @@ Overarching Goal:
 	Learning Linux
 
 	https://www.youtube.com/watch?v=VetI2lr2LNA&list=RDMMCCY0bAPLZ1w&index=27
+
+
+Improvements:
+	For the love of god, make regex a virtual package!
+	Then programers can reference whichever engine is installed, and
+	users can choose their engine by installing the appropriate package -> Unify regex across systems.

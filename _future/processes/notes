@@ -1,3 +1,9 @@
+<p>
+	Each process has a <em>current working directory</em>, whose
+	value is maintained by the kernel; changing a process's
+	current working directory requires the use of a system call.
+</p>
+
 Multiprocess systems:
 	Running more than one program at a time
 
