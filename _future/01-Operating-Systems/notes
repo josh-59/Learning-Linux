@@ -1,51 +1,54 @@
-Modern operating systems so large (on the order of xxxxxxx lines of code) that they
-are divided into layers.  At the bottom, nearest to the machine, is a collection
-of hardware drivers.
+An operating system serves as software abstraction layer, separating and
+disconnecting user-space processes from hardware.
+  - Drivers
+  - Kernel
+  - System Call API
+  - Standard "Core" utilities
+
+Drivers:
+The lowest elements of the operating system interact
+directly with hardware, and are known as <em>hardware drivers</em>.
+
+System Call API:
+The operating system exposes a system call interface to each
+user-space process, allowing a process to instruct the kernel to carry out
+actions on its behalf.
+  - POSIX / SUSv4
+  - #?
+
+"Because programs are independent of the underlying hardware, it is easy
+to move them between UNIX systems running on different hardware if the programs
+do not make assumptions about the underlying hardware." (Bach, 5) [The Design of the Unix Operating System]
+
+Kernel:
+Between these two elements is the kernel.
 
 What is a kernel?
+    - A key component of the OS
+    - Began by Linus Torvals, the Linux Kernel
+
 The kernel is the software layer between user-space programs and hardware drivers.
 This is the largest software layer in the operating system construct; it is
 tasked with maintaining the filesystem, ensuring user-space processes do not
 interfere with each other, and scheduling processes in a fair and reasonable manner.
 
-Kernel programming is among the most difficult of modern programming.
+A great number of kernels implement the Unix system-call API,
 
-What is a distro?
-A distro is a collection of software, precompiled for use.
-It includes a kernel, with any number of hardware drivers precompiled, and
-a collection of user-space programs.
-
-It's relatively easy to produce your own distribution; anyone can do it.
-
-What tasks do the
+"Core" Utilites:
+The standard collection of programs that help define the working "Linux" OS;
+Some of these are critical to operating system functionality (?? Examples ??)
+  - GNU
 
 
-The Linux Command Line, page 172
-The most important determinant of distribution quality is the packaging system and the
-vitality of the distribution's support community. As we spend more time with Linux, we
-see that its software landscape is extremely dynamic. Things are constantly changing.
-Most of the top-tier Linux distributions release new versions every six months and many
-individual program updates every day. To keep up with this blizzard of software, we need
-good tools for package management.
+Bundling It All Up: The Distribution
+  An operating system, precompiled for use.
+  It includes a kernel, selected drivers, and selected utilities.
 
-The more I've used Linux, the more I've come to appreciate good software.
-When I go back to Windows, all the little things that formerly struck me as
-minor annoyances-- programs hanging and crashing, obtuse UI, intrusive privacy
-policies, needing an account for everything, etc-- have become
-telltale signs of crummy software.
+  Because Linux is open-source, it's relatively easy to produce your own distribution,
+  and because it's free, anyone can do it.
 
-Debian is old and stable; as an analogy, consider a washing machine.
-Consumerism today dictates that you buy a new washing machine every five or
-ten years.  They have become more complicated, unnecessarily including LCD screens;
-they have become more efficient(TM), they have forty settings for washing
-your new gel-based mattress-liner, hypoallergenic-ly.
-One could go their entire life hopping from washing machine to washing machine,
-always spending more money, always wishing they had spent more money,
-always looking forward to spending more money.
 
-The alternative is to buy a simple commercial washing machine.
-This thing <i>just works.</i>  You need clothes washed?  This thing washes
-clothes.  It's gonna last twenty years, right off, and when
-it does fail, you know you'll be able to get it fixed, no problem.
-
-wiki.osdev.org
+What will run Linux?
+  - Just about anything!
+  Pinebook Pro:
+   a compelling alternative to mid-ranged Chromebooks that people convert into Linux laptops.

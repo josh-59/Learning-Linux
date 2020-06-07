@@ -1,4 +1,4 @@
-Describe life without package managers 
+Describe life without package managers
 
 Structure of a package:
     Data
@@ -17,6 +17,14 @@ https://www.debian.org/doc/manuals/debian-reference/ch02.en.html
     Users are recommended to use the new apt(8) command for
     interactive usage and use the apt-get(8) and apt-cache(8) commands in the shell script.
 """
+
+The Linux Command Line, page 172
+The most important determinant of distribution quality is the packaging system and the
+vitality of the distribution's support community. As we spend more time with Linux, we
+see that its software landscape is extremely dynamic. Things are constantly changing.
+Most of the top-tier Linux distributions release new versions every six months and many
+individual program updates every day. To keep up with this blizzard of software, we need
+good tools for package management.
 
 Debian
 

@@ -1,0 +1,7 @@
+PATH environment variable:
+Kernighan page 132:
+    Invented by John Mashey and introduced in the 6th edition shell,
+    it was a workaround so that non-expert users could
+    share their own sets of commands by lab, department and group.
+
+10)	The Art of the Command Line https://github.com/jlevy/the-art-of-command-line/blob/master/README.md

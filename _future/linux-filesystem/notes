@@ -30,108 +30,10 @@ Directories
 
     +x "search" permission
 
-Device Files
-    Requires:
-        Directory tree
-        Filesystem
-
-    Block devices vs Character Devices
-
-lsblk:
-    /dev/sda        Denotes the entire drive
-    /dev/sda1       Denotes the first partition
-    /dev/sda2       Denotes the second partition
-
-    /dev/nvme0n     Denotes the entire drive
-    /dev/nvme0np1   Denotes the first partition
-    /dev/nvme0np2   Denotes the second partition
-
-    *** BEGIN
-    For instructional purposes, let's have a look at
-    Jeremy "Jay" LaCroix's disk partition layout.
-    Notes from "Arch Linux Full Installation Walkthrough"
-    https://www.youtube.com/watch?v=a00wbjy2vns&t=727s
-
-    lsblk
-    NAME        MAJ:MIN RM    SIZE RO TYPE MOUNTPOINT
-    nvme0n1     259:0    0    477G  0 disk
-    ├─nvme0n1p1 259:1    0    500M  0 part
-    ├─nvme0n1p2 259:2    0     30G  0 part
-    └─nvme0n1p3 259:3    0  446.5G  0 part
-
-    /dev/nvme0n1p1      500-MB      Boot Partition     mounted to /boot/efi     formatted FAT32
-    /dev/nvme0n1p2      30-GB       Root Filesystem    mounted to /             formatted EXT4
-    /dev/nvme0n1p3      446.5GB     Home               mounted to /home/        formatted EXT4
-
-    swap file, of 2 GB, mounted to /swapfile
-
-    *** END
-
-
-Pseudo Filesystems
-Meta-Persistent Filesystems
-
-virtual filesystem,
-
-Abstracting away from machine state;
-  in particular we are IGNORING running programs.
-This amounts to ignoring half of the operating system,
-but it is appropriate because files are static with
-respect to processes.
-
-
-stdin / stdout
-  lsof - list open files
-
-pipes:
-  A Beautiful Abstraction
-
-  The file-first mentality projected by Unix lets you work with the output of
-  programs as though they were files.
-  For instance,
-    ls /dev > dev_listing
-  doesn't make any sense because the output of "ls /dev" is conceptually identical to
-  a file anyways.
+.
 
 Kernighan: Commands are verbs, and files are nouns, p 71
 
-Linux files as variables:
-  "A file has an owner, a modification time, a size, a type, and other attributes." --Understanding Unix/Linux Programming:  A Guide to Theory and Practice
-  Names
-    Found in directories
-    Can have aliases
-  Addresses
-    Disk block locations
-  Value
-    Data
-  Type
-    Ordinary file
-    Directory
-    Special device file
-    etc
-  Lifetime
-    Static wrt system:
-      /etc/passwd
-      /home
-    Static wrt programs:
-      program-specific binaries
-    User-defined:
-      User-owned files
-    Runtime-only
-  Scope
-
-locate:
-  Considers files by name
-
-GNU Find:
-  Considers files as such
-  A much deeper search
-
-grep:
-
-STDIN / STDOUT
-vis:
-  use argument '-' to create an interactive filter
 
 inode:
   Sources:
@@ -160,20 +62,6 @@ inode:
   Since neither links nor data addresses can cross disk partition
   boundaries, the inode number is sufficient to uniquely identify an inode.
 
-
-
-
-Shell:
-    A text terminal is a device that lets a user "peer into" the computer
-    by reading on a monitor the data written to a special file.
-    In days' past, the text terminal was physical; these days, the
-    device has been replaced by emulation.
-    The most novel thing to recognize about terminals is that they exist, from the operating system's
-    perspective, as an ordinary file.
-    That <i>you read</i> from it is merely coincidental to what that file is connected to&mdash; namely,
-    a buffer within a monitor or emulator.
-    Likewise, data sent from the keyboard appears, to a user-space process,
-    as the contents of an ordinary file.
 
     PATH environment variable:
     Kernighan page 132:
