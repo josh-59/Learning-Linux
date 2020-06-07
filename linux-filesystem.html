@@ -30,8 +30,8 @@ last-updated: June, 2020
     <p>
         Unix began life as a filesystem (Kernighan 33-34).  Shortly thereafter, a means
         of interacting with it was created&mdash; initially,
-		this consisted of an <code>exec</code>
-        function, a shell, text editor and assembler.
+		    this consisted of the <code>exec</code>
+        system call, a shell, a text editor and an assembler.
         Written entirely by Ken Thompson, these key components formed the nexus of
         the time-sharing operating system that would eventually be called
         <em>Unix</em>.
@@ -52,7 +52,7 @@ last-updated: June, 2020
     <p>
         A filesystem is a systematic method of organizing data on disk.<sup><a href="https://wiki.osdev.org/Filesystem">[1]</a><a href="https://wiki.archlinux.org/index.php/File_systems">[2]</a></sup>
         Conceptually, it is similar to a data structure, in that it defines a convention
-        to be followed to store and retrieve data.
+        to be followed in the storing and retrieval of data.
         Preparing a drive for use by a particular filesystem is known as formatting.
     </p>
 
@@ -99,9 +99,8 @@ last-updated: June, 2020
     </ul>
 
 	<p>
-		Users of Linux don't often interact with the filesystem
-		of their operating systems.
-		The term was developed here to make a precise distinction between
+		Users of Linux don't often interact with the filesystem;
+		the term was developed here to make a precise distinction between
 		<em>filesystem</em> and <em>directory tree</em>.
 	</p>
 
@@ -115,25 +114,14 @@ last-updated: June, 2020
     <h2> Directory Tree</h2>
 
 	<p>
-		On top of a given filesystem, a directory structure is imposed by the operating system.
-        On Linux, that structure is a tree of files, also known as a hierarchy.
+		On top of a given filesystem, a directory structure may be imposed.
+    On Linux, that structure is a tree of files, also known as a hierarchy.
 		It begins at "root," denoted by a forward-slash:
 	</p>
 
 	<div class="code">
 		/
 	</div>
-
-	<p>
-        The Linux directory tree is defined
-		in the <a href="https://refspecs.linuxfoundation.org/fhs.shtml">Linux Filesystem Heirarchy Standard</a>,
-		but note that this is a "follow along standard":  It attempts to codify the
-		Linux filesystem as it usually appears, and does not aim to arbitrarily impose a
-		standard prior to implementation.
-		In particular, the <code>/proc</code> filesystem has not yet been described.
-		For a more thorough discussion of the directory tree than presented here, see
-		<a href="https://www.tldp.org/LDP/sag/html/dir-tree-overview.html">The Linux System Admintrator's Guide</a>.
-	</p>
 
 	<p>
 		Within any GNU/Linux distribution, some common themes will be found.
@@ -143,6 +131,18 @@ last-updated: June, 2020
 		These contain binary executable files (programs), which
         can be ran as commands from the shell.
     </p>
+
+    <div class="aside-right">
+      <h4>Aside</h4>
+      <p>
+        The <a href="https://refspecs.linuxfoundation.org/fhs.shtml">Linux Filesystem Heirarchy Standard</a>
+        officially describes the Linux filesystem.  It is a "follow along standard":
+        It codifies the Linux filesystem as it commonly appears (at time of publication),
+        and does not arbitrarily impose a standard prior to implementation.
+        For instance, while the <code>/proc</code> virtual filesystem is lauded by the standard,
+        it <a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch06.html#procKernelAndProcessInformationVir">has not yet been described</a>.
+    </p>
+    </div>
 
     <p>
         The directory <code>/etc</code> (usually read "<em>et</em>-c") contains host-specific
@@ -194,6 +194,11 @@ last-updated: June, 2020
 		<li><code><a href="http://man7.org/linux/man-pages/man8/lspci.8.html">lspci</a></code> - List all PCI devices </li>
 		<li><code><a href="http://man7.org/linux/man-pages/man8/lsmod.8.html">lsmod</a></code> - Show the status of modules in the Linux Kernel </li>
 	</ul>
+
+  <p>
+    For a more thorough discussion of the directory tree than presented here, see
+    <a href="https://www.tldp.org/LDP/sag/html/dir-tree-overview.html">The Linux System Admintrator's Guide</a>.
+  </p>
 
 	<h3>See Also:</h3>
 		<ul>
@@ -337,12 +342,13 @@ last-updated: June, 2020
 		<div id="directories" class="content">
 			<h2>Directories</h2>
 			<p>
-				Directories form non-leaf nodes in the Unix/Linux directory tree.
+        Each non-leaf node in the
+				Directories are non-leaf nodes of the Unix/Linux directory tree (Bach, 6).
 
 
 
 			<p>
-				A directory is implemented in Linux as a file with two columns:
+				A directory is implemented, conceptually, as a file containing a table with two columns:
 				Filename and inode number.
 				We list the contents of a directory with the usual <code>ls</code> command;
 				we can list a file's inode number using <code>ls -i</code>:
