@@ -15,7 +15,7 @@ Overarching Goal:
 2)  Package Managers -> Up-front and center!
 3)  The Linux Directory Tree
 4)  Processes
-4)  Shells
+4)  The Command Line
 6)	An Introduction to Vim
 7)  Text Terminals-> Rewrite?
 8)	Finding Files
