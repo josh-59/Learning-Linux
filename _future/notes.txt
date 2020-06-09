@@ -38,6 +38,11 @@ Overarching Goal:
 
 	https://www.youtube.com/watch?v=VetI2lr2LNA&list=RDMMCCY0bAPLZ1w&index=27
 
+	And All Was Right With The World
+		(Uniform system-call interfaces)
+		- A lot of fucking work went into that
+		- Is characteristic of good software
+
 
 Improvements:
 	For the love of god, make regex a virtual package!

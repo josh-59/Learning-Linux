@@ -13,7 +13,8 @@ last-updated: June, 2020
         <li><a href="#mounting-unmounting"> Mounting and Unmounting</a></li>
         <li><a href="#regular-files"> Regular Files </a></li>
         <li><a href="#directories"> Directories </a></li>
-		<li><a href="#engineer-man"> Engineer Man </a></li>
+        <li><a href="#closing-remarks"> Closing Remarks </a></li>
+		    <li><a href="#engineer-man"> Engineer Man </a></li>
         <li><a href="#references"> References </a></li>
         <li><a href="#credits">Credits and Licenses</a></li>
     </ul>
@@ -90,7 +91,7 @@ last-updated: June, 2020
                 Oracle.<sup><a href="https://en.wikipedia.org/wiki/ZFS">[2]</a></sup>
                 It was intended for enterprise use, and is
                 <a href="https://en.wikipedia.org/wiki/ZFS#Inappropriately_specified_systems">relatively easy to configure improperly.</a>
-                Also, it is <a href="https://wiki.archlinux.org/index.php/ZFS">not free.</a>
+                Also, ZFS is <a href="https://wiki.archlinux.org/index.php/ZFS">not free</a>.
             </p>
         </li>
 
@@ -120,7 +121,7 @@ last-updated: June, 2020
 
   <p>
     A key feature of the architecture of the System V filesystem
-    is the <em>inode</em>.
+    was the <em>inode</em>.
     This feature has been retained throughout the Extended Filesystem,
     and is a key to understanding files in Linux.
     The inode of a file is the unique on-disk reference to the file; it contains
@@ -180,7 +181,7 @@ last-updated: June, 2020
       <p>
         The <a href="https://refspecs.linuxfoundation.org/fhs.shtml">Linux Filesystem Heirarchy Standard</a>
         officially describes the Linux filesystem.  It is a "follow along standard":
-        It codifies the Linux filesystem as it commonly appears (at time of publication),
+        It codifies the Linux filesystem as it commonly appears at the time of its publication,
         and does not arbitrarily impose a standard prior to implementation.
         For instance, while the <code>/proc</code> virtual filesystem is lauded by the standard,
         it <a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch06.html#procKernelAndProcessInformationVir">has not yet been described</a>.
@@ -309,15 +310,15 @@ last-updated: June, 2020
         <h2>Regular Files</h2>
 
 		<p>
-			In Unix, a file is a sequence of bytes (Kernighan, 62).
+			In Unix, a file was a sequence of bytes (Kernighan, 62).
 			This definition is sufficiently abstract to allow, for instance, a keyboard
-			to appear as a file.
-			The kernel facilitates reading and writing of files,
-			and otherwise refrains from interjection.
-			This approach was quite novel for its time; earlier
+			(or directory) to appear as a file.
+			Ken Thompson's <em>Unix</em> kernel facilitated reading and writing of files,
+			but otherwise refrained from interjection.
+			This approach was quite novel for its time: Earlier
 			operating systems interposed upon the handling of files, so that
 			some files could only be read by some programs, and not by others (Kernighan, 62).
-			In my opinion, this begins <a href="https://en.wikipedia.org/wiki/Unix_philosophy">"The Unix Philosophy."</a>
+      In my opinion, this uniformity begins <a href="https://en.wikipedia.org/wiki/Unix_philosophy">"The Unix Philosophy."</a>
 		</p>
 
     <p>
@@ -342,7 +343,7 @@ last-updated: June, 2020
 			They are:
 			<code>read</code>, <code>write</code> and <code>execute</code> for each,
 			<em>owner</em>, <em>group</em>, <em>everyone else</em>.
-			These bits and other meta-data are maintained on-disk.
+			These bits, and other metadata, are maintained on-disk.
 		</p>
 
 		<p>
@@ -466,6 +467,7 @@ last-updated: June, 2020
 
     <div class="content" id="closing-remarks" link-name="Closing Remarks">
       <h2>Closing Remarks</h2>
+      <h3> Filesystem vs. Directory Tree</h3>
       <p>
         The terms <em>filesystem</em> and <em>directory tree</em> were developed here
         precisely, in order to make a clear distinction between the two.
@@ -479,16 +481,43 @@ last-updated: June, 2020
       </p>
 
       <p>
-        Where the overlap between <em>filesystem</em> and <em>directory tree</em> is
-        valid is, a given filesystem must entertain exactly one directory tree.
+        The terms <em>filesystem</em> and <em>directory tree</em> overlap, somewhat:
+        A given filesystem must entertain exactly one directory tree.
         Because of this, a directory tree is implied by each filesystem;
         this is the sense in which it is valid to say, "We are going to mount
         a filesystem at <code>/home</code>," when in fact we mean,
-        "We are going to mount the filesystem's directory tree at <code>/home</code>."
+        "We are going to mount a filesystem's directory tree at <code>/home</code>."
+      </p>
+
+      <h3>Linux Virtual File System (Kernel Subsystem)</h3>
+      <p>
+        The above discussion gives rise to a few questions:
+      </p>
+
+      <ol>
+        <li> How can the Linux operating system support multiple filesystems? </li>
+        <li> How can it do so simultaneously?  </li>
+        <li> How does it handle filesystems that <em>do not</em> use inodes?</li>
+      </ol>
+
+      <p>
+        The answer to each of these is the <a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">
+        Linux Virtual File System</a> (VFS), a kernel subsystem that acts,
+        essentially, as a driver for filesystems.
+        Whereas each filesystem type may implement its own functionality,
+        most functionality is common;
+        the Virtual Filesystem Switch provides both kernel-space threads and user-space processes with
+        a uniform system call interface.
       </p>
 
       <p>
-
+        As for inodes, a more formal definition is given by kernel.org:
+        "An inode object represents an object within the filesystem."<sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html#id1">[10]</a></sup>
+        That is, on filesystems that do not use inodes, they are imposed virtually by
+        the VFS, as a means of representing files.
+        As a consequence, the discussion about inodes given above remains
+        at least conceptually correct, when EXT2/EXT3/EXT4 are not being employed.
+      </p>
 
 
     </div>
