@@ -152,7 +152,7 @@ last-updated: June, 2020
 </div>
 
 <div id="directory-tree" class="content">
-    <h2> Directory Tree</h2>
+    <h2> The Linux Directory Tree</h2>
 
 	<p>
     Filesystems describe how files are stored;
@@ -463,6 +463,35 @@ last-updated: June, 2020
 			</ul>
 
 		</div>
+
+    <div class="content" id="closing-remarks" link-name="Closing Remarks">
+      <h2>Closing Remarks</h2>
+      <p>
+        The terms <em>filesystem</em> and <em>directory tree</em> were developed here
+        precisely, in order to make a clear distinction between the two.
+        Part of the reason for this is a reaction by the author to common usage of the
+        term <em>filesystem</em> as a catch-all for "all things whatever file (on disk)."
+        I feel confident in the development of these terms in virtue of
+        1) The development of the term "filesystem" in
+        <a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">An Introduction to Disk Partitions</a>, by Fedora,
+        a leading-edge development community of Linux, and
+        2) the mathematical definition of "tree".
+      </p>
+
+      <p>
+        Where the overlap between <em>filesystem</em> and <em>directory tree</em> is
+        valid is, a given filesystem must entertain exactly one directory tree.
+        Because of this, a directory tree is implied by each filesystem;
+        this is the sense in which it is valid to say, "We are going to mount
+        a filesystem at <code>/home</code>," when in fact we mean,
+        "We are going to mount the filesystem's directory tree at <code>/home</code>."
+      </p>
+
+      <p>
+
+
+
+    </div>
 
 		<div id="engineer-man" class="content">
 			<h2>Engineer Man</h2>
