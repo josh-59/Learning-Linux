@@ -40,10 +40,10 @@ last-updated: June, 2020
     <p>
         This file-first approach to operating system design is found in
         the implementation as well as the history of Unix and its derivatives:
-		Unix and its derivatives use files for many things.
-		As such, there is a lot to be said about files.
-        This paper introduces the notion of a filesystem, and
-        discusses the directory structure implemented with it.
+    		Unix and its derivatives use files for many things.
+    		As such, there is a lot to be said about files.
+        This paper introduces the <em>filesystem</em>, and
+        discusses the directory structure implemented on top of it.
     </p>
 </div>
 
@@ -60,24 +60,32 @@ last-updated: June, 2020
         <h3>Some Common Filesystems:</h3>
         <li>
             <p>
-                EXT4:
-                Introduced in 2008,<sup><a href="https://en.wikipedia.org/wiki/Ext4">[1]</a></sup> EXT4 is the most common filesystem used on Linux
-                today.  It is an evolutionary enhancement on EXT3,
+                <strong>EXT4</strong>:
+                Introduced in 2008,<sup><a href="https://en.wikipedia.org/wiki/Ext4">[1]</a></sup> EXT4 is
+                the current standard Linux filesystem.
+                It is an evolutionary enhancement on EXT3,
                 supporting larger filesizes, deeper subdirectory support,
                 faster handling of large files, along with many other improvements.<sup><a href="https://ext4.wiki.kernel.org/index.php/Ext4_Disk_Layout">[3]</a></sup>
                 It is mature, fast, and stable.
             </p>
         </li>
 
+        <div class="aside-right">
+          <h4>Aside</h4>
+          <p>
+            Linux supports many filesystems&mdash; <a href="https://www.man7.org/linux/man-pages/man8/fdisk.8.html"><code>fdisk</code></a> lists 73 known partition types.
+          </p>
+        </div>
+
         <li>
             <p>
-                ZFS:
+                <strong>ZFS</strong>:
 					"Don't use ZFS.  It's that simple." &mdash;<a href="https://www.realworldtech.com/forum/?threadid=189711&curpostid=189841">Linus Torvalds</a>.
 			</p>
 
 			<p>
 				Introduced in 2005,<sup><a href="https://en.wikipedia.org/wiki/ZFS">[2]</a></sup> ZFS incorporates fancier features that are generally
-                out of place on an ordinary Linux desktop.
+                out of place on a Linux desktop.
                 It was developed by Sun Microsystems, and became closed-source with Sun's acquisition by
                 Oracle.<sup><a href="https://en.wikipedia.org/wiki/ZFS">[2]</a></sup>
                 It was intended for enterprise use, and is
@@ -88,7 +96,7 @@ last-updated: June, 2020
 
         <li>
             <p>
-                FAT32: The "File Allcoation Table 32-bit" is a DOS-era filesystem,<sup><a href="https://en.wikipedia.org/wiki/File_Allocation_Table#FAT32">[3]</a></sup>
+                <strong>FAT32</strong>: The "File Allcoation Table 32-bit" is a DOS-era filesystem,<sup><a href="https://en.wikipedia.org/wiki/File_Allocation_Table#FAT32">[3]</a></sup>
                 and is widely supported, though antiquated.
                 In particular, it is not a <a href="https://en.wikipedia.org/wiki/Journaling_file_system">journaling filesystem</a>,
                 so that changes to data are not recorded before being carried out (increasing the likelihood of
@@ -98,15 +106,48 @@ last-updated: June, 2020
         </li>
     </ul>
 
-	<p>
-		Users of Linux don't often interact with the filesystem;
-		the term was developed here to make a precise distinction between
-		<em>filesystem</em> and <em>directory tree</em>.
+  <p>
+    System V Unix implemented a filesystem as an integral part of the operating system;
+    it was unnamed, though well-documented (by, for instance, Maurice J. Bach in <em>The Design of the Unix Operating System</em>).
+    The Extended Filesystem (EXT) was an open-source variant, and retained many distinctive features of the original;
+    since then, EXT2, EXT3, and EXT4 have continued to improve upon the design.
+    Each new filesystem in the series is an evolutionary improvement over the previous:
+    EXT3 implemented journaling, which reduces data corruption of data in the event of power-loss;
+    EXT4 supports a maximum filesize of 16TiB, whereas EXT3 supported a maximum filesize of 2TiB.
+  </p>
+
+  <h3> inodes </h3>
+
+  <p>
+    A key feature of the architecture of the System V filesystem
+    is the <em>inode</em>.
+    This feature has been retained throughout the Extended Filesystem,
+    and is a key to understanding files in Linux.
+    The inode of a file is the unique on-disk reference to the file; it contains
+    information describing where the data of the file is (data block references),
+    in addition to metadata about the file, including its size, access permissions
+    and timestamps.
 	</p>
+
+  <p>
+    The set of all inodes in a filesystem is organized in an array; this array
+    is located at the beginning of the partition.
+    An inode number is an index into this array, and therefore serves as a
+    reference to a unique inode.
+    Each inode (and therefore each file) has a unique inode number.
+  </p>
+
+  <p>
+    inode numbers serve as the "hardware name" of a file.
+    They will become important
+    as we discuss directories (which link a filename to an inode number).
+  </p>
 
 	<h3> See Also: </h3>
 	<ul>
 		<li> <a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">An Introduction to Disk Partitions - Fedora Docs Site </a> </li>
+    <li> <a href="http://web.mit.edu/tytso/www/linux/ext2intro.html"> Design and Implementation of the Second Extended Filesystem </a></li>
+    <li> <a href="http://www.tldp.org/HOWTO/Filesystems-HOWTO-6.html"> Filesystems HOWTO: Extended Filesystems (Ext, Ext2, Ext3) </a> The Linux Documentation Project</li>
 	</ul>
 </div>
 
@@ -116,7 +157,7 @@ last-updated: June, 2020
 	<p>
     Filesystems describe how files are stored;
     among files are directories, which list other files.
-    These listings may be connected in an arbitrary manner, forming a directory structure.
+    Directories may list one another, forming a directory structure.
     On Linux, that structure is a tree of files, also known as a hierarchy.
 		It begins at "root," denoted by a forward-slash:
 	</p>
@@ -279,12 +320,12 @@ last-updated: June, 2020
 			In my opinion, this begins <a href="https://en.wikipedia.org/wiki/Unix_philosophy">"The Unix Philosophy."</a>
 		</p>
 
-        <p>
-            Regular files contain data.
-			The Linux kernel continues the Unix philosophy by treating text files, programs, movies,
-            source code, pdf's, etc., identically;
-            any "special treatment," is implemented by user-space processes.
-            Approximately 80% of files are regular files (Stevens, 98).
+    <p>
+        Regular files contain data.
+	      The Linux kernel continues the Unix philosophy by treating text files, programs, movies,
+        source code, pdf's, etc., identically;
+        any "special treatment," is implemented by user-space processes.
+        Approximately 80% of files are regular files (Stevens, 98).
 		</p>
 
 		<p>
@@ -340,7 +381,7 @@ last-updated: June, 2020
 			<h2>Directories</h2>
 
 			<p>
-				A directory is implemented, conceptually, as a file containing a table with two columns:
+				A directory is, conceptually, a file containing a table with two columns:
 				Filename and inode number.
 				We list the contents of a directory with the usual <code>ls</code> command,
         and can list a file's inode number using <code>ls -i</code>:
@@ -400,7 +441,7 @@ last-updated: June, 2020
         <h4>Aside</h4>
         <p style="margin-bottom: 0">
           The directory tree is the responsibility of the kernel, so that
-          user-space applications are not permitted to read or write
+          user-space processes are not permitted to read or write
           directly to directory files.
           Specific system calls exist to
           <ul style="padding-left: 20px; margin-top: 0">
