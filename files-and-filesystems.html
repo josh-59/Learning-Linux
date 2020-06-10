@@ -108,12 +108,12 @@ last-updated: June, 2020
     </ul>
 
   <p>
-    System V Unix implemented a filesystem as an integral part of the operating system;
+    System V Unix implemented its filesystem as an integral part of the operating system;
     it was unnamed, though well-documented (by, for instance, Maurice J. Bach in <em>The Design of the Unix Operating System</em>).
     The Extended Filesystem (EXT) was an open-source variant, and retained many distinctive features of the original;
     since then, EXT2, EXT3, and EXT4 have continued to improve upon the design.
     Each new filesystem in the series is an evolutionary improvement over the previous:
-    EXT3 implemented journaling, which reduces data corruption of data in the event of power-loss;
+    EXT3 implemented journaling, which reduces data corruption in the event of power-loss;
     EXT4 supports a maximum filesize of 16TiB, whereas EXT3 supported a maximum filesize of 2TiB.
   </p>
 
@@ -132,7 +132,7 @@ last-updated: June, 2020
 
   <p>
     The set of all inodes in a filesystem is organized in an array; this array
-    is located at the beginning of the partition.
+    is located near the beginning of the partition.
     An inode number is an index into this array, and therefore serves as a
     reference to a unique inode.
     Each inode (and therefore each file) has a unique inode number.
@@ -149,17 +149,18 @@ last-updated: June, 2020
 		<li> <a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">An Introduction to Disk Partitions - Fedora Docs Site</a></li>
     <li> <a href="http://web.mit.edu/tytso/www/linux/ext2intro.html"> Design and Implementation of the Second Extended Filesystem</a> (Discusses inodes)</li>
     <li> <a href="http://www.tldp.org/HOWTO/Filesystems-HOWTO-6.html"> Filesystems HOWTO: Extended Filesystems (Ext, Ext2, Ext3) - The Linux Documentation Project</a></li>
+    <li> <a href="https://www.tldp.org/LDP/tlk/fs/filesystem.html"> The Linux Kernel - The File System - The Linux Documentation Project</a> (Discusses EXT2)</li>
 	</ul>
 </div>
 
 <div id="directory-tree" class="content">
-    <h2> The Linux Directory Tree</h2>
+    <h2> Directory Tree</h2>
 
 	<p>
     Filesystems describe how files are stored;
     among files are directories, which list other files.
     Directories may list one another, forming a directory structure.
-    On Linux, that structure is a tree of files, also known as a hierarchy.
+    On Linux, that structure is a heirarchy of files, also known as a tree.
 		It begins at "root," denoted by a forward-slash:
 	</p>
 
