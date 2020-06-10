@@ -49,3 +49,9 @@ Process-specific environments
         Command: Printenv: can be called by any process,
                             prints the environment inherited from that process
                             (which is given to printenv).
+
+Inter-process communication:
+		- Since each process has its own memory, sending messages between
+			processes is not as simple as "select the process and write to its memory";
+			Channels of inter-process communication must be supported by operating system,
+			and then used appropriately by processes.

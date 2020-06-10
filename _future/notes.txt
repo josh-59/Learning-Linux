@@ -13,7 +13,7 @@ Overarching Goal:
 		kernel / coreutils fundamentals, the same ethos (make small tools and make them well),
 		the same open-ness
 2)  Package Managers -> Up-front and center!
-3)  The Linux Directory Tree
+3)  Files and Filesystems
 4)  Processes
 4)  The Command Line
 6)	An Introduction to Vim
