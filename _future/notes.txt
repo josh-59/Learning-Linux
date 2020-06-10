@@ -48,3 +48,12 @@ Improvements:
 	For the love of god, make regex a virtual package!
 	Then programers can reference whichever engine is installed, and
 	users can choose their engine by installing the appropriate package -> Unify regex across systems.
+
+	Printers and Scanners
+
+	Preload common applications:
+		With modern desktops having an overabundance of RAM, allow the user to
+		specify some applications' text data segment to be preloaded into memory,
+		until the kernel begins to run out of memory.
+		Then distribution creators could implement a tool to allow the user to modify this
+		list (and/or base it on history).
