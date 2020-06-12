@@ -1,4 +1,12 @@
 
+Shell:
+  while(true) {
+    print_prompt();
+    get_line();
+    parse_line();
+    execute(line);
+  }
+
 Random useful man-pages
 man heir
 man ascii
@@ -10,3 +18,6 @@ Kernighan page 132:
     Invented by John Mashey and introduced in the 6th edition shell,
     it was a workaround so that non-expert users could
     share their own sets of commands by lab, department and group.
+
+Discuss difference between shell variables and environment variables
+    (the function of export)
