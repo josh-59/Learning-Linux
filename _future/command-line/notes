@@ -2,3 +2,11 @@
 Random useful man-pages
 man heir
 man ascii
+
+Kernighan: Commands are verbs, and files are nouns, p 71
+
+PATH environment variable:
+Kernighan page 132:
+    Invented by John Mashey and introduced in the 6th edition shell,
+    it was a workaround so that non-expert users could
+    share their own sets of commands by lab, department and group.
