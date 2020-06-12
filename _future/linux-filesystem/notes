@@ -1,11 +1,3 @@
-
-
-
-
-
-
-
-
 "dotfiles"
 Configuration files
 https://fedoramagazine.org/take-back-your-dotfiles-with-chezmoi/
@@ -27,23 +19,10 @@ Directories
     char *getcwd(char *buf, size_t size);
       // Starts at current directory, gets name via '.', then travels up (via '..'),
       and repeats.
-
     +x "search" permission
 
-.
-
-Kernighan: Commands are verbs, and files are nouns, p 71
-
-
 inode:
-  Sources:
     man inode
-    APUE
-    The Design of the Unix Operating System
-
-
-  File "handle"
-  Placed at the beginning of the logical partition
 
   For each file these exists a unique inode containing metadata about the file:
     owner
@@ -58,32 +37,5 @@ inode:
     disk addresses
       (The design of the unix operating system)
 
-  inode number -> index into array
-  Since neither links nor data addresses can cross disk partition
-  boundaries, the inode number is sufficient to uniquely identify an inode.
-
-
-    PATH environment variable:
-    Kernighan page 132:
-        Invented by John Mashey and introduced in the 6th edition shell,
-        it was a workaround so that non-expert users could
-        share their own sets of commands by lab, department and group.
-
-    Kernighan:
-
-
-
-SOURCES
-
-// Unreadable       https://www.tldp.org/LDP/Linux-Filesystem-Hierarchy/html/dev.html
-https://unix.stackexchange.com/questions/18239/understanding-dev-and-its-subdirs-and-files
-
-http://www.tldp.org/LDP/intro-linux/html/sect_03_01.html
-
-https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/
-
 embed:
 https://www.youtube.com/watch?v=mV_8GbzwZMM
-
-
-      <li><a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/"> An Introduction to Disk Partitions </a></li>
