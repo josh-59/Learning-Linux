@@ -6,115 +6,113 @@ last-updated: June, 2020
 
 <!-- To Do: Citation needed in "regular files" -> heirarchical filestructure taken from Multics-->
 <div id="nav_bar_2" class="nav">
-    <ul>
-        <li><a href="#introduction"> Introduction </a></li>
-        <li><a href="#filesystems"> Filesystems </a></li>
-        <li><a href="#directory-tree"> Directory Tree </a></li>
-        <li><a href="#mounting-unmounting"> Mounting and Unmounting</a></li>
-        <li><a href="#regular-files"> Regular Files </a></li>
-        <li><a href="#directories"> Directories </a></li>
-        <li><a href="#closing-remarks"> Closing Remarks </a></li>
-		    <li><a href="#engineer-man"> Engineer Man </a></li>
-        <li><a href="#references"> References </a></li>
-        <li><a href="#credits">Credits and Licenses</a></li>
-    </ul>
+  <ul>
+    <li><a href="#introduction"> Introduction </a></li>
+    <li><a href="#filesystems"> Filesystems </a></li>
+    <li><a href="#directory-tree"> Directory Tree </a></li>
+    <li><a href="#mounting-unmounting"> Mounting and Unmounting</a></li>
+    <li><a href="#regular-files"> Regular Files </a></li>
+    <li><a href="#device-files"> Device Special Files </a></li>
+    <li><a href="#directories"> Directories </a></li>
+    <li><a href="#closing-remarks"> Closing Remarks </a></li>
+    <li><a href="#engineer-man"> Engineer Man </a></li>
+    <li><a href="#references"> References </a></li>
+    <li><a href="#credits">Credits and Licenses</a></li>
+  </ul>
 </div>
 
 <div id="introduction" class="content">
-    <h1>Files and Filesystems</h1>
-    <!-- <h4>"In the beginning, the file was without form, and void;
-	and emptiness was upon the face of the bits.
-	And the Fingers of the Author moved upon the face of the keyboard.
-	And the Author said, Let there be words, and there were words.".</h4> -->
-    <h4>Under Construction!</h4>
+  <h1>Files and Filesystems</h1>
+  <!-- <h4>"In the beginning, the file was without form, and void;
+  and emptiness was upon the face of the bits.
+  And the Fingers of the Author moved upon the face of the keyboard.
+  And the Author said, Let there be words, and there were words.".</h4> -->
+  <h4>Under Construction!</h4>
 
-    <p>
-        Unix began life as a filesystem (Kernighan 33-34).  Shortly thereafter, a means
-        of interacting with it was created&mdash; initially,
-		    this consisted of the <code>exec</code>
-        system call, a shell, a text editor and an assembler.
-        Written entirely by Ken Thompson, these key components formed the nexus of
-        the time-sharing operating system that would eventually be called
-        <em>Unix</em>.
-    </p>
+  <p>
+    Unix began life as a filesystem (Kernighan 33-34).  Shortly thereafter, a means
+    of interacting with it was created&mdash; initially,
+    this consisted of the <code>exec</code>
+    system call, a shell, a text editor and an assembler.
+    Written entirely by Ken Thompson, these key components formed the nexus of
+    the time-sharing operating system that would eventually be called
+    <em>Unix</em>.
+  </p>
 
-    <p>
-        This file-first approach to operating system design is found in
-        the implementation as well as the history of Unix and its derivatives:
-    		Unix and its derivatives use files for many things.
-    		As such, there is a lot to be said about files.
-        This paper introduces the <em>filesystem</em>, and
-        discusses the directory structure implemented on top of it.
-    </p>
+  <p>
+    This file-first approach to operating system design is found in
+    the implementation as well as the history of Unix and its derivatives:
+    Unix and its derivatives use files for many things.
+    As such, there is a lot to be said about files.
+    This paper introduces the <em>filesystem</em>, and
+    discusses the directory structure implemented on top of it.
+  </p>
 </div>
 
 <div id="filesystems" class="content">
-    <h2> Filesystems </h2>
-    <p>
-        A filesystem is a systematic method of organizing data on disk.<sup><a href="https://wiki.osdev.org/Filesystem">[1]</a><a href="https://wiki.archlinux.org/index.php/File_systems">[2]</a></sup>
-        Conceptually, it is similar to a data structure, in that it defines a convention
-        to be followed in the storing and retrieval of data, in the form of files.
-        Preparing a drive for use by a particular filesystem is known as formatting.
-    </p>
+  <h2> Filesystems </h2>
+  <p>
+    A filesystem is a systematic method of organizing data on disk.<sup><a href="https://wiki.osdev.org/Filesystem">[1]</a><a href="https://wiki.archlinux.org/index.php/File_systems">[2]</a></sup>
+    Conceptually, it is similar to a data structure, in that it defines a convention
+    to be followed in the storing and retrieval of data, in the form of files.
+    Preparing a drive for use by a particular filesystem is known as formatting.
+  </p>
 
-    <ul>
-        <h3>Some Common Filesystems:</h3>
-        <li>
-            <p>
-                <strong>EXT4</strong>:
-                Introduced in 2008,<sup><a href="https://en.wikipedia.org/wiki/Ext4">[1]</a></sup> EXT4 is
-                the current standard Linux filesystem.
-                It is an evolutionary enhancement on EXT3,
-                supporting larger filesizes, deeper subdirectory support,
-                faster handling of large files, along with many other improvements.<sup><a href="https://ext4.wiki.kernel.org/index.php/Ext4_Disk_Layout">[3]</a></sup>
-                It is mature, fast, and stable.
-            </p>
-        </li>
+  <ul>
+    <h3>Some Common Filesystems:</h3>
+    <li>
+      <p>
+        <strong>EXT4</strong>:
+        Introduced in 2008,<sup><a href="https://en.wikipedia.org/wiki/Ext4">[1]</a></sup> Ext4 is
+        the current standard Linux filesystem.
+        It is an evolutionary enhancement on EXT3,
+        supporting larger filesizes, deeper subdirectory support,
+        faster handling of large files, along with many other improvements.<sup><a href="https://ext4.wiki.kernel.org/index.php/Ext4_Disk_Layout">[3]</a></sup>
+        It is mature, fast, and stable.
+      </p>
+    </li>
 
-        <div class="aside-right">
-          <h4>Aside</h4>
-          <p>
-            Linux supports many filesystems&mdash; <a href="https://www.man7.org/linux/man-pages/man8/fdisk.8.html"><code>fdisk</code></a> lists 73 known partition types.
-          </p>
-        </div>
+    <div class="aside-right">
+      <h4>Aside</h4>
+      <p>
+        Linux supports many filesystems&mdash; <a href="https://www.man7.org/linux/man-pages/man8/fdisk.8.html"><code>fdisk</code></a> lists 73 known partition types.
+      </p>
+    </div>
 
-        <li>
-            <p>
-                <strong>ZFS</strong>:
-					"Don't use ZFS.  It's that simple." &mdash;<a href="https://www.realworldtech.com/forum/?threadid=189711&curpostid=189841">Linus Torvalds</a>.
-			</p>
+    <li>
+      <p>
+        <strong>ZFS</strong>:
+        "Don't use ZFS.  It's that simple." &mdash;<a href="https://www.realworldtech.com/forum/?threadid=189711&curpostid=189841">Linus Torvalds</a>.
+      </p>
 
-			<p>
-				Introduced in 2005,<sup><a href="https://en.wikipedia.org/wiki/ZFS">[2]</a></sup> ZFS incorporates fancier features that are generally
-                out of place on a Linux desktop.
-                It was developed by Sun Microsystems, and became closed-source with Sun's acquisition by
-                Oracle.<sup><a href="https://en.wikipedia.org/wiki/ZFS">[2]</a></sup>
-                It was intended for enterprise use, and is
-                <a href="https://en.wikipedia.org/wiki/ZFS#Inappropriately_specified_systems">relatively easy to configure improperly.</a>
-                Also, ZFS is <a href="https://wiki.archlinux.org/index.php/ZFS">not free</a>.
-            </p>
-        </li>
+      <p>
+        Introduced in 2005,<sup><a href="https://en.wikipedia.org/wiki/ZFS">[2]</a></sup> ZFS incorporates fancier features that are generally
+        out of place on a Linux desktop.
+        It was developed by Sun Microsystems, and became closed-source with Sun's acquisition by
+        Oracle.<sup><a href="https://en.wikipedia.org/wiki/ZFS">[2]</a></sup>
+        It was intended for enterprise use, and is
+        <a href="https://en.wikipedia.org/wiki/ZFS#Inappropriately_specified_systems">relatively easy to configure improperly.</a>
+        Also, ZFS is <a href="https://wiki.archlinux.org/index.php/ZFS">not free</a>.
+      </p>
+    </li>
 
-        <li>
-            <p>
-                <strong>FAT32</strong>: The "File Allcoation Table 32-bit" is a DOS-era filesystem,<sup><a href="https://en.wikipedia.org/wiki/File_Allocation_Table#FAT32">[3]</a></sup>
-                and is widely supported, though antiquated.
-                In particular, it is not a <a href="https://en.wikipedia.org/wiki/Journaling_file_system">journaling filesystem</a>,
-                so that changes to data are not recorded before being carried out (increasing the likelihood of
-                corruption in the event of, say, power outage).
-                This format is often used to hold the bootloader, since it is virtually guaranteed to be supported by firmware.
-            </p>
-        </li>
-    </ul>
+    <li>
+      <p>
+        <strong>FAT32</strong>: The "File Allcoation Table 32-bit" is a DOS-era filesystem,<sup><a href="https://en.wikipedia.org/wiki/File_Allocation_Table#FAT32">[3]</a></sup>
+        and is widely supported, though antiquated.
+        In particular, it is not a <a href="https://en.wikipedia.org/wiki/Journaling_file_system">journaling filesystem</a>,
+        so that changes to data are not recorded before being carried out (increasing the likelihood of
+        corruption in the event of, say, power outage).
+        This format is often used to hold the bootloader, since it is virtually guaranteed to be supported by firmware.
+      </p>
+    </li>
+  </ul>
 
   <p>
     System V Unix implemented its filesystem as an integral part of the operating system;
     it was unnamed, though well-documented (by, for instance, Maurice J. Bach in <em>The Design of the Unix Operating System</em>).
-    The Extended Filesystem (EXT) was an open-source variant, and retained many distinctive features of the original;
-    since then, EXT2, EXT3, and EXT4 have continued to improve upon the design.
-    Each new filesystem in the series is an evolutionary improvement over the previous:
-    EXT3 implemented journaling, which reduces data corruption in the event of power-loss;
-    EXT4 supports a maximum filesize of 16TiB, whereas EXT3 supported a maximum filesize of 2TiB.
+    The Extended Filesystem (Ext) was an open-source variant, and retained many distinctive features of the original;
+    since then, Ext2, Ext3, and Ext4 have continued to improve upon the design.
   </p>
 
   <h3> inodes </h3>
@@ -122,13 +120,13 @@ last-updated: June, 2020
   <p>
     A key feature of the architecture of the System V filesystem
     was the <em>inode</em>.
-    This feature has been retained throughout the Extended Filesystem,
+    This feature has been retained throughout the Extended Filesystem series,
     and is a key to understanding files in Linux.
     The inode of a file is the unique on-disk reference to the file; it contains
     information describing where the data of the file is (data block references),
     in addition to metadata about the file, including its size, access permissions
     and timestamps.
-	</p>
+  </p>
 
   <p>
     The set of all inodes in a filesystem is organized in an array; this array
@@ -144,365 +142,367 @@ last-updated: June, 2020
     as we discuss directories (which link a filename to an inode number).
   </p>
 
-	<h3> See Also: </h3>
-	<ul>
-		<li> <a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">An Introduction to Disk Partitions - Fedora Docs Site</a></li>
+  <h3> See Also: </h3>
+  <ul>
+    <li> <a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">An Introduction to Disk Partitions - Fedora Docs Site</a></li>
+    <li> <a href="https://ext4.wiki.kernel.org/index.php/Main_Page">Ext4 (and Ext2/Ext3) Wiki </a></li>
+    <li> <a href="https://youtu.be/lsFDp-W1Ks0"> What is ZFS?: A Brief Primer</a> (Youtube Video) </li>
     <li> <a href="http://web.mit.edu/tytso/www/linux/ext2intro.html"> Design and Implementation of the Second Extended Filesystem</a> (Discusses inodes)</li>
     <li> <a href="http://www.tldp.org/HOWTO/Filesystems-HOWTO-6.html"> Filesystems HOWTO: Extended Filesystems (Ext, Ext2, Ext3) - The Linux Documentation Project</a></li>
     <li> <a href="https://www.tldp.org/LDP/tlk/fs/filesystem.html"> The Linux Kernel - The File System - The Linux Documentation Project</a> (Discusses EXT2)</li>
-	</ul>
+  </ul>
 </div>
 
 <div id="directory-tree" class="content">
-    <h2> Directory Tree</h2>
+  <h2> Directory Tree</h2>
 
-	<p>
+  <p>
     Filesystems describe how files are stored;
     among files are directories, which list other files.
     Directories may list one another, forming a directory structure.
     On Linux, that structure is a heirarchy of files, also known as a tree.
-		It begins at "root," denoted by a forward-slash:
-	</p>
-
-	<div class="code">
-		/
-	</div>
-
-	<p>
-		Within any GNU/Linux distribution, some common themes will be found.
-        For instance, <code>bin</code> directories are found in several places, such as
-        <code>/bin</code> and <code>/sbin</code>, along with <code>/usr/bin</code> and often
-        <code>/home/user/bin</code>.
-		These contain binary executable files (programs), which
-        can be ran as commands from the shell.
-    </p>
-
-    <div class="aside-right">
-      <h4>Aside</h4>
-      <p>
-        The <a href="https://refspecs.linuxfoundation.org/fhs.shtml">Linux Filesystem Heirarchy Standard</a>
-        officially describes the Linux filesystem.  It is a "follow along standard":
-        It codifies the Linux filesystem as it commonly appears at the time of its publication,
-        and does not arbitrarily impose a standard prior to implementation.
-        For instance, while the <code>/proc</code> virtual filesystem is lauded by the standard,
-        it <a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch06.html#procKernelAndProcessInformationVir">has not yet been described</a>.
-    </p>
-    </div>
-
-    <p>
-        The directory <code>/etc</code> (usually read "<em>et</em>-c") contains host-specific
-        system configuration files; as a consequence, you can expect to fiddle
-		with the contents of this directory when configuring the system for the first time
-        (or otherwise).
-        It contains, for instance, files describing the configuration of the system's package
-        manager, printers, and, well, etcetera.
-    </p>
-
-	<p>
-		The directory tree is used as a general-purpose meeting place:
-		In addition to regular files, it also holds, for instance, references to hardware drivers,
-		and information about running processes.
-		This mechanism is general, extensible, and allows both users and programmers
-		access to the running machine; the only trick is keeping it organized.
-	</p>
-
-	<p>
-		The directory <code>/dev</code> contains files called <em>special device files</em>.<sup><a href="https://www.pathname.com/fhs/pub/fhs-2.3.pdf">[1]</a></sup>
-		Special device files represent a device connected to the system (or an aspect of one).
-		<code>/dev/sdb</code>, for instance, refers to a hard-disk.
-		More precisely, this file is our handle to a specific hard-disk's driver.
-		<code>/dev/sdb1</code> refers to the drive's first partition;
-		<code>/dev/sdb2</code> refers to the drive's second partition;
-		etc..
-	</p>
-
-	<p>
-		Among device special files, there are two distinct kinds:
-		<em>block</em> and <em>character</em>.
-		The distinction refers to the way that the kernel reads and writes to these files.
-		Character special files are operated on a single character at a time
-		(e.g., terminal screen), while block special files are operated on a block of
-		bytes at a time (usually, 4096 or 8192), as in a hard drive.
-	</p>
-
-	<p>
-		While there is too much going on in the <code>/dev</code> directory
-		to exhaust the subject here,
-		it's worth noting that utilities for displaying the current
-		system's hardware often begin with <code>ls</code>:
-	</p>
-
-	<ul>
-		<li><code><a href="http://man7.org/linux/man-pages/man8/lsblk.8.html">lsblk</a></code> - List block devices (hardrives, CD-drives, etc).  Useful to determine what drive to mount.</li>
-		<li><code><a href="http://man7.org/linux/man-pages/man1/lscpu.1.html">lscpu</a></code> - Display information about the CPU architecture </li>
-		<li><code><a href="http://man7.org/linux/man-pages/man8/lsusb.8.html">lsusb</a></code> - List usb devices </li>
-		<li><code><a href="http://man7.org/linux/man-pages/man8/lspci.8.html">lspci</a></code> - List all PCI devices </li>
-		<li><code><a href="http://man7.org/linux/man-pages/man8/lsmod.8.html">lsmod</a></code> - Show the status of modules in the Linux Kernel </li>
-	</ul>
-
-  <p>
-    For a more thorough discussion of the directory tree than presented here, see
-    <a href="https://www.tldp.org/LDP/sag/html/dir-tree-overview.html">The Linux System Admintrator's Guide</a>.
+    It begins at "root," denoted by a forward-slash:
   </p>
 
-	<h3>See Also:</h3>
-		<ul>
-			<li><a href="https://www.tldp.org/LDP/sag/html/dir-tree-overview.html">Overview of the Directory Tree: Linux System Administrator's Guide</a></li>
-			<li><a href="https://wiki.archlinux.org/index.php/Device_file">Device File - ArchWiki</a></li>
-		</ul>
-	</div>
+  <div class="code">
+    /
+  </div>
 
-	<div class="content" id="mounting-unmounting">
+  <p>
+    Within any GNU/Linux distribution, some common themes will be found.
+    For instance, <code>bin</code> directories are found in several places, such as
+    <code>/bin</code> and <code>/sbin</code>, along with <code>/usr/bin</code> and often
+    <code>/home/user/bin</code>.
+    These contain binary executable files (programs), such as <code>ls</code>, which
+    can be ran as commands from the shell.
+  </p>
 
-		<h2>Mounting and Unmounting</h2>
+  <p>
+    The directory <code>/etc</code> (usually read "<em>et</em>-c") contains host-specific
+    system configuration files; as a consequence, you can expect to fiddle
+    with the contents of this directory when configuring the system for the first time
+    (or otherwise).
+    It contains, for instance, files describing the configuration of the system's package
+    manager, printers, and, well, etcetera.
+  </p>
 
-	    <p>
-	        Unlike Windows systems, which create a new, distinct directory tree
-	        for each storage device on the system (<code>C:\, D:\</code>, etc.),
-	        Linux systems place a new filesystem's directory tree within the existing
-	        directory tree, in an operation called
-			<a href="https://www.man7.org/linux/man-pages/man8/mount.8.html"><em>mounting</em></a>.
-		</p>
+  <p>
+    The directory tree is used as a general-purpose meeting place:
+    In addition to regular files, it also holds, for instance, references to hardware drivers,
+    and information about running processes.
+    This mechanism is general, extensible, and allows both users and programmers
+    access to the running machine; the only trick is keeping it organized.
+  </p>
 
-		<p>
-			Let's take a look at the <code>mount</code> operation, for this is new.
-			Suppose you have a usb stick with some music on it, and you'd
-			like to access its contents.
-			After it's plugged into your computer, the hardware, then the kernel,
-			recognize it, but it may not be accessible:
-		</p>
+  <p>
+    The <a href="https://refspecs.linuxfoundation.org/fhs.shtml">Linux Filesystem Heirarchy Standard</a>
+    officially describes the Linux filesystem.  It is a "follow along standard":
+    It codifies the Linux filesystem as it commonly appears at the time of its publication,
+    and does not arbitrarily impose a standard prior to implementation.
+    For instance, while the <code>/proc</code> virtual filesystem is lauded by the standard,
+    it <a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch06.html#procKernelAndProcessInformationVir">has not yet been described</a>.
+  </p>
 
-		<img style="width:80%" src="assets/img/mounting.png">
+  <h3>See Also:</h3>
+  <ul>
+    <li><a href="https://www.tldp.org/LDP/sag/html/dir-tree-overview.html">Overview of the Directory Tree: Linux System Administrator's Guide</a></li>
+    <li><a href="https://wiki.archlinux.org/index.php/Device_file">Device File - ArchWiki</a></li>
+  </ul>
+</div>
 
-		<p>
-			When mounting new devices manually, the usual method is to identify the device
-			to be mounted with <code>lsblk</code>, then mount it with <code>sudo mount [DEVICE] [MOUNTPOINT]</code>.
-			The device to be mounted should be a partition, and can usually be determined by its size and
-			its mountpoint (which should be none).
-			The Linux Filesystem Hierarchy Standard provides two places to mount temporary
-			filesystems: <code>/mnt</code> and <code>/media/[user]</code>
-    </p>
+<div class="content" id="mounting-unmounting">
 
-    <p>
-			Similarly, to unmount a filesystem, we first identify the correct
-			partition with <code>lsblk</code>,
-			then unmount it with <a href="https://linux.die.net/man/8/umount"><code>sudo umount [DEVICE]</code></a>.
-		</p>
+  <h2>Mounting and Unmounting</h2>
 
-		<p>
-			A few details:
-			First, device names that appear in <code>/dev</code> or <code>lsblk</code>
-			<em>are not</em> guaranteed to be stable across reboots&mdash; The devices are named in the
-			order that they are found.
-			Second, when mounting a new filesystem, if any files exist at the
-			mount point, they will be "hidden" by the files of the new filesystem.
-			They are not deleted, and unmounting the new filesystem will "reveal" them again.
-		</p>
+  <p>
+    Unlike Windows systems, which create a new, distinct directory tree
+    for each storage device on the system (<code>C:\, D:\</code>, etc.),
+    Linux systems place a new filesystem's directory tree within the existing
+    directory tree, in an operation called
+    <a href="https://www.man7.org/linux/man-pages/man8/mount.8.html"><em>mounting</em></a>.
+  </p>
+
+  <p>
+    Let's take a look at the <code>mount</code> operation, for this is new.
+    Suppose you have a usb stick with some music on it, and you'd
+    like to access its contents.
+    After it's plugged into your computer, the hardware, then the kernel,
+    recognize it, but it may not be accessible:
+  </p>
+
+  <img style="width:80%" src="assets/img/mounting.png">
+
+  <p>
+    When mounting new devices manually, the usual method is to identify the device
+    to be mounted with <code>lsblk</code>, then mount it with
+    <a href="https://www.man7.org/linux/man-pages/man8/mount.8.html"><code>sudo mount DEVICE MOUNTPOINT</code></a>.
+    The device to be mounted should be a partition, and can usually be determined by its size and
+    its mountpoint (which should be none).
+    The Linux Filesystem Hierarchy Standard provides two places to mount temporary
+    filesystems: <code>/mnt</code> and <code>/media/[user]</code>
+  </p>
+
+  <p>
+    Similarly, to unmount a filesystem, we first identify the correct
+    partition with <code>lsblk</code>,
+    then unmount it with <a href="https://www.man7.org/linux/man-pages/man8/umount.8.html"><code>sudo umount PATH</code></a>,
+    where <code>PATH</code> is the location of the mounted filesystem.
+  </p>
+
+  <p>
+    A few details:
+    First, device names that appear in <code>/dev</code> or <code>lsblk</code>
+    <em>are not</em> guaranteed to be stable across reboots&mdash; The devices are named in the
+    order that they are found.
+    Second, when mounting a new filesystem, if any files exist at the
+    mount point, they will be "hidden" by the files of the new filesystem.
+    They are not deleted, and unmounting the new filesystem will "reveal" them again.
+    Finally, a filesystem must be not be in use to be unmounted; in particular,
+    you must <code>cd</code> out of it before calling <code>umount</code>.
+  </p>
 
 
-		<p>
-			In practice, most distributions automatically mount
-			usb sticks when they are plugged in.
-		</p>
+  <p>
+    In practice, most distributions automatically mount
+    usb sticks when they are plugged in.
+  </p>
 
 
 </div>
-    <div id="regular-files" class="content">
-        <h2>Regular Files</h2>
+<div id="regular-files" class="content">
+  <h2>Regular Files</h2>
 
-		<p>
-			In Unix, a file was a sequence of bytes (Kernighan, 62).
-			This definition is sufficiently abstract to allow, for instance, a keyboard
-			(or directory) to appear as a file.
-			Ken Thompson's <em>Unix</em> kernel facilitated reading and writing of files,
-			but otherwise refrained from interjection.
-			This approach was quite novel for its time: Earlier
-			operating systems interposed upon the handling of files, so that
-			some files could only be read by some programs, and not by others (Kernighan, 62).
-      In my opinion, this uniformity begins <a href="https://en.wikipedia.org/wiki/Unix_philosophy">"The Unix Philosophy."</a>
-		</p>
+  <p>
+    In Unix, a file was a sequence of bytes (Kernighan, 62).
+    This definition is sufficiently abstract to allow, for instance, a keyboard
+    to appear as a file.
+    Ken Thompson's <em>Unix</em> kernel facilitated reading and writing of files,
+    but otherwise refrained from interjection.
+    This approach was quite novel for its time: Earlier
+    operating systems interposed upon the handling of files, so that
+    some files could only be read by some programs, and not by others (Kernighan, 62).
+    In my opinion, this uniformity begins <a href="https://en.wikipedia.org/wiki/Unix_philosophy">"The Unix Philosophy."</a>
+  </p>
+
+  <p>
+    A regular file contains data which is stored on-disk.
+    The regular file is the prototypical "file" type;
+    approximately 80% of files are regular files (Stevens, 98).
+  </p>
+
+  <p>
+    In both Unix and Linux, each file has an owner, and belongs to a group.
+    Only the owner of a file can delete it.
+    Important files are owned by <code>root</code>, the superuser of the system.
+    Because the owner of a given file is permitted to do anything to it, we typically wish
+    to avoid acting as <code>root</code>, and instead use <code>sudo</code> wherever possible.
+  </p>
+
+  <p>
+    The accesiblity of each file is controlled by the owner through
+    nine <em>access permission bits</em>, also called <em>mode bits</em>.
+    and only the owner of the file can change these.
+    They are:
+    <code>read</code>, <code>write</code> and <code>execute</code> for each,
+    <em>owner</em>, <em>group</em>, <em>everyone else</em>.
+    These bits, and other metadata, are maintained within the file's inode.
+  </p>
+
+  <p>
+    Here we have a typical directory listing:
+  </p>
+
+  <a href="assets/img/ls-long.pdf" target="_blank"><img src="assets/img/ls-long.png" style="width: 100%" title="Click for printable" ></a>
+
+  <p>
+    We see that <code>bash</code> is executable by anybody, but can
+    only be written to by <code>root</code>.
+    File mode bits can be changed with the
+    <a href="https://www.man7.org/linux/man-pages/man1/chmod.1.html"><code>chmod(1)</code></a> utility.
+  </p>
+
+  <h3>A Short Example</h3>
+
+  <div class="code">
+    $ echo "hello world" > newfile <br>
+    $ cat newfile <br>
+    hello world <br>
+    $ chmod -r newfile &emsp;&emsp;&emsp;&emsp; #Remove read permissions on newfile<br>
+    $ cat newfile <br>
+    cat: newfile: Permission denied <br>
+  </div>
+
+  <h3>See Also:</h3>
+  <ul>
+    <li><a href="https://www.gnu.org/software/coreutils/manual/html_node/File-permissions.html#File-permissions">File Permissions (GNU Coreutils)</a></li>
+    <li> <a href="https://www.man7.org/linux/man-pages/man1/chown.1.html"<code>chown(1)</code></a></li>
+  </ul>
+
+</div>
+<div id="device-files" class="content">
+  <h2>Device Special Files</h2>
+  <p>
+    The directory <code>/dev</code> is famous in the Unix/Linux world.
+    It contains files called <em>special device files</em>,<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[1]</a></sup>
+    which <em>are not</em> regular files, and are not existent on-disk.
+    Each special device file represents a device connected to the system;
+    it serves as the principle reference to the device driver (and, therefore, the device).
+  </p>
+
+  <p>
+    For instance, when we want to partition a drive, we pass the name of the drive
+    (say, <code>/dev/sdb</code>) to a program, such as <code>fdisk</code>:
+  </p>
+
+  <div class="code">
+    $ sudo fdisk /dev/sdb
+  </div>
+
+  <p>
+    Note that <code>fdisk</code> is a user-space program.
+    That is, the operating system has not undertaken the task of
+    providing the user an interface for partitioning.
+    This is an example of <em>The Unix Philosophy:</em>
+    By keeping each tool in the chain small, they are each more easily maintainable, and interchangeable.
+    Another program to do the same task is GNU's partition editor, <code>parted</code>.
+  </p>
+
+  <p>
+    Among device special files, there are two distinct kinds:
+    <em>block</em> and <em>character</em>.
+    The distinction refers to the way that the kernel reads and writes to these files.
+    Character special files are operated on a single character at a time
+    (e.g., terminal screen), while block special files are operated on a block of
+    bytes at a time (usually, 4096 or 8192), as in a hard drive.
+  </p>
+
+  <p>
+    While there is too much going on in the <code>/dev</code> directory
+    to exhaust the subject here,
+    it's worth noting that utilities for displaying the current
+    system's hardware often begin with <code>ls</code>:
+  </p>
+
+  <ul>
+    <li><code><a href="http://man7.org/linux/man-pages/man8/lsblk.8.html">lsblk</a></code> - List block devices (hardrives, CD-drives, etc).  Useful to determine what drive to mount.</li>
+    <li><code><a href="http://man7.org/linux/man-pages/man1/lscpu.1.html">lscpu</a></code> - Display information about the CPU architecture </li>
+    <li><code><a href="http://man7.org/linux/man-pages/man8/lsusb.8.html">lsusb</a></code> - List usb devices </li>
+    <li><code><a href="http://man7.org/linux/man-pages/man8/lspci.8.html">lspci</a></code> - List all PCI devices </li>
+</div>
+
+<div id="directories" class="content">
+  <h2>Directories</h2>
+
+  <p>
+    A directory is, conceptually, a file containing a table with two columns:
+    Filename and inode number.
+    We list the contents of a directory with the usual <code>ls</code> command,
+    and can list a file's inode number using<br><code>ls -i</code>:
+  </p>
+
+  <div class="code">
+    /home/josh/studies$ ls -i newfile <br>
+    2112949 newfile
+  </div>
+
+  <div class="aside-right">
+    <h4>Aside</h4>
+    <p>
+      The system calls used to delete files are
+      <a href="https://man7.org/linux/man-pages/man2/unlink.2.html"><code>unlink</code> and
+        <code>unlinkat()</code></a>, which remove entries from directories.
+        A file is only removed (deleted) by the kernel when there are no hard
+        links to it, and when there are no processes holding it open.
+      </p>
+    </div>
 
     <p>
-        Regular files contain data.
-	      The Linux kernel continues the Unix philosophy by treating text files, programs, movies,
-        source code, pdf's, etc., identically;
-        any "special treatment," is implemented by user-space processes.
-        Approximately 80% of files are regular files (Stevens, 98).
-		</p>
+      Each such directory listing is called a <em>hard link.</em>
+      They link a filename (location in the directory tree) to a file
+      (described by an inode).
+      A file may have more than one hard link, and therefore, appear
+      more than once in the directory tree.
+      Additional hard links to a file may be created with
+      <a href="https://www.man7.org/linux/man-pages/man1/ln.1.html"<code>ln</code></a>,
+      and may be removed with
+      <a href="https://www.man7.org/linux/man-pages/man1/unlink.1.html"><code>unlink</code></a> or
+      <a href="https://www.man7.org/linux/man-pages/man1/rm.1.html"><code>rm</code></a>.
+      The number of hard links to a file can be listed with
+      <code>ls -l</code> (see above).
+    </p>
 
-		<p>
-			We do interject upon reading and writing for the purposes of security and stability:
-			Each file has an owner, and belongs to a group.
-			Important files are owned by <code>root</code>, the superuser of the system.
-			Because the owner of a given file is permitted to do anything to it, we typically wish
-			to avoid acting as <code>root</code>, and instead use <code>sudo</code> wherever possible.
-		</p>
+    <p>
+      Each directory has at least two entries, which cannot be changed, and
+      which help define the Linux directory structure.  They are,
+      <code>.</code> ("dot"), which refers to the containing directory itself,
+      and <code>..</code> ("dot dot"), which refers to its parent directory.
+      The root directory's parent directory is the root directory itself.
+    </p>
 
-		<p>
-			Each file on the system has nine <em>access permission bits</em>,
-			and the owner of the file can change these.
-			They are:
-			<code>read</code>, <code>write</code> and <code>execute</code> for each,
-			<em>owner</em>, <em>group</em>, <em>everyone else</em>.
-			These bits, and other metadata, are maintained on-disk.
-		</p>
-
-		<p>
-			Here we have a typical directory listing:
-		</p>
-
-		<a href="assets/img/ls-long.pdf" target="_blank"><img src="assets/img/ls-long.png" style="width: 100%" title="Click for printable" ></a>
-
-		<p>
-			We see that <code>bash</code> is executable by anybody, but can
-			only be written to by <code>root</code>.
-			File mode bits can be changed with the
-			<a href="https://www.man7.org/linux/man-pages/man1/chmod.1.html"><code>chmod(1)</code></a> utility.
-		</p>
-
-		<h3>A Short Example</h3>
-
-		<div class="code">
-			$ echo "hello world" > newfile <br>
-			$ cat newfile <br>
-			hello world <br>
-			$ chmod -r newfile &emsp;&emsp;&emsp;&emsp; #Remove read permissions on newfile<br>
-			$ cat newfile <br>
-			cat: newfile: Permission denied <br>
-		</div>
-
-		<h3>See Also:</h3>
-		<ul>
-			<li><a href="https://www.gnu.org/software/coreutils/manual/html_node/File-permissions.html#File-permissions">File Permissions (GNU Coreutils)</a></li>
-			<li> <a href="https://www.man7.org/linux/man-pages/man1/chown.1.html"<code>chown(1)</code></a></li>
-		</ul>
-
-        </div>
-
-		<div id="directories" class="content">
-			<h2>Directories</h2>
-
-			<p>
-				A directory is, conceptually, a file containing a table with two columns:
-				Filename and inode number.
-				We list the contents of a directory with the usual <code>ls</code> command,
-        and can list a file's inode number using <code>ls -i</code>:
-			</p>
-
-			<div class="code">
-				/home/josh/studies$ ls -i newfile <br>
-				2112949 newfile
-			</div>
-
-			<p>
-				The inode number serves as an index into an <em>inode table</em>.
-        In <code>ext4</code>, this is a linear array of <br>
-        <code>struct ext4_inode</code>.<sup><a href="https://ext4.wiki.kernel.org/index.php/Ext4_Disk_Layout#Inode_Table">[5]</a></sup>
-				inodes are stored statically, on-disk (usually near the beginning of the partition).
-        Each inode lists the data blocks of the file it describes, as
-        well as metadata about the file, such as size and timestamps.
-        The filename is not contained in the inode, and metadata is not
-        contained in directories.
-			</p>
-
-      <div class="aside-right">
-        <h4>Aside</h4>
-        <p>
-          The system calls used to delete files are
-          <a href="https://man7.org/linux/man-pages/man2/unlink.2.html"><code>unlink</code> and
-          <code>unlinkat()</code></a>, which remove entries from directories.
-          A file is only removed (deleted) by the kernel when there are no hard
-          links to it, and when there are no processes holding it open.
-        </p>
-      </div>
-
-      <p>
-        From the operating system's point of view, each directory
-        listing is a <em>hard link</em>, since it links a filename
-        (location in the directory tree) to a file (described by the inode).
-        A file may have more than one hard link, and therefore, appear
-        more than once in the directory tree.
-        Additional hard links to a file may be created with
-        <a href="https://www.man7.org/linux/man-pages/man1/ln.1.html"<code>ln</code></a>,
-        and may be removed with
-        <a href="https://www.man7.org/linux/man-pages/man1/unlink.1.html"><code>unlink</code></a> or
-        <a href="https://www.man7.org/linux/man-pages/man1/rm.1.html"><code>rm</code></a>.
-        The number of hard links to a file can be listed with <br>
-        <code>ls -l</code> (see above).
+    <div class="aside-left">
+      <h4>Aside</h4>
+      <p style="margin-bottom: 0">
+        The directory tree is the responsibility of the kernel, so that
+        user-space processes are not permitted to read or write
+        directly to directory files.
+        Specific system calls exist to
+        <ul style="padding-left: 20px; margin-top: 0">
+          <li><a href="https://www.man7.org/linux/man-pages/man2/mkdir.2.html">create directories</a></li>
+          <li><a href="https://www.man7.org/linux/man-pages/man2/rmdir.2.html">remove directories</a></li>
+          <li><a href="https://www.man7.org/linux/man-pages/man2/getdents.2.html">get directory entries</a></li>
+        </ul>
       </p>
+    </div>
 
-			<p>
-				Each directory has at least two entries, which cannot be changed, and
-        which help define the Linux directory structure.  They are,
-        <code>.</code> ("dot"), which refers to the containing directory itself,
-        and <code>..</code> ("dot dot"), which refers to its parent directory.
-				The root directory's parent directory is the root directory itself.
-			</p>
+    <h3>Symbolic Links</h3>
+    <p>
+      Hard links cannot cross filesystem divisions.
+    </p>
 
-      <div class="aside-left">
-        <h4>Aside</h4>
-        <p style="margin-bottom: 0">
-          The directory tree is the responsibility of the kernel, so that
-          user-space processes are not permitted to read or write
-          directly to directory files.
-          Specific system calls exist to
-          <ul style="padding-left: 20px; margin-top: 0">
-            <li><a href="https://www.man7.org/linux/man-pages/man2/mkdir.2.html">create directories</a></li>
-            <li><a href="https://www.man7.org/linux/man-pages/man2/rmdir.2.html">remove directories</a></li>
-            <li><a href="https://www.man7.org/linux/man-pages/man2/getdents.2.html">get directory entries</a></li>
-          </ul>
-        </p>
-      </div>
+    <h3>See Also:</h3>
+    <ul>
+      <li><a href="https://unix.stackexchange.com/questions/20670/why-do-hard-links-exist">Why do hard links exist?</a></li>
+    </ul>
 
-			<h3>Symbolic Links</h3>
-			<p>
-				Hard links cannot cross filesystem divisions.
-			</p>
+  </div>
 
-			<h3>See Also:</h3>
-			<ul>
-				<li><a href="https://unix.stackexchange.com/questions/20670/why-do-hard-links-exist">Why do hard links exist?</a></li>
-			</ul>
+  <div class="content" id="closing-remarks">
+    <h2>Closing Remarks</h2>
+    <h3> Filesystem vs. Directory Tree</h3>
+    <p>
+      The terms <em>filesystem</em> and <em>directory tree</em> were developed here
+      precisely, in order to make a clear distinction between the two.
+      Part of the reason for this is a reaction by the author to common usage of the
+      term <em>filesystem</em> as a catch-all for "all things whatever file (on disk)."
+      I feel confident in the development of these terms in virtue of
+      1) The development of the term "filesystem" in
+      <a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">An Introduction to Disk Partitions</a>, by Fedora,
+      a leading-edge development community of Linux, and
+      2) the mathematical definition of "tree".
+    </p>
 
-		</div>
+    <p>
+      The terms <em>filesystem</em> and <em>directory tree</em> overlap, somewhat:
+      A given filesystem must entertain exactly one directory tree.
+      Because of this, a directory tree is implied by each filesystem;
+      this is the sense in which it is valid to say, "We are going to mount
+      a filesystem at <code>/home</code>," when in fact we mean,
+      "We are going to mount a filesystem's directory tree at <code>/home</code>."
+    </p>
 
-    <div class="content" id="closing-remarks">
-      <h2>Closing Remarks</h2>
-      <h3> Filesystem vs. Directory Tree</h3>
-      <p>
-        The terms <em>filesystem</em> and <em>directory tree</em> were developed here
-        precisely, in order to make a clear distinction between the two.
-        Part of the reason for this is a reaction by the author to common usage of the
-        term <em>filesystem</em> as a catch-all for "all things whatever file (on disk)."
-        I feel confident in the development of these terms in virtue of
-        1) The development of the term "filesystem" in
-        <a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">An Introduction to Disk Partitions</a>, by Fedora,
-        a leading-edge development community of Linux, and
-        2) the mathematical definition of "tree".
-      </p>
+    <h3>Linux Virtual File System (Kernel Subsystem)</h3>
+    <p>
+      The above discussion gives rise to a few questions:
+    </p>
 
-      <p>
-        The terms <em>filesystem</em> and <em>directory tree</em> overlap, somewhat:
-        A given filesystem must entertain exactly one directory tree.
-        Because of this, a directory tree is implied by each filesystem;
-        this is the sense in which it is valid to say, "We are going to mount
-        a filesystem at <code>/home</code>," when in fact we mean,
-        "We are going to mount a filesystem's directory tree at <code>/home</code>."
-      </p>
+    <ol>
+      <li> How can the Linux operating system support multiple filesystems? </li>
+      <li> How can it do so simultaneously?  </li>
+      <li> How does it handle filesystems that <em>do not</em> use inodes?</li>
+    </ol>
 
-      <h3>Linux Virtual File System (Kernel Subsystem)</h3>
-      <p>
-        The above discussion gives rise to a few questions:
-      </p>
-
-      <ol>
-        <li> How can the Linux operating system support multiple filesystems? </li>
-        <li> How can it do so simultaneously?  </li>
-        <li> How does it handle filesystems that <em>do not</em> use inodes?</li>
-      </ol>
-
-      <p>
-        The answer to each of these is the <a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">
+    <p>
+      The answer to each of these is the <a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">
         Linux Virtual File System</a> (VFS), a kernel subsystem that acts,
         essentially, as a driver for filesystems.
         Whereas each filesystem type may implement its own functionality,
@@ -523,18 +523,18 @@ last-updated: June, 2020
 
     </div>
 
-		<div id="engineer-man" class="content">
-			<h2>Engineer Man</h2>
-			<iframe class="video" src="https://www.youtube.com/embed/UFIoRLqhFpo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-		</div>
+    <div id="engineer-man" class="content">
+      <h2>Engineer Man</h2>
+      <iframe class="video" src="https://www.youtube.com/embed/UFIoRLqhFpo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
 
-        <div id="references" class="content">
-            <h2> References </h2>
-            <ol>
-				<li> Filesystem Hierarchy Standard Group. <a href="https://www.pathname.com/fhs/pub/fhs-2.3.pdf">The Linux Filesystem Heirarchy Standard</a>.  Retrieved May 29, 2020.</li>
-				<li> Kernighan, Brian. <i>Unix: A History and a Memoir.</i>  Published 2020, by Brian W. Kernighan via Kindle Direct Publishing. </li>
-				<li> Stevens, W. Richard. <i><a href="http://www.apuebook.com/apue3e.html"> Advanced Programming in the Unix Environment.</a></i> Pearson Eduction, 2013.</li>
+    <div id="references" class="content">
+      <h2> References </h2>
+      <ol>
+        <li> Filesystem Hierarchy Standard Group. <a href="https://www.pathname.com/fhs/pub/fhs-2.3.pdf">The Linux Filesystem Heirarchy Standard</a>.  Retrieved May 29, 2020.</li>
+        <li> Kernighan, Brian. <i>Unix: A History and a Memoir.</i>  Published 2020, by Brian W. Kernighan via Kindle Direct Publishing. </li>
+        <li> Stevens, W. Richard. <i><a href="http://www.apuebook.com/apue3e.html"> Advanced Programming in the Unix Environment.</a></i> Pearson Eduction, 2013.</li>
 
-			</ol>
+      </ol>
 
-        </div>
+    </div>
