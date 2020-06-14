@@ -1,5 +1,4 @@
-An operating system serves as software abstraction layer, separating and
-disconnecting user-space processes from hardware.
+The Unix Architecture
   - Drivers
   - Kernel
   - System Call API

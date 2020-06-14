@@ -1,27 +1,27 @@
 
-All modern operating systems support the abstraction of the <em>process</em>.
-A process is a running program(http://pages.cs.wisc.edu/~remzi/OSTEP/cpu-intro.pdf).
+The GNU/Linux operating system ;
+
+    The Linux kernel facilitates process creation, supports existing processes,
+    and launches exactly one, but otherwise pays no attention to processes;
+    there's a very clear division of responsibilities, here:
+    The kernel will exist with zero processes.
+    It would, however, be impossible to interact with, and hence, useless.
+
+This is known as the <em>init</em> process. https://en.wikipedia.org/wiki/Init
 
 
-Bash async:
-        Invite friend to stay
-    synchronous:
-        Invite friend, they are expected to do something and then leave,
-        so you wait for them to leave
-            This is appropriate for things like, "list files in current directory"
-            or "move this file over there"
-
-Commands:
-    ps - Who have I invited in
-    ps -e - Who's here
-    pstree- Who invited who
-    vmstat- Who's using what
+                          Process Attributes:
+    PID
 
 
-Process environment
-    Each process has its own environment:
-				Its own, separate, dedicated memory
-        environment variables
+
+Process Structure:
+    Memory:
+
+    Environment Variables:
+
+    Current working directory:
+
 
         Command: Printenv: can be called by any process,
                             prints the environment inherited from that process
@@ -29,17 +29,19 @@ Process environment
 
 		    Current working directory:
 				<p>
-					Each process has a <em>current working directory</em>, whose
-					value is maintained by the kernel; changing a process's
+					Each process has a <em>current working directory</em>, a place in
+          the directory tree.
+          This value is maintained by the kernel; changing a process's
 					current working directory requires the use of a system call.
 				</p>
 
-Multiprocess systems:
-	Running more than one program at a time
-	The kernel is home to many processes.
-	The kernel does this by starting one process explicitly;
-	this process then invites all of its friends.
 
+
+  Commands:
+      ps - Who have I invited in
+      ps -e - Who's here
+      pstree- Who invited who
+      vmstat- Who's using what
 
 	Inter-process communication:
 			- Since each process has its own memory, sending messages between

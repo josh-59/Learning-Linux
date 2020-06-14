@@ -12,13 +12,14 @@ Overarching Goal:
 		Think of these as flavors of Linux; they mostly share the GNU/Linux
 		kernel / coreutils fundamentals, the same ethos (make small tools and make them well),
 		the same open-ness
-2)  Package Managers -> Up-front and center!
+
 3)  Files and Filesystems
 4)  Processes
 4)  The Command Line
-6)	An Introduction to Vim
+2)  Package Managers -> Up-front and center!
 7)  Text Terminals-> Rewrite?
 8)	Finding Files
+6)	An Introduction to Vim
 9)  Learning Linux
 11) Going Further: Programming in Linux
 	a) The Importance of C

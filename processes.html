@@ -1,0 +1,88 @@
+---
+layout: default
+title: Processes
+last-updated: June, 2020
+---
+
+<!-- To Do: Citation needed in "regular files" -> heirarchical filestructure taken from Multics-->
+<div id="nav_bar_2" class="nav">
+  <ul>
+    <li><a href="#introduction"> Introduction </a></li>
+    <li><a href="#fork-and-exec"> Fork and Exec </a></li>
+    <li><a href="#references"> References </a></li>
+    <li><a href="#credits">Credits and Licenses</a></li>
+  </ul>
+</div>
+
+<div id="introduction" class="content">
+  <h1>Processes</h1>
+  <h4>Under Construction!</h4>
+
+  <p>
+    A process is a running program<sup><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/cpu-intro.pdf">[1]</a></sup>.
+    A <em>program</em> is a file containing a range of information that describes how to
+    construct a process at run time<sup><a href="#references">[2]</a></sup>.
+    Modern operating systems, including GNU/Linux, are multiprocess operating systems, supporting
+    multiple processes concurrently.
+  </p>
+
+  <p>
+    There are processes for every function on the system.
+    There's one for the network manager,
+    another for the desktop environment,
+    another acting as a printer spooler, etc..
+    On GNU/Linux operating systems, all aspects of processes, except launching them,
+    are the responsibility of the the kernel.
+    In this way, the kernel supports the use of the machine,
+    without making stipulations on its use.
+  </p>
+
+  <p>
+    The kernel:
+  </p>
+
+  <ol>
+    <li> Facilitates new process creation </li>
+    <li> Allocates hardware resources to each process </li>
+    <li> Facilitates communication between processes </li>
+    <li> Maintains metadata about processes </li>
+  </ol>
+
+  <p>
+    Processes are <em>actors</em> of the system.
+  </p>
+
+</div>
+
+<div class="content">
+  <h2> Fork / Exec </h2>
+
+  <p>
+    Like all interactions with the kernel, instructing the kernel to generate a new
+    process takes place through the system call interface.
+
+
+
+
+  <p>
+    The Unix kernel executes exactly one program, <em>init</em>.
+
+        The Linux kernel facilitates process creation, supports existing processes,
+        and launches exactly one, but otherwise pays no attention to processes;
+        there's a very clear division of responsibilities, here:
+        The kernel will exist with zero processes.
+        It would, however, be impossible to interact with, and hence, useless.
+
+
+</div>
+
+
+
+<div id="references" class="content">
+  <h2> References </h2>
+  <ol>
+    <li> Arpaci-Dusseau, Remzi H., Arpaci-Dusseau, Andrea C..  <em>Operating Systems: Three Easy Pieces.</em> Arpaci-Dusseau Books. Published August, 2018 (Version 1.00)</li>
+    <li> Kerrisk, Michael.  <em>The Linux Programming Interface</em>. San Francisco, CA, No Starch Press, 2010.</li>
+  </ol>
+
+</div>

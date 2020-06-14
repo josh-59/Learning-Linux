@@ -21,3 +21,11 @@ Kernighan page 132:
 
 Discuss difference between shell variables and environment variables
     (the function of export)
+
+    Bash async:
+            Invite friend to stay
+        synchronous:
+            Invite friend, they are expected to do something and then leave,
+            so you wait for them to leave
+                This is appropriate for things like, "list files in current directory"
+                or "move this file over there"

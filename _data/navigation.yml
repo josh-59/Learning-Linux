@@ -8,3 +8,5 @@
   link: /finding-files.html
 - name: Files and Filesystems
   link: /files-and-filesystems.html
+- name: Processes
+  link: /processes.html
