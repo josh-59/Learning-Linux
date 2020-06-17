@@ -6,9 +6,11 @@ title: Introduction to GNU/Linux
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
-        <li><a href="#linux-architecture"> GNU/Linux Architecture </a></li>
-        <li><a href="#gnu"> GNU </a></li>
-        <li><a href="#distributions"> Distributions </a></li>
+        <li><a href="#unix-architecture"> Unix Architecture </a></li>
+        <li><a href="#linux-kernel"> The Linux Kernel </a></li>
+        <li><a href="#gnu-coreutils"> GNU Coreutils </a></li>
+        <li><a href="#linux-distributions"> Linux Distributions </a></li>
+        <li><a href="#linux-mint"> Linux Mint </a></li>
         <li><a href="#references"> References </a></li>
         <li><a href="#credits">Credits and Licenses</a></li>
     </ul>
@@ -30,16 +32,20 @@ title: Introduction to GNU/Linux
     </p>
 </div>
 
-<div id="linux-architecture" class="content">
-    <h2>GNU/Linux Architecture</h2>
+<div id="unix-architecture" class="content">
+    <h2>Unix Architecture</h2>
     <p>
-      The GNU/Linux operating system has a clear and well-documented architecture,
-      composed of several distinct layers:
+      GNU/Linux belongs to a large class of operating systems called
+      <em>Unix-like</em>, sometimes referred to by <em>*nix</em>.
+      The Unix operating system had a clear and well-documented architecture,
+      which has been replicated many times in both open-source and proprietary contexts.
+      The canonical depiction of its architecture is as follows:
     </p>
 
     <img src="assets/img/linux-architecture.png" style="height: 400px;">
 
     <p>
+      <strong>Hardware:</strong>
       At the heart of any machine is its hardware.
       Each piece of hardware
       has a software interface defined by the engineers that
@@ -48,6 +54,7 @@ title: Introduction to GNU/Linux
     </p>
 
     <p>
+      <strong>Drivers:</strong>
       Directly interacting with hardware and providing a more-uniform interface to
       each piece is the task of the system's <em>drivers</em>. This software layer
       represents the deepest and most remote element of any operating system.
@@ -56,10 +63,11 @@ title: Introduction to GNU/Linux
     </p>
 
     <p>
-      While the heart of any machine is its hardware, the heart of any GNU/Linux
-      operating system is its kernel.
+      <strong>Kernel:</strong>
+      While the heart of any machine is its hardware, the heart of any
+      Unix-like operating system is its kernel.
       The kernel uses drivers to direct the actions of the machine, at the
-      behest of user-space programs.
+      behest of processes.
       Because the expectations that we have for the system are great
       (running multiple programs concurrently, never losing files nor parts of
       files, weeks-long stability),
@@ -67,23 +75,49 @@ title: Introduction to GNU/Linux
     </p>
 
     <p>
-      The Linux kernel was began by Linus Torvalds, then a graduate student
-      of the University of Helsinki.<sup><a href="https://en.wikipedia.org/wiki/Linus_Torvalds">[1]</a></sup>
-      Following the architecture of the Unix operating system,
-      he wrote an open-source kernel as "...a hobby, won't be big and professional like [the GNU kernel]."
-      He soon released it publicly under the free-and-open-source <em>GNU General Public License</em>, version 2.
+      <strong>System Calls:</strong>
+      In order to permit interaction with the kernel, each
+      Unix-like operating system employs a well-defined set of system calls.
+      Interaction with the kernel is restricted to the system-call interface.
+       From a source-code point of view, these "look" and "act" like ordinary function
+       calls, but their actions are not restricted to user-space; rather, they
+       transcend the software hierarchy, often making changes at the hardware level.
     </p>
 
     <p>
+      <strong>Processes:</strong>
+      From <em>The Linux Programming Interface</em> by Michael Kerrisk,
+      "A process is an instance of an executing program."<sup><a href="#references">[1]</a></sup>
+      On a *nix system, processes are the only means that a user has to interact with the system.
+      Processes are a critical component of a functioning Unix-like operating system.
+    </p>
 
-    <p>
 
+
+    </div>
+
+    <div class="content" id="linux-kernel">
+      <h2>The Linux Kernel</h2>
+      <p>
+        Properly speaking, the name <em>Linux</em> refers to the Linux kernel.
+        The Linux kernel was began by Linus Torvalds in 1991, then a graduate student
+        of the University of Helsinki.<sup><a href="https://en.wikipedia.org/wiki/Linus_Torvalds">[1]</a></sup>
+        Following the architecture of the Unix operating system,
+        he wrote an open-source kernel as "...a hobby, won't be big and professional like [the GNU kernel]."
+        He soon released it publicly under the free-and-open-source <em>GNU General Public License</em>, version 2.
+      </p>
 
     <h3>See Also:</h3>
     <ul>
       <li><a href="https://en.wikipedia.org/wiki/History_of_Linux">History of Linux - Wikipedia</a></li>
     </ul>
+    </div>
 
+    <div class="content" id="gnu">
+      <h2>GNU</h2>
+      The deployment of a Unix-like operating system is contingent upon
+      the execution of some user-space programs.
+    </div>
 
     <p>
         - Kernel
@@ -98,9 +132,7 @@ title: Introduction to GNU/Linux
         - POSIX / SUSv4
         - #?
 
-      "Because programs are independent of the underlying hardware, it is easy
-      to move them between UNIX systems running on different hardware if the programs
-      do not make assumptions about the underlying hardware." (Bach, 5) [The Design of the Unix Operating System]
+
 
       Kernel:
       Between these two elements is the kernel.

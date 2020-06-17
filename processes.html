@@ -8,6 +8,7 @@ last-updated: June, 2020
 <div id="nav_bar_2" class="nav">
   <ul>
     <li><a href="#introduction"> Introduction </a></li>
+    <li><a href="#sandbox"> Sandbox </a></li>
     <li><a href="#fork-and-exec"> Fork and Exec </a></li>
     <li><a href="#references"> References </a></li>
     <li><a href="#credits">Credits and Licenses</a></li>
@@ -54,14 +55,23 @@ last-updated: June, 2020
 
 </div>
 
-<div class="content">
+<div class="content" id="sandbox">
+
+  </div>
+
+<div class="content" id="fork-and-exec">
   <h2> Fork / Exec </h2>
 
   <p>
     Like all interactions with the kernel, instructing the kernel to generate a new
     process takes place through the system call interface.
 
-
+    "Because programs are independent of the underlying hardware, it is easy
+    to move them between UNIX systems running on different hardware if the programs
+    do not make assumptions about the underlying hardware." (Bach, 5) [The Design of the Unix Operating System]
+    User-space programs are what operating systems are all about.
+    These are sometimes called "user-land processes," and it is expected that
+    any user-space program can
 
 
   <p>
