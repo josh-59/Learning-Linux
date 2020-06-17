@@ -1,14 +1,17 @@
 - name: Home
   link: /
+- name: Introduction to GNU/Linux
+  link: /intro-to-gnu-linux.html
+- name: Files and Filesystems
+  link: /files-and-filesystems.html
+- name: Processes
+  link: /processes.html
 - name: Learning Linux
   link: /learning-linux.html
 - name: Text Terminals
   link: /text-terminals.html
 - name: Finding Files
   link: /finding-files.html
-- name: Files and Filesystems
-  link: /files-and-filesystems.html
-- name: Processes
-  link: /processes.html
+
 - name: Reviews
   link: /reviews.html
