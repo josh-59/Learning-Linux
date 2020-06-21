@@ -9,6 +9,7 @@ last-updated: June, 2020
 <div id="nav_bar_2" class="nav">
   <ul>
     <li><a href="#introduction"> Introduction </a></li>
+    <li><a href="#actors"> Actors </a></li>
     <li><a href="#sandbox"> Sandbox </a></li>
     <li><a href="#fork-and-exec"> Fork and Exec </a></li>
     <li><a href="#references"> References </a></li>
@@ -21,20 +22,25 @@ last-updated: June, 2020
   <h4>Under Construction!</h4>
 
   <p>
-    A process is a running program<sup><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/cpu-intro.pdf">[1]</a></sup>.
+    A process is a running program.<sup><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/cpu-intro.pdf">[1]</a></sup>
     A <em>program</em> is a file containing a range of information that describes how to
-    construct a process at run time<sup><a href="#references">[2]</a></sup>.
+    construct a process at run time.<sup><a href="#references">[2]</a></sup>
     Modern operating systems, including GNU/Linux, are multiprocess operating systems, supporting
     multiple processes concurrently.
   </p>
+</div>
 
+<div class="content" id="actors">
+  <h2> Actors </h2>
   <p>
     There are processes for every function on the system.
     There's one for the network manager,
     another for the desktop environment,
     another acting as a printer spooler, etc..
-    On GNU/Linux operating systems, all aspects of processes, except launching them,
-    are the responsibility of the the kernel.
+    On GNU/Linux operating systems, all aspects of processes
+    are the responsibility of the the kernel;
+    the only exception to this is that we explicitly tell the kernel which programs
+    to launch.
     In this way, the kernel supports the use of the machine,
     without making stipulations on its use.
   </p>
@@ -51,12 +57,72 @@ last-updated: June, 2020
   </ol>
 
   <p>
-    Processes are <em>actors</em> of the system.
+    Processes are the actors of the system.
+    Under the Unix philosophy, each process has a narrowly defined role,
+    which it is expected to do well.  It might copy a file, list the
+    contents of a directory, or interpret and execute commands that the user inputs.
+  </p>
+
+  <p>
+    We wish to run multiple processes simultaneously,
+    so that <em>Bash</em> remains running while <em>ls</em> is executing.
+    This is known as a multitasking or multiprogramming operating system, and all modern operating
+    systems are multitasking.
+    This is an unfortunate term, but <em>multiprocessor</em> is reserved to
+    refer to a machine having, or an operating system supporting, multiple
+    CPU's.<sup><a href="https://en.wikipedia.org/wiki/Multiprocessing">[3]</a></sup>
+  </p>
+
+  <p>
+    We pause our discussion to give definitions of the words <em>dynamic</em> and <em>static.</em>
+    An action occurs dynamically with respect to a process if it occurs during process
+    execution.
+    For instance, the kernel creates files <em>dynamically.</em>
+    Similarly, an element of the process environment is dynamic if it can change
+    during process execution.
+    For example, the contents of a file may be dynamic, and the contents of a
+    process's data structure are certainly dynamic.
+    An element of the programming environment is <em>static</em> with respect to a process if it is invariant
+    throughout program execution.
+    For instance, the CPU architecture of a machine is static with respect to each process.
   </p>
 
 </div>
 
 <div class="content" id="sandbox">
+  <h2>Sandbox</h2>
+  <p>
+    Processes run on the machine in a "sandboxed" environment, such that each
+    process is incapable of jeopardizing the stability of the machine,
+    and cannot affect any other process in an unpredictable manner.
+    This environment is composed of an allotment of memory, and restricted access to the machine's CPU(s).
+  </p>
+
+  <p>
+    Memory is allotted to a process by the kernel, upon initialization of the process and
+    often during process execution (i.e., dynamically).
+    It is known as <em>virtual memory.</em>
+
+    and the set of all
+    A full explanation of virtual memory is quite involved, and outside the scope of this paper.
+    For a formal development, see <em>Computer Systems: A Programmer's Perspective</em>,
+    but be cautioned that this is not an easy subject.
+  </p>
+  
+  <p>
+    Each process runs its instructions directly on the CPU(s), by a technique
+    known as <em>limited direct execution.</em><sup><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/cpu-mechanisms.pdf">[3]</a></sup>
+    It is <em>limited</em> in the sense that each process has access to
+    only a restricted subset of the CPU's instructions.
+    Notably, a process cannot access hardware directly, nor
+    assume the identity of another process.
+  </p>
+
+
+  <h3>See Also</h3>
+  <ul>
+    <li><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/vm-intro.pdf"<em>Operating Systems, Three Easy Pieces: Address Spaces</em></a></li>
+  </ul>
 
   </div>
 
