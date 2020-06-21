@@ -11,7 +11,7 @@ title: Introduction to GNU/Linux
         <li><a href="#linux-kernel"> The Linux Kernel </a></li>
         <li><a href="#gnu"> GNU </a></li>
         <li><a href="#posix"> POSIX </a></li>
-        <li><a href="#linux-distributions"> Linux Distributions </a></li>
+        <li><a href="#distributions"> Linux Distributions </a></li>
         <li><a href="#linux-mint"> Linux Mint </a></li>
         <li><a href="#video">Greg Kroah-Hartman </a></li>
         <li><a href="#references"> References </a></li>
@@ -21,7 +21,7 @@ title: Introduction to GNU/Linux
 
 <div id="introduction" class="content">
     <h1>Introduction to GNU/Linux</h1>
-    {% comment %} A Pragmatic Introduction {% endcomment %}
+    {% comment %} ...but calmer heads prevailed...{% endcomment %}
     <h4>Under Construction!</h4>
     <p>
       An operating system is a collection of software designed to facilitate
@@ -81,7 +81,9 @@ title: Introduction to GNU/Linux
       <strong>System Calls:</strong>
       In order to permit interaction with the kernel, each
       Unix-like operating system employs a set of system calls.
-      From a source-code point of view, these "look" and "act" like ordinary function
+      While the system-call interface is not the only means of interacting with
+      the kernel, it is the most-used and most-traditional.
+      From a source-code point of view, system calls "look" and "act" like ordinary function
       calls, but their actions are not restricted to user-space; rather, they
       transcend the software hierarchy, often making changes at the hardware level.
     </p>
@@ -127,6 +129,8 @@ title: Introduction to GNU/Linux
 
     <h3>See Also:</h3>
     <ul>
+      <li><a href="http://www.kroah.com/lkn/"> Linux Kernel in a Nutshell</a> by Greg Kroah-Hartman (Free. Discusses building custom kernels)</li>
+      <li><a href="https://www.kernel.org/doc/html/latest/process/index.html"> Working with the kernel development community</a>&mdash; The Linux Kernel documentation</li>
       <li><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/process?h=v5.8-rc1">The Kernel Development Process</a> (Official) </li>
       <li><a href="https://en.wikipedia.org/wiki/History_of_Linux">History of Linux - Wikipedia</a></li>
     </ul>
@@ -146,54 +150,75 @@ title: Introduction to GNU/Linux
     <p>
         - System Call API
         - Standard "Core" utilities
+        POSIX / SUSv4
 
-
-      System Call API:
-      The operating system exposes a system call interface to each
-      user-space process, allowing a process to instruct the kernel to carry out
-      actions on its behalf.
-        - POSIX / SUSv4
-        - #?
-
-
-      The kernel is the software layer between user-space programs and hardware drivers.
-
-
-      A great number of kernels implement the Unix system-call API,
 
       "Core" Utilites:
       The standard collection of programs that help define the working "Linux" OS;
       Some of these are critical to operating system functionality (?? Examples ??)
         - GNU
 
-
-      Bundling It All Up: The Distribution
-        An operating system, precompiled for use.
-        It includes a kernel, selected drivers, and selected utilities.
-
-        Because Linux is open-source, it's relatively easy to produce your own distribution,
-        and because it's free, anyone can do it.
-
-
-      What will run Linux?
-        - Just about anything!
-        Pinebook Pro:
-         a compelling alternative to mid-ranged Chromebooks that people convert into Linux laptops.
-
-      Mac-style Kubuntu
-      https://www.youtube.com/watch?v=oFN3nEppRdU
-
     </p>
 
 </div>
 
-<div id="details" class="content">
-    <h2> How Linux Distributions Differ </h2>
+<div id="distributions" class="content">
+    <h2> Linux Distributions </h2>
+    <p>
+      A distribution is a collection of software that, when installed, yields
+      a functioning operating system.
+      Each will include a kernel, compiled with some drivers, core utilities,
+      and, usually, some user-space applications (e.g., Firefox).
+      All of this will be packaged in a fashion that facilitates installation
+      (usually, an ISO).
+    </p>
+
+    <p>
+      In my opinion, distributions are more similar than dissimilar;
+      to me, they're more like flavors of the Unix architecture, rather than distinct operating systems.
+      The oldest distribution that's still maintained is
+      <a href="http://www.slackware.com/">Slackware</a>.
+    </p>
+
+    <p>
+      Most distributions follow an incremental release development cycle,
+      in which versions of software are frozen, and only patched for security and bug fixes.
+      The number of features that are included with software is a function of how new it is;
+      on the other hand, newer software tends to have more bugs.
+      As a consequence, each distribution is, in part, a compromise between
+      features and stability.
+    </p>
+
+    <p>
+      Some distributions follow a "rolling release" development cycle&mdash; notably,
+      <a href="https://wiki.archlinux.org/index.php/Arch_Linux">Arch.</a>
+      This method of delivering software focuses on obtaining and using the
+      latest version of each; in particular, new package releases are expected to
+      work correctly only with the latest package releases.
+      The user is expected to update/upgrade frequently, but is guaranteed that
+      each system-wide update will yield a coherent collection of software (in theory).
+    </p>
+
+    <p>
+      New users are expected to "distro hop," changing between distributions
+      frequently and nonsensically.
+      The principle distinction between distributions at this phase is
+      the desktop environment it ships with.
+    </p>
 </div>
 
 <div id="mint" class="content">
-    <h2> An Argument for Linux Mint</h2>
+    <h2> Linux Mint </h2>
+    <p>
+      I like <a href="https://linuxmint.com/">Linux Mint,</a> but then, I'm a simple guy.
+      It's easy to use, and focuses on productivity.
+      Mint offers the Cinnamon desktop environment, which I quite like;
+      Windows users will feel right at home.
+    </p>
 
+    <p>
+
+    </p>
 
 </div>
 
