@@ -1,7 +1,7 @@
 ---
 layout: default
 credits: default
-title: Introduction to GNU/Linux
+title: Introduction to Linux
 ---
 
 <div id="nav_bar_2" class="nav">
@@ -9,16 +9,18 @@ title: Introduction to GNU/Linux
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#unix-architecture"> Unix Architecture </a></li>
         <li><a href="#linux-kernel"> The Linux Kernel </a></li>
-        <li><a href="#gnu-coreutils"> GNU Coreutils </a></li>
+        <li><a href="#gnu"> GNU </a></li>
+        <li><a href="#posix"> POSIX </a></li>
         <li><a href="#linux-distributions"> Linux Distributions </a></li>
         <li><a href="#linux-mint"> Linux Mint </a></li>
+        <li><a href="#video">Greg Kroah-Hartman </a></li>
         <li><a href="#references"> References </a></li>
         <li><a href="#credits">Credits and Licenses</a></li>
     </ul>
 </div>
 
 <div id="introduction" class="content">
-    <h1>Introduction to GNU/Linux</h1>
+    <h1>Introduction to Linux</h1>
     {% comment %} A Pragmatic Introduction {% endcomment %}
     <h4>Under Construction!</h4>
     <p>
@@ -37,10 +39,10 @@ title: Introduction to GNU/Linux
     <h2>Unix Architecture</h2>
     <p>
       GNU/Linux belongs to a large class of operating systems called
-      <em>Unix-like</em>, sometimes referred to by <em>*nix</em>.
+      <em>Unix-like</em>, sometimes referred to as <em>*nix</em>.
       The Unix operating system had a clear and well-documented architecture,
       which has been replicated many times in both open-source and proprietary contexts.
-      The canonical depiction of its architecture is as follows:
+      A simplified depiction of its architecture is as follows:
     </p>
 
     <img src="assets/img/linux-architecture.png" style="height: 400px;">
@@ -59,7 +61,7 @@ title: Introduction to GNU/Linux
       Directly interacting with hardware and providing a more-uniform interface to
       each piece is the task of the system's <em>drivers</em>. This software layer
       represents the deepest and most remote element of any operating system.
-      While drivers can be installed on an as-needed basis, in Linux
+      While drivers can be installed on an as-needed basis, in GNU/Linux
       the tendency is to include many drivers, and use only those that are required.
     </p>
 
@@ -78,7 +80,7 @@ title: Introduction to GNU/Linux
     <p>
       <strong>System Calls:</strong>
       In order to permit interaction with the kernel, each
-      Unix-like operating system employs a well-defined set of system calls.
+      Unix-like operating system employs a set of system calls.
       Interaction with the kernel is restricted to the system-call interface.
        From a source-code point of view, these "look" and "act" like ordinary function
        calls, but their actions are not restricted to user-space; rather, they
@@ -87,29 +89,45 @@ title: Introduction to GNU/Linux
 
     <p>
       <strong>Processes:</strong>
-      From <em>The Linux Programming Interface</em> by Michael Kerrisk,
-      "A process is an instance of an executing program."<sup><a href="#references">[1]</a></sup>
-      On a *nix system, processes are the only means that a user has to interact with the system.
+      Sometimes called a "user-space process," a process is an executing program.
+      On *nix systems, processes run the entire show, and
+      are the only means that a user has to interact with the system.
       Processes are a critical component of a functioning Unix-like operating system.
     </p>
-
-
-
     </div>
 
     <div class="content" id="linux-kernel">
       <h2>The Linux Kernel</h2>
       <p>
-        Properly speaking, the name <em>Linux</em> refers to the Linux kernel.
-        The Linux kernel was began by Linus Torvalds in 1991, then a graduate student
+        Properly speaking, the name <em>Linux</em> refers only to the Linux Kernel.
+        The Linux Kernel was began by Linus Torvalds in 1991, then a graduate student
         of the University of Helsinki.<sup><a href="https://en.wikipedia.org/wiki/Linus_Torvalds">[1]</a></sup>
         Following the architecture of the Unix operating system,
-        he wrote an open-source kernel as "...a hobby, won't be big and professional like [the GNU kernel]."
-        He soon released it publicly under the free-and-open-source <em>GNU General Public License</em>, version 2.
+        he wrote an open-source kernel as "...a hobby, won't be big and professional like
+        [the GNU kernel]."<sup><a href="https://en.wikipedia.org/wiki/Linux_kernel#cite_note-Torvlads25Aug91-17">[2]</a></sup>
+        He soon released it publicly under the free-and-open-source <em>GNU General Public License, version 2.</em>
+      </p>
+
+      <p>
+        Linus Torvalds remains the maintainer of the Development branch today.
+        (One does not contact Linus Torvalds; this is here only because it is interesting.)
+        Another major figure in Linux development is Greg Kroah-Hartman (pronounced "Crow-Hartman").
+        He is currently the maintainer of the Stable branch.
+      </p>
+
+      <p>
+        The Linux Kernel has been very successful, attracting many open-source developers.
+        Its development is broken down into a set of subsystems.
+        Usually, each has its own
+        maintainer.<sup><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/process/2.Process.rst?h=v5.8-rc1">[3]</a></sup>
+        Furthermore, each kernel release is broken down into stages, with the intent
+        of facilitating change (by opening a "merge window"), while tending towards stability
+        (by closing the merge window, reviewing, testing, and patching).
       </p>
 
     <h3>See Also:</h3>
     <ul>
+      <li><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/process?h=v5.8-rc1">The Kernel Development Process</a> (Official) </li>
       <li><a href="https://en.wikipedia.org/wiki/History_of_Linux">History of Linux - Wikipedia</a></li>
     </ul>
     </div>
@@ -120,8 +138,11 @@ title: Introduction to GNU/Linux
       the execution of some user-space programs.
     </div>
 
+    <div class="content" id="posix">
+      <h2> Specifications </h2>
+
+
     <p>
-        - Kernel
         - System Call API
         - Standard "Core" utilities
 
@@ -134,17 +155,8 @@ title: Introduction to GNU/Linux
         - #?
 
 
-
-      Kernel:
-      Between these two elements is the kernel.
-
-      What is a kernel?
-          - Began by Linus Torvals, the Linux Kernel
-
       The kernel is the software layer between user-space programs and hardware drivers.
-      This is the largest software layer in the operating system construct; it is
-      tasked with maintaining the filesystem, ensuring user-space processes do not
-      interfere with each other, and scheduling processes in a fair and reasonable manner.
+
 
       A great number of kernels implement the Unix system-call API,
 
@@ -185,7 +197,8 @@ title: Introduction to GNU/Linux
 </div>
 
 <div id="video" class="content">
-    <iframe class="video" src="https://www.youtube.com/embed/1hwWAOBOsJs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <h2> Greg Kroah-Hartman </h2>
+    <iframe class="video" src="https://www.youtube.com/embed/vyenmLqJQjs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 
