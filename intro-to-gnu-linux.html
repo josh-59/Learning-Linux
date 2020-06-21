@@ -81,18 +81,17 @@ title: Introduction to Linux
       <strong>System Calls:</strong>
       In order to permit interaction with the kernel, each
       Unix-like operating system employs a set of system calls.
-      Interaction with the kernel is restricted to the system-call interface.
-       From a source-code point of view, these "look" and "act" like ordinary function
-       calls, but their actions are not restricted to user-space; rather, they
-       transcend the software hierarchy, often making changes at the hardware level.
+      From a source-code point of view, these "look" and "act" like ordinary function
+      calls, but their actions are not restricted to user-space; rather, they
+      transcend the software hierarchy, often making changes at the hardware level.
     </p>
 
     <p>
       <strong>Processes:</strong>
       Sometimes called a "user-space process," a process is an executing program.
-      On *nix systems, processes run the entire show, and
+      On Unix-like systems, processes run the entire show, and
       are the only means that a user has to interact with the system.
-      Processes are a critical component of a functioning Unix-like operating system.
+      That is, processes are a critical component of a functioning Unix-like operating system.
     </p>
     </div>
 
@@ -109,20 +108,21 @@ title: Introduction to Linux
       </p>
 
       <p>
-        Linus Torvalds remains the maintainer of the Development branch today.
-        (One does not contact Linus Torvalds; this is here only because it is interesting.)
-        Another major figure in Linux development is Greg Kroah-Hartman (pronounced "Crow-Hartman").
-        He is currently the maintainer of the Stable branch.
+        Since then, the Linux kernel has become very successful, being both
+        widely used and attracting many developers.
+        Demands on the development process are great:
+        It must both facilitate change, so that new features may be incorporated,
+        and also yield stable kernels, for private and commercial use.
+        As such, the development process is somewhat involved; see
+        <a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/process?h=v5.8-rc1">The Kernel Development Process</a>
+        for official information.
       </p>
 
       <p>
-        The Linux Kernel has been very successful, attracting many open-source developers.
-        Its development is broken down into a set of subsystems.
-        Usually, each has its own
-        maintainer.<sup><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/process/2.Process.rst?h=v5.8-rc1">[3]</a></sup>
-        Furthermore, each kernel release is broken down into stages, with the intent
-        of facilitating change (by opening a "merge window"), while tending towards stability
-        (by closing the merge window, reviewing, testing, and patching).
+        Linus Torvalds remains the maintainer of the Development branch today.
+        (One does not contact Linus Torvalds; this is here only because it is interesting.)
+        Another major figure in Linux development is Greg Kroah-Hartman (pronounced "<em>Crow</em>-Hartman").
+        He is currently the maintainer of the Stable branch.
       </p>
 
     <h3>See Also:</h3>
@@ -134,6 +134,7 @@ title: Introduction to Linux
 
     <div class="content" id="gnu">
       <h2>GNU</h2>
+
       The deployment of a Unix-like operating system is contingent upon
       the execution of some user-space programs.
     </div>
