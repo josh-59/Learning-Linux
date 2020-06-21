@@ -44,6 +44,18 @@ Overarching Goal:
 		- A lot of fucking work went into that
 		- Is characteristic of good software
 
+Conventions:
+	Tried to restrict links to USEFUL and NONOBVIOUS--
+			i.e., things you could not get from an easy Google search.
+	Wikipedia is considered authoritative.
+				Open-source/community-driven, etc.
+	Superscript references are used for authoritative references that are of little peripheral interest
+				i.e., don't read them, unless you must
+	Inline links are used to reference good and immediately relevant sources
+				i.e., they're worth looking into
+  See Also's are used for further explorations.
+
+
 
 Improvements:
 	For the love of god, make regex a virtual package!
