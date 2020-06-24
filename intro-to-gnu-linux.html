@@ -40,7 +40,7 @@ title: Introduction to GNU/Linux
     <h2>Unix Architecture</h2>
     <p>
       GNU/Linux belongs to a large class of operating systems called
-      <em>Unix-like</em>, sometimes referred to as <em>*nix</em>.
+      <em>Unix-like,</em> sometimes referred to as <em>*nix.</em>
       The Unix operating system had a clear and well-documented architecture,
       which has been replicated many times in both open-source and proprietary contexts.
       An overview of its architecture is as follows:
@@ -82,8 +82,6 @@ title: Introduction to GNU/Linux
       <strong>System Calls:</strong>
       In order to permit interaction with the kernel, each
       Unix-like operating system employs a set of system calls.
-      While the system-call interface is not the only means of interacting with
-      the kernel, it is the most-used and most-traditional.
       From a source-code point of view, system calls "look" and "act" like ordinary function
       calls, but their actions are not restricted to user-space; rather, they
       transcend the software hierarchy, often making changes at the hardware level.
@@ -118,8 +116,8 @@ title: Introduction to GNU/Linux
         it must yield stable kernels, for private and commercial use; most
         importantly, it must accept patches from thousands of unknown and volunteer developers each month.
         As such, the development process is somewhat involved.
-        See <a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/process?h=v5.8-rc1">The Kernel Development Process</a>
-        for official information.
+        Documentation about it is maintained
+        <a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/process?h=v5.8-rc1">within the source code.</a>
       </p>
 
       <p>
@@ -211,7 +209,8 @@ title: Introduction to GNU/Linux
       The standard collection of programs that help define the working "Linux" OS;
       Some of these are critical to operating system functionality (?? Examples ??)
         - GNU
-
+      While the system-call interface is not the only means of interacting with
+      the kernel, it is the most-used and most-traditional.
     </p>
 
 </div>
@@ -228,8 +227,8 @@ title: Introduction to GNU/Linux
     </p>
 
     <p>
-      In my opinion, distributions are more similar than dissimilar;
-      to me, they're more like flavors of the Unix architecture, rather than distinct operating systems.
+      In my opinion, distributions are more similar than dissimilar.
+      Think of them as flavors of the Unix architecture, rather than distinct operating systems.
       The oldest distribution that's still maintained is
       <a href="http://www.slackware.com/">Slackware</a>.
     </p>
@@ -240,7 +239,7 @@ title: Introduction to GNU/Linux
       As a consequence, each distribution is, in part, a compromise between
       features and stability.
       Most distributions follow an incremental release cycle,
-      in which versions of software are frozen, and only updated for security and bug fixes.
+      in which versions of software are frozen, and updated only for security and bug fixes.
       Most commercial and desktop GNU/Linux distributions follow this model.
     </p>
 
