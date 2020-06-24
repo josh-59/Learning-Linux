@@ -82,7 +82,8 @@ last-updated: June, 2020
     during process execution.
     For example, the contents of a file may be dynamic, and the contents of a
     process's data structure are certainly dynamic.
-    An element of the programming environment is <em>static</em> with respect to a process if it is invariant
+    The obverse of dynamic is <em>static:</em>
+    For any given process, an element of the programming environment is static with respect to the process if it is invariant
     throughout program execution.
     For instance, the CPU architecture of a machine is static with respect to each process.
   </p>
@@ -108,14 +109,14 @@ last-updated: June, 2020
     For a formal development, see <em>Computer Systems: A Programmer's Perspective</em>,
     but be cautioned that this is not an easy subject.
   </p>
-  
+
   <p>
     Each process runs its instructions directly on the CPU(s), by a technique
     known as <em>limited direct execution.</em><sup><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/cpu-mechanisms.pdf">[3]</a></sup>
     It is <em>limited</em> in the sense that each process has access to
     only a restricted subset of the CPU's instructions.
-    Notably, a process cannot access hardware directly, nor
-    assume the identity of another process.
+    Notably, a process cannot access hardware beyond the CPU and memory directly,
+    and it also cannot assume the identity of another process.
   </p>
 
 
