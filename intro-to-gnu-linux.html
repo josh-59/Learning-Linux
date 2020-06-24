@@ -110,13 +110,14 @@ title: Introduction to GNU/Linux
       </p>
 
       <p>
-        Since then, the Linux kernel has become very successful, being both
-        widely used and attracting many developers.
-        Demands on the development process are great:
-        It must both facilitate change, so that new features may be incorporated,
-        and also yield stable kernels, for private and commercial use.
-        As such, the development process is somewhat involved; see
-        <a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/process?h=v5.8-rc1">The Kernel Development Process</a>
+        Since then, the Linux kernel has become very successful, becoming
+        the most-used Unix-like kernel in existence today.
+        Demands on the kernel development process are great:
+        It must facilitate change, so that new features may be incorporated;
+        it must yield stable kernels, for private and commercial use; most
+        importantly, it must accept patches from thousands of unknown and volunteer developers each month.
+        As such, the development process is somewhat involved.
+        See <a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/process?h=v5.8-rc1">The Kernel Development Process</a>
         for official information.
       </p>
 
@@ -129,9 +130,10 @@ title: Introduction to GNU/Linux
 
     <h3>See Also:</h3>
     <ul>
-      <li><a href="http://www.kroah.com/lkn/"> Linux Kernel in a Nutshell</a> by Greg Kroah-Hartman (Free. Discusses building custom kernels)</li>
-      <li><a href="https://www.kernel.org/doc/html/latest/process/index.html"> Working with the kernel development community</a>&mdash; The Linux Kernel documentation</li>
+      <li><a href="http://www.kroah.com/lkn/"> Linux Kernel in a Nutshell</a> by Greg Kroah-Hartman (Free. Discusses building custom kernels.)</li>
+      <li><a href="https://www.kernel.org/doc/html/latest/process/index.html"> Working with the kernel development community</a> (Official) </li>
       <li><a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/process?h=v5.8-rc1">The Kernel Development Process</a> (Official) </li>
+      <li><a href="https://www.kernel.org/doc/html/v4.10/process/coding-style.html"> Linux Kernel Coding Style</a> (Written by Linux Torvalds) </li>
       <li><a href="https://en.wikipedia.org/wiki/History_of_Linux">History of Linux - Wikipedia</a></li>
     </ul>
     </div>
@@ -139,8 +141,64 @@ title: Introduction to GNU/Linux
     <div class="content" id="gnu">
       <h2>GNU</h2>
 
-      The deployment of a Unix-like operating system is contingent upon
-      the execution of some user-space programs.
+
+
+
+      <p>
+        Development and deployment of Unix-like operating systems is
+        contingent upon some user-space programs, such as a C compiler and
+        an <em>sh</em>-compatible shell.
+        GNU (pronounced <em>gah-new</em>) is well-known for producing high-quality, well-documented
+        free software; they are as "official" as the open-source community gets.
+      </p>
+
+      <div class="aside-right">
+        <h4> From <a href="https://www.gnu.org/philosophy/free-sw.html">gnu.org:</a> </h4>
+        <p>
+          “Free software” means software that respects users' freedom and community.
+          Roughly, it means that <strong>the users have the freedom to run, copy,
+          distribute, study, change and improve the software.</strong>[sic]
+        </p>
+      </div>
+
+      <p>
+        The GNU Project was began by Richard Stallman in September 1983,<sup><a href="https://www.gnu.org/gnu/gnu-history.html">[2]</a></sup>
+        and takes freedom very seriously.
+        In GNU language, <em>free</em> software does not mean merely, "costs nothing."
+        Rather, it is intended to mean <em>free as in
+        freedom.</em><sup><a href="https://www.gnu.org/philosophy/free-sw.html">[3]</a></sup>
+        GNU and the open-source community often use
+        the term <em>libre</em> to connote this kind of freedom.
+        It should speak volumes that Linus Torvalds chose to release his budding
+        kernel under a GNU license.
+      </p>
+
+      <p>
+        <code>gcc</code> is the de-facto compiler on GNU/Linux operating
+        systems.  It stands for <em>GNU Compiler Collection,</em> and is
+        exclusively used to build Linux kernels.
+        <code>bash</code> is the default shell on these systems; it also is maintained
+        by the GNU project.
+        Each tool offered by GNU is well-documented, so look to them for
+        official documentation&mdash; though, I gotta be honest, I never use their
+        <code>info</code> documentation system.
+      </p>
+
+      <p>
+        A point of note:
+        The GNU project maintains a list of "free" operating systems on their website.
+        Their criteria is extremely restrictive, disallowing non-free software to
+        exist even in downloadable form on the distribution's package-management repositories.
+        Most Linux distributions are not listed; this is permissiveness on the part
+        of the distribution's maintainer, allowing non-free software to be
+        officially supported, and does not mean that you can't use it.
+      </p>
+    <h3> See Also: </h3>
+    <ul>
+      <li><a href="https://www.gnu.org/philosophy/philosophy.html"> Philosophy of the GNU Project - GNU Project</a></li>
+      <li><a href="https://www.gnu.org/philosophy/free-sw.html"> What is free software? - GNU Project</a> </li>
+    </ul>
+
     </div>
 
     <div class="content" id="posix">
