@@ -10,9 +10,10 @@ title: Introduction to GNU/Linux
         <li><a href="#unix-architecture"> Unix Architecture </a></li>
         <li><a href="#linux-kernel"> The Linux Kernel </a></li>
         <li><a href="#gnu"> GNU </a></li>
-        <li><a href="#posix"> POSIX </a></li>
+        <li><a href="#sus"> Single Unix Specification</a></li>
         <li><a href="#distributions"> Linux Distributions </a></li>
-        <li><a href="#linux-mint"> Linux Mint </a></li>
+        <li><a href="#mint"> Linux Mint </a></li>
+        <li><a href="#fsf"> Free Software Foundation </a></li>
         <li><a href="#video">Greg Kroah-Hartman </a></li>
         <li><a href="#references"> References </a></li>
         <li><a href="#credits">Credits and Licenses</a></li>
@@ -140,10 +141,6 @@ title: Introduction to GNU/Linux
 
     <div class="content" id="gnu">
       <h2>GNU</h2>
-
-
-
-
       <p>
         Development and deployment of Unix-like operating systems is
         contingent upon some user-space programs, such as a C compiler and
@@ -180,8 +177,7 @@ title: Introduction to GNU/Linux
         <code>bash</code> is the default shell on these systems; it also is maintained
         by the GNU project.
         Each tool offered by GNU is well-documented, so look to them for
-        official documentation&mdash; though, I gotta be honest, I never use their
-        <code>info</code> documentation system.
+        official documentation.
       </p>
 
       <p>
@@ -201,8 +197,8 @@ title: Introduction to GNU/Linux
 
     </div>
 
-    <div class="content" id="posix">
-      <h2> Specifications </h2>
+    <div class="content" id="sus">
+      <h2> Single Unix Specification </h2>
 
 
     <p>
@@ -227,7 +223,7 @@ title: Introduction to GNU/Linux
       a functioning operating system.
       Each will include a kernel, compiled with some drivers, core utilities,
       and, usually, some user-space applications (e.g., Firefox).
-      All of this will be packaged in a fashion that facilitates installation
+      All of this is tested to work and will be packaged in a fashion that facilitates installation
       (usually, an ISO).
     </p>
 
@@ -251,7 +247,8 @@ title: Introduction to GNU/Linux
       Some distributions follow a "rolling release" development cycle&mdash; notably,
       <a href="https://wiki.archlinux.org/index.php/Arch_Linux">Arch.</a>
       This method of delivering software focuses on obtaining and using the
-      latest version of each; in particular, new package releases are expected to
+      latest version of each.
+      In particular, new package releases are expected to
       work correctly only with the latest package releases.
       The user is expected to update/upgrade frequently, but is guaranteed that
       each system-wide update will yield a coherent collection of software (in theory).
@@ -269,11 +266,43 @@ title: Introduction to GNU/Linux
     <h2> Linux Mint </h2>
     <p>
       I like <a href="https://linuxmint.com/">Linux Mint,</a> but then, I'm a simple guy.
-      It's easy to use, and focuses on productivity.
-      Mint offers the Cinnamon desktop environment, which I quite like;
-      Windows users will feel right at home.
+      It's easy to install,  easy to use, is very professional and focuses on productivity.
     </p>
 
+    <p>
+      Mint offers the Cinnamon desktop environment;
+      Windows users will feel right at home.
+      It's a decently attractive desktop, but only moderately customizable.
+      Like many users, I just want to get to work, so a
+      desktop environment that stays out of my way helps me do exactly that.
+    </p>
+
+    <p>
+      New for Linux Mint 19 is <em>Timeshift.</em> From <a href="https://github.com/linuxmint/timeshift">their github:</a>
+      "Timeshift for Linux is an application that provides functionality
+      similar to the <em>System Restore</em> feature in Windows and the <em>Time Machine</em>
+      tool in Mac OS. Timeshift protects your system by taking incremental
+      snapshots of the file system at regular intervals. These snapshots
+      can be restored at a later date to undo all changes to the system."
+    </p>
+
+    <p>
+      I recommend using it&mdash;  It's saved my butt a few times.
+      You will be queried about it (and other optional things, such as a firewall)
+      at the end of installation.
+      Make sure you walk through the <a href="https://linuxmint-installation-guide.readthedocs.io/en/latest/index.html">installation instructions.</a>
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+      <li><a href="https://linuxmint-installation-guide.readthedocs.io/en/latest/index.html"> Linux Mint Installation Guide </a></li>
+      <li><a href="https://www.balena.io/etcher/"> balenaEtcher - Flash OS images to SD cards & USB drives</a> (Free; cross-platform) </li>
+    </ul>
+
+</div>
+
+<div id="fsf" class="content">
+    <h2> Free Software Foundation </h2>
 </div>
 
 <div id="video" class="content">
