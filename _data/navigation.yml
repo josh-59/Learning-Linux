@@ -12,3 +12,6 @@
   link: /text-terminals.html
 - name: Finding Files
   link: /finding-files.html
+- name: Programming in *nix
+  link: /programming-in-nix.html
+  
