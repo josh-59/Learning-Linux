@@ -10,7 +10,7 @@ title: Introduction to GNU/Linux
         <li><a href="#unix-architecture"> Unix Architecture </a></li>
         <li><a href="#linux-kernel"> The Linux Kernel </a></li>
         <li><a href="#gnu"> GNU </a></li>
-        <li><a href="#sus"> Single Unix Specification</a></li>
+        <li><a href="#posix"> POSIX </a></li>
         <li><a href="#distributions"> Linux Distributions </a></li>
         <li><a href="#mint"> Linux Mint </a></li>
         <li><a href="#licenses"> Licenses </a></li>
@@ -129,8 +129,8 @@ title: Introduction to GNU/Linux
 
     <h3>See Also:</h3>
     <ul>
-      <li><a href="http://www.kroah.com/lkn/"> Linux Kernel in a Nutshell</a> by Greg Kroah-Hartman (Free. Discusses building custom kernels.)</li>
-      <li><a href="https://www.kernel.org/doc/html/latest/process/index.html"> Working with the kernel development community - The LInux Kernel documentation</a> </li>
+      <li><a href="http://www.kroah.com/lkn/"> Linux Kernel in a Nutshell</a> by Greg Kroah-Hartman (Free book. Discusses building custom kernels.)</li>
+      <li><a href="https://www.kernel.org/doc/html/latest/process/index.html"> Working with the kernel development community - The Linux Kernel documentation</a> </li>
       <li><a href="https://www.kernel.org/">The Linux Kernel Source Code</a> </li>
       <li><a href="https://www.kernel.org/doc/html/v4.10/process/coding-style.html"> Linux Kernel Coding Style</a> (Written by Linux Torvalds) </li>
       <li><a href="https://en.wikipedia.org/wiki/History_of_Linux">History of Linux - Wikipedia</a></li>
@@ -189,29 +189,43 @@ title: Introduction to GNU/Linux
       </p>
     <h3> See Also: </h3>
     <ul>
-      <li><a href="https://www.gnu.org/philosophy/philosophy.html"> Philosophy of the GNU Project - GNU Project</a></li>
       <li><a href="https://www.gnu.org/philosophy/free-sw.html"> What is free software? - GNU Project</a> </li>
+      <li><a href="https://www.gnu.org/philosophy/philosophy.html"> Philosophy of the GNU Project - GNU Project</a></li>
     </ul>
 
     </div>
 
-    <div class="content" id="sus">
-      <h2> Single Unix Specification </h2>
+    <div class="content" id="posix">
+      <h2> POSIX </h2>
+      <p>
+        The set of system calls that an operating system provides
+        determines the interface that any user-space process has
+        to the operating system, and thus to the machine.
+        In order to assure software portability across operating systems, it is
+        essential that this interface be (mostly) uniform.
+      </p>
 
+      <p>
+        The first <em>Portable Operating System Interface</em> specification
+        was released as an IEEE standard in 1988,<sup><a href="https://en.wikipedia.org/wiki/POSIX#Name">[4]</a></sup>
+        and specifies the system-call interface available to user-space programs.
+        Operating systems that abide by this standard are called <em>POSIX Compliant;</em>
+        systems developers general aim for POSIX compliance.<sup><a href="https://en.wikipedia.org/wiki/Single_UNIX_Specification">[5]</a></sup>
+      </p>
 
-    <p>
-        - System Call API
-        - Standard "Core" utilities
-        POSIX / SUSv4
+      <p>
+        A stronger specification is the <em>Single Unix Specification,</em>
+        which is a superset of POSIX.<sup><a href="#references">[3]</a></sup>
+        Certification to this standard is costly, and is generally reserved for proprietary operating systems.
+      </p>
 
-
-      "Core" Utilites:
-      The standard collection of programs that help define the working "Linux" OS;
-      Some of these are critical to operating system functionality (?? Examples ??)
-        - GNU
-      While the system-call interface is not the only means of interacting with
-      the kernel, it is the most-used and most-traditional.
-    </p>
+      <p>
+        While the system-call interface is not the only means of interacting with
+        the kernel, and properly speaking belongs to the kernel,
+        I feel it sufficiently important to be depicted above as an additional layer;
+        most interactions between processes and the operating system occur
+        through the system-call interface.
+      </p>
 
 </div>
 
@@ -221,7 +235,7 @@ title: Introduction to GNU/Linux
       A distribution is a collection of software that, when installed, yields
       a functioning operating system.
       Each will include a kernel, compiled with some drivers, core utilities,
-      and, usually, some user-space applications (e.g., Firefox).
+      and, usually, some other user-space applications (e.g., Firefox).
       All of this is tested to work and will be packaged in a fashion that facilitates installation
       (usually, an ISO).
     </p>
@@ -230,17 +244,28 @@ title: Introduction to GNU/Linux
       In my opinion, distributions are more similar than dissimilar.
       Think of them as flavors of the Unix architecture, rather than distinct operating systems.
       The oldest distribution that's still maintained is
-      <a href="http://www.slackware.com/">Slackware</a>.
+      <a href="http://www.slackware.com/">Slackware</a>.<sup><a href="https://en.wikipedia.org/wiki/Slackware">[5]</a></sup>
     </p>
 
     <p>
-      The number of features that are included with software is a function of how new it is;
-      on the other hand, newer software tends to have more bugs.
-      As a consequence, each distribution is, in part, a compromise between
-      features and stability.
-      Most distributions follow an incremental release cycle,
-      in which versions of software are frozen, and updated only for security and bug fixes.
-      Most commercial and desktop GNU/Linux distributions follow this model.
+      One of the key distinctions between distributions is the package management
+      system that is provided.
+      The package-management system is intended to be the user's interface
+      to obtaining, installing and upgrading software; it's similar
+      to a <em>Store</em> on closed-source OS's.
+      While the user is free to install software "by hand," this is generally
+      discouraged because the package-management system allows the centralized
+      and automated maintenance of software.
+    </p>
+
+    <p>
+      Distributions differ in philosophy towards software that's appropriate to their
+      operating system.
+      Loosely, newer software has newer features, but
+      is less stable than older software.
+      For an operating system intended to be used on a server (i.e., <a href="https://www.debian.org/">Debian</a>),
+      the maintainers would tend towards reliable, stable,
+      well-tested and mature user-space software.
     </p>
 
     <p>
@@ -251,18 +276,29 @@ title: Introduction to GNU/Linux
       Under the rolling release paradigm, new software releases are expected to
       work correctly only with the latest software releases.
       The user is expected to update/upgrade frequently, but is guaranteed that
-      each system-wide update will yield a coherent collection of software (in theory).
+      each system-wide update will yield a coherent collection of software.
     </p>
+
+    <h3> See Also: </h3>
+    <ul>
+      <li><a href="https://www.balena.io/etcher/"> balenaEtcher - Flash OS images to SD cards & USB drives</a> (Free, cross-platform) </li>
+    </ul>
 </div>
 
 <div id="mint" class="content">
     <h2> Linux Mint </h2>
     <p>
       I like <a href="https://linuxmint.com/">Linux Mint,</a> but then, I'm a simple guy.
-      This is a characteristically professional operating system, and focuses on
+      This distribution is <em>downstream</em> of Debian, which means that
+      it is a derivation of Debian.
+      It inherits their package-mangament tool, <code>apt</code>,
+      and the philosophy towards software that it implies.
+      Linux Mint is a characteristically professional operating system, and focuses on
       productivity.  It is extremely new-user friendly, but retains the power
       of any other Unix-like operating system.
     </p>
+<a title="RealNZZN / CC BY-SA (https://creativecommons.org/licenses/by-sa/4.0)" href="https://commons.wikimedia.org/wiki/File:Cinnamon_4.4.8_on_Linux_Mint_19.3.png"><img width="1024" alt="Cinnamon 4.4.8 on Linux Mint 19.3" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Cinnamon_4.4.8_on_Linux_Mint_19.3.png/1024px-Cinnamon_4.4.8_on_Linux_Mint_19.3.png"></a>
+    <center>By <a href="//commons.wikimedia.org/w/index.php?title=User:RealNZZN&amp;action=edit&amp;redlink=1" class="new" title="User:RealNZZN (page does not exist)">RealNZZN</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="https://creativecommons.org/licenses/by-sa/4.0" title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=86878031">Link</a></center>
 
     <p>
       Mint offers the Cinnamon desktop environment;
@@ -287,10 +323,17 @@ title: Introduction to GNU/Linux
       at the end of installation.
     </p>
 
+    <p>
+      Mint isn't perfect: Being founded upon a server distribution,
+      it is not well-suited to kernel development.
+      A more appropriate distribution for that task would be
+      <a href="https://en.wikipedia.org/wiki/Fedora_(operating_system)">Fedora</a>.
+    </p>
+
     <h3>See Also:</h3>
     <ul>
       <li><a href="https://linuxmint-installation-guide.readthedocs.io/en/latest/index.html"> Linux Mint Installation Guide </a></li>
-      <li><a href="https://www.balena.io/etcher/"> balenaEtcher - Flash OS images to SD cards & USB drives</a> (Free, cross-platform) </li>
+
     </ul>
 
 </div>
@@ -310,6 +353,7 @@ title: Introduction to GNU/Linux
     <ol style="margin-left: 0">
         <li> <i>Unix Programmer's Manual, First Edition.</i>  <a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html"> https://www.bell-labs.com/usr/dmr/www/1stEdman.html </a> </li>
         <li> WHATWG HTML Living Standard Section 1.6, History. <a href="https://html.spec.whatwg.org/multipage/introduction.html#history-2">https://html.spec.whatwg.org/multipage/introduction.html#history-2</a> </li>
+        <li> Kerrisk, Michael.  <em>The Linux Programming Interface</em>. San Francisco, CA, No Starch Press, 2010.</li>
     </ol>
 </div>
 
