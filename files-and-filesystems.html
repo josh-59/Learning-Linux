@@ -13,8 +13,8 @@ last-updated: June, 2020
     <li><a href="#directory-tree"> Directory Tree </a></li>
     <li><a href="#mounting-unmounting"> Mounting and Unmounting</a></li>
     <li><a href="#regular-files"> Regular Files </a></li>
-    <li><a href="#device-files"> Device Special Files </a></li>
     <li><a href="#directories"> Directories </a></li>
+    <li><a href="#device-files"> Device Special Files </a></li>
     <li><a href="#closing-remarks"> Closing Remarks </a></li>
     <li><a href="#engineer-man"> Engineer Man </a></li>
     <li><a href="#references"> References </a></li>
@@ -340,56 +340,6 @@ last-updated: June, 2020
   </ul>
 
 </div>
-<div id="device-files" class="content">
-  <h2>Device Special Files</h2>
-  <p>
-    The directory <code>/dev</code> is famous in the Unix/Linux world.
-    It contains files called <em>special device files</em>,<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[1]</a></sup>
-    which <em>are not</em> regular files, and are not existent on-disk.
-    Each special device file represents a device connected to the system;
-    it serves as the principle reference to the device driver (and, therefore, the device).
-  </p>
-
-  <p>
-    For instance, when we want to partition a drive, we pass the name of the drive
-    (say, <code>/dev/sdb</code>) to a program, such as <code>fdisk</code>:
-  </p>
-
-  <div class="code">
-    $ sudo fdisk /dev/sdb
-  </div>
-
-  <p>
-    Note that <code>fdisk</code> is a user-space program.
-    That is, the operating system has not undertaken the task of
-    providing the user an interface for partitioning.
-    This is an example of <em>The Unix Philosophy:</em>
-    By keeping each tool in the chain small, they are each more easily maintainable, and interchangeable.
-    Another program to do the same task is GNU's partition editor, <code>parted</code>.
-  </p>
-
-  <p>
-    Among device special files, there are two distinct kinds:
-    <em>block</em> and <em>character</em>.
-    The distinction refers to the way that the kernel reads and writes to these files.
-    Character special files are operated on a single character at a time
-    (e.g., terminal screen), while block special files are operated on a block of
-    bytes at a time (usually, 4096 or 8192), as in a hard drive.
-  </p>
-
-  <p>
-    While there is too much going on in the <code>/dev</code> directory
-    to exhaust the subject here,
-    it's worth noting that utilities for displaying the current
-    system's hardware often begin with <code>ls</code>:
-  </p>
-
-  <ul>
-    <li><code><a href="http://man7.org/linux/man-pages/man8/lsblk.8.html">lsblk</a></code> - List block devices (hardrives, CD-drives, etc).  Useful to determine what drive to mount.</li>
-    <li><code><a href="http://man7.org/linux/man-pages/man1/lscpu.1.html">lscpu</a></code> - Display information about the CPU architecture </li>
-    <li><code><a href="http://man7.org/linux/man-pages/man8/lsusb.8.html">lsusb</a></code> - List usb devices </li>
-    <li><code><a href="http://man7.org/linux/man-pages/man8/lspci.8.html">lspci</a></code> - List all PCI devices </li>
-</div>
 
 <div id="directories" class="content">
   <h2>Directories</h2>
@@ -454,6 +404,61 @@ last-updated: June, 2020
         </ul>
       </p>
     </div>
+  </div>
+
+<div id="device-files" class="content">
+  <h2>Device Special Files</h2>
+  <p>
+    The directory <code>/dev</code> is famous in the Unix/Linux world.
+    It contains files called <em>special device files</em>,<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[1]</a></sup>
+    which <em>are not</em> regular files, and are not existent on-disk.
+    Each special device file represents a device connected to the system;
+    it serves as the principle reference to the device driver (and, therefore, the device).
+  </p>
+
+  <p>
+    For instance, when we want to partition a drive, we pass the name of the drive
+    (say, <code>/dev/sdb</code>) to a program, such as <code>fdisk</code>:
+  </p>
+
+  <div class="code">
+    $ sudo fdisk /dev/sdb
+  </div>
+
+  <p>
+    Note that <code>fdisk</code> is a user-space program.
+    That is, the operating system has not undertaken the task of
+    providing the user an interface for partitioning.
+    This is an example of <em>The Unix Philosophy:</em>
+    By keeping each tool in the chain small, they are each more easily maintainable, and
+    we can interchange them more easily.
+    Another program to do the same task is GNU's partition editor, <code>parted</code>.
+  </p>
+
+  <p>
+    Among device special files, there are two distinct kinds:
+    <em>block</em> and <em>character</em>.
+    The distinction refers to the way that the kernel reads and writes to these files.
+    Character special files are operated on a single character at a time
+    (e.g., terminal screen), while block special files are operated on a block of
+    bytes at a time (usually, 4096 or 8192), as in a hard drive.
+  </p>
+
+  <p>
+    While there is too much going on in the <code>/dev</code> directory
+    to exhaust the subject here,
+    it's worth noting that utilities for displaying the current
+    system's hardware often begin with <code>ls</code>:
+  </p>
+
+  <ul>
+    <li><code><a href="http://man7.org/linux/man-pages/man8/lsblk.8.html">lsblk</a></code> - List block devices (hardrives, CD-drives, etc).  Useful to determine what drive to mount.</li>
+    <li><code><a href="http://man7.org/linux/man-pages/man1/lscpu.1.html">lscpu</a></code> - Display information about the CPU architecture </li>
+    <li><code><a href="http://man7.org/linux/man-pages/man8/lsusb.8.html">lsusb</a></code> - List usb devices </li>
+    <li><code><a href="http://man7.org/linux/man-pages/man8/lspci.8.html">lspci</a></code> - List all PCI devices </li>
+</div>
+
+
 
     <h3>Symbolic Links</h3>
     <p>
