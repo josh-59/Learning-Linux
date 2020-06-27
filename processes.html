@@ -25,8 +25,7 @@ last-updated: June, 2020
     A process is a running program.<sup><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/cpu-intro.pdf">[1]</a></sup>
     A <em>program</em> is a file containing a range of information that describes how to
     construct a process at run time.<sup><a href="#references">[2]</a></sup>
-    Modern operating systems, including GNU/Linux, are multiprocess operating systems, supporting
-    multiple processes concurrently.
+    The abstraction of the process is, alongside the <em>file,</em> among the most important concepts in operating systems.
   </p>
 </div>
 
@@ -42,7 +41,7 @@ last-updated: June, 2020
     the only exception to this is that we explicitly tell the kernel which programs
     to launch.
     In this way, the kernel supports the use of the machine,
-    without making stipulations on its use.
+    without placing stipulations on its use.
   </p>
 
   <p>
@@ -61,68 +60,83 @@ last-updated: June, 2020
     Under the Unix philosophy, each process has a narrowly defined role,
     which it is expected to do well.  It might copy a file, list the
     contents of a directory, or interpret and execute commands that the user inputs.
+    Together, these disparate parts field the running desktop.
   </p>
 
-  <p>
-    We wish to run multiple processes simultaneously,
-    so that <em>Bash</em> remains running while <em>ls</em> is executing.
-    This is known as a multitasking or multiprogramming operating system, and all modern operating
-    systems are multitasking.
-    This is an unfortunate term, but <em>multiprocessor</em> is reserved to
-    refer to a machine having, or an operating system supporting, multiple
-    CPU's.<sup><a href="https://en.wikipedia.org/wiki/Multiprocessing">[3]</a></sup>
-  </p>
 
-  <p>
-    We pause our discussion to give definitions of the words <em>dynamic</em> and <em>static.</em>
-    An action occurs dynamically with respect to a process if it occurs during process
-    execution.
-    For instance, the kernel creates files <em>dynamically.</em>
-    Similarly, an element of the process environment is dynamic if it can change
-    during process execution.
-    For example, the contents of a file may be dynamic, and the contents of a
-    process's data structure are certainly dynamic.
-    The obverse of dynamic is <em>static:</em>
-    For any given process, an element of the programming environment is static with respect to the process if it is invariant
-    throughout program execution.
-    For instance, the CPU architecture of a machine is static with respect to each process.
-  </p>
 
 </div>
 
 <div class="content" id="sandbox">
   <h2>Sandbox</h2>
   <p>
-    Processes run on the machine in a "sandboxed" environment, such that each
-    process is incapable of jeopardizing the stability of the machine,
-    and cannot affect any other process in an unpredictable manner.
-    This environment is composed of an allotment of memory, and restricted access to the machine's CPU(s).
+    For each process on the system, we wish to guarantee a few things.
+    We want to ensure that the process is incapable of jeopardizing the stability of the
+    machine, so that it cannot (inadvertently or not) crash the system.
+    We also want to ensure that each process cannot affect any other process in
+    an unpredictable manner.
+    In effect, we wish to treat user-space programs as <em>untrusted</em> software,
+    for the benefit of the system as a whole.
   </p>
 
   <p>
-    Memory is allotted to a process by the kernel, upon initialization of the process and
-    often during process execution (i.e., dynamically).
-    It is known as <em>virtual memory.</em>
-
-    and the set of all
-    A full explanation of virtual memory is quite involved, and outside the scope of this paper.
-    For a formal development, see <em>Computer Systems: A Programmer's Perspective</em>,
-    but be cautioned that this is not an easy subject.
+    The way we do this is by running each process in a
+    "sandboxed" environment, composed of an allotment of memory,
+    and restricted access to the machine's CPU(s).
+    Modern CPU architectures support this abstraction by fielding two
+    distinct modes of operation.
+    <em>Kernel mode</em> is the unrestricted mode; here, all
+    CPU instructions are available.
+    <em>User mode</em> is a proper subset of that instruction set;
+    all processes run in user mode.
+    If a process, running in user mode, attempts to execute a restricted instruction,
+    its execution is aborted, and control is
+    given to the kernel.
+    At that point, it is up to the operating system to determine what to do
+    (usually, terminate the offending process).
   </p>
 
   <p>
-    Each process runs its instructions directly on the CPU(s), by a technique
+    This technique is
     known as <em>limited direct execution.</em><sup><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/cpu-mechanisms.pdf">[3]</a></sup>
     It is <em>limited</em> in the sense that each process has access to
     only a restricted subset of the CPU's instructions.
-    Notably, a process cannot access hardware beyond the CPU and memory directly,
-    and it also cannot assume the identity of another process.
+    It is <em>direct</em> in the sense that each process runs directly on hardware.
+    It makes safe and efficient use of available hardware.
   </p>
 
+  <p>
+    A similar story unfolds in the case of process memory, but is slightly more
+    complicated because we wish to give each process the illusion that it has
+    the same memory space.
+    Physical memory is allotted to each process by the kernel.  With the exception
+    of read-only sections of memory (such as the program's instructions), each
+    process is allotted distinct physical memory.
+    This physical memory is mapped onto <em>virtual memory</em> by
+    a translating table.
+    The process sees and references virtual memory; the CPU translates
+    these virtual addresses to physical addresses;
+    the kernel is responsible for maintaining the translating tables and physical memory.
+  </p>
+
+  <p>
+    If a process attempts to access an invalid (i.e., unassigned) memory address,
+    execution of the process is aborted, and control is given to the kernel.
+  </p>
+
+  <p>
+    The above are quite dramatic simplifications of
+    low-level operating systems concepts.
+    There are two good reasons for including them.
+    First, it's important to recognize that each process is distinct;
+    this explains how they are distinct.
+    Second, a high-level overview will only make a thorough investigation
+    easier.
+  </p>
 
   <h3>See Also</h3>
   <ul>
-    <li><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/vm-intro.pdf"<em>Operating Systems, Three Easy Pieces: Address Spaces</em></a></li>
+    <li><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/"><em>Operating Systems: Three Easy Pieces</em></a> (Free book)</li>
   </ul>
 
   </div>
@@ -152,6 +166,22 @@ last-updated: June, 2020
         It would, however, be impossible to interact with, and hence, useless.
 
 
+</div>
+
+<div id="closing-remarks" class="content">
+  <p>
+    We pause our discussion to give definitions of the words <em>dynamic</em> and <em>static.</em>
+    An action occurs dynamically with respect to a process if it occurs during process
+    execution.
+    For instance, the kernel creates files <em>dynamically.</em>
+    Similarly, an element of the process environment is dynamic if it can change
+    during process execution.
+    The obverse of dynamic is <em>static:</em>
+    For any given process, an element of the programming environment is static with respect to the process if it is invariant
+    throughout program execution.
+    For instance, the CPU architecture of a machine is static.
+    As a final word, note that the contents of a file may be dynamic, or they may be static.
+  </p>
 </div>
 
 
