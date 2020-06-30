@@ -70,3 +70,5 @@ Improvements:
 		until the kernel begins to run out of memory.
 		Then distribution creators could implement a tool to allow the user to modify this
 		list (and/or base it on history).
+
+Use Lbry's framework to make scholarly publications available freely (and searchable).
