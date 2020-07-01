@@ -10,13 +10,13 @@ last-updated: June, 2020
   <ul>
     <li><a href="#introduction"> Introduction </a></li>
     <li><a href="#filesystems"> Filesystems </a></li>
+    <li><a href="#directories"> Directories </a></li>
     <li><a href="#directory-tree"> Directory Tree </a></li>
     <li><a href="#mounting-unmounting"> Mounting and Unmounting</a></li>
     <li><a href="#regular-files"> Regular Files </a></li>
-    <li><a href="#directories"> Directories </a></li>
     <li><a href="#device-files"> Device Special Files </a></li>
     <li><a href="#closing-remarks"> Closing Remarks </a></li>
-    <li><a href="#engineer-man"> Engineer Man </a></li>
+    <li><a href="#lvl1"> Level 1 Linux </a></li>
     <li><a href="#references"> References </a></li>
     <li><a href="#credits">Credits and Licenses</a></li>
   </ul>
@@ -77,6 +77,7 @@ last-updated: June, 2020
       <h4>Aside</h4>
       <p>
         Linux supports many filesystems&mdash; <a href="https://www.man7.org/linux/man-pages/man8/fdisk.8.html"><code>fdisk</code></a> lists 73 known partition types.
+        In addition, the filesystems known by the current kernel are listed in the <code>/proc/filesystems</code> file.<sup><a href="#references">[4]</a></sup>
       </p>
     </div>
 
@@ -123,36 +124,114 @@ last-updated: June, 2020
     was the <em>inode</em>.
     This feature has been retained throughout the Extended Filesystem series,
     and is a key to understanding files in Linux.
-    The inode of a file is the unique on-disk reference to the file; it contains
-    information describing where the data of the file is (data block references),
+    The inode of a file serves as the filesystem's unique reference to the file.
+    It contains information describing where the data of the file is,
     in addition to metadata about the file, including its size, access permissions
     and timestamps.
   </p>
 
   <p>
-    The set of all inodes in a filesystem is organized in an array; this array
-    is located near the beginning of the partition.
+    The set of all inodes in a filesystem is organized in an array;
+    in most filesystems, this array is located near the beginning of the partition.
     An inode number is an index into this array, and therefore serves as a
     reference to a unique inode.
-    Each inode (and therefore each file) has a unique inode number.
+    Each inode&mdash; and therefore each file&mdash; has a unique inode number within its
+    filesystem.
   </p>
 
   <p>
-    inode numbers serve as the "hardware name" of a file.
-    They will become important
-    as we discuss directories (which link a filename to an inode number).
+    Intuitively, inode numbers serve as the "hardware name" of a file, within its
+    filesystem.
+    Inode numbers, together with filesystem identifiers, serve as the "hardware name"
+    of a file, at the system level.
+    They will become important as we discuss directories (which link a filename to an inode number).
   </p>
 
   <h3> See Also: </h3>
   <ul>
     <li> <a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">An Introduction to Disk Partitions - Fedora Docs Site</a></li>
     <li> <a href="https://ext4.wiki.kernel.org/index.php/Main_Page">Ext4 (and Ext2/Ext3) Wiki </a></li>
-    <li> <a href="https://youtu.be/lsFDp-W1Ks0"> What is ZFS?: A Brief Primer</a> (Youtube Video) </li>
+
     <li> <a href="http://web.mit.edu/tytso/www/linux/ext2intro.html"> Design and Implementation of the Second Extended Filesystem</a> (Discusses inodes)</li>
-    <li> <a href="http://www.tldp.org/HOWTO/Filesystems-HOWTO-6.html"> Filesystems HOWTO: Extended Filesystems (Ext, Ext2, Ext3) - The Linux Documentation Project</a></li>
-    <li> <a href="https://www.tldp.org/LDP/tlk/fs/filesystem.html"> The Linux Kernel - The File System - The Linux Documentation Project</a> (Discusses EXT2)</li>
+    <li> <a href="https://www.man7.org/tlpi/">The Linux Programming Interface</a>, Chapter 14: Filesystems </li>
   </ul>
 </div>
+
+<div id="directories" class="content">
+  <h2>Directories</h2>
+
+  <p>
+    A directory is a file containing a table with two columns:
+    Filename and inode number.
+    Each entry in this table is known as a 'hard link'.
+    Since a directory is a file, it exists within a filesystem; as a consequence,
+    the data in this table is sufficient to link each filename to a unique file.
+  </p>
+
+
+
+
+
+
+    We list the contents of a directory with the usual <code>ls</code> command,
+    and can list a file's inode number using<br><code>ls -i</code>:
+  </p>
+
+  <div class="code">
+    /home/josh/studies$ ls -i newfile <br>
+    2112949 newfile
+  </div>
+
+  <div class="aside-right">
+    <h4>Aside</h4>
+    <p>
+      The system calls used to delete files are
+      <a href="https://man7.org/linux/man-pages/man2/unlink.2.html"><code>unlink</code> and
+        <code>unlinkat()</code></a>, which remove entries from directories.
+        A file is only removed (deleted) by the kernel when there are no hard
+        links to it, and when there are no processes holding it open.
+      </p>
+    </div>
+
+    <p>
+      Each such directory listing is called a <em>hard link.</em>
+      They link a filename (location in the directory tree) to a file
+      (described by an inode).
+      A file may have more than one hard link, and therefore, appear
+      more than once in the directory tree.
+      Additional hard links to a file may be created with
+      <a href="https://www.man7.org/linux/man-pages/man1/ln.1.html"<code>ln</code></a>,
+      and may be removed with
+      <a href="https://www.man7.org/linux/man-pages/man1/unlink.1.html"><code>unlink</code></a> or
+      <a href="https://www.man7.org/linux/man-pages/man1/rm.1.html"><code>rm</code></a>.
+      The number of hard links to a file can be listed with
+      <code>ls -l</code> (see above).
+    </p>
+
+    <p>
+      Each directory has at least two entries, which cannot be changed, and
+      which help define the Linux directory structure.  They are,
+      <code>.</code> ("dot"), which refers to the containing directory itself,
+      and <code>..</code> ("dot dot"), which refers to its parent directory.
+      The root directory's parent directory is the root directory itself.
+    </p>
+
+    <div class="aside-left">
+      <h4>Aside</h4>
+      <p style="margin-bottom: 0">
+        The directory tree is the responsibility of the kernel, so that
+        user-space processes are not permitted to read or write
+        directly to directory files.
+        Specific system calls exist to
+        <ul style="padding-left: 20px; margin-top: 0">
+          <li><a href="https://www.man7.org/linux/man-pages/man2/mkdir.2.html">create directories</a></li>
+          <li><a href="https://www.man7.org/linux/man-pages/man2/rmdir.2.html">remove directories</a></li>
+          <li><a href="https://www.man7.org/linux/man-pages/man2/getdents.2.html">get directory entries</a></li>
+        </ul>
+      </p>
+    </div>
+  </div>
+
 
 <div id="directory-tree" class="content">
   <h2> Directory Tree</h2>
@@ -341,70 +420,6 @@ last-updated: June, 2020
 
 </div>
 
-<div id="directories" class="content">
-  <h2>Directories</h2>
-
-  <p>
-    A directory is, conceptually, a file containing a table with two columns:
-    Filename and inode number.
-    We list the contents of a directory with the usual <code>ls</code> command,
-    and can list a file's inode number using<br><code>ls -i</code>:
-  </p>
-
-  <div class="code">
-    /home/josh/studies$ ls -i newfile <br>
-    2112949 newfile
-  </div>
-
-  <div class="aside-right">
-    <h4>Aside</h4>
-    <p>
-      The system calls used to delete files are
-      <a href="https://man7.org/linux/man-pages/man2/unlink.2.html"><code>unlink</code> and
-        <code>unlinkat()</code></a>, which remove entries from directories.
-        A file is only removed (deleted) by the kernel when there are no hard
-        links to it, and when there are no processes holding it open.
-      </p>
-    </div>
-
-    <p>
-      Each such directory listing is called a <em>hard link.</em>
-      They link a filename (location in the directory tree) to a file
-      (described by an inode).
-      A file may have more than one hard link, and therefore, appear
-      more than once in the directory tree.
-      Additional hard links to a file may be created with
-      <a href="https://www.man7.org/linux/man-pages/man1/ln.1.html"<code>ln</code></a>,
-      and may be removed with
-      <a href="https://www.man7.org/linux/man-pages/man1/unlink.1.html"><code>unlink</code></a> or
-      <a href="https://www.man7.org/linux/man-pages/man1/rm.1.html"><code>rm</code></a>.
-      The number of hard links to a file can be listed with
-      <code>ls -l</code> (see above).
-    </p>
-
-    <p>
-      Each directory has at least two entries, which cannot be changed, and
-      which help define the Linux directory structure.  They are,
-      <code>.</code> ("dot"), which refers to the containing directory itself,
-      and <code>..</code> ("dot dot"), which refers to its parent directory.
-      The root directory's parent directory is the root directory itself.
-    </p>
-
-    <div class="aside-left">
-      <h4>Aside</h4>
-      <p style="margin-bottom: 0">
-        The directory tree is the responsibility of the kernel, so that
-        user-space processes are not permitted to read or write
-        directly to directory files.
-        Specific system calls exist to
-        <ul style="padding-left: 20px; margin-top: 0">
-          <li><a href="https://www.man7.org/linux/man-pages/man2/mkdir.2.html">create directories</a></li>
-          <li><a href="https://www.man7.org/linux/man-pages/man2/rmdir.2.html">remove directories</a></li>
-          <li><a href="https://www.man7.org/linux/man-pages/man2/getdents.2.html">get directory entries</a></li>
-        </ul>
-      </p>
-    </div>
-  </div>
 
 <div id="device-files" class="content">
   <h2>Device Special Files</h2>
@@ -525,13 +540,12 @@ last-updated: June, 2020
         As a consequence, the discussion about inodes given above remains
         at least conceptually correct, when EXT2/EXT3/EXT4 are not being employed.
       </p>
-
-
     </div>
 
-    <div id="engineer-man" class="content">
-      <h2>Engineer Man</h2>
-      <iframe class="video" src="https://www.youtube.com/embed/UFIoRLqhFpo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div id="lvl1" class="content">
+      <h2>Level-1 Linux</h2>
+          <iframe class="video" src="https://www.youtube.com/embed/lsFDp-W1Ks0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
     </div>
 
     <div id="references" class="content">
@@ -540,7 +554,7 @@ last-updated: June, 2020
         <li> Filesystem Hierarchy Standard Group. <a href="https://www.pathname.com/fhs/pub/fhs-2.3.pdf">The Linux Filesystem Heirarchy Standard</a>.  Retrieved May 29, 2020.</li>
         <li> Kernighan, Brian. <i>Unix: A History and a Memoir.</i>  Published 2020, by Brian W. Kernighan via Kindle Direct Publishing. </li>
         <li> Stevens, W. Richard. <i><a href="http://www.apuebook.com/apue3e.html"> Advanced Programming in the Unix Environment.</a></i> Pearson Eduction, 2013.</li>
-
+        <li> Kerrisk, Michael.  <em>The Linux Programming Interface</em>. San Francisco, CA, No Starch Press, 2010.</li>
       </ol>
 
     </div>
