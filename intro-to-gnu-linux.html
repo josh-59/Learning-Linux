@@ -7,12 +7,13 @@ title: Introduction to GNU/Linux
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
-        <li><a href="#unix-architecture"> Unix Architecture </a></li>
+        <li><a href="#unix-architecture"> The Unix Architecture </a></li>
         <li><a href="#linux-kernel"> The Linux Kernel </a></li>
         <li><a href="#gnu"> GNU </a></li>
         <li><a href="#posix"> POSIX </a></li>
         <li><a href="#distributions"> Linux Distributions </a></li>
         <li><a href="#mint"> Linux Mint </a></li>
+        <li><a href="#about"> About This Work </a></li>
         <li><a href="#video">Greg Kroah-Hartman </a></li>
         <li><a href="#references"> References </a></li>
         <li><a href="#credits">Credits and Licenses</a></li>
@@ -45,7 +46,7 @@ title: Introduction to GNU/Linux
 </div>
 
 <div id="unix-architecture" class="content">
-    <h2>Unix Architecture</h2>
+    <h2>The Unix Architecture</h2>
     <p>
       GNU/Linux belongs to a large class of operating systems called
       <em>Unix-like,</em> sometimes referred to as <em>*nix.</em>
@@ -235,7 +236,10 @@ title: Introduction to GNU/Linux
         Most interactions between processes and the operating system occur
         through the system-call interface.
       </p>
-
+    <h3> See Also: </h3>
+    <ul>
+      <li><a href="https://www.man7.org/tlpi/index.html">The Linux Programming Interface</a> (Book, not free.) </li>
+    </ul>
 </div>
 
 <div id="distributions" class="content">
@@ -275,6 +279,8 @@ title: Introduction to GNU/Linux
       For an operating system intended to be used on a server (e.g., <a href="https://www.debian.org/">Debian</a>),
       the maintainers would tend towards reliable, stable,
       well-tested and mature user-space software.
+      Conversely, a distribution geared towards development
+      (e.g., <a href="https://getfedora.org/">Fedora</a>) would employ software which is newer and less-tested.
     </p>
 
     <p>
@@ -298,7 +304,7 @@ title: Introduction to GNU/Linux
     <h2> Linux Mint </h2>
     <p>
       I like <a href="https://linuxmint.com/">Linux Mint,</a> but then, I'm a simple guy.
-      This distribution is <em>downstream</em> of Debian, which means that
+      This distribution is downstream of Debian, which means that
       it's a derivative of Debian.
       It inherits their package-management tool, <code>apt</code>,
       and the philosophy towards software that this implies.
@@ -327,12 +333,6 @@ title: Introduction to GNU/Linux
     </p>
 
     <p>
-      I recommend using Timeshift&mdash;  It's saved my butt a few times.
-      You will be queried about it (and other optional things)
-      at the end of installation.
-    </p>
-
-    <p>
       Mint isn't perfect:  It isn't new and isn't flashy.
       Changes from release to release are minor, and the software available from Debian's
       <code>apt</code> is comparatively old.
@@ -347,6 +347,31 @@ title: Introduction to GNU/Linux
       <li><a href="https://youtu.be/KZZaM5BRz4I"> Linux Mint 20 "Ulyana" Full Installation Walkthrough - LearnLinuxTV</a> (Youtube video. No affiliation)</li>
       <li><a href="https://youtu.be/IzVnTSklWa0"> How to: Dual Boot Linux Mint 20 with Windows 10 - LearnLinuxTV</a> (Youtube video. No affiliation)</li>
     </ul>
+</div>
+
+<div class="content" id="about">
+  <h2> About This Work </h2>
+  <p>
+    The field of computing is simply enormous.
+    I think it's so large that no single human can understand all of it.
+    Even restricting ourselves to the subject of Linux, I still think it infeasible
+    to comprehend it all.
+    Linus Torvalds, for instance, can't program GUI's.
+    Fortunately, it is sufficient to do a single job well.
+  </p>
+
+  <p>
+    This work is a survey of GNU/Linux.
+    It will introduce the new user to the subject, point out the major ideas,
+    thoroughly develop a few of the important ones, and explain the relationships among them.
+    Most importantly, it will highlight good, authoritative sources.
+  </p>
+
+  <p>
+    Linux is big, but very interesting to learn about.
+    A principle concept in computing is the notion of abstraction, hiding
+    detail to produce something that does the same thing, but appears simpler.
+  </p>
 </div>
 
 <div id="video" class="content">
