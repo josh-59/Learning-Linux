@@ -2,16 +2,15 @@
   link: /
 - name: Introduction to GNU/Linux
   link: /intro-to-gnu-linux.html
+- name: Documentation
+  link: /documentation.html
 - name: Files and Filesystems
   link: /files-and-filesystems.html
 - name: Processes
   link: /processes.html
-- name: Learning Linux
-  link: /learning-linux.html
 - name: Text Terminals
   link: /text-terminals.html
 - name: Finding Files
   link: /finding-files.html
 - name: Programming in *nix
   link: /programming-in-nix.html
-  

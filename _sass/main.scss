@@ -141,7 +141,7 @@ table {
 /* section in a script */
 .content {
     padding-top: 10pt;
-    margin-left: 240pt;
+    margin-left: 280pt;
     margin-right: 40px;
     max-width: 1000px;
     font-size: 14pt;
@@ -161,7 +161,7 @@ table {
 .content .big-list {
     margin: auto;
     margin-top: -20pt;
-    width: 70%;
+    width: 90%;
 }
 
 .content .big-list li {
@@ -211,17 +211,17 @@ table {
 }
 
 #nav_bar_1, #nav_bar_2 {
-    width: 100pt;
+    width: 120pt;
 }
 
 /* Same as nav_bar_1, but shifted right 100pt */
 #nav_bar_2 {
-    margin-left: 100pt;
+    margin-left: 120pt;
 }
 
 /* Wide nav bar on landing*/
 #nav_home {
-    width: 200pt;
+    width: 240pt;
 }
 
 /* Shift left */

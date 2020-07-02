@@ -1,8 +1,8 @@
 ---
 layout: default
 credits: default
-title: Learning Linux
-last-updated: May, 2020
+title: Documentation
+last-updated: July, 2020
 ---
 
 <div id="nav_bar_2" class="nav">
@@ -19,7 +19,7 @@ last-updated: May, 2020
 </div>
 
 <div id="introduction" class="content">
-	<h1>Learning Linux</h1>
+	<h1>Documentation</h1>
 	<div class="quote-text">
 		"Understanding is the key to success with Linux."
 	</div>
@@ -33,7 +33,7 @@ last-updated: May, 2020
 		in general, well-organized, so that finding the right information
 		can be hard.
 		This paper aims to give an overview of available resources,
-		some examples of each, and useful pointers, where appropriate.
+		some good examples of each, and useful pointers, where appropriate.
 	</p>
 </div>
 
@@ -143,7 +143,7 @@ last-updated: May, 2020
 	<p>
 		Technically speaking, this utility searches the single-line, "short description"
 		of each man page, and prints out the names and descriptions of programs that match your search
-		(<code>man apropos</code> for more information).
+		(<code><a href="https://www.man7.org/linux/man-pages/man1/apropos.1.html">man apropos</a></code> for more information).
 	</p>
 
 	<p>
@@ -230,7 +230,7 @@ last-updated: May, 2020
 				The Rust Progamming Language</a>&mdash;
 				Written by Steve Klabnik and Carol Nichols with updates from the community,
 				this book is the main documentation of the Rust language.
-				I think it's a great book, especially for its
+				I think it's very well-written, especially notable for its
 				technical excellence.
 			</li>
 			<li>
@@ -271,7 +271,7 @@ last-updated: May, 2020
 				Examples of good, unofficial documentation:
 				<ul class="big-list">
 					<li>
-						<a href="http://www.linfo.org"> The Linux Information Project </a>&mdash;
+						<a href="http://www.linfo.org"> The Linux Information Project</a>&mdash;
 						<em>LINFO</em> emphasizes useful, accurate, clear, consistent and interesting documentation of
 						Linux<sup><a href="http://www.linfo.org/linfo_about.html">[3]</a></sup>.
 						It's a neat site, but was last updated in 2007.
@@ -280,33 +280,53 @@ last-updated: May, 2020
 						<a href="http://tldp.org/"> The Linux Documentation Project</a>&mdash; Sadly, this project is not maintained anymore,
 						so that its content is often out of date.
 					</li>
-					<li>
-						<a href="http://www.man7.org/tlpi/index.html"> The Linux Programming Interface</a> by Michael Kerrisk&mdash;
-						The de-facto reference for programming in Linux.
-					</li>
 				</ul>
 			</p>
+	</div>
 
+	<div class="content" id="books">
+		<h2>Books</h2>
 			<p>
-				A piece of advice: Stay away from books.
-				The problem is that there's just too many of them, and better sources
-				are often available.
-				As my professor said, "There are a gazzillion books on Linux."
-				(and I own, like, ten).
-				They tend not to be authoritative; they tend to be *somewhat* out-of-date.
-				Moreover, there's just no need to pay for a secondary source.
-				I, personally, would rather read the
-				<a href="https://www.gnu.org/software/bash/manual">Official GNU Bash Reference Manual</a>
-				than any secondary source.
+				In the main, I recommend staying away from books.
+				There are several reasons for this recommendation.
+				First, there's just too many of them, and only a few are worthwhile.
+				The result is that the reader wastes a lot of time just figuring
+				out which source to study from.
+				Second, they are almost always secondary sources, and hence not authoritative.
+				In particular, there must be a thousand <em>Introduction to Linux</em>
+				books.
+				Third, they tend to be *somewhat* out-of-date.
+				I guess there's not much money in writing books, because it's rare that
+				they are maintained properly.
 			</p>
 
 			<p>
-				There's an exception to every rule.
-				Michael Kerrisk is currently the maintainer of the
-				<a href="http://www.man7.org/">Linux Man Page project</a>;
-				his book, <em>The Linux Programming Interface</em>, is an excellent text
-				on the structures of the Linux kernel and the programming interface
-				that it offers.
+				There are a few exceptions:
+
+				<ul>
+					<li> <a href="https://en.wikipedia.org/wiki/The_C_Programming_Language">The C Programming Language, Second Edition</a>&mdash;
+						The only resource a C programmer needs.
+					</li>
+					<li> <a href="https://www.man7.org/tlpi/index.html">The Linux Programming Interface</a> by Michael Kerrisk&mdash;
+						This book is the definitive text on the programming interface
+						of the Linux Kernel.
+						Michael Kerrisk is currently the maintainer of the
+						<a href="http://www.man7.org/">Linux Man Page project</a>,
+						and his work is simply terrific.
+					</li>
+					<li> <a href="http://www.csapp.cs.cmu.edu/">Computer Systems: A Programmer's Perspective</a>
+						If you're interested in (and serious about) the foundations of computer programming,
+						specifically, the abstractions provided by the machines themselves,
+						this is a great book.
+						The material is developed rigorously through mathematics,
+						and as such can be very difficult.
+						For instance, two's-complement arithematic is defined through
+						&omega;-length bit-vectors.
+						If you ever wanted to learn too much about C programming, this is
+						your source.
+					</li>
+				</ul>
+
 			</p>
 		</div>
 
