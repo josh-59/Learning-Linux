@@ -18,39 +18,137 @@ title: Programming in *nix
 
 <div id="introduction" class="content">
 	<h1>Programming in *nix</h1>
+  {comment} As all right-thinking people know, 1) K&R are right, and 2) K&R are right {endcomment}
   <h4>Under Construction!</h4>
 
   <p>
-    As stated in the opening chapter, the Unix architecture provides the
-    superlative programming environment for advanced users today.
-    It is very <em>pure</em> with respect to computer science, and, through
-    devices such as command-line redirection, supports programming as a way of life.
+    A major theme of the GNU/Linux operating system is that abstractions are maintained
+    by the kernel for both users and programmers.
+    As one studies these abstractions, the details of their implementation
+    become increasingly complex, and also increasingly irrelevant:
+    Each abstraction is maintained precisely so that its details may be ignored.
+  </p>
+
+  <p>
+    The Linux kernel is written in C, and as such, the "native tongue"
+    of each system call is C.
+    For example, when querying the kernel about a file through the system
+    call <em><a href="https://www.man7.org/linux/man-pages/man2/stat.2.html">stat</a>,</em>
+    a C struct is returned.
+
   </p>
 </div>
 
 <div id="c" class="content">
-
   <h2> C </h2>
 
   <p>
-    C is the <em>lingua franca</em> of programming,<sup><a href="https://wiki.osdev.org/Required_Knowledge">[1]</a>
-      <a href="#references">[2]</a></sup>
-      and as such, it would be a mistake to put any other programming language first.
-    C is not a large language,<sup><a href="#references">[3]</a></sup> but is
-    difficult to master.
-    It is often called <em>portable assembly</em> because it closely
+    C is the <em>lingua franca</em> of
+    programming.<sup><a href="https://wiki.osdev.org/Required_Knowledge">[1]</a><a href="#references">[2]</a></sup>
+      As such, it would be a mistake to put any other programming language first.
+    C is not a large language, but is difficult to master.
+    It is often called "portable assembly" because it closely
     mirrors the abstractions of the machine itself.<sup><a href="https://youtu.be/HgtRAbE1nBM?t=1021">[4]</a></sup>
+  </p>
+
+  <p>
+    A central feature of the language, and the principal reason for its
+    difficulty, is that C expects the programmer to manually (explicitly)
+    address memory, through variables called <em>pointers.</em>
+    Moreover, memory is often allocated and deallocated manually (explicitly)
+    by the programmer.
+    With this combination, there are many possible avenues of failure, including
+    syntax errors, dangling pointers, double-free'ing, and
+    the glorious segmentation fault.
+  </p>
+
+  <p>
+    The C Programming Language shows its age in a few ways.
+    First, its command-line interface is not unified.
+    There is a preprocessor, separate from the compiler; there is also a linker and an assembler.
+    While <code>gcc</code> executes each of these for you in a single step,
+    it is not as slick an interface as Mozilla Rust's <em>cargo</em> utility,
+    which, in addition to the above, also handles packaging and make-ing.
+  </p>
+
+  <p>
+    Another way that C shows its age is, well, its memory management.
+    Each language since has, to my mind, first decreed their own philosophy regarding memory&mdash;
+    i.e., "This is how <em>we're</em> going to handle memory."
+    Each new philosophy carries its own set of problems.
+    Garbage collection is too slow and unpredictable for systems programming,
+    and Rust's "zero-cost abstractions" require a nontrivial understanding of
+    the language's idea of ownership.
+  </p>
+
+  <p>
+    C is a great language.
+    The only documentation a programmer requires is <em>The C Programming Language,</em>
+    by Ken Thompson and Brian Kerningham, the language's creators.
+    This book is commonly known as <em>K&R.</em>
+    You require the second edition.
   </p>
 
   <h3> See Also: </h3>
   <ul>
-      <li><a href="https://en.wikipedia.org/wiki/The_C_Programming_Language">The C Programming Language</a><sup>(Not Free)</sup></li>
-      <li><a href="http://www.man7.org/tlpi/index.html">The Linux Programming Interface</a><sup>(Not Free)</sup></li>
+      <li><a href="https://en.wikipedia.org/wiki/The_C_Programming_Language">The C Programming Language</a></li>
   </ul>
 </div>
 
 <div id="systems-programming" class="content">
-  <h2>Systems Programming</h2>
+  <h2>Other Systems Programming Languages</h2>
+  <p>
+    The C language belongs to a class of programming languages known as
+    <em>systems programming languages:</em> It is suitable for use in
+    the production of non-application software, such as drivers and kernels.
+    While there have been many attempts to supersede C, I wish to discuss only two.
+  </p>
+
+  <h3> C++ </h3>
+  <p>
+    Stay away from C++.
+    Originally, this language was called <em>C with Classes,</em> and this name
+    reflects an attempt to augment the C language by arbitrarily introducing
+    object-oriented programming (via classes).
+    The result is a very large, very complicated language.
+  </p>
+
+  <p>
+    There are two issues with using such a language.
+    First, because C is fully supported within C++,
+    and C is a complete language, C++ is redundantly complete.
+    Anywhere you might use C++, you can instead use C.
+    Second, in practice, the tendency is to use only a portion of the full
+    language, meaning that handy features go unused, simply because they are
+    not known.
+  </p>
+
+  <h3> Rust </h3>
+  <p>
+    I <em>really like</em> Rust.  I truly believe that it is the systems programming
+    language of the next 20 years.
+
+
+  <h3> Other <em>Other</em> Systems Programming Languages </h3>
+  <ul>
+    <li> C# </li>
+    <li> Swift </li>
+    <li> Objective-C </li>
+    <li> Objective-C++ </li>
+    <li> Go </li>
+  </ul>
+
+  <h3> See Also: </h3>
+  <ul>
+    <li><a href="http://yosefk.com/c++fqa/index.html"> C++ Frequently Questioned Answers</a> (Critique of C++)</li>
+    <li><a href="http://harmful.cat-v.org/software/c++/linus"> Linus Torvalds on C++</a></li>
+  </ul>
+</div>
+
+Finally, my preferred verb for using system calls is <em>direct,</em>
+as in, "We <em>direct</em> the kernel to create a new file via the
+<a href="https://man7.org/linux/man-pages/man2/open.2.html">open</a> system call."
+
 
   <h2> Web Development </h2>
   <ul>
@@ -70,6 +168,8 @@ https://guides.github.com/introduction/git-handbook/
 
 Linux kernel coding style (Linux Torvalds)
 https://www.kernel.org/doc/html/v4.10/process/coding-style.html
+
+      <li><a href="http://www.man7.org/tlpi/index.html">The Linux Programming Interface</a><sup>(Not Free)</sup></li>
 
 </div>
 <div id="bryan-cantrill" class="content">
