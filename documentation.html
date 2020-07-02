@@ -34,7 +34,7 @@ last-updated: July, 2020
 		in general, well-organized, so that finding the right information
 		can be hard.
 		This makes good information harder-won than it ought to be,
-		and implies that finding good sources (i.e., appropriate sources) is a skill in itself.
+		and implies that finding good (i.e., appropriate) sources  is a skill in itself.
 	</p>
 
 	<p>
@@ -47,46 +47,101 @@ last-updated: July, 2020
 <div id="how-to" class="content">
 	<h2>How-to</h2>
 
+    <p>
+        Suppose you are working at the command-line, and you have a question about 
+        copying files.  
+        Knowing that the command <code>cp</code> copies a file,
+        you type <code>man cp</code>, and the manual page appears.
+        When you type <code>apropos copy</code>, looking for other
+        commands that can copy a file, it shows no results&mdash; 
+        you know this to be an error, because <code>apropos</code>
+        is supposed to search manual pages and list all that
+        match "copy".
+    </p>
+
 	<ol class="big-list">
 		<li>
 			<i>Figure out what your question is.</i>
-			<p>
+            <p>
+                Initially, your question might be <em>Why this no work,</em>
+                and that's totally fine.  
 				Figuring out your question can be more difficult than you might guess,
 				because you might not know how to phrase it.
-				Be specific!
-				Keep in mind that things are very precisely defined in computers.
+				Try to be specific:
+                When dealing with computers, things are <em>very</em> precisely defined.  
 			</p>
 		</li>
 
 		<li>
-			<i>What would answer your question?  </i>
-			<ul style="list-style-type: '- '">
-				<li> An Example </li>
-				<li> A Precise Explanation</li>
-				<li> Theoretical Discussion </li>
-			</ul>
-			<p>
-			</p>
+			<i>What would answer your question?</i>
+            <p>
+                This strikes you as such an obvious error
+                that any reasonable documentation should answer your question
+                (and you would be right).
+                So, you first look into the man pages, with 
+                <code>man apropos</code>.
+            </p>
+
+            <p>
+                There, you discover that <code>apropos</code> doesn't search the man
+                pages <em>directly,</em> but instead searches a database of information
+                about them (it does this because it's much faster).
+                Reasonably, you suspect that there might be an error with this database
+                (such as, it doesn't exist).
+            </p>
+
+            <p>
+                A little further down the page, you read, 
+                "The database searched by <code>apropos</code> is updated by <code>mandb</code>.
+                You run the program, and voila! <code>apropos</code> works as it should.
+            </p>
 		</li>
 		<li>
 			<i>Revise.</i>
 			<p>
 				Do you need more information? Or less?
-				You might need something immediately
-				useful rather than theoretically correct.
-				Conversely, you might find that your practical knowledge is
+				Should it be a simpler source, or more involved?
+				You might find that your practical knowledge is
 				lacking some kind of <i>body</i>; in this case, you are
-				looking to frame your knowledge in appropriate theory.
+				looking to frame your knowledge in a more-general theory.
 			</p>
 		</li>
 		<li>
 			<i>Be Patient.</i>
 			<p>
-				Skill accrues.
-				Answer one question at a time.
+			    Databases like this pop up in other
+                contexts, as well.  For instance, in package management, a common
+                practice is to maintain a local database of package metadata, so that
+                the user can search for packages without bothering public servers.
+                As such, updating those databases (on Debian/Ubuntu/Mint, with <code>apt update</code>)
+                is a precursive step to obtaining the latest packages.
+            </p>
+
+            <p>
+                The point here is that you should try to be patient, and take the time
+                to learn the underlying concepts.
+			   	Skill accrues. Answer one question at a time.
 			</p>
 		</li>
 	</ol>
+
+    <p>
+        By far, the worst habit to get into is expecting to be spoon-fed solutions as though
+        by technical support. 
+        Imagine, for a second, that you had *instantly* appealed to 
+        Google, and there you found a response such as, 
+        "Just run <code>mandb</code>."
+        This is correct, and it solves your problem, but you've learned nothing, and 
+        you're stuck memorizing trivial idioms.
+    </p>
+
+    <p>
+        <em>Linux is written by programmers, for programmers.</em>
+        It is very pure with respect to computer science, and to be a good user of Linux
+        necessarily requires some CS know-how.
+        If you're not interested in learning that, then find somewhere else to go 
+        (but if you are interested, stick around!).
+    </p>
 </div>
 
 <div id="man-pages" class="content">
