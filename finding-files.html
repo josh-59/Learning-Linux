@@ -2,7 +2,7 @@
 layout: default
 credits: default
 title: Finding Files
-last-updated: May, 2020
+last-updated: July, 2020
 ---
 
 <div id="nav_bar_2" class="nav">
@@ -10,7 +10,9 @@ last-updated: May, 2020
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#basename"> Pathnames and Basenames </a></li>
         <li><a href="#locate"> Locate </a></li>
+        <li><a href="#globbing"> Shell Globbing </a></li>
         <li><a href="#find"> Find </a></li>
+        <li><a href="#regex"> Regex </a></li>
         <li><a href="#grep"> Grep </a></li>
         <li><a href="#engineer-man"> Engineer Man</a></li>
         <li><a href="#references"> References </a></li>
@@ -20,21 +22,24 @@ last-updated: May, 2020
 
 <div id="introduction" class="content">
     <h1>Finding Files</h1>
+    {% comment %}
     <h4> Oh where the hell is that damn thing </h4>
     <h4> <code>sudo find / -regex ".*[Ll]earn[ing].*[Ll]inux.*"</code> </h4>
 
       <div class="quote-ref">
         &mdash;Josh Timmons
       </div>
-    <h4>  </h4>
-    <h4>  </h4>
-
+    {% endcomment %}
+    <h4> Under Construction! </h4>
 
     <p>
         Finding files is a very common operation in Linux, and the tools
         available are powerful, but not new-user friendly.
-        This short paper will cover GNU's <code>locate</code>, <code>find</code>, and <code>grep</code>
-        utilities.
+        This paper will cover the most common file-finding utilities, and
+        introduce the string-matching languages known as <em>shell globbing</em>
+        and <em>regex</em>.
+        The subject is sort-of boring, with a lot of <em>if</em> ... <em>then</em> ...
+        statements.
     </p>
 
 </div>
@@ -90,8 +95,10 @@ last-updated: May, 2020
 	</div>
 
 	<p>
-        By default, <code>locate</code> matches <em>*pattern*</em> against the pathname of each file,
+    By default, <code>locate</code> matches <em>*pattern*</em> against the pathname of each file,
 		using shell globbing to interpret the asterisks, <code>*</code> .
+    These asterisks match zero-or-more of any character, so that we're effectively saying,
+    "Any file with the string <em>pattern</em> in its pathname."
 		If a file matches, then the file's pathname is printed on a new line.
 	</p>
 
@@ -104,18 +111,7 @@ last-updated: May, 2020
         $ locate bin
     </div>
 
-	<div class=aside-right>
-		<h4>Aside</h4>
-		<p>
-	        In Linux, a single file can have more than one pathname.
-			Each pathname is known as a <em>link</em>, and the kernel only deletes a file when it has no links (and is not in use by a process).
-			This is why the system call used to delete files is called <a href="http://man7.org/linux/man-pages/man2/unlink.2.html"><em>unlink</em></a>.
-			Moreover, this is the reason that the directory structure is not, strictly speaking, a mathematical tree.
-		</p>
-	</div>
-
     <p>
-
         prints all files currently in the database whose pathname includes
         the string "bin", so that
     </p>
@@ -125,7 +121,7 @@ last-updated: May, 2020
     </div>
 
     <p>
-        matches, as do
+        will be printed, as will
     </p>
 
     <div class="code">
@@ -141,63 +137,27 @@ last-updated: May, 2020
     </div>
 
     <p>
-		On this system, we matched 56677 files.
-        If we wanted to print only directories in the system named <code>bin</code>,
-        then this is not what we want.
-	</p>
-
-	<p>
-        The first thing we can do to narrow this list down is specify that
-        <code>locate</code> match against the basename alone, rather than
-        the full pathname.
-        This is done with either <code> -b </code> or <code> --basename</code>:
+      This will match hidden files, as well.
     </p>
 
-    <div class="code">
-        $ locate --basename bin
-    </div>
-
-    <p>
-        This reduces the number of matches by half, but still matches such things as
-    </p>
-
-    <div class="code">
-        /var/lib/gems/2.5.0/gems/sassc-2.3.0/ext/libsass/src/<strong>bin</strong>d.hpp
-    </div>
-
-    <p>
-        Our final modification to this command will be to match with an expression
-        that can specify the beginning of the line as well as the end of the line:
-    </p>
-
-    <div class="code">
-        $ locate --basename --regex ^bin$
-    </div>
-
-    <p>
-        This gives the desired result.
-	</p>
-
-	<p>
-		Now for a bit of minutia:
-		<code>locate</code> references a database of information about the files
-        on the system, and not the directories themselves.
-        As a consequence, if you have done some operation on the directories, and
-        the files you are looking for are new, then you must update this
-        database:
+	  <p>
+  		Now for a few details:
+  	  <code>locate</code> references a database of information about files
+      on the system, and not the directories themselves.
+      This makes <code>locate</code> much faster for ordinary searches.
+      If you're looking for new files, however, or just want to
+      be on the safe side, then you're going to want to update this
+      database with:
     </p>
 
     <div class="code">
         $ sudo updatedb
     </div>
 
-    <p>
-        The <code>locate</code> command is restricted in two ways:
-		First, it searches the entire file hierarchy at each invocation, so
-		restricting a search to a particular directory requires a workaround.
-		In addition, <code>locate</code> only inspects the pathname of each file.
-		To search with greater fidelity, we must look elsewhere.
-	</p>
+</div>
+
+<div id="globbing" class="content">
+  <h2> Shell Globbing </h2>
 
 </div>
 
@@ -205,8 +165,8 @@ last-updated: May, 2020
 
     <h2> Find </h2>
     <p>
-        GNU's <a href="http://man7.org/linux/man-pages/man1/find.1.html"><code>find</code></a> utility is much more powerful.
-        It searches the directory tree itself (no database), and allows the user
+        The <a href="http://man7.org/linux/man-pages/man1/find.1.html"><code>find</code></a> utility is much more powerful.
+        It searches the directory tree itself, and allows the user
         to query attributes of files besides their names.
     </p>
 
@@ -340,6 +300,13 @@ last-updated: May, 2020
 			<a href="http://man7.org/linux/man-pages/man1/find.1.html"><code>man 1 find</code></a> or
             <a href="https://www.gnu.org/software/findutils/manual/find.html"> GNU Findutils Official Documentation</a>.
         </p>
+    </div>
+
+    <div id="regex" class="content">
+      <h2> Regex </h2>
+      <p>
+        Regex is fun!  It is, essentially, the
+      </p>
     </div>
 
     <div id="grep" class="content">
