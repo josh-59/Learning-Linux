@@ -1,7 +1,7 @@
 ---
 layout: default
 credits: default
-title: Programming in *nix
+title: "Going Further: Programming in *nix"
 ---
 
 <div id="nav_bar_2" class="nav">
@@ -17,8 +17,18 @@ title: Programming in *nix
 </div>
 
 <div id="introduction" class="content">
-	<h1>Programming in *nix</h1>
-  {comment} As all right-thinking people know, 1) K&R are right, and 2) K&R are right {endcomment}
+	<h1>Going Further: Programming in *nix</h1>
+  {% comment %}
+  <div class="quote-text">
+    All right-thinking people know that
+  <span style="display:inline-block; width: 50pt;"></span><br>
+  <span style="display:inline-block; width: 50pt;"></span>
+    (a) K&R are <strong>right</strong> and (b) K&R are right
+  </div>
+  <div class="quote-ref">
+    &mdash;<a href="https://www.kernel.org/doc/html/v4.10/process/coding-style.html">Linus Torvalds</a>
+  </div>
+  {% endcomment %}
   <h4>Under Construction!</h4>
 
   <p>
@@ -35,13 +45,11 @@ title: Programming in *nix
     For example, when querying the kernel about a file through the system
     call <em><a href="https://www.man7.org/linux/man-pages/man2/stat.2.html">stat</a>,</em>
     a C struct is returned.
-
   </p>
 </div>
 
 <div id="c" class="content">
   <h2> C </h2>
-
   <p>
     C is the <em>lingua franca</em> of
     programming.<sup><a href="https://wiki.osdev.org/Required_Knowledge">[1]</a><a href="#references">[2]</a></sup>
@@ -170,6 +178,13 @@ Linux kernel coding style (Linux Torvalds)
 https://www.kernel.org/doc/html/v4.10/process/coding-style.html
 
       <li><a href="http://www.man7.org/tlpi/index.html">The Linux Programming Interface</a><sup>(Not Free)</sup></li>
+
+      HOWTO do Linux kernel development (Official)
+      https://www.kernel.org/doc/html/latest/process/howto.html#documentation
+
+          <li><a href="https://www.kernel.org/doc/html/latest/process/index.html"> Working with the kernel development community - The Linux Kernel documentation</a> </li>
+
+          <li><a href="http://www.kroah.com/lkn/"> Linux Kernel in a Nutshell</a> by Greg Kroah-Hartman (Free book. Discusses building custom kernels.)</li>
 
 </div>
 <div id="bryan-cantrill" class="content">
