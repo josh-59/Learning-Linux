@@ -8,8 +8,11 @@ title: "Going Further: Programming in *nix"
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#c"> C </a></li>
-        <li><a href="#systems-programming"> Systems Programming </a></li>
+        <li><a href="#systems-programming"> Other Systems Programming Languages </a></li>
+        <li><a href="#general-cs"> General Computer Science </a></li>
         <li><a href="#scripting"> Scripting </a></li>
+        <li><a href="#web-dev"> Web Development </a></li>
+        <li><a href="#kernel-dev"> Kernel Development </a></li>
         <li><a href="#bryan-cantrill"> Bryan Cantrill </a></li>
         <li><a href="#references"> References </a></li>
         <li><a href="#credits">Credits </a></li>
@@ -133,8 +136,12 @@ title: "Going Further: Programming in *nix"
 
   <h3> Rust </h3>
   <p>
-    I <em>really like</em> Rust.  I truly believe that it is the systems programming
+    I <em>really like</em> Rust.  It's super-modern, its command-line utility,
+    <code>cargo</code>, is superb, and its approach towards memory management
+    is very intelligent.
+    I truly believe that it is the systems programming
     language of the next 20 years.
+  </p>
 
 
   <h3> Other <em>Other</em> Systems Programming Languages </h3>
@@ -153,24 +160,106 @@ title: "Going Further: Programming in *nix"
   </ul>
 </div>
 
-Finally, my preferred verb for using system calls is <em>direct,</em>
-as in, "We <em>direct</em> the kernel to create a new file via the
-<a href="https://man7.org/linux/man-pages/man2/open.2.html">open</a> system call."
+<div class="content" id="general-cs">
+    <h2> General Computer Science </h2>
+    <p>
+      It's worthwhile to draw an outline of computer science, in general.
+      A classical undergraduate CS curriculum centers around a few courses:
+    </p>
+
+    <ul class="big-list">
+      <li>
+        <p><strong>Programming Languages</strong>&mdash; Initial courses in Java and C++ are pretty
+        typical, but neither language has any business in the open-source ecosystem.
+        Advanced studies in programming languages become abstract, discussing and developing
+        language theory rather than practice.
+        This can be useful in language development and compiler design, for instance.
+        </p>
+
+        <p>
+          This subject was (effectively) founded by
+          Christopher Strachey, in his 38-page <a href="https://github.com/papers-we-love/papers-we-love/blob/master/languages-theory/fundamental-concepts-in-programming-languages.pdf">
+          Fundamental Concepts of Programming Languages</a>.
+        </p>
+      </li>
+      <li style="padding-top: 0;">
+        <p>
+          <strong>Operating Systems</strong>&mdash; A very large topic, it again
+          discusses operating systems in the abstract.  A good, if lighthearted,
+          development is given by Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau in
+          their free <a href="http://pages.cs.wisc.edu/~remzi/OSTEP/"> Operating Systems: Three Easy Pieces</a>.
+        </p>
+      </li>
+      <li style="padding-top: 0;">
+        <p><strong>Discrete Mathematics</strong>&mdash; At the end of abstraction, there
+          is always math, it seems.  Discrete mathematics is not a difficult subject,
+          on par with a first semester in calculus.  It will introduce enough
+          logic to give informal proofs, and cover advanced counting techniques, among other things.
+          The subject founds all of computer
+          science, given the inherently discrete nature of the bit.
+          The canonical text for computer scientists is
+          <a href="https://en.wikipedia.org/wiki/Concrete_Mathematics">Concrete Mathematics</a>,
+          but I prefer <a href="http://discrete.openmathbooks.org/dmoi3.html"> Discrete Mathematics - An Open Introduction</a>
+        </p>
+      </li>
+      <li style="padding-top: 0;">
+        <p><strong>Data Structures</strong>&mdash; After learning a programming language or two,
+          data structures are the next most important thing to learn in becoming a developer;
+          some understanding of discrete math is a required.
+          The typical methodology in writing a program is to
+          <em>first select the most appropriate data structure,</em>
+          then build the rest of the program around it.
+        </p>
+
+        <p>
+          <a href="https://opendatastructures.org/"> Open Data Structures </a> is a great book on the subject, the best that I
+          personally have found.
+          Advanced studies delve further into mathematics, usually focusing on analysis of algorithms.
+          The canonical text of that subject is <a href="https://mitpress.mit.edu/books/introduction-algorithms-third-edition">Introduction to Algorithms</a>.
+        </p>
+      </li>
+      <li style="padding-top: 0; padding-bottom: 10px;">
+        <p><strong>Computer Architecture</strong>&mdash; Ah, computer architecture.  I loved studying this subject,
+          but honestly wonder how useful it is.  It looks into the abstractions presented by
+          hardware itself, such as signed and unsigned numbers, and instruction set architectures.
+          A good development of this
+          material is highly mathematical, and correspondingly not-easy.
+          I liked <a href="http://www.csapp.cs.cmu.edu/">Computer Systems: A Programmer's Perspective</a>.
+      </li>
+    </ul>
+
+    <p>
+      The above aims to be representative of a typical undergraduate curriculum.
+      Past this, the sky is the limit.
+    </p>
+  <h3> See Also: </h3>
+    <ul>
+        <li><a href="https://en.wikipedia.org/wiki/The_Practice_of_Programming"> The Practice of Programming</a> by Brian Kernighan and Rob Pike </li>
+    </ul>
+</div>
+
+<div class="content">
+
 
 
   <h2> Web Development </h2>
   <ul>
     <li><a href="https://www.theodinproject.com">The Oden Project</a></li>
-    <li><a href="https://www.mathjax.org/">MathJax</a></li>
     <li><a href="https://eloquentjavascript.net/">Eloquent Javascript</a></li>
   </ul>
 
-    <h2> General Computer Science </h2>
-    <ul>
-        <li><a href="https://opendatastructures.org/"> Open Data Structures </a></li>
-        <li><a href="http://discrete.openmathbooks.org/dmoi3.html"> Discrete Mathematics </a></li>
-        <li><a href="http://www.csapp.cs.cmu.edu/">Computer Systems: A Programmer's Perspective</a><sup>(Not Free)</sup></li>
-    </ul>
+</div>
+
+<div class="content" id="kernel-dev">
+  <h2> Kerenel Development </h2>
+  <div class="quote-text">
+  "So, you want to learn how to become a Linux kernel developer?"
+  </div>
+  <div class="quote-ref">
+    <a href="https://www.kernel.org/doc/html/latest/process/howto.html#introduction">The Linux Kernel Documentation</a>
+  </div>
+</div>
+
 git handbook:
 https://guides.github.com/introduction/git-handbook/
 
