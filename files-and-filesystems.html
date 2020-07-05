@@ -2,7 +2,7 @@
 layout: default
 credits: default
 title: Files and Filesystems
-last-updated: June, 2020
+last-updated: July, 2020
 ---
 
 <!-- To Do: Citation needed in "regular files" -> heirarchical filestructure taken from Multics-->
@@ -83,8 +83,10 @@ last-updated: June, 2020
     <div class="aside-right">
       <h4>Aside</h4>
       <p>
-        Linux supports many filesystems&mdash; <a href="https://www.man7.org/linux/man-pages/man8/fdisk.8.html"><code>fdisk</code></a> lists 73 known partition types.
-        In addition, the filesystems known by the current kernel are listed in the <code>/proc/filesystems</code> file.<sup><a href="#references">[7]</a></sup>
+        A filesystem describes how files are stored, but it's the kernel's responsibility to abide by this specification.
+        Thus, the details of creating, reading and writing are the left to the kernel.
+        In Linux, the filesystems known by the current kernel are 
+        listed in the <code>/proc/filesystems</code> file.<sup><a href="#references">[7]</a></sup>
       </p>
     </div>
 
