@@ -1,18 +1,76 @@
-
-Shell:
-  while(true) {
-    print_prompt();
-    get_line();
-    parse_line();
-    execute(line);
-  }
-
 Random useful man-pages
 man heir
 man ascii
 
-Kernighan: Commands are verbs, and files are nouns, p 71
+<div class="quote_text">
+DOUBLE CHECK THIS!!!
+"Commands are verbs, and files are nouns."
+</div>
+<div class="quote_ref">
+Brian Kernighan, <br><i>UNIX, A History and Memoir,</i><br>p. 71
+</div>
 
+
+<h2> Introduction </h2>
+<p>
+    A shell is not, fundamentally, a commplicated program.  
+    Its job is to query the user for their next command,
+    then execute that command. 
+    An outline of the central loop is as follows:
+</p>
+
+<div class="code">
+  while(true) {<br>
+    &emsp;print_prompt();<br>
+    &emsp;get_line();<br>
+    &emsp;parse_line();<br>
+    &emsp;execute(line);<br>
+  }
+
+<p>
+    It's a classic project for computer science students to
+    write their own shells.
+    The fun is to be had, primarily, in parsing the line :).
+</p>
+
+<h2> Fish </h2>
+<p>
+    The best interactive shell that I have found is <code>fish</code>.
+    It's a relatively new shell, and I find it preferrable to <code>bash</code>,
+    even as an experienced user.  
+    Several features of <code>fish</code> make it more friendly than <code>bash</code>:
+
+    <ul>
+        <li> Command suggestions </li>
+        <li> Obvious function syntax:
+            <div class="code">
+                function foo<br>
+                   &emsp;echo hello world<br>
+                end
+            </div>
+            </li>
+        <li> Forgiving scripting:  If you make any mistake at all in <code>bash</code>,
+            it responds with, "Syntax error near unexpected token [token]", which tells you
+            nothing (and becomes infuriating).
+            <code>Fish</code>, on the other hand, tells you what's up and then reprints
+            what you had, so that you can modify it.
+        </li>
+    </ul>
+</p>
+
+<p>
+    
+
+
+<p> Bash </p>
+<p>
+    Bash is standard shell on GNU/Linux distributions.  
+
+
+    
+<h2> PATH Environment Variable </h2>
+<p>
+    
 PATH environment variable:
 Kernighan page 132:
     Invented by John Mashey and introduced in the 6th edition shell,
@@ -29,3 +87,5 @@ Discuss difference between shell variables and environment variables
             so you wait for them to leave
                 This is appropriate for things like, "list files in current directory"
                 or "move this file over there"
+
+
