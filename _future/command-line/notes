@@ -33,6 +33,44 @@ Brian Kernighan, <br><i>UNIX, A History and Memoir,</i><br>p. 71
     The fun is to be had, primarily, in parsing the line :).
 </p>
 
+<h2> PATH Environment Variable </h2>
+<p>
+    Among new users (or perhaps just me), the <code>PATH</code>
+    environment variable is often a source of concern. 
+    This variable explicitly declares the directories that will
+    be searched to locate an executable file when a command
+    is entered. 
+    We can have a look at its value with,
+<p>
+
+<div class="code">
+    echo $PATH
+</div>
+
+<p>
+    The result is either a colon-separated (in <code>bash</code>)
+    or a space-separated (in <code>fish</code>) list of directories.
+    Their order matters, for the shell will search these directories from left to right,
+    will execute the first executable with the same name as the command given,
+    and will cease searching once this is done.
+    We can always override this search by specifying the executable's filename,
+    such as <code>/bin/echo</code> or <code>./cat</code>.
+</p>
+
+<p>
+    The <code>PATH</code> variable was invented by John Mashey
+    and introduced as a workaround so that non-expert users could
+    share their own sets of command by lab, department or 
+    group.<sup><a href="#references">Kernighan page 132 (check not plaigarizing)</a></sup>
+</p>
+
+<p>
+    There are several common modifications made to the value of this variable, today.
+    For instance, to include your own 
+
+
+    A common use today is 
+
 <h2> Fish </h2>
 <p>
     The best interactive shell that I have found is <code>fish</code>.
@@ -53,29 +91,16 @@ Brian Kernighan, <br><i>UNIX, A History and Memoir,</i><br>p. 71
             it responds with, "Syntax error near unexpected token [token]", which tells you
             nothing (and becomes infuriating).
             <code>Fish</code>, on the other hand, tells you what's up and then reprints
-            what you had, so that you can modify it.
+            what you had, so that you can modify it and try again. Love it!
         </li>
+        <li> Default prompt displays command return values if they are nonzero (if they indicate error)</li>
     </ul>
 </p>
 
 <p>
-    
-
-
-<p> Bash </p>
-<p>
-    Bash is standard shell on GNU/Linux distributions.  
-
-
-    
-<h2> PATH Environment Variable </h2>
-<p>
-    
-PATH environment variable:
-Kernighan page 132:
-    Invented by John Mashey and introduced in the 6th edition shell,
-    it was a workaround so that non-expert users could
-    share their own sets of commands by lab, department and group.
+    With <code>fish</code> and other tools like Mozilla Rust's <code>cargo</code>, 
+    I think that we can bring the command-line into the twenty-first century.
+</p>
 
 Discuss difference between shell variables and environment variables
     (the function of export)
@@ -87,5 +112,41 @@ Discuss difference between shell variables and environment variables
             so you wait for them to leave
                 This is appropriate for things like, "list files in current directory"
                 or "move this file over there"
+
+
+
+<h2> Shell Functions (Requires all shell capabilities listed above) </h2>
+<p>
+    Modern shells are large programs, and contain functions of their own that may be
+    called as though they were ordinary executables.
+    Moreover, shells also allow their users to create their own functions.
+    Shell functions can be quite elaborate, containing conditional statements and redirections
+    (anything persmissible in ordinary usage).
+</p>
+
+<p>
+    A <strong>builtin</code> is a command that is implemented in the shell.  
+    Builtins are commands that are so closely ties to the shell
+    that it is impossible to implement them as external 
+    commands.<sup>FISH DOCUMENTATION</sup>.
+
+    An example of a builtin in <code>fish</code> is <code>fish_prompt</code>,
+    which is called before the shell queries the user for a new line.
+    We can list these functions with the <code>functions</code> builtin:
+</p>
+
+<div class="code">
+    $ functions
+</div>
+
+<p>
+    The problem with this is that the shell searches its own set of functions
+    before searching <code>PATH</code>, consequently, a locally-defined function
+    will "override" any executable located in <code>PATH</code>.
+
+
+
+
+    
 
 
