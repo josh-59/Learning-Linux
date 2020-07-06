@@ -11,8 +11,8 @@ last-updated: July, 2020
     <li><a href="#introduction"> Introduction </a></li>
     <li><a href="#filesystems"> Filesystems </a></li>
     <li><a href="#directories"> Directories </a></li>
-    <li><a href="#directory-tree"> Directory Tree </a></li>
     <li><a href="#mounting-unmounting"> Mounting and Unmounting</a></li>
+    <li><a href="#fs-heir"> Filesystem Heirarchy </a></li>
     <li><a href="#regular-files"> Regular Files </a></li>
     <li><a href="#device-files"> Device Special Files </a></li>
     <li><a href="#closing-remarks"> Closing Remarks </a></li>
@@ -46,7 +46,7 @@ last-updated: July, 2020
     the implementation as well as the history of Unix:
     Unix and its derivatives use files for many things.
     As such, there is a lot to be said about files.
-    This paper introduces the <em>filesystem</em>, 
+    This paper introduces the <em>filesystem</em>,
     discusses the directory structure implemented on top of it,
     and gives a practical overview of the contents of them.
   </p>
@@ -55,13 +55,13 @@ last-updated: July, 2020
 <div id="filesystems" class="content">
   <h2> Filesystems </h2>
   <p>
-    A filesystem is a systematic method of organizing data on 
+    A filesystem is a systematic method of organizing data on
     disk.<sup><a href="https://wiki.osdev.org/Filesystem">[2]</a><a href="https://wiki.archlinux.org/index.php/File_systems">[3]</a></sup>
     Conceptually, it is similar to a data structure, in that it defines a convention
     to be followed in the storage and retrieval of data.
     A given disk is usually <em>partitioned</em> into several logically-distinct components.
     All partitions are contiguous with respect to the disk's address space, and
-    entertains its own distinct filesystem, if any. 
+    entertains its own distinct filesystem, if any.
     Preparing a partition for use by a particular filesystem is known as
     formatting.<sup><a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">[4]</a></sup>.
   </p>
@@ -84,8 +84,8 @@ last-updated: July, 2020
       <h4>Aside</h4>
       <p>
         A filesystem describes how files are stored, but it's the kernel's responsibility to abide by this specification.
-        Thus, the details of creating, reading and writing are the left to the kernel.
-        In Linux, the filesystems known by the current kernel are 
+        Thus, the details of creating, reading and writing files are the left to the kernel.
+        In Linux, the filesystems known by the current kernel are
         listed in the <code>/proc/filesystems</code> file.<sup><a href="#references">[7]</a></sup>
       </p>
     </div>
@@ -149,7 +149,7 @@ last-updated: July, 2020
   </p>
 
   <p>
-    Intuitively, a file's inode number serves as the "hardware name" of a file, 
+    Intuitively, a file's inode number serves as the "hardware name" of a file,
     since it is unique to the file within its filesystem.
     For the kernel, the information required to uniquely identify a file
     is its inode number and the device (drive & partition) of the filesystem it belongs to.
@@ -169,116 +169,104 @@ last-updated: July, 2020
   <h2>Directories</h2>
 
   <p>
-    Directories link inode numbers to filenames&mdash; specfically, they link to the file's 
+    Directories link inode numbers to filenames&mdash; specfically, they link to the file's
     <a href="finding-files.html#basename">basename</a>.
-    We can therefore think of a directory as a file containing two columns:
-    inode number and basename.  
+    We can therefore think of a directory as a file containing a table with two columns:
+    inode number and basename.
     Each entry in the table is known as a <em>hard link.</em>
-    Since a directory belongs to a filesystem, this information is sufficient to uniquely
-    identify a file only within the filesystem the directory belongs to.
-    Consequently, <em>hard links may not cross filesystem boundaries.</em>
   </p>
 
   <p>
-    We can list the contents of a directory with the usual <code>ls</code> command,
+    Since a directory belongs to a filesystem, this information is sufficient to uniquely
+    identify a file only within the filesystem the directory belongs to.
+    Consequently, <em>hard links may not cross filesystem boundaries.</em>
+    Another way of saying this is, "Every file belongs to the same filesystem
+    as the directories which hard-link to it."
+  </p>
+
+  <p>
+    Every file on the system has an inode number.
+    We list the contents of a directory with the usual <code>ls</code> command,
     and can list inode numbers using the <code>-i</code> switch:
   </p>
 
-  <div class="code">
-    $ ls -i newfile <br>
-    2112949 newfile
+  <div class="aside-right">
+      <h4>Aside</h4>
+      <p>
+      The contents of directories are managed by the kernel.
+      User-space processes are not permitted to read or write
+      directly to directory files.
+      System calls exist to:
+      <ul style="padding-left: 20px; margin-top: -10px;">
+        <li><a href="https://www.man7.org/linux/man-pages/man2/mkdir.2.html">create directories</a></li>
+        <li><a href="https://www.man7.org/linux/man-pages/man2/rmdir.2.html">remove directories</a></li>
+        <li><a href="https://www.man7.org/linux/man-pages/man2/getdents.2.html">get directory entries</a></li>
+      </ul>
+    </p>
   </div>
+
+    <div class="code">
+      $ echo "hello world" > newfile <br>
+      $ ls -i newfile <br>
+      2112949 newfile
+    </div>
 
     <p>
         The above components suggest a great deal of the structure of the *nix filesystem
         scheme, and the rest of this paper will be spent, mostly, bearing that out.
-        To begin, a file may have more than one hard link, without contradiction.
-        This allows a file to appear in more than one directory, or more than once
-        in a single directory.  
-        We can create new hardlinks with the <code>ln</code> command:
+        To begin, a file may be hard-link'ed more than once, without contradiction.
+        This allows a file to appear in more than one directory, and/or more than once
+        in a single directory.
+        We can create new hard links with the <code>ln</code> command:
     </p>
 
     <div class="code">
         $ ln newfile 2newfile <br>
         $ ls -i newfile 2newfile <br>
-        2112949 newfile <br> 
+        2112949 newfile <br>
         2112949 2newfile <br>
     </div>
 
-    <div class="aside-right">
-        <h4>Aside</h4>
-        <p>
-        Both directories and filesystems are the responsibility of the kernel.
-        User-space processes are not permitted to read or write
-        directly to directory files.
-        System calls exist to:
-        <ul style="padding-left: 20px; margin-top: 0">
-          <li><a href="https://www.man7.org/linux/man-pages/man2/mkdir.2.html">create directories</a></li>
-          <li><a href="https://www.man7.org/linux/man-pages/man2/rmdir.2.html">remove directories</a></li>
-          <li><a href="https://www.man7.org/linux/man-pages/man2/getdents.2.html">get directory entries</a></li>
-        </ul>
-      </p>
-    </div>
-  </div>
-
-
-<div id="directory-tree" class="content">
-  <h2> Directory Tree</h2>
+    <p>
+      The name <code>2newfile</code> is now logically equivalent to the name
+      <code>newfile</code>.  If we modify one, we modify the other.
+      An obvious question arises: <em>"What if we delete <code>newfile</code>?"</em>
+      File deletion is handled by the kernel, which does not delete a file
+      until there are no hard links referencing it.
+    </p>
 
     <p>
-      Each directory has at least two entries, which cannot be changed, and
+      Each directory contains at least two hard links, which cannot be changed, and
       which help define the Linux directory structure.  They are,
       <code>.</code> ("dot"), which refers to the containing directory itself,
       and <code>..</code> ("dot dot"), which refers to its parent directory.
       The root directory's parent directory is the root directory itself.
     </p>
 
+    <p>
+      Directories may list other directories, but
+      the kernel does not allow arbitrary hard links to directories to be created;
+      thus, the hard links of a Unix-like system form a tree.
+      Finally, filenames that begin with a dot (<code>.</code>) are considered
+      "hidden" files.  They can be listed with
+    </p>
 
+    <div class="code">
+      $ ls -a
+    </div>
 
-  <div class="code">
-    /
-  </div>
+    <p>
+      or
+    </p>
 
-  <p>
-    Within any GNU/Linux distribution, some common themes will be found.
-    For instance, <code>bin</code> directories are found in several places, such as
-    <code>/bin</code> and <code>/sbin</code>, along with <code>/usr/bin</code> and often
-    <code>/home/user/bin</code>.
-    These contain binary executable files (programs), such as <code>ls</code>, which
-    can be ran as commands from the shell.
-  </p>
+    <div class="code">
+      $ ls -A
+    </div>
 
-  <p>
-    The directory <code>/etc</code> (usually read "<em>et</em>-c") contains host-specific
-    system configuration files; as a consequence, you can expect to fiddle
-    with the contents of this directory when configuring the system for the first time
-    (or otherwise).
-    It contains, for instance, files describing the configuration of the system's package
-    manager, printers, and, well, etcetera.
-  </p>
-
-  <p>
-    The directory tree is used as a general-purpose meeting place:
-    In addition to regular files, it also holds, for instance, references to hardware drivers,
-    and information about running processes.
-    This mechanism is general, extensible, and allows both users and programmers
-    access to the running machine; the only trick is keeping it organized.
-  </p>
-
-  <p>
-    The <a href="https://refspecs.linuxfoundation.org/fhs.shtml">Linux Filesystem Heirarchy Standard</a>
-    officially describes the Linux filesystem.  It is a "follow along standard":
-    It codifies the Linux filesystem as it commonly appears at the time of its publication,
-    and does not arbitrarily impose a standard prior to implementation.
-    For instance, while the <code>/proc</code> virtual filesystem is lauded by the standard,
-    it <a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch06.html#procKernelAndProcessInformationVir">has not yet been described</a>.
-  </p>
-
-  <h3>See Also:</h3>
-  <ul>
-    <li><a href="https://www.tldp.org/LDP/sag/html/dir-tree-overview.html">Overview of the Directory Tree: Linux System Administrator's Guide</a></li>
-    <li><a href="https://wiki.archlinux.org/index.php/Device_file">Device File - ArchWiki</a></li>
-  </ul>
+    <h3> See Also: </h3>
+    <ul>
+      <li><a href="https://en.wikipedia.org/wiki/Symbolic_link#Overview"> Symbolic Link (Overview) - Wikipedia </a> </li>
+    </ul>
 </div>
 
 <div class="content" id="mounting-unmounting">
@@ -310,7 +298,7 @@ last-updated: July, 2020
     The device to be mounted should be a partition, and can usually be determined by its size and
     its mountpoint (which should be none).
     The Linux Filesystem Hierarchy Standard provides two places to mount temporary
-    filesystems: <code>/mnt</code> and <code>/media/[user]</code>
+    filesystems: <code>/mnt</code> and <code>/media/[user]</code>.
   </p>
 
   <p>
@@ -326,20 +314,61 @@ last-updated: July, 2020
     <em>are not</em> guaranteed to be stable across reboots&mdash; The devices are named in the
     order that they are found.
     Second, when mounting a new filesystem, if any files exist at the
-    mount point, they will be "hidden" by the files of the new filesystem.
+    mount point, they will be "hidden" by the files of the new filesystem
+    (they become unaccessible).
     They are not deleted, and unmounting the new filesystem will "reveal" them again.
-    Finally, a filesystem must be not be in use to be unmounted; in particular,
-    you must <code>cd</code> out of it before calling <code>umount</code>.
+    Third, a filesystem cannot be in use while unmounting; in particular,
+    you must <code>cd</code> out of the device before calling <code>umount</code>.
+    Finally, unmount (eject) before unplugging!
   </p>
+</div>
 
+<div id="fs-heir" class="content">
+  <h2> Filesystem Heirarchy</h2>
 
   <p>
-    In practice, most distributions automatically mount
-    usb sticks when they are plugged in.
+    Now, we turn to more pragmatic matters.
+    Within any GNU/Linux distribution, some common themes will be found.
+    For instance, <code>bin</code> directories are found in several places, such as
+    <code>/bin</code> and <code>/sbin</code>, along with <code>/usr/bin</code> and often
+    <code>/home/user/bin</code>.
+    These contain binary executable files (programs), such as <code>ls</code>, which
+    can be ran as commands from the shell.
   </p>
 
+  <div class="aside-right">
+    <h4>Aside:</h4>
+      <p>
+        The <a href="https://refspecs.linuxfoundation.org/fhs.shtml">Linux Filesystem Heirarchy Standard</a>
+        officially describes the Linux filesystem.  It is a "follow along standard":
+        It codifies the Linux filesystem as it commonly appears at the time of its publication,
+        and does not arbitrarily impose a standard prior to implementation.
+        For instance, while the <code>/proc</code> virtual filesystem is lauded by the standard,
+        it <a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch06.html#procKernelAndProcessInformationVir">has not yet been described</a>.
+      </p>
+  </div>
 
+  <p>
+    The directory <code>/etc</code> (usually read "<em>et</em>-see") contains host-specific
+    system configuration files; as a consequence, you can expect to fiddle
+    with the contents of this directory when configuring the system for the first time
+    (or otherwise).
+    It contains, for instance, files describing the configuration of the system's package
+    manager, printers, and, well, etcetera.
+  </p>
+
+  <p>
+    Per-user configuration files are contained in the user's home directory, either as
+    hidden files, or (more recently), in the directory <code>~/.config</code>.
+  </p>
+
+  <h3>See Also:</h3>
+  <ul>
+    <li><a href="https://www.tldp.org/LDP/sag/html/dir-tree-overview.html">Overview of the Directory Tree: Linux System Administrator's Guide</a></li>
+    <li><a href="https://wiki.archlinux.org/index.php/Device_file">Device File - ArchWiki</a></li>
+  </ul>
 </div>
+
 <div id="regular-files" class="content">
   <h2>Regular Files</h2>
 
@@ -404,7 +433,7 @@ last-updated: July, 2020
   </div>
 
   <h3> Reference Count & Deleting </h3>
-    
+
 
   <h3>See Also:</h3>
   <ul>
@@ -415,8 +444,18 @@ last-updated: July, 2020
 </div>
 
 
+
 <div id="device-files" class="content">
   <h2>Device Special Files</h2>
+
+  <p>
+    The directory tree is used as a general-purpose meeting place:
+    In addition to regular files, it also holds, for instance, references to hardware drivers,
+    and information about running processes.
+    This mechanism is general, extensible, and allows both users and programmers
+    access to the running machine; the only trick is keeping it organized.
+  </p>
+
   <p>
     The directory <code>/dev</code> is famous in the Unix/Linux world.
     It contains files called <em>special device files</em>,<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[1]</a></sup>
@@ -467,17 +506,6 @@ last-updated: July, 2020
     <li><code><a href="http://man7.org/linux/man-pages/man8/lspci.8.html">lspci</a></code> - List all PCI devices </li>
 </div>
 
-
-
-    <h3>Symbolic Links</h3>
-    <p>
-      Hard links cannot cross filesystem divisions.
-    </p>
-
-    <h3>See Also:</h3>
-    <ul>
-      <li><a href="https://unix.stackexchange.com/questions/20670/why-do-hard-links-exist">Why do hard links exist?</a></li>
-    </ul>
 
   </div>
 
