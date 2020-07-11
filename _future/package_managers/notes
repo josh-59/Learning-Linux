@@ -1,5 +1,3 @@
-Describe life without package managers
-
 Structure of a package:
     Data
     Metadata
@@ -58,4 +56,4 @@ Arch:
 		Master Server
 
 
-Python:
+Ruby:

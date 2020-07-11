@@ -506,8 +506,16 @@ last-updated: July, 2020
     <li><code><a href="http://man7.org/linux/man-pages/man8/lspci.8.html">lspci</a></code> - List all PCI devices </li>
 </div>
 
+<div class="content" id="procfs">
+  <h2><code>procfs</code></h2>
 
-  </div>
+  <h3>See Also:</h3>
+  <ul>
+    <li> <a href="https://en.wikipedia.org/wiki/Synthetic_file_system"> Synthetic File System</a> (Wikipedia) </li>
+  </ul>
+</div>
+
+
 
   <div class="content" id="closing-remarks">
     <h2>Closing Remarks</h2>
@@ -515,19 +523,9 @@ last-updated: July, 2020
     <p>
       The terms <em>filesystem</em> and <em>directory tree</em> were developed here
       precisely, in order to make a clear distinction between the two.
-      Part of the reason for this is a reaction by the author to common usage of the
-      term <em>filesystem</em> as a catch-all for "all things whatever file (on disk)."
-      I feel confident in the development of these terms in virtue of
-      1) The development of the term "filesystem" in
-      <a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">An Introduction to Disk Partitions</a>, by Fedora,
-      a leading-edge development community of Linux, and
-      2) the mathematical definition of "tree".
-    </p>
-
-    <p>
-      The terms <em>filesystem</em> and <em>directory tree</em> overlap, somewhat:
-      A given filesystem must entertain exactly one directory tree.
-      Because of this, a directory tree is implied by each filesystem;
+      However, the terms overlap, somewhat:
+      In *nix, a useable filesystem must entertain exactly one directory tree.
+      Because of this, each filesystem implies a directory tree;
       this is the sense in which it is valid to say, "We are going to mount
       a filesystem at <code>/home</code>," when in fact we mean,
       "We are going to mount a filesystem's directory tree at <code>/home</code>."
