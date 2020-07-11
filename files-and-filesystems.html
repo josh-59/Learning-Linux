@@ -190,18 +190,14 @@ last-updated: July, 2020
   </p>
 
   <div class="aside-right">
-      <h4>Aside</h4>
+      <h4>Aside:</h4>
       <p>
-      The contents of directories are managed by the kernel.
-      User-space processes are not permitted to read or write
-      directly to directory files.
-      System calls exist to:
-      <ul style="padding-left: 20px; margin-top: -10px;">
-        <li><a href="https://www.man7.org/linux/man-pages/man2/mkdir.2.html">create directories</a></li>
-        <li><a href="https://www.man7.org/linux/man-pages/man2/rmdir.2.html">remove directories</a></li>
-        <li><a href="https://www.man7.org/linux/man-pages/man2/getdents.2.html">get directory entries</a></li>
-      </ul>
-    </p>
+        The idea of using numerical values as names (i.e., unique identifiers)
+        is common throughout computing.
+        As we'll see in the essay about processes, each process has a
+        unique numerical identifier, used as the system's "handle" to the process.
+        Other examples include user id's and memory addresses.
+      </p>
   </div>
 
     <div class="code">
@@ -246,6 +242,21 @@ last-updated: July, 2020
       File deletion is handled by the kernel, which does not delete a file
       until there are no hard links referencing it.
     </p>
+
+    <p>
+      The contents of directories are managed by the kernel.
+      User-space processes are not permitted to read or write
+      directly to directories.
+      System calls exist to:
+      <ul style="columns: 2; width: 80%; margin-left: 10%;">
+        <li><a href="https://www.man7.org/linux/man-pages/man2/open.2.html">Create a new file</a></li>
+        <li><a href="https://man7.org/linux/man-pages/man2/link.2.html">Create a new hardlink</a></li>
+        <li><a href="https://man7.org/linux/man-pages/man2/unlink.2.html">Delete a hardlink</a></li>
+        <li><a href="https://www.man7.org/linux/man-pages/man2/mkdir.2.html">Create a directory</a></li>
+        <li><a href="https://www.man7.org/linux/man-pages/man2/rmdir.2.html">Remove a directory</a></li>
+        <li><a href="https://www.man7.org/linux/man-pages/man2/getdents.2.html">Get directory entries</a></li>
+      </ul>
+  </p>
 
     <p>
       Each directory contains at least two hard links, which cannot be changed, and
@@ -339,7 +350,7 @@ last-updated: July, 2020
   <h2> Filesystem Heirarchy</h2>
 
   <p>
-    Now, we turn to less technical matters.
+    Now, we turn to more pragmatic matters.
     Within any GNU/Linux distribution, some common themes will be found.
     For instance, <code>bin</code> directories are found in several places, such as
     <code>/bin</code> and <code>/sbin</code>, along with <code>/usr/bin</code> and often
@@ -444,8 +455,6 @@ last-updated: July, 2020
     cat: newfile: Permission denied <br>
   </div>
 
-  <h3> Reference Count & Deleting </h3>
-
 
   <h3>See Also:</h3>
   <ul>
@@ -461,7 +470,7 @@ last-updated: July, 2020
   <h2>Device Special Files</h2>
 
   <p>
-    The directory tree is used as a general-purpose meeting place:
+    The system's directory tree is used as a general-purpose meeting place:
     In addition to regular files, it also holds, for instance, references to hardware drivers,
     and information about running processes.
     This mechanism is general, extensible, and allows both users and programmers
@@ -536,7 +545,7 @@ last-updated: July, 2020
       The terms <em>filesystem</em> and <em>directory tree</em> were developed here
       precisely, in order to make a clear distinction between the two.
       However, the terms overlap, somewhat:
-      In *nix, a useable filesystem must entertain exactly one directory tree.
+      In *nix, a (usable) filesystem must entertain exactly one directory tree.
       Because of this, each filesystem implies a directory tree;
       this is the sense in which it is valid to say, "We are going to mount
       a filesystem at <code>/home</code>," when in fact we mean,
