@@ -172,7 +172,7 @@ last-updated: July, 2020
     A directory is a type of file, and exists within a filesystem.
     Conceptually, each directory contains a table with two columns:
     <a href="finding-files.html#basename">basename</a> and inode number (Kerrisk, p. 339).
-    Each entry in a directory is known as a <em>hard link.</em>
+    Each entry is known as a <em>hard link.</em>
   </p>
 
   <p>
@@ -207,10 +207,7 @@ last-updated: July, 2020
     </div>
 
     <p>
-        The filesystem, inodes and directories described above suggest a great deal
-        of the structure of the *nix filesystem scheme, and the rest of
-        this paper will be spent, mostly, bearing that out.
-        To begin, a file may be hard-linked more than once, without contradiction.
+        Files may be hard-linked more than once.
         This allows a file to appear in more than one directory, and/or more than once
         in a single directory.
         We can create new hard links with the <code>ln</code> command:
@@ -224,9 +221,9 @@ last-updated: July, 2020
     </div>
 
     <p>
-      The name <code>2newfile</code> is now logically equivalent to the name
-      <code>newfile</code>.  If we modify the file linked by one hard link,
-      then we modify the file linked by the other:
+      The name <code>2newfile</code> is now equivalent to the name
+      <code>newfile</code>.  If we modify the file using one name,
+      then we have modified the file referred to by the other:
     </p>
 
     <div class="code">
@@ -239,8 +236,8 @@ last-updated: July, 2020
 
     <p>
       A question arises: <em>"What if we delete <code>newfile</code>?"</em>
-      File deletion is handled by the kernel, which does not delete a file
-      until there are no hard links referencing it.
+      File deletion is a filesystem operation, and is handled by the kernel.
+      The kernel does not delete a file unless there are no hard links referencing it.
     </p>
 
     <p>
@@ -267,9 +264,6 @@ last-updated: July, 2020
     </p>
 
     <p>
-      Directories may link to other directories, but
-      the kernel does not allow arbitrary hard links to directories to be created;
-      thus, the hard links of a Unix-like system form a tree.
       Finally, filenames that begin with a dot (<code>.</code>) are considered
       "hidden" files.  They can be listed with
     </p>
