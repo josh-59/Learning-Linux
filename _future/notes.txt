@@ -27,70 +27,7 @@ Overarching Goal:
 	c) Command-line tools vs. Scripting Language
 		Set of wrenches vs ratchet set
 
-13) About
-	It is the opinion of the author that more is not always better.
-	In particular, having less documentation is often better than having more.
-	Consider, the C programming language.
-	Now, the creators of this language wrote a book on it; it isn't a large book.
-	Say the authors, "C is not a large language, and is not well-served by a large book."
-
-	With the internet at our disposal, it's relatively easy to
-	<a href="https://github.com/EbookFoundation/free-programming-books/blob/master/free-programming-books.md#c">bury the reader</a>
-	in documentation about the C programming language.
-	But the above does not list good documentation.
-	For instance, have a look at <a href="https://www.slideshare.net/olvemaudal/deep-c">Deep C:</a>
-	It's a slideshow some 400 slides in length.
-	For kicks, here's the second slide:
-
-	<img src="assets/img/deep-c.png">
-
-
-
-	There are a few problems with too much documentation.
-	 	it wastes the reader's time.
-		it doesn't provide good information
-		Is not authoritative
-
-
-	Finally, the best resource isn't even listed!
-	Moreover, each of these sources is at-best secondary, because the
-	creators of the C programming language have <em>written a book about it!</em>
-	But, here's the catch: <em>The creators of the language have written
-	that <strong>C is not a large language, and is not well-served by a large book!</strong></em>
-
-
-	Rather, documentation
-
-	The Social Contract
-		There is an implicit social contract between the writer of a given work
-		and their reader(s).
-		The deal is, I can't guarantee that what I write about is what you're trying to learn.  What I
-		can guarantee is that <em>if</em> you read this work,
-		I will provide a precise rendition of valuable material.
-		In this sense, I have striven for maximum usefulness.
-
-		Conventions:
-			Tried to restrict links to USEFUL and NONOBVIOUS--
-					i.e., things you could not get from an easy Google search.
-			Wikipedia is considered authoritative.
-						Open-source/community-driven, etc.
-			Superscript references are used for authoritative references that are of little peripheral interest
-						i.e., don't read them, unless you must
-			Inline links are used to reference good and immediately relevant sources
-						i.e., they're worth looking into
-		  See Also's are used for further explorations.
-
-	Learning Linux
-
 	https://www.youtube.com/watch?v=VetI2lr2LNA&list=RDMMCCY0bAPLZ1w&index=27
-
-	And All Was Right With The World
-		(Uniform system-call interfaces)
-		- A lot of fucking work went into that
-		- Is characteristic of good software
-
-
-
 
 
 Improvements:
@@ -108,8 +45,3 @@ Improvements:
 		list (and/or base it on history).
 
 Use Lbry's framework to make scholarly publications available freely (and searchable).
-
-
-
-	In particular, documentation ought to strive
-	to be the best possible (on its author's honor).
