@@ -172,11 +172,11 @@ last-updated: July, 2020
     A directory is a type of file, and exists within a filesystem.
     Conceptually, each directory contains a table with two columns:
     <a href="finding-files.html#basename">basename</a> and inode number (Kerrisk, p. 339).
-    Each entry is known as a <em>hard link.</em>
+    Each entry is called a <em>hard link.</em>
   </p>
 
   <p>
-    The inode number is sufficient to uniquely identify a file only within
+    An inode number is sufficient to uniquely identify a file only within
     the filesystem the directory belongs to.
     Consequently, <em>hard links may not cross filesystem boundaries.</em>
     Another way of saying this is, "Every file belongs to the same filesystem
