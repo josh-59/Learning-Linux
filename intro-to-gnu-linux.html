@@ -98,7 +98,8 @@ last-updated: July, 2020
 
     <p>
       <strong>Processes:</strong>
-      Sometimes called a "user-space process," a process is an executing program.
+      Sometimes called a "user-space process," a process is an executing
+      program.<sup><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/cpu-intro.pdf">[1]</a></sup>
       On Unix-like systems, processes run the entire show, and
       are the only means that a user has to interact with the system.
       That is, processes are a critical component of a functioning Unix-like operating system.
@@ -110,10 +111,10 @@ last-updated: July, 2020
       <p>
         Properly speaking, the name <em>Linux</em> refers only to the Linux Kernel.
         The Linux Kernel was started by Linus Torvalds in 1991, then a graduate student
-        of the University of Helsinki.<sup><a href="https://en.wikipedia.org/wiki/Linus_Torvalds">[1]</a></sup>
+        of the University of Helsinki.<sup><a href="https://en.wikipedia.org/wiki/Linus_Torvalds">[2]</a></sup>
         Following the architecture of the Unix operating system,
         he wrote an open-source operating system as "...a hobby, won't be big and professional like
-        [the GNU Project]."<sup><a href="https://en.wikipedia.org/wiki/Linux_kernel#History">[2]</a></sup>
+        [the GNU Project]."<sup><a href="https://en.wikipedia.org/wiki/Linux_kernel#History">[3]</a></sup>
         He soon released it publicly under the free-and-open-source <em>GNU General Public License, version 2.</em>
       </p>
 
@@ -138,7 +139,7 @@ last-updated: July, 2020
 
     <h3>See Also:</h3>
     <ul>
-      
+
       <li><a href="https://www.kernel.org/">The Linux Kernel Source Code</a> </li>
       <li><a href="https://www.kernel.org/doc/html/v4.10/process/coding-style.html"> Linux Kernel Coding Style</a> (Written by Linux Torvalds) </li>
       <li><a href="https://en.wikipedia.org/wiki/History_of_Linux">History of Linux - Wikipedia</a></li>
@@ -165,11 +166,11 @@ last-updated: July, 2020
       </div>
 
       <p>
-        The GNU Project was started by Richard Stallman in September 1983,<sup><a href="https://www.gnu.org/gnu/gnu-history.html">[3]</a></sup>
+        The GNU Project was started by Richard Stallman in September 1983,<sup><a href="https://www.gnu.org/gnu/gnu-history.html">[4]</a></sup>
         and takes freedom very seriously.
         In GNU language, <em>free</em> software does not mean merely, "costs nothing."
         Rather, it is intended to mean <em>free as in
-        freedom.</em><sup><a href="https://www.gnu.org/philosophy/free-sw.html">[4]</a></sup>
+        freedom.</em><sup><a href="https://www.gnu.org/philosophy/free-sw.html">[5]</a></sup>
         GNU and the open-source community often use
         the term <em>libre</em> to connote this kind of freedom.
         It should speak volumes that Linus Torvalds chose to release his budding
@@ -215,16 +216,16 @@ last-updated: July, 2020
 
       <p>
         The first <em>Portable Operating System Interface</em> specification
-        was released as an IEEE standard in 1988,<sup><a href="https://en.wikipedia.org/wiki/POSIX#Name">[5]</a></sup>
+        was released as an IEEE standard in 1988,<sup><a href="https://en.wikipedia.org/wiki/POSIX#Name">[6]</a></sup>
         and specified the system-call interface available to user-space programs.
         This standard has been refined since then.
         Operating systems that abide by this standard are called <em>POSIX Compliant;</em>
-        systems developers general aim for POSIX compliance.<sup><a href="https://en.wikipedia.org/wiki/Single_UNIX_Specification">[6]</a></sup>
+        systems developers general aim for POSIX compliance.<sup><a href="https://en.wikipedia.org/wiki/Single_UNIX_Specification">[7]</a></sup>
       </p>
 
       <p>
         A stronger specification is the <em>Single Unix Specification,</em>
-        which is a superset of POSIX.<sup><a href="#references">[7]</a></sup>
+        which is a superset of POSIX.<sup><a href="#references">[8]</a></sup>
         Certification to this standard is costly, and is generally reserved for proprietary operating systems.
       </p>
 
@@ -256,7 +257,7 @@ last-updated: July, 2020
       In my opinion, distributions are more similar than dissimilar.
       Think of them as flavors of the Unix architecture, rather than distinct operating systems.
       The oldest distribution that's still maintained is
-      <a href="http://www.slackware.com/">Slackware</a>.<sup><a href="https://en.wikipedia.org/wiki/Slackware">[8]</a></sup>
+      <a href="http://www.slackware.com/">Slackware</a>.<sup><a href="https://en.wikipedia.org/wiki/Slackware">[9]</a></sup>
     </p>
 
     <p>
@@ -337,7 +338,7 @@ last-updated: July, 2020
       <code>apt</code> is comparatively old.
       But, it is very stable and very predictable.
       Linux Mint 20 is a long-term support
-      release, and will be supported until 2025.<sup><a href="https://blog.linuxmint.com/?p=3928">[9]</a></sup>
+      release, and will be supported until 2025.<sup><a href="https://blog.linuxmint.com/?p=3928">[10]</a></sup>
     </p>
 
     <h3>See Also:</h3>
@@ -348,29 +349,6 @@ last-updated: July, 2020
     </ul>
 </div>
 
-<div class="content" id="about">
-  <h2> About This Work </h2>
-  <p>
-    The field of computing is simply enormous.
-    I think it's so large that no single human can understand all of it.
-    Even restricting ourselves to the subject of Linux, I still think it infeasible
-    to comprehend it all.
-    Fortunately, it is sufficient to do a single job well.
-  </p>
-
-  <p>
-    This work is intended as a thorough introduction GNU/Linux.
-    It will make a survey of the subject, point out some major ideas,
-    develop a few of the important ones, and explain the relationships among them.
-    Most importantly, it will highlight good, authoritative sources.
-  </p>
-
-  <p>
-    A principle concept in computing is the notion of <em>abstraction,</em> hiding
-    detail to produce something that does the same thing, but appears simpler.
-  </p>
-</div>
-
 <div id="video" class="content">
     <h2> Greg Kroah-Hartman </h2>
     <iframe class="video" src="https://www.youtube.com/embed/vyenmLqJQjs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -379,6 +357,7 @@ last-updated: July, 2020
 <div id="references" class="content">
     <h2> References </h2>
     <ol style="margin-left: 0">
+        <li> Arpaci-Dusseau, R. H., &amp; Arpaci-Dusseau, A. C. (2018). <em>Operating Systems: Three Easy Pieces.</em> Arpaci-Dusseau Books.
         <li>"Linus Torvalds." <em>Wikipedia,</em> Wikimedia Foundation, 23 June 2020,
           <a href="en.wikipedia.org/wiki/Linus_Torvalds">en.wikipedia.org/wiki/Linus_Torvalds</a>.
         <li>"Linux kernel." <em>Wikipedia,</em> Wikimedia Foundation, 26 June 2020,
