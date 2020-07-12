@@ -13,9 +13,9 @@ Brian Kernighan, <br><i>UNIX, A History and Memoir,</i><br>p. 71
 
 <h2> Introduction </h2>
 <p>
-    A shell is not, fundamentally, a commplicated program.  
+    A shell is not, fundamentally, a commplicated program.
     Its job is to query the user for their next command,
-    then execute that command. 
+    then execute that command.
     An outline of the central loop is as follows:
 </p>
 
@@ -36,10 +36,10 @@ Brian Kernighan, <br><i>UNIX, A History and Memoir,</i><br>p. 71
 <h2> PATH Environment Variable </h2>
 <p>
     Among new users (or perhaps just me), the <code>PATH</code>
-    environment variable is often a source of concern. 
+    environment variable is often a source of concern.
     This variable explicitly declares the directories that will
     be searched to locate an executable file when a command
-    is entered. 
+    is entered.
     We can have a look at its value with,
 <p>
 
@@ -60,22 +60,22 @@ Brian Kernighan, <br><i>UNIX, A History and Memoir,</i><br>p. 71
 <p>
     The <code>PATH</code> variable was invented by John Mashey
     and introduced as a workaround so that non-expert users could
-    share their own sets of command by lab, department or 
+    share their own sets of command by lab, department or
     group.<sup><a href="#references">Kernighan page 132 (check not plaigarizing)</a></sup>
 </p>
 
 <p>
     There are several common modifications made to the value of this variable, today.
-    For instance, to include your own 
+    For instance, to include your own
 
 
-    A common use today is 
+    A common use today is
 
 <h2> Fish </h2>
 <p>
     The best interactive shell that I have found is <code>fish</code>.
     It's a relatively new shell, and I find it preferrable to <code>bash</code>,
-    even as an experienced user.  
+    even as an experienced user.
     Several features of <code>fish</code> make it more friendly than <code>bash</code>:
 
     <ul>
@@ -98,7 +98,7 @@ Brian Kernighan, <br><i>UNIX, A History and Memoir,</i><br>p. 71
 </p>
 
 <p>
-    With <code>fish</code> and other tools like Mozilla Rust's <code>cargo</code>, 
+    With <code>fish</code> and other tools like Mozilla Rust's <code>cargo</code>,
     I think that we can bring the command-line into the twenty-first century.
 </p>
 
@@ -125,9 +125,9 @@ Discuss difference between shell variables and environment variables
 </p>
 
 <p>
-    A <strong>builtin</code> is a command that is implemented in the shell.  
+    A <strong>builtin</code> is a command that is implemented in the shell.
     Builtins are commands that are so closely ties to the shell
-    that it is impossible to implement them as external 
+    that it is impossible to implement them as external
     commands.<sup>FISH DOCUMENTATION</sup>.
 
     An example of a builtin in <code>fish</code> is <code>fish_prompt</code>,
@@ -147,6 +147,10 @@ Discuss difference between shell variables and environment variables
 
 
 
-    
+PATH environment variable:
+Kernighan page 132:
+    Invented by John Mashey and introduced in the 6th edition shell,
+    it was a workaround so that non-expert users could
+    share their own sets of commands by lab, department and group.
 
-
+10)	The Art of the Command Line https://github.com/jlevy/the-art-of-command-line/blob/master/README.md
