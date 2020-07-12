@@ -15,6 +15,7 @@ last-updated: July, 2020
     <li><a href="#fs-heir"> Filesystem Heirarchy </a></li>
     <li><a href="#regular-files"> Regular Files </a></li>
     <li><a href="#device-files"> Device Special Files </a></li>
+    <li><a href="#procfs"> Procfs </a></li>
     <li><a href="#closing-remarks"> Closing Remarks </a></li>
     <li><a href="#lvl1"> Level 1 Linux </a></li>
     <li><a href="#references"> References </a></li>
@@ -62,8 +63,8 @@ last-updated: July, 2020
     A given disk is usually <em>partitioned</em> into several logically-distinct components.
     All partitions are contiguous with respect to the disk's address space, and
     entertains its own distinct filesystem, if any.
-    Preparing a partition for use by a particular filesystem is known as
-    formatting.<sup><a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">[4]</a></sup>.
+    Preparing a partition for use by a particular filesystem
+    <a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">is known as formatting.</a>
   </p>
 
   <ul>
@@ -138,6 +139,13 @@ last-updated: July, 2020
     in addition to metadata about the file, such as its size, access permissions
     and timestamps.
   </p>
+
+  <div class="aside-left">
+    <h4>Aside:</h4>
+    <p>
+      <em>Filesystem</em> is often abbreviated <em>fs.</em>
+    </p>
+  </div>
 
   <p>
     The set of all inodes in a filesystem is organized in an array;
