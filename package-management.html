@@ -1,0 +1,178 @@
+---
+layout: default
+title: Package Management
+credits: default
+last-updated: July 2020
+---
+
+<div id="nav_bar_2" class="nav">
+    <ul>
+        <li><a href="#introduction"> Introduction </a></li>
+        <li><a href="#whatis-package"> What is a Package? </a></li>
+        <li><a href="#repositories"> Repositories </a></li>
+        <li><a href="#package-managers"> Package Managers </a></li>
+        <li><a href="#references"> References </a></li>
+        <li><a href="#credits">Credits </a></li>
+    </ul>
+</div>
+
+<div id="introduction" class="content">
+    <h1>Package Management </h1>
+    <h4>Under Construction!</h4>
+
+  	<p>
+  		Packages provide a uniform way to install, patch and remove software,
+      and exist in multiple contexts within the FOSS domain.
+  		Each distribution wishing to be part of a larger ecosystem
+      includes a package manager.
+      Large programming language ecosystems often offer a package management
+      tool to ease its own use.
+      Examples include Rust's <code>cargo</code>, Python's <code>pip</code>
+      and Ruby's <code>gem</code>.
+    </p>
+</div>
+
+<div class="content" id="whatis-package">
+  <h2>What is a Package?</h2>
+  <p>
+    A package is a compressed bundle of data that contains everything
+    required to implement a set of related commands or features.<sup><a href="https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html#package">[1]</a></sup>
+    In addition, packages contain metadata in the form of files which describe the package;
+    these are crucial to the organization of packages and the automation of their installation.
+  </p>
+
+  <p>
+    Let's have a look at Debian's
+    <a href="https://packages.debian.org/stable/utils/locate"><code>locate</code></a>.
+    We download the file from a Debian repository mirror, and receive a single
+    file, <code>locate_4.6.0+git+20190209-2_amd64.deb</code>.
+    Note the <em>.deb</em> extension.
+  </p>
+
+  <p>
+    This file can be uncompressed in a few ways.
+  </p>
+
+  <ol>
+    <li>On Mint, by right-clicking and selecting "Extract Here"</li>
+    <li>From the command line, with traditional tools:<br>
+      <code>$ ar x locate_4.6.0+git+20190209-2_amd64.deb</code></li>
+  </ol>
+
+  <p>
+    In either case, we find three files, <em>control.tar.xz</em>, <em>data.tar.xz</em>
+    and <em>debian-binary.</em>
+    The <em>debian-binary</em> file lists the package-format version number.<sup><a href="https://en.wikipedia.org/wiki/Deb_%28file_format%29#Implementation">[1]</a></sup>
+    Both <em>.tar.xz</em> files are technically uncompressed, but bundled (archived).
+    Let's first look at the <em>data</em> file.
+  </p>
+
+  <ol>
+    <li>On Mint, right-click and select "Extract Here"</li>
+    <li>From the command line:<br>
+      <code>$ tar -xJf data.tar.xz</code></li>
+  </ol>
+
+
+  <p>
+    Next, let's look at the <em>control</em> file.
+    This archive contains the metadata files; each is plaintext,
+    and can be viewed with <code>cat</code> or <code>less</code>.
+  </p>
+
+    <div class="code">
+      $ cat control <br>
+      Package: locate<br>
+      Source: findutils<br>
+      Version: 4.6.0+git+20190209-2<br>
+      Architecture: amd64<br>
+      Maintainer: Andreas Metzler <br>
+      Installed-Size: 421<br>
+      Depends: findutils (>> 4.2.31-1), libc6 (>= 2.14)<br>
+      Breaks: slocate (<= 3.1-1.1)<br>
+      Replaces: findutils (&lt;&lt; 4.2.31-2)<br>
+      Section: utils<br>
+      Priority: optional<br>
+      Multi-Arch: foreign<br>
+      Homepage: https://savannah.gnu.org/projects/findutils/<br>
+      Description: maintain and query an index of a directory tree<br>
+      &emsp;updatedb generates an index of files and directories. <br>
+      &emsp;GNU locate can be used to quickly query this index.<br>
+    </div>
+
+  <p>
+    This might look familiar: It is the result of querying <code>apt</code>
+    about a particular package: <br> <code> $ apt show locate </code>
+    returns similar results.
+  </p>
+
+  <p>
+    From the ArchWiki <code>pacman</code> page:
+    A package is an archive containing:
+
+    <ul>
+      <li> The compiled files of an application </li>
+      <li> Metadata about the application (application name, version, dependencies, etc.) </li>
+      <li> Installation directives for <code>pacman</code> </li>
+      <li> Extra, optional files, such as scripts </li>
+    </ul>
+
+<h3>See Also:</h3>
+  <ul>
+    <li><a href="https://en.wikipedia.org/wiki/Deb_%28file_format%29"> deb (file format) - Wikipedia </a></li>
+  </ul>
+</div>
+
+<div class="content" id="repositories">
+  <h2>Repositories</h2>
+</div>
+
+<div class="content" id="package-managers">
+  <h2>Package Managers</h2>
+</div>
+
+<div class="content" id="apt">
+  <h2> Apt </h2>
+  <p>
+    "Native packaging systems"
+	</p>
+https://unix.stackexchange.com/questions/138188/easily-unpack-deb-edit-postinst-and-repack-deb
+
+
+
+
+		</p>
+
+		<p>
+			The compiled files that form the core of an application are an obvious
+			component of each package; however, in order to manage packages in
+			an efficient manner, each package must contain metadata describing itself.
+			One method to store this information might be to keep it in the executables themselves&mdash;
+			version numbers appended to the executable filename, say.
+			This would not be extensible, nor pleasant to use.
+		</p>
+
+		<p>
+			All modern package
+			A package does not contain copies of common libraries and executables.
+
+      Snap
+      https://blog.linuxmint.com/?p=3766 (Critique of Snap)
+      https://blog.linuxmint.com/?p=3906 (Chromium empty package) "In Linux Mint 20, APT will forbid snapd from getting installed.""
+
+
+      From https://linuxmint-user-guide.readthedocs.io/en/latest/snap.html
+      "The Snap Store, also known as the Ubuntu Store, is a commercial centralized software store operated by Canonical."
+
+
+	"zero install"
+</div>
+
+
+<div id="references" class="content">
+    <h2> References </h2>
+    <ol>
+        <li> <i>Unix Programmer's Manual, First Edition.</i>  <a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html"> https://www.bell-labs.com/usr/dmr/www/1stEdman.html </a> </li>
+        <li> WHATWG HTML Living Standard Section 1.6, History. <a href="https://html.spec.whatwg.org/multipage/introduction.html#history-2">https://html.spec.whatwg.org/multipage/introduction.html#history-2</a> </li>
+    </ol>
+</div>
