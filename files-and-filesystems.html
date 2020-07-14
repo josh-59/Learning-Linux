@@ -428,14 +428,14 @@ last-updated: July, 2020
   <h2>Regular Files</h2>
 
   <p>
-    In Unix, a file is a sequence of bytes (Kernighan, 62).
+    In Unix, a file is a sequence of bytes.<sup><a href=#references>[1]</a></sup>
     This definition is sufficiently abstract to allow, for instance, a keyboard
     to appear as a file.
     Ken Thompson's <em>Unix</em> kernel facilitated reading and writing of files,
     but otherwise refrained from interjection.
     This approach was quite novel for its time: Earlier
     operating systems interposed upon the handling of files, so that
-    some files could only be read by some programs, and not by others (Kernighan, 62).
+    some files could only be read by some programs, and not by others.<sup><a href=#references>[1]</a></sup>
     In my opinion, this uniformity begins <a href="https://en.wikipedia.org/wiki/Unix_philosophy">"The Unix Philosophy."</a>
   </p>
 
@@ -456,20 +456,19 @@ last-updated: July, 2020
 
   <p>
     In both Unix and its derivatives, each file has an owner, and belongs to a group.
-    Only the owner of a file can delete it.
     Important files are owned by <code>root</code>, the superuser of the system.
     Because the owner of a given file is permitted to do anything to it, we typically wish
     to avoid acting as <code>root</code>, and instead use <code>sudo</code> wherever possible.
   </p>
 
   <p>
-    The accesiblity of each file is controlled by the owner through
+    The accessibility of each file is controlled by
     nine <em>access permission bits</em>, also called <em>mode bits</em>.
-    and only the owner of the file can change these.
+    Only the owner of the file can change these.
     They are:
     <code>read</code>, <code>write</code> and <code>execute</code> for each,
     <em>owner</em>, <em>group</em>, <em>everyone else</em>.
-    These bits, and other metadata, are maintained within the file's inode.
+    These bits are maintained within the file's inode.
   </p>
 
   <p>
@@ -480,43 +479,38 @@ last-updated: July, 2020
 
   <p>
     We see that <code>bash</code> is executable by anybody, but can
-    only be written to by <code>root</code>.
+    only be written to (changed by) <code>root</code>.
     File mode bits can be changed with the
     <a href="https://www.man7.org/linux/man-pages/man1/chmod.1.html"><code>chmod(1)</code></a> utility.
   </p>
 
-  <h3>A Short Example</h3>
-
-  <div class="code">
-    $ echo "hello world" > newfile <br>
-    $ cat newfile <br>
-    hello world <br>
-    $ chmod -r newfile &emsp;&emsp;&emsp;&emsp; #Remove read permissions on newfile<br>
-    $ cat newfile <br>
-    cat: newfile: Permission denied <br>
-  </div>
-
   <p>
-    Finally, filenames that begin with a dot (<code>.</code>) are considered
-    "hidden" files.  They can be listed with
+    Beyond <code>ls</code>, two other command-line tools are useful for peeking
+    into a file. They are <code>file</code>, which gives a brief description of
+    the file's type, and <code>stat</code>, which gives a human-readable
+    summary of the file's inode's metadata:
   </p>
 
   <div class="code">
-    $ ls -a
-  </div>
-
-  <p>
-    or
-  </p>
-
-  <div class="code">
-    $ ls -A
+    $ file /bin/bash<br>
+    /bin/bash: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), <br>
+    dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, <br>
+    BuildID[sha1]=a43fec47192ff49c2d3fed671f2be8df7e83784a, for <br>
+    GNU/Linux 3.2.0, stripped<br><br>
+    $ stat /bin/bash<br>
+    File: /bin/bash<br>
+    Size: 1183448   	Blocks: 2312       IO Block: 4096   regular file<br>
+    Device: 802h/2050d	Inode: 1835042     Links: 1<br>
+    Access: (0755/-rwxr-xr-x)  Uid: (    0/    root)   Gid: (    0/    root)<br>
+    Access: 2020-07-14 13:33:43.628528710 -0500<br>
+    Modify: 2020-02-25 06:03:22.000000000 -0600<br>
+    Change: 2020-07-09 11:20:12.676956656 -0500<br>
+    Birth: -<br>
   </div>
 
   <h3>See Also:</h3>
   <ul>
-    <li><a href="https://www.gnu.org/software/coreutils/manual/html_node/File-permissions.html#File-permissions">File Permissions (GNU Coreutils)</a></li>
-    <li><a href="https://gitlab.com/dwt1/dotfiles"> Derek Taylor / Dotfiles - Gitlab </a></li>
+    <li><a href="https://en.wikipedia.org/wiki/File_system_permissions#Numeric_notation">File System Permissions - Numeric Notation - Wikipedia </a></li>
   </ul>
 
 </div>
