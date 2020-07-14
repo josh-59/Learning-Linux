@@ -16,6 +16,7 @@ last-updated: July, 2020
     <li><a href="#regular-files"> Regular Files </a></li>
     <li><a href="#device-files"> Device Special Files </a></li>
     <li><a href="#procfs"> Procfs </a></li>
+    <li><a href="#Virtual Filesystem"> Virtual Filesystem </a></li>
     <li><a href="#closing-remarks"> Closing Remarks </a></li>
     <li><a href="#lvl1"> Level 1 Linux </a></li>
     <li><a href="#references"> References </a></li>
@@ -84,10 +85,8 @@ last-updated: July, 2020
     <div class="aside-right">
       <h4>Aside</h4>
       <p>
-        A filesystem describes how files are stored, but it's the kernel's responsibility to abide by this specification.
-        Thus, the details of creating, reading and writing files are the left to the kernel.
-        In Linux, the filesystems known by the current kernel are
-        listed in the <code>/proc/filesystems</code> file.<sup><a href="#references">[7]</a></sup>
+        A filesystem describes how files are stored, but it is the kernel's responsibility to abide by this specification.
+        Thus, the details of creating, reading and writing files are left to the kernel.
       </p>
     </div>
 
@@ -115,13 +114,14 @@ last-updated: July, 2020
         In particular, it is not a <a href="https://en.wikipedia.org/wiki/Journaling_file_system">journaling filesystem</a>,
         so that changes to data are not recorded before being carried out (increasing the likelihood of
         corruption in the event of, say, power outage).
-        This format is often used to hold the bootloader, since it is virtually guaranteed to be supported by firmware.
+        This filesystem is often used to hold the bootloader, since it is virtually guaranteed to be supported by firmware,
+        and it will not be changed very often.
       </p>
     </li>
   </ul>
 
   <p>
-    System V Unix implemented its filesystem as an integral part of the operating system;
+    System V Unix implemented its own filesystem as an integral part of the operating system;
     it was unnamed, though well-documented (by, for instance, Maurice J. Bach in <em>The Design of the Unix Operating System</em>).
     The Extended Filesystem (EXT) was an open-source derivative, and retained many distinctive features of the original;
     since then, EXT2, EXT3, and EXT4 have continued to improve upon the design.
@@ -158,9 +158,10 @@ last-updated: July, 2020
 
   <p>
     Intuitively, a file's inode number serves as the "hardware name" of a file,
-    since it is unique to the file within its filesystem.
-    For the kernel, the information required to uniquely identify a file
-    is its inode number and the device (drive & partition) of the filesystem it belongs to.
+    since it uniquely identifies a file within a filesystem.
+    For the kernel, which often manages more than one filesystem at a time,
+    the information required to identify a file
+    is its inode number and the filesystem it belongs to.
   </p>
 
   <h3> See Also: </h3>
@@ -177,10 +178,9 @@ last-updated: July, 2020
   <h2>Directories</h2>
 
   <p>
-    A directory is a type of file, and exists within a filesystem.
-    Conceptually, each directory contains a table with two columns:
+    A directory is a file containing a table with two columns,
     <a href="finding-files.html#basename">basename</a> and inode number (Kerrisk, p. 339).
-    Each entry is called a <em>hard link.</em>
+    Each entry in a directory's table is called a <em>hard link.</em>
   </p>
 
   <p>
@@ -202,8 +202,9 @@ last-updated: July, 2020
       <p>
         The idea of using numerical values as names (i.e., unique identifiers)
         is common throughout computing.
-        As we'll see in the essay about processes, each process has a
-        unique numerical identifier, used as the system's "handle" to the process.
+        As we'll see later, each process has a
+        unique numerical identifier, called its PID,
+        which is used as the system's "handle" to the process.
         Other examples include user id's and memory addresses.
       </p>
   </div>
@@ -229,8 +230,9 @@ last-updated: July, 2020
     </div>
 
     <p>
-      The name <code>2newfile</code> is now equivalent to the name
-      <code>newfile</code>.  If we modify the file using one name,
+      The name <code>2newfile</code> is equivalent to the name
+      <code>newfile</code>, since they link to the same inode number.
+      If we modify the file using one name,
       then we have modified the file referred to by the other:
     </p>
 
@@ -244,12 +246,20 @@ last-updated: July, 2020
 
     <p>
       A question arises: <em>"What if we delete <code>newfile</code>?"</em>
-      File deletion is a filesystem operation, and is handled by the kernel.
-      The kernel does not delete a file unless there are no hard links referencing it.
+      With the above implementation in mind, there are two distinct operations
+      that must take place to delete a file: First, remove all hardlinks to the file
+      (that is, delete all directory entries linking it), and
+      second, free the file (i.e., allow its inodes and data blocks to be reused).
+      Deleting hardlinks is precisely what the <code>rm</code> command does.
+      Freeing the file from the filesystem is left to the kernel, and
+      takes place only if no hard links reference it.
     </p>
 
+    <h3>Structure</h3>
+
     <p>
-      The contents of directories are managed by the kernel.
+      While most files on the system are owned by a user,
+      the contents of directories are, effectively, owned by the kernel.
       User-space processes are not permitted to read or write
       directly to directories.
       System calls exist to:
@@ -261,32 +271,21 @@ last-updated: July, 2020
         <li><a href="https://www.man7.org/linux/man-pages/man2/rmdir.2.html">Remove a directory</a></li>
         <li><a href="https://www.man7.org/linux/man-pages/man2/getdents.2.html">Get directory entries</a></li>
       </ul>
-  </p>
+      The layer of indirection offered by these interfaces affords the kernel
+      the opportunity to restrict the manipulation of directories, and therefore,
+      to impose structure upon the directories within a filesystem.
+      In particular, directories are not allowed to be arbitrarily hard-linked
+      (i.e., you cannot create new hardlinks to existing directories).
+    </p>
 
     <p>
       Each directory contains at least two hard links, which cannot be changed, and
-      which help define the Linux directory structure.  They are,
+      which help define the filesystem's directory structure.  They are,
       <code>.</code> ("dot"), which refers to the containing directory itself,
       and <code>..</code> ("dot dot"), which refers to its parent directory.
       The root directory's parent directory is the root directory itself.
+      Finally, each filesystem has a single root directory.
     </p>
-
-    <p>
-      Finally, filenames that begin with a dot (<code>.</code>) are considered
-      "hidden" files.  They can be listed with
-    </p>
-
-    <div class="code">
-      $ ls -a
-    </div>
-
-    <p>
-      or
-    </p>
-
-    <div class="code">
-      $ ls -A
-    </div>
 
     <h3> See Also: </h3>
     <ul>
@@ -488,6 +487,22 @@ last-updated: July, 2020
     cat: newfile: Permission denied <br>
   </div>
 
+  <p>
+    Finally, filenames that begin with a dot (<code>.</code>) are considered
+    "hidden" files.  They can be listed with
+  </p>
+
+  <div class="code">
+    $ ls -a
+  </div>
+
+  <p>
+    or
+  </p>
+
+  <div class="code">
+    $ ls -A
+  </div>
 
   <h3>See Also:</h3>
   <ul>
@@ -611,6 +626,9 @@ last-updated: July, 2020
         the Virtual Filesystem Switch provides both kernel-space threads and user-space processes with
         a uniform system call interface.
       </p>
+
+      In Linux, the filesystems known by the current kernel are
+      listed in the <code>/proc/filesystems</code> file.<sup><a href="#references">[7]</a></sup>
 
       <p>
         As for inodes, a more formal definition is given by kernel.org:
