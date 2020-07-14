@@ -14,8 +14,8 @@ last-updated: July, 2020
     <li><a href="#mounting-unmounting"> Mounting and Unmounting</a></li>
     <li><a href="#fs-heir"> Filesystem Heirarchy </a></li>
     <li><a href="#regular-files"> Regular Files </a></li>
-    <li><a href="#device-files"> Device Special Files </a></li>
     <li><a href="#procfs"> Procfs </a></li>
+    <li><a href="#device-files"> Device Special Files </a></li>
     <li><a href="#Virtual Filesystem"> Virtual Filesystem </a></li>
     <li><a href="#closing-remarks"> Closing Remarks </a></li>
     <li><a href="#lvl1"> Level 1 Linux </a></li>
@@ -515,14 +515,31 @@ last-updated: July, 2020
 
 </div>
 
+<div class="content" id="procfs">
+  <h2><code>procfs</code></h2>
+  <p>
+    The system's directory tree is used as a general-purpose meeting place.
+    In addition to regular files, it is also used to
+    make available information about running processes, and information about the kernel.
+    These are known as <em>pseudo</em>-filesystems:
+    For all intents and purposes, the kernel makes these filesystems appear
+    as ordinary, actual filesystems.
+  </p>
+
+
+
+  <h3>See Also:</h3>
+  <ul>
+    <li> <a href="https://en.wikipedia.org/wiki/Synthetic_file_system"> Synthetic File System</a> (Wikipedia) </li>
+  </ul>
+</div>
 
 
 <div id="device-files" class="content">
   <h2>Device Special Files</h2>
 
-  <p>
-    The system's directory tree is used as a general-purpose meeting place:
-    In addition to regular files, it also holds, for instance, references to hardware drivers,
+
+    references to hardware drivers,
     and information about running processes.
     This mechanism is general, extensible, and allows both users and programmers
     access to the running machine; the only trick is keeping it organized.
@@ -584,14 +601,7 @@ last-updated: July, 2020
   </ul>
 </div>
 
-<div class="content" id="procfs">
-  <h2><code>procfs</code></h2>
 
-  <h3>See Also:</h3>
-  <ul>
-    <li> <a href="https://en.wikipedia.org/wiki/Synthetic_file_system"> Synthetic File System</a> (Wikipedia) </li>
-  </ul>
-</div>
 
 
 
