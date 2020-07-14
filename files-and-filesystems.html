@@ -428,7 +428,7 @@ last-updated: July, 2020
   <h2>Regular Files</h2>
 
   <p>
-    In Unix, a file was a sequence of bytes (Kernighan, 62).
+    In Unix, a file is a sequence of bytes (Kernighan, 62).
     This definition is sufficiently abstract to allow, for instance, a keyboard
     to appear as a file.
     Ken Thompson's <em>Unix</em> kernel facilitated reading and writing of files,
@@ -445,8 +445,17 @@ last-updated: July, 2020
     approximately 80% of files are regular files (Stevens, 98).
   </p>
 
+  <div class="aside-left">
+    <h4> Aside: </h4>
+    <p>
+      <em>Root</em> has such power over the system that I
+      like to think of it as acting on behalf of the system itself.
+      It is not a <em>user</em>, per se.
+    </p>
+  </div>
+
   <p>
-    In both Unix and Linux, each file has an owner, and belongs to a group.
+    In both Unix and its derivatives, each file has an owner, and belongs to a group.
     Only the owner of a file can delete it.
     Important files are owned by <code>root</code>, the superuser of the system.
     Because the owner of a given file is permitted to do anything to it, we typically wish
