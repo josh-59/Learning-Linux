@@ -144,8 +144,12 @@ Discuss difference between shell variables and environment variables
     before searching <code>PATH</code>, consequently, a locally-defined function
     will "override" any executable located in <code>PATH</code>.
 
-
-
+<div class="aside-right">
+  <h4>Aside:</h4>
+  <p>
+    To assert the existence of a command, query its version with <code>-v</code>
+  </p>
+</div>
 
 PATH environment variable:
 Kernighan page 132:
