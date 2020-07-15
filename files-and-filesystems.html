@@ -16,7 +16,6 @@ last-updated: July, 2020
     <li><a href="#regular-files"> Regular Files </a></li>
     <li><a href="#synfs"> Synthetic Files </a></li>
     <li><a href="#device-files"> Device Special Files </a></li>
-    <li><a href="#Virtual Filesystem"> Virtual Filesystem </a></li>
     <li><a href="#closing-remarks"> Closing Remarks </a></li>
     <li><a href="#lvl1"> Level 1 Linux </a></li>
     <li><a href="#references"> References </a></li>
@@ -263,14 +262,19 @@ last-updated: July, 2020
       User-space processes are not permitted to read or write
       directly to directories.
       System calls exist to:
-      <ul style="columns: 2; width: 80%; margin-left: 10%;">
-        <li><a href="https://www.man7.org/linux/man-pages/man2/open.2.html">Create a new file</a></li>
-        <li><a href="https://man7.org/linux/man-pages/man2/link.2.html">Create a new hardlink</a></li>
-        <li><a href="https://man7.org/linux/man-pages/man2/unlink.2.html">Delete a hardlink</a></li>
-        <li><a href="https://www.man7.org/linux/man-pages/man2/mkdir.2.html">Create a directory</a></li>
-        <li><a href="https://www.man7.org/linux/man-pages/man2/rmdir.2.html">Remove a directory</a></li>
-        <li><a href="https://www.man7.org/linux/man-pages/man2/getdents.2.html">Get directory entries</a></li>
-      </ul>
+    </p>
+
+    <ul style="columns: 2; width: 80%; margin-left: 10%; margin-bottom: 20px;">
+      <li><a href="https://www.man7.org/linux/man-pages/man2/open.2.html">Create a new file</a></li>
+      <li><a href="https://man7.org/linux/man-pages/man2/link.2.html">Create a new hardlink</a></li>
+      <li><a href="https://man7.org/linux/man-pages/man2/unlink.2.html">Delete a hardlink</a></li>
+      <li><a href="https://www.man7.org/linux/man-pages/man2/mkdir.2.html">Create a directory</a></li>
+      <li><a href="https://www.man7.org/linux/man-pages/man2/rmdir.2.html">Remove a directory</a></li>
+      <li><a href="https://www.man7.org/linux/man-pages/man2/getdents.2.html">Get directory entries</a></li>
+    </ul>
+
+
+    <p>
       The layer of indirection offered by these interfaces affords the kernel
       the opportunity to restrict the manipulation of directories, and therefore,
       to impose structure upon the directories within a filesystem.
@@ -287,6 +291,10 @@ last-updated: July, 2020
       Finally, each filesystem has a single root directory.
     </p>
 
+    <p>
+      These restrictions guarantee that the directory structure forms a tree.
+    </p>
+
     <h3> See Also: </h3>
     <ul>
       <li><a href="https://en.wikipedia.org/wiki/Symbolic_link#Overview"> Symbolic Link (Overview) - Wikipedia </a> </li>
@@ -300,16 +308,18 @@ last-updated: July, 2020
   <p>
     Unlike Windows systems, which create a new, distinct directory tree
     for each storage device on the system (<code>C:\, D:\</code>, etc.),
-    Linux systems place a new filesystem's directory tree within the existing
-    directory tree, in an operation called
-    <a href="https://www.man7.org/linux/man-pages/man8/mount.8.html"><em>mounting</em></a>.
+    *nix systems place a new filesystem's directory tree within the existing
+    directory tree by placing the new root directory in the existing directory
+    tree.
+    This operation is called
+    <a href="https://unix.stackexchange.com/questions/3192/what-is-meant-by-mounting-a-device-in-linux"><em>mounting</em></a>.
   </p>
 
   <p>
-    Let's take a look at the <code>mount</code> operation, for this is new.
+    Let's take a look at this operation, for this is new.
     Suppose you have a usb stick with some music on it, and you'd
     like to access its contents.
-    After it's plugged into your computer, the hardware, then the kernel,
+    After it's plugged in, the hardware, then the kernel,
     recognize it, but it may not be accessible:
   </p>
 
@@ -317,11 +327,11 @@ last-updated: July, 2020
 
   <p>
     When mounting new devices manually, the usual method is to identify the device
-    to be mounted with <code>lsblk</code>, then mount it with
+    to be mounted with <a href="https://man7.org/linux/man-pages/man8/lsblk.8.html"><code>lsblk(8)</code></a>, then mount it with
     <a href="https://www.man7.org/linux/man-pages/man8/mount.8.html"><code>sudo mount DEVICE MOUNTPOINT</code></a>.
     The device to be mounted should be a partition, and can usually be determined by its size and
     its mountpoint (which should be none).
-    The Linux Filesystem Hierarchy Standard provides two places to mount temporary
+    Most GNU/Linux distributions provide two places to mount temporary
     filesystems: <code>/mnt</code> and <code>/media/[user]</code>.
   </p>
 
@@ -339,8 +349,9 @@ last-updated: July, 2020
     order that they are found.
     Second, when mounting a new filesystem, if any files exist at the
     mount point, they will be "hidden" by the files of the new filesystem
-    (they become unaccessible).
+    (they become inaccessible).
     They are not deleted, and unmounting the new filesystem will "reveal" them again.
+    To avoid this, create a new directory and mount there.
     Third, a filesystem cannot be in use while unmounting; in particular,
     you must <code>cd</code> out of the device before calling <code>umount</code>.
     Finally, unmount (eject) before unplugging!
@@ -472,7 +483,7 @@ last-updated: July, 2020
   </p>
 
   <p>
-    Here we have a typical directory listing:
+    Here we have a typical listing:
   </p>
 
   <a href="assets/img/ls-long.pdf" target="_blank"><img src="assets/img/ls-long.png" style="width: 100%" title="Click for printable" ></a>
@@ -588,6 +599,7 @@ last-updated: July, 2020
   <h3>See Also:</h3>
   <ul>
     <li> <a href="https://man7.org/linux/man-pages/man5/filesystems.5.html"> <code> filesystems(5)</code></a></li>
+    <li> <a href="https://www.man7.org/linux/man-pages/man1/watch.1.html"> <code> watch(1) </code> </a> </li>
   </ul>
 </div>
 
@@ -650,55 +662,50 @@ last-updated: July, 2020
 </div>
 
 
-
-
-
   <div class="content" id="closing-remarks">
     <h2>Closing Remarks</h2>
-    <h3> Filesystem vs. Directory Tree</h3>
-    <p>
-      The terms <em>filesystem</em> and <em>directory tree</em> were developed here
-      precisely, in order to make a clear distinction between the two.
-      However, the terms overlap, somewhat:
-      In *nix, a (usable) filesystem must entertain exactly one directory tree.
-      Because of this, each filesystem implies a directory tree;
-      this is the sense in which it is valid to say, "We are going to mount
-      a filesystem at <code>/home</code>," when in fact we mean,
-      "We are going to mount a filesystem's directory tree at <code>/home</code>."
-    </p>
-
-    <h3>Linux Virtual File System (Kernel Subsystem)</h3>
+    <h3> Virtual File System (Kernel Subsystem)</h3>
     <p>
       The above discussion gives rise to a few questions:
     </p>
 
     <ol>
-      <li> How can the Linux operating system support multiple filesystems? </li>
+      <li> How can the Linux kernel support multiple filesystems? </li>
       <li> How can it do so simultaneously?  </li>
       <li> How does it handle filesystems that <em>do not</em> use inodes?</li>
     </ol>
 
     <p>
-      The answer to each of these is the <a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">
-        Linux Virtual File System</a> (VFS), a kernel subsystem that acts,
+      The answer to each of these is the
+        Virtual File System (VFS), a kernel subsystem that acts,
         essentially, as a driver for filesystems.
-        Whereas each filesystem type may implement its own functionality,
+        Whereas each filesystem may implement its own functionality,
         most functionality is common;
-        the Virtual Filesystem Switch provides both kernel-space threads and user-space processes with
-        a uniform system call interface.
+        the Virtual File System provides a uniform interface by
+        implementing filesystem-related system calls, such as <code>open</code>, <code>creat</code>, etc..<sup> <a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">[10]</a></sup>
       </p>
-
-      In Linux, the filesystems known by the current kernel are
-      listed in the <code>/proc/filesystems</code> file.<sup><a href="#references">[7]</a></sup>
 
       <p>
         As for inodes, a more formal definition is given by kernel.org:
         "An inode object represents an object within the filesystem."<sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html#id1">[10]</a></sup>
         That is, on filesystems that do not use inodes, they are imposed virtually by
         the VFS, as a means of representing files.
-        As a consequence, the discussion about inodes given above remains
-        at least conceptually correct, when EXT2/EXT3/EXT4 are not being employed.
+        As a consequence, the discussion about inodes given here remains
+        conceptually correct, when EXT2/EXT3/EXT4 are not being employed.
       </p>
+
+    <h3> Filesystem vs. Directory Tree</h3>
+    <p>
+      The terms <em>filesystem</em> and <em>directory tree</em> were developed here
+      precisely, in order to make a clear distinction between the two.
+      However, the terms overlap, somewhat:
+      In *nix, each filesystem must entertain exactly one directory tree.
+      Because of this, each filesystem implies a directory tree;
+      this is the sense in which it is valid to say, "We are going to mount
+      a filesystem at <code>/home</code>," when in fact we mean,
+      "We are going to mount a filesystem's root directory at <code>/home</code>."
+    </p>
+
     </div>
 
     <div id="lvl1" class="content">
