@@ -14,7 +14,7 @@ last-updated: July, 2020
     <li><a href="#mounting-unmounting"> Mounting and Unmounting</a></li>
     <li><a href="#fs-heir"> Filesystem Heirarchy </a></li>
     <li><a href="#regular-files"> Regular Files </a></li>
-    <li><a href="#procfs"> Procfs </a></li>
+    <li><a href="#synfs"> Synthetic Files </a></li>
     <li><a href="#device-files"> Device Special Files </a></li>
     <li><a href="#Virtual Filesystem"> Virtual Filesystem </a></li>
     <li><a href="#closing-remarks"> Closing Remarks </a></li>
@@ -167,7 +167,7 @@ last-updated: July, 2020
   <h3> See Also: </h3>
   <ul>
     <li> <a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">An Introduction to Disk Partitions - Fedora Docs Site</a></li>
-    <li> <a href="https://man7.org/linux/man-pages/man7/inode.7.html"> man 7 inode </a></li>
+    <li> <a href="https://man7.org/linux/man-pages/man7/inode.7.html"> inode(7) </a></li>
     <li> <a href="https://ext4.wiki.kernel.org/index.php/Main_Page">Ext4 (and Ext2/Ext3) Wiki </a></li>
     <li> <a href="http://web.mit.edu/tytso/www/linux/ext2intro.html"> Design and Implementation of the Second Extended Filesystem</a> (Discusses inodes)</li>
     <li> <a href="https://www.man7.org/tlpi/">The Linux Programming Interface</a>, Chapter 14: Filesystems </li>
@@ -515,22 +515,79 @@ last-updated: July, 2020
 
 </div>
 
-<div class="content" id="procfs">
-  <h2><code>procfs</code></h2>
+<div class="content" id="synfs">
+  <h2>Synthetic Files</h2>
   <p>
-    The system's directory tree is used as a general-purpose meeting place.
-    In addition to regular files, it is also used to
-    make available information about running processes, and information about the kernel.
-    These are known as <em>pseudo</em>-filesystems:
-    For all intents and purposes, the kernel makes these filesystems appear
-    as ordinary, actual filesystems.
+    The GNU/Linux directory tree is used as a general-purpose meeting place.
+    In addition to regular files, it also contains
+    information about running processes, information about the (running) kernel,
+    and references to hardware drivers, each in the form of files.
+    This mechanism is general, extensible, and allows both users and programmers
+    access to the running machine; it is the source of the catechism,
+    <em>"Everything is a file."</em>
   </p>
 
+  <p>
+    For example, the file <code>/proc/filesystems</code> contains the
+    filesystems supported by the running kernel:
+  </p>
 
+  <div class="aside-right">
+    <h4>Aside:</h4>
+    <p>
+      Other interesting synthetic files are <code>/proc/meminfo</code>,
+      and <code>/dev/urandom</code>.
+    </p>
+  </div>
+
+  <div class="code">
+      $ cat /proc/filesystems <br>
+      nodev	sysfs<br>
+      nodev	tmpfs<br>
+      nodev	bdev<br>
+      nodev	proc<br>
+      ext3<br>
+      ext2<br>
+      ext4<br>
+      squashfs<br>
+      vfat<br>
+      ...<br>
+    </div>
+
+  <p>
+    These are known as <em>synthetic</em> or <em>psuedo</em> files.
+    A synthetic file is a file that exists only in virtue of the kernel.
+    It does not exist on a disk, and does not exist on any persistent filesystem.
+  </p>
+
+  <p>
+    To explain, a running program is restricted to querying the kernel
+    about files:  To read a file, it asks the kernel; to get directory
+    entries, it asks the kernel; etc.
+    As such, we can interject upon this&mdash; we can make it
+    "look like" a file is in a directory by including it as a directory entry in
+    response to an appropriate query.
+    Similarly, we can make it "look like" it has contents by giving
+    information back, when it's requested.
+    Thus, for all intents and purposes, these files appear
+    as actual files; this is a great example of a "hack."
+  </p>
+
+  <p>
+    The underlying machinery involves actual filesystems&mdash; <em>sysfs</em>,
+    <em>proc</em>, and <em>tmpfs</em> are each synthetic filesystems.
+    We'll discuss <code>/proc</code> in more depth later.
+    For now, know that there are a lot of neat tricks that you can do with this.
+    For instance, swap space (which uses hard-disk space as extra RAM)
+    can be invented (literally) and mounted as a filesystem.
+    In addition <code>tmpfs</code> is a filesystem whose contents exists entirely on
+    RAM, allowing programs to create and use temporary files which respond
+    very quickly, but do not persist across reboots.
+  </p>
 
   <h3>See Also:</h3>
   <ul>
-    <li> <a href="https://en.wikipedia.org/wiki/Synthetic_file_system"> Synthetic File System</a> (Wikipedia) </li>
+    <li> <a href="https://man7.org/linux/man-pages/man5/filesystems.5.html"> <code> filesystems(5)</code></a></li>
   </ul>
 </div>
 
@@ -539,11 +596,7 @@ last-updated: July, 2020
   <h2>Device Special Files</h2>
 
 
-    references to hardware drivers,
-    and information about running processes.
-    This mechanism is general, extensible, and allows both users and programmers
-    access to the running machine; the only trick is keeping it organized.
-  </p>
+
 
   <p>
     The directory <code>/dev</code> is famous in the Unix/Linux world.
