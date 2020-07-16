@@ -12,7 +12,7 @@ last-updated: July, 2020
 		<li><a href="#man-pages"> Man Pages </a></li>
 		<li><a href="#official-documentation"> Official Documen-<br>tation</a></li>
 		<li><a href="#unofficial-documentation"> Unofficial Documen-<br>tation</a></li>
-		<li><a href="#books"> Books </a></li>
+		<li><a href="#nf-books"> Nonfree Books </a></li>
 		<li><a href="#tutorials"> Tutorials </a></li>
 		<li><a href="#references"> References </a></li>
 		<li><a href="#credits">Credits </a></li>
@@ -336,53 +336,88 @@ last-updated: July, 2020
 
 			<p>
 				Examples of good, unofficial documentation:
-				<ul class="big-list">
-					<li>
-						<a href="http://www.linfo.org"> The Linux Information Project</a>&mdash;
-						<em>LINFO</em> emphasizes useful, accurate, clear, consistent and interesting documentation of
-						Linux<sup><a href="http://www.linfo.org/linfo_about.html">[3]</a></sup>.
-						It's a neat site, but was last updated in 2007.
-					</li>
-					<li>
-						<a href="http://tldp.org/"> The Linux Documentation Project</a>&mdash; Sadly, this project is not maintained anymore,
-						so that its content is usually out of date.
-					</li>
-				</ul>
+			</p>
+
+			<ul class="big-list">
+				<li>
+					<a href="http://tldp.org/"> The Linux Documentation Project</a>&mdash; Sadly, this project is not maintained anymore,
+					so that its content is often out of date (but still very good).
+				</li>
+			</ul>
+
+			<p>
+				Note:  GNU/Linux is an open-source community; respect it by avoiding
+				commercial (.com) sites that "offer" advice and documentation about Linux.
+				Also, StackOverflow is not the appropriate avenue for bug reports.
 			</p>
 	</div>
 
-	<div class="content" id="books">
-		<h2>Books</h2>
+	<div class="content" id="nf-books">
+		<h2>Nonfree Books</h2>
 			<p>
-				In the main, I recommend staying away from books.
+				I have sort of a bone to pick, here, because I've wasted a lot
+				of time and a lot of money on <em>bad books.</em>
+				As a consequence, I recommend staying away from non-free Linux books.
 				There are several reasons for this.
-				First, there's just too many of them, and very few are worthwhile.
-				The result is that the reader wastes a lot of time just figuring
-				out which to study from.
-				Second, they are almost always secondary sources, and hence not authoritative.
-				In particular, there must be a thousand <em>Introduction to Linux</em>
-				books.
-				Third, they tend to be *somewhat* out-of-date.
-				I guess there's not much money in writing books, because it's rare that
-				they are maintained properly.
 			</p>
 
 			<p>
-				There are a few exceptions:
-
-				<ul class="big-list">
-					<li> <a href="https://en.wikipedia.org/wiki/The_C_Programming_Language">The C Programming Language, Second Edition</a>&mdash;
-						The only resource a C programmer needs.
-					</li>
-					<li> <a href="https://www.man7.org/tlpi/index.html">The Linux Programming Interface</a> by Michael Kerrisk&mdash;
-						This book is the definitive text on the programming interface
-						of the Linux Kernel.
-						Michael Kerrisk is currently the maintainer of the
-						<a href="http://www.man7.org/">Linux Man Page project</a>,
-						and his work is simply terrific.
-					</li>
-				</ul>
+				First, there's just too many of them, and very few are worthwhile.
+				For instance, I bought a handbook on UNIX system administration
+				that looked very promising, but taught me precious little.
+				In fact, the free <a href="https://debian-handbook.info/browse/stable/">Debian Administrator's Handbook</a>
+				would have been a more succinct, more direct and more appropriate resource.
+				The result of having too many books is that the reader wastes a
+				lot of time just figuring out which are worth studying from (not to mention, money).
 			</p>
+
+			<div class="aside-right">
+				<h4>Aside:</h4>
+				<p>
+					My aim here is to warn the reader, not to make light of other peoples'
+					work.
+				</p>
+			</div>
+
+			<p>
+				Second, they are almost always secondary sources, and hence not authoritative;
+				moreover, there's a good chance that the one you try will not be the best
+				resource.
+			</p>
+
+			<p>
+				Third, they tend to be *somewhat* out-of-date.
+				For example, I really liked the premise of
+				<a href="https://www.pearson.com/us/higher-education/program/Molay-Understanding-UNIX-LINUX-Programming-A-Guide-to-Theory-and-Practice/PGM190781.html">
+					Understanding UNIX/LINUX Programming: A Guide to Theory and Practice</a>.
+				It walks you through programming in Linux by recreating
+				common command-line tools, such as <code>cat(1)</code> and <code>ls(1)</code>, but it
+				was so out-of-date by the time I read it that the information in it couldn't be trusted.
+				It'd be great to see this rewritten in a modern context.
+			</p>
+
+			<p>
+				In general, I would say, <em>Only buy books that are highly recommended.</em>
+				I can only name a few:
+			</p>
+
+			<ul class="big-list">
+				<li> <a href="https://www.man7.org/tlpi/index.html">The Linux Programming Interface</a>&mdash;
+					This is the definitive text on the programming interface
+					of the Linux Kernel.
+					If you want all the gory details of the system-call interface offered
+					by the Linux kernel, as well as sound explanations of its
+					internals, this is your book.
+					Its writer, Michael Kerrisk, is currently the maintainer of the
+					<a href="http://www.man7.org/">Linux Man Page project</a>,
+					and his work is simply terrific.
+				</li>
+				<li> <a href="https://en.wikipedia.org/wiki/The_C_Programming_Language">The C Programming Language, Second Edition</a>&mdash;
+					Written by the creators of the language itself, this is the
+					definitive resource on C.
+				</li>
+			</ul>
+
 		</div>
 
 		<div id="tutorials" class="content">
