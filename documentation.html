@@ -47,54 +47,54 @@ last-updated: July, 2020
 <div id="how-to" class="content">
 	<h2>How-to</h2>
 
-    <p>
-        Suppose you are working at the command-line, and you have a question about
-        copying files.
-        Knowing that the command <code>cp</code> copies a file,
-        you type <code>man cp</code>, and the manual page appears.
-        When you type <code>apropos copy</code>, looking for other
-        commands that can copy a file, it shows no results&mdash;
-        you know this to be an error, because <code>apropos</code>
-        is supposed to search manual pages and list all that
-        match "copy".
-    </p>
+	<p>
+		Suppose you are working at the command-line, and you have a question about
+		copying files.
+		Knowing that the command <code>cp</code> copies a file,
+		you type <code>man cp</code>, and the manual page appears.
+		When you type <code>apropos copy</code>, looking for other
+		commands that can copy a file, it shows no results&mdash;
+		you know this to be an error, because <code>apropos</code>
+		is supposed to search manual pages and list all that
+		match "copy".
+	</p>
 
 	<ol class="big-list" style="padding-bottom: 10px;">
 		<li>
 			<i>Figure out what your question is.</i>
-            <p>
-                Initially, your question might be <em>Why this no work,</em>
-                and that's totally fine.
+			<p>
+				Initially, your question might be <em>Why this no work,</em>
+				and that's totally fine.
 				Figuring out your question can be more difficult than you might guess,
 				because you might not know how to phrase it.
 				Try to be specific:
-                When dealing with computers, things are <em>very</em> precisely defined.
+				When dealing with computers, things are <em>very</em> precisely defined.
 			</p>
 		</li>
 
 		<li>
 			<i>What would answer your question?</i>
-            <p>
-                This strikes you as such an obvious error
-                that any reasonable documentation should answer your question
-                (and you would be right).
-                So, you first look into the man pages, with
-                <code>man apropos</code>.
-            </p>
+			<p>
+				This strikes you as such an obvious error
+				that any reasonable documentation should answer your question
+				(and you would be right).
+				So, you first look into the man pages, with
+				<code>man apropos</code>.
+			</p>
 
-            <p>
-                There, you discover that <code>apropos</code> doesn't search the man
-                pages <em>directly,</em> but instead searches a database of information
-                about them (it does this because it's much faster).
-                Reasonably, you suspect that there might be an error with this database
-                (such as, it doesn't exist).
-            </p>
+			<p>
+				There, you discover that <code>apropos</code> doesn't search the man
+				pages <em>directly,</em> but instead searches a database of information
+				about them (it does this because it's much faster).
+				Reasonably, you suspect that there might be an error with this database
+				(such as, it doesn't exist).
+			</p>
 
-            <p>
-                A little further down the page, you read,
-                "The database searched by <code>apropos</code> is updated by <code>mandb</code>.
-                You run the program, and voila! <code>apropos</code> works as it should.
-            </p>
+			<p>
+				A little further down the page, you read,
+				"The database searched by <code>apropos</code> is updated by <code>mandb</code>.
+				You run the program, and voila! <code>apropos</code> works as it should.
+			</p>
 		</li>
 		<li>
 			<i>Revise.</i>
@@ -109,39 +109,39 @@ last-updated: July, 2020
 		<li>
 			<i>Be Patient.</i>
 			<p>
-			    Databases like this pop up in other
-                contexts, as well.  For instance, in package management, a common
-                practice is to maintain a local database of package metadata, so that
-                the user can search for packages without bothering public servers.
-                As such, updating these databases (on Debian/Ubuntu/Mint, with <code>apt update</code>)
-                is a precursive step to obtaining the latest packages.
-            </p>
+				Databases like this pop up in other
+				contexts, as well.  For instance, in package management, a common
+				practice is to maintain a local database of package metadata, so that
+				the user can search for packages without bothering public servers.
+				As such, updating these databases (on Debian/Ubuntu/Mint, with <code>apt update</code>)
+				is a precursive step to obtaining the latest packages.
+			</p>
 
-            <p>
-                The point here is that you should try to take the time
-                to learn underlying concepts, because it usually pays off in the long run.
-			   	Skill accrues. Answer one question at a time.
+			<p>
+				The point here is that you should try to take the time
+				to learn underlying concepts, because it usually pays off in the long run.
+				Skill accrues. Answer one question at a time.
 			</p>
 		</li>
 	</ol>
 
-    <p>
-        By far, the worst habit to get into is expecting to be spoon-fed solutions as though
-        by technical support.
-        Imagine, for a second, that you had *instantly* appealed to
-        Google, and there you found a response such as,
-        "Just run <code>mandb</code>."
-        This is correct, and it solves your problem, but you've learned nothing, and
-        if you continue "learning" this way, you'll be stuck memorizing trivial idioms.
-    </p>
+	<p>
+		By far, the worst habit to get into is expecting to be spoon-fed solutions as though
+		by technical support.
+		Imagine, for a second, that you had *instantly* appealed to
+		Google, and there you found a response such as,
+		"Just run <code>mandb</code>."
+		This is correct, and it solves your problem, but you've learned nothing, and
+		if you continue "learning" this way, you'll be stuck memorizing trivial idioms.
+	</p>
 
-    <p>
-        <em>Linux is written by programmers, for programmers.</em>
-        It is very pure with respect to computer science, and being a competent user
-        necessarily requires some CS know-how.
-        If you're not interested in learning that, then find somewhere else to go
-        (but if you are interested, stick around!).
-    </p>
+	<p>
+		<em>Linux is written by programmers, for programmers.</em>
+		It is very pure with respect to computer science, and being a competent user
+		necessarily requires some CS know-how.
+		If you're not interested in learning that, then find somewhere else to go
+		(but if you are interested, stick around!).
+	</p>
 </div>
 
 <div id="man-pages" class="content">
@@ -255,7 +255,7 @@ last-updated: July, 2020
 
 	<h3>See Also:</h3>
 	<ul>
-		<li><a href="https://www.man7.org/linux/man-pages/man5/manpath.5.html">manpath(5)</a></li>
+		<li><a href="https://www.man7.org/linux/man-pages/man1/man.1.html">man(1)</a></li>
 	</ul>
 
 </div>
@@ -265,129 +265,147 @@ last-updated: July, 2020
 
 	<p>
 		Official documentation originates from the group or organization
-		that is producing the work.
-		It is suitably positioned to be both exhaustive and authoritative over the subject at hand.
+		that is producing the work; it is part of the project itself.
+		It is suitably positioned to be both exhaustive and authoritative over the subject.
 		Think of offical documentation like the
 		<a href="https://primarysources.yale.edu/"> primary sources </a>
 		from history class.
-		This is by far my favorite form of documentation.
-		Nothing makes me feel warmer and fuzzier than downloading
-		the <i>Official ________ _________ Reference Manual</i>.
 	</p>
 
 	<p>
-		However, it's unreasonable to expect people to produce
-		such technically meritorious writing in multiple formats simultaneously, such as
-		HTML, PDF, etc. (although GNU does an admirable job).
-		As a consequence, official documentation
-		is typically found in web-page format.
-		Moreover, like the projects they are part of,
-		official documentation is often community-driven.
+		In some sense this is the only form of true "documentation," properly speaking;
+		everything else is commentary.
+		Like the projects they are part of, official documentation is usually
+		community-driven.
+		Moreover, it is typically found in web-page format.
 	</p>
 
 	<p>
-		Several awesome examples spring to mind:
+		Several examples spring to mind:
 	</p>
 	<ul class="big-list">
 		<li>
+			<a href="https://www.kernel.org/doc/html/latest/"> The Linux Kernel Documentation</a>&mdash;
+			A book-like documenting the latest kernel.
+		</li>
+		<li>
+			<a href="https://wiki.archlinux.org/"> Arch Linux's Wiki</a>&mdash;
+			The official documentation of the Arch distribution.
+			This is an excellent resource, and its material often applies to distributions outside of Arch.
+		</li>
+
+		<li>
+			<a href="https://www.gnu.org/doc/doc.html"> GNU's official documentation</a>
+			exemplifies what documentation should be.  It is both supremely authoritative and exhaustive,
+			but owing to its precision, and the precision of the work they do, it can be
+			difficult to read.  Moreover, they offer (the same) documentation in multiple
+			formats: HTML, PDF, and through their own <code>info(1)</code> utility.
+		</li>
+
+		<li>
+			<a href="https://godotengine.org/">Godot Open Source Game Engine</a>&mdash;
+			Godot is an MIT-licensed open source game engine.
+			Its <a href="https://docs.godotengine.org/en/stable/">official documentation</a> is community-driven.
+		</li>
+
+		<li>
 			<a href="https://doc.rust-lang.org/stable/book/">
 				The Rust Progamming Language</a>&mdash;
-				Written by Steve Klabnik and Carol Nichols with updates from the community,
-				this book is the main documentation of the Rust language.
+				A book written by Steve Klabnik and Carol Nichols with updates from the community,
+				this is part of the official documentation of the Rust language.
 				I think it's very well-written, especially notable for its
 				technical excellence.
 			</li>
+		</ul>
+
+	</div>
+
+	<div id="unofficial-documentation" class="content">
+		<h2> Unofficial Documentation </h2>
+		<p>
+			Most documentation is from unofficial, secondary sources.
+			Examples include this website, blogs, question/answer sites,
+			Youtube videos, podcasts, books, etc..
+		</p>
+
+		<p>
+			Think of unofficial documentation as commentary on the subject at hand.
+			It can be useful when the subject is difficult (for instance, Bash),
+			but official documentation should still be considered your reference.
+		</p>
+
+		<p>
+			Examples of good, unofficial documentation:
+		</p>
+
+		<ul class="big-list">
 			<li>
-				<a href="https://wiki.archlinux.org/"> Arch Linux's Wiki</a> is great,
-				and almost always applies to distributions outside of Arch.
+				<a href="http://tldp.org/"> The Linux Documentation Project</a>&mdash;
+				This is very close to being official documentation, in virtue of the
+				nature of the community that created Linux.
+				However, it is not officially coupled to any project, and so is
+				best considered a secondary source.
+				Sadly, this project is not maintained anymore,
+				so that its content is often out of date (but still very good).
 			</li>
+			<li>
+				<a href="https://debian-handbook.info/"> Debian Administrator's Handbook</a>&mdash;
+				A free book written by Raphaël Hertzog and Roland Mas, two Debian developers,
+				it was originally written in French, and has been translated into
+				four other languages, with twenty(!) more in-progress.
+			</li>
+			<li>
+				<a href="http://www.linuxfromscratch.org/lfs/"> Linux From Scratch </a>&mdash;
+				From their website, "Linux From Scratch (LFS) is a project that provides
+				you with step-by-step instructions for building your own customized
+				Linux system entirely from source."<sup><a href="http://www.linuxfromscratch.org/lfs/index.html">[2]</a></sup>
+				It's a thing.
+			</li>
+		</ul>
 
-				<li>
-					<a href="https://www.gnu.org/doc/doc.html"> GNU's official documentation</a> is
-					both supremely authoritative and exhaustive.
-				</li>
-
-				<li>
-					<a href="https://godotengine.org/">
-						Godot Open Source Game Engine</a>&mdash;
-						Godot is an MIT-licensed open source game engine.
-						Its <a href="https://docs.godotengine.org/en/stable/">official documentation</a> is community-driven.
-					</li>
-
-				<li>
-					<a href="https://developer.mozilla.org/en-US/docs/Web/HTML">Mozilla's HTML Docs</a>&mdash;
-					Mozilla produces excellent documentation, primarily about web technologies.
-					In addition, they help define
-					the HTML living standard,<sup><a href="#references">[2]</a></sup>
-					and hence, represent an official voice with respect to modern HTML.
-				</li>
-			</ul>
-
-		</div>
-
-		<div id="unofficial-documentation" class="content">
-			<h2> Unofficial Documentation </h2>
-			<p>
-				Most online documentation is from unofficial, secondary sources.
-				Examples include this website, websites like it, question/answer sites,
-				Youtube videos, podcasts, etc..
-				Think of unofficial documentation as commentary on the subject at hand.
-			</p>
-
-			<p>
-				Examples of good, unofficial documentation:
-			</p>
-
-			<ul class="big-list">
-				<li>
-					<a href="http://tldp.org/"> The Linux Documentation Project</a>&mdash; Sadly, this project is not maintained anymore,
-					so that its content is often out of date (but still very good).
-				</li>
-			</ul>
-
-			<p>
-				Note:  GNU/Linux is an open-source community; respect it by avoiding
-				commercial (.com) sites that "offer" advice and documentation about Linux.
-				Also, StackOverflow is not the appropriate avenue for bug reports.
-			</p>
+		<p>
+			Note:  GNU/Linux is an open-source community; respect it by avoiding
+			commercial (.com) sites that "offer" advice and documentation about Linux.
+			Also, StackOverflow is not the appropriate avenue for bug reports.
+		</p>
 	</div>
 
 	<div class="content" id="nf-books">
 		<h2>Nonfree Books</h2>
+		<p>
+			In the main, I recommend staying away from non-free *nix books.
+			There are several reasons for this.
+		</p>
+
+		<p>
+			First, there's just too many of them, and very few are worthwhile.
+			For instance, I bought a handbook on UNIX system administration
+			that looked very promising, but taught me precious little.
+			In fact, the free <a href="https://debian-handbook.info/browse/stable/">Debian Administrator's Handbook</a>
+			would have been a more succinct, more direct and more appropriate resource.
+			The result of having too many books is that the reader wastes a
+			lot of time just figuring out which are worth studying from (not to mention, money).
+		</p>
+
+		<div class="aside-right">
+			<h4>Aside:</h4>
 			<p>
-				In the main, I recommend staying away from non-free *nix books.
-				There are several reasons for this.
+				My aim here is to warn the reader, not to make light of other peoples'
+				work.
 			</p>
+		</div>
 
-			<p>
-				First, there's just too many of them, and very few are worthwhile.
-				For instance, I bought a handbook on UNIX system administration
-				that looked very promising, but taught me precious little.
-				In fact, the free <a href="https://debian-handbook.info/browse/stable/">Debian Administrator's Handbook</a>
-				would have been a more succinct, more direct and more appropriate resource.
-				The result of having too many books is that the reader wastes a
-				lot of time just figuring out which are worth studying from (not to mention, money).
-			</p>
+		<p>
+			Second, they are almost always secondary sources, and hence not authoritative;
+			moreover, there's a good chance that the one you try will not be the best
+			resource.
+		</p>
 
-			<div class="aside-right">
-				<h4>Aside:</h4>
-				<p>
-					My aim here is to warn the reader, not to make light of other peoples'
-					work.
-				</p>
-			</div>
-
-			<p>
-				Second, they are almost always secondary sources, and hence not authoritative;
-				moreover, there's a good chance that the one you try will not be the best
-				resource.
-			</p>
-
-			<p>
-				Third, they tend to be *somewhat* out-of-date.
-				For example, I really liked the premise of
-				<a href="https://www.pearson.com/us/higher-education/program/Molay-Understanding-UNIX-LINUX-Programming-A-Guide-to-Theory-and-Practice/PGM190781.html">
-					Understanding UNIX/LINUX Programming: A Guide to Theory and Practice</a>.
+		<p>
+			Third, they tend to be *somewhat* out-of-date.
+			For example, I really liked the premise of
+			<a href="https://www.pearson.com/us/higher-education/program/Molay-Understanding-UNIX-LINUX-Programming-A-Guide-to-Theory-and-Practice/PGM190781.html">
+				Understanding UNIX/LINUX Programming: A Guide to Theory and Practice</a>.
 				It walks you through programming in Linux by recreating
 				common command-line tools, such as <code>cat(1)</code> and <code>ls(1)</code>, but it
 				was so out-of-date by the time I read it that the information in it couldn't be trusted.
