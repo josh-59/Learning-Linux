@@ -50,14 +50,6 @@ last-updated: July, 2020
 		where they were the user's primary documentation of the new operating system.
 		They often included examples, hints and useful suggestions, such as,
 		<a href="http://man.cat-v.org/unix-1st/1/cat">"<em>cat file</em> is about the easiest way to print a file."</a>
-	</p>
-
-	<p>
-		Each project maintains their own man page (if any),
-		and this is usually installed automatically for you, through your distribution's
-		package manager.
-		The pages for the Linux kernel and C library interfaces have become
-		<a href="https://www.kernel.org/doc/man-pages/">a separate project.</a>
 		Learn to use man pages early, for they are a way of life.
 	</p>
 
@@ -126,26 +118,20 @@ last-updated: July, 2020
 		For instance, to move down one line, type <b>j</b>.
 		To move up one line, type <b>k</b>.
 		And, move down a screenful by hitting the spacebar.
-		Why the crazy controls?  It keeps your fingers on the home row.
+		Why the crazy controls?  They keep your fingers on the home row.
 	</p>
 
 	<p>
 		The manual is structured into sections, as shown above.
 		We use a shorthand for denoting man pages:  "printf(3)" refers
-		to the man page named <em>printf</em>, in the third section,
-		as opposed to printf(1), in the first.
+		to the page named <em>printf</em> in the third section,
+		while printf(1) refers to a page in the first section.
 		When using <code>apropos</code>, one can restrict the search to a particular section with the <code>-s</code> switch:
 	</p>
 
 	<div class="code">
 		apropos -s 3 printf
 	</div>
-
-	<p>
-		Finally, each manual page has a common format.
-		For instance, each page has a "See Also" section near the bottom,
-		which lists related commands or library functions.
-	</p>
 
 	<h3>See Also:</h3>
 	<ul>
@@ -159,10 +145,9 @@ last-updated: July, 2020
 
 	<p>
 		Official documentation originates from the group or organization
-		that is producing the work; it is part of the project itself.
+		that is producing the work; it's part of the project itself.
 		It is suitably positioned to be both exhaustive and authoritative over the subject.
-		Think of offical documentation like the
-		<a href="https://primarysources.yale.edu/"> primary sources </a>
+		Think of offical documentation like the primary sources
 		from history class.
 	</p>
 
