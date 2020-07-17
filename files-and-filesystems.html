@@ -591,11 +591,6 @@ last-updated: July, 2020
     each running program (process) on the system.
     Its contents are organized by process id number, with one "directory"
     for each process.
-    For instance, <code>/proc/[pid]/environ</code> contains the environment
-    variables of the process.
-  </p>
-
-  <p>
     Similarly, the <code>/sys</code> directory is a mounted <em>sysfs</em>
     filesystem, and contains in-depth information about the kernel.
   </p>
@@ -612,14 +607,48 @@ last-updated: July, 2020
   <h2>Device Special Files</h2>
 
   <p>
-    The directory <code>/dev</code> contains files called <em>special device files</em>.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[1]</a></sup>
-    Each special device file represents a device connected to the system;
-    it serves as the principle reference to the device driver (and, therefore, the device).
+    The directory <code>/dev</code> contains <em>special device files</em>.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[1]</a></sup>
+    Each of these files represents a device connected to the system,
+    and each special device file serves as the principle reference to its respective device.
+    Let's consider the task of creating a boot media "the hard way."
   </p>
 
   <p>
-    For instance, when we want to partition a drive, we pass the name of the drive
-    (say, <code>/dev/sdb</code>) to a program, such as <code>fdisk</code>:
+    I would like to install Arch Linux onto my PineBook Pro.
+    I download a new installation image via torrent, then compare the resulting file
+    against the checksum file included in the same directory, using <code>sha256sum(1)</code>.
+    It matches character-wise; this means that the file is correct and intact.
+  </p>
+
+  <p>
+    Next, I insert my USB stick and locate it with <code>lsblk</code>; it
+    has been mounted, and I need it unmounted so that I can write to the
+    device directly (without filesystem), through its device special file.
+    I unmount the device, and double-check with another call to <code>lsblk</code>.
+  </p>
+
+  <p>
+    This is where things get hairy, because we will be writing to a device
+    (in this case, <em>/dev/sdb</em>) with root privileges.
+    Note that my system's hard drive is <em>/dev/sda</em>.
+    Because I can, I decide to create the boot media with <code>cat</code>
+    (a thorough investigation revealed that <em>cat</em> and <em>dd</em> are exceptionally similar).
+    The caveat is that one must be acting as superuser:
+  </p>
+
+  <div class="code">
+    /home/josh/Downloads# cat ./archlinux-2020.07.02-pbp.img > /dev/sdb
+  </div>
+
+  <p>
+    And, success! Granted, <code>dd</code> would have been faster and safer.
+  </p>
+
+  <p>
+    As the command above points out, my usb stick, <em>/dev/sdb</em>
+    appears in the system as a file: We can read from it, and write to it.
+    Moreover, all operations that we need to do can be done through this interface.
+    For instance, if we wanted to partition a drive:
   </p>
 
   <div class="code">
@@ -627,26 +656,14 @@ last-updated: July, 2020
   </div>
 
   <p>
-    Note that <code>fdisk</code> is a user-space program.
-    That is, the operating system has not undertaken the task of
-    providing the user an interface for partitioning.
-    This is an example of <em>The Unix Philosophy:</em>
-    By keeping each tool in the chain small, they are each more easily maintainable, and
-    we can interchange them more easily.
-    Another program to do the same task is GNU's partition editor, <code>parted</code>.
+    This utility will read the existing partition table on the device and
+    tell us about it, and it will allow us to write a new partition table to the device.
+    Furthermore, the <em>mkfs</em> (make filesystem) utilities write
+    a new/empty filesystem to a file, allowing us to "format" a partition.
   </p>
 
   <p>
-    Among device special files, there are two distinct kinds:
-    <em>block</em> and <em>character</em>.
-    The distinction refers to the way that the kernel reads and writes to these files.
-    Character special files are operated on a single character at a time
-    (e.g., terminal screen), while block special files are operated on a block of
-    bytes at a time (usually, 4096 or 8192), as in a hard drive.
-  </p>
-
-  <p>
-    It's worth noting that utilities for displaying the current
+    Finally, it's worth noting that utilities for displaying the current
     system's hardware often begin with <code>ls</code>:
   </p>
 
