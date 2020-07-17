@@ -30,12 +30,12 @@ last-updated: July, 2020
 
 	<p>
 		The Free-and-Open-Source Software (FOSS) community centers around projects.
-		At the center of each project is its code.
-		Outside of that is its official documentation;
-		outside that, unofficial documentation.
+		At the center of each project is its code;
+		official documentation, if it exists, is part of the project.
+		Outside the project, there is unofficial documentation.
 		Finally, at the periphery, is opinion.
-		Documentation is part of each project; I believe that appropriate
-		documentation is very important to the success of a project.
+		Appropriate documentation is very important to the success of a project,
+		and this paper discusses sources and when they are appropriate.
 	</p>
 </div>
 
@@ -47,7 +47,7 @@ last-updated: July, 2020
 		The most useful asset in the Linux documentation pool is the
 		manual ("man") pages.
 		These date back to the first implementations of Unix,<sup><a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html">[1]</a></sup>
-		where they were the user's primary documentation of the new operating system.
+		where they were the user's primary source for information about the new operating system.
 		They often included examples, hints and useful suggestions, such as,
 		<a href="http://man.cat-v.org/unix-1st/1/cat">"<em>cat file</em> is about the easiest way to print a file."</a>
 	</p>
@@ -99,12 +99,6 @@ last-updated: July, 2020
 	<div class="code">
 		apropos extract
 	</div>
-
-	<p>
-		Technically speaking, this utility searches the single-line, "short description"
-		of each man page, and prints out the names and descriptions of programs that match your search
-		(<code><a href="https://www.man7.org/linux/man-pages/man1/apropos.1.html">apropos(1)</a></code> for more information).
-	</p>
 
 	<p>
 		Once within the <code>man</code> utility, you can easily search the content
@@ -184,8 +178,7 @@ last-updated: July, 2020
 			<a href="https://www.gnu.org/doc/doc.html"> GNU's Official Docs</a>&mdash;
 			Excellent documentation. It is both supremely authoritative and exhaustive,
 			but owing to its precision, and the precision of the work they do, it can be
-			difficult to read.  Also, note that they offer (the same) documentation in multiple
-			formats: HTML, PDF, and through their own <code>info(1)</code> utility.
+			difficult to read.
 		</li>
 
 		<li>
