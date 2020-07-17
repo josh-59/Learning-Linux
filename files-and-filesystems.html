@@ -72,11 +72,11 @@ last-updated: July, 2020
     <li>
       <p>
         <strong>EXT4</strong>:
-        Introduced in 2008,<sup><a href="https://en.wikipedia.org/wiki/Ext4">[5]</a></sup> EXT4 is
+        Introduced in 2008,<sup><a href="https://en.wikipedia.org/wiki/Ext4">[4]</a></sup> EXT4 is
         the current standard Linux filesystem.
         It is an evolutionary enhancement on EXT3,
         supporting larger filesizes, deeper subdirectory support,
-        faster handling of large files, along with many other improvements.<sup><a href="https://ext4.wiki.kernel.org/index.php/Ext4_Disk_Layout">[6]</a></sup>
+        faster handling of large files, along with many other improvements.<sup><a href="https://ext4.wiki.kernel.org/index.php/Ext4_Disk_Layout">[5]</a></sup>
         It is mature, fast, and stable.
       </p>
     </li>
@@ -96,10 +96,10 @@ last-updated: July, 2020
       </p>
 
       <p>
-        Introduced in 2005,<sup><a href="https://en.wikipedia.org/wiki/ZFS">[8]</a></sup> ZFS incorporates fancier features that are generally
+        Introduced in 2005,<sup><a href="https://en.wikipedia.org/wiki/ZFS">[6]</a></sup> ZFS incorporates fancier features that are generally
         out of place on a Linux desktop.
         It was developed by Sun Microsystems, and became closed-source with Sun's acquisition by
-        Oracle.<sup><a href="https://en.wikipedia.org/wiki/ZFS">[8]</a></sup>
+        Oracle.<sup><a href="https://en.wikipedia.org/wiki/ZFS">[6]</a></sup>
         It was intended for enterprise use, and is
         <a href="https://en.wikipedia.org/wiki/ZFS#Inappropriately_specified_systems">relatively easy to configure improperly.</a>
       </p>
@@ -107,7 +107,7 @@ last-updated: July, 2020
 
     <li>
       <p>
-        <strong>FAT32</strong>: The "File Allcoation Table 32-bit" is a DOS-era filesystem,<sup><a href="https://en.wikipedia.org/wiki/File_Allocation_Table#FAT32">[9]</a></sup>
+        <strong>FAT32</strong>: The "File Allcoation Table 32-bit" is a DOS-era filesystem,<sup><a href="https://en.wikipedia.org/wiki/File_Allocation_Table#FAT32">[7]</a></sup>
         and is widely supported, though antiquated.
         In particular, it is not a <a href="https://en.wikipedia.org/wiki/Journaling_file_system">journaling filesystem</a>,
         so that changes to data are not recorded before being carried out (increasing the likelihood of
@@ -402,7 +402,7 @@ last-updated: July, 2020
 
   <p>
     According the the standard, the system's root directory, <code>/</code>, should belong
-    to a minimal filesystem that is "adequate to boot, restore recover and/or repair the system."<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03.html">[5]</a></sup>
+    to a minimal filesystem that is "adequate to boot, restore recover and/or repair the system."<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03.html">[8]</a></sup>
     As such, <code>/bin</code>, <code>/sbin</code>, <code>/etc</code>, <code>/media</code>,
     and <code>/mnt</code> should each belong to the root filesystem.
     Moreover, critical user programs, such as <code>ls</code> and <code>bash</code>,
@@ -415,7 +415,7 @@ last-updated: July, 2020
     operation, and are not machine-specific.
     This stipulation allows multiple machines to share a single <code>/usr</code>
     directory by locating it on a network,
-    potentially saving large amounts of storage.<sup><a href="https://www.tldp.org/LDP/sag/html/fs-background.html">[6]</a></sup>
+    potentially saving large amounts of storage.<sup><a href="https://www.tldp.org/LDP/sag/html/fs-background.html">[9]</a></sup>
     For instance, man-pages are found in <code>/usr</code>, as are most user
     programs.
   </p>
@@ -607,7 +607,7 @@ last-updated: July, 2020
   <h2>Device Special Files</h2>
 
   <p>
-    The directory <code>/dev</code> contains <em>special device files</em>.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[1]</a></sup>
+    The directory <code>/dev</code> contains <em>special device files</em>.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[10]</a></sup>
     Each of these files represents a device connected to the system,
     and each special device file serves as the principle reference to its respective device.
     Let's consider the task of creating a boot media "the hard way."
@@ -632,7 +632,9 @@ last-updated: July, 2020
     (in this case, <em>/dev/sdb</em>) with root privileges.
     Note that my system's hard drive is <em>/dev/sda</em>.
     Because I can, I decide to create the boot media with <code>cat</code>
-    (a thorough investigation revealed that <em>cat</em> and <em>dd</em> are exceptionally similar).
+    (a thorough investigation revealed that
+    <em><a href="https://www.man7.org/linux/man-pages/man1/cat.1.html">cat</a></em>
+    and <em><a href="https://www.man7.org/linux/man-pages/man1/dd.1.html">dd</a></em> are exceptionally similar).
     The caveat is that one must be acting as superuser:
   </p>
 
@@ -659,20 +661,8 @@ last-updated: July, 2020
     This utility will read the existing partition table on the device and
     tell us about it, and it will allow us to write a new partition table to the device.
     Furthermore, the <em>mkfs</em> (make filesystem) utilities write
-    a new/empty filesystem to a file, allowing us to "format" a partition.
+    a new/empty filesystem to a file, allowing us to format a partition.
   </p>
-
-  <p>
-    Finally, it's worth noting that utilities for displaying the current
-    system's hardware often begin with <code>ls</code>:
-  </p>
-
-  <ul>
-    <li><code><a href="http://man7.org/linux/man-pages/man8/lsblk.8.html">lsblk</a></code> - List block devices (hardrives, CD-drives, etc).  Useful to determine what drive to mount.</li>
-    <li><code><a href="http://man7.org/linux/man-pages/man1/lscpu.1.html">lscpu</a></code> - Display information about the CPU architecture </li>
-    <li><code><a href="http://man7.org/linux/man-pages/man8/lsusb.8.html">lsusb</a></code> - List usb devices </li>
-    <li><code><a href="http://man7.org/linux/man-pages/man8/lspci.8.html">lspci</a></code> - List all PCI devices </li>
-  </ul>
 
   <h3>See Also:</h3>
   <ul>
@@ -698,19 +688,19 @@ last-updated: July, 2020
       The answer to each of these is the
         Virtual File System (VFS), a kernel subsystem that acts,
         essentially, as a driver for filesystems.
-        Whereas each filesystem may implement its own functionality,
+        While each filesystem may implement its own functionality,
         most functionality is common;
         the Virtual File System provides a uniform interface by
-        implementing filesystem-related system calls, such as <code>open</code>, <code>creat</code>, etc..<sup> <a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">[10]</a></sup>
+        implementing filesystem-related system calls, such as <code>open</code>, <code>read</code>, etc..<sup> <a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">[11]</a></sup>
       </p>
 
       <p>
         As for inodes, a more formal definition is given by kernel.org:
-        "An inode object represents an object within the filesystem."<sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html#id1">[10]</a></sup>
+        "An inode object represents an object within the filesystem."<sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">[11]</a></sup>
         That is, on filesystems that do not use inodes, they are imposed virtually by
         the VFS, as a means of representing files.
         As a consequence, the discussion about inodes given here remains
-        conceptually correct, when EXT2/EXT3/EXT4 are not being employed.
+        conceptually correct even when non-Unix-like filesystems are being employed.
       </p>
 
     <h3> Filesystem vs. Directory Tree</h3>
@@ -718,7 +708,8 @@ last-updated: July, 2020
       The terms <em>filesystem</em> and <em>directory tree</em> were developed here
       precisely, in order to make a clear distinction between the two.
       However, the terms overlap, somewhat:
-      In *nix, each filesystem must entertain exactly one directory tree.
+      In *nix, each filesystem must entertain exactly one directory tree
+      (specifically, it must contain exactly one root directory).
       Because of this, each filesystem implies a directory tree;
       this is the sense in which it is valid to say, "We are going to mount
       a filesystem at <code>/home</code>," when in fact we mean,
@@ -737,9 +728,16 @@ last-updated: July, 2020
       <h2> References </h2>
       <ol>
         <li> Kernighan, Brian. <i>Unix: A History and a Memoir.</i>  Published 2020, by Brian W. Kernighan via Kindle Direct Publishing. </li>
-        <li> Filesystem Hierarchy Standard Group. <a href="https://www.pathname.com/fhs/pub/fhs-2.3.pdf">The Linux Filesystem Heirarchy Standard</a>.  Retrieved May 29, 2020.</li>
-        <li> Stevens, W. Richard. <i><a href="http://www.apuebook.com/apue3e.html"> Advanced Programming in the Unix Environment.</a></i> Pearson Eduction, 2013.</li>
-        <li> Kerrisk, Michael.  <em>The Linux Programming Interface</em>. San Francisco, CA, No Starch Press, 2010.</li>
+        <li> File Systems. (n.d.). Retrieved July 17, 2020, from <a href="https://wiki.osdev.org/Filesystem">https://wiki.osdev.org/Filesystem</a> </li>
+        <li> File systems - ArchWiki. (n.d.). Retrieved July 17, 2020, from <a href="https://wiki.archlinux.org/index.php/File_systems">https://wiki.archlinux.org/index.php/File_systems</a> </li>
+        <li> Ext4 - Wikipedia. (2020, June 14). Retrieved July 17, 2020, from <a href="https://en.wikipedia.org/wiki/Ext4">https://en.wikipedia.org/wiki/Ext4</a> </li>
+        <li> Ext4 Disk Layout - Ext4. (2019, August 26). Retrieved July 17, 2020, from <a href="https://ext4.wiki.kernel.org/index.php/Ext4_Disk_Layout">https://ext4.wiki.kernel.org/index.php/Ext4_Disk_Layout</a></li>
+        <li> ZFS - Wikipedia. (2020, July 15). Retrieved July 17, 2020, from <a href="https://en.wikipedia.org/wiki/ZFS">https://en.wikipedia.org/wiki/ZFS</a></li>
+        <li> File Allocation Table - Wikipedia. (2020, July 12). Retrieved July 17, 2020, from <a href="https://en.wikipedia.org/wiki/File_Allocation_Table">https://en.wikipedia.org/wiki/File_Allocation_Table</a></li>
+        <li> LSB Workgroup, The Linux Foundation. (2015, March 9). The Root Filesystem. Retrieved July 17, 2020, from <a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03.html">https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03.html</a> </li>
+        <li> Wirzenius, L. (2004). Chapter 3: Overview of the Directory Tree. In <em>Linux System Administrator's Guide.</em> <a href="https://www.tldp.org/LDP/sag/html/fs-background.html">https://www.tldp.org/LDP/sag/html/fs-background.html</a></li>
+        <li> LSB Workgroup, The Linux Foundation. (2015, March 9). The Root Filesystem. Retrieved July 17, 2020, from <a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html</a></li>
+        <li> Overview of the Linux Virtual File System - The Linux Kernel Documentation. (n.d.). Retrieved July 17, 2020, from <a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">https://www.kernel.org/doc/html/latest/filesystems/vfs.html</a> </li>
       </ol>
 
     </div>
