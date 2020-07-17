@@ -8,13 +8,12 @@ last-updated: July, 2020
 <div id="nav_bar_2" class="nav">
 	<ul>
 		<li><a href="#introduction"> Introduction </a></li>
-		<li><a href="#how-to"> How-To </a></li>
 		<li><a href="#man-pages"> Man Pages </a></li>
 		<li><a href="#official-documentation"> Official Documen-<br>tation</a></li>
 		<li><a href="#unofficial-documentation"> Unofficial Documen-<br>tation</a></li>
 		<li><a href="#nf-books"> Nonfree Books </a></li>
-		<li><a href="#tutorials"> Tutorials </a></li>
 		<li><a href="#news"> News </a></li>
+		<li><a href="#how-to"> How-To </a></li>
 		<li><a href="#references"> References </a></li>
 		<li><a href="#credits">Credits </a></li>
 	</ul>
@@ -30,128 +29,25 @@ last-updated: July, 2020
 	</div>
 
 	<p>
-		Linux is a very large subject.
-		Although there are many sources of documentation, they are not,
-		in general, well-organized, so that finding the right information
-		can be hard.
-		This makes good information harder-won than it ought to be,
-		and implies that finding good (i.e., appropriate) sources  is a skill in itself.
-	</p>
-
-	<p>
-		This paper gives an overview of available resources,
-		some examples of each, and useful pointers, where appropriate.
-		First, though, we make explicit the process of determining appropriate sources.
+		The Free-and-Open-Source Software (FOSS) community centers around projects.
+		At the center of each project is its code.
+		Outside of that is its official documentation;
+		outside that, unofficial documentation.
+		Finally, at the periphery, is opinion.
+		Documentation is part of each project; I believe that appropriate
+		documentation is very important to the success of a project.
 	</p>
 </div>
 
-<div id="how-to" class="content">
-	<h2>How-to</h2>
 
-	<p>
-		Suppose you are working at the command-line, and you have a question about
-		copying files.
-		Knowing that the command <code>cp</code> copies a file,
-		you type <code>man cp</code>, and the manual page appears.
-		When you type <code>apropos copy</code>, looking for other
-		commands that can copy a file, it shows no results&mdash;
-		you know this to be an error, because <code>apropos</code>
-		is supposed to search manual pages and list all that
-		match "copy".
-	</p>
-
-	<ol class="big-list" style="padding-bottom: 10px;">
-		<li>
-			<i>Figure out what your question is.</i>
-			<p>
-				Initially, your question might be <em>Why this no work,</em>
-				and that's totally fine.
-				Figuring out your question can be more difficult than you might guess,
-				because you might not know how to phrase it.
-				Try to be specific:
-				When dealing with computers, things are <em>very</em> precisely defined.
-			</p>
-		</li>
-
-		<li>
-			<i>What would answer your question?</i>
-			<p>
-				This strikes you as such an obvious error
-				that any reasonable documentation should answer your question
-				(and you would be right).
-				So, you first look into the man pages, with
-				<code>man apropos</code>.
-			</p>
-
-			<p>
-				There, you discover that <code>apropos</code> doesn't search the man
-				pages <em>directly,</em> but instead searches a database of information
-				about them (it does this because it's much faster).
-				Reasonably, you suspect that there might be an error with this database
-				(such as, it doesn't exist).
-			</p>
-
-			<p>
-				A little further down the page, you read,
-				"The database searched by <code>apropos</code> is updated by <code>mandb</code>.
-				You run the program, and voila! <code>apropos</code> works as it should.
-			</p>
-		</li>
-		<li>
-			<i>Revise.</i>
-			<p>
-				Do you need more information? Or less?
-				Should it be a simpler source, or more involved?
-				You might find that your practical knowledge is
-				lacking some kind of <i>body</i>; in this case, you are
-				looking to frame your knowledge in a more-general theory.
-			</p>
-		</li>
-		<li>
-			<i>Be Patient.</i>
-			<p>
-				Databases like this pop up in other
-				contexts, as well.  For instance, in package management, a common
-				practice is to maintain a local database of package metadata, so that
-				the user can search for packages without bothering public servers.
-				As such, updating these databases (on Debian/Ubuntu/Mint, with <code>apt update</code>)
-				is a precursive step to obtaining the latest packages.
-			</p>
-
-			<p>
-				The point here is that you should try to take the time
-				to learn underlying concepts, because it usually pays off in the long run.
-				Skill accrues. Answer one question at a time.
-			</p>
-		</li>
-	</ol>
-
-	<p>
-		By far, the worst habit to get into is expecting to be spoon-fed solutions as though
-		by technical support.
-		Imagine, for a second, that you had *instantly* appealed to
-		Google, and there you found a response such as,
-		"Just run <code>mandb</code>."
-		This is correct, and it solves your problem, but you've learned nothing, and
-		if you continue "learning" this way, you'll be stuck memorizing trivial idioms.
-	</p>
-
-	<p>
-		<em>Linux is written by programmers, for programmers.</em>
-		It is very pure with respect to computer science, and being a competent user
-		necessarily requires some CS know-how.
-		If you're not interested in learning that, then find somewhere else to go
-		(but if you are interested, stick around!).
-	</p>
-</div>
 
 <div id="man-pages" class="content">
 	<h2> Man Pages </h2>
 	<p>
-		By far the most useful asset in the Linux documentation pool is the
+		The most useful asset in the Linux documentation pool is the
 		manual ("man") pages.
 		Man pages date back to the first implementations of Unix,<sup><a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html">[1]</a></sup>
-		where they were the user's primary documentation of the newly-minted operating system.
+		where they were the user's primary documentation of the new operating system.
 		They often included examples, hints and useful suggestions, such as,
 		<a href="http://man.cat-v.org/unix-1st/1/cat">"<em>cat file</em> is about the easiest way to print a file."</a>
 	</p>
@@ -204,7 +100,7 @@ last-updated: July, 2020
 	<p>
 		Technically speaking, this utility searches the single-line, "short description"
 		of each man page, and prints out the names and descriptions of programs that match your search
-		(<code><a href="https://www.man7.org/linux/man-pages/man1/apropos.1.html">man apropos</a></code> for more information).
+		(<code><a href="https://www.man7.org/linux/man-pages/man1/apropos.1.html">apropos(1)</a></code> for more information).
 	</p>
 
 	<p>
@@ -218,6 +114,7 @@ last-updated: July, 2020
 
 	<p>
 		Then, <em>enter</em>.  To jump to the next result, type a single <b>n</b>.
+		This makes it fast and easy to find relevant information.
 	</p>
 
 	<p>
@@ -232,10 +129,9 @@ last-updated: July, 2020
 
 	<p>
 		The manual is structured into sections, as shown above.
-		In particular, Section 1 contains entries for user commands,
-		such as <code>cat</code>, <code>man</code>, <code>mv</code> and <code>cp</code>,
-		while Section 3 contains the manual pages for C library functions, such as
-		<code>getline()</code>, <code>printf()</code> and <code>strtol()</code>.
+		We use a shorthand for denoting man pages:  "printf(3)" refers
+		to the man page named <em>printf</em>, in the third section,
+		as opposed to printf(1), in the first.
 		When using <code>apropos</code>, one can restrict the search to a particular section with the <code>-s</code> switch:
 	</p>
 
@@ -244,14 +140,9 @@ last-updated: July, 2020
 	</div>
 
 	<p>
-		Otherwise, <code>apropos</code> lists them all.
-	</p>
-
-	<p>
-		In addition, each manual page is organized into
-		a common format.
+		Finally, each manual page has a common format.
 		For instance, each page has a "See Also" section near the bottom,
-		which lists related commands/library functions.
+		which lists related commands or library functions.
 	</p>
 
 	<h3>See Also:</h3>
@@ -274,8 +165,6 @@ last-updated: July, 2020
 	</p>
 
 	<p>
-		In some sense this is the only form of true "documentation," properly speaking;
-		everything else is commentary.
 		Like the projects they are part of, official documentation is usually
 		community-driven.
 		Moreover, it is typically found in web-page format.
@@ -287,7 +176,7 @@ last-updated: July, 2020
 	<ul class="big-list">
 		<li>
 			<a href="https://www.kernel.org/doc/html/latest/"> The Linux Kernel Documentation</a>&mdash;
-			A book-like documenting the latest kernel.
+			A book-like website documenting the latest kernel.
 		</li>
 		<li>
 			<a href="https://wiki.archlinux.org/"> Arch Linux's Wiki</a>&mdash;
@@ -327,12 +216,9 @@ last-updated: July, 2020
 			Most documentation is from unofficial, secondary sources.
 			Examples include this website, blogs, question/answer sites,
 			Youtube videos, podcasts, books, etc..
-		</p>
-
-		<p>
 			Think of unofficial documentation as commentary on the subject at hand.
-			It can be useful when the subject is difficult (for instance, Bash),
-			but official documentation should still be considered your reference.
+			It can be useful when the subject is difficult,
+			but official documentation should still be your reference.
 		</p>
 
 		<p>
@@ -342,26 +228,43 @@ last-updated: July, 2020
 		<ul class="big-list">
 			<li>
 				<a href="http://tldp.org/"> The Linux Documentation Project</a>&mdash;
-				This is very close to being official documentation, in virtue of the
-				nature of the community that created Linux.
-				However, it is not officially coupled to any project, and so is
-				best considered a secondary source.
-				Moreover, its scope is larger than the kernel.
-				TLDP is not maintained anymore,
-				so that its content is often out of date (but still very good).
+				From the website: "TLDP is short for The Linux Documentation Project,
+				an organization of volunteers authoring, reviewing and managing
+				documents about the Linux operating system. Documents basically
+				come in two formats based upon their length. The shorter ones
+				generally are called HOWTOs (or mini-HOWTOs, if they are really short),
+				the longer documents, called guides, deal in-depth with a Linux
+				feature."<sup><a href="http://tldp.org/history.html">[2]</a></sup>
+				<br>
+				<br>
+				TLDP is not maintained anymore, so that its content is sometimes
+				out-of-date (but still very good).
+
 			</li>
 			<li>
 				<a href="https://debian-handbook.info/"> Debian Administrator's Handbook</a>&mdash;
-				A free book written by Raphaël Hertzog and Roland Mas, two Debian developers,
-				it was originally written in French, and has been translated into
+				A free book written by Raphaël Hertzog and Roland Mas, two Debian developers.
+				It was originally written in French, and has been translated into
 				four other languages, with twenty(!) more in-progress.
 			</li>
 			<li>
 				<a href="http://www.linuxfromscratch.org/lfs/"> Linux From Scratch </a>&mdash;
 				From their website, "Linux From Scratch (LFS) is a project that provides
 				you with step-by-step instructions for building your own customized
-				Linux system entirely from source."<sup><a href="http://www.linuxfromscratch.org/lfs/index.html">[2]</a></sup>
+				Linux system entirely from source."<sup><a href="http://www.linuxfromscratch.org/lfs/index.html">[3]</a></sup>
 				It's a thing.
+			</li>
+			<li>
+				<a href="http://www.kroah.com/lkn/"> Linux Kernel in a Nutshell</a>&mdash;
+				A free book written by Greg Kroah-Hartman.
+				He says, "I want this book to help
+				bring more people into the Linux kernel development fold.
+				The act of building a customized kernel for your machine is one
+				of the basic tasks needed to become a Linux kernel developer.
+				The more people that try this out, and realize that there is
+				not any real magic behind the whole Linux kernel process, the
+				more people will be willing to jump in and help out in making
+				the kernel the best that it can be."<sup><a href="http://www.kroah.com/lkn/">[4]</a></sup>
 			</li>
 		</ul>
 
@@ -435,43 +338,12 @@ last-updated: July, 2020
 
 			<p>
 				In general, the people who ought to be writing books are those that
-				work in the FOSS community, and those people usually write free books.
+				work in the FOSS community, and they usually write free books.
 				They often offer a paid-for paperback copy, or a means
-				to donate.
+				to donate/support.
 			</p>
 
 		</div>
-
-		<div id="tutorials" class="content">
-			<h2> Tutorials </h2>
-
-			<p>
-				Tutorials are a great form of documentation,
-				because they are informative, concise, and relevant.
-				A tutorial jumps right in to the subject at hand.
-			</p>
-
-			<p>
-				Good examples of good tutorials:
-				<ul class="big-list">
-					<li>
-						<a href="https://youtu.be/mAbG8Oi-SvQ"> Make an Action RPG in Godot 3.2</a>&mdash;
-						A Youtube tutorial for building your own Godot 3.2 game.
-					</li>
-
-					<li>
-						<a href="https://www.markdowntutorial.com"> Learn Markdown</a>&mdash;
-						A tutorial guide to markdown.
-					</li>
-
-					<li>
-						<a href="https://guides.rubygems.org/make-your-own-gem/">
-							Making Your Own Ruby Gems</a> &mdash; Walks you through
-							the creation of a Ruby software package (a.k.a., 'gem').
-						</li>
-					</ul>
-				</p>
-			</div>
 
 			<div id="news" class="content">
 				<h2>News</h2>
@@ -487,12 +359,115 @@ last-updated: July, 2020
 					</li>
 					<li>
 						<a href="https://www.usenix.org/publications/login">USENIX ;login:</a>&mdash;
-						Non-free, though well-written.  Publications more than a year old are
-						available freely.
+						A non-free, though well-written, magazine covering *nix.
+						Publications more than a year old are available freely.
 					</li>
 					<li>
 						<a href="https://lwn.net/">Linux Weekly News</a>&mdash; Non-free.
 					</li>
+				</div>
+
+				<div id="how-to" class="content">
+					<h2>How-to</h2>
+
+					<p>
+						I'd like to take a step back now and consider the process
+						of learning Linux itself.
+						In my experience, the best method of learning Linux is to focus on the
+						underlying concept.
+						In view of the quote at the top, I'm not alone in this opinion.
+						When the concept is understood, one can usually "feel" one's way through
+						rectifying the situation at the command line.
+						Let's take an example.
+					</p>
+
+					<p>
+						Suppose you are working at the command-line, and you have a question about
+						copying files.
+						Knowing that the command <code>cp</code> copies a file,
+						you type <code>man cp</code>, and the manual page appears.
+						When you type <code>apropos copy</code>, looking for other
+						commands that can copy a file, it shows no results&mdash;
+						you know this to be an error, because <code>apropos</code>
+						is supposed to search manual pages and list all that
+						match "copy," which would certainly include <code>cp</code>.
+					</p>
+
+					<ol class="big-list" style="padding-bottom: 10px;">
+						<li>
+							<i>Figure out what your question is.</i>
+							<p>
+								Initially, your question might be <em>Why doesn't this work?</em>&mdash;
+								and that's totally fine.
+								Figuring out your question can be more difficult than you might guess,
+								because you might not know how to phrase it.
+								Try to be specific:
+								When dealing with computers, things are <em>very</em> precisely defined.
+							</p>
+						</li>
+
+						<li>
+							<i>What would answer your question?</i>
+							<p>
+								This strikes you as such an obvious error
+								that any reasonable documentation should answer your question,
+								and you would be right.
+								So, you first look into the man pages, with
+								<code>man apropos</code>.
+							</p>
+
+							<p>
+								There, you discover that <code>apropos</code> doesn't search the man
+								pages <em>directly,</em> but instead searches a database of information
+								about them (it does this because it's much faster).
+								Reasonably, you suspect that there might be an error with this database,
+								such as, <em>It doesn't exist</em>.
+							</p>
+
+							<p>
+								A little further down the page, you read,
+								"The database searched by <code>apropos</code> is updated by <code>mandb</code>.
+								You try <code>mandb</code>, and voila! <code>apropos</code> works as it should.
+							</p>
+						</li>
+
+						<li>
+							<i>Be Patient.</i>
+
+							<p>
+								Databases like this pop up in other
+								contexts, as well.  For instance, in package management, a common
+								practice is to maintain a local database about available packages, so that
+								the user can search for packages without bothering public servers.
+								As such, updating these databases (on Debian/Ubuntu/Mint, with <code>apt update</code>)
+								is a precursive step to obtaining the latest packages.
+							</p>
+
+							<p>
+								The point here is that you should take the time to try to
+								learn underlying concepts, because it usually pays off in the long run.
+								Skill accrues. Answer one question at a time.
+							</p>
+						</li>
+					</ol>
+
+					<p>
+						By far, the worst habit to get into is expecting to be spoon-fed solutions as though
+						by technical support.
+						Imagine, for a second, that you had *instantly* appealed to
+						Google, and there you found a response such as,
+						"Just run mandb."
+						This is correct, and it solves your problem, but you've learned nothing, and
+						if you continue "learning" this way, you'll be stuck memorizing trivial idioms.
+					</p>
+
+					<p>
+						<em>Linux is written by programmers, for programmers.</em>
+						It is very pure with respect to computer science, and being a competent user
+						necessarily requires some CS know-how.
+						If you're not interested in learning that, then find somewhere else to go&mdash;
+						but if you are interested, stick around!
+					</p>
 				</div>
 
 
@@ -500,6 +475,8 @@ last-updated: July, 2020
 				<h2> References </h2>
 				<ol>
 					<li> <i>Unix Programmer's Manual, First Edition.</i>  <a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html"> https://www.bell-labs.com/usr/dmr/www/1stEdman.html </a> </li>
+					<li> Garrels, M. (n.d.). Linux Documentation Project History. Retrieved July 17, 2020, from <a href="http://tldp.org/history.html">http://tldp.org/history.html</a></li>
 					<li> What is Linux From Scratch? (n.d.). Retrieved July 16, 2020, from <a href="http://www.linuxfromscratch.org/lfs/index.html">http://www.linuxfromscratch.org/lfs/index.html</a> </li>
+					<li> Kroah-Hartman, G. (n.d.). Secret Goal (i.e. why I wrote this book and am giving it away for free online). Retrieved July 17, 2020, from <a href="http://www.kroah.com/lkn/">http://www.kroah.com/lkn/</a></li>
 				</ol>
 			</div>
