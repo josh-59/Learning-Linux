@@ -12,7 +12,6 @@ last-updated: July, 2020
 		<li><a href="#official-documentation"> Official Documen-<br>tation</a></li>
 		<li><a href="#unofficial-documentation"> Unofficial Documen-<br>tation</a></li>
 		<li><a href="#nf-books"> Nonfree Books </a></li>
-		<li><a href="#news"> News </a></li>
 		<li><a href="#how-to"> How-To </a></li>
 		<li><a href="#references"> References </a></li>
 		<li><a href="#credits">Credits </a></li>
@@ -330,129 +329,108 @@ last-updated: July, 2020
 
 		</div>
 
-			<div id="news" class="content">
-				<h2>News</h2>
+			<div id="how-to" class="content">
+				<h2>How-to</h2>
+
 				<p>
-					What community would be complete without a means of staying up-to-date?
-					Most projects maintain an official blog.
+					I'd like to take a step back now and consider the process
+					of learning Linux itself.
+					In my experience, the best method of learning Linux is to focus on the
+					underlying concept.
+					In view of the quote at the top, I'm not alone in this opinion.
+					When the concept is understood, one can usually "feel" one's way through
+					rectifying the situation at the command line.
+					Let's take an example.
 				</p>
 
-				<ul class="big-list">
+				<p>
+					Suppose you are working at the command-line, and you have a question about
+					copying files.
+					Knowing that the command <code>cp</code> copies a file,
+					you type <code>man cp</code>, and the manual page appears.
+					When you type <code>apropos copy</code>, looking for other
+					commands that can copy a file, it shows no results&mdash;
+					you know this to be an error, because <code>apropos</code>
+					is supposed to search manual pages and list all that
+					match "copy," which would certainly include <code>cp</code>.
+				</p>
+
+				<ol class="big-list" style="padding-bottom: 10px;">
 					<li>
-						<a href="https://www.usenix.org/publications/login">USENIX ;login:</a>&mdash;
-						A non-free, though well-written, magazine covering *nix.
-						Publications more than a year old are available freely.
+						<i>Figure out what your question is.</i>
+						<p>
+							Initially, your question might be <em>Why doesn't this work?</em>&mdash;
+							and that's totally fine.
+							Figuring out your question can be more difficult than you might guess,
+							because you might not know how to phrase it.
+							Try to be specific:
+							When dealing with computers, things are <em>very</em> precisely defined.
+						</p>
 					</li>
+
 					<li>
-						<a href="https://lwn.net/">Linux Weekly News</a>&mdash; Non-free.
+						<i>What would answer your question?</i>
+						<p>
+							This strikes you as such an obvious error
+							that any reasonable documentation should answer your question,
+							and you would be right.
+							So, you first look into the man pages, with
+							<code>man apropos</code>.
+						</p>
+
+						<p>
+							There, you discover that <code>apropos</code> doesn't search the man
+							pages <em>directly,</em> but instead searches a database of information
+							about them (it does this because it's much faster).
+							Reasonably, you suspect that there might be an error with this database,
+							such as, <em>It doesn't exist</em>.
+						</p>
+
+						<p>
+							A little further down the page, you read,
+							"The database searched by <code>apropos</code> is updated by <code>mandb</code>.
+							You try <code>mandb</code>, and voila! <code>apropos</code> works as it should.
+						</p>
 					</li>
+
 					<li>
-						<a href="https://insights.stackoverflow.com/survey/">StackOverflow Annual Survey</a>&mdash;
-						See what's trending.
-				</div>
+						<i>Be Patient.</i>
 
-				<div id="how-to" class="content">
-					<h2>How-to</h2>
+						<p>
+							Databases like this pop up in other
+							contexts, as well.  For instance, in package management, a common
+							practice is to maintain a local database about available packages, so that
+							the user can search for packages without bothering public servers.
+							As such, updating these databases (on Debian/Ubuntu/Mint, with <code>apt update</code>)
+							is a precursive step to obtaining the latest packages.
+						</p>
 
-					<p>
-						I'd like to take a step back now and consider the process
-						of learning Linux itself.
-						In my experience, the best method of learning Linux is to focus on the
-						underlying concept.
-						In view of the quote at the top, I'm not alone in this opinion.
-						When the concept is understood, one can usually "feel" one's way through
-						rectifying the situation at the command line.
-						Let's take an example.
-					</p>
+						<p>
+							The point here is that you should take the time to try to
+							learn underlying concepts, because it usually pays off in the long run.
+							Skill accrues. Answer one question at a time.
+						</p>
+					</li>
+				</ol>
 
-					<p>
-						Suppose you are working at the command-line, and you have a question about
-						copying files.
-						Knowing that the command <code>cp</code> copies a file,
-						you type <code>man cp</code>, and the manual page appears.
-						When you type <code>apropos copy</code>, looking for other
-						commands that can copy a file, it shows no results&mdash;
-						you know this to be an error, because <code>apropos</code>
-						is supposed to search manual pages and list all that
-						match "copy," which would certainly include <code>cp</code>.
-					</p>
+				<p>
+					By far, the worst habit to get into is expecting to be spoon-fed solutions as though
+					by technical support.
+					Imagine, for a second, that you had *instantly* appealed to
+					Google, and there you found a response such as,
+					"Just run mandb."
+					This is correct, and it solves your problem, but you've learned nothing, and
+					if you continue "learning" this way, you'll be stuck memorizing trivial idioms.
+				</p>
 
-					<ol class="big-list" style="padding-bottom: 10px;">
-						<li>
-							<i>Figure out what your question is.</i>
-							<p>
-								Initially, your question might be <em>Why doesn't this work?</em>&mdash;
-								and that's totally fine.
-								Figuring out your question can be more difficult than you might guess,
-								because you might not know how to phrase it.
-								Try to be specific:
-								When dealing with computers, things are <em>very</em> precisely defined.
-							</p>
-						</li>
-
-						<li>
-							<i>What would answer your question?</i>
-							<p>
-								This strikes you as such an obvious error
-								that any reasonable documentation should answer your question,
-								and you would be right.
-								So, you first look into the man pages, with
-								<code>man apropos</code>.
-							</p>
-
-							<p>
-								There, you discover that <code>apropos</code> doesn't search the man
-								pages <em>directly,</em> but instead searches a database of information
-								about them (it does this because it's much faster).
-								Reasonably, you suspect that there might be an error with this database,
-								such as, <em>It doesn't exist</em>.
-							</p>
-
-							<p>
-								A little further down the page, you read,
-								"The database searched by <code>apropos</code> is updated by <code>mandb</code>.
-								You try <code>mandb</code>, and voila! <code>apropos</code> works as it should.
-							</p>
-						</li>
-
-						<li>
-							<i>Be Patient.</i>
-
-							<p>
-								Databases like this pop up in other
-								contexts, as well.  For instance, in package management, a common
-								practice is to maintain a local database about available packages, so that
-								the user can search for packages without bothering public servers.
-								As such, updating these databases (on Debian/Ubuntu/Mint, with <code>apt update</code>)
-								is a precursive step to obtaining the latest packages.
-							</p>
-
-							<p>
-								The point here is that you should take the time to try to
-								learn underlying concepts, because it usually pays off in the long run.
-								Skill accrues. Answer one question at a time.
-							</p>
-						</li>
-					</ol>
-
-					<p>
-						By far, the worst habit to get into is expecting to be spoon-fed solutions as though
-						by technical support.
-						Imagine, for a second, that you had *instantly* appealed to
-						Google, and there you found a response such as,
-						"Just run mandb."
-						This is correct, and it solves your problem, but you've learned nothing, and
-						if you continue "learning" this way, you'll be stuck memorizing trivial idioms.
-					</p>
-
-					<p>
-						<em>Linux is written by programmers, for programmers.</em>
-						It is very pure with respect to computer science, and being a competent user
-						necessarily requires some CS know-how.
-						If you're not interested in learning that, then find somewhere else to go&mdash;
-						but if you are interested, stick around!
-					</p>
-				</div>
+				<p>
+					<em>Linux is written by programmers, for programmers.</em>
+					It is very pure with respect to computer science, and being a competent user
+					necessarily requires some CS know-how.
+					If you're not interested in learning that, then find somewhere else to go&mdash;
+					but if you are interested, stick around!
+				</p>
+			</div>
 
 
 			<div id="references" class="content">
