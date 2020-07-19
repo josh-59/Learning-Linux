@@ -6,13 +6,13 @@
   link: /documentation.html
 - name: Files and Filesystems
   link: /files-and-filesystems.html
-- name: Package Management
-  link: /package-management.html
 - name: Processes
   link: /processes.html
 - name: Text Terminals
   link: /text-terminals.html
 - name: Finding Files
   link: /finding-files.html
+- name: Package Management
+  link: /package-management.html
 - name: "Going Further: Programming in *nix"
   link: /programming-in-nix.html
