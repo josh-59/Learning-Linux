@@ -10,8 +10,8 @@ last-updated: June, 2020
   <ul>
     <li><a href="#introduction"> Introduction </a></li>
     <li><a href="#actors"> Actors </a></li>
+    <li><a href="#proccess-creation"> Process Creation </a></li>
     <li><a href="#sandbox"> Sandbox </a></li>
-    <li><a href="#fork-and-exec"> Fork and Exec </a></li>
     <li><a href="#references"> References </a></li>
     <li><a href="#credits">Credits and Licenses</a></li>
   </ul>
@@ -22,47 +22,97 @@ last-updated: June, 2020
   <h4>Under Construction!</h4>
 
   <p>
-    A process is a running program.<sup><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/cpu-intro.pdf">[1]</a></sup>
-    A <em>program</em> is a file containing a range of information that describes how to
-    construct a process at run time.<sup><a href="#references">[2]</a></sup>
-    The abstraction of the process is, alongside the <em>file,</em> among the most important concepts in operating systems.
+    A process is an instance of an executing program.<sup><a href="#references">[1]</a></sup>
+    A <em>program</em> (also known as an "executable file")
+    contains a range of information that describes how to
+    construct a process at run time.<sup><a href="#references">[1]</a></sup>
+    The  process is, after the <em>file,</em> the most important
+    abstraction of operating systems.
   </p>
 </div>
 
 <div class="content" id="actors">
   <h2> Actors </h2>
+
+  <div class="aside-right">
+    <h4>Aside:</h4>
+    <p>
+      Recall that <a href="files-and-filesystems.html#regular-files">a file</a> is a sequence of bytes.
+    </p>
+  </div>
+
+  <p>
+    Conceptually, processes are the actors of the system.
+    Left to its own devices, the kernel does nothing;
+    all GNU/Linux operating systems depend upon processes to direct the kernel,
+    and through the kernel, processes direct the machine.
+    The result is a clear delineation between
+    <em>what</em> to do (dictated by processes), and <em>how</em> to do
+    it (dictated by the kernel).
+  </p>
+
   <p>
     There are processes for every function on the system.
     There's one for the network manager,
     another for the desktop environment,
     another acting as a printer spooler, etc..
-    On GNU/Linux operating systems, all aspects of processes
-    are the responsibility of the the kernel;
-    the only exception to this is that we explicitly tell the kernel which programs
-    to launch.
-    In this way, the kernel supports the use of the machine,
-    without placing stipulations on its use.
+    The simplest feasible Unix-like operating system would boot with a single
+    process, a shell program such as Bash.
+    Without a process, the kernel is unreachable, and the system is static.
   </p>
 
   <p>
-    The kernel:
+    On GNU/Linux operating systems, the kernel:
   </p>
 
   <ol>
-    <li> Facilitates new process creation </li>
-    <li> Allocates hardware resources to each process </li>
-    <li> Facilitates communication between processes </li>
+    <li>
+      Facilitates new process creation
+      <ul><li>Processes can direct the kernel to create a new process, through the
+        <em>fork</em> and <em>exec</em> system calls</li></ul>
+    </li>
+    <li>
+      Allocates hardware resources to each process
+      <ul><li>Gives them a chance to run, by giving them time on the CPU and some memory (parts of this are automatic)</li></ul>
+    </li>
+    <li>
+      Facilitates communication between processes
+      <ul><li>"Inter-Process Communication"</li></ul></li>
     <li> Maintains metadata about processes </li>
   </ol>
 
   <p>
-    Processes are the actors of the system.
     Under the Unix philosophy, each process has a narrowly defined role,
     which it is expected to do well.  It might copy a file, list the
-    contents of a directory, or interpret and execute commands that the user inputs.
-    Together, these disparate parts field the running desktop.
+    contents of a directory, or interpret and execute commands from the user.
+    Together, these disparate parts field the running operating system known
+    as <em>GNU/Linux.</em>
+  </p>
+</div>
+
+<div class="content" id="proccess-creation">
+  <h2> Process Creation </h2>
+
+  <p>
+    Like all interactions with the kernel, instructing the kernel to generate a new
+    process takes place through the system call interface.
+
+    "Because programs are independent of the underlying hardware, it is easy
+    to move them between UNIX systems running on different hardware if the programs
+    do not make assumptions about the underlying hardware." (Bach, 5) [The Design of the Unix Operating System]
+    User-space programs are what operating systems are all about.
+    These are sometimes called "user-land processes," and it is expected that
+    any user-space program can
   </p>
 
+  <p>
+    The Unix kernel executes exactly one program, <em>init</em>.
+
+        The Linux kernel facilitates process creation, supports existing processes,
+        and launches exactly one, but otherwise pays no attention to processes;
+        there's a very clear division of responsibilities, here:
+        The kernel will exist with zero processes.
+        It would, however, be impossible to interact with, and hence, useless.
 
 
 </div>
@@ -141,32 +191,7 @@ last-updated: June, 2020
 
   </div>
 
-<div class="content" id="fork-and-exec">
-  <h2> Fork / Exec </h2>
 
-  <p>
-    Like all interactions with the kernel, instructing the kernel to generate a new
-    process takes place through the system call interface.
-
-    "Because programs are independent of the underlying hardware, it is easy
-    to move them between UNIX systems running on different hardware if the programs
-    do not make assumptions about the underlying hardware." (Bach, 5) [The Design of the Unix Operating System]
-    User-space programs are what operating systems are all about.
-    These are sometimes called "user-land processes," and it is expected that
-    any user-space program can
-
-
-  <p>
-    The Unix kernel executes exactly one program, <em>init</em>.
-
-        The Linux kernel facilitates process creation, supports existing processes,
-        and launches exactly one, but otherwise pays no attention to processes;
-        there's a very clear division of responsibilities, here:
-        The kernel will exist with zero processes.
-        It would, however, be impossible to interact with, and hence, useless.
-
-
-</div>
 
 <div id="closing-remarks" class="content">
   <p>
