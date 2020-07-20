@@ -8,9 +8,9 @@ last-updated: July 2020
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
-        <li><a href="#whatis-package"> What is a Package? </a></li>
-        <li><a href="#repositories"> Repositories </a></li>
         <li><a href="#package-managers"> Package Managers </a></li>
+        <li><a href="#repositories"> Repositories </a></li>
+        <li><a href="#whatis-package"> What is a Package? </a></li>
         <li><a href="#references"> References </a></li>
         <li><a href="#credits">Credits </a></li>
     </ul>
@@ -18,39 +18,37 @@ last-updated: July 2020
 
 <div id="introduction" class="content">
     <h1>Package Management </h1>
+    <!-- <h4>Let's get you some free software!</h4> -->
     <h4>Under Construction!</h4>
 
   	<p>
-  		Packages provide a uniform way to install, patch and remove software,
+  		Packages provide a uniform way to distribute, install and patch software,
       and exist in multiple contexts within the FOSS domain.
-  		Each distribution wishing to be part of a larger ecosystem
-      includes a package manager.
-      Large programming language ecosystems often offer a package management
-      tool to ease its own use.
-      Examples include Rust's <code>cargo</code>, Python's <code>pip</code>
-      and Ruby's <code>gem</code>.
+      This essay will cover the big ideas of package management, and explain
+      how they can be used.
     </p>
 </div>
 
 <div class="content" id="whatis-package">
   <h2>What is a Package?</h2>
   <p>
-    A package is a compressed bundle of data that contains everything
-    required to implement a set of related commands or features.<sup><a href="https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html#package">[1]</a></sup>
-    In addition, packages contain metadata in the form of files which describe the package;
-    these are crucial to the organization of packages and the automation of their installation.
+    A package is a bundle of data that contains everything
+    required to implement a set of related commands or features.
+    It is a container for software that also contains some metadata,
+    in the form of files, which describes the software it contains.
   </p>
 
   <p>
     Let's have a look at Debian's
-    <a href="https://packages.debian.org/stable/utils/locate"><code>locate</code></a>.
+    <a href="https://packages.debian.org/stable/utils/locate"><code>locate</code></a>,
+    as an example.
     We download the file from a Debian repository mirror, and receive a single
     file, <code>locate_4.6.0+git+20190209-2_amd64.deb</code>.
     Note the <em>.deb</em> extension.
   </p>
 
   <p>
-    This file can be uncompressed in a few ways.
+    This is a compressed file, and may be uncompressed in a few ways.
   </p>
 
   <ol>
@@ -60,10 +58,8 @@ last-updated: July 2020
   </ol>
 
   <p>
-    In either case, we find three files, <em>control.tar.xz</em>, <em>data.tar.xz</em>
-    and <em>debian-binary.</em>
-    The <em>debian-binary</em> file lists the package-format version number.<sup><a href="https://en.wikipedia.org/wiki/Deb_%28file_format%29#Implementation">[1]</a></sup>
-    Both <em>.tar.xz</em> files are technically uncompressed, but bundled (archived).
+    In either case, we find two archives,  <em>control.tar.xz</em>,
+    and <em>data.tar.xz</em>.
     Let's first look at the <em>data</em> file.
   </p>
 
@@ -73,12 +69,61 @@ last-updated: July 2020
       <code>$ tar -xJf data.tar.xz</code></li>
   </ol>
 
+  <p>
+    And, we find:
+  </p>
+
+  <div class="code">
+    ~/Downloads/locate/data$ tree <br>
+     <br>
+    . <br>
+    ├── data.tar.xz <br>
+    ├── etc <br>
+    │   └── cron.daily <br>
+    │       └── locate <br>
+    ├── usr <br>
+    │   ├── bin <br>
+    │   │   ├── locate.findutils <br>
+    │   │   └── updatedb.findutils <br>
+    │   ├── lib <br>
+    │   │   └── x86_64-linux-gnu <br>
+    │   │       └── locate <br>
+    │   │           └── frcode <br>
+    │   └── share <br>
+    │       ├── doc <br>
+    │       │   └── locate <br>
+    │       │       ├── changelog.Debian.gz <br>
+    │       │       ├── changelog.gz <br>
+    │       │       ├── copyright <br>
+    │       │       └── README.Debian <br>
+    │       └── man <br>
+    │           ├── man1 <br>
+    │           │   ├── locate.findutils.1.gz <br>
+    │           │   └── updatedb.findutils.1.gz <br>
+    │           └── man5 <br>
+    │               └── locatedb.5.gz <br>
+    └── var <br>
+    &emsp; &ensp;  └── cache <br>
+    &emsp; &emsp; &emsp; &emsp; └── locate <br>
+
+    16 directories, 12 files
+    </div>
+
 
   <p>
     Next, let's look at the <em>control</em> file.
     This archive contains the metadata files; each is plaintext,
     and can be viewed with <code>cat</code> or <code>less</code>.
   </p>
+
+  <div class="aside-right">
+    <h4>Aside:</h4>
+    <p>
+      The "debian-binary" file, also included, lists the package-format version
+      number.<sup><a href="https://en.wikipedia.org/wiki/Deb_%28file_format%29#Implementation">[1]</a></sup>
+      As of this writing, the latest version is 2.0.
+    </p>
+  </div>
 
     <div class="code">
       $ cat control <br>
@@ -119,57 +164,108 @@ last-updated: July 2020
 
 <h3>See Also:</h3>
   <ul>
-    <li><a href="https://en.wikipedia.org/wiki/Deb_%28file_format%29"> deb (file format) - Wikipedia </a></li>
+    <li><a href="https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html#package"> Basics of the Debian package management system </a></li>
   </ul>
+</div>
+
+
+
+<div class="content" id="package-managers">
+  <h2>Package Managers</h2>
+  <p>
+    A <em>package manager</em> is a command-line tool which installs new
+    software, updates existing, and removes unwanted software.
+  </p>
+
+  <h3> APT </h3>
+  <p>
+    Debain's <em>Advanced Package Tool</em> (APT) is the distributions primary
+    package-management front-end.<sup><a href="https://wiki.debian.org/Apt">[3]</a></sup>
+    We can search with,
+  </p>
+
+  <div class="code">
+    apt search &lt;query&gt;
+  </div>
+
+
+
+  <h3> dpkg </h3>
+  <p>
+    "Native packaging systems"
+  </p>
+
+  <p>
+    https://unix.stackexchange.com/questions/138188/easily-unpack-deb-edit-postinst-and-repack-deb
+  </p>
+
+  <h4>Front-end's</h4>
+
+  <p>
+    <code>dpkg</code> is not intended as a user interface "front-end."
+    Instead, it is the backend tool of developers and software engineers:
+    It is stable enough to allow them to build on top of it.
+    There are a few pieces of software which are intended as the
+    user's front-end.
+  <p>
+
+  <ul>
+    <li><strong>APT</strong>&mdash;
+      "Advanced Package Tool (or APT), the main command-line package manager
+      for Debian and its derivatives. It provides command-line tools for
+      searching, managing and querying information about packages, as well
+      as low-level access to all features provided by the libapt-pkg and
+      libapt-inst libraries which higher-level package managers can depend
+      upon."<sup><a href="https://wiki.debian.org/Apt">[3]</a></sup></li>
+      apt install --install-recommends --install-suggests
+    <li><strong>aptitude</strong>&mdash;
+    "Aptitude is an Ncurses and command-line based front-end to numerous
+    Apt libraries, which are also used by Apt, the default Debian package
+    manager. Aptitude is text based and run from a terminal."<sup><a href="https://wiki.debian.org/Aptitude">[4]</a></sup> </li>
+    <li><strong>synaptic</strong></li>
+  </ul>
+
+  <p>
+    In addition, distributions often create their own graphical front-end.
+  </p>
+
+  <ul>
+    <li><strong>Mint Install</strong>&mdash; Written in Python,
+      Mint Install offers software from both
+      Debian and Flatpak repositories.<sup><a href="https://github.com/linuxmint/mintinstall">[4]</a></sup></li>
+    <li><strong>Ubuntu Software Center</strong>&mdash;
+      An easy-to-use interface that provides a central point for installing and removing software.<sup><a href="https://wiki.ubuntu.com/SoftwareCenter">[5]</a></sup></li>
+  </ul>
+
 </div>
 
 <div class="content" id="repositories">
   <h2>Repositories</h2>
 </div>
 
-<div class="content" id="package-managers">
-  <h2>Package Managers</h2>
-  apt install --install-recommends --install-suggests
+
+
+
+<div class="content" id="other">
+  <h2> Other Package Managers </h2>
+
+  <p>
+    There are other packaging schemes, which we will cover briefly.
+  </p>
+
+  Snap
+  https://blog.linuxmint.com/?p=3766 (Critique of Snap)
+  https://blog.linuxmint.com/?p=3906 (Chromium empty package) "In Linux Mint 20, APT will forbid snapd from getting installed.""
+
+
+  From https://linuxmint-user-guide.readthedocs.io/en/latest/snap.html
+  "The Snap Store, also known as the Ubuntu Store, is a commercial centralized software store operated by Canonical."
 </div>
 
-<div class="content" id="apt">
-  <h2> Apt </h2>
-  <p>
-    "Native packaging systems"
-	</p>
-https://unix.stackexchange.com/questions/138188/easily-unpack-deb-edit-postinst-and-repack-deb
+	"zero install"
 
 Installing Ruby:
 https://jekyllrb.com/docs/installation/ubuntu/
-
-
-		</p>
-
-		<p>
-			The compiled files that form the core of an application are an obvious
-			component of each package; however, in order to manage packages in
-			an efficient manner, each package must contain metadata describing itself.
-			One method to store this information might be to keep it in the executables themselves&mdash;
-			version numbers appended to the executable filename, say.
-			This would not be extensible, nor pleasant to use.
-		</p>
-
-		<p>
-			All modern package
-			A package does not contain copies of common libraries and executables.
-
-      Snap
-      https://blog.linuxmint.com/?p=3766 (Critique of Snap)
-      https://blog.linuxmint.com/?p=3906 (Chromium empty package) "In Linux Mint 20, APT will forbid snapd from getting installed.""
-
-
-      From https://linuxmint-user-guide.readthedocs.io/en/latest/snap.html
-      "The Snap Store, also known as the Ubuntu Store, is a commercial centralized software store operated by Canonical."
-
-
-	"zero install"
-</div>
-
 
 <div id="references" class="content">
     <h2> References </h2>
