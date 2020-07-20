@@ -44,7 +44,7 @@ last-updated: June, 2020
   <p>
     Conceptually, processes are the actors of the system.
     Left to its own devices, the kernel does nothing;
-    all GNU/Linux operating systems depend upon processes to direct the kernel,
+    all Unix-like operating systems depend upon processes to direct the kernel,
     and through the kernel, processes direct the machine.
     The result is a clear delineation between
     <em>what</em> to do (dictated by processes), and <em>how</em> to do
@@ -73,11 +73,8 @@ last-updated: June, 2020
     </li>
     <li>
       Allocates hardware resources to each process
-      <ul><li>Gives them a chance to run, by giving them time on the CPU and some memory (parts of this are automatic)</li></ul>
+      <ul><li>Gives them a chance to run, by giving them time on the CPU and some memory</li></ul>
     </li>
-    <li>
-      Facilitates communication between processes
-      <ul><li>"Inter-Process Communication"</li></ul></li>
     <li> Maintains information about processes, and assigns attributes to them
     </li>
   </ol>
