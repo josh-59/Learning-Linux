@@ -21,6 +21,13 @@ last-updated: June, 2020
   <h1>Processes</h1>
   <h4>Under Construction!</h4>
 
+  <div class="aside-right">
+    <h4>Aside:</h4>
+    <p>
+      Recall that <a href="files-and-filesystems.html#regular-files">a file</a> is a sequence of bytes.
+    </p>
+  </div>
+
   <p>
     A process is an instance of an executing program.<sup><a href="#references">[1]</a></sup>
     A <em>program</em> (also known as an "executable file")
@@ -33,13 +40,6 @@ last-updated: June, 2020
 
 <div class="content" id="actors">
   <h2> Actors </h2>
-
-  <div class="aside-right">
-    <h4>Aside:</h4>
-    <p>
-      Recall that <a href="files-and-filesystems.html#regular-files">a file</a> is a sequence of bytes.
-    </p>
-  </div>
 
   <p>
     Conceptually, processes are the actors of the system.
@@ -78,7 +78,8 @@ last-updated: June, 2020
     <li>
       Facilitates communication between processes
       <ul><li>"Inter-Process Communication"</li></ul></li>
-    <li> Maintains metadata about processes </li>
+    <li> Maintains information about processes, and assigns attributes to them
+    </li>
   </ol>
 
   <p>
@@ -94,31 +95,59 @@ last-updated: June, 2020
   <h2> Process Creation </h2>
 
   <p>
-    Like all interactions with the kernel, instructing the kernel to generate a new
-    process takes place through the system call interface.
+    At the end of the boot sequence, the kernel launches a single program,
+    <code>/sbin/init</code>.<sup><a href="http://tldp.org/LDP/intro-linux/intro-linux.pdf">[2] CH4</a></sup>
+    This program is responsible for
+    spawning all other processes.<sup><a href="https://arxiv.org/abs/0706.2748">[3]</a></sup>
+  </p>
 
-    "Because programs are independent of the underlying hardware, it is easy
-    to move them between UNIX systems running on different hardware if the programs
-    do not make assumptions about the underlying hardware." (Bach, 5) [The Design of the Unix Operating System]
-    User-space programs are what operating systems are all about.
-    These are sometimes called "user-land processes," and it is expected that
-    any user-space program can
+  <div class="aside-left">
+    <h4>Aside:</h4>
+    <p>
+      You can check your <em>init</em> program with <br> <center><code>$ ps --pid 1</code></center><br>
+      systemd is very common today.
+    </p>
+  </div>
+
+  <p>
+    While init schemes <a href="https://arxiv.org/abs/0706.2748">have evolved</a> over the years,
+    their purpose has not changed.  It is a process with root-level permissions that acts as a
+    trustee among processes; its central responsibility is to bring up
+    userspace.<sup><a href="http://0pointer.de/blog/projects/systemd.html">[5]</a></sup>
   </p>
 
   <p>
-    The Unix kernel executes exactly one program, <em>init</em>.
+    Creating a new process begins with the <em><a href="https://www.man7.org/linux/man-pages/man2/fork.2.html">fork()</a></em> system call.
+    This instructs the kernel to make a copy of the current process&mdash;
+    an exact copy is produced, save one difference: Each of the two
+    processes receives a distinct return value from <em>fork().</em>
+    The new process is called the <em>child</em> process; the
+    old process is called the <em>parent</em> process.
+  </p>
 
-        The Linux kernel facilitates process creation, supports existing processes,
-        and launches exactly one, but otherwise pays no attention to processes;
-        there's a very clear division of responsibilities, here:
-        The kernel will exist with zero processes.
-        It would, however, be impossible to interact with, and hence, useless.
+  <p>
+    The parent process usually goes on about its business, be it managing other
+    user-space processes in the case of <em>init,</em> or querying the user
+    for a new line of input, in the case of a shell.
+    The child goes on to call <em><a href="https://www.man7.org/linux/man-pages/man2/execve.2.html">execve(pathname, argv, envp)</a>.</em>
+    This system call instructs the kernel to replace the current
+    process with a brand-new one, by loading the executable file located at <em>pathname.</em>
+  </p>
 
+  <h3>See Also:</h3>
+  <ul>
+    <li><a href="https://www.freedesktop.org/wiki/Software/systemd/"> systemd - freedesktop.org</a></li>
+    <li><a href="http://0pointer.de/blog/projects/the-biggest-myths.html"> Myths of systemd </a></li>
+    <li><a href="https://www.man7.org/tlpi/"> The Linux Programming Interface</a> Chapters 24-28 </li>
+  </ul>
 
 </div>
 
 <div class="content" id="sandbox">
   <h2>Sandbox</h2>
+  <p>
+    Each process on a Unix-like operating system is distinct in several ways.
+
   <p>
     For each process on the system, we wish to guarantee a few things.
     We want to ensure that the process is incapable of jeopardizing the stability of the
