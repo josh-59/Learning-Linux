@@ -125,11 +125,17 @@ last-updated: June, 2020
 
   <p>
     The parent process usually goes on about its business, be it managing other
-    user-space processes in the case of <em>init,</em> or querying the user
-    for a new line of input, in the case of a shell.
+    user-space processes, as in the case of <em>init,</em> or querying the user
+    for a new line of input, as in the case of a shell.
     The child goes on to call <em><a href="https://www.man7.org/linux/man-pages/man2/execve.2.html">execve(pathname, argv, envp)</a>.</em>
     This system call instructs the kernel to replace the current
     process with a brand-new one, by loading the executable file located at <em>pathname.</em>
+  </p>
+
+  <p>
+    Upon birth, each process is given its own process id (PID) number by the kernel.
+    This is guaranteed to be unique to the process, serves as the kernel's handle
+    to the process, and remains constant throughout the process's life.
   </p>
 
   <h3>See Also:</h3>
@@ -142,20 +148,51 @@ last-updated: June, 2020
 
 <div class="content" id="programs">
   <h2> Programs </h2>
-  <p>
-    Processes are distinct in a variety of ways.
-    In particular, multiple processes may be executing the same program, so
-    that there may be three separate instances of <em>notepad</em> running simultaneously.
-    Most programs are of binary format, which simply means that they
-    have been compiled for use by the computer.
 
-  <h3> Binary </h3>
-  http://ftp.openwatcom.org/devel/docs/elf-64-gen.pdf
+  <p>
+    Most programs are in binary format, which simply means that they
+    have been compiled for native use by the computer.
+    Beyond machine instructions, they also include initial values of
+    program variables, where specified.  
+    The binary format currently in use is
+    ELF; command-line tools for peeking into such a file include:
+  </p>
+
+  <ul>
+    <li> <code>file</code> - Provide a brief description of any filetype</li>
+    <li> <code>size</code> - List section sizes, briefly </li>
+    <li> <code>readelf</code> - Display detailed information about ELF files</li>
+    <li> <code>objdump</code> - "... mostly useful to programmers who are working on compilation tools,
+      as opposed to programmers who just want their program to compile and
+      work."<sup><a href="https://www.man7.org/linux/man-pages/man1/objdump.1.html">[19]</a></sup></li>
+  </ul>
 
   <h3> Script </h3>
-  <ul>
-    <li>hashbang (#!)</li>
-  </ul>
+  <p>
+    A script is a text file that is executable.
+    Scripts must begin with the magic characters <em>#!</em> , then the
+    complete pathname of the desired interpreter, as in
+  </p>
+
+  <div class="code">
+    #! /bin/bash
+  </div>
+
+  <p>
+    or
+  </p>
+
+  <div class="code">
+    #! /bin/python.
+  </div>
+
+  <p>
+    This line is often called <em>shebang</em> or <em>hashbang</em>,
+    and <a href="https://en.wikipedia.org/wiki/Shebang_(Unix)#History">was announced by Dennis Ritchie</a> in 1980.
+    Scripting in <code>bash</code> is easy once you know bash&mdash; you just
+    act like you're really at the command line.  It's also a good way to
+  </p>
+
 
 
 </div>
