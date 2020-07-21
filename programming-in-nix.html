@@ -24,13 +24,10 @@ last-updated: July, 2020
 	<h1>Going Further: Programming in *nix</h1>
   {% comment %}
   <div class="quote-text">
-    All right-thinking people know that
-  <span style="display:inline-block; width: 50pt;"></span><br>
-  <span style="display:inline-block; width: 50pt;"></span>
-    (a) K&R are <strong>right</strong> and (b) K&R are right
+    "From here on out, an exclamation point means "not"."
   </div>
   <div class="quote-ref">
-    &mdash;<a href="https://www.kernel.org/doc/html/v4.10/process/coding-style.html">Linus Torvalds</a>
+    &mdash;Professor Kraft
   </div>
   {% endcomment %}
   <h4>Under Construction!</h4>
@@ -54,6 +51,17 @@ last-updated: July, 2020
 
 <div id="c" class="content">
   <h2> C </h2>
+  {% comment %}
+  <div class="quote-text">
+    All right-thinking people know that
+  <span style="display:inline-block; width: 50pt;"></span><br>
+  <span style="display:inline-block; width: 50pt;"></span>
+    (a) K&R are <strong>right</strong> and (b) K&R are right
+  </div>
+  <div class="quote-ref">
+    &mdash;<a href="https://www.kernel.org/doc/html/v4.10/process/coding-style.html">Linus Torvalds</a>
+  </div>
+  {% endcomment %}
   <p>
     C is the <em>lingua franca</em> of
     programming.<sup><a href="https://wiki.osdev.org/Required_Knowledge">[1]</a><a href="#references">[2]</a></sup>
@@ -73,6 +81,14 @@ last-updated: July, 2020
     syntax errors, dangling pointers, double-free'ing, and
     the glorious segmentation fault.
   </p>
+
+  <div class="aside-right">
+    <h4>Aside:</h4>
+    <p>
+      In Linux, a C compiler is almost always preinstalled.
+      Check with <br><center>$ gcc --version</center><br>
+    </p>
+  </div>
 
   <p>
     The C Programming Language shows its age in a few ways.
@@ -110,7 +126,7 @@ last-updated: July, 2020
 <div id="systems-programming" class="content">
   <h2>Other Systems Programming Languages</h2>
   <p>
-    The C language belongs to a class of programming languages known as
+    C belongs to a class of programming languages known as
     <em>systems programming languages:</em> It is suitable for use in
     the production of non-application software, such as drivers and kernels.
     While there have been many attempts to supersede C, I wish to discuss only two.
