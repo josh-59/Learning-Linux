@@ -11,6 +11,10 @@ last-updated: June, 2020
     <li><a href="#introduction"> Introduction </a></li>
     <li><a href="#actors"> Actors </a></li>
     <li><a href="#proccess-creation"> Process Creation </a></li>
+    <li><a href="#programs"> Programs </a></li>
+    <li><a href="#daemons"> Daemons </a></li>
+    <li><a href="#memory-layout"> Memory Layout </a></li>
+    <li><a href="#scheduling"> Scheduling </a></li>
     <li><a href="#sandbox"> Sandbox </a></li>
     <li><a href="#references"> References </a></li>
     <li><a href="#credits">Credits and Licenses</a></li>
@@ -96,6 +100,10 @@ last-updated: June, 2020
     <code>/sbin/init</code>.<sup><a href="http://tldp.org/LDP/intro-linux/intro-linux.pdf">[2] CH4</a></sup>
     This program is responsible for
     spawning all other processes.<sup><a href="https://arxiv.org/abs/0706.2748">[3]</a></sup>
+    While init schemes <a href="https://arxiv.org/abs/0706.2748">have evolved</a> over the years,
+    their purpose has not changed.  It is a process with root-level permissions that acts as a
+    trustee among processes; its central responsibility is to bring up
+    userspace.<sup><a href="http://0pointer.de/blog/projects/systemd.html">[5]</a></sup>
   </p>
 
   <div class="aside-left">
@@ -105,13 +113,6 @@ last-updated: June, 2020
       systemd is very common today.
     </p>
   </div>
-
-  <p>
-    While init schemes <a href="https://arxiv.org/abs/0706.2748">have evolved</a> over the years,
-    their purpose has not changed.  It is a process with root-level permissions that acts as a
-    trustee among processes; its central responsibility is to bring up
-    userspace.<sup><a href="http://0pointer.de/blog/projects/systemd.html">[5]</a></sup>
-  </p>
 
   <p>
     Creating a new process begins with the <em><a href="https://www.man7.org/linux/man-pages/man2/fork.2.html">fork()</a></em> system call.
@@ -137,13 +138,90 @@ last-updated: June, 2020
     <li><a href="http://0pointer.de/blog/projects/the-biggest-myths.html"> Myths of systemd </a></li>
     <li><a href="https://www.man7.org/tlpi/"> The Linux Programming Interface</a> Chapters 24-28 </li>
   </ul>
+</div>
+
+<div class="content" id="programs">
+  <h2> Programs </h2>
+  <p>
+    Processes are distinct in a variety of ways.
+    In particular, multiple processes may be executing the same program, so
+    that there may be three separate instances of <em>notepad</em> running simultaneously.
+    Most programs are of binary format, which simply means that they
+    have been compiled for use by the computer.
+
+  <h3> Binary </h3>
+  http://ftp.openwatcom.org/devel/docs/elf-64-gen.pdf
+
+  <h3> Script </h3>
+  <ul>
+    <li>hashbang (#!)</li>
+  </ul>
+
 
 </div>
 
+<div class="content" id="daemons">
+  <h2> Daemons </h2>
+
+</div>
+
+<div class="content" id="memory-layout">
+  <h2> Memory Layout of a Process </h2>
+  <p>
+    The kernel provides each process with its own, distinct memory, in the
+    form of an <em>address space.</em>
+    An address space is a collection of memory addresses; on all modern architectures,
+    memory is byte-addressable, so that each address refers to exactly one byte.
+    Addresses themselves are simply numbers, and are usually expressed
+    in hexadecimal.
+  </p>
+
+  <div class="aside-right">
+    <h4>Aside:</h4>
+    <p>
+      Current x86-64 architectures support
+      48-bit address spaces, implying
+      2<sup>48</sup> distinct addresses, or 256 Tebibytes
+      (roughly, 256 Terabytes) of memory.
+  </p>
+  </div>
+
+  <p>
+    Archaic operating systems allowed processes direct access to
+    the system's main memory; they effectively shared the same address space.
+    This posed significant issues for system stability and security&mdash;
+    namely, one process could read and/or manipulate the memory of another.
+  </p>
+
+  <p>
+    Modern operating systems provide each process with a distinct
+    address space. By working in conjunction with the CPU, the kernel
+    defines a mapping from the process's <em>virtual</em> address space,
+    to the system's <em>physical</em> address space.
+    By this scheme, each process references virtual memory addresses as though
+    they are real; the CPU translates these addresses onto physical addresses, and
+    the kernel maintains the mappings, and remains responsible for
+    physical memory.
+  </p>
+
+  <p>
+    A benefit of this is that, because each process is presented with a distinct
+    address space, it may be organized identically for all processes.
+
+</div>
+
+<div class="content" id="scheduling">
+  <h2> Scheduling </h2>
+
+</div>
+
+
+
+
+
 <div class="content" id="sandbox">
   <h2>Sandbox</h2>
-  <p>
-    Each process on a Unix-like operating system is distinct in several ways.
+
 
   <p>
     For each process on the system, we wish to guarantee a few things.
