@@ -196,19 +196,15 @@ last-updated: June, 2020
   <h3> Virtual Memory </h3>
 
   <p>
-    Modern operating systems provide each process with its own memory, in the
+    Modern operating systems provide each process with its own memory in the
     form of a distinct <em>address space.</em>
     An address space is a collection of memory addresses; on all modern architectures,
-    memory is byte-addressable, so that each address refers to exactly one byte.
+    memory (RAM) is byte-addressable, so that each address refers to exactly one byte.
     Addresses themselves are simply numbers.
   </p>
 
-  <div class="aside-left">
-    <h4>Aside:</h4>
-    <p>
-      Here, "main memory" and "physical memory" refers to RAM.
-      A "physical address" is a location in physical memory.
-    </p>
+  <div class="img-right" style="background: #f1f1f1;">
+<a style="outline: solid black 2px; " title="Traced by User:Stannered, original by en:User:Dysprosia / BSD (http://opensource.org/licenses/bsd-license.php)" href="https://commons.wikimedia.org/wiki/File:Virtual_address_space_and_physical_address_space_relationship.svg"><img width="512" alt="Virtual address space and physical address space relationship" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Virtual_address_space_and_physical_address_space_relationship.svg/512px-Virtual_address_space_and_physical_address_space_relationship.svg.png"></a>
   </div>
 
   <p>
@@ -229,12 +225,14 @@ last-updated: June, 2020
     This is referred to colloquially as <em>virtual memory.</em>
   </p>
 
+
   <p>
     The virtual memory abstraction requires support from both the kernel
     and CPU.
     For each process, the kernel maintains an address translation table, which maps
     virtual addresses onto physical ones.
-    This is loaded onto the <a href="https://en.wikipedia.org/wiki/Memory_management_unit">MMU</a> whenever the process runs,
+    This is loaded onto the <a href="https://en.wikipedia.org/wiki/Memory_management_unit">MMU</a>
+    whenever the process runs,
     and the MMU carries out address translation automatically whenever in user mode.
   </p>
 
