@@ -11,11 +11,9 @@ last-updated: June, 2020
     <li><a href="#introduction"> Introduction </a></li>
     <li><a href="#actors"> Actors </a></li>
     <li><a href="#proccess-creation"> Process Creation </a></li>
+    <li><a href="#sandbox"> Sandbox </a></li>
     <li><a href="#programs"> Programs </a></li>
     <li><a href="#daemons"> Daemons </a></li>
-    <li><a href="#memory-layout"> Memory Layout </a></li>
-    <li><a href="#scheduling"> Scheduling </a></li>
-    <li><a href="#sandbox"> Sandbox </a></li>
     <li><a href="#references"> References </a></li>
     <li><a href="#credits">Credits and Licenses</a></li>
   </ul>
@@ -40,9 +38,11 @@ last-updated: June, 2020
     The  process is, after the <em>file,</em> the most important
     abstraction of operating systems.
   </p>
-</div>
 
-<div class="content" id="actors">
+  </div>
+
+  <div class="content" id="actors">
+
   <h2> Actors </h2>
 
   <p>
@@ -50,7 +50,7 @@ last-updated: June, 2020
     Left to its own devices, the kernel does nothing;
     all Unix-like operating systems depend upon processes to direct the kernel,
     and through the kernel, processes direct the machine.
-    The result is a clear delineation between
+    The result is a clear demarcation between
     <em>what</em> to do (dictated by processes), and <em>how</em> to do
     it (dictated by the kernel).
   </p>
@@ -66,7 +66,7 @@ last-updated: June, 2020
   </p>
 
   <p>
-    On GNU/Linux operating systems, the kernel:
+    The Linux Kernel:
   </p>
 
   <ol>
@@ -80,6 +80,7 @@ last-updated: June, 2020
       <ul><li>Gives them a chance to run, by giving them time on the CPU and some memory</li></ul>
     </li>
     <li> Maintains information about processes, and assigns attributes to them
+      <ul><li>This includes a unique PID and file access authority</li></ul>
     </li>
   </ol>
 
@@ -101,7 +102,7 @@ last-updated: June, 2020
     This program is responsible for
     spawning all other processes.<sup><a href="https://arxiv.org/abs/0706.2748">[3]</a></sup>
     While init schemes <a href="https://arxiv.org/abs/0706.2748">have evolved</a> over the years,
-    their purpose has not changed.  It is a process with root-level permissions that acts as a
+    its purpose has not changed.  It is a process with root-level permissions that acts as a
     trustee among processes; its central responsibility is to bring up
     userspace.<sup><a href="http://0pointer.de/blog/projects/systemd.html">[5]</a></sup>
   </p>
@@ -110,7 +111,7 @@ last-updated: June, 2020
     <h4>Aside:</h4>
     <p>
       You can check your <em>init</em> program with <br> <center><code>$ ps --pid 1</code></center><br>
-      systemd is very common today.
+      <a href="https://www.freedesktop.org/wiki/Software/systemd/">systemd</a> is very common today.
     </p>
   </div>
 
@@ -140,22 +141,147 @@ last-updated: June, 2020
 
   <h3>See Also:</h3>
   <ul>
-    <li><a href="https://www.freedesktop.org/wiki/Software/systemd/"> systemd - freedesktop.org</a></li>
-    <li><a href="http://0pointer.de/blog/projects/the-biggest-myths.html"> Myths of systemd </a></li>
-    <li><a href="https://www.man7.org/tlpi/"> The Linux Programming Interface</a> Chapters 24-28 </li>
+    <li><a href="https://www.man7.org/tlpi/"> The Linux Programming Interface</a> Chapter 24: Process Creation </li>
   </ul>
 </div>
+
+<div class="content" id="sandbox">
+  <h2>Sandbox</h2>
+  <p>
+    One of the major ideas of modern computing is that each process is isolated
+    from both the kernel and from other processes.
+    This is done for a few reasons.
+    First, we want to ensure that no process is capable of jeopardizing the stability of the
+    machine.
+    Second, we want to ensure that no process can affect any other process
+    in an unpredictable manner.
+    We do this by running each process in a
+    "sandboxed" environment, composed of restricted access to the machine's CPU,
+    and a unique address space.
+  </p>
+
+  <h3> Limited Direct Execution </h3>
+  <p>
+    Modern CPU architectures support two
+    distinct modes of operation.
+    <em>Kernel mode,</em> sometimes called "supervisor mode," is the unrestricted mode.
+    Here, all CPU instructions are available, so that code running in this mode
+    has complete access to the machine.
+    <em>User mode</em> is a proper subset of kernel mode; all processes run in user mode.
+    If a process, running in user mode, attempts to execute a restricted instruction,
+    its execution is halted, and control is given to the kernel.
+    At that point, it is up to the operating system to determine what to do
+    (usually, terminate the offending process).
+  </p>
+
+  <p>
+    This technique is
+    known as <em>limited direct execution.</em><sup><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/cpu-mechanisms.pdf">[3]</a></sup>
+    It is <em>limited</em> in the sense that each process has access to
+    only a restricted subset of the CPU's instructions.
+    It is <em>direct</em> in the sense that each process runs directly on hardware.
+    It makes safe and efficient use of available hardware.
+  </p>
+
+  <p>
+    For instance, no process can access a hard-drive directly.
+    The proper avenue for a process to access such a device is through the kernel,
+    via system calls.
+    Through limited direct execution, this is
+    <em>the only</em> way that a process can access it.
+    This ensures that the kernel remains in charge of the machine's state.
+  </p>
+
+  <h3> Virtual Memory </h3>
+
+  <p>
+    Modern operating systems provide each process with its own memory, in the
+    form of a distinct <em>address space.</em>
+    An address space is a collection of memory addresses; on all modern architectures,
+    memory is byte-addressable, so that each address refers to exactly one byte.
+    Addresses themselves are simply numbers.
+  </p>
+
+  <div class='img-right'>
+  <a title="Dougct / CC BY-SA (https://creativecommons.org/licenses/by-sa/3.0)" href="https://commons.wikimedia.org/wiki/File:Program_memory_layout.pdf"><img width="256" alt="Program memory layout" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Program_memory_layout.pdf/page1-234px-Program_memory_layout.pdf.jpg"></a>
+  </div>
+
+  <p>
+    Archaic operating systems allowed processes direct access to
+    the system's main memory; they effectively shared the same address space.
+    This posed significant issues for system stability and security&mdash;
+    namely, one process could read and/or manipulate the memory of another.
+  </p>
+
+  <p>
+    Modern operating systems provide each process with a distinct
+    address space.
+    The result has been profound improvements in system stability.
+    The addresses that the process references are called <em>virtual</em>
+    because they exist for that process alone.
+    These virtual addresses are mapped onto physical addresses by
+    the CPU, without the process ever being aware of it.
+    This is referred to colloquially as <em>virtual memory.</em>
+  </p>
+
+  <p>
+    The virtual memory abstraction requires support from both the operating system (here, the kernel),
+    and the hardware (specifically, a part of the CPU called the <em>Memory Management Unit</em>).
+    For each process, the kernel maintains an address translation table, which maps
+    virtual addresses onto physical ones.
+    This is loaded onto the MMU whenever the process runs, and the CPU carries out
+    address translation automatically whenever in user mode.
+  </p>
+
+  <p>
+    Crucially, not every virtual address needs to be mapped to a physical address&mdash;
+    it only needs to <em>appear</em> so when the process accesses it.
+    If a process references a virtual address that is not mapped,
+    then the CPU interrupts execution of the process and defers control to the kernel.
+    If the memory address should be mapped to the belong to the process, the kernel loads that data into memory,
+    modifies the translation table and returns control to the process.
+    This allows a process to run with only part of its memory loaded.
+  </p>
+
+  <p>
+    Now suppose a process references a virtual address that is not mapped, and
+    which
+
+    Through the mechanism of virtual memory, the kernel can ensure the stability
+    of the machine, the safety of other processes, and make efficient use of the machine's memory.
+  </p>
+
+  <h3> See Also: </h3>
+  <ul>
+    <li><a href="https://www.makeuseof.com/tag/virtual-memory-low-heres-fix/"> Is Your Virtual Memory Too Low?  Here's How to Fix It!</a> (WRONG!)</li>
+    <li><a href="http://www.csapp.cs.cmu.edu/"> Computer Systems: A Programmer's Perspective, 3<sup>rd</sup> Ed.</a>, Chapter 9: Virtual Memory</li>
+  </ul>
+
+  </div>
 
 <div class="content" id="programs">
   <h2> Programs </h2>
 
   <p>
+    A program is an executable file.
     Most programs are in binary format, which simply means that they
     have been compiled for native use by the computer.
-    Beyond machine instructions, they also include initial values of
-    program variables, when specified by the programmer.
+    Historically, Unix binary executables had three distinct segments, which
+    coincided with the layout of the resulting process's memory:
+  </p>
+
+  <ol>
+    <li> Text &mdash; Machine instructions </li>
+    <li> Data &mdash; Initial values for global and static variables</li>
+    <li> BSS &mdash; Uninitialized global and static variable values; assigned arithmetic zero by the kernel upon loading</li>
+  </ol>
+
+  <p>
     The binary format currently in use is
-    <a href="https://wiki.osdev.org/ELF">ELF</a>; command-line tools for peeking into such a file
+    <a href="https://wiki.osdev.org/ELF">ELF</a>; it was introduced to streamline
+    software development across operating environments by reducing the
+    need to recode and recompile code.<sup><a href="http://www.skyfree.org/linux/references/ELF_Format.pdf">[23]</a></sup>
+    Command-line tools for peeking into such a file
     include:<sup><a href="https://en.wikipedia.org/wiki/Executable_and_Linkable_Format#Tools">[21]</a></sup>
   </p>
 
@@ -169,7 +295,6 @@ last-updated: June, 2020
   </ul>
 
   <h3> Script </h3>
-
   <p>
     A script is a text file that is executable.
     Scripts must begin with the magic characters <em>#!</em> , then the
@@ -207,6 +332,7 @@ last-updated: June, 2020
   <h3>See Also:</h3>
   <ul>
     <li><a href="https://www.man7.org/linux/man-pages/man1/echo.1.html">echo(1)</a></li>
+
   </ul>
 
 </div>
@@ -216,135 +342,6 @@ last-updated: June, 2020
 
 </div>
 
-<div class="content" id="memory-layout">
-  <h2> Memory Layout of a Process </h2>
-  <p>
-    The kernel provides each process with its own, distinct memory, in the
-    form of an <em>address space.</em>
-    An address space is a collection of memory addresses; on all modern architectures,
-    memory is byte-addressable, so that each address refers to exactly one byte.
-    Addresses themselves are simply numbers, and are usually expressed
-    in hexadecimal.
-  </p>
-
-  <div class="aside-right">
-    <h4>Aside:</h4>
-    <p>
-      Current x86-64 architectures support
-      48-bit address spaces, implying
-      2<sup>48</sup> distinct addresses, or 256 Tebibytes
-      (roughly, 256 Terabytes) of memory.
-  </p>
-  </div>
-
-  <p>
-    Archaic operating systems allowed processes direct access to
-    the system's main memory; they effectively shared the same address space.
-    This posed significant issues for system stability and security&mdash;
-    namely, one process could read and/or manipulate the memory of another.
-  </p>
-
-  <p>
-    Modern operating systems provide each process with a distinct
-    address space. By working in conjunction with the CPU, the kernel
-    defines a mapping from the process's <em>virtual</em> address space,
-    to the system's <em>physical</em> address space.
-    By this scheme, each process references virtual memory addresses as though
-    they are real; the CPU translates these addresses onto physical addresses, and
-    the kernel maintains the mappings, and remains responsible for
-    physical memory.
-  </p>
-
-  <p>
-    A benefit of this is that, because each process is presented with a distinct
-    address space, it may be organized identically for all processes.
-
-</div>
-
-<div class="content" id="scheduling">
-  <h2> Scheduling </h2>
-
-</div>
-
-
-
-
-
-<div class="content" id="sandbox">
-  <h2>Sandbox</h2>
-
-
-  <p>
-    For each process on the system, we wish to guarantee a few things.
-    We want to ensure that the process is incapable of jeopardizing the stability of the
-    machine, so that it cannot (inadvertently or not) crash the system.
-    We also want to ensure that each process cannot affect any other process in
-    an unpredictable manner.
-    In effect, we wish to treat user-space programs as <em>untrusted</em> software,
-    for the benefit of the system as a whole.
-  </p>
-
-  <p>
-    The way we do this is by running each process in a
-    "sandboxed" environment, composed of an allotment of memory,
-    and restricted access to the machine's CPU(s).
-    Modern CPU architectures support this abstraction by fielding two
-    distinct modes of operation.
-    <em>Kernel mode</em> is the unrestricted mode; here, all
-    CPU instructions are available.
-    <em>User mode</em> is a proper subset of that instruction set;
-    all processes run in user mode.
-    If a process, running in user mode, attempts to execute a restricted instruction,
-    its execution is aborted, and control is
-    given to the kernel.
-    At that point, it is up to the operating system to determine what to do
-    (usually, terminate the offending process).
-  </p>
-
-  <p>
-    This technique is
-    known as <em>limited direct execution.</em><sup><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/cpu-mechanisms.pdf">[3]</a></sup>
-    It is <em>limited</em> in the sense that each process has access to
-    only a restricted subset of the CPU's instructions.
-    It is <em>direct</em> in the sense that each process runs directly on hardware.
-    It makes safe and efficient use of available hardware.
-  </p>
-
-  <p>
-    A similar story unfolds in the case of process memory, but is slightly more
-    complicated because we wish to give each process the illusion that it has
-    the same memory space.
-    Physical memory is allotted to each process by the kernel.  With the exception
-    of read-only sections of memory (such as the program's instructions), each
-    process is allotted distinct physical memory.
-    This physical memory is mapped onto <em>virtual memory</em> by
-    a translating table.
-    The process sees and references virtual memory; the CPU translates
-    these virtual addresses to physical addresses;
-    the kernel is responsible for maintaining the translating tables and physical memory.
-  </p>
-
-  <p>
-    If a process attempts to access an invalid (i.e., unassigned) memory address,
-    execution of the process is aborted, and control is given to the kernel.
-  </p>
-
-  <p>
-    The above are quite dramatic simplifications of
-    low-level operating systems concepts.
-    There are two good reasons for including them.
-    First, it's important to recognize that each process is distinct;
-    this explains how they are distinct.
-    Second, a high-level overview will only make a thorough investigation
-    easier.
-  </p>
-
-  <h3>See Also</h3>
-  <ul>
-    <li><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/"><em>Operating Systems: Three Easy Pieces</em></a> (Free book)</li>
-  </ul>
-
-  </div>
 
 
 
@@ -360,7 +357,7 @@ last-updated: June, 2020
     For any given process, an element of the programming environment is static with respect to the process if it is invariant
     throughout program execution.
     For instance, the CPU architecture of a machine is static.
-    As a final word, note that the contents of a file may be dynamic, or they may be static.
+    Note that the contents of a file may be dynamic, or they may be static.
   </p>
 </div>
 
