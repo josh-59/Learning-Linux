@@ -152,15 +152,16 @@ last-updated: June, 2020
     from both the kernel and from other processes.
     This is done for a few reasons.
     First, we want to ensure that no process is capable of jeopardizing the stability of the
-    machine.
+    system.
     Second, we want to ensure that no process can affect any other process
     in an unpredictable manner.
     We do this by running each process in a
     "sandboxed" environment, composed of restricted access to the machine's CPU,
-    and a unique address space.
+    and a virtualized memory address space.
   </p>
 
   <h3> Limited Direct Execution </h3>
+
   <p>
     Modern CPU architectures support two
     distinct modes of operation.
@@ -202,8 +203,12 @@ last-updated: June, 2020
     Addresses themselves are simply numbers.
   </p>
 
-  <div class='img-right'>
-  <a title="Dougct / CC BY-SA (https://creativecommons.org/licenses/by-sa/3.0)" href="https://commons.wikimedia.org/wiki/File:Program_memory_layout.pdf"><img width="256" alt="Program memory layout" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Program_memory_layout.pdf/page1-234px-Program_memory_layout.pdf.jpg"></a>
+  <div class="aside-left">
+    <h4>Aside:</h4>
+    <p>
+      Here, "main memory" and "physical memory" refers to RAM.
+      A "physical address" is a location in physical memory.
+    </p>
   </div>
 
   <p>
@@ -216,8 +221,8 @@ last-updated: June, 2020
   <p>
     Modern operating systems provide each process with a distinct
     address space.
-    The result has been profound improvements in system stability.
-    The addresses that the process references are called <em>virtual</em>
+    The result has been a profound improvement in system stability.
+    The addresses that the process uses are called <em>virtual</em>
     because they exist for that process alone.
     These virtual addresses are mapped onto physical addresses by
     the CPU, without the process ever being aware of it.
@@ -225,12 +230,12 @@ last-updated: June, 2020
   </p>
 
   <p>
-    The virtual memory abstraction requires support from both the operating system (here, the kernel),
-    and the hardware (specifically, a part of the CPU called the <em>Memory Management Unit</em>).
+    The virtual memory abstraction requires support from both the kernel
+    and CPU.
     For each process, the kernel maintains an address translation table, which maps
     virtual addresses onto physical ones.
-    This is loaded onto the MMU whenever the process runs, and the CPU carries out
-    address translation automatically whenever in user mode.
+    This is loaded onto the <a href="https://en.wikipedia.org/wiki/Memory_management_unit">MMU</a> whenever the process runs,
+    and the MMU carries out address translation automatically whenever in user mode.
   </p>
 
   <p>
@@ -238,15 +243,13 @@ last-updated: June, 2020
     it only needs to <em>appear</em> so when the process accesses it.
     If a process references a virtual address that is not mapped,
     then the CPU interrupts execution of the process and defers control to the kernel.
-    If the memory address should be mapped to the belong to the process, the kernel loads that data into memory,
+    If the memory address should be mapped, the kernel loads that data into memory,
     modifies the translation table and returns control to the process.
-    This allows a process to run with only part of its memory loaded.
+    If the memory should not be mapped (i.e., it is an undefined address), the
+    kernel can abort execution of the program.
   </p>
 
   <p>
-    Now suppose a process references a virtual address that is not mapped, and
-    which
-
     Through the mechanism of virtual memory, the kernel can ensure the stability
     of the machine, the safety of other processes, and make efficient use of the machine's memory.
   </p>
@@ -254,7 +257,7 @@ last-updated: June, 2020
   <h3> See Also: </h3>
   <ul>
     <li><a href="https://www.makeuseof.com/tag/virtual-memory-low-heres-fix/"> Is Your Virtual Memory Too Low?  Here's How to Fix It!</a> (WRONG!)</li>
-    <li><a href="http://www.csapp.cs.cmu.edu/"> Computer Systems: A Programmer's Perspective, 3<sup>rd</sup> Ed.</a>, Chapter 9: Virtual Memory</li>
+    <li><a href="http://www.csapp.cs.cmu.edu/"> Computer Systems: A Programmer's Perspective, 3<sup>rd</sup> Ed.</a>, Chapter 9: Virtual Memory (Not free)</li>
   </ul>
 
   </div>
@@ -359,6 +362,9 @@ last-updated: June, 2020
     For instance, the CPU architecture of a machine is static.
     Note that the contents of a file may be dynamic, or they may be static.
   </p>
+</div>
+<div class='img-right'>
+<a title="Dougct / CC BY-SA (https://creativecommons.org/licenses/by-sa/3.0)" href="https://commons.wikimedia.org/wiki/File:Program_memory_layout.pdf"><img width="256" alt="Program memory layout" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Program_memory_layout.pdf/page1-234px-Program_memory_layout.pdf.jpg"></a>
 </div>
 
 
