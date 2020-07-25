@@ -33,19 +33,10 @@ last-updated: July, 2020
   <h4>Under Construction!</h4>
 
   <p>
-    A major theme of the GNU/Linux operating system is that abstractions are maintained
-    by the kernel for both users and programmers.
-    As one studies these abstractions, the details of their implementation
-    become increasingly complex, and also increasingly irrelevant:
-    Each abstraction is maintained precisely so that its details may be ignored.
-  </p>
-
-  <p>
-    The Linux kernel is written in C, and as such, the "native tongue"
-    of each system call is C.
-    For example, when querying the kernel about a file through the system
-    call <em><a href="https://www.man7.org/linux/man-pages/man2/stat.2.html">stat</a>,</em>
-    a C struct is returned.
+    Thus far, this work has avoided opinion wherever possible:
+    Opinion simply does not belong in a formal development, as this work
+    is intended to be.
+    Here, I break with this, and offer opinions regarding programming.
   </p>
 </div>
 
@@ -65,20 +56,29 @@ last-updated: July, 2020
   <p>
     C is the <em>lingua franca</em> of
     programming.<sup><a href="https://wiki.osdev.org/Required_Knowledge">[1]</a><a href="#references">[2]</a></sup>
-      As such, it would be a mistake to put any other programming language first.
-    C is not a large language, but is difficult to master.
-    It is often called "portable assembly" because it closely
-    mirrors the abstractions of the machine itself.<sup><a href="https://youtu.be/HgtRAbE1nBM?t=1021">[4]</a></sup>
+    As such, it would be a mistake to put any other programming language first.
+    Many examples of the fruitful use of C exist.
+    For instance, the executable binary file format <em>ELF</em> is defined in C.
+    Bash, Zsh, as well as the reference Python interpreter, are written in C.
+    Most importantly, the Linux kernel is written in C, and as such, C
+    is the "native tongue" of each system call.
+    For example, when querying the kernel about a file through the system
+    call <em><a href="https://www.man7.org/linux/man-pages/man2/stat.2.html">stat</a>,</em>
+    a C struct is returned.
   </p>
 
   <p>
+    C is not a large language, but is difficult to master.
+    It is often called "portable assembly" because it closely
+    mirrors the abstractions of the machine itself.<sup><a href="https://youtu.be/HgtRAbE1nBM?t=1021">[4]</a></sup>
     A central feature of the language, and the principal reason for its
     difficulty, is that C expects the programmer to manually (explicitly)
     address memory, through variables called <em>pointers.</em>
     Moreover, memory is often allocated and deallocated manually (explicitly)
     by the programmer.
     With this combination, there are many possible avenues of failure, including
-    syntax errors, dangling pointers, double-free'ing, memory leaks, and
+    syntax errors, dangling pointers, double-free'ing, memory leaks,
+    going past the end of an allocated memory segment, and
     the glorious segmentation fault.
   </p>
 
@@ -175,6 +175,7 @@ last-updated: July, 2020
   <ul>
     <li><a href="http://yosefk.com/c++fqa/index.html"> C++ Frequently Questioned Answers</a> (Critique of C++)</li>
     <li><a href="http://harmful.cat-v.org/software/c++/linus"> Linus Torvalds on C++ </a></li>
+    <li><a href="https://en.wikiquote.org/wiki/Ken_Thompson#%22Coders_At_Work%22,_2009"> Ken Thompson on C++</a></li>
     <li><a href="https://github.com/EnterpriseQualityCoding/FizzBuzzEnterpriseEdition"> EnterpriseQualityCoding</a></li>
   </ul>
 </div>
@@ -214,15 +215,17 @@ last-updated: July, 2020
           is always math, it seems.  Discrete mathematics is not a difficult subject,
           on par with a first semester in calculus.  It will introduce enough
           logic to give informal proofs, and cover advanced counting techniques, among other things.
-          The subject founds all of computer
-          science, given the inherently discrete nature of the bit.
+          Given the inherently discrete nature of the bit, this
+          subject founds all of computer
+          science.
           The canonical text for computer scientists is
           <a href="https://en.wikipedia.org/wiki/Concrete_Mathematics">Concrete Mathematics</a>,
           but I prefer <a href="http://discrete.openmathbooks.org/dmoi3.html"> Discrete Mathematics - An Open Introduction</a>
         </p>
       </li>
       <li style="padding-top: 0;">
-        <p><strong>Data Structures</strong>&mdash; After learning a programming language or two,
+        <p><strong>Data Structures</strong>&mdash;
+          After learning a programming language or two,
           data structures are the next most important thing to learn in becoming a developer;
           some understanding of discrete math is a required.
           The typical methodology in writing a program is to
@@ -248,13 +251,16 @@ last-updated: July, 2020
     </ul>
 
     <p>
-      The above aims to be representative of a typical undergraduate curriculum.
-      Past this, the sky is the limit.
+      My book recommendations:
     </p>
-  <h3> See Also: </h3>
-    <ul>
-        <li><a href="https://en.wikipedia.org/wiki/The_Practice_of_Programming"> The Practice of Programming</a> by Brian Kernighan and Rob Pike </li>
-    </ul>
+
+    <ol>
+      <li><a href="https://en.wikipedia.org/wiki/The_C_Programming_Language">The C Programming Language</a>, 2<sup>nd</sup> Edition</li>
+      <li><a href="https://www.man7.org/tlpi/">The Linux Programming Interface</a></li>
+      <li><a href="http://www.csapp.cs.cmu.edu/">Computer Systems: A Programmer's Perspective</a></li>
+      <li><a href="https://opendatastructures.org/">Open Data Structures</a></li>
+      <li><a href="http://discrete.openmathbooks.org/dmoi3.html">Discrete Mathematics - An Open Introduction</a></li>
+    </ol>
 </div>
 
 <div class="content">
