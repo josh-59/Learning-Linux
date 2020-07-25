@@ -5,7 +5,6 @@ title: Processes
 last-updated: June, 2020
 ---
 
-<!-- To Do: Citation needed in "regular files" -> heirarchical filestructure taken from Multics-->
 <div id="nav_bar_2" class="nav">
   <ul>
     <li><a href="#introduction"> Introduction </a></li>
@@ -151,13 +150,13 @@ last-updated: June, 2020
     One of the major ideas of modern computing is that each process is isolated
     from both the kernel and from other processes.
     This is done for a few reasons.
-    First, we want to ensure that no process is capable of jeopardizing the stability of the
-    system.
+    First, we want to ensure that no process is capable of jeopardizing the 
+    stability of the system.
     Second, we want to ensure that no process can affect any other process
     in an unpredictable manner.
-    We do this by running each process in a
-    "sandboxed" environment, composed of restricted access to the machine's CPU,
-    and a virtualized memory address space.
+    We do this by running each process in a "sandboxed" environment, composed 
+    of restricted access to the machine's CPU, and a virtualized memory address 
+    space.
   </p>
 
   <h3> Limited Direct Execution </h3>
@@ -214,8 +213,8 @@ last-updated: June, 2020
   </p>
 
   <p>
-    Modern operating systems provide each process with a distinct
-    address space.
+  <strong>Modern operating systems provide each process with a distinct
+      address space.</strong>
     The result has been a profound improvement in system stability.
     The addresses that the process uses are called <em>virtual</em>
     because they exist for that process alone.
@@ -238,18 +237,23 @@ last-updated: June, 2020
     Crucially, not every virtual address needs to be mapped to a physical address&mdash;
     it only needs to <em>appear</em> so when the process accesses it.
     If a process references a virtual address that is not mapped,
-    then the CPU interrupts execution of the process and defers control to the kernel.
+    the CPU interrupts execution of the process and defers control to the kernel.
     If the memory address should be mapped, the kernel loads that data into memory,
     modifies the translation table and returns control to the process.
     If the memory should not be mapped (i.e., it is an undefined address), the
-    kernel can abort execution of the program.
+    kernel aborts execution of the program.
   </p>
 
   <p>
-    Through the mechanism of virtual memory, each process acts as though
-    it were executing alone.  In addition, the kernel can ensure the stability
-    of the machine, the safety of other processes, and the efficient use of
-    available memory.
+    Through the mechanism of virtual memory, each process is presented with 
+    the illusion that it has the entirity of the machine's memory to
+    itself.
+    Other processes are intrinsically protected from memory tampering:
+    Their memory simply does not exist within the context of the 
+    currently running process, and therefore cannot be read from, nor written to, 
+    by it.
+    As with limited direct execution, virtual memory facilitates
+    the safe and efficient use of a machine resource.
   </p>
 
   <h3> See Also: </h3>
@@ -259,16 +263,30 @@ last-updated: June, 2020
   </ul>
 </div>
 
+<div class="content" id="process-attributes">
+    <h2> Process Attributes </h2>
+    <p>
+        Each process on the 
+    </p>
+</div>
+
+    
 <div class="content" id="programs">
   <h2> Programs </h2>
 
   <p>
-    A program is an executable file.
-    Most programs are in binary format, which simply means that they
+    As stated above, a program is a file containing instructions on how to create
+    a process.
+    Most programs are in binary format, which means that they
     have been compiled for native use by the computer.
-    Historically, Unix binary executables had three distinct segments, which
-    coincided with the layout of the resulting process's memory:
-  </p>
+    </p>
+
+    <p>
+        The first Unix binary executable file format was called <em>a.out,</em>
+        which stood for <em>assembler output.</em><sup><a href="https://en.wikipedia.org/wiki/A.out">[5]</a></sup>
+        This was a very simple format, with three distinct data segments that 
+        coincided with the layout of the resulting process's memory:
+    </p>
 
   <ol>
     <li> Text &mdash; Machine instructions </li>
@@ -278,16 +296,14 @@ last-updated: June, 2020
 
   <p>
     The binary format currently in use is
-    <a href="https://wiki.osdev.org/ELF">ELF</a>; it was introduced to streamline
-    software development across operating environments by reducing the
-    need to recode and recompile code.<sup><a href="http://www.skyfree.org/linux/references/ELF_Format.pdf">[23]</a></sup>
+    <a href="https://wiki.osdev.org/ELF">ELF</a>.
     Command-line tools for peeking into such a file
     include:<sup><a href="https://en.wikipedia.org/wiki/Executable_and_Linkable_Format#Tools">[21]</a></sup>
   </p>
 
   <ul>
     <li> <code>file</code> &mdash; Provide a brief description of any filetype</li>
-    <li> <code>size</code> &mdash; List section sizes, briefly </li>
+    <li> <code>size</code> &mdash; List section sizes above<li>
     <li> <code>readelf</code> &mdash; Display detailed information about ELF files</li>
     <li> <code>objdump</code> &mdash; "... mostly useful to programmers who are working on compilation tools,
       as opposed to programmers who just want their program to compile and
@@ -322,17 +338,18 @@ last-updated: June, 2020
   </div>
 
   <p>
-    This line is often called <em>shebang</em> or <em>hashbang</em>,
-    and <a href="https://en.wikipedia.org/wiki/Shebang_(Unix)#History">was announced
-    as a kernel feature by Dennis Ritchie in 1980</a>.
-    Some shells (notably, Bash) will attempt to execute the file
-    within a subshell, if no hashbang line exists.<sup><a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Scripts.html#Shell-Scripts">[22]</a></sup>
+    This line is often called <em>shebang</em> or <em>hashbang</em>.
+    Note that this feature is implemented by the kernel:  The kernel 
+    itself is passed the script via <em>exec</em>, and 
+    goes about executing the interpreter given, with the file as an
+    argument to it.<sup><a href="https://en.wikipedia.org/wiki/Shebang_(Unix)#History">[5]</a></sup>
+    Also, Bash will attempt to execute the file within a subshell, 
+    if no hashbang line exists.<sup><a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Scripts.html#Shell-Scripts">[22]</a></sup>
   </p>
 
   <h3>See Also:</h3>
   <ul>
     <li><a href="https://www.man7.org/linux/man-pages/man1/echo.1.html">echo(1)</a></li>
-
   </ul>
 
 </div>
@@ -340,12 +357,17 @@ last-updated: June, 2020
 <div class="content" id="daemons">
   <h2> Daemons </h2>
 
+  <p>
+    A daemon is a background process, nothing more.  
+    Historicallly, daemons have had names ending in the letter <em>d,</em>
+    which explains the name <em>systemd</em> above.
+  </p>
+
 </div>
 
 
-
-
 <div id="closing-remarks" class="content">
+    <h2> Closing Remarks </h2>
   <p>
     We pause our discussion to give definitions of the words <em>dynamic</em> and <em>static.</em>
     An action occurs dynamically with respect to a process if it occurs during process
