@@ -5,14 +5,21 @@ title: Processes
 last-updated: July, 2020
 ---
 
+<!--
+  TODO
+  Current working directory -> Change with system call
+  File Access Permissions
+  Memory layout
+  Environment variables
+
 <div id="nav_bar_2" class="nav">
   <ul>
     <li><a href="#introduction"> Introduction </a></li>
     <li><a href="#actors"> Actors </a></li>
     <li><a href="#proccess-creation"> Process Creation </a></li>
     <li><a href="#sandbox"> Sandbox </a></li>
-    <li><a href="#programs"> Programs </a></li>
-    <li><a href="#daemons"> Daemons </a></li>
+    <li><a href="#process-attributes"> Process Attributes </a></li>
+
     <li><a href="#references"> References </a></li>
     <li><a href="#credits">Credits and Licenses</a></li>
   </ul>
@@ -90,6 +97,11 @@ last-updated: July, 2020
     Together, these disparate parts field the running operating system known
     as <em>GNU/Linux.</em>
   </p>
+
+  <h3> See Also: </h3>
+  <ul>
+    <li> top(1) </li>
+  </ul>
 </div>
 
 <div class="content" id="proccess-creation">
@@ -266,31 +278,22 @@ last-updated: July, 2020
 <div class="content" id="process-attributes">
     <h2> Process Attributes </h2>
     <p>
-        Each process on the
+        Each process on the system has
     </p>
+
+
+    		    Current working directory:
+    				<p>
+    					Each process has a <em>current working directory</em>, a place in
+              the directory tree.
+    				</p>
+
+
+    <h3> See Also: </h3>
+    <ul>
+      <li><a href="https://man7.org/linux/man-pages/man5/proc.5.html"> proc(5)</a></li>
+    </ul>
 </div>
-
-
-
-
-  <h3>See Also:</h3>
-  <ul>
-    <li><a href="https://www.man7.org/linux/man-pages/man1/echo.1.html">echo(1)</a></li>
-  </ul>
-
-</div>
-
-<div class="content" id="daemons">
-  <h2> Daemons </h2>
-
-  <p>
-    A daemon is a background process, nothing more.
-    Historicallly, daemons have had names ending in the letter <em>d,</em>
-    which explains the name <em>systemd</em> above.
-  </p>
-
-</div>
-
 
 <div id="closing-remarks" class="content">
     <h2> Closing Remarks </h2>
@@ -307,6 +310,11 @@ last-updated: July, 2020
     For instance, the CPU architecture of a machine is static.
     Note that the contents of a file may be dynamic, or they may be static.
   </p>
+
+  <h3> See Also: </h3>
+  <ul>
+    <li>< a href="https://www.man7.org/linux/man-pages/man7/daemon.7.html"> daemon(7) </a></li>q
+  </ul>
 </div>
 
 
