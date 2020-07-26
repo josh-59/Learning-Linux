@@ -2,7 +2,7 @@
 layout: default
 credits: default
 title: Processes
-last-updated: June, 2020
+last-updated: July, 2020
 ---
 
 <div id="nav_bar_2" class="nav">
@@ -150,12 +150,12 @@ last-updated: June, 2020
     One of the major ideas of modern computing is that each process is isolated
     from both the kernel and from other processes.
     This is done for a few reasons.
-    First, we want to ensure that no process is capable of jeopardizing the 
+    First, we want to ensure that no process is capable of jeopardizing the
     stability of the system.
     Second, we want to ensure that no process can affect any other process
     in an unpredictable manner.
-    We do this by running each process in a "sandboxed" environment, composed 
-    of restricted access to the machine's CPU, and a virtualized memory address 
+    We do this by running each process in a "sandboxed" environment, composed
+    of restricted access to the machine's CPU, and a virtualized memory address
     space.
   </p>
 
@@ -213,14 +213,14 @@ last-updated: June, 2020
   </p>
 
   <p>
-  <strong>Modern operating systems provide each process with a distinct
-      address space.</strong>
+  <em>Modern operating systems provide each process with a distinct
+      address space.</em>
     The result has been a profound improvement in system stability.
-    The addresses that the process uses are called <em>virtual</em>
+    The addresses that the process uses are called "virtual"
     because they exist for that process alone.
     These virtual addresses are mapped onto physical addresses by
     the CPU, without the process ever being aware of it.
-    This is referred to colloquially as <em>virtual memory.</em>
+    This is referred to colloquially as "virtual memory."
   </p>
 
   <p>
@@ -245,12 +245,12 @@ last-updated: June, 2020
   </p>
 
   <p>
-    Through the mechanism of virtual memory, each process is presented with 
+    Through the mechanism of virtual memory, each process is presented with
     the illusion that it has the entirity of the machine's memory to
     itself.
     Other processes are intrinsically protected from memory tampering:
-    Their memory simply does not exist within the context of the 
-    currently running process, and therefore cannot be read from, nor written to, 
+    Their memory simply does not exist within the context of the
+    currently running process, and therefore cannot be read from, nor written to,
     by it.
     As with limited direct execution, virtual memory facilitates
     the safe and efficient use of a machine resource.
@@ -266,11 +266,11 @@ last-updated: June, 2020
 <div class="content" id="process-attributes">
     <h2> Process Attributes </h2>
     <p>
-        Each process on the 
+        Each process on the
     </p>
 </div>
 
-    
+
 <div class="content" id="programs">
   <h2> Programs </h2>
 
@@ -284,7 +284,7 @@ last-updated: June, 2020
     <p>
         The first Unix binary executable file format was called <em>a.out,</em>
         which stood for <em>assembler output.</em><sup><a href="https://en.wikipedia.org/wiki/A.out">[5]</a></sup>
-        This was a very simple format, with three distinct data segments that 
+        This was a very simple format, with three distinct data segments that
         coincided with the layout of the resulting process's memory:
     </p>
 
@@ -339,11 +339,11 @@ last-updated: June, 2020
 
   <p>
     This line is often called <em>shebang</em> or <em>hashbang</em>.
-    Note that this feature is implemented by the kernel:  The kernel 
-    itself is passed the script via <em>exec</em>, and 
+    Note that this feature is implemented by the kernel:  The kernel
+    itself is passed the script via <em>exec</em>, and
     goes about executing the interpreter given, with the file as an
     argument to it.<sup><a href="https://en.wikipedia.org/wiki/Shebang_(Unix)#History">[5]</a></sup>
-    Also, Bash will attempt to execute the file within a subshell, 
+    Also, Bash will attempt to execute the file within a subshell,
     if no hashbang line exists.<sup><a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Scripts.html#Shell-Scripts">[22]</a></sup>
   </p>
 
@@ -358,7 +358,7 @@ last-updated: June, 2020
   <h2> Daemons </h2>
 
   <p>
-    A daemon is a background process, nothing more.  
+    A daemon is a background process, nothing more.
     Historicallly, daemons have had names ending in the letter <em>d,</em>
     which explains the name <em>systemd</em> above.
   </p>
@@ -382,7 +382,6 @@ last-updated: June, 2020
     Note that the contents of a file may be dynamic, or they may be static.
   </p>
 </div>
-
 
 
 <div id="references" class="content">
