@@ -1,101 +1,10 @@
 
 
-<div class="quote_text">
-DOUBLE CHECK THIS!!!
-"Commands are verbs, and files are nouns."
-</div>
-<div class="quote_ref">
-Brian Kernighan, <br><i>UNIX, A History and Memoir,</i><br>p. 71
-</div>
 
 
-<h2> PATH Environment Variable </h2>
-<p>
-    Among new users (or perhaps just me), the <code>PATH</code>
-    environment variable is often a source of concern.
-    This variable explicitly declares the directories that will
-    be searched to locate an executable file when a command
-    is entered.
-    We can have a look at its value with,
-<p>
-
-<div class="code">
-    echo $PATH
-</div>
-
-<p>
-    The result is either a colon-separated (in <code>bash</code>)
-    or a space-separated (in <code>fish</code>) list of directories.
-    Their order matters, for the shell will search these directories from left to right,
-    will execute the first executable with the same name as the command given,
-    and will cease searching once this is done.
-    We can always override this search by specifying the executable's filename,
-    such as <code>/bin/echo</code> or <code>./cat</code>.
 </p>
-
-<p>
-    The <code>PATH</code> variable was invented by John Mashey
-    and introduced as a workaround so that non-expert users could
-    share their own sets of command by lab, department or
-    group.<sup><a href="#references">Kernighan page 132 (check not plaigarizing)</a></sup>
-</p>
-
-<p>
-    There are several common modifications made to the value of this variable, today.
-    For instance, to include your own
-
-
-    A common use today is
-
-<h2> Fish </h2>
-<p>
-    The best interactive shell that I have found is <code>fish</code>.
-    It's a relatively new shell, and I find it preferrable to <code>bash</code>,
-    even as an experienced user.
-    Several features of <code>fish</code> make it more friendly than <code>bash</code>:
-
-    <ul>
-        <li> Command suggestions </li>
-        <li> Obvious function syntax:
-            <div class="code">
-                function foo<br>
-                   &emsp;echo hello world<br>
-                end
-            </div>
-            </li>
-        <li> Forgiving scripting:  If you make any mistake at all in <code>bash</code>,
-            it responds with, "Syntax error near unexpected token [token]", which tells you
-            nothing (and becomes infuriating).
-            <code>Fish</code>, on the other hand, tells you what's up and then reprints
-            what you had, so that you can modify it and try again. Love it!
-        </li>
-        <li> Default prompt displays command return values if they are nonzero (if they indicate error)</li>
-    </ul>
-</p>
-
-<p>
-    With <code>fish</code> and other tools like Mozilla Rust's <code>cargo</code>,
-    I think that we can bring the command-line into the twenty-first century.
-</p>
-
-Discuss difference between shell variables and environment variables
-    (the function of export)
-
-    Bash async:
-            Invite friend to stay
-        synchronous:
-            Invite friend, they are expected to do something and then leave,
-            so you wait for them to leave
-                This is appropriate for things like, "list files in current directory"
-                or "move this file over there"
-
-
-
-<h2> Shell Functions (Requires all shell capabilities listed above) </h2>
-<p>
-    Modern shells are large programs, and contain functions of their own that may be
-    called as though they were ordinary executables.
     Moreover, shells also allow their users to create their own functions.
+
     Shell functions can be quite elaborate, containing conditional statements and redirections
     (anything persmissible in ordinary usage).
 </p>
@@ -136,22 +45,7 @@ Kernighan page 132:
 10)	The Art of the Command Line https://github.com/jlevy/the-art-of-command-line/blob/master/README.md
 
 
-<h2> Closing Remarks </h2>
-<p>
-    A shell is not, fundamentally, a commplicated program.
-    Its job is to query the user for their next command,
-    then execute that command.
-    An outline of the central loop is as follows:
-</p>
 
-<div class="code">
-  while(true) {<br>
-    &emsp;print_prompt();<br>
-    &emsp;get_line();<br>
-    &emsp;parse_line();<br>
-    &emsp;execute(line);<br>
-  }
-</div>
 
 <p>
     It's a classic project for computer science students to
