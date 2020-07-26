@@ -1,6 +1,4 @@
-Random useful man-pages
-man heir
-man ascii
+
 
 <div class="quote_text">
 DOUBLE CHECK THIS!!!
@@ -10,28 +8,6 @@ DOUBLE CHECK THIS!!!
 Brian Kernighan, <br><i>UNIX, A History and Memoir,</i><br>p. 71
 </div>
 
-
-<h2> Introduction </h2>
-<p>
-    A shell is not, fundamentally, a commplicated program.
-    Its job is to query the user for their next command,
-    then execute that command.
-    An outline of the central loop is as follows:
-</p>
-
-<div class="code">
-  while(true) {<br>
-    &emsp;print_prompt();<br>
-    &emsp;get_line();<br>
-    &emsp;parse_line();<br>
-    &emsp;execute(line);<br>
-  }
-
-<p>
-    It's a classic project for computer science students to
-    write their own shells.
-    The fun is to be had, primarily, in parsing the line :).
-</p>
 
 <h2> PATH Environment Variable </h2>
 <p>
@@ -158,3 +134,27 @@ Kernighan page 132:
     share their own sets of commands by lab, department and group.
 
 10)	The Art of the Command Line https://github.com/jlevy/the-art-of-command-line/blob/master/README.md
+
+
+<h2> Closing Remarks </h2>
+<p>
+    A shell is not, fundamentally, a commplicated program.
+    Its job is to query the user for their next command,
+    then execute that command.
+    An outline of the central loop is as follows:
+</p>
+
+<div class="code">
+  while(true) {<br>
+    &emsp;print_prompt();<br>
+    &emsp;get_line();<br>
+    &emsp;parse_line();<br>
+    &emsp;execute(line);<br>
+  }
+</div>
+
+<p>
+    It's a classic project for computer science students to
+    write their own shells.
+    The fun is to be had, primarily, in parsing the line :).
+</p>
