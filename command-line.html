@@ -1,0 +1,102 @@
+---
+layout: default
+credits: default
+title: Command Line
+last-updated: July, 2020
+---
+
+<div id="nav_bar_2" class="nav">
+  <ul>
+    <li><a href="#introduction"> Introduction </a></li>
+    <li><a href="#standard-file-descriptors"> Standard File Descriptors </a></li>
+    <li><a href="#references"> References </a></li>
+    <li><a href="#credits">Credits and Licenses</a></li>
+  </ul>
+</div>
+
+<div id="introduction" class="content">
+  <h1>The Command Line</h1>
+  <h4>Under Construction!</h4>
+
+  <p>
+    The command-line is uniquely *nix.
+    As a programming tool, it is exceptionally powerful:
+    Anything that can be done on a GNU/Linux system can be done through
+    the command-line alone.
+    The graphical user interface (desktop environment) is a superstructure;
+    it is often the case that
+    <a href="https://en.wikipedia.org/wiki/Synaptic_(software)">GUI interfaces are built on top of command-line
+    tools.</a>
+  </p>
+
+</div>
+
+<div id="standard-file-descriptors" class="content">
+  <h2> The Standard File Descriptors </h2>
+  <p>
+    Each process on a *nix system is created with three open files,
+    <em>Standard In,</em> <em>Standard Out</em> and <em>Standard Error:</em>
+  </p>
+
+  <figure>
+    <img src="assets/img/stdin-stdout-stderr.png" style="width: 100%;">
+  </figure>
+
+  <p>
+    Although these files are opened for each process on the system, they
+    make the most sense at (and are used most often at) the command line.
+    Standard in is usually the terminal keyboard.
+    Standard out and standard error are usually the terminal screen.
+  </p>
+
+  <p>
+    Consider the <em>echo</em> utility.
+    This program reads each argument passed to it, and prints it to standard
+    out:
+  </p>
+
+  <div class="code">
+    $ echo one two three <br>
+    one two three <br>
+  </div>
+
+  <p>
+    Neither STDIN nor STDERR are used.
+    Rather, the arguments are passed to the kernel in the
+    <em><a href="https://www.man7.org/linux/man-pages/man2/execve.2.html">execve(pathname, argv, envp)</a></em>
+    system call; they are placed within the address space of <em>echo</em>,
+    which simply reads them from itself, and prints them to standard out:
+  </p>
+
+  <figure>
+    <img src="assets/img/echo-std.png" style="width: 80%;">
+  </figure>
+
+  <p>
+    As each line is read by the shell, it is broken down into tokens, which
+    are delimited by space(s) or tab(s).
+    The first token (here, '<code>echo</code>') is always interpreted as a command.
+    The other tokens are passed as arguments, so that our call to echo
+    passes three arguments.
+  </p>
+
+  <p>
+    Now consider the <em>cat</em> utility:
+  </p>
+
+  <div class="code">
+    $ cat foo bar <br>
+    &lt;contents of 'foo'&gt; <br>
+    &lt;contents of 'bar'&gt; <br>
+  </div>
+</div>
+
+<div id="references" class="content">
+  <h2> References </h2>
+  <ol>
+    <li> Kerrisk, Michael.  <em>The Linux Programming Interface</em>. San Francisco, CA, No Starch Press, 2010.</li>
+    <li>
+        Bryant, R. E., & O'Hallaron, D. R. (2016).  Processes. In <em>Computer Systems: A Programmer's Perspective</em> (3rd ed., p. 732).  Upper Saddle River, New Jersey: Pearson. </li>
+  </ol>
+
+</div>
