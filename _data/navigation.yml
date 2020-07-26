@@ -8,6 +8,8 @@
   link: /files-and-filesystems.html
 - name: Processes
   link: /processes.html
+- name: Command Line
+  link: /command-line.html
 - name: Text Terminals
   link: /text-terminals.html
 - name: Finding Files
