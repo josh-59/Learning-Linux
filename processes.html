@@ -41,7 +41,7 @@ last-updated: July, 2020
   <p>
   A process is an instance of an executing program.<sup><a href="#references">[1]</a></sup><sup><a href="#references">[2]</a></sup>
     A <em>program</em> (also known as an "executable file")
-    contains the information required to
+    contains all information required to
     construct a process.<sup><a href="#references">[1]</a></sup>
     The  process is, after the <em>file,</em> the most important
     abstraction of operating systems.
@@ -150,12 +150,9 @@ last-updated: July, 2020
     Upon birth, each process is given its own process id (PID) number by the kernel.
     This is guaranteed to be unique to the process, serves as the kernel's handle
     to the process, and remains constant throughout the process's life.
+    For detailed information about processes in the Linux environment, see
+    <a href="https://www.man7.org/tlpi/"> The Linux Programming Interface</a>.
   </p>
-
-  <h3>See Also:</h3>
-  <ul>
-    <li><a href="https://www.man7.org/tlpi/"> The Linux Programming Interface</a> Chapter 24: Process Creation </li>
-  </ul>
 </div>
 
 <div class="content" id="sandbox">
@@ -221,7 +218,7 @@ last-updated: July, 2020
 
   <p>
     Some archaic operating systems (such as the
-    <a href="https://en.wikipedia.org/wiki/Exec_(Amiga)">Amiga</a>
+    <a href="https://en.wikipedia.org/wiki/Exec_(Amiga)">Amiga</a>)
     allowed processes direct access to
     the system's main memory; processes effectively shared the same address space.
     This posed significant issues for system stability and security&mdash;
