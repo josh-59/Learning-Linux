@@ -5,11 +5,20 @@ title: "Going Further: Programming in *nix"
 last-updated: July, 2020
 ---
 
+<!--
+  TODO
+
+  "Theory and practice sometimes clash, and when they do, theory loses.
+  Every Single Time."
+  https://lwn.net/Articles/326505/
+
+-->
+
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#c"> C </a></li>
-        <li><a href="#systems-programming"> Other Systems Programming Languages </a></li>
+        <li><a href="#rust"> Rust </a></li>
         <li><a href="#general-cs"> General Computer Science </a></li>
         <li><a href="#scripting"> Scripting </a></li>
         <li><a href="#web-dev"> Web Development </a></li>
@@ -22,14 +31,6 @@ last-updated: July, 2020
 
 <div id="introduction" class="content">
 	<h1>Going Further: Programming in *nix</h1>
-  {% comment %}
-  <div class="quote-text">
-    "From here on out, an exclamation point means "not"."
-  </div>
-  <div class="quote-ref">
-    &mdash;Professor Kraft
-  </div>
-  {% endcomment %}
   <h4>Under Construction!</h4>
 
 </div>
@@ -109,14 +110,42 @@ last-updated: July, 2020
   </ul>
 </div>
 
-<div id="systems-programming" class="content">
-  <h2>Other Systems Programming Languages</h2>
+<div id="rust" class="content">
+  <h2> Rust </h2>
   <p>
-    C belongs to a class of programming languages known as
-    <em>systems programming languages:</em> It is suitable for use in
-    the production of non-application software, such as drivers and kernels.
-    While there have been many attempts to supersede C, I wish to discuss only two.
+    Rust is the next systems programming language, and, to speak frankly,
+    the place to be.
+    Just check out some of these projects:
   </p>
+
+  <ul>
+    <li><a href="https://github.com/sharkdp/bat">bat</a>&mdash; A drop-in replacement
+      for <em>cat</em> that does syntax highlighting and paging (when connected
+      to an interactive terminal) </li>
+    <li><a href="https://github.com/ClementTsang/bottom">bottom</a>&mdash;
+      A(nother) replacement for <em>top</em></li>
+    <li><a href="https://github.com/rust-unofficial/awesome-rust#audio-and-music">Awesome Rust</a>&mdas;
+      A big-ass list of such projects
+  </ul>
+
+  <p>
+    Rust's command-line utility, <a href="https://doc.rust-lang.org/cargo/">cargo</a>,
+    is super-modern, and incorporates a package manager.
+  </p>
+
+  <p>
+    Rust is not an easy language to learn, but facilitates safe memory usage
+    and safe concurrent programming.
+  </p>
+
+  <h3> See Also </h3>
+  <ul>
+    <li><a href="https://corecursive.com/013-rust-and-bitter-c-developers-with-jim-blandy/"> Rust and Bitter C++ Developers with Jim Blandy </a> (Podcast)</li>
+  </ul>
+</div>
+
+<div id="other-systems-programming" class="content">
+  <h2>Other Systems Programming Languages</h2>
 
   <h3> C++ </h3>
   <p>
@@ -135,17 +164,6 @@ last-updated: July, 2020
     Second, in practice, the tendency is to use only a portion of the full
     language, meaning that handy features go unused, simply because they are
     not known.
-  </p>
-
-  <h3> Rust </h3>
-  <p>
-    I <em>really like</em> Rust.  Overall, it is super-modern.
-    Its command-line utility,
-    <code>cargo</code>, is superb, and its approach towards memory management
-    is very intelligent.
-    I truly believe that it is the systems programming
-    language of the next 20 years.
-    Unfortunately, I have not learned enough about Rust to say much more than this.
   </p>
 
   <h3> Other <em>Other</em> Systems Programming Languages </h3>
@@ -237,90 +255,7 @@ last-updated: July, 2020
     </ul>
 </div>
 
-<div class="content" id="programs">
-  <h2> Programs </h2>
-
-  <p>
-    As stated above, a program is a file containing instructions on how to create
-    a process.
-    Most programs are in binary format, which means that they
-    have been compiled for native use by the computer.
-    </p>
-
-    <p>
-        The first Unix binary executable file format was called <em>a.out,</em>
-        which stood for <em>assembler output.</em><sup><a href="https://en.wikipedia.org/wiki/A.out">[5]</a></sup>
-        This was a very simple format, with three distinct data segments that
-        coincided with the layout of the resulting process's memory:
-    </p>
-
-  <ol>
-    <li> Text &mdash; Machine instructions </li>
-    <li> Data &mdash; Initial values for global and static variables</li>
-    <li> BSS &mdash; Uninitialized global and static variable values; assigned arithmetic zero by the kernel upon loading</li>
-  </ol>
-
-  <p>
-    The binary format currently in use is
-    <a href="https://wiki.osdev.org/ELF">ELF</a>.
-    Command-line tools for peeking into such a file
-    include:<sup><a href="https://en.wikipedia.org/wiki/Executable_and_Linkable_Format#Tools">[21]</a></sup>
-  </p>
-
-  <ul>
-    <li> <code>file</code> &mdash; Provide a brief description of any filetype</li>
-    <li> <code>size</code> &mdash; List section sizes above<li>
-    <li> <code>readelf</code> &mdash; Display detailed information about ELF files</li>
-    <li> <code>objdump</code> &mdash; "... mostly useful to programmers who are working on compilation tools,
-      as opposed to programmers who just want their program to compile and
-      work."<sup><a href="https://www.man7.org/linux/man-pages/man1/objdump.1.html">[19]</a></sup></li>
-  </ul>
-
-  <h3> Script </h3>
-  <p>
-    A script is a text file that is executable.
-    Scripts must begin with the magic characters <em>#!</em> , then the
-    complete pathname of the desired interpreter, as in
-  </p>
-
-  <div class="aside-right">
-    <h4>Aside:</h4>
-    <p>
-      To execute a file in the current working directory, use
-      <br><center><code>./file</code></center><br>
-    </p>
-  </div>
-
-  <div class="code">
-    #! /bin/bash
-  </div>
-
-  <p>
-    or
-  </p>
-
-  <div class="code">
-    #! /usr/bin/python.
-  </div>
-
-  <p>
-    This line is often called <em>shebang</em> or <em>hashbang</em>.
-    Note that this feature is implemented by the kernel:  The kernel
-    itself is passed the script via <em>exec</em>, and
-    goes about executing the interpreter given, with the file as an
-    argument to it.<sup><a href="https://en.wikipedia.org/wiki/Shebang_(Unix)#History">[5]</a></sup>
-    Also, Bash will attempt to execute the file within a subshell,
-    if no hashbang line exists.<sup><a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Scripts.html#Shell-Scripts">[22]</a></sup>
-  </p>
-
-
-</div>
-
-
 <div class="content">
-
-
-
   <h2> Web Development </h2>
   <ul>
     <li><a href="https://www.theodinproject.com">The Oden Project</a></li>
