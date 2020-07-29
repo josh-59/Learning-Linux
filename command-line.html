@@ -79,7 +79,7 @@ last-updated: July, 2020
     Rather, the arguments are passed to the kernel during the
     <em><a href="https://www.man7.org/linux/man-pages/man2/execve.2.html">execve(pathname, argv, envp)</a></em>
     system call, which places them within the address space of <em>echo</em>,
-    which in turn simply reads them from within itself and prints them to standard out:
+    which in turn simply reads them from within itself and prints them to its standard out:
   </p>
 
   <figure>
@@ -89,7 +89,7 @@ last-updated: July, 2020
   <p>
     The name <em>argv</em> is short for <em>argument vector,</em> and
     is an array of character pointers.
-    It exists within each process, and the first element it points at
+    It exists within each process, and the first element it points to
     is always the name of the called program.
     If you want to learn more about the argument vector, see <em>The C Programming Language</em>.
   </p>
@@ -99,9 +99,28 @@ last-updated: July, 2020
     As each line is read by the shell, it is broken down into tokens, which
     are delimited by space(s) or tab(s).
     The first token (here, '<code>echo</code>') is always interpreted as a command.
-    The other tokens are passed as arguments, so that our call to echo
-    passes three arguments.
+    The other tokens were interpreted as arguments, so that our call to echo
+    passed three arguments.
   </p>
+
+  <p>
+    By default, the shell connects a command-line tool's <em>Standard-out</em>
+    to the terminal screen.  We can change this, though:
+  </p>
+
+  <div class="code">
+    $ echo one two three > boo <br>
+  </div>
+
+  <p>
+    This is called <em>redirection</em>&mdash; Formally, we have redirected the
+    standard out of the <code>echo</code> utility to a file called <code>boo</code> by using
+    the redirection operator <code>&gt;</code>.
+    This is a facility of the shell; <code>echo</code> is not involved in any way.
+    In the command above, the shell first opens
+    the file <code>boo</code>, creating it if it does not exist, and truncating it
+    to zero length if it does exist (and is writeable).
+    Then the shell connects the standard out to that
 
   <p>
     Now consider the <em>cat</em> utility:
