@@ -4,65 +4,51 @@ title: "Going Further: Programming in *nix"
 last-updated: July, 2020
 ---
 
-<!--
-  TODO
-
-  "Theory and practice sometimes clash, and when they do, theory loses.
-  Every Single Time."
-  https://lwn.net/Articles/326505/
-
--->
-
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#c"> C </a></li>
         <li><a href="#rust"> Rust </a></li>
+        <li><a href="#c-plus-plus"> C++ </a></li>
         <li><a href="#general-cs"> General Computer Science </a></li>
-        <li><a href="#scripting"> Scripting </a></li>
-        <li><a href="#web-dev"> Web Development </a></li>
-        <li><a href="#kernel-dev"> Kernel Development </a></li>
-        <li><a href="#bryan-cantrill"> Bryan Cantrill </a></li>
+        <li><a href="#closing-remarks"> Closing Remarks </a></li>
         <li><a href="#references"> References </a></li>
     </ul>
 </div>
 
 <div id="introduction" class="content">
 	<h1>Going Further: Programming in *nix</h1>
-  <h4>Under Construction!</h4>
+  <div class="quote-text">
+  "Theory and practice sometimes clash. <br>
+  And when that heppens, theory loses.
+  Every single time."
+  </div>
+  <div class="quote-ref">
+    &mdash;<a href="https://lwn.net/Articles/326505/">Linus Torvalds</a>
+  </div>
 
 </div>
 
 <div id="c" class="content">
   <h2> C </h2>
-  {% comment %}
-  <div class="quote-text">
-    All right-thinking people know that
-  <span style="display:inline-block; width: 50pt;"></span><br>
-  <span style="display:inline-block; width: 50pt;"></span>
-    (a) K&R are <strong>right</strong> and (b) K&R are right
-  </div>
-  <div class="quote-ref">
-    &mdash;<a href="https://www.kernel.org/doc/html/v4.10/process/coding-style.html">Linus Torvalds</a>
-  </div>
-  {% endcomment %}
   <p>
     C is the <em>lingua franca</em> of
     programming.<sup><a href="https://wiki.osdev.org/Required_Knowledge">[1]</a><a href="#references">[2]</a></sup>
-    As such, it would be a mistake to put any other programming language first.
+    As such, it would be a mistake to put any other language first.
     For instance, the executable binary file format <em>ELF</em> is defined in C.
     Bash, Zsh, as well as the reference Python interpreter, are written in C.
-    Most importantly, the Linux kernel is written in C, and as such, C
+    Also, the Linux kernel is written in C, and as such, the language
     is the "native tongue" of each system call.
     For example, when querying the kernel about a file through the system
-    call <em><a href="https://www.man7.org/linux/man-pages/man2/stat.2.html">stat</a>,</em>
-    a C struct is returned.
+    call <em>stat,</em>
+    <a href="https://www.man7.org/linux/man-pages/man2/stat.2.html">a C struct is returned</a>.
   </p>
 
   <p>
-    C is not a large language, but is difficult to master.
+    "C is not a large language," say Brian Kerninghan and Dennis Ritchie<sup><a href="#references">[3]</a></sup>,
+    but it is difficult to master.
     It is often called "portable assembly" because it closely
-    mirrors the abstractions of the machine itself.<sup><a href="https://youtu.be/HgtRAbE1nBM?t=1021">[4]</a></sup>
+    mirrors the abstractions of the machine itself.
     A central feature of the language, and the principal reason for its
     difficulty, is that C expects the programmer to manually (explicitly)
     address memory, through variables called <em>pointers.</em>
@@ -111,8 +97,9 @@ last-updated: July, 2020
 <div id="rust" class="content">
   <h2> Rust </h2>
   <p>
-    Rust is the next systems programming language, and, to speak frankly,
-    the place to be.
+    Rust is the next systems programming language, and the place to be, so-to-speak.
+    I think that most, if not all, GNU/Linux code will be rewritten in Rust, but
+    that this is going to occur incrementally.
     Just check out some of these projects:
   </p>
 
@@ -130,19 +117,26 @@ last-updated: July, 2020
 
   <p>
     Rust's command-line utility, <a href="https://doc.rust-lang.org/cargo/">cargo</a>,
-    is super-modern, and incorporates a package manager.
+    is super-modern, and also incorporates a package manager.
+    Libraries available there are unique among systems-programming-language
+    libraries because their users are <em>guaranteed</em> (through the rust compiler)
+    that software available on it is memory-safe.
   </p>
 
   <p>
     Rust is not an easy language to learn, but facilitates safe memory usage
     and safe concurrent programming.
   </p>
+
+  <h3>See Also:</h3>
+  <ul>
+    <li> <a href="https://youtu.be/2wZ1pCpJUIM"> Bryan Cantrill on Rust and Other Interesting Things </a></li>
+    <li> <a href="https://rustup.rs/"> rustup.rs - The Rust Toolchain Installer </a></li>
+  </ul>
 </div>
 
-<div id="other-systems-programming" class="content">
-  <h2>Other Systems Programming Languages</h2>
-
-  <h3> C++ </h3>
+<div id="c-plus-plus" class="content">
+  <h2> C++ </h2>
   <p>
     Stay away from C++.
     Originally, this language was called <em>C with Classes,</em> and this name
@@ -163,18 +157,8 @@ last-updated: July, 2020
 
   <p>
     Curiously, experienced programmers who switch from C++ to Rust
-    liken it to, "... getting out of a bad relationship."<sup><a href="https://corecursive.com/013-rust-and-bitter-c-developers-with-jim-blandy/">[10]</a></sup>
-
+    liken it to getting out of a bad relationship<sup><a href="https://corecursive.com/013-rust-and-bitter-c-developers-with-jim-blandy/">[4]</a><a href="https://youtu.be/HgtRAbE1nBM">[5]</a></sup>
   </p>
-
-  <h3> Other <em>Other</em> Systems Programming Languages </h3>
-  <ul>
-    <li> C# </li>
-    <li> Swift </li>
-    <li> Objective-C </li>
-    <li> Objective-C++ </li>
-    <li> Go </li>
-  </ul>
 
   <h3> See Also: </h3>
   <ul>
@@ -256,15 +240,30 @@ last-updated: July, 2020
     </ul>
 </div>
 
-<div class="content">
-  <h2> Web Development </h2>
+<div class="content" id="closing-remarks">
+  <h3>Closing Remarks</h3>
+  <p>
+    Thanks for reading!
+    I'd like to say <em>"Thanks"</em> to a few people.
+    While I never met any of them, they each are heroes of mine:
+  </p>
+
   <ul>
-    <li><a href="https://www.theodinproject.com">The Oden Project</a></li>
-    <li><a href="https://eloquentjavascript.net/">Eloquent Javascript</a></li>
+    <li> <a href="https://www.youtube.com/channel/UCrUL8K81R4VBzm-KOYwrcxQ">Engineer Man</a>&mdash; Who got me started with Linux and programming</li>
+    <li> Brian Kernigham&mdash; Whose book, <a href="https://www.cs.princeton.edu/~bwk/memoir.html"><em>Unix: A History and Memoir</em></a>,
+      grounded the study in concrete history </li>
+    <li> Ken Thompson&mdash; And all the other geniuses of Bell Labs who
+      laid the foundation of <em>Unix</em></li>
+    <li> Linus Torvalds&mdash; Who made Linux!</li>
   </ul>
 
+  <p>
+    Thanks!
+  </p>
 </div>
 
+
+<!--
 <div class="content" id="kernel-dev">
   <h2> Kerenel Development </h2>
   <div class="quote-text">
@@ -274,38 +273,25 @@ last-updated: July, 2020
     <a href="https://www.kernel.org/doc/html/latest/process/howto.html#introduction">The Linux Kernel Documentation</a>
   </div>
 
-  https://github.com/trimstray/the-book-of-secret-knowledge
-  https://github.com/mtdvio/every-programmer-should-know/blob/master/README.md
-  wiki.osdev.org
 
 <li><a href="https://www.kernel.org/doc/html/v4.10/process/coding-style.html"> Linux Kernel Coding Style</a> (Written by Linux Torvalds) </li>
 </div>
 
-git handbook:
-https://guides.github.com/introduction/git-handbook/
-
 Linux kernel coding style (Linux Torvalds)
 https://www.kernel.org/doc/html/v4.10/process/coding-style.html
 
-      <li><a href="http://www.man7.org/tlpi/index.html">The Linux Programming Interface</a><sup>(Not Free)</sup></li>
-
       HOWTO do Linux kernel development (Official)
       https://www.kernel.org/doc/html/latest/process/howto.html#documentation
-
-          <li><a href="https://www.kernel.org/doc/html/latest/process/index.html"> Working with the kernel development community - The Linux Kernel documentation</a> </li>
-
-          <li><a href="http://www.kroah.com/lkn/"> Linux Kernel in a Nutshell</a> by Greg Kroah-Hartman (Free book. Discusses building custom kernels.)</li>
-
-</div>
-<div id="bryan-cantrill" class="content">
-    <h2>Bryan Cantrill</h2>
-    <iframe class="video" src="https://www.youtube.com/embed/HgtRAbE1nBM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
+<li><a href="https://www.kernel.org/doc/html/latest/process/index.html"> Working with the kernel development community - The Linux Kernel documentation</a> </li>
+  -->
 
 <div id="references" class="content">
     <h2> References </h2>
     <ol>
-        <li> <i>Unix Programmer's Manual, First Edition.</i>  <a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html"> https://www.bell-labs.com/usr/dmr/www/1stEdman.html </a> </li>
+        <li> Required Knowledge - OSDev Wiki. (2020, January 22). Retrieved July 29, 2020, from https://wiki.osdev.org/Required_Knowledge</li>
         <li> Kernighan, Brian. <i>Unix: A History and a Memoir.</i>  Published 2020, by Brian W. Kernighan via Kindle Direct Publishing. </li>
+        <li> Kernighan, B. W., &amp; Ritchie, D. M. (1988). <i>The C Programming Language</i> (2nd ed.). Englewood Cliffs,, NJ: Prentice Hall.</li>
+        <li> Blandy, J. (n.d.). Rust and Bitter C++ Developers with Jim Blandy [Interview by A. G. Bell]. Corecursive. Retrieved July 29, 2020, from https://corecursive.com/013-rust-and-bitter-c-developers-with-jim-blandy/.</li>
+        <li> Campbrill, B. (2018). <i>Is It Time to Rewrite the Operating System in Rust?</i>. Lecture presented at QCon, San Francisco, 2018.</li>
     </ol>
 </div>
