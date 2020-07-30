@@ -180,16 +180,6 @@ last-updated: July, 2020
   </p>
 </div>
 
-<p>
-  Shells contain functions of their own;  that may be
-    called as though they were ordinary executables.
-    These commands are called <em>builtins,</em> and implement functionality
-    too closely tied with the shell to be separate.
-    For instance, the <em>cd</em> command must be implemented as a
-    builtin because the system call to change a process's working directory
-    (<em> <a href="https://man7.org/linux/man-pages/man2/chdir.2.html">int chdir(const char *path)</a></em>) acts on the calling process alone!
-  </p>
-
 <div class="content" id="closing-remarks">
   <h2> Closing Remarks </h2>
   <p>
@@ -207,6 +197,35 @@ last-updated: July, 2020
       &emsp;execute(line);<br>
     }
   </div>
+
+  <h3> The Builtin Confusion </h3>
+  <p>
+    Shells contain many functions of their own.
+    These commands are called <em>builtins,</em> and implement functionality
+    too closely tied with the shell to be separate.
+    For instance, the <em>cd</em> command must be implemented as a
+    builtin (because the system call to change a process's working directory,
+    <em> <a href="https://man7.org/linux/man-pages/man2/chdir.2.html">int chdir(const char *path)</a></em>)=,
+    acts on the calling process alone.
+  </p>
+
+  <p>
+    The confusion arises when the shell implements a command like <em>echo</em>
+    as a builtin.
+    In this situation, echo exists as a program on PATH, so that <em>which echo</em>
+    returns a path, but that program is not called when echo is called.
+    Modern shells (in particular, <em>nushell</em>) will warn you of this when you
+    call <em>which</em>, but older shells like bash do not.
+    In bash, if you suspect that a command like <em>echo</em> is builtin, you can check with
+    "help echo".
+  </p>
+
+  <p>
+    In practice, this detail is rarely an issue, but it occasionally is, and it
+    is confusing.
+    You can "force" the external program with an absolute pathname,
+    e.g., <em>$(which echo) hello world</em>.
+  </p>
 
   <h3> Convention: $ and # </h3>
 
