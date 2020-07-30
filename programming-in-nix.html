@@ -28,6 +28,15 @@ last-updated: July, 2020
     &mdash;<a href="https://lwn.net/Articles/326505/">Linus Torvalds</a>
   </div>
 
+  <p>
+    My passion lies in systems programming.  
+    I have little
+    interest in so-called scripting languages, such as Python and Ruby; nothing
+    against them, they just don't do anything that I want to do, and it's as 
+    simple as that.
+    So, I won't say anything about them.
+    </p>
+
 </div>
 
 <div id="c" class="content">
@@ -37,28 +46,12 @@ last-updated: July, 2020
     programming.<sup><a href="https://wiki.osdev.org/Required_Knowledge">[1]</a><a href="#references">[2]</a></sup>
     As such, it would be a mistake to put any other language first.
     For instance, the executable binary file format <em>ELF</em> is defined in C.
-    Bash, Zsh, as well as the reference Python interpreter, are written in C.
-    Also, the Linux kernel is written in C, and as such, the language
-    is the "native tongue" of each system call.
+    Bash, Zsh, as well as the reference Python interpreter, are all written in C.
+    Also, the Linux kernel is written in C, so that the language
+    is the "native tongue" of every system call.
     For example, when querying the kernel about a file through the system
     call <em>stat,</em>
-    <a href="https://www.man7.org/linux/man-pages/man2/stat.2.html">a C struct is returned</a>.
-  </p>
-
-  <p>
-    "C is not a large language," say Brian Kerninghan and Dennis Ritchie,<sup><a href="#references">[3]</a></sup>
-    but it is difficult to master.
-    It is often called "portable assembly" because it closely
-    mirrors the abstractions of the machine itself.
-    A central feature of the language, and the principal reason for its
-    difficulty, is that C expects the programmer to manually (explicitly)
-    address memory, through variables called <em>pointers.</em>
-    Moreover, memory is often allocated and deallocated manually (explicitly)
-    by the programmer.
-    With this combination, there are many possible avenues of failure, including
-    syntax errors, dangling pointers, double-free'ing, memory leaks,
-    going past the end of an allocated memory segment, and
-    the glorious segmentation fault.
+    <a href="https://www.man7.org/linux/man-pages/man2/stat.2.html">a C struct is used</a>.
   </p>
 
   <div class="aside-right">
@@ -70,22 +63,29 @@ last-updated: July, 2020
   </div>
 
   <p>
-    The C Programming Language shows its age in a few ways.
-    First, its command-line interface is not unified.
-    There is a preprocessor, separate from the compiler; there is also a linker and an assembler.
-    While <code>gcc</code> executes each of these for you in a single step,
-    it is not as slick an interface as Mozilla Rust's <em>cargo</em> utility,
-    which, in addition to the above, also handles packaging and make-ing.
-  </p>
+    "C is not a large language," say Brian Kerninghan and Dennis Ritchie,<sup><a href="#references">[3]</a></sup>
+    but it is difficult to master: 
+    A great deal of the burdern of 
+    <em>correctness</em> rests with the programmer.
+    That is, it's easy to make mistakes that the compiler won't catch.
+    </p>
 
-  <p>
-    Another way that C shows its age is, well, its memory management.
-    Each language since has, to my mind, first decreed their own philosophy regarding memory&mdash;
-    i.e., "This is how <em>we're</em> going to handle memory."
-    Each new philosophy carries its own set of problems.
-    Garbage collection is too slow and unpredictable for systems programming,
-    and Rust's method requires a nontrivial understanding of
-    the language's idea of ownership.
+    <p>
+    A central feature of the language, and the principal reason for its
+    difficulty, is that C expects the programmer to manually (explicitly)
+    address memory, through variables called <em>pointers.</em>
+    Moreover, memory is often allocated and deallocated manually (explicitly)
+    by the programmer.
+    With this combination, there are many possible avenues of failure, including
+    syntax errors, dangling pointers, double-free'ing, memory leaks,
+    running off the end of an array, and
+    the glorious segmentation fault.
+    </p>
+
+    <p>
+    C is often called "portable assembly" because it closely
+    mirrors the abstractions of the machine itself.
+    It has been the standard systems programming language for fifty years.
   </p>
 
   <h3> See Also: </h3>
@@ -99,8 +99,6 @@ last-updated: July, 2020
   <h2> Rust </h2>
   <p>
     Rust is the next systems programming language, and the place to be, so-to-speak.
-    I think that most, if not all, GNU/Linux code will be rewritten in Rust, but
-    that this is going to occur incrementally.
     Just check out some of these projects:
   </p>
 
@@ -120,8 +118,8 @@ last-updated: July, 2020
     Rust's command-line utility, <a href="https://doc.rust-lang.org/cargo/">cargo</a>,
     is super-modern, and also incorporates a package manager.
     Libraries available there are unique among systems-programming-language
-    libraries because their users are <em>guaranteed</em> (through the rust compiler)
-    that software available on it is memory-safe.
+    libraries because they are <em>guaranteed</em> to be memory/concurrency
+    safe, through the Rust compiler.
   </p>
 
   <p>
@@ -218,9 +216,9 @@ last-updated: July, 2020
       <li style="padding-top: 0;">
         <p><strong>Data Structures</strong>&mdash;
           After learning a programming language or two,
-          data structures are the next most important thing to learn in becoming a developer;
+          data structures are the next thing to learn in becoming a developer&mdash;
           some understanding of discrete math is a required.
-          The typical methodology in writing a program is to
+          To illustrate, the typical methodology in writing a program is to
           <em>first select the most appropriate data structure,</em>
           then build the rest of the program around it.
         </p>
@@ -242,6 +240,25 @@ last-updated: July, 2020
       </li>
     </ul>
 </div>
+
+<!--
+
+<div class="content" id="study-tlpi">
+    <h4> Modern Linux </h4>
+    <p>
+        Of the 64 chapters in Kerrisk's terrific <em>The Linux Programming
+        Interface,</em> the first three are an introduction.
+        Approximately nine chapters are dedicated to files, filesystems 
+        and directories.
+        Processes consume 16 chapters, and an additional 5 are devoted to
+        threads.  
+        Ten chapters are given to miscellaneous systems facilities, such as
+        system time,
+        but the most chapters (21) are devoted to Interprocess Communication&mdash;
+        signals, pipes, sockets, etc., where there are many redundancies. 
+    </p>
+</div>
+ -->
 
 <div class="content" id="closing-remarks">
   <h2>Closing Remarks</h2>
@@ -302,3 +319,4 @@ https://www.kernel.org/doc/html/v4.10/process/coding-style.html
         <li> Cantrill, B. (2018). <i>Is It Time to Rewrite the Operating System in Rust?</i>. Lecture presented at QCon, San Francisco, 2018.</li>
     </ol>
 </div>
+
