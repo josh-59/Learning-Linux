@@ -213,21 +213,48 @@ last-updated: July, 2020
     The confusion arises when the shell implements a command like <em>echo</em>
     as a builtin.
     In this situation, echo exists as a program on PATH, so that <em>which echo</em>
-    returns a path, but that program is not called when echo is called.
+    prints a path, but that program is not called when echo is called.
     Modern shells (in particular, <em>nushell</em>) will warn you of this when you
     call <em>which</em>, but older shells like bash do not.
-    In bash, if you suspect that a command like <em>echo</em> is builtin, you can check with
-    "help echo".
+    In bash, if you suspect that a command like <em>echo</em> is builtin, you can check with,
   </p>
 
+  <div class="code">
+    $ help echo
+  </div>
+
   <p>
+    If a shell help page exists, then it is a builtin.
     In practice, this detail is rarely an issue, but it occasionally is, and it
     is confusing.
     You can "force" the external program with an absolute pathname,
-    e.g., <em>$(which echo) hello world</em>.
+    e.g.,
   </p>
 
+  <div class="code">
+    $ /bin/echo hello world
+  </div>
+
+  or
+
+  <div class="code">
+    $ $(which echo) hello world.
+  </div>
+
   <h3> Convention: $ and # </h3>
+  <p>
+    By convention, the dollar-sign symbol <em>$</em> denotes
+    the command-line prompt with ordinary user permissions.
+    The hash symbol <em>#</em> denotes the command-line prompt with root permissions:
+  </p>
+
+  <div class="code">
+    $ cat archlinux-2020.07.02-pbp.img > /dev/sdb <br>
+    bash: /dev/sdb: Permission denied <br>
+    $ sudo -i <br>
+    [sudo] password for josh: <br>
+    # cat archlinux-2020.07.02-pbp.img > /dev/sdb <br>
+  </div>
 
   <h3> See Also: </h3>
   <ul>
