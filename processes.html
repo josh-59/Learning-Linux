@@ -18,6 +18,7 @@ last-updated: July, 2020
     <li><a href="#proccess-creation"> Process Creation </a></li>
     <li><a href="#sandbox"> Sandbox </a></li>
     <li><a href="#process-attributes"> Process Attributes </a></li>
+    <li><a href="#closing-remarks"> Closing Remarks </a></li>
 
     <li><a href="#references"> References </a></li>
   </ul>
@@ -293,17 +294,24 @@ last-updated: July, 2020
 
 <div id="closing-remarks" class="content">
     <h2> Closing Remarks </h2>
+
+    <h3> Dynamic vs. Static </h3>
   <p>
     We pause our discussion to give definitions of the words <em>dynamic</em> and <em>static.</em>
     An action occurs dynamically with respect to a process if it occurs during process
     execution.
-    For instance, the kernel creates files <em>dynamically.</em>
-    Similarly, an element of the process environment is dynamic if it can change
-    during process execution.
+    For instance, the kernel creates files <em>dynamically,</em> since the
+    only way to create a file is to have a process make an appropriate
+    <a href="https://www.man7.org/linux/man-pages/man2/open.2.html">open(2)</a> system call.
+    Similarly, the <a href="https://man7.org/linux/man-pages/man3/malloc.3.html">malloc(3)</a> library function
+    allocates memory dynamically.
+  </p>
+
+  <p>
     The obverse of dynamic is <em>static:</em>
     For any given process, an element of the programming environment is static with respect to the process if it is invariant
     throughout program execution.
-    For instance, the CPU architecture of a machine is static.
+    For instance, the CPU architecture of a machine is static for each process on it.
     Note that the contents of a file may be dynamic, or they may be static.
   </p>
 
