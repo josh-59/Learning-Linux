@@ -52,20 +52,12 @@ last-updated: July, 2020
   </p>
 
   <figure>
-    <img src="assets/img/stdin-stdout-stderr.png" style="width: 100%;">
+    <a href="assets/img/stdin-stdout-stderr.png"><img src="assets/img/stdin-stdout-stderr.png" style="width: 100%;"></a>
   </figure>
 
-  <div class="aside-right">
-    <h4>Aside:</h4>
-    <p>
-      Although these files are opened for every process,
-      we interact with them most often at the command line.
-    </p>
-  </div>
-
   <p>
-    Standard in is usually the terminal keyboard.
-    Standard out and standard error are usually the terminal screen.
+    At the command-line, standard in is usually the terminal keyboard;
+    standard out and standard error are usually the terminal screen.
   </p>
 
   <p>
@@ -80,20 +72,20 @@ last-updated: July, 2020
   </div>
 
   <p>
-    Here, neither STDIN nor STDERR are used (although they are technically open).
+    Here, neither STDIN nor STDERR are used (although they are open).
     Rather, the arguments are passed to the kernel during the
     <em><a href="https://www.man7.org/linux/man-pages/man2/execve.2.html">execve(pathname, argv, envp)</a></em>
     system call, which places them within the address space of <em>echo</em>,
-    which in turn simply reads them from within itself and prints them to its standard out:
+    which in turn simply reads them from within itself and prints them to (its) standard out:
   </p>
 
   <figure>
-    <img src="assets/img/echo-std.png" style="width: 80%;">
+    <a href="assets/img/echo-std.png"><img src="assets/img/echo-std.png" style="width: 80%;"></a>
   </figure>
 
   <p>
     The name <em>argv</em> is short for <em>argument vector,</em> and
-    is an array of character pointers.
+    is a pointer to an array of character pointers.
     It exists within each process, and the first element it points to
     is always the name of the called program.
     If you want to learn more about the argument vector, see <em>The C Programming Language</em>.
