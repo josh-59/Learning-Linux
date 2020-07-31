@@ -55,14 +55,26 @@ last-updated: July, 2020
     <a href="assets/img/stdin-stdout-stderr.png"><img src="assets/img/stdin-stdout-stderr.png" style="width: 100%;"></a>
   </figure>
 
+
+  <div class="aside-right">
+    <h4>Aside:</h4>
+    <p>
+      Although these files are opened for every process,
+      we interact with them most often at the command line.
+    </p>
+  </div>
+
   <p>
-    At the command-line, standard in is usually the terminal keyboard;
-    standard out and standard error are usually the terminal screen.
+    By default the shell connects each command-line utility's standard-in to
+    the keyboard, and both standard out and standard error to the terminal screen.
+    These are, in fact, the shell's <em>own</em> connections; each
+    process that the <a href="processes.html#proccess-creation">shell creates</a>
+    inherits the shell's file descriptors.
   </p>
 
   <p>
     Consider the <em>echo</em> utility.
-    This program reads each argument passed to it, and prints it to standard
+    This program reads each argument passed to it, and prints each to standard
     out:
   </p>
 
@@ -85,10 +97,9 @@ last-updated: July, 2020
 
   <p>
     The name <em>argv</em> is short for <em>argument vector,</em> and
-    is a pointer to an array of character pointers.
+    is a pointer to an array of character pointers.<sup><a href="#references">[1]</a></sup>
     It exists within each process, and the first element it points to
     is always the name of the called program.
-    If you want to learn more about the argument vector, see <em>The C Programming Language</em>.
   </p>
 
   <p>
@@ -101,8 +112,9 @@ last-updated: July, 2020
   </p>
 
   <p>
-    By default, the shell connects a command-line tool's <em>Standard-out</em>
-    to the terminal screen.  We can change this, though:
+    By default, the shell connects each command-line utility <em>Standard-out</em>
+    to the terminal screen, <em>Standard-in</em> to the keyboard, and
+    <em>Standard-error</em> to the  We can change this, though:
   </p>
 
   <div class="code">
@@ -111,13 +123,19 @@ last-updated: July, 2020
 
   <p>
     This is called <em>redirection</em>&mdash; Formally, we have redirected the
-    standard out of the <code>echo</code> utility to a file called <code>boo</code> by using
+    standard-out of the <code>echo</code> utility to a file called <code>boo</code> by using
     the redirection operator <code>&gt;</code>.
     This is a facility of the shell; <code>echo</code> is not involved in any way.
+  </p>
+
+  <p>
     In the command above, the shell first opens
     the file <code>boo</code>, creating it if it does not exist, and truncating it
     to zero length if it does exist (and is writeable).
-    Then the shell connects the standard out to that
+    Then the shell connects its own standard out to it, and executes echo.
+    Echo blindly prints its output to <em>standard out,</em> which happens to
+    be a file, instead of the terminal screen.
+  </p>
 
   <p>
     Now consider the <em>cat</em> utility:
@@ -202,18 +220,19 @@ last-updated: July, 2020
     too closely tied with the shell to be separate.
     For instance, the <em>cd</em> command must be implemented as a
     builtin (because the system call to change a process's working directory,
-    <em> <a href="https://man7.org/linux/man-pages/man2/chdir.2.html">int chdir(const char *path)</a></em>)=,
-    acts on the calling process alone.
+    <a href="https://man7.org/linux/man-pages/man2/chdir.2.html">chdir(2)</a>,
+    acts on the calling process alone, and therefore cannot be executed within
+    a fork of the process.
   </p>
 
   <p>
     The confusion arises when the shell implements a command like <em>echo</em>
     as a builtin.
-    In this situation, echo exists as a program on PATH, so that <em>which echo</em>
+    In this situation, echo exists as a program on PATH, so that "which echo"
     prints a path, but that program is not called when echo is called.
-    Modern shells (in particular, <em>nushell</em>) will warn you of this when you
+    Modern shells (e.g., <em><a href="https://www.nushell.sh/">nushell</a></em>) will warn you of this when you
     call <em>which</em>, but older shells like bash do not.
-    In bash, if you suspect that a command like <em>echo</em> is builtin, you can check with,
+    In Bash, if you suspect that a command like <em>echo</em> is builtin, you can check with,
   </p>
 
   <div class="code">
@@ -222,7 +241,7 @@ last-updated: July, 2020
 
   <p>
     If a shell help page exists, then it is a builtin.
-    In practice, this detail is rarely an issue, but it occasionally is, and it
+    In practice, this "builtin" detail is rarely an issue, but it occasionally is, and it
     is confusing.
     You can "force" the external program with an absolute pathname,
     e.g.,
@@ -262,9 +281,7 @@ last-updated: July, 2020
 <div id="references" class="content">
   <h2> References </h2>
   <ol>
-    <li> Kerrisk, Michael.  <em>The Linux Programming Interface</em>. San Francisco, CA, No Starch Press, 2010.</li>
-    <li>
-        Bryant, R. E., & O'Hallaron, D. R. (2016).  Processes. In <em>Computer Systems: A Programmer's Perspective</em> (3rd ed., p. 732).  Upper Saddle River, New Jersey: Pearson. </li>
+    <li> Kernighan, B. W., &amp; Ritchie, D. M. (1988). <i>The C Programming Language</i> (2nd ed.). Englewood Cliffs,, NJ: Prentice Hall.</li>
   </ol>
 
 </div>
