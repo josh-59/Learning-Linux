@@ -8,9 +8,7 @@ last-updated: July, 2020
   TODO
   Current working directory -> Change with system call
       -> Absolute and relative pathnames -> kernel feature?
-  File Access Permissions
   Memory layout
-  Environment variables
 -->
 
 <div id="nav_bar_2" class="nav">
@@ -277,16 +275,15 @@ last-updated: July, 2020
 <div class="content" id="process-attributes">
     <h2> Process Attributes </h2>
     <p>
-        Each process on the system has
+        Each process on the system has:
     </p>
 
-
-    		    Current working directory:
-    				<p>
-    					Each process has a <em>current working directory</em>, a place in
-              the directory tree.
-    				</p>
-
+    <ul>
+    		<li>Current working directory</li>
+        <li>File Access Permissions</li>
+        <li>Environment variables</li>
+        <li>Its own directory in <code>/proc</code></li>
+    </ul>
 
     <h3> See Also: </h3>
     <ul>
