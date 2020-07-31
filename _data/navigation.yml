@@ -18,5 +18,3 @@
   link: /package-management.html
 - name: "Going Further: Programming in *nix"
   link: /programming-in-nix.html
-- name: 'Appendix: The Command Line: A Tutorial Introduction'
-  link: /command-line-tutorial-introduction.html
