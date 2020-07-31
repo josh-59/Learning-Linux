@@ -1,0 +1,150 @@
+---
+layout: default
+title: The Command Line - A Tutorial Introduction
+last-updated: July, 2020
+---
+
+<div id="nav_bar_2" class="nav">
+  <ul>
+    <li><a href="#introduction"> Introduction </a></li>
+    <li><a href="#bringing-up-the-command-line"> Bringing Up The Command Line</a></li>
+    <li><a href="#shells-and-terminals"> Shells vs. Terminals </a></li>
+  </ul>
+</div>
+
+<div id="introduction" class="content">
+  <h1>Terminal Boss</h1>
+  <h4> You da man! (or woman!)</h4>
+
+  <p>
+    The command-line is uniquely *nix.
+    As a user interface, it is exceptionally powerful:
+    Anything that can be done on a Unix-like system can be done through
+    the command-line alone.
+    This essay is intended to bring you "up to speed" on the use of the command line.
+    Click on any image to zoom.
+  </p>
+</div>
+
+<div id="bringing-up-the-command-line" class="content">
+  <h2> Bringing Up The Command Line </h2>
+  <p>
+    We will assume that you are using <a href="https://www.linuxmint.com/">Linux Mint, Cinammon Edition</a>,
+    a user-friendly, professional and powerful operating system.
+    We access the command line through a <em>terminal.</em>
+    On a default installation, the terminal is available from the desktop:
+  </p>
+
+  <figure >
+    <a href="assets/img/mint-terminal-screenshots/terminal-pointed.png"><img src="assets/img/mint-terminal-screenshots/terminal-pointed.png" style="width:100%;"></a>
+  </figure>
+
+  <p>
+    Clicking on it once brings up the command line:
+  </p>
+
+  <figure>
+    <a href="assets/img/mint-terminal-screenshots/terminal.png"><img src="assets/img/mint-terminal-screenshots/terminal.png" style="width:100%;"></a>
+  </figure>
+
+  <p>
+    Although there are other ways to access the command-line, in practice they
+    are rarely used.
+    On the left is the <em>prompt:</em>
+  </p>
+
+  <figure>
+    <a href="assets/img/mint-terminal-screenshots/terminal-prompt.png"><img src="assets/img/mint-terminal-screenshots/terminal-prompt.png" style="width:100%;"></a>
+  </figure>
+
+  <p>
+    The prompt gives us useful information about the state of the shell.
+    It's configurable, but this one is pretty common.
+  </p>
+
+  <figure>
+    <a href="assets/img/mint-terminal-screenshots/terminal-prompt-decorated.png"><img src="assets/img/mint-terminal-screenshots/terminal-prompt-decorated.png" style="width:100%;"></a>
+  </figure>
+
+  <p>
+    You'll spend a lot of time configuring the prompt :)
+    The prompt being displayed tells us that the shell is ready to receive a command.
+    So let's try one:
+  </p>
+
+  <figure>
+    <a href="assets/img/mint-terminal-screenshots/echo.png"><img src="assets/img/mint-terminal-screenshots/echo.png" style="width:100%;"></a>
+  </figure>
+
+  <p>
+    Here our command was <em>echo</em>.  This command simply prints out the <em>arguments</em>
+    that were given to it.
+    Our arguments were "Hello," and "World!"
+    Oh, and the little outline square is called the "cursor."
+    You can move it around with the arrow keys, but let's do something useful:
+  </p>
+
+  <p>
+    You might think the <em>echo</em> utility is trivial, but in practice it's
+    quite useful.
+    It can be used to quickly create files, to display the value of shell variables
+    and to debug commands before you use them.
+  </p>
+
+  <figure>
+    <a href="assets/img/mint-terminal-screenshots/ls.png"><img src="assets/img/mint-terminal-screenshots/ls.png" style="width:100%;"></a>
+  </figure>
+
+  <p>
+    Here we've used the command <code>ls</code> without arguments.
+    This lists the files and directories in the current working directory.
+    The current working directory is our location within the filesystem;
+    tilde (~) represents home, which is (for this user) <code>/home/mint</code>.
+    You can change directories with <code>cd</code>.
+  </p>
+
+  <p>
+    Give it a shot: <code>cd</code> around, <code>ls</code> a bit, <code>exit</code>
+    when you're done.
+  </p>
+
+</div>
+
+<div id="shells-and-terminals" class="content">
+  <h2> Shells vs. Terminals </h2>
+  <p>
+    A terminal <a href="text-terminals.html">used to be</a> a physical i/o device,
+    a keyboard-plus-monitor setup.
+    The only functionality they offered was text i/o; for computing,
+    this implies the command line.
+    This was the technological "climate" that Unix was created in; as terminals
+    got replaced with proper monitors and mainframes with personal computers, the functionality
+    of the terminal was preserved by creating terminal emulators, which is
+    what we use today.
+  </p>
+
+  <p>
+    A shell is actually just a program; that we use it as a user interface does not
+    imply that it is "special" in any way.
+    As depicted so far, it might appear that the shell exists "within" the terminal,
+    but that is not the case, and it's a mistake to adopt that sentiment.
+    Rather, the shell exists as a separate process, and <em>writes</em> to
+    the terminal as though it were a file.
+    Moreover, the shell gathers input (your commands) by <em>reading</em>
+    from the terminal as though it were a file.
+    This is possible because of the uniquely elegant file interface that
+    was created for Unix.
+  </p>
+
+  <p>
+    You might ask, "Why bother keeping the command-line?"
+    The answer is that it's easy to write code that interprets (and prints)
+    text, and so the command-line is a great abstraction layer for
+    systems-level software.
+  </p>
+
+  <h3>See Also:</h3>
+  <ul>
+    <li><a href="https://devblogs.microsoft.com/commandline/introducing-windows-terminal/">Introducing Windows Terminal</a> (Commands not guaranteed to be the same)</li>
+  </ul>
+</div>
