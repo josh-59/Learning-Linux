@@ -267,6 +267,145 @@ last-updated: July, 2020
 
 <div class="content" id="editing-files">
   <h2>Editing Files</h2>
+  <p>
+    Alright, let's get some real work done.
+    There are many terminal-based text editors available, but I recommend
+    that you learn <a href="https://www.vim.org/">vim</a>.  Its controls
+    are similar to those of the manual paging utility, which you can expect
+    to use often, and because it's available everywhere.
+    You can launch it with,
+  </p>
+
+  <div class="code">
+    $ vim [filename]
+  </div>
+
+
+  <p>
+    where <em>filename</em> either exists and is readable, or does not exist.
+    Like most command-line tools, this one is intended for an experienced user,
+    so there's a bit of a learning curve to it.
+    It breaks down like this:
+  </p>
+
+  <p>
+    Vim has <em>modes</em>.
+    The default mode is called <em>normal mode,</em> and you can get to
+    it from any other mode by pressing the escape key.
+    From normal mode, you can exit vim by typing a colon, followed by the
+    letter 'q',
+  </p>
+
+  <div class="code">
+    :q
+  </div>
+
+  <p>
+    If you have unsaved work, this command will fail, and vim will warn you.
+    To discard your changes and exit anyway, type,
+  </p>
+
+  <div class="aside-right">
+    <h4>Aside:</h4>
+    <p>
+      I personally use <a href="https://neovim.io/">Neovim</a>,
+      which is just a modern, extensible variant of vim.
+    </p>
+  </div>
+
+  <div class="code">
+    :q!
+  </div>
+
+  <p>
+    You should familiarize yourself with these commands now.
+  </p>
+
+  <p>
+    Similarly, to write (save) your work to file, enter normal mode and type,
+  </p>
+
+  <div class="code">
+    :w
+  </div>
+
+  <p>
+    To save-and-quit, simply,
+  </p>
+
+  <div class="code">
+    :wq
+  </div>
+
+  <p>
+    Soon enough, these controls are second-nature.
+    How about modifying text?
+    Well, we enter <em>insert</em> mode by pressing <em>i</em>
+    from normal mode.
+    From there, type away (and press escape to return to normal mode).
+  </p>
+
+  <p>
+    Now for moving around within text.
+    The idea is that the controls are entirely at the home-row, so that
+    one can quickly edit text (and it is fast when one becomes proficient).
+    To move right, press <code>l</code> once.  To move left, press <code>h</code>.
+    To move up, press <code>k</code>; and to move down, press <code>j</code>.
+  </p>
+
+  <p>
+    These are best learned through practice, and there are a few good resources.
+    The first one is, <a href="https://vim-adventures.com/">Vim Adventures</a>.
+    The second is <em>vimtutor,</em> available through the command line
+    itself by executing,
+  </p>
+
+  <figure style="padding-top: 10px;">
+    <a href="assets/img/vim-adventures.png"><img src="assets/img/vim-adventures.png" style="width:100%;"></a>
+    <figcaption><br><center><b>Vim Adventures</b></center></figcaption>
+  </figure>
+
+  <div class="code">
+    $ vimtutor
+  </div>
+
+  <p>
+    Finally, a run-down of some useful commands:
+  </p>
+
+  <div class="aside-right">
+    <h4>Aside:</h4>
+    <p>
+      Vim distinguishes between upper- and lower-case commands, so make sure
+      your caps-lock key is not depressed.
+    </p>
+  </div>
+
+  <ul>
+    <li><code>u</code>&mdash; undo</li>
+    <li><code>v</code>&mdash; enter visual mode (highlighting; allows copying and pasting)</li>
+    <li><code>y</code>&mdash; "yank" (copy)
+    <li><code>p</code>&mdash; "put" (paste)
+    <li><code>x</code>&mdash; delete</li>
+    <li><code>dd</code>&mdash; delete a line</li>
+    <li><code>o</code>&mdash; "open" a new line below</li>
+    <li><code>O</code>&mdash; "Open" a new line above</li>
+    <li><code>I</code>&mdash; "Insert" place cursor at the beginning of the line and enter insert mode</li>
+    <li><code>A</code>&mdash; "Append" place cursor at end of line and enter insert mode</li>
+    <li><code>a</code>&mdash; "append" insert text after cursor</li>
+    <li><code>:help [term]</code>&mdash; Vim's onboard help system; enter colon-q (:q) to return to your document</li>
+  </ul>
+
+  <p>
+    Vi isn't the only text editor out there, and we could delve further into the
+    theory of Vi itself, but this is good for now.
+  </p>
+
+  <h3>See Also:</h3>
+  <ul>
+    <li><a href="https://www.vim.org/docs.php"> Vim Documentation</a></li>
+  </ul>
+
 </div>
 
 <div class="content" id="everythings-a-command">
