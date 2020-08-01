@@ -9,16 +9,17 @@ last-updated: July, 2020
     <li><a href="#introduction"> Introduction </a></li>
     <li><a href="#bringing-up-the-command-line"> Bringing Up The Command Line</a></li>
     <li><a href="#shells-and-terminals"> Shells vs. Terminals </a></li>
+    <li><a href="#more-shell-features"> More Shell Features </a></li>
+    <li><a href="#editing-files"> Editing Files </a></li>
+    <li><a href="#everythings-a-command"> (Almost) Everything is a Command </a></li>
   </ul>
 </div>
 
 <div id="introduction" class="content">
-  <h1>Terminal Boss</h1>
-  <h4> You da man! (or woman!)</h4>
+  <h1>The Command Line - A Tutorial Introduction</h1>
 
   <p>
-    The command-line is uniquely *nix.
-    As a user interface, it is exceptionally powerful:
+    As a user interface, the command-line is exceptionally powerful:
     Anything that can be done on a Unix-like system can be done through
     the command-line alone.
     This essay is intended to bring the reader "up to speed" on the use of the command line.
@@ -149,8 +150,131 @@ last-updated: July, 2020
     <li> lsblk&mdash; List block devices (hard-drives, USB devices, etc.)</li>
   </ul>
 
+  <p>
+    Moreover, most programming tools (such as compilers and interpreters)
+    deal in simple text, so that the command line is a natural interface
+    to them.
+    Finally, the stability of shells and commands means that they have
+    become languages of their own; with the inclusion of <em>conditional</em>
+    and <em>looping</em> constructs, they have become
+    full-fledged programming languages.
+    Let's look at some more powerful constructs within shells.
+  </p>
+
   <h3>See Also:</h3>
   <ul>
     <li><a href="https://devblogs.microsoft.com/commandline/introducing-windows-terminal/">Introducing Windows Terminal</a> (Commands not guaranteed to be the same)</li>
   </ul>
 </div>
+
+<div class="content" id="more-shell-features">
+  <h2> More Shell Features </h2>
+
+  <p>
+    Some tokens are expanded by the shell before it executes the line they're in.
+    For instance,
+  </p>
+
+  <div class="aside-right">
+    <h4>Aside:</h4>
+    <p>
+      How can you check?
+    </p>
+  </div>
+
+  <div class="code">
+    {1..6}
+  </div>
+
+  <p>
+    expands to
+  </p>
+
+  <div class="code">
+    1 2 3 4 5 6
+  </div>
+
+  <p>
+    This is called <em>shell expansion,</em> and within Bash, becomes quite a
+    topic.
+    Shell variables are expanded with the <code>$</code> operator; they are
+    declared by giving their name followed without-space by an equals-sign:
+  </p>
+
+  <div class="aside-right">
+    <h4>Aside:</h4>
+    <p>
+      How does the shell interpret,
+      <br><center><code>$ myvar =12</code>?</center>
+    </p>
+  </div>
+
+  <div class="code">
+    $ myvar=12 <br>
+    $ echo myvar <br>
+    myvar <br>
+    $ echo $myvar <br>
+    12
+  </div>
+
+  <p>
+    It's important to note that the shell deals in <em>strings</em> and <em>commands</em>,
+    so that <em>12</em> is the string composed of the letters <em>1</em> and <em>2</em>,
+    and not the number twelve.
+    We can tell Bash to deal in integers, but let's not bother just now.
+  </p>
+
+  <div class="aside-right">
+    <h4>Aside:</h4>
+    <p>
+      And how can we assert the value of the variable <em>hello</em>?
+    </p>
+  </div>
+
+  <p>
+    What do you think this does?
+  </p>
+
+  <div class="code">
+    $ hello='echo Hello, World!'<br>
+    $ $hello
+  </div>
+
+  <p>
+    Alright, scenario:  You're at work, and you haven't been doing anything.
+    How can you create a bunch of files to make it <em>look</em> like you've
+    been busy, without actually going through the trouble of doing much?
+  </p>
+
+  <div class="aside-right">
+    <h4>Aside:</h4>
+    <p>
+      You can clean up with,
+      <br><center><code>$ rm ./1.0*</code></center>
+    </p>
+  </div>
+
+  <div class="code">
+    $ for filename in 1.{01..9}.{01..20..2}; do<br>
+    echo 'somesuch' > $filename <br>
+    done
+  </div>
+
+  <p>
+    Pretty spiffy, eh?
+  </p>
+</div>
+
+<div class="content" id="editing-files">
+  <h2>Editing Files</h2>
+</div>
+
+<div class="content" id="everythings-a-command">
+  <h2>(Almost) Everything is a Command </h2>
+
+  <p>
+    In the shell, most things are commands&mdash; even the for loop above is a
+    command.
+  </p>
+
+  </div>
