@@ -257,8 +257,8 @@ last-updated: July, 2020
 
   <div class="code">
     $ for filename in 1.{01..9}.{01..20..2}; do<br>
-    echo 'somesuch' > $filename <br>
-    done
+    &gt; echo 'somesuch' > $filename <br>
+    &gt; done
   </div>
 
   <p>
@@ -280,7 +280,6 @@ last-updated: July, 2020
   <div class="code">
     $ vim [filename]
   </div>
-
 
   <p>
     where <em>filename</em> either exists and is readable, or does not exist.
@@ -395,6 +394,7 @@ last-updated: July, 2020
     <li><code>A</code>&mdash; "Append" place cursor at end of line and enter insert mode</li>
     <li><code>a</code>&mdash; "append" insert text after cursor</li>
     <li><code>:help [term]</code>&mdash; Vim's onboard help system; enter colon-q (:q) to return to your document</li>
+    <li><code>:q[uit]</code>&mdash; Quit the current window; if this is the last window, quit vim</li>
   </ul>
 
   <p>
