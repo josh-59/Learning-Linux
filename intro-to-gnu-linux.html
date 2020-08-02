@@ -32,9 +32,10 @@ last-updated: July, 2020
 
     <p>
       An operating system is a collection of software designed to facilitate
-      the use of a computer.
+      the use of a computer.<sup><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/intro.pdf">[1]</a></sup>
       To this end, its two main responsibilities are to support running
-      programs&mdash; known as processes&mdash; and to maintain persistent data, known as files.
+      programs&mdash; known as processes&mdash; and to maintain persistent
+      data&mdash; known as files.
       In addition, operating systems ease the task of creating
       useful programs by giving processes a predictable environment.
       Modern, open-source GNU/Linux offers the single best programming environment
@@ -75,9 +76,9 @@ last-updated: July, 2020
     <p>
       <strong>Drivers:</strong>
       Directly interacting with hardware and providing a more-uniform interface to
-      each piece is the task of the system's <em>drivers</em>. This software layer
+      each piece is the task of the system's drivers. This software layer
       represents the deepest and most remote element of any operating system.
-      While drivers can be installed on an as-needed basis, in GNU/Linux
+      Although drivers can be installed on an as-needed basis, in GNU/Linux
       the tendency is to include many drivers, and use only those that are required.
     </p>
 
@@ -98,7 +99,7 @@ last-updated: July, 2020
       In order to permit interaction with the kernel, each
       Unix-like operating system employs a set of system calls.
       From a source-code point of view, system calls "look" and "act" like ordinary function
-      calls, but their actions are not restricted to user-space; rather, they
+      calls, but their actions are not restricted to user-space.  Rather, they
       transcend the software hierarchy, often making changes at the hardware level.
     </p>
 
@@ -121,13 +122,13 @@ last-updated: July, 2020
         Following the architecture of the Unix operating system,
         he wrote an open-source operating system as "...a hobby, won't be big and professional like
         [the GNU Project]."<sup><a href="https://en.wikipedia.org/wiki/Linux_kernel#History">[3]</a></sup>
-        He soon released it publicly under the free-and-open-source <em>GNU General Public License, version 2.</em>
+        He soon released it publicly under the GNU General Public License, version 2.
       </p>
 
       <p>
-        Since then, the Linux kernel has become very successful, becoming
+        Since then, it has become very successful, becoming
         the most-used Unix-like kernel in existence.
-        Demands on the kernel development process are great:
+        Demands on its development process are great:
         It must facilitate change, so that new features may be incorporated;
         it must yield stable kernels, for private and commercial use; most
         importantly, it must accept patches from thousands of unknown and volunteer developers each month.
