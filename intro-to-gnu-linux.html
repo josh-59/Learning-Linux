@@ -88,10 +88,7 @@ last-updated: July, 2020
       Unix-like operating system is its kernel.
       The kernel uses drivers to direct the actions of the machine, at the
       behest of processes.
-      Because the expectations that we have for the system are great
-      (running multiple programs concurrently, never losing files nor parts of
-      files, weeks-long stability),
-      this is a <em>large</em> and <em>involved</em> piece of software.
+      At some 28 million lines of code, this is a large and involved piece of software.
     </p>
 
     <p>
@@ -120,18 +117,28 @@ last-updated: July, 2020
         The Linux Kernel was started by Linus Torvalds in 1991, then a graduate student
         of the University of Helsinki.<sup><a href="https://en.wikipedia.org/wiki/Linus_Torvalds">[2]</a></sup>
         Following the architecture of the Unix operating system,
-        he wrote an open-source operating system as "...a hobby, won't be big and professional like
+        he began writing an open-source operating system as "...a hobby, won't be big and professional like
         [the GNU Project]."<sup><a href="https://en.wikipedia.org/wiki/Linux_kernel#History">[3]</a></sup>
         He soon released it publicly under the GNU General Public License, version 2.
+        Since then, it has become very successful, and has become
+        the most-used Unix-like kernel in existence.
       </p>
 
       <p>
-        Since then, it has become very successful, becoming
-        the most-used Unix-like kernel in existence.
-        Demands on its development process are great:
-        It must facilitate change, so that new features may be incorporated;
-        it must yield stable kernels, for private and commercial use; most
-        importantly, it must accept patches from thousands of unknown and volunteer developers each month.
+        Developing the kernel is not an easy task.
+        The development process must:
+      </p>
+
+      <ul>
+        <li> Facilitate change, so that new features may be incorporated </li>
+        <li> Yield stable kernels, for private and commercial use</li>
+        <li> Accept patches from thousands of unknown and volunteer developers each month</li>
+      </ul>
+
+      <p>
+        In addition, the kernel development team takes care not to break
+        user-space, so that what did work will continue to
+        work.<sup><a href="https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space">[4]</a></sup>
         As such, the development process is somewhat involved.
         Documentation about it is maintained
         <a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/process?h=v5.8-rc1">within the source code.</a>
@@ -171,11 +178,11 @@ last-updated: July, 2020
       </div>
 
       <p>
-        The GNU Project was started by Richard Stallman in September 1983,<sup><a href="https://www.gnu.org/gnu/gnu-history.html">[4]</a></sup>
+        The GNU Project was started by Richard Stallman in September 1983,<sup><a href="https://www.gnu.org/gnu/gnu-history.html">[5]</a></sup>
         and takes freedom very seriously.
         In GNU language, <em>free</em> software does not mean merely, "costs nothing."
         Rather, it is intended to mean <em>free as in
-        freedom.</em><sup><a href="https://www.gnu.org/philosophy/free-sw.html">[5]</a></sup>
+        freedom.</em><sup><a href="https://www.gnu.org/philosophy/free-sw.html">[6]</a></sup>
         GNU and the open-source community often use
         the term <em>libre</em> to connote this kind of freedom.
         It should speak volumes that Linus Torvalds chose to release his budding
@@ -185,7 +192,7 @@ last-updated: July, 2020
       <p>
         GNU's compiler collection, <code>gcc</code>, contains the de-facto C compiler
         of the open-source community.
-        This compiler is the only one capable of building Linux kernels.<sup><a href="http://files.kroah.com/lkn/lkn_pdf/ch02.pdf">[6]</a></sup>
+        This compiler is the only one capable of building Linux kernels.<sup><a href="http://files.kroah.com/lkn/lkn_pdf/ch02.pdf">[7]</a></sup>
         Similarly, their <code>bash</code> is the default shell on these systems.
         Each tool offered by GNU is well-documented, so look to them for
         documentation.
@@ -220,16 +227,16 @@ last-updated: July, 2020
 
       <p>
         The first <em>Portable Operating System Interface</em> specification
-        was released as an IEEE standard in 1988,<sup><a href="https://en.wikipedia.org/wiki/POSIX#Name">[7]</a></sup>
+        was released as an IEEE standard in 1988,<sup><a href="https://en.wikipedia.org/wiki/POSIX#Name">[8]</a></sup>
         and specified the system-call interface available to user-space programs.
         This standard has been refined since then.
         Operating systems that abide by this standard are called <em>POSIX Compliant;</em>
-        systems developers general aim for POSIX compliance.<sup><a href="https://en.wikipedia.org/wiki/Single_UNIX_Specification">[8]</a></sup>
+        systems developers general aim for POSIX compliance.<sup><a href="https://en.wikipedia.org/wiki/Single_UNIX_Specification">[9]</a></sup>
       </p>
 
       <p>
         A stronger specification is the <em>Single Unix Specification,</em>
-        which is a superset of POSIX.<sup><a href="#references">[9]</a></sup>
+        which is a superset of POSIX.<sup><a href="#references">[10]</a></sup>
         Certification to this standard is costly, and is generally reserved for proprietary operating systems.
       </p>
 
@@ -257,7 +264,7 @@ last-updated: July, 2020
       In my opinion, distributions are more similar than dissimilar.
       Think of them as flavors of the Unix architecture, rather than distinct operating systems.
       The oldest distribution that's still maintained is
-      <a href="http://www.slackware.com/">Slackware</a>.<sup><a href="https://en.wikipedia.org/wiki/Slackware">[10]</a></sup>
+      <a href="http://www.slackware.com/">Slackware</a>.<sup><a href="https://en.wikipedia.org/wiki/Slackware">[11]</a></sup>
     </p>
 
     <p>
@@ -360,6 +367,8 @@ last-updated: July, 2020
           <a href="en.wikipedia.org/wiki/Linus_Torvalds">en.wikipedia.org/wiki/Linus_Torvalds</a>.
         <li>"Linux kernel." <em>Wikipedia,</em> Wikimedia Foundation, 26 June 2020,
           <a href="https://en.wikipedia.org/wiki/Linux_kernel#History">https://en.wikipedia.org/wiki/Linux_kernel#History</a>.</li>
+        <li>Mitha, F. (2015, October 11). Why is there a Linux kernel policy to never break user space? Retrieved August 02, 2020, from
+          <a href="https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space">https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space</a></li>
         <li> "Overview of the GNU System." <em>Overview of the GNU System - GNU Project - Free Software Foundation,</em>
           Free Software Foundation, Inc., 4 Sept. 2017, 10:21:27,
           <a href="www.gnu.org/gnu/gnu-history.html">www.gnu.org/gnu/gnu-history.html</a>.</li>
