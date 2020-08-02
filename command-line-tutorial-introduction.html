@@ -251,11 +251,13 @@ last-updated: July, 2020
     <h4>Aside:</h4>
     <p>
       You can clean up with,
-      <br><center><code>$ rm ./1.0*</code></center>
+      <br><center><code>$ rm ./1.0*</code></center><br>
     </p>
   </div>
 
   <div class="code">
+    $ mkdir work <br>
+    $ cd work <br>
     $ for filename in 1.{01..9}.{01..20..2}; do<br>
     &gt; echo 'somesuch' > $filename <br>
     &gt; done
@@ -293,7 +295,7 @@ last-updated: July, 2020
     The default mode is called <em>normal mode,</em> and you can get to
     it from any other mode by pressing the escape key.
     From normal mode, you can exit vim by typing a colon, followed by the
-    letter 'q',
+    letter 'q', like this
   </p>
 
   <div class="code">
