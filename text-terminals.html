@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Text Terminals
-last-updated: July, 2020
+last-updated: August, 2020
 ---
 
 <!--
@@ -24,7 +24,7 @@ last-updated: July, 2020
 		<li><a href="#escape_sequences"> Escape Sequences </a></li>
 		<li><a href="#shell"> Shell </a></li>
 		<li><a href="#terminal_line_discipline"> Terminal Line Discipline </a></li>
-		<li><a href="#signals"> Signals </a></li>
+		<li><a href="#special-characters"> Special Characters </a></li>
 		<li><a href="#lgr_video"> An LGR Thing </a></li>
 		<li><a href="#references"> References </a></li>
 	</ul>
@@ -658,35 +658,42 @@ last-updated: July, 2020
 
 		</div>
 
-		<div id="signals" class="content">
-			<h2>Signals</h2>
-			<p>
-				Signals are like escape sequences, but in the other
-				direction.  That is, they
-				are sent from the terminal (keyboard) to the computer, rather than
-				being sent from the computer to the terminal.
-			</p>
+		<div id="special-characters" class="content">
+			<h2>Special Characters</h2>
 
 			<p>
-				There are eleven Posix-defined special
-				characters<sup><a href="#references">[15]</a></sup>, and most of them
+				Terminal special characters are like escape sequences, but in the other
+				direction.  They are key-combinations typed at the keyboard
+				which are interpreted by the terminal driver and mapped to special
+				actions.
+				The Posix specification defines eleven of these,<sup><a href="#references">[15]</a></sup> and most of them
 				can be remapped by manipulating the <code>termios</code> struct.
-				For instance, the CTRL+S combination is often mapped to the STOP special character;
-				upon receiving the input bound to this special character, the terminal line
-				discipline stops, and attempts to store, all data to and from the terminal.
-				This can make it appear as though the terminal has frozen, but it has not.
-				Neither input nor output is discarded; pressing CTRL+Q (START) will send all queued input and output where
-				it's supposed to go, and then resume normal operation.
+				Here are a few:
 			</p>
 
+			<ul>
+				<li>CTRL-C&mdash; Send the interrupt signal, <code>SIGINT</code>, to the foreground process. This is the principal
+					means of terminating an unresponsive process.</li>
+				<li>CTRL-D&mdash; Write the End-of-File character, <code>EOF</code>, to
+					standard-in of the foreground process.  This will terminate a Bash session,
+					for instance, or an interactive Python session.</li>
+				<li>CTRL-S&mdash; "<code>STOP</code>" Upon receiving this character combination, the terminal
+					driver stops, and attempts to store, all data to and from the terminal.
+				This can make it appear as though the terminal has frozen.</li>
+				<li>CTRL-Q&mdash; "<code>START</code>" Restart terminal input and output.
+					If input or output is queued, the terminal driver will send it first, then resume normal operation.</li>
+			</ul>
+
 			<p>
-				This particular signal was more useful in times' past: The effect of STOP was to pause scrolling.
+				<em>Start</em> and <em>Stop</em> were more useful in times' past: The effect was to pause scrolling.
 				In addition, the bell character was traditionally sounded when output was stopped and the terminal
 				line discipline's buffer became full, thereby warning the user that data was being discarded.
 				From the command prompt, we can list all bindings to special characters, in addition to other terminal attributes by,
 			</p>
 
-			<center><code> stty -a </code></center>
+			<div class="code">
+				$ stty -a
+			</div>
 
 			<p>
 				Hope you enjoyed this&mdash; more to come!
