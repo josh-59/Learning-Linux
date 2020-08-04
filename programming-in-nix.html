@@ -20,14 +20,11 @@ last-updated: July, 2020
 <div id="introduction" class="content">
 	<h1>Going Further: Programming in *nix</h1>
   <div class="quote-text">
-  "Theory and practice sometimes clash. <br>
-  And when that happens, theory loses.
-  Every single time."
+  "The only way to learn a new programming language <Br>is by writing programs in it."
   </div>
   <div class="quote-ref">
-    &mdash;<a href="https://lwn.net/Articles/326505/">Linus Torvalds</a>
+    &mdash;Brian Kernighan <br>and Dennis Ritchie
   </div>
-
 </div>
 
 <div id="c" class="content">
@@ -35,14 +32,9 @@ last-updated: July, 2020
   <p>
     C is the <em>lingua franca</em> of
     programming.<sup><a href="https://wiki.osdev.org/Required_Knowledge">[1]</a><a href="#references">[2]</a></sup>
-    As such, it would be a mistake to put any other language first.
-    For instance, the executable binary file format <em>ELF</em> is defined in C.
-    Bash, Zsh, as well as the reference Python interpreter, are all written in C.
-    Also, the Linux kernel is written in C, so that the language
-    is the "native tongue" of every system call.
-    For example, when querying the kernel about a file through the system
-    call <em>stat,</em>
-    <a href="https://www.man7.org/linux/man-pages/man2/stat.2.html">a C struct is used</a>.
+    The Linux kernel is written in C; the executable binary file format <em>ELF</em> is defined in C;
+    Bash, Zsh, as well as the reference Python interpreter, are all written in C;
+    <a href="https://www.gtk.org/">GTK</a> is written in C; etc..
   </p>
 
   <div class="aside-right">
@@ -55,9 +47,9 @@ last-updated: July, 2020
 
   <p>
     "C is not a large language," say Brian Kerninghan and Dennis Ritchie,<sup><a href="#references">[3]</a></sup>
-    but it is difficult to master:
-    A great deal of the burdern of
-    <em>correctness</em> rests with the programmer.
+    but it is difficult to master.
+    A great deal of the burden of
+    correctness rests with the programmer.
     That is, it's easy to make mistakes that the compiler won't catch.
     </p>
 
@@ -68,9 +60,9 @@ last-updated: July, 2020
     Moreover, memory is often allocated and deallocated manually (explicitly)
     by the programmer.
     With this combination, there are many possible avenues of failure, including
-    syntax errors, dangling pointers, double-free'ing, memory leaks,
+    syntax errors, dangling pointers, double-free-ing, memory leaks,
     running off the end of an array, and
-    the glorious segmentation fault.
+    the time-honored segmentation fault.
     </p>
 
     <p>

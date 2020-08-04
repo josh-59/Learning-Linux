@@ -11,8 +11,8 @@ last-updated: August, 2020
     <li><a href="#shells-and-terminals"> Shells vs. Terminals </a></li>
     <li><a href="#more-shell-features"> More Shell Features </a></li>
     <li><a href="#editing-files"> Editing Files </a></li>
-    <li><a href="#everythings-a-command"> (Almost) Everything is a Command </a></li>
     <li><a href="#globbing"> Globbing </a></li>
+    <li><a href="#everythings-a-command"> (Almost) Everything is a Command </a></li>
     <li><a href="#bram-moolenaar"> Bram Moolenaar </a></li>
   </ul>
 </div>
@@ -91,8 +91,6 @@ last-updated: August, 2020
     You can move it around with the arrow keys, but let's do something useful:
   </p>
 
-
-
   <figure>
     <a href="assets/img/mint-terminal-screenshots/ls.png"><img src="assets/img/mint-terminal-screenshots/ls.png" style="width:100%;"></a>
   </figure>
@@ -117,11 +115,11 @@ last-updated: August, 2020
   <p>
     A terminal <a href="text-terminals.html">used to be</a> a physical i/o device&mdash;
     a keyboard-plus-monitor setup.
-    The only functionality they offered was text i/o; clearly,
+    The only functionality it offered was text i/o; clearly,
     this implies a command line.
     This was the technological climate that Unix was created in.
     As terminals
-    got replaced with proper monitors and mainframes with personal computers, the functionality
+    got replaced with proper monitors, the functionality
     of the terminal was preserved by terminal emulators, which is
     what we use today.
   </p>
@@ -157,14 +155,14 @@ last-updated: August, 2020
     deal in simple text, so that the command line is a natural interface
     to them.
     Finally, the stability of shells and commands means that they are
-    languages of their own; with the inclusion of conditional
-    and looping constructs, they have become
-    full-fledged programming languages.
+    languages of their own; with the inclusion of variables, conditionals
+    and loops, they have become full-fledged programming languages.
     Let's look at some more powerful constructs within shells.
   </p>
 
   <h3>See Also:</h3>
   <ul>
+    <li><a href="https://guide.bash.academy/"> The Bash Guide </a></li>
     <li><a href="https://devblogs.microsoft.com/commandline/introducing-windows-terminal/">Introducing Windows Terminal</a> (Commands not guaranteed to be the same)</li>
   </ul>
 </div>
@@ -173,7 +171,7 @@ last-updated: August, 2020
   <h2> More Shell Features </h2>
 
   <p>
-    Some tokens are expanded by the shell before it executes the line they're in.
+    Some words are expanded by the shell before it executes the line they're in.
     For instance,
   </p>
 
@@ -407,7 +405,75 @@ last-updated: August, 2020
 
   <h3>See Also:</h3>
   <ul>
+    <li><a href="https://stackoverflow.com/questions/14390519/whats-the-difference-between-b-and-b-in-vim"> Difference Between 'b' and 'B' in vim</a> (Vim-Adventures hint)</li>
     <li><a href="https://www.vim.org/docs.php"> Vim Documentation</a></li>
+  </ul>
+</div>
+
+<div class="content" id="globbing">
+  <h2> Globbing </h2>
+
+  <p>
+    Shell globbing introduces the fine art of matching strings via metacharacters.
+    In Bash, this is particularly simple, with only three such characters&mdash;
+    two wildcards and one to describe sets.
+    First, the asterisk, <code>*</code>,
+    which matches zero-or-more of any character.
+    Second, the question mark, <code>?</code>,
+    which matches zero-or-one of any character.
+    And finally, brackets <code>[ ]</code> denote a set of character to consider;
+    a string must match exactly one character within the brackets.
+    All other characters are treated literally.
+  </p>
+
+  <p>
+    By default, the shell only matches non-hidden files.
+    Hence,
+  </p>
+
+  <div class="code">
+    $ echo *
+  </div>
+
+  <p>
+    lists all files in the current directory, just like <code>ls</code> does;
+  </p>
+
+  <div class="code">
+    $ ls *.pdf
+  </div>
+
+  <p>
+    lists all pdf's in the current directory; and
+  </p>
+
+  <div class="code">
+    $ rm *.[gx]z
+  </div>
+
+  <p>
+    removes all files ending in either <code>.xz</code> or <code>.gz</code>
+  </p>
+
+  <p>
+    Formally, after the shell splits the words of the
+    line, and before it executes its command, it searches each word for one of,
+    <code>*</code>, <code>?</code>,
+    <code>[</code>.
+    If a word contains one of these characters, then it is considered a pattern,
+    and is expanded to any filename in the current directory to which it matches.
+  </p>
+
+  <h3> Tab Completion </h3>
+
+  <p>
+    More of an aside:  If you've typed enough of a command-name or filename to
+    uniquely identify it, and then press "tab", Bash will complete it for you.
+  </p>
+
+  <h3> See Also: </h3>
+  <ul>
+    <li><a href="http://mywiki.wooledge.org/glob"> glob - Greg's Wiki </a></li>
   </ul>
 
 </div>
@@ -421,11 +487,6 @@ last-updated: August, 2020
   </p>
 
 </div>
-
-<div class="content" id="globbing">
-  <h2> Globbing </h2>
-</div>
-
 
 <div class="content" id="bram-moolenaar">
   <h2>Bram Moolenaar</h2>
