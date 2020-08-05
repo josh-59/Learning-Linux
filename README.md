@@ -1,6 +1,6 @@
 # Learning Linux
 
-A minor source and handy directory for all things Linux.
+A Minor Source and Handy Directory for All Things Linux
 
 Available at [https://josh-59.github.io/Learning-Linux/](https://josh-59.github.io/Learning-Linux/).
 
