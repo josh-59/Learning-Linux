@@ -25,7 +25,6 @@ last-updated: August, 2020
     Anything that can be done on a Unix-like system can be done through
     the command-line alone.
     This essay is intended to bring the reader "up to speed" on the use of the command line.
-    Click on any image to zoom.
   </p>
 </div>
 
@@ -70,9 +69,8 @@ last-updated: August, 2020
   </figure>
 
   <p>
-    You'll spend a lot of time configuring the prompt :)
     The prompt being displayed tells us that the shell is ready to receive a command.
-    So let's try one:
+    So, let's try one:
   </p>
 
   <figure>
@@ -128,7 +126,7 @@ last-updated: August, 2020
     The shell is the program which interprets and executes our commands.
     As depicted so far, it might appear that the shell exists "within" the terminal,
     but that is not the case, and it's a mistake to adopt that sentiment.
-    Rather, the shell exists as a separate process, and <em>writes</em> to
+    Rather, the shell exists as a separately executing program, and <em>writes</em> to
     the terminal as though it were a file.
     Moreover, the shell gathers your input by <em>reading</em>
     from the terminal as though it were a file.
@@ -151,12 +149,22 @@ last-updated: August, 2020
   </ul>
 
   <p>
-    Moreover, most programming tools (such as compilers and interpreters)
+    When this interface is sufficiently stable, these commands can form 
+    the <em>back-end</em> for graphical programs.  
+    An example of this is the Synaptic package manager.
+    </p>
+
+  <p>
+    In addition, most programming tools (such as compilers and interpreters)
     deal in simple text, so that the command line is a natural interface
     to them.
     Finally, the stability of shells and commands means that they are
     languages of their own; with the inclusion of variables, conditionals
     and loops, they have become full-fledged programming languages.
+    This means that you can make config <em>scripts</em>, for instance.
+    </p>
+
+    <p>
     Let's look at some more powerful constructs within shells.
   </p>
 
@@ -219,7 +227,7 @@ last-updated: August, 2020
 
   <p>
     It's important to note that the shell deals in <em>strings</em> and <em>commands</em>,
-    so that <em>12</em> is the string composed of the letters <em>1</em> and <em>2</em>,
+    so that <code>myvar</code> contains the string composed of the letters <em>1</em> and <em>2</em>,
     and not the number twelve.
     We can tell Bash to deal in integers, but let's not bother just now.
   </p>
@@ -416,19 +424,18 @@ last-updated: August, 2020
 
   <p>
     Shell globbing introduces the fine art of matching strings via metacharacters.
-    In Bash, this is particularly simple, with only three such characters&mdash;
-    two wildcards and one to describe sets.
+    We'll keep this short, and consider only three such characters&dash;
+    two wildcards and a way to describe sets of characters.
     First, the asterisk, <code>*</code>,
     which matches zero-or-more of any character.
     Second, the question mark, <code>?</code>,
     which matches zero-or-one of any character.
     And finally, brackets <code>[ ]</code> denote a set of character to consider;
     a string must match exactly one character within the brackets.
-    All other characters are treated literally.
   </p>
 
   <p>
-    By default, the shell only matches non-hidden files.
+    All other characters are treated literally.
     Hence,
   </p>
 
@@ -445,7 +452,7 @@ last-updated: August, 2020
   </div>
 
   <p>
-    lists all pdf's in the current directory; and
+    lists all files ending in <code>.pdf</code>, and
   </p>
 
   <div class="code">
@@ -453,16 +460,7 @@ last-updated: August, 2020
   </div>
 
   <p>
-    removes all files ending in either <code>.xz</code> or <code>.gz</code>
-  </p>
-
-  <p>
-    Formally, after the shell splits the words of the
-    line, and before it executes its command, it searches each word for one of,
-    <code>*</code>, <code>?</code>,
-    <code>[</code>.
-    If a word contains one of these characters, then it is considered a pattern,
-    and is expanded to any filename in the current directory to which it matches.
+    removes all files ending in either <code>.xz</code> or <code>.gz</code>.
   </p>
 
   <h3> Tab Completion </h3>
