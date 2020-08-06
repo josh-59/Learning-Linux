@@ -9,7 +9,6 @@ last-updated: July, 2020
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#basename"> Pathnames and Basenames </a></li>
         <li><a href="#locate"> Locate </a></li>
-        <li><a href="#globbing"> Shell Globbing </a></li>
         <li><a href="#find"> Find </a></li>
         <li><a href="#regex"> Regex </a></li>
         <li><a href="#grep"> Grep </a></li>
@@ -34,12 +33,8 @@ last-updated: July, 2020
         Finding files is a very common operation in Linux, and the tools
         available are powerful, but not new-user friendly.
         This paper will cover the most common file-finding utilities, and
-        introduce the string-matching languages known as <em>shell globbing</em>
-        and <em>regex</em>.
-        The subject is sort-of boring, with a lot of <em>if</em> ... <em>then</em> ...
-        statements.
+        touch upon regex.  
     </p>
-
 </div>
 
 <div id="basename" class="content">
@@ -70,7 +65,7 @@ last-updated: July, 2020
 
     <p>
         Every file in the system also has a basename.
-        The command <code> basename</code> isolates this name for us:
+        The command <code>basename</code> isolates this name for us:
         <div class="code">
             $ basename /home/josh/studies/merge.c<br>
             merge.c
@@ -89,17 +84,21 @@ last-updated: July, 2020
 	</p>
 
 	<div class="code">
-		locate <em>pattern</em>
+		$ locate <em>pattern</em>
 	</div>
 
 	<p>
     By default, <code>locate</code> matches <em>*pattern*</em> against the pathname of each file,
-		using shell globbing to interpret the asterisks, <code>*</code> .
-    These asterisks match zero-or-more of any character, so that we're effectively saying,
-    "Any file with the string <em>pattern</em> in its pathname."
-		If a file matches, then the file's pathname is printed on a new line.
-	</p>
+    using <a href="command-line-tutorial-introduction.html#globbing">shell globbing</a> to interpret the asterisks; essentially, 
+    </p>
 
+    <div class="code">
+        $ locate <em>pattern</em>
+    </div>
+
+    <p>
+        says, "Print out all absolute filenames containing the string <em>pattern</em>.
+	</p>
 
     <p>
         For instance,
@@ -110,7 +109,7 @@ last-updated: July, 2020
     </div>
 
     <p>
-        prints all files currently in the database whose pathname includes
+        prints all files whose pathname includes
         the string "bin", so that
     </p>
 
@@ -139,12 +138,12 @@ last-updated: July, 2020
     </p>
 
 	  <p>
-  		Now a minor detail:
-  	  <code>locate</code> references a database of information about files
+  	    A minor detail:
+  	  <em>locate</em> references a database of information about files
       on the system, and not the directories themselves.
-      This makes <code>locate</code> much faster for ordinary searches.
-      If you're looking for new files, however, or just want to
-      be on the safe side, then you're going to want to update this
+      This makes it much faster for ordinary searches.
+      If you're looking for new files,
+      then you're going to want to update this
       database with:
     </p>
 
@@ -152,20 +151,15 @@ last-updated: July, 2020
         $ sudo updatedb
     </div>
 
+    <p>
+        Upon installation of the findutils package, the above command
+        is executed for you daily.
+    </p>
+
     <h3>See Also:</h3>
     <ul>
       <li><a href="https://jvns.ca/blog/2015/03/05/how-the-locate-command-works-and-lets-rewrite-it-in-one-minute/"> How the locate command works and let's write a faster version in one minute!</a> (Shoutout to <a href="https://wiki.archlinux.org/index.php/Mlocate">ArchWiki</a> for this link!)</li>
     </ul>
-
-</div>
-
-<div id="globbing" class="content">
-  <h2> Shell Globbing </h2>
-
-  <h3>See Also:</h3>
-  <ul>
-    <li><code>glob(7)</code></li>
-  </ul>
 
 </div>
 
