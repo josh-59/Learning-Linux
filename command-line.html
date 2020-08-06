@@ -128,30 +128,21 @@ last-updated: July, 2020
   </p>
 
   <p>
-    In the command above, the shell first opens
+    To explain, in the command above, the shell first opens
     the file <code>boo</code>, creating it if it does not exist, and truncating it
     to zero length if it does exist (and is writeable).
     Then the shell connects its own standard out to it, and executes echo.
     Echo blindly prints its output to <em>standard out,</em> which happens to
-    be a file, instead of the terminal screen.
+    be the file <em>boo</em>, and not the terminal screen.
   </p>
 
-  <p>
-    Now consider the <em>cat</em> utility:
-  </p>
-
-  <div class="code">
-    $ cat foo bar <br>
-    &lt;contents of 'foo'&gt; <br>
-    &lt;contents of 'bar'&gt; <br>
-  </div>
 </div>
 
 <div class="content" id="path-environment-variable">
   <h2> The Path Environment Variable </h2>
   <p>
-      The PATH environment variable declares the directories the shell
-      will search when locating an executable file, when a command is entered.
+      The <em>PATH</em> environment variable declares the directories the shell
+      will search when locating an executable file each time a command is entered.
       We can have a look at its value with,
   <p>
 
