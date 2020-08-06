@@ -9,7 +9,7 @@ last-updated: July, 2020
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#basename"> Pathnames and Basenames </a></li>
         <li><a href="#locate"> Locate </a></li>
-        <li><a href="#find"> Find </a></li>
+        <li><a href="#fd"> Find </a></li>
         <li><a href="#regex"> Regex </a></li>
         <li><a href="#grep"> Grep </a></li>
         <li><a href="#engineer-man"> Engineer Man</a></li>
@@ -139,12 +139,12 @@ last-updated: July, 2020
 
 	  <p>
   	    A minor detail:
-  	  <em>locate</em> references a database of information about files
+  	  <em>locate</em> references a database of information 
+      (see below) about files
       on the system, and not the directories themselves.
       This makes it much faster for ordinary searches.
       If you're looking for new files,
-      then you're going to want to update this
-      database with:
+      then you must update this database with:
     </p>
 
     <div class="code">
@@ -163,37 +163,62 @@ last-updated: July, 2020
 
 </div>
 
-<div id="find" class="content">
+<div id="fd" class="content">
 
-    <h2> Find </h2>
+    <h2> Fd </h2>
     <p>
-        The <a href="http://man7.org/linux/man-pages/man1/find.1.html"><code>find</code></a> utility is much more powerful.
-        It searches the directory tree itself, and allows the user
-        to query attributes of files besides their names.
-    </p>
-
-	    <div class="code">
-	        find [starting-point...] [expression]
-	    </div>
-
-    <p>
-        The <code>find</code> utility works by beginning at the starting point(s)
-        specified, inspecting the attributes of each file found there
-		against the tests in <code>[expression]</code>.
-        If no starting point is specified, then <code>.</code> is implied.
-		If the tests pass, then the action stipulated is carried out.
-        <code>find</code> then descends into each directory and repeats.
-    </p>
-
-	<p>
-		The given expression is evaluated left-to-right, and a file is no longer inspected
-		once it is known to either pass or fail.
-        If the tests in <code>[expression]</code> evaluate to true, then
-		<code>find</code> will carry out the action(s) specified;
-        if no action is specified, then <code>-print</code> is implied.
+        A more powerful utility for finding files is <a href="https://github.com/shardp/fd">fd</a>.  
+        It traverses the directory tree itself, which allows it to query the
+        system about each file on an individual basis.
     </p>
 
     <p>
+        This specific utility, <em>fd,</em> is fairly new, having been first
+        released in 2017.  
+        Written in Rust, it aims to be a "simple, fast and user-friendly alternative to 
+        find."<sup><a href="https://github.com/shardp/fd">fd</a></sup>.
+        For its ease of use alone, I recommend that you install it, with either,
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p> 
+            On Debian distributions, the executable is named <code>fdfind</code>
+        </p>
+    </div>
+
+    <div class="code">
+        $ sudo apt install fd-find
+    </div>
+
+    <p>
+        or
+    </p>
+
+    <div class="code">
+        $ sudo pacman -S fd
+    </div>
+
+    <p>
+        The essential format of a call to <em>fd</em> is
+    </p>
+
+    <div class="code">
+        $ fd [pattern] [path...]
+    </div>
+
+    <p>
+        where <em>pattern</em> is a regex pattern.
+        This means that its behavior is very much like that
+        of locate, wherein <em>fd</em> will print the name of any 
+        file whose wholename contains the string <em>pattern</em>.
+        We'll explain some regex as we go, and then cover it in 
+        greater detail later.
+    </p>
+
+    <!--
+    <p>
+        Some examples:
         For instance, we can count all files on the system by,
     </p>
 
@@ -302,13 +327,12 @@ last-updated: July, 2020
 			<a href="http://man7.org/linux/man-pages/man1/find.1.html"><code>man 1 find</code></a> or
             <a href="https://www.gnu.org/software/findutils/manual/find.html"> GNU Findutils Official Documentation</a>.
         </p>
+    -->
     </div>
 
     <div id="regex" class="content">
       <h2> Regex </h2>
-      <p>
-        Regex is fun!  It is, essentially, the
-      </p>
+
     </div>
 
     <div id="grep" class="content">
