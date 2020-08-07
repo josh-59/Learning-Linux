@@ -5,252 +5,298 @@ last-updated: July, 2020
 ---
 
 <div id="nav_bar_2" class="nav">
-    <ul>
-        <li><a href="#introduction"> Introduction </a></li>
-        <li><a href="#c"> C </a></li>
-        <li><a href="#rust"> Rust </a></li>
-        <li><a href="#c-plus-plus"> C++ </a></li>
-        <li><a href="#general-cs"> General Computer Science </a></li>
-        <li><a href="#closing-remarks"> Closing Remarks </a></li>
-        <li><a href="#bryan-cantrill"> Bryan Cantrill </a></li>
-        <li><a href="#references"> References </a></li>
-    </ul>
+  <ul>
+    <li><a href="#introduction"> Introduction </a></li>
+    <li><a href="#c"> C </a></li>
+    <li><a href="#rust"> Rust </a></li>
+    <li><a href="#c-plus-plus"> C++ </a></li>
+    <li><a href="#general-cs"> General Computer Science </a></li>
+    <li><a href="#closing-remarks"> Closing Remarks </a></li>
+    <li><a href="#bryan-cantrill"> Bryan Cantrill </a></li>
+    <li><a href="#references"> References </a></li>
+  </ul>
 </div>
 
 <div id="introduction" class="content">
-	<h1>Going Further: Programming in *nix</h1>
+  <h1>Going Further: Programming in *nix</h1>
   <div class="quote-text">
-  "The only way to learn a new programming language <Br>is by writing programs in it."
-  </div>
-  <div class="quote-ref">
-    &mdash;Brian Kernighan, <br>&emsp;Dennis Ritchie
-  </div>
-</div>
+    "The only way to learn a new programming language <Br>is by writing programs in it."
+    </div>
+    <div class="quote-ref">
+      &mdash;Brian Kernighan, <br>&emsp;Dennis Ritchie
+    </div>
 
-<div id="c" class="content">
-  <h2> C </h2>
-  <p>
-    C is the <em>lingua franca</em> of
-    programming.<sup><a href="https://wiki.osdev.org/Required_Knowledge">[1]</a><a href="#references">[2]</a></sup>
-    The Linux kernel is written in C; the executable binary file format <em>ELF</em> is defined in C;
-    Bash, Zsh, as well as the reference Python interpreter, are all written in C;
-    <a href="https://www.gtk.org/">GTK</a> is written in C; etc..
-  </p>
-
-  <div class="aside-right">
-    <h4>Aside:</h4>
-    <p>
-      In Linux, a C compiler is almost always preinstalled.
-      Check with <br><center>$ gcc --version</center><br>
-    </p>
-  </div>
-
-  <p>
-    "C is not a large language," say Brian Kerninghan and Dennis Ritchie,<sup><a href="#references">[3]</a></sup>
-    but it is difficult to master.
-    A great deal of the burden of
-    correctness rests with the programmer.
-    That is, it's easy to make mistakes that the compiler won't catch.
-    </p>
-
-    <p>
-    A central feature of the language, and the principal reason for its
-    difficulty, is that C expects the programmer to manually (explicitly)
-    address memory, through variables called <em>pointers.</em>
-    Moreover, memory is often allocated and deallocated manually (explicitly)
-    by the programmer.
-    With this combination, there are many possible avenues of failure, including
-    syntax errors, dangling pointers, double-free-ing, memory leaks,
-    running off the end of an array, and
-    the time-honored segmentation fault.
-    </p>
-
-    <p>
-    C is often called "portable assembly" because it closely
-    mirrors the abstractions of the machine itself.
-    It has been the standard systems programming language for fifty years.
-  </p>
-
-  <h3> See Also: </h3>
-  <ul>
-      <li><a href="https://en.wikipedia.org/wiki/The_C_Programming_Language">The C Programming Language</a> (2<sup>nd</sup> Edition)</li>
-      <li><a href="https://www.linuxlinks.com/wp-content/uploads/2019/07/An_Introduction_to_GCC-Brian_Gough.pdf"> An Introduction to GCC </a></li>
-  </ul>
-</div>
-
-<div id="rust" class="content">
-  <h2> Rust </h2>
-  <p>
-    Rust is the up-and-coming systems programming language, and in my opinion,
-    the place to be, so-to-speak.
-    Just check out some of these projects:
-  </p>
-
-  <ul>
-    <li><a href="https://github.com/sharkdp/bat">bat</a>&mdash; A drop-in replacement
-      for <em>cat</em> that does syntax highlighting and paging (when connected
-      to an interactive terminal) </li>
-    <li><a href="https://github.com/ClementTsang/bottom">bottom</a>&mdash;
-      A replacement for <em>top</em></li>
-    <li><a href="https://github.com/alacritty/alacritty">Alacritty</a>&mdash;
-      A cross-platform, GPU-accelerated terminal emulator</li>
-    <li><a href="https://github.com/rust-unofficial/awesome-rust#audio-and-music">Awesome Rust</a>&mdash;
-      A big-ass list of such projects
-  </ul>
-
-  <p>
-    Rust's command-line utility, <a href="https://doc.rust-lang.org/cargo/">cargo</a>,
-    is super-modern, and also incorporates a package manager.
-    Libraries available there are unique among systems-programming-language
-    libraries because they are <em>guaranteed</em> to be memory/concurrency
-    safe, through the Rust compiler.
-  </p>
-
-  <p>
-    Rust is not an easy language to learn.
-    Like other systems programming language,
-    it requires the programmer to comprehend where and how data is stored on
-    the machine at runtime, which contrasts greatly from easier languages like
-    Python or Ruby.
-    Of the resources available to learn Rust, I like these two the most:
-  </p>
-
-  <ul>
-    <li><a href="https://www.oreilly.com/library/view/programming-rust/9781491927274/">Programming Rust</a>&mdash;
-      Not free.  Expects the reader to be familiar with some systems programming, such as C.
-      Note that a second edition is expected in 2021.
-    </li>
-    <li><a href="https://github.com/rust-lang/rustlings">Rustlings</a>&mdash;
-      A command-line game that teaches you Rust expressions. You open a text editor
-      in a second window, and edit the files so that they compile.
-    </li>
-  </ul>
-
-  <h3>See Also:</h3>
-  <ul>
-    <li> <a href="https://github.com/rust-lang/rustup"> Rustup - The Rust Toolchain Installer </a></li>
-  </ul>
-</div>
-
-<div id="c-plus-plus" class="content">
-  <h2> C++ </h2>
-  <p>
-    I'm just gonna say it: Stay away from C++.
-    Originally, this language was called <em>C with Classes,</em> and this name
-    reflects an attempt to augment the C language by arbitrarily introducing
-    object-oriented programming (via classes).
-    The result is a very large, very complicated language.
-  </p>
-
-  <p>
-    There are two issues with using such a language.
-    First, because C is fully supported within C++,
-    and C is a complete language, C++ is redundantly complete.
-    Anywhere you might use C++, you can instead use C.
-    Second, in practice, the tendency is to use only a portion of the full
-    language, meaning that handy features go unused, simply because they are
-    not known.
-  </p>
-
-  <p>
-    Moreover, owing to its C heritage, it is <em>unsafe</em> in the sense that
-    it, like C, makes no guarantees about the use of memory.
-    Consequently, it is easy to build bugs and security vulnerabilities;
-    this problem is exacerbated by the complexity of the language.
-    Curiously, experienced programmers who have switched from C++ to Rust have
-    likened it to getting out of a bad relationship<sup><a href="https://corecursive.com/013-rust-and-bitter-c-developers-with-jim-blandy/">[4]</a><a href="https://youtu.be/HgtRAbE1nBM">[5]</a></sup>
-  </p>
-
-  <p>
-    But hey&mdash; if you want to write C++, don't let me stop you!
-    There's plenty of good software written in it:
-    KDE's <a href="https://en.wikipedia.org/wiki/KDE_Plasma_5">Plasma</a> desktop
-    environment is written in C++, as well as <a href="https://en.wikipedia.org/wiki/Qt_(software)">QT</a>.
-    I just think you're better off learning Rust.
-  </p>
-
-  <h3> See Also: </h3>
-  <ul>
-    <li><a href="https://lwn.net/Articles/249460/"> Linus Torvalds on C++ </a></li>
-    <li><a href="https://en.wikiquote.org/wiki/Ken_Thompson#%22Coders_At_Work%22,_2009"> Ken Thompson on C++</a></li>
-  </ul>
-</div>
-
-<div class="content" id="general-cs">
-    <h2> General Computer Science </h2>
-    <p>
-      It's worthwhile to draw an outline of computer science, in general.
-      A classical undergraduate CS curriculum centers around a few courses:
-    </p>
-
-    <ul class="big-list">
-      <li>
-        <p><strong>Programming Languages</strong>&mdash; Initial courses in Java and C++ are pretty
-        typical, but neither language has any business in the open-source ecosystem.
-        Advanced studies in programming languages become abstract, discussing and developing
-        language theory rather than practice.
-        This can be useful in language development and compiler design, for instance.
-        </p>
-
-        <p>
-          This subject was (effectively) founded by
-          Christopher Strachey, in his 38-page <a href="https://github.com/papers-we-love/papers-we-love/blob/master/languages-theory/fundamental-concepts-in-programming-languages.pdf">
-          Fundamental Concepts of Programming Languages</a>.
-        </p>
-      </li>
-      <li style="padding-top: 0;">
-        <p>
-          <strong>Operating Systems</strong>&mdash; A very large topic, it again
-          discusses operating systems in the abstract.  A good, if lighthearted,
-          development is given by Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau in
-          their free <a href="http://pages.cs.wisc.edu/~remzi/OSTEP/"> Operating Systems: Three Easy Pieces</a>.
-        </p>
-      </li>
-      <li style="padding-top: 0;">
-        <p><strong>Discrete Mathematics</strong>&mdash; At the end of abstraction, there
-          is always math, it seems.  Discrete mathematics is not a difficult subject,
-          on par with a first semester in calculus.  It will introduce enough
-          logic to give informal proofs, cover graphs and advanced counting techniques, among other things.
-          Given the inherently discrete nature of the bit, this
-          subject founds all of computer science.
-          The canonical text for computer scientists is
-          <a href="https://en.wikipedia.org/wiki/Concrete_Mathematics">Concrete Mathematics</a>,
-          but I prefer <a href="http://discrete.openmathbooks.org/dmoi3.html"> Discrete Mathematics - An Open Introduction</a>
-        </p>
-      </li>
-      <li style="padding-top: 0;">
-        <p><strong>Data Structures</strong>&mdash;
-          After learning a programming language or two,
-          data structures are the next thing to learn in becoming a developer&mdash;
-          some understanding of discrete math is a required.
-          To illustrate, the typical methodology in writing a program is to
-          <em>first select the most appropriate data structure,</em>
-          then build the rest of the program around it.
-        </p>
-
-        <p>
-          <a href="https://opendatastructures.org/"> Open Data Structures </a> is a great book on the subject, the best that I
-          personally have found.
-          Advanced studies delve further into mathematics, usually focusing on analysis of algorithms.
-          The canonical text of algorithms is <a href="https://mitpress.mit.edu/books/introduction-algorithms-third-edition">Introduction to Algorithms</a>.
-        </p>
-      </li>
-      <li style="padding-top: 0; padding-bottom: 10px;">
-        <p><strong>Computer Architecture</strong>&mdash; Ah, computer architecture.  I loved studying this subject,
-          but honestly wonder how useful it is.  It looks into the abstractions presented by
-          hardware itself, such as signed and unsigned numbers, and instruction set architectures.
-          A good development of this
-          material is highly mathematical, and correspondingly not-easy.
-          I liked <a href="http://www.csapp.cs.cmu.edu/">Computer Systems: A Programmer's Perspective</a>.
-      </li>
-    </ul>
-</div>
+    </div>
 
 <!--
+    <div id="python" class="content">
+      <h2> Python </h2>
+      <p>
 
-<div class="content" id="study-tlpi">
-    <h4> Modern Linux </h4>
-    <p>
+      </p>
+    </div>
+-->
+
+    <div id="c" class="content">
+      <h2> C </h2>
+      <p>
+        C has been called the <em>lingua franca</em> of
+        programming,<sup><a href="https://wiki.osdev.org/Required_Knowledge">[1]</a><a href="#references">[2]</a></sup>
+        and for good reason.
+        Consider some of the projects carried out in C:
+      </p>
+
+      <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+          In Linux, a C compiler is almost always preinstalled.
+          Check with <br><center>$ gcc --version</center><br>
+        </p>
+      </div>
+
+      <ul>
+        <li>
+          <a href="https://elinux.org/Executable_and_Linkable_Format_(ELF)">ELF</a>&mdash; The format of the executable binary file in Linux
+        </li>
+
+        <li>
+          The Linux Kernel
+        </li>
+
+        <li>
+          Bash, Zsh
+        </li>
+
+        <li>
+          <a href="https://en.wikipedia.org/wiki/CPython">CPython</a>&mdash; The reference Python interpreter
+        </li>
+      </ul>
+
+      <p>
+        "C is not a large language," say Brian Kerninghan and Dennis Ritchie,<sup><a href="#references">[3]</a></sup>
+        but it is difficult to master.
+        A central feature of the language, and the principal reason for its
+        difficulty, is that C expects the programmer to manually (explicitly)
+        address memory, through variables called <em>pointers.</em>
+        Moreover, memory is often allocated and deallocated manually (explicitly)
+        by the programmer.
+        With this combination, there are many possible avenues of failure, including
+        dangling pointers, double-free-ing, memory leaks, and running off the end of an array.
+      </p>
+
+      <p>
+        These, in turn can lead to security vulnerabilities, bugs and crashes.
+        For instance, even something as elementary as
+        <a href="https://www.man7.org/linux/man-pages/man3/strcpy.3.html">copying a string</a>
+        introduces the possibility of attack and exploitation (if left unchecked).
+        Because the compiler does not warn you of these possibilities, this
+        makes it very difficult to write "correct" C.
+        Moreover, as Brian Cantrill points out, even when one can write correct C,
+        it is difficult to compose the work of multiple developers into a single
+        whole (see video below).
+      </p>
+
+      <p>
+        Nonetheless, C is a great language, and is here to stay; it just shows its
+        age a bit.
+        C is often called "portable assembly" because it closely
+        mirrors the abstractions of the machine itself.
+        It has been the standard systems programming language for fifty years.
+      </p>
+
+      <h3> See Also: </h3>
+      <ul>
+        <li><a href="https://en.wikipedia.org/wiki/The_C_Programming_Language">The C Programming Language</a> (2<sup>nd</sup> Edition)</li>
+        <li><a href="https://www.linuxlinks.com/wp-content/uploads/2019/07/An_Introduction_to_GCC-Brian_Gough.pdf"> An Introduction to GCC </a></li>
+      </ul>
+    </div>
+
+    <div id="rust" class="content">
+      <h2> Rust </h2>
+      <p>
+        Rust is the up-and-coming systems programming language, and in my opinion,
+        the bee's knees.
+        Rust, like C, is a compiled systems-programming language.
+        However, it corrects C's faults with memory management by introducing a rigorous type
+        system and new ownership rules.
+        Together, these allow the Rust compiler to guarantee (prove) the aforementioned
+        "correctness" of code.
+      </p>
+
+      <p>
+        In addition to guarding against many errors, bugs and exploits, this also
+        increases the composability of the code.
+        Of the source code present and available in Rust's package-management repository (<a href="https://crates.io/">crates.io</a>),
+        you, the developer, are guaranteed that the code you choose is memory- and
+        concurrency-safe (or you will be warned).
+      </p>
+
+      <p>
+        Just check out some of these projects:
+      </p>
+
+      <ul>
+        <li><a href="https://github.com/sharkdp/bat">bat</a>&mdash; A drop-in replacement
+          for <em>cat</em> that does syntax highlighting and paging (when connected
+          to an interactive terminal)
+        </li>
+        <li><a href="https://github.com/alacritty/alacritty">Alacritty</a>&mdash;
+          A cross-platform, GPU-accelerated terminal emulator
+        </li>
+        <li><a href="https://github.com/rust-unofficial/awesome-rust#audio-and-music">Awesome Rust</a>&mdash;
+          A big-ass list of such projects
+        </li>
+      </ul>
+
+      <p>
+        The cherry on top is Rust's command-line utility, <a href="https://doc.rust-lang.org/cargo/">cargo</a>.
+        It is super-modern, super-friendly, <em>and</em> serves as the language's package manager.
+        Rust is not an easy language to learn, though, so expect to do a little studying.
+        Like other systems programming languages,
+        it requires the programmer to comprehend where and how data is stored on
+        the machine at runtime.
+        (This contrasts greatly with interpreted languages like Python or Ruby.)
+      </p>
+
+      <p>
+        Of the resources available to learn Rust, I found these two helpful:
+      </p>
+
+      <ul>
+        <li><a href="https://www.oreilly.com/library/view/programming-rust/9781491927274/">Programming Rust</a>&mdash;
+          Not free; a second edition is expected in 2021.
+        </li>
+        <li><a href="https://github.com/rust-lang/rustlings">Rustlings</a>&mdash;
+          A command-line game that teaches you Rust expressions. You open a text editor
+          in a second window, and edit the files so that they compile.
+        </li>
+      </ul>
+
+      <h3>See Also:</h3>
+      <ul>
+        <li> <a href="https://github.com/rust-lang/rustup"> Rustup - The Rust Toolchain Installer </a></li>
+      </ul>
+    </div>
+
+    <div id="c-plus-plus" class="content">
+      <h2> C++ </h2>
+      <p>
+        I'm just gonna say it: Stay away from C++.
+        Originally, this language was called <em>C with Classes,</em> and this name
+        reflects an attempt to augment the C language by arbitrarily introducing
+        object-oriented programming (via classes).
+        The result is a very large, very complicated language.
+      </p>
+
+      <p>
+        There are two issues with using such a language.
+        First, because C is fully supported within C++,
+        and C is a complete language, C++ is redundantly complete.
+        Anywhere you might use C++, you can instead use C.
+        Second, in practice, the tendency is to use only a portion of the full
+        language, meaning that handy features go unused, simply because they are
+        not known.
+      </p>
+
+      <p>
+        Moreover, owing to its C heritage, it is <em>unsafe</em> in the sense that
+        it, like C, makes no guarantees about the use of memory.
+        Consequently, it is easy to build bugs and security vulnerabilities;
+        this problem is exacerbated by the complexity of the language.
+        Curiously, experienced programmers who have switched from C++ to Rust have
+        likened it to getting out of a bad relationship<sup><a href="https://corecursive.com/013-rust-and-bitter-c-developers-with-jim-blandy/">[4]</a><a href="https://youtu.be/HgtRAbE1nBM">[5]</a></sup>
+      </p>
+
+      <p>
+        But hey&mdash; if you want to write C++, don't let me stop you!
+        There's plenty of good software written in it:
+        KDE's <a href="https://en.wikipedia.org/wiki/KDE_Plasma_5">Plasma</a> desktop
+        environment is written in C++, as well as <a href="https://en.wikipedia.org/wiki/Qt_(software)">QT</a>.
+        I just think you're better off learning Rust.
+      </p>
+
+      <h3> See Also: </h3>
+      <ul>
+        <li><a href="https://lwn.net/Articles/249460/"> Linus Torvalds on C++ </a></li>
+        <li><a href="https://en.wikiquote.org/wiki/Ken_Thompson#%22Coders_At_Work%22,_2009"> Ken Thompson on C++</a></li>
+      </ul>
+    </div>
+
+    <div class="content" id="general-cs">
+      <h2> General Computer Science </h2>
+      <p>
+        It's worthwhile to draw an outline of computer science, in general.
+        A classical undergraduate CS curriculum centers around a few courses:
+      </p>
+
+      <ul class="big-list">
+        <li>
+          <p><strong>Programming Languages</strong>&mdash; Initial courses in Java and C++ are pretty
+            typical, but neither language has any business in the open-source ecosystem.
+            Advanced studies in programming languages become abstract, discussing and developing
+            language theory rather than practice.
+            This can be useful in language development and compiler design, for instance.
+          </p>
+
+          <p>
+            This subject was (effectively) founded by
+            Christopher Strachey, in his 38-page <a href="https://github.com/papers-we-love/papers-we-love/blob/master/languages-theory/fundamental-concepts-in-programming-languages.pdf">
+              Fundamental Concepts of Programming Languages</a>.
+            </p>
+          </li>
+          <li style="padding-top: 0;">
+            <p>
+              <strong>Operating Systems</strong>&mdash; A very large topic, it again
+              discusses operating systems in the abstract.  A good, if lighthearted,
+              development is given by Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau in
+              their free <a href="http://pages.cs.wisc.edu/~remzi/OSTEP/"> Operating Systems: Three Easy Pieces</a>.
+            </p>
+          </li>
+          <li style="padding-top: 0;">
+            <p><strong>Discrete Mathematics</strong>&mdash; At the end of abstraction, there
+              is always math, it seems.  Discrete mathematics is not a difficult subject,
+              on par with a first semester in calculus.  It will introduce enough
+              logic to give informal proofs, cover graphs and advanced counting techniques, among other things.
+              Given the inherently discrete nature of the bit, this
+              subject founds all of computer science.
+              The canonical text for computer scientists is
+              <a href="https://en.wikipedia.org/wiki/Concrete_Mathematics">Concrete Mathematics</a>,
+              but I prefer <a href="http://discrete.openmathbooks.org/dmoi3.html"> Discrete Mathematics - An Open Introduction</a>
+            </p>
+          </li>
+          <li style="padding-top: 0;">
+            <p><strong>Data Structures</strong>&mdash;
+              After learning a programming language or two,
+              data structures are the next thing to learn in becoming a developer&mdash;
+              some understanding of discrete math is a required.
+              To illustrate, the typical methodology in writing a program is to
+              <em>first select the most appropriate data structure,</em>
+              then build the rest of the program around it.
+            </p>
+
+            <p>
+              <a href="https://opendatastructures.org/"> Open Data Structures </a> is a great book on the subject, the best that I
+              personally have found.
+              Advanced studies delve further into mathematics, usually focusing on analysis of algorithms.
+              The canonical text of algorithms is <a href="https://mitpress.mit.edu/books/introduction-algorithms-third-edition">Introduction to Algorithms</a>.
+            </p>
+          </li>
+          <li style="padding-top: 0; padding-bottom: 10px;">
+            <p><strong>Computer Architecture</strong>&mdash; Ah, computer architecture.  I loved studying this subject,
+              but honestly wonder how useful it is.  It looks into the abstractions presented by
+              hardware itself, such as signed and unsigned numbers, and instruction set architectures.
+              A good development of this
+              material is highly mathematical, and correspondingly not-easy.
+              I liked <a href="http://www.csapp.cs.cmu.edu/">Computer Systems: A Programmer's Perspective</a>.
+            </li>
+          </ul>
+        </div>
+
+        <!--
+
+        <div class="content" id="study-tlpi">
+        <h4> Modern Linux </h4>
+        <p>
         Of the 64 chapters in Kerrisk's terrific <em>The Linux Programming
         Interface,</em> the first three are an introduction.
         Approximately nine chapters are dedicated to files, filesystems
@@ -261,66 +307,66 @@ last-updated: July, 2020
         system time,
         but the most chapters (21) are devoted to Interprocess Communication&mdash;
         signals, pipes, sockets, etc., where there are many redundancies.
+      </p>
+    </div>
+  -->
+
+  <div class="content" id="closing-remarks">
+    <h2>Closing Remarks</h2>
+    <p>
+      Thanks for reading!
+      I'd like to say <em>"Thanks"</em> to a few people.
+      While I never met them, they each are heroes of mine:
     </p>
-</div>
- -->
 
-<div class="content" id="closing-remarks">
-  <h2>Closing Remarks</h2>
-  <p>
-    Thanks for reading!
-    I'd like to say <em>"Thanks"</em> to a few people.
-    While I never met them, they each are heroes of mine:
-  </p>
+    <ul>
+      <li> <a href="https://www.youtube.com/channel/UCrUL8K81R4VBzm-KOYwrcxQ">Engineer Man</a>&mdash; Who got me started with Linux and programming</li>
+      <li> Brian Kernigham&mdash; Whose book, <a href="https://www.cs.princeton.edu/~bwk/memoir.html"><em>Unix: A History and Memoir</em></a>,
+        grounded the study in concrete history </li>
+        <li> Ken Thompson&mdash; And all the other geniuses of Bell Labs who
+          laid the foundation of <em>Unix</em></li>
+          <li> Linus Torvalds and all kernel developers&mdash; Who made Linux!</li>
+        </ul>
 
-  <ul>
-    <li> <a href="https://www.youtube.com/channel/UCrUL8K81R4VBzm-KOYwrcxQ">Engineer Man</a>&mdash; Who got me started with Linux and programming</li>
-    <li> Brian Kernigham&mdash; Whose book, <a href="https://www.cs.princeton.edu/~bwk/memoir.html"><em>Unix: A History and Memoir</em></a>,
-      grounded the study in concrete history </li>
-    <li> Ken Thompson&mdash; And all the other geniuses of Bell Labs who
-      laid the foundation of <em>Unix</em></li>
-    <li> Linus Torvalds and all kernel developers&mdash; Who made Linux!</li>
-  </ul>
+        <p>
+          Thanks!
+        </p>
+      </div>
 
-  <p>
-    Thanks!
-  </p>
-</div>
+      <div class="content" id="bryan-cantrill">
+        <h2>Bryan Cantrill: Rust and Other Interesting Things</h2>
+        <iframe class="video" src="https://www.youtube.com/embed/2wZ1pCpJUIM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
 
-<div class="content" id="bryan-cantrill">
-  <h2>Bryan Cantrill: Rust and Other Interesting Things</h2>
-  <iframe class="video" src="https://www.youtube.com/embed/2wZ1pCpJUIM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
-<!--
-<div class="content" id="kernel-dev">
-  <h2> Kerenel Development </h2>
-  <div class="quote-text">
-  "So, you want to learn how to become a Linux kernel developer?"
-  </div>
-  <div class="quote-ref">
+      <!--
+      <div class="content" id="kernel-dev">
+      <h2> Kerenel Development </h2>
+      <div class="quote-text">
+      "So, you want to learn how to become a Linux kernel developer?"
+    </div>
+    <div class="quote-ref">
     <a href="https://www.kernel.org/doc/html/latest/process/howto.html#introduction">The Linux Kernel Documentation</a>
   </div>
 
 
-<li><a href="https://www.kernel.org/doc/html/v4.10/process/coding-style.html"> Linux Kernel Coding Style</a> (Written by Linux Torvalds) </li>
+  <li><a href="https://www.kernel.org/doc/html/v4.10/process/coding-style.html"> Linux Kernel Coding Style</a> (Written by Linux Torvalds) </li>
 </div>
 
 Linux kernel coding style (Linux Torvalds)
 https://www.kernel.org/doc/html/v4.10/process/coding-style.html
 
-      HOWTO do Linux kernel development (Official)
-      https://www.kernel.org/doc/html/latest/process/howto.html#documentation
+HOWTO do Linux kernel development (Official)
+https://www.kernel.org/doc/html/latest/process/howto.html#documentation
 <li><a href="https://www.kernel.org/doc/html/latest/process/index.html"> Working with the kernel development community - The Linux Kernel documentation</a> </li>
-  -->
+-->
 
 <div id="references" class="content">
-    <h2> References </h2>
-    <ol>
-        <li> Required Knowledge - OSDev Wiki. (2020, January 22). Retrieved July 29, 2020, from https://wiki.osdev.org/Required_Knowledge</li>
-        <li> Kernighan, Brian. <i>Unix: A History and a Memoir.</i>  Published 2020, by Brian W. Kernighan via Kindle Direct Publishing. </li>
-        <li> Kernighan, B. W., &amp; Ritchie, D. M. (1988). <i>The C Programming Language</i> (2nd ed.). Englewood Cliffs,, NJ: Prentice Hall.</li>
-        <li> Blandy, J. (n.d.). Rust and Bitter C++ Developers with Jim Blandy [Interview by A. G. Bell]. Corecursive. Retrieved July 29, 2020, from https://corecursive.com/013-rust-and-bitter-c-developers-with-jim-blandy/.</li>
-        <li> Cantrill, B. (2018). <i>Is It Time to Rewrite the Operating System in Rust?</i>. Lecture presented at QCon, San Francisco, 2018.</li>
-    </ol>
+  <h2> References </h2>
+  <ol>
+    <li> Required Knowledge - OSDev Wiki. (2020, January 22). Retrieved July 29, 2020, from https://wiki.osdev.org/Required_Knowledge</li>
+    <li> Kernighan, Brian. <i>Unix: A History and a Memoir.</i>  Published 2020, by Brian W. Kernighan via Kindle Direct Publishing. </li>
+    <li> Kernighan, B. W., &amp; Ritchie, D. M. (1988). <i>The C Programming Language</i> (2nd ed.). Englewood Cliffs,, NJ: Prentice Hall.</li>
+    <li> Blandy, J. (n.d.). Rust and Bitter C++ Developers with Jim Blandy [Interview by A. G. Bell]. Corecursive. Retrieved July 29, 2020, from https://corecursive.com/013-rust-and-bitter-c-developers-with-jim-blandy/.</li>
+    <li> Cantrill, B. (2018). <i>Is It Time to Rewrite the Operating System in Rust?</i>. Lecture presented at QCon, San Francisco, 2018.</li>
+  </ol>
 </div>
