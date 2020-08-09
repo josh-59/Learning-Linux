@@ -9,10 +9,9 @@ last-updated: August, 2020
     <li><a href="#introduction"> Introduction </a></li>
     <li><a href="#bringing-up-the-command-line"> Bringing Up The Command Line</a></li>
     <li><a href="#shells-and-terminals"> Shells vs. Terminals </a></li>
-    <li><a href="#more-shell-features"> More Shell Features </a></li>
+    <li><a href="#some-shell-features"> Some Shell Features </a></li>
     <li><a href="#editing-text"> Editing Text </a></li>
     <li><a href="#globbing"> Globbing </a></li>
-    <li><a href="#everythings-a-command"> (Almost) Everything is a Command </a></li>
     <li><a href="#bram-moolenaar"> Bram Moolenaar </a></li>
   </ul>
 </div>
@@ -25,6 +24,7 @@ last-updated: August, 2020
     Anything that can be done on a Unix-like system can be done through
     the command-line alone.
     This essay is intended to bring the reader "up to speed" on the use of the command line.
+    Click any picture to zoom.
   </p>
 </div>
 
@@ -149,8 +149,8 @@ last-updated: August, 2020
   </ul>
 
   <p>
-    When this interface is sufficiently stable, these commands can form 
-    the <em>back-end</em> for graphical programs.  
+    When this interface is sufficiently stable, these commands can form
+    the <em>back-end</em> for graphical programs.
     An example of this is the Synaptic package manager.
     </p>
 
@@ -175,8 +175,8 @@ last-updated: August, 2020
   </ul>
 </div>
 
-<div class="content" id="more-shell-features">
-  <h2> More Shell Features </h2>
+<div class="content" id="some-shell-features">
+  <h2> Some Shell Features </h2>
 
   <p>
     Some words are expanded by the shell before it executes the line they're in.
@@ -371,15 +371,7 @@ last-updated: August, 2020
     These are best learned through practice, and there are a few good resources.
     One is <a href="https://vim-adventures.com/">(epilepsy warning!) Vim Adventures</a>.
     Another is <em>vimtutor,</em> available through the command line
-    itself by executing,
-  </p>
-
-  <div class="code">
-    $ vimtutor
-  </div>
-
-  <p>
-    Finally, a run-down of some useful commands:
+    by executing,
   </p>
 
   <div class="aside-right">
@@ -389,6 +381,14 @@ last-updated: August, 2020
       your caps-lock key is not depressed.
     </p>
   </div>
+
+  <div class="code">
+    $ vimtutor
+  </div>
+
+  <p>
+    Finally, a run-down of some useful commands:
+  </p>
 
   <ul>
     <li><code>u</code>&mdash; undo</li>
@@ -410,6 +410,17 @@ last-updated: August, 2020
     But, we don't always use a terminal-based text editor.  For an ordinary, stand-alone editor, I personally like
     <a href="https://atom.io">Atom</a> (with the 'minimap' plugin).  I've <a href="https://tkainrad.dev/posts/setting-up-linux-workstation/#text-editing-vscodehttpscodevisualstudiocom">heard good things</a>
     about VSCode, as well.  Also, some people like <a href="https://www.sublimetext.com/">Sublime</a>, but that one isn't free.
+  </p>
+
+  <p>
+    You might have noticed that Vim and other applications
+    "take control" of the terminal.
+    How does this happen?
+    Well, the secret is that Bash is still running&mdash; it's just waiting in the
+    background until the program returns.
+    In fact, shells do this for each command executed: It launches and then waits.
+    When the command returns, Bash then prints the prompt and asks for the next command.
+    With a program like Vim, it's just a protracted delay.
   </p>
 
   <h3>See Also:</h3>
@@ -439,6 +450,15 @@ last-updated: August, 2020
     Hence,
   </p>
 
+  <div class="aside-right">
+    <h4>Aside:</h4>
+    <p>
+      Most shells support <em>tab completion:</em>
+      If you've typed enough of a command-name or filename to
+      uniquely identify it, you can press "tab," and it will complete it for you.
+    <p/>
+  </div>
+
   <div class="code">
     $ echo *
   </div>
@@ -463,13 +483,6 @@ last-updated: August, 2020
     removes all files ending in either <code>.xz</code> or <code>.gz</code>.
   </p>
 
-  <h3> Tab Completion </h3>
-
-  <p>
-    More of an aside:  If you've typed enough of a command-name or filename to
-    uniquely identify it, you can press "tab", and Bash will complete it for you.
-  </p>
-
   <h3> See Also: </h3>
   <ul>
     <li><a href="http://mywiki.wooledge.org/glob"> glob - Greg's Wiki </a></li>
@@ -478,18 +491,7 @@ last-updated: August, 2020
 
 </div>
 
-<div class="content" id="everythings-a-command">
-  <h2>(Almost) Everything is a Command </h2>
-
-  <p>
-    In the shell, most things are commands&mdash; even the for loop above is a
-    command.
-  </p>
-
-</div>
-
 <div class="content" id="bram-moolenaar">
   <h2>Bram Moolenaar</h2>
   <iframe class="video" src="https://www.youtube.com/embed/p6K4iIMlouI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
- 
