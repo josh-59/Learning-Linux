@@ -8,7 +8,9 @@
   link: /files-and-filesystems.html
 - name: Processes
   link: /processes.html
-- name: Command Line
+- name: "Command Line 1: A Tutorial Introduction"
+  link: /command-line-tutorial-introduction.html
+- name: "Command Line 2: More Detail"
   link: /command-line.html
 - name: Text Terminals
   link: /text-terminals.html
@@ -18,5 +20,3 @@
   link: /package-management.html
 - name: "Going Further: Programming in *nix"
   link: /programming-in-nix.html
-- name: "Command Line: A Tutorial Introduction"
-  link: /command-line-tutorial-introduction.html
