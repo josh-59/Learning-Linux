@@ -13,7 +13,7 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-    font-size: 23pt;
+  font-size: 23pt;
 	margin-bottom: 5px;
 	margin-top: 25px;
 }
@@ -137,6 +137,10 @@ table {
     margin-right: 40px;
     max-width: 1000px;
     font-size: 14pt;
+}
+
+.content p {
+	line-height: 1.3;
 }
 
 /*  In written work and any superscript, no underline. */
