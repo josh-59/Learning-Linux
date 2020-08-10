@@ -254,17 +254,17 @@ last-updated: July, 2020
       A question arises: <em>"What if we delete <code>newfile</code>?"</em>
       With the above implementation in mind, there are two distinct operations
       that must take place to delete a file: First, remove all hardlinks to the file
-      (that is, delete all directory entries linking it), and
-      second, free the file (i.e., allow its inodes and data blocks to be reused).
+      (that is, delete all directory entries linking it).
+      Second, free the file (i.e., allow its inodes and data blocks to be reused).
       Deleting hardlinks is precisely what the <code>rm</code> command does.
       Freeing the file from the filesystem is left to the kernel, and
-      takes place only if no hard links reference it.
+      takes place only after there are zero hard links to it.
     </p>
 
     <h3>Structure</h3>
 
     <p>
-      While most files on the system are owned by a user,
+      While each file on the system, including directories, is owned by a user,
       the contents of directories are, effectively, owned by the kernel.
       User-space processes are not permitted to read or write
       directly to directories.
