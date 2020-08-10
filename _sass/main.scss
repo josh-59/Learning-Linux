@@ -139,6 +139,10 @@ table {
     font-size: 14pt;
 }
 
+sup, sub {
+	line-height: 0;
+}
+
 .content p {
 	line-height: 1.3;
 }
