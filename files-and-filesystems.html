@@ -42,7 +42,7 @@ last-updated: July, 2020
     Unix began life as a filesystem.<sup><a href=#references>[1]</a></sup>
     Shortly thereafter, a means
     of interacting with it was created&mdash; initially,
-    this consisted of the <code>exec</code>
+    this consisted of the <em>exec</em>
     system call, a shell, a text editor and an assembler.
     Written entirely by Ken Thompson, these key components formed the nexus of
     the time-sharing operating system that would eventually be called
@@ -184,8 +184,8 @@ last-updated: July, 2020
   <h2>Directories</h2>
 
   <p>
-    A directory is a file containing a table with two columns,
-    <a href="finding-files.html#basename">basename</a> and inode number (Kerrisk, p. 339).
+    A directory is a file containing a table with two columns:
+    <a href="finding-files.html#basename">basename</a> and inode number.
     Each entry in a directory's table is called a <em>hard link.</em>
   </p>
 
@@ -236,8 +236,8 @@ last-updated: July, 2020
     </div>
 
     <p>
-      The name <code>2newfile</code> is equivalent to the name
-      <code>newfile</code>, since they link to the same inode number.
+      The name "2newfile" is equivalent to the name
+      "newfile", since they link to the same inode number.
       If we modify the file using one name,
       then we have modified the file referred to by the other:
     </p>
@@ -251,7 +251,7 @@ last-updated: July, 2020
     </div>
 
     <p>
-      A question arises: <em>"What if we delete <code>newfile</code>?"</em>
+      A question arises: <em>"What if we delete newfile?"</em>
       With the above implementation in mind, there are two distinct operations
       that must take place to delete a file: First, remove all hardlinks to the file
       (that is, delete all directory entries linking it).
@@ -381,7 +381,7 @@ last-updated: July, 2020
     <h4>Aside:</h4>
       <p>
         The <a href="https://refspecs.linuxfoundation.org/fhs.shtml">Linux Filesystem Heirarchy Standard</a>
-        describes the working GNU/Linux directory structure.  It is a "follow along standard":
+        describes the working GNU/Linux directory structure.  It is a "follow along" standard:
         It codifies the Linux filesystem as it commonly appears at the time of its publication,
         and does not arbitrarily impose a standard prior to implementation.
       </p>
