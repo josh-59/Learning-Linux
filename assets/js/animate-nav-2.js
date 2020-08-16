@@ -11,23 +11,28 @@ function highlight_nav() {
         const currLink = $(this);
         const refElement = $(currLink.attr("href"));
 
+
         if ( refElement.length == 0 ) {
+            // Link exists in nav but corresponding div does not exist
             ;
         } else {
 
             var elemTop = refElement.position().top;
             var elemBottom = elemTop + refElement.height();
-    
-            if ( elemTop >= screenTop && elemTop + 100 < screenBottom ) { // Can see top
+
+            if ( elemTop >= screenTop && elemTop + 100 < screenBottom ) {
+                // Can see top
                 currLink.addClass("active");
-            } else if ( elemTop < screenTop && elemBottom > screenBottom ) { // Are in the middle
+            } else if ( elemTop < screenTop && elemBottom > screenBottom ) {
+                // Are in the middle
                 currLink.addClass("active");
-            } else if ( elemBottom - 10 > screenTop && elemBottom < screenBottom ) { // Can see bottom
+            } else if ( elemBottom - 10 > screenTop && elemBottom < screenBottom ) {
+                // Can see bottom
                 currLink.addClass("active");
             } else {
+                // Otherwise
                 currLink.removeClass("active");
             }
         }
     });
 }
-
