@@ -98,7 +98,11 @@ img{
 /* Uniform background and shading*/
 .aside-left, .aside-right, table, #pro-tip {
     background-color: var(--shaded-background);
-		outline: 2px solid black;
+	outline: 2px solid black;
+}
+
+.aside-left code, .aside-right code, table code, #pro-tip code {
+	font-size: 14pt;
 }
 
 .aside-left, .aside-right, {
@@ -121,6 +125,8 @@ img{
     margin-right: 20px;
     margin-left: 0;
 }
+
+
 
 table {
 	width: 70%;
