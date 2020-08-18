@@ -10,20 +10,6 @@ Python
 Ruby
 JavaScript
 
-Train Schedules
-
-Development -> Initial Release -> Maturity -> Retirement
-|-------------------Train------------------------------|
-
-Each train follows a schedule (get it?).
-
-Upgrade painlessly -> Each time a train is retired, there exists a different,
-mature train.
-
-"Stability without stagnation"
-
-https://blog.rust-lang.org/2014/10/30/Stability.html
-http://thinking-in-code.blogspot.com/2010/07/train-model-of-software-development.html
 -->
 
 <div id="nav_bar_2" class="nav">
@@ -34,6 +20,7 @@ http://thinking-in-code.blogspot.com/2010/07/train-model-of-software-development
         <li><a href="#c-plus-plus"> C++ </a></li>
         <li><a href="#javascript"> JavaScript</a></li>
         <li><a href="#general-cs"> General Computer Science </a></li>
+        <li><a href="#train-schedules"> Train Schedules </a></li>
         <li><a href="#kernel-development">Kernel Developmen </a></li>
         <li><a href="#closing-remarks"> Closing Remarks </a></li>
         <li><a href="#bryan-cantrill"> Bryan Cantrill </a></li>
@@ -239,7 +226,6 @@ Javascript toaster https://youtu.be/mVCbeOYeDww
     <h3>See Also:</h3>
     <ul>
         <li> <a href="https://rustup.rs/"> Rustup - The Rust Toolchain Installer </a></li>
-        <li> <a href="https://blog.rust-lang.org/2014/10/30/Stability.html"> Stability as a Deliverable </a> </li>
     </ul>
 </div>
 
@@ -393,6 +379,82 @@ Javascript toaster https://youtu.be/mVCbeOYeDww
     </ul>
 </div>
 
+<div class="content" id="train-schedules">
+    <h2 style="margin-bottom: 10pt;"> Train Schedules </h2>
+    <h4> Or How Open Source Works</h4>
+
+    <p>
+        Formally, train scheduling is a form of agile software development.
+        The goal of this model is to provide "stability without stagnation."
+        We will use Firefox as a case study, but note that, for instance,
+        the Linux kernel development team uses a similar approach.
+    </p>
+
+    <p>
+        A version of software is like a train:
+        It has different places that it stops during its life.
+        Each train follows a schedule, and there are multiple trains "running" at any one time.
+        Crucial to this approach is that users upgrade painlessly:
+        Each time a train is retired, there exists a new mature train for the user to jump onboard.
+    </p>
+
+    <figure>
+        <img src="assets/img/train-schedules.png" style="width: 100%;">
+    </figure>
+
+    <p>
+        A new Firefox version is scheduled for release every four weeks.<sup><a href="https://wiki.mozilla.org/Release_Management/Release_Process">[6]</a></sup>
+        That is, each version spends four weeks in the <em>Mature</em> category,
+        being the officially-supported, current version of Firefox.
+        When here, no new features are implemented&mdash; rather, only security patches, bug-fixes, etc.
+        are implemented and pushed to the user.
+        After its four weeks in the spotlight, it is discarded, for the next version is ready.
+    </p>
+
+    <p>
+        Before it becomes mature, each version of Firefox has been released as a <a href="https://www.mozilla.org/en-US/firefox/80.0beta/releasenotes/">beta</a>,
+        corresponding to the <em>Initial Release</em> above.
+        When a release enters the <em>Beta</em> stage, only patches aimed at improving
+        stability are accepted.<sup><a href="https://wiki.mozilla.org/Release_Management/Release_Process">[6]</a></sup>
+        Finally, there is the <a href="https://www.mozilla.org/en-US/firefox/80.0a1/releasenotes/">Nightly</a> build,
+        which contains the latest (and most untested) features.
+    </p>
+
+    <p>
+        Here we see that <em>Firefox 80</em> will be released as <em>Firefox 81</em>
+        enters Beta and <em>Firefox 82</em> enters Nightly:
+    </p>
+
+    <figure>
+        <a href="https://wiki.mozilla.org/Release_Management/Calendar">
+            <img src="assets/img/firefox-train-schedule.png" style="width: 90%; padding-bottom: 10pt;">
+        </a>
+        <figcaption><center><b><a href="https://wiki.mozilla.org/Release_Management/Calendar">Firefox Release Schedule</a></b></center></figcaption>
+    </figure>
+
+    <p>
+        As a rule, only opt for pre-release versions of software
+        if you are willing to submit bug-reports.
+    </p>
+
+    <p>
+        In addition to the mainline releases, Mozilla also supports two others:
+        <a href="https://www.mozilla.org/en-US/firefox/developer/">Developer Edition</a>,
+        which incorporates tools useful for building web pages;
+        and, <a href="https://www.mozilla.org/en-US/firefox/enterprise/">Extended Support Release</a>,
+        which is upgraded every 42 weeks, and intended for deployment in
+        enterprise settings.
+        These also, I believe, follow a train schedule.
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://blog.rust-lang.org/2014/10/30/Stability.html"> Stability as a Deliverable | Rust Blog</a></li>
+        <li><a href="http://thinking-in-code.blogspot.com/2010/07/train-model-of-software-development.html"> Thinking in Code: Train Model of Software Development</a></li>
+    </ul>
+
+</div>
+
 
 
 <div class="content" id="kernel-development">
@@ -463,10 +525,11 @@ Javascript toaster https://youtu.be/mVCbeOYeDww
 <div id="references" class="content">
     <h2> References </h2>
     <ol>
-        <li> Required Knowledge - OSDev Wiki. (2020, January 22). Retrieved July 29, 2020, from https://wiki.osdev.org/Required_Knowledge</li>
+        <li> Required Knowledge - OSDev Wiki. (2020, January 22). Retrieved July 29, 2020, from <a href="https://wiki.osdev.org/Required_Knowledge">https://wiki.osdev.org/Required_Knowledge</a></li>
         <li> Kernighan, Brian. <i>Unix: A History and a Memoir.</i>  Published 2020, by Brian W. Kernighan via Kindle Direct Publishing. </li>
         <li> Kernighan, B. W., &amp; Ritchie, D. M. (1988). <i>The C Programming Language</i> (2nd ed.). Englewood Cliffs,, NJ: Prentice Hall.</li>
         <li> Blandy, J. (n.d.). Rust and Bitter C++ Developers with Jim Blandy [Interview by A. G. Bell]. Corecursive. Retrieved July 29, 2020, from https://corecursive.com/013-rust-and-bitter-c-developers-with-jim-blandy/.</li>
         <li> Cantrill, B. (2018). <i>Is It Time to Rewrite the Operating System in Rust?</i>. Lecture presented at QCon, San Francisco, 2018.</li>
+        <li> The Firefox release process. (n.d.). Retrieved August 18, 2020, from <a href="https://wiki.mozilla.org/Release_Management/Release_Process">https://wiki.mozilla.org/Release_Management/Release_Process</a></li>
     </ol>
 </div>
