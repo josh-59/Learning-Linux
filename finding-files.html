@@ -32,7 +32,7 @@ last-updated: July, 2020
     <p>
         Finding files is a very common operation in Linux, and the tools
         available are powerful, but not very new-user friendly.
-        This paper will introduce the subject and some file-finding utilities. 
+        This paper will introduce the subject and some file-finding utilities.
     </p>
 </div>
 
@@ -47,7 +47,7 @@ last-updated: July, 2020
     <center><img style="width: 70%;" src="./assets/img/pathname-basename.png"></center>
 
     <p>
-        Every file in the system has a <em>basename,</em> 
+        Every file in the system has a <em>basename,</em>
         which is, informally, just its name.
         The command <code>basename</code> isolates this name for us:
     </p>
@@ -58,9 +58,9 @@ last-updated: July, 2020
     </div>
 
     <p>
-        A <em>pathname</em> prepends a file's basename with its 
-        parent directories, separating elements with forward slashes, 
-        <code>/</code>.  
+        A <em>pathname</em> prepends a file's basename with its
+        parent directories, separating elements with forward slashes,
+        <code>/</code>.
         Each of the following are pathnames of the above file:
     </p>
 
@@ -89,18 +89,18 @@ last-updated: July, 2020
     </div>
 
     <p>
-        where the leading <code>./</code> explicitly specifies 
+        where the leading <code>./</code> explicitly specifies
         the current working directory.
     </p>
 
     <p>
-        An <em>absolute pathname</em> is a pathname that begins with root, 
+        An <em>absolute pathname</em> is a pathname that begins with root,
         <code>/</code>.
         While each absolute pathname denotes a unique point in the directory tree,
-        we cannot say that the absolute pathname of a file is unique, because
+        it is not the case that an absolute pathname of a file is unique, because
         the basename 
         <a href="files-and-filesystems.html#directories">may be one of many names of the same file.</a>
-        The command <code>readlink</code> can report to us the absolute 
+        The command <code>readlink</code> can report to us the absolute
         pathname of an arbitrary basename:
     </p>
 
@@ -110,7 +110,7 @@ last-updated: July, 2020
         /home/josh/bin
     </div>
 
-    
+
     <p>
         Now, on to finding files!
     </p>
@@ -133,7 +133,7 @@ last-updated: July, 2020
 
 	<p>
     By default, <code>locate</code> matches <em>*pattern*</em> against the pathname of each file,
-    using <a href="command-line-tutorial-introduction.html#globbing">shell globbing</a> to interpret the asterisks; essentially, 
+    using <a href="command-line-tutorial-introduction.html#globbing">shell globbing</a> to interpret the asterisks; essentially,
     </p>
 
     <div class="code">
@@ -183,7 +183,7 @@ last-updated: July, 2020
 
 	  <p>
   	    A minor detail:
-  	  <em>locate</em> references a database of information 
+  	  <em>locate</em> references a database of information
       (see below) about files
       on the system, and not the directories themselves.
       This makes it much faster for ordinary searches.
@@ -211,22 +211,22 @@ last-updated: July, 2020
 
     <h2> Fd </h2>
     <p>
-        A more powerful utility for finding files is <a href="https://github.com/shardp/fd">fd</a>.  
+        A more powerful utility for finding files is <a href="https://github.com/shardp/fd">fd</a>.
         It traverses the directory tree itself, which allows it to query the
         system about each file on an individual basis.
     </p>
 
     <p>
         This specific utility, <em>fd,</em> is fairly new, having been first
-        released in 2017.  
-        Written in Rust, it aims to be a "simple, fast and user-friendly alternative to 
+        released in 2017.
+        Written in Rust, it aims to be a "simple, fast and user-friendly alternative to
         find."<sup><a href="https://github.com/shardp/fd">fd</a></sup>.
         For its ease of use alone, I recommend that you install it, with either,
     </p>
 
     <div class="aside-right">
         <h4>Aside:</h4>
-        <p> 
+        <p>
             On Debian distributions, the executable is named <code>fdfind</code>
         </p>
     </div>
@@ -254,9 +254,9 @@ last-updated: July, 2020
     <p>
         where <em>pattern</em> is a regex pattern.
         This means that its behavior is very much like that
-        of locate, wherein <em>fd</em> will print the name of any 
+        of locate, wherein <em>fd</em> will print the name of any
         file whose wholename contains the string <em>pattern</em>.
-        We'll explain some regex as we go, and then cover it in 
+        We'll explain some regex as we go, and then cover it in
         greater detail later.
     </p>
 
