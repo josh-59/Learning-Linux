@@ -19,21 +19,20 @@ last-updated: July, 2020
 
 <div id="introduction" class="content">
     <h1>Finding Files</h1>
-    {% comment %}
-    <h4> Oh where the hell is that damn thing </h4>
-    <h4> <code>sudo find / -regex ".*[Ll]earn[ing].*[Ll]inux.*"</code> </h4>
+    <div class="quote-text">
+        "...though the advantages are obvious in hindsight, <br>
+        heirarchical file systems were not widely available before Multics and then Unix."
+    </div>
 
-      <div class="quote-ref">
-        &mdash;Josh Timmons
-      </div>
-    {% endcomment %}
-    <h4> Under Construction! </h4>
+    <div class="quote-ref">
+        &mdash;Brian Kernighan,<br>
+        <u>UNIX: A History and a Memoir</u>
+    </div>
 
     <p>
         Finding files is a very common operation in Linux, and the tools
-        available are powerful, but not new-user friendly.
-        This paper will cover the most common file-finding utilities, and
-        touch upon regex.  
+        available are powerful, but not very new-user friendly.
+        This paper will introduce the subject and some file-finding utilities. 
     </p>
 </div>
 
@@ -41,40 +40,85 @@ last-updated: July, 2020
     <h2> Pathnames and Basenames</h2>
     <p>
         To start, we must make a clear distinction between a file's
-        <em>pathname</em> and a file's <em>basename</em>, because
+        <em>pathname</em> and its <em>basename</em>, because
         our search tools will often make a distinction between these two.
     </p>
 
     <center><img style="width: 70%;" src="./assets/img/pathname-basename.png"></center>
 
     <p>
-        Every file in the system has a pathname, which begins at root, <code>/</code>.
-        This is also known as an <em>absolute filename</em>, and sometimes, a <em>wholename</em>.
-        Each pathname denotes a unique point in the directory tree.
-		</p>
+        Every file in the system has a <em>basename,</em> 
+        which is, informally, just its name.
+        The command <code>basename</code> isolates this name for us:
+    </p>
 
-    <p> The command <code>readlink</code> can report to us the pathname of an
-        arbitrary file:
+    <div class="code">
+        $ basename /home/josh/bin<br>
+        bin
+    </div>
 
-        <div class="code">
-            $ cd /home/josh<br>
-            $ readlink -f bin<br>
-            /home/josh/bin
-        </div>
+    <p>
+        A <em>pathname</em> prepends a file's basename with its 
+        parent directories, separating elements with forward slashes, 
+        <code>/</code>.  
+        Each of the following are pathnames of the above file:
+    </p>
+
+    <div class="code">
+        /home/josh/bin <br>
+        home/josh/bin <br>
+        josh/bin
+    </div>
+
+    <p>
+        Pathnames are usually used in a relative context.
+        For example, if our current working directory is <code>/home</code>,
+        then the relative pathname to the above file is,
+    </p>
+
+    <div class="code">
+        josh/bin
+    </div>
+
+    <p>
+        or equally,
+    </p>
+
+    <div class="code">
+        ./josh/bin
+    </div>
+
+    <p>
+        where the leading <code>./</code> explicitly specifies 
+        the current working directory.
     </p>
 
     <p>
-        Every file in the system also has a basename.
-        The command <code>basename</code> isolates this name for us:
-        <div class="code">
-            $ basename /home/josh/studies/merge.c<br>
-            merge.c
-        </div>
+        An <em>absolute pathname</em> is a pathname that begins with root, 
+        <code>/</code>.
+        While each absolute pathname denotes a unique point in the directory tree,
+        we cannot say that the absolute pathname of a file is unique, because
+        the basename 
+        <a href="files-and-filesystems.html#directories">may be one of many names of the same file.</a>
+        The command <code>readlink</code> can report to us the absolute 
+        pathname of an arbitrary basename:
     </p>
 
+    <div class="code">
+        $ cd /home/josh<br>
+        $ readlink -f bin<br>
+        /home/josh/bin
+    </div>
+
+    
     <p>
         Now, on to finding files!
     </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><code><a href="https://man7.org/linux/man-pages/man7/path_resolution.7.html">path_resolution(7)</a></code>&ndash; How the kernel resolves pathnames</li>
+    </ul>
 </div>
 
 <div id="locate" class="content">
