@@ -1,24 +1,17 @@
 ---
 layout: default
 title: "Going Further: Programming in *nix"
-last-updated: July, 2020
+last-updated: August, 2020
 ---
 
-<!--
-To Do:
-Python
-Ruby
-JavaScript
-
--->
 
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
+        <li><a href="#getting-started"> Getting Started </a></li>
         <li><a href="#c"> C </a></li>
         <li><a href="#rust"> Rust </a></li>
         <li><a href="#c-plus-plus"> C++ </a></li>
-        <li><a href="#javascript"> JavaScript</a></li>
         <li><a href="#general-cs"> General Computer Science </a></li>
         <li><a href="#train-schedules"> Train Schedules </a></li>
         <li><a href="#kernel-development">Kernel Development </a></li>
@@ -48,39 +41,72 @@ JavaScript
     </p>
 </div>
 
-
-
-    <!--
-    <div id="python" class="content">
-    <h2> Python </h2>
+<div id="getting-started" class="content">
+    <h2> Getting Started</h2>
 
     <p>
-    If you're just starting out, I think your best bet is to learn Python.
-    While it's intended to be easy to program in, it nonetheless is
-    a powerful, general-purpose programming language.
-    Python's community is active and friendly, so don't be shy!
-</p>
+        The only way to learn programming is to do it.
+        There are several languages that are well-suited to the novice,
+        including Python, Ruby and JavaScript.
+        These are each object-oriented languages, and none of them are
+        "toy" languages.
+    </p>
 
-<h3>See Also:</h3>
-<ul>
-<li>
-<a href="https://www.hackerrank.com/">Hacker Rank</a>&mdash; Practice skills, obtain certification and get a job
-</li>
-</ul>
+    <p>
+        For instance, the Linux Mint update manager, <a href="https://github.com/linuxmint/mintupgrade/blob/master/usr/bin/mintupgrade">Mint Upgrade</a>,
+        is written in Python.
+        This is an excellent use-case for the language:
+        Because it isn't ran very often, it doesn't need to maximize performance.
+        In addition, readability of the code is, in this case, very important.
+        It could easily be the case that someone other than its original
+        author needs to come in and orient themselves quickly.
+        In fact, <a href="https://github.com/linuxmint">according to GitHub</a>,
+        most of the Linux Mint development team's work is in Python.
+    </p>
+
+    <p>
+        Another piece of software that I use a lot is <a href="https://jekyllrb.com/">Jekyll</a>, a
+        static site-builder, which is written in Ruby.
+        It lets you build websites according to custom templates, and also allows
+        you to serve them to yourself locally.
+        For what I do, it's very easy to use; it's also the default site-generator
+        of Github:  I don't actually upload webpages; rather, I upload files
+        describing <em>how the website should to be built according to Jekyll,</em>
+        and the Github backend takes care of the rest.
+        Admittedly, this might not be the best use-case for Ruby, with
+        <a href="https://gohugo.io/">Hugo</a> coming into maturity and its
+        being written in a proper systems programming language.
+    </p>
+
+    <p>
+        And, of course, JavaScript, being the standard scripting language of the web, is used everywhere.
+        It <a href="https://youtu.be/mVCbeOYeDww">has been claimed (Youtube video)</a> that
+        JavaScript is the inevitable future of programming,
+        that everything from toasters to automobiles will be programmed through JavaScript.
+        This is owed to its migration from the web, first to the <a href="https://nodejs.org/en/">NodeJS</a> runtime environment,
+        which lets you access systems API's from within the language,
+        and then on to the <a href="https://www.electronjs.org/">Electron</a> application framework,
+        which lets you create desktop applications that are identical across platforms, with the language.
+        If you've ever used the <a href="https://atom.io/">Atom</a> text editor, then you've experienced <em>Electron.</em>
+    </p>
+
+    <p>
+        Outside of reading and writing code,
+        several sources exist to aid the newcomer into the wonderful world of programming.
+        Books offer in-depth explanations and theoretical background.
+        Videos offer lecture-style, if curated, material.
+        Open classes cover more ground systematically.
+        The best aides, though, are websites that present programming problems,
+        and let the student solve them.
+        Two of these are listed below.
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://www.hackerrank.com/">HackerRank</a></li>
+        <li><a href="https://emkc.org/">Engineer Man Knowledge Center</a></li>
+    </ul>
 </div>
--->
-
-<!--
-<div id="javascript" class="content">
-<h2> JavaScript </h2>
-<p>
-
-</p>
-</div>
-Javascript toaster https://youtu.be/mVCbeOYeDww
-- Javascript is used everywhere
--
--->
 
 <div id="c" class="content">
     <h2> C </h2>
@@ -281,33 +307,6 @@ Javascript toaster https://youtu.be/mVCbeOYeDww
     <ul>
         <li><a href="https://lwn.net/Articles/249460/"> Linus Torvalds on C++ </a></li>
         <li><a href="https://en.wikiquote.org/wiki/Ken_Thompson#%22Coders_At_Work%22,_2009"> Ken Thompson on C++</a></li>
-    </ul>
-</div>
-
-<div id="javascript" class="content">
-    <h2>JavaScript</h2>
-
-    <p>
-        It has been claimed that
-        JavaScript is the inevitable future of programming,
-        that everything from toasters to automobiles will be programmed through Javascript.<sup><a href="https://youtu.be/mVCbeOYeDww">[15]</a></sup>
-        Therefore, it will be the first interpreted / dynamically-compiled language
-        we will look at.
-    </p>
-
-<!--
-    <p>
-        JavaScript began life in the browser.
-        From there, it migrated out via NodeJS:
-            -- Take away HTML Document Object Model
-            -- And introduce a system API (e.g., open, read, wrtie, etc)
-        Electron allows IDENTICAL application interfaces cross-platform
-    </p>
--->
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://youtu.be/mVCbeOYeDww">JavaScript - EM Live</a> (Youtube Video)</li>
     </ul>
 </div>
 
