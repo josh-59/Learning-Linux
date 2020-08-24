@@ -211,41 +211,46 @@ last-updated: August, 2020
       <li><a href="https://www.gnu.org/philosophy/free-sw.html"> What is free software? - GNU Project</a> </li>
       <li><a href="https://www.gnu.org/philosophy/philosophy.html"> Philosophy of the GNU Project - GNU Project</a></li>
     </ul>
+</div>
 
-    </div>
-
-    <div class="content" id="posix">
-      <h2> POSIX </h2>
-      <p>
+<div class="content" id="posix">
+    <h2> POSIX </h2>
+    <p>
         The set of system calls that an operating system provides
         determines the interface that any user-space process has
         to the operating system, and thus to the machine.
         In order to assure software portability across operating systems, it is
         essential that this interface be (mostly) uniform.
-      </p>
+    </p>
 
-      <p>
+    <p>
         The first <em>Portable Operating System Interface</em> specification
         was released as an IEEE standard in 1988,<sup><a href="https://en.wikipedia.org/wiki/POSIX#Name">[8]</a></sup>
-        and specified the system-call interface available to user-space programs.
-        This standard has been refined since then.
+        and specified the system-call interface available to user-space programs,
+        among other things.
         Operating systems that abide by this standard are called <em>POSIX Compliant;</em>
         systems developers general aim for POSIX compliance.<sup><a href="https://en.wikipedia.org/wiki/Single_UNIX_Specification">[9]</a></sup>
-      </p>
+    </p>
 
-      <p>
-        A stronger specification is the <em>Single Unix Specification,</em>
-        which is a superset of POSIX.<sup><a href="#references">[10]</a></sup>
+    <p>
+        Posix has been refined since 1988.
+        In addition, a stronger specification has been introduced, and is
+        called the <em>Single Unix Specification.</em><sup><a href="#references">[10]</a></sup>
         Certification to this standard is costly, and is generally reserved for proprietary operating systems.
-      </p>
+    </p>
 
-      <p>
+    <p>
         While the system-call interface is not the only means of interacting with
         the kernel, and properly speaking belongs to the kernel,
         I feel it a sufficiently important abstraction layer to be depicted separately:
         Most interactions between processes and the operating system occur
         through the system-call interface.
-      </p>
+    </p>
+
+    <h3> See Also: </h3>
+    <ul>
+        <li><a href="https://pubs.opengroup.org/onlinepubs/9699919799/mindex.html">POSIX.1-2017</a>&mdash; The Current Standard</li>
+    </ul>
 </div>
 
 <div id="distributions" class="content">
