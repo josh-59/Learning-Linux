@@ -16,25 +16,26 @@ last-updated: August, 2020
 </div>
 
 <div id="introduction" class="content">
-  <h1>The Command Line:</h1>
-  <h4>A Tutorial Introduction</h4>
+    <h1>The Command Line:</h1>
+    <h4>A Tutorial Introduction</h4>
 
-  <p>
-    As a user interface, the command-line is exceptionally powerful:
-    Anything that can be done on a Unix-like system can be done through
-    the command-line alone.
-    This essay is intended to bring the reader "up to speed" on the use of the command line.
-    Click any picture to zoom.
-  </p>
+    <p>
+        As a user interface, the command-line is exceptionally powerful:
+        Anything that can be done on a Unix-like system can be done through
+        the command-line alone.
+        This essay is intended to introduce a first-time user to it.
+    </p>
+
+    <p>
+        Click any picture to zoom.
+    </p>
 </div>
 
 <div id="bringing-up-the-command-line" class="content">
   <h2> Bringing Up The Command Line </h2>
   <p>
-    We will assume that you are using <a href="https://www.linuxmint.com/">Linux Mint, Cinammon Edition</a>,
-    a user-friendly, professional and powerful operating system.
-    We access the command line through a <em>terminal.</em>
-    On a default installation, the terminal is available from the desktop:
+      On any machine, we access the command line through a <em>terminal.</em>
+    On a default Mint installation, the terminal is available from the desktop:
   </p>
 
   <figure >
@@ -81,6 +82,18 @@ last-updated: August, 2020
     Here our command was <em>echo</em>.  This command simply prints out the <em>arguments</em>
     that were given to it.
     Our arguments were "Hello," and "World!"
+    </p>
+
+    <p>
+    Incidentally, I will represent terminal commands by placing them on a separate line, in bold,
+    with a leading <code>$</code> representing the prompt, like so:
+    </p>
+
+    <div class="code">
+        $ echo Hello, World!
+    </div>
+
+    <p>
     You might think the <em>echo</em> utility is trivial, but in practice it's
     quite useful.
     It can be used to quickly create files, to display the value of shell variables
@@ -143,29 +156,30 @@ last-updated: August, 2020
   </p>
 
   <ul>
-    <li> lscpu&mdash; List CPU information </li>
-    <li> lsmem&mdash; List memory information </li>
-    <li> df --all --human-readable&mdash; Report file system disk space usage </li>
+    <li> <code>lscpu</code>&mdash; List CPU information </li>
+    <li> <code>lsmem</code>&mdash; List memory information </li>
+    <li> <code>df --all --human-readable</code>&mdash; Report file system disk space usage </li>
   </ul>
 
   <p>
-    When this interface is sufficiently stable, these commands can form
-    the <em>back-end</em> for graphical programs.
-    An example of this is the Synaptic package manager.
+    When the output of these commands is sufficiently stable, programmers
+    can depend on them, allowing so-called <em>scripts</em> to be written.
+    Taken to its limit, these commands can form
+    the "back-end" for graphical programs.
+    An example of this is the <a href="https://www.nongnu.org/synaptic/">Synaptic package manager</a>, which is a popular GUI
+    frontend for Debian's <code>apt</code> collection of command-line tools.
     </p>
 
   <p>
     In addition, most programming tools (such as compilers and interpreters)
-    deal in simple text, so that the command line is a natural interface
+    often deal in simple text, so that the command line is a natural interface
     to them.
-    Finally, the stability of shells and commands means that they are
-    languages of their own; with the inclusion of variables, conditionals
-    and loops, they have become full-fledged programming languages.
-    This means that you can make config <em>scripts</em>, for instance.
+    Finally, with the inclusion of variables, conditionals,
+    and loops, shells have become full-fledged programming languages of their own.
     </p>
 
     <p>
-    Let's look at some more powerful constructs within shells.
+    Let's look at some more powerful constructs within Bash.
   </p>
 
   <h3>See Also:</h3>
@@ -179,7 +193,7 @@ last-updated: August, 2020
   <h2> Some Shell Features </h2>
 
   <p>
-    Some words are expanded by the shell before it executes the line they're in.
+    Some words are expanded by the shell before being executed.
     For instance,
   </p>
 
@@ -205,8 +219,9 @@ last-updated: August, 2020
   <p>
     This is called <em>shell expansion,</em> and within Bash, becomes quite a
     topic.
-    Shell variables are expanded with the <code>$</code> operator; they are
-    declared by giving their name followed without-space by an equals-sign:
+    Shell variables are expanded with the <code>$</code> operator, as
+    in the string <code>$myvar</code> below; variables are declared and
+    given a value by giving their name followed without-space by an equals-sign:
   </p>
 
   <div class="aside-right">
@@ -227,7 +242,8 @@ last-updated: August, 2020
 
   <p>
     It's important to note that the shell deals in <em>strings</em> and <em>commands</em>,
-    so that <code>myvar</code> contains the string composed of the letters <em>1</em> and <em>2</em>,
+    so that <code>myvar</code> is a string, and when expanded,
+    contains the string composed of the letters <em>1</em> and <em>2</em>,
     and not the number twelve.
     We can tell Bash to deal in integers, but let's not bother just now.
   </p>
@@ -280,28 +296,38 @@ last-updated: August, 2020
   <p>
     Alright, let's get some real work done.
     There are many terminal-based text editors available, but I recommend
-    that you learn <a href="https://www.vim.org/">Vim</a>.  Its controls
+    that you learn <a href="https://en.wikipedia.org/wiki/Vi">Vi</a>.
+    It's available everywhere, and also, its controls
     are similar to those of the manual paging utility, which you can expect
-    to use often, and because it's available everywhere.
+    to use often.
     You can launch it with,
   </p>
 
+  <div class="aside-right">
+      <h4>Aside:</h4>
+      <p>
+          <code>Vi</code> has a several variants.
+          A popular one is <code><a href="https://www.vim.org/">Vim</a></code>.
+          I personally use <code><a href="https://neovim.io/">Neovim</a></code>,
+          which is just a modern, extensible variant of Vi.
+      </p>
+  </div>
+
   <div class="code">
-    $ vim [filename]
+    $ vi [filename]
   </div>
 
   <p>
-    where <em>filename</em> either exists and is readable, or does not exist.
     Like most command-line tools, this one is intended for an experienced user,
     so there's a bit of a learning curve to it.
     It breaks down like this:
   </p>
 
   <p>
-    Vim has <em>modes</em>.
+    Vi has <em>modes</em>.
     The default mode is called <em>normal mode,</em> and you can get to
     it from any other mode by pressing the escape key.
-    From normal mode, you can exit vim by typing a colon, followed by the
+    From normal mode, you can exit Vi by typing a colon, followed by the
     letter 'q', like this
   </p>
 
@@ -313,14 +339,6 @@ last-updated: August, 2020
     If you have unsaved work, this command will fail, and Vim will warn you.
     To discard your changes and exit anyway, type,
   </p>
-
-  <div class="aside-right">
-    <h4>Aside:</h4>
-    <p>
-      I personally use <a href="https://neovim.io/">Neovim</a>,
-      which is just a modern, extensible variant of Vim.
-    </p>
-  </div>
 
   <div class="code">
     :q!
@@ -377,8 +395,8 @@ last-updated: August, 2020
   <div class="aside-right">
     <h4>Aside:</h4>
     <p>
-      Vim distinguishes between upper- and lower-case commands, so make sure
-      your caps-lock key is not engaged.
+      Vi distinguishes between upper- and lower-case commands, so make sure
+      your caps-lock key is not pressed!
     </p>
   </div>
 
@@ -387,7 +405,7 @@ last-updated: August, 2020
   </div>
 
   <p>
-    Finally, a run-down of some useful commands:
+    Finally, some useful commands:
   </p>
 
   <ul>
@@ -413,14 +431,14 @@ last-updated: August, 2020
   </p>
 
   <p>
-    You might have noticed that Vim and other applications
+    You might have noticed that Vi and other applications
     "take control" of the terminal.
     How does this happen?
-    Well, the secret is that Bash is still running&mdash; it's just waiting in the
-    background until the program returns.
+    Well, the secret is that Bash is still running&mdash; it's just waiting
+    until the program returns.
     In fact, shells do this for each command executed: It launches and then waits.
     When the command returns, Bash then prints the prompt and asks for the next command.
-    With a program like Vim, it's just a protracted delay.
+    With Vi/Vim, it's just a protracted delay.
   </p>
 
   <h3>See Also:</h3>
@@ -488,5 +506,15 @@ last-updated: August, 2020
     <li><a href="http://mywiki.wooledge.org/glob"> glob - Greg's Wiki </a></li>
     <li><a href="https://man7.org/linux/man-pages/man7/glob.7.html">glob(7)</a></li>
   </ul>
+
+</div>
+
+<div class="content" id="learning-resources">
+    <h2> Some Learning Resources </h2>
+
+    <ul>
+        <li> <a href="https://github.com/jlevy/the-art-of-command-line">The Art of Command Line</a> </li>
+        <li> <a href="https://guide.bash.academy/">The Bash Guide</a></li>
+    </ul>
 
 </div>
