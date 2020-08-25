@@ -8,8 +8,8 @@ last-updated: August, 2020
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#unix-architecture"> The Unix Architecture </a></li>
-        <li><a href="#linux-kernel"> The Linux Kernel </a></li>
         <li><a href="#gnu"> GNU </a></li>
+        <li><a href="#linux-kernel"> The Linux Kernel </a></li>
         <li><a href="#posix"> POSIX </a></li>
         <li><a href="#distributions"> Linux Distributions </a></li>
         <li><a href="#mint"> Linux Mint </a></li>
@@ -21,192 +21,201 @@ last-updated: August, 2020
 <div id="introduction" class="content">
     <h1>Introduction to GNU/Linux</h1>
     <div class="quote-text">
-      "Those who do not understand UNIX
-    <span style="display:inline-block; width: 50pt;"></span><br>
-    <span style="display:inline-block; width: 50pt;"></span>
-      are condemned to reinvent it, poorly."
+        "Those who do not understand UNIX
+        <span style="display:inline-block; width: 50pt;"></span><br>
+        <span style="display:inline-block; width: 50pt;"></span>
+        are condemned to reinvent it, poorly."
     </div>
     <div class="quote-ref">
-      Henry Spence, Programmer
-  </div>
+        Henry Spence, Programmer
+    </div>
 
     <p>
-      An operating system is a collection of software designed to facilitate
-      the use of a computer.
-      To this end, its two main responsibilities are to support running
-      programs&mdash; known as processes&mdash; and to maintain persistent
-      data&mdash; known as files.
-      In addition, operating systems ease the task of creating
-      useful programs by giving processes a predictable environment.
-      Modern, open-source GNU/Linux offers the single best programming environment
-      available today.
+        An operating system is a collection of software designed to facilitate
+        the use of a computer.
+        To this end, its two main responsibilities are to support running
+        programs&mdash; known as processes&mdash; and to maintain persistent
+        data&mdash; known as files.
+        In addition, operating systems ease the task of creating
+        useful programs by giving processes a predictable environment.
+        Modern, open-source GNU/Linux offers the single best programming environment
+        available today.
     </p>
 </div>
 
 <div id="unix-architecture" class="content">
     <h2>The Unix Architecture</h2>
     <p>
-      GNU/Linux belongs to a large class of operating systems called
-      <em>Unix-like,</em> sometimes referred to as <em>*nix.</em>
-      The Unix operating system had a clear and well-documented architecture,
-      which has been replicated many times in both open-source and proprietary contexts.
-      An overview of its architecture is as follows:
+        GNU/Linux belongs to a large class of operating systems called
+        <em>Unix-like,</em> sometimes referred to as <em>*nix.</em>
+        The Unix operating system had a clear and well-documented architecture,
+        which has been replicated many times in both open-source and proprietary contexts.
+        An overview of its architecture is as follows:
     </p>
 
     <img src="assets/img/linux-architecture.png" style="height: 400px;">
 
     <p>
-      <strong>Hardware:</strong>
-      At the heart of any machine is its hardware.
-      Each piece of hardware has a software interface defined by the engineers that
-      created it.
-      These interfaces are varied at best.
+        <strong>Hardware:</strong>
+        At the heart of any machine is its hardware.
+        Each piece of hardware has a software interface defined by the engineers that
+        created it.
+        These interfaces are varied at best.
     </p>
 
     <p>
-      <strong>Drivers:</strong>
-      These interact directly with hardware and provide the kernel with
-      a more-uniform interface to each piece. This software layer
-      represents the deepest and most remote element of any operating system.
-      Although drivers can be installed on an as-needed basis, in GNU/Linux
-      the tendency is to include many drivers, and use only those that are required.
+        <strong>Drivers:</strong>
+        These interact directly with hardware and provide the kernel with
+        a more-uniform interface to each piece. This software layer
+        represents the deepest and most remote element of any operating system.
+        Although drivers can be installed on an as-needed basis, in GNU/Linux
+        the tendency is to include many drivers, and use only those that are required.
     </p>
 
     <p>
-      <strong>Kernel:</strong>
-      While the heart of any machine is its hardware, the heart of any
-      Unix-like operating system is its kernel.
-      The kernel uses drivers to direct the actions of the machine, at the
-      behest of processes.
-      At some 28 million lines of code, this is a large and involved piece of software.
+        <strong>Kernel:</strong>
+        While the heart of any machine is its hardware, the heart of any
+        Unix-like operating system is its kernel.
+        The kernel uses drivers to direct the actions of the machine, at the
+        behest of processes.
+        At some 28 million lines of code, this is a large and involved piece of software.
     </p>
 
     <p>
-      <strong>System Calls:</strong>
-      In order to permit interaction with the kernel, each
-      Unix-like operating system employs a set of system calls.
-      From a source-code point of view, system calls "look" and "act" like ordinary function
-      calls, but their actions are not restricted to user-space.  Rather, they
-      transcend the software hierarchy, often propogating changes at the hardware level.
+        <strong>System Calls:</strong>
+        In order to permit interaction with the kernel, each
+        Unix-like operating system employs a set of system calls.
+        From a source-code point of view, system calls "look" and "act" like ordinary function
+        calls, but their actions are not restricted to user-space.  Rather, they
+        transcend the software hierarchy, often propogating changes at the hardware level.
     </p>
 
     <p>
-      <strong>Processes:</strong>
-      Sometimes called a "user-space process," a process is an executing
-      program.
-      On *nix platforms, processes run the entire show.
-      They are the only means that a user has to interact with the system, and
-      the kernel depends on them to direct its actions.
-      Processes are a critical component of a functioning operating system.
+        <strong>Processes:</strong>
+        Sometimes called a "user-space process," a process is an executing
+        program.
+        On *nix platforms, processes run the entire show.
+        They are the only means that a user has to interact with the system, and
+        the kernel depends on them to direct its actions.
+        Processes are a critical component of a functioning operating system.
     </p>
 
     <h3>See Also:</h3>
     <ul>
         <li><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/">Operating Systems: Three Easy Pieces</a></li>
+    </ul>
+</div>
+
+<div class="content" id="gnu">
+    <h2>GNU</h2>
+    <p>
+        The first serious attempt at producing a free and open-source Unix-like
+        operating system was undertaken by Richard Stallman in 1983.
+        Stallman was, at the time, a graduate student at
+        MIT's AI Laboratory,<sup><a href="https://en.wikipedia.org/wiki/Richard_Stallman#Harvard_University_and_MIT">[1]</a></sup>
+        and his project was called "GNU," a recursive acronym for <em>GNU's Not Unix.</em><sup><a href="https://www.gnu.org/gnu/gnu-history.html">[2]</a></sup>
+    </p>
+
+
+    <div class="aside-right">
+        <h4> From <a href="https://www.gnu.org/philosophy/free-sw.html">gnu.org</a>:</h4>
+        <p>
+            “Free software” means software that respects users' freedom and community.
+            Roughly, it means that <strong>the users have the freedom to run, copy,
+                distribute, study, change and improve the software.</strong>[sic]
+        </p>
     </div>
 
-    <div class="content" id="linux-kernel">
-      <h2>The Linux Kernel</h2>
-      <p>
-        Properly speaking, the name <em>Linux</em> refers only to the Linux kernel.
+    <p>
+        To create an entire operating system is an enormous task, but,
+        "...by 1990 [the GNU Project] had either found or written all the major components except one&ndash; the kernel."<sup><a href="https://www.gnu.org/gnu/gnu-history.html">[2]</a></sup>
+        GNU's own kernel, dubbed <a href="https://www.gnu.org/software/hurd/">Hurd</a>,
+        is, as of 2020, <a href="https://www.gnu.org/software/hurd/news/2016-12-18-releases.html">in version 0.9</a>.
+    </p>
+
+    <p>
+        Today, the GNU Project is well-regarded for producing high-quality, well-documented
+        free software;
+        they are as "official" as the open-source community gets.
+    </p>
+
+    <p>
+        In particular, GNU's compiler collection, <code>gcc</code>, contains the de-facto C compiler
+        of the open-source community.
+        This compiler is the only one capable of building Linux kernels.<sup><a href="http://files.kroah.com/lkn/lkn_pdf/ch02.pdf">[3]</a></sup>
+        Similarly, their <code>Bash</code> shell is the default shell on many distributions.
+    </p>
+
+    <p>
+        The GNU Project takes freedom very seriously.
+        In their language, <em>free</em> does not mean merely, "costs nothing."
+        Rather, it means <em>free as in
+            freedom.</em><sup><a href="https://www.gnu.org/philosophy/free-sw.html">[4]</a></sup>
+            Thus, GNU's software is free in terms of both price and liberty;
+            the open-source community often uses
+            the term <em>libre</em> to connote this kind of freedom.
+    </p>
+    <h3> See Also: </h3>
+    <ul>
+        <li><a href="https://www.gnu.org/philosophy/philosophy.html"> Philosophy of the GNU Project - GNU Project</a></li>
+        <li><a href="http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/">The Cathedral and the Bazaar</a></li>
+    </ul>
+</div>
+
+<div class="content" id="linux-kernel">
+    <h2>The Linux Kernel</h2>
+    <p>
         This kernel was started by Linus Torvalds in 1991, then a graduate student
-        of the University of Helsinki.<sup><a href="https://en.wikipedia.org/wiki/Linus_Torvalds">[1]</a></sup>
+        of the University of Helsinki.<sup><a href="https://en.wikipedia.org/wiki/Linus_Torvalds">[5]</a></sup>
         Following the architecture of the Unix operating system,
         he began writing an open-source operating system as "...a hobby, won't be big and professional like
-        [the GNU Project]."<sup><a href="https://en.wikipedia.org/wiki/Linux_kernel#History">[2]</a></sup>
+        [the GNU Project]."<sup><a href="https://en.wikipedia.org/wiki/Linux_kernel#History">[6]</a></sup>
         He soon released it publicly under the GNU General Public License, version 2.
         Since then, it has become very successful, and has become
         the most-used Unix-like kernel in existence.
-      </p>
+    </p>
 
-      <p>
+    <div class="aside-right" style="font-size: 11pt;">
+        <h4>Aside:</h4>
+        <p>
+            Properly speaking, the name <em>Linux</em> refers only to the Linux kernel.
+        </p>
+    </div>
+
+    <p>
         Developing the kernel is not an easy task.
         The development process must:
-      </p>
+    </p>
 
-      <ul>
+    <ul>
         <li> Facilitate change, so that new features may be incorporated </li>
         <li> Yield stable kernels, for private and commercial use</li>
         <li> Accept patches from thousands of unknown and volunteer developers each month</li>
-      </ul>
+    </ul>
 
-      <p>
+    <p>
         In addition, the kernel development team takes care not to break
         user-space, so that what did work will continue to
-        work.<sup><a href="https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space">[3]</a></sup>
+        work.<sup><a href="https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space">[7]</a></sup>
         As such, the development process is somewhat involved.
         Documentation about it is maintained
         <a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/process?h=v5.8-rc1">within the source code.</a>
-      </p>
+    </p>
 
-      <p>
+    <p>
         Linus Torvalds remains the maintainer of the Development branch today.
         Another major figure in Linux development is Greg Kroah-Hartman (pronounced "<em>Crow</em>-Hartman").
         He is currently the maintainer of the Stable branch.
-      </p>
+    </p>
 
     <h3>See Also:</h3>
     <ul>
-      <li><a href="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/">The Linux Kernel Source Code</a> </li>
-      <li><a href="https://en.wikipedia.org/wiki/History_of_Linux">History of Linux - Wikipedia</a></li>
-    </ul>
-    </div>
-
-    <div class="content" id="gnu">
-      <h2>GNU</h2>
-      <p>
-        Development and deployment of Unix-like operating systems is
-        contingent upon some user-space programs, such as a C compiler and
-        an <em>sh</em>-compatible shell.
-        GNU (pronounced <em>gah-new</em>) is well-known for producing high-quality, well-documented
-        free software; they are as "official" as the open-source community gets.
-      </p>
-
-      <div class="aside-right">
-        <h4> From <a href="https://www.gnu.org/philosophy/free-sw.html">gnu.org</a>:</h4>
-        <p>
-          “Free software” means software that respects users' freedom and community.
-          Roughly, it means that <strong>the users have the freedom to run, copy,
-          distribute, study, change and improve the software.</strong>[sic]
-        </p>
-      </div>
-
-      <p>
-        The GNU Project was started by Richard Stallman in September 1983,<sup><a href="https://www.gnu.org/gnu/gnu-history.html">[4]</a></sup>
-        and takes freedom very seriously.
-        In GNU language, <em>free</em> software does not mean merely, "costs nothing."
-        Rather, it is intended to mean <em>free as in
-        freedom.</em><sup><a href="https://www.gnu.org/philosophy/free-sw.html">[5]</a></sup>
-        GNU and the open-source community often use
-        the term <em>libre</em> to connote this kind of freedom.
-        It should speak volumes that Linus Torvalds chose to release his budding
-        kernel under a GNU license.
-      </p>
-
-      <p>
-        GNU's compiler collection, <code>gcc</code>, contains the de-facto C compiler
-        of the open-source community.
-        This compiler is the only one capable of building Linux kernels.<sup><a href="http://files.kroah.com/lkn/lkn_pdf/ch02.pdf">[6]</a></sup>
-        Similarly, their <code>bash</code> is the default shell on these systems.
-        Each tool offered by GNU is well-documented, so look to them for
-        documentation.
-      </p>
-
-      <p>
-        A point of note:
-        The GNU Project maintains a list of "free" operating systems on their website.
-        Their criteria is extremely restrictive, disallowing non-free software to
-        exist even in downloadable form on the distributions' package-management repositories.
-        Most Linux distributions are not listed; this is permissiveness on the part
-        of the distribution's maintainer, allowing non-free software to be
-        officially supported, and does not mean that you can't use it.
-      </p>
-    <h3> See Also: </h3>
-    <ul>
-      <li><a href="https://www.gnu.org/philosophy/free-sw.html"> What is free software? - GNU Project</a> </li>
-      <li><a href="https://www.gnu.org/philosophy/philosophy.html"> Philosophy of the GNU Project - GNU Project</a></li>
+        <li><a href="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/">The Linux Kernel Source Code</a> </li>
+        <li><a href="https://en.wikipedia.org/wiki/History_of_Linux">History of Linux - Wikipedia</a></li>
     </ul>
 </div>
+
+
 
 <div class="content" id="posix">
     <h2> POSIX </h2>
@@ -220,17 +229,17 @@ last-updated: August, 2020
 
     <p>
         The first <em>Portable Operating System Interface</em> specification
-        was released as an IEEE standard in 1988,<sup><a href="https://en.wikipedia.org/wiki/POSIX#Name">[7]</a></sup>
+        was released as an IEEE standard in 1988,<sup><a href="https://en.wikipedia.org/wiki/POSIX#Name">[8]</a></sup>
         and specified the system-call interface available to user-space programs,
         among other things.
         Operating systems that abide by this standard are called <em>POSIX Compliant;</em>
-        systems developers general aim for POSIX compliance.<sup><a href="https://en.wikipedia.org/wiki/Single_UNIX_Specification">[8]</a></sup>
+        systems developers general aim for POSIX compliance.<sup><a href="https://en.wikipedia.org/wiki/Single_UNIX_Specification">[9]</a></sup>
     </p>
 
     <p>
         Posix has been refined since 1988.
         In addition, a stronger specification has been introduced, and is
-        called the <em>Single Unix Specification.</em><sup><a href="#references">[9]</a></sup>
+        called the <em>Single Unix Specification.</em><sup><a href="https://en.wikipedia.org/wiki/Single_UNIX_Specification">[9]</a></sup>
         Certification to this standard is costly, and it is generally reserved for proprietary operating systems.
     </p>
 
@@ -251,106 +260,106 @@ last-updated: August, 2020
 <div id="distributions" class="content">
     <h2> Linux Distributions </h2>
     <p>
-      A Linux <em>distribution</em> is a collection of software that, when installed, yields
-      a functioning operating system.
-      Each will include a kernel, some core utilities,
-      and, usually, some user-space applications (e.g., Firefox).
-      All of this is tested to work and will be packaged in a fashion that facilitates installation,
-      (usually, an ISO).
+        A Linux <em>distribution</em> is a collection of software that, when installed, yields
+        a functioning operating system.
+        Each will include a kernel, some core utilities,
+        and, usually, some user-space applications (e.g., Firefox).
+        All of this is tested to work and will be packaged in a fashion that facilitates installation,
+        (usually, an ISO).
     </p>
 
     <p>
-      In my opinion, distributions are more similar than dissimilar.
-      Think of them as flavors of the Unix architecture, rather than distinct operating systems.
-      The oldest distribution that's still maintained is
-      <a href="http://www.slackware.com/">Slackware</a>.<sup><a href="https://en.wikipedia.org/wiki/Slackware">[10]</a></sup>
+        In my opinion, distributions are more similar than dissimilar.
+        Think of them as flavors of the Unix architecture, rather than distinct operating systems.
+        The oldest distribution that's still maintained is
+        <a href="http://www.slackware.com/">Slackware</a>.<sup><a href="https://en.wikipedia.org/wiki/Slackware">[10]</a></sup>
     </p>
 
     <p>
-      One of the key distinctions between distributions is the package management
-      system that is provided.
-      The package-management system is intended to be the user's interface
-      to obtaining, installing and upgrading software; it's similar
-      to a <em>Store</em> on closed-source OS's.
-      While the user is free to install software "by hand," this is generally
-      discouraged because the package-management system allows centralized
-      and automated updating.
+        One of the key distinctions between distributions is the package management
+        system that is provided.
+        The package-management system is intended to be the user's interface
+        to obtaining, installing and upgrading software; it's similar
+        to a <em>Store</em> on closed-source OS's.
+        While the user is free to install software "by hand," this is generally
+        discouraged because the package-management system allows centralized
+        and automated updating.
     </p>
 
     <p>
-      Distributions differ in philosophy towards the software that's appropriate
-      to their operating system.
-      Loosely, newer software has newer features, but
-      is less stable than older software.
-      For an operating system intended to be used on a server (e.g., <a href="https://www.debian.org/">Debian</a>),
-      the maintainers would tend towards reliable, stable,
-      and well-tested user-space software.
-      Similarly, a distribution geared towards development
-      (e.g., <a href="https://getfedora.org/">Fedora</a>) would employ software which is newer and less-tested.
+        Distributions differ in philosophy towards the software that's appropriate
+        to their operating system.
+        Loosely, newer software has newer features, but
+        is less stable than older software.
+        For an operating system intended to be used on a server (e.g., <a href="https://www.debian.org/">Debian</a>),
+        the maintainers would tend towards reliable, stable,
+        and well-tested user-space software.
+        Similarly, a distribution geared towards development
+        (e.g., <a href="https://getfedora.org/">Fedora</a>) would employ software which is newer and less-tested.
     </p>
 
     <p>
-      Some distributions follow a "rolling release" development cycle&mdash; notably,
-      <a href="https://wiki.archlinux.org/index.php/Arch_Linux">Arch.</a>
-      This method of delivering software focuses on obtaining and using the
-      latest version of each.
-      Under the rolling release paradigm, new software releases are expected to
-      work correctly only with the latest software releases.
-      The user is expected to update/upgrade frequently, but is guaranteed that
-      each system-wide update will yield a coherent collection of software.
+        Some distributions follow a "rolling release" development cycle&mdash; notably,
+        <a href="https://wiki.archlinux.org/index.php/Arch_Linux">Arch.</a>
+        This method of delivering software focuses on obtaining and using the
+        latest version of each.
+        Under the rolling release paradigm, new software releases are expected to
+        work correctly only with the latest software releases.
+        The user is expected to update/upgrade frequently, but is guaranteed that
+        each system-wide update will yield a coherent collection of software.
     </p>
 
     <h3> See Also: </h3>
     <ul>
-      <li><a href="https://www.balena.io/etcher/"> balenaEtcher - Flash OS images to SD cards & USB drives</a> (Free, cross-platform) </li>
-      <li><a href="https://github.com/aleksandar-todorovic/awesome-linux#--linux-"> Awesome Linux</a>&mdash; A run-down of distributions, desktop environments, resources, etc</li>
+        <li><a href="https://www.balena.io/etcher/"> balenaEtcher - Flash OS images to SD cards & USB drives</a> (Free, cross-platform) </li>
+        <li><a href="https://github.com/aleksandar-todorovic/awesome-linux#--linux-"> Awesome Linux</a>&mdash; A run-down of distributions, desktop environments, resources, etc</li>
     </ul>
 </div>
 
 <div id="mint" class="content">
     <h2> Linux Mint </h2>
     <p>
-      I like <a href="https://linuxmint.com/">Linux Mint,</a> but then, I'm a simple guy.
-      This distribution is downstream of Debian, which means that
-      it's a derivative of Debian.
-      It inherits their package-management tool, <code>apt</code>,
-      and the philosophy towards software that this implies.
-      Linux Mint is a characteristically professional operating system, and focuses on
-      productivity.  It is extremely new-user friendly, but retains the power
-      of any other Unix-like operating system.
+        I like <a href="https://linuxmint.com/">Linux Mint,</a> but then, I'm a simple guy.
+        This distribution is downstream of Debian, which means that
+        it's a derivative of Debian.
+        It inherits their package-management tool, <code>apt</code>,
+        and the philosophy towards software that this implies.
+        Linux Mint is a characteristically professional operating system, and focuses on
+        productivity.  It is extremely new-user friendly, but retains the power
+        of any other Unix-like operating system.
     </p>
-<a title="RealNZZN / CC BY-SA (https://creativecommons.org/licenses/by-sa/4.0)" href="https://upload.wikimedia.org/wikipedia/commons/b/b3/Cinnamon_4.4.8_on_Linux_Mint_19.3.png"><img width="1024" alt="Cinnamon 4.4.8 on Linux Mint 19.3" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Cinnamon_4.4.8_on_Linux_Mint_19.3.png/1024px-Cinnamon_4.4.8_on_Linux_Mint_19.3.png"></a>
+    <a title="RealNZZN / CC BY-SA (https://creativecommons.org/licenses/by-sa/4.0)" href="https://upload.wikimedia.org/wikipedia/commons/b/b3/Cinnamon_4.4.8_on_Linux_Mint_19.3.png"><img width="1024" alt="Cinnamon 4.4.8 on Linux Mint 19.3" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Cinnamon_4.4.8_on_Linux_Mint_19.3.png/1024px-Cinnamon_4.4.8_on_Linux_Mint_19.3.png"></a>
     <center>By <a href="//commons.wikimedia.org/w/index.php?title=User:RealNZZN&amp;action=edit&amp;redlink=1" class="new" title="User:RealNZZN (page does not exist)">RealNZZN</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="https://creativecommons.org/licenses/by-sa/4.0" title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=86878031">Link</a></center>
 
     <p>
-      Mint offers the Cinnamon desktop environment;
-      Windows users will feel right at home.
-      I find it to be an attractive desktop, but it's only moderately customizable.
-      Like many users, I just want to get to work, so a
-      desktop environment that stays out of my way helps me do exactly that.
+        Mint offers the Cinnamon desktop environment;
+        Windows users will feel right at home.
+        I find it to be an attractive desktop, but it's only moderately customizable.
+        Like many users, I just want to get to work, so a
+        desktop environment that stays out of my way helps me do exactly that.
     </p>
 
     <p>
-      New for Linux Mint 19 is <em>Timeshift.</em> From <a href="https://github.com/linuxmint/timeshift">their github:</a>
-      "Timeshift for Linux is an application that provides functionality
-      similar to the <em>System Restore</em> feature in Windows and the <em>Time Machine</em>
-      tool in Mac OS. Timeshift protects your system by taking incremental
-      snapshots of the file system at regular intervals. These snapshots
-      can be restored at a later date to undo all changes to the system."
+        New for Linux Mint 19 is <em>Timeshift.</em> From <a href="https://github.com/linuxmint/timeshift">their github:</a>
+        "Timeshift for Linux is an application that provides functionality
+        similar to the <em>System Restore</em> feature in Windows and the <em>Time Machine</em>
+        tool in Mac OS. Timeshift protects your system by taking incremental
+        snapshots of the file system at regular intervals. These snapshots
+        can be restored at a later date to undo all changes to the system."
     </p>
 
     <p>
-      Mint isn't perfect:  It isn't new and isn't flashy.
-      Changes from release to release are minor, and the software available from Debian's
-      <code>apt</code> is comparatively old.
-      But, it is very stable and very predictable.
-      Linux Mint 20 is a long-term support
-      release, and <a href="https://blog.linuxmint.com/?p=3928">will be supported until 2025</a>.
+        Mint isn't perfect:  It isn't new and isn't flashy.
+        Changes from release to release are minor, and the software available from Debian's
+        <code>apt</code> is comparatively old.
+        But, it is very stable and very predictable.
+        Linux Mint 20 is a long-term support
+        release, and <a href="https://blog.linuxmint.com/?p=3928">will be supported until 2025</a>.
     </p>
 
     <h3>See Also:</h3>
     <ul>
-      <li><a href="https://linuxmint-installation-guide.readthedocs.io/en/latest/index.html"> Linux Mint Installation Guide</a> (Official)</li>
+        <li><a href="https://linuxmint-installation-guide.readthedocs.io/en/latest/index.html"> Linux Mint Installation Guide</a> (Official)</li>
     </ul>
 </div>
 
@@ -362,6 +371,27 @@ last-updated: August, 2020
 <div id="references" class="content">
     <h2> References </h2>
     <ol style="margin-left: 0">
+        <li>
+            Richard Stallman. (2020, August 16). Retrieved August 25, 2020, from <a href="https://en.wikipedia.org/wiki/Richard_Stallman">https://en.wikipedia.org/wiki/Richard_Stallman</a>
+        </li>
+
+        <li>
+            "Overview of the GNU System." <em>Overview of the GNU System - GNU Project - Free Software Foundation,</em>
+            Free Software Foundation, Inc., 4 Sept. 2017, 10:21:27,
+            <a href="www.gnu.org/gnu/gnu-history.html">www.gnu.org/gnu/gnu-history.html</a>.
+        </li>
+
+        <li>
+            Kroah-Hartman, G. (2007). Chapter 2: Requirements for Building and Using the Kernel.
+            In <em>Linux kernel in a nutshell</em> (pp. 5-6). Sebastopol, CA: O'Reilly.
+        </li>
+
+        <li>
+            "What Is Free Software?" <em>What Is Free Software? - GNU Project - Free Software Foundation,</em>
+            Free Software Foundation, Inc., 30 July 2019, 10:09:02,
+            <a href="www.gnu.org/philosophy/free-sw.html">www.gnu.org/philosophy/free-sw.html</a>.
+        </li>
+
         <li>
             "Linus Torvalds." <em>Wikipedia,</em> Wikimedia Foundation, 23 June 2020,
             <a href="en.wikipedia.org/wiki/Linus_Torvalds">en.wikipedia.org/wiki/Linus_Torvalds</a>.
@@ -378,23 +408,6 @@ last-updated: August, 2020
         </li>
 
         <li>
-            "Overview of the GNU System." <em>Overview of the GNU System - GNU Project - Free Software Foundation,</em>
-            Free Software Foundation, Inc., 4 Sept. 2017, 10:21:27,
-            <a href="www.gnu.org/gnu/gnu-history.html">www.gnu.org/gnu/gnu-history.html</a>.
-        </li>
-
-        <li>
-            "What Is Free Software?" <em>What Is Free Software? - GNU Project - Free Software Foundation,</em>
-            Free Software Foundation, Inc., 30 July 2019, 10:09:02,
-            <a href="www.gnu.org/philosophy/free-sw.html">www.gnu.org/philosophy/free-sw.html</a>.
-        </li>
-
-        <li>
-            Kroah-Hartman, G. (2007). Chapter 2: Requirements for Building and Using the Kernel.
-            In <em>Linux kernel in a nutshell</em> (pp. 5-6). Sebastopol, CA: O'Reilly.
-        </li>
-
-        <li>
             "POSIX." <em>Wikipedia,</em> Wikimedia Foundation, 21 June 2020,
             <a href="en.wikipedia.org/wiki/POSIX">en.wikipedia.org/wiki/POSIX</a>.
         </li>
@@ -402,10 +415,6 @@ last-updated: August, 2020
         <li>
             "Single UNIX Specification." <em>Wikipedia,</em> Wikimedia Foundation, 23 May 2020,
             <a href="en.wikipedia.org/wiki/Single_UNIX_Specification">en.wikipedia.org/wiki/Single_UNIX_Specification</a>.
-        </li>
-
-        <li>
-            Kerrisk, Michael.  <em>The Linux Programming Interface</em>. San Francisco, CA, No Starch Press, 2010.
         </li>
 
         <li>
