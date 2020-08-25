@@ -63,16 +63,6 @@ last-updated: August, 2020
       These interfaces are varied at best.
     </p>
 
-    <div class="aside-left">
-      <h4>Aside:</h4>
-      <p>
-        Curiously, hardware is becoming increasingly integrated.
-        Hard-disk controllers have long been integrated into the drive itself,
-        and System-on-a-Chip's (SOC's) are becoming
-        increasingly popular.
-      </p>
-    </div>
-
     <p>
       <strong>Drivers:</strong>
       These interact directly with hardware and provide the kernel with
@@ -97,28 +87,33 @@ last-updated: August, 2020
       Unix-like operating system employs a set of system calls.
       From a source-code point of view, system calls "look" and "act" like ordinary function
       calls, but their actions are not restricted to user-space.  Rather, they
-      transcend the software hierarchy, often making changes at the hardware level.
+      transcend the software hierarchy, often propogating changes at the hardware level.
     </p>
 
     <p>
       <strong>Processes:</strong>
       Sometimes called a "user-space process," a process is an executing
-      program.<sup><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/cpu-intro.pdf">[1]</a></sup>
-      On Unix-like systems, processes run the entire show, and
-      are the only means that a user has to interact with the system.
-      As such, processes are a critical component of a functioning operating system.
+      program.
+      On *nix platforms, processes run the entire show.
+      They are the only means that a user has to interact with the system, and
+      the kernel depends on them to direct its actions.
+      Processes are a critical component of a functioning operating system.
     </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/">Operating Systems: Three Easy Pieces</a></li>
     </div>
 
     <div class="content" id="linux-kernel">
       <h2>The Linux Kernel</h2>
       <p>
-        Properly speaking, the name <em>Linux</em> refers only to the Linux Kernel.
-        The Linux Kernel was started by Linus Torvalds in 1991, then a graduate student
-        of the University of Helsinki.<sup><a href="https://en.wikipedia.org/wiki/Linus_Torvalds">[2]</a></sup>
+        Properly speaking, the name <em>Linux</em> refers only to the Linux kernel.
+        This kernel was started by Linus Torvalds in 1991, then a graduate student
+        of the University of Helsinki.<sup><a href="https://en.wikipedia.org/wiki/Linus_Torvalds">[1]</a></sup>
         Following the architecture of the Unix operating system,
         he began writing an open-source operating system as "...a hobby, won't be big and professional like
-        [the GNU Project]."<sup><a href="https://en.wikipedia.org/wiki/Linux_kernel#History">[3]</a></sup>
+        [the GNU Project]."<sup><a href="https://en.wikipedia.org/wiki/Linux_kernel#History">[2]</a></sup>
         He soon released it publicly under the GNU General Public License, version 2.
         Since then, it has become very successful, and has become
         the most-used Unix-like kernel in existence.
@@ -138,7 +133,7 @@ last-updated: August, 2020
       <p>
         In addition, the kernel development team takes care not to break
         user-space, so that what did work will continue to
-        work.<sup><a href="https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space">[4]</a></sup>
+        work.<sup><a href="https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space">[3]</a></sup>
         As such, the development process is somewhat involved.
         Documentation about it is maintained
         <a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/process?h=v5.8-rc1">within the source code.</a>
@@ -177,11 +172,11 @@ last-updated: August, 2020
       </div>
 
       <p>
-        The GNU Project was started by Richard Stallman in September 1983,<sup><a href="https://www.gnu.org/gnu/gnu-history.html">[5]</a></sup>
+        The GNU Project was started by Richard Stallman in September 1983,<sup><a href="https://www.gnu.org/gnu/gnu-history.html">[4]</a></sup>
         and takes freedom very seriously.
         In GNU language, <em>free</em> software does not mean merely, "costs nothing."
         Rather, it is intended to mean <em>free as in
-        freedom.</em><sup><a href="https://www.gnu.org/philosophy/free-sw.html">[6]</a></sup>
+        freedom.</em><sup><a href="https://www.gnu.org/philosophy/free-sw.html">[5]</a></sup>
         GNU and the open-source community often use
         the term <em>libre</em> to connote this kind of freedom.
         It should speak volumes that Linus Torvalds chose to release his budding
@@ -191,7 +186,7 @@ last-updated: August, 2020
       <p>
         GNU's compiler collection, <code>gcc</code>, contains the de-facto C compiler
         of the open-source community.
-        This compiler is the only one capable of building Linux kernels.<sup><a href="http://files.kroah.com/lkn/lkn_pdf/ch02.pdf">[7]</a></sup>
+        This compiler is the only one capable of building Linux kernels.<sup><a href="http://files.kroah.com/lkn/lkn_pdf/ch02.pdf">[6]</a></sup>
         Similarly, their <code>bash</code> is the default shell on these systems.
         Each tool offered by GNU is well-documented, so look to them for
         documentation.
@@ -216,7 +211,7 @@ last-updated: August, 2020
 <div class="content" id="posix">
     <h2> POSIX </h2>
     <p>
-        The set of system calls that an operating system provides
+        The collection of system calls that an operating system provides
         determines the interface that any user-space process has
         to the operating system, and thus to the machine.
         In order to assure software portability across operating systems, it is
@@ -225,17 +220,17 @@ last-updated: August, 2020
 
     <p>
         The first <em>Portable Operating System Interface</em> specification
-        was released as an IEEE standard in 1988,<sup><a href="https://en.wikipedia.org/wiki/POSIX#Name">[8]</a></sup>
+        was released as an IEEE standard in 1988,<sup><a href="https://en.wikipedia.org/wiki/POSIX#Name">[7]</a></sup>
         and specified the system-call interface available to user-space programs,
         among other things.
         Operating systems that abide by this standard are called <em>POSIX Compliant;</em>
-        systems developers general aim for POSIX compliance.<sup><a href="https://en.wikipedia.org/wiki/Single_UNIX_Specification">[9]</a></sup>
+        systems developers general aim for POSIX compliance.<sup><a href="https://en.wikipedia.org/wiki/Single_UNIX_Specification">[8]</a></sup>
     </p>
 
     <p>
         Posix has been refined since 1988.
         In addition, a stronger specification has been introduced, and is
-        called the <em>Single Unix Specification.</em><sup><a href="#references">[10]</a></sup>
+        called the <em>Single Unix Specification.</em><sup><a href="#references">[9]</a></sup>
         Certification to this standard is costly, and is generally reserved for proprietary operating systems.
     </p>
 
@@ -268,7 +263,7 @@ last-updated: August, 2020
       In my opinion, distributions are more similar than dissimilar.
       Think of them as flavors of the Unix architecture, rather than distinct operating systems.
       The oldest distribution that's still maintained is
-      <a href="http://www.slackware.com/">Slackware</a>.<sup><a href="https://en.wikipedia.org/wiki/Slackware">[11]</a></sup>
+      <a href="http://www.slackware.com/">Slackware</a>.<sup><a href="https://en.wikipedia.org/wiki/Slackware">[10]</a></sup>
     </p>
 
     <p>
@@ -367,27 +362,55 @@ last-updated: August, 2020
 <div id="references" class="content">
     <h2> References </h2>
     <ol style="margin-left: 0">
-        <li> Arpaci-Dusseau, R. H., &amp; Arpaci-Dusseau, A. C. (2018). <em>Operating Systems: Three Easy Pieces.</em> Arpaci-Dusseau Books.
-        <li>"Linus Torvalds." <em>Wikipedia,</em> Wikimedia Foundation, 23 June 2020,
-          <a href="en.wikipedia.org/wiki/Linus_Torvalds">en.wikipedia.org/wiki/Linus_Torvalds</a>.
-        <li>"Linux kernel." <em>Wikipedia,</em> Wikimedia Foundation, 26 June 2020,
-          <a href="https://en.wikipedia.org/wiki/Linux_kernel#History">https://en.wikipedia.org/wiki/Linux_kernel#History</a>.</li>
-        <li>Mitha, F. (2015, October 11). Why is there a Linux kernel policy to never break user space? Retrieved August 02, 2020, from
-          <a href="https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space">https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space</a></li>
-        <li> "Overview of the GNU System." <em>Overview of the GNU System - GNU Project - Free Software Foundation,</em>
-          Free Software Foundation, Inc., 4 Sept. 2017, 10:21:27,
-          <a href="www.gnu.org/gnu/gnu-history.html">www.gnu.org/gnu/gnu-history.html</a>.</li>
-        <li> "What Is Free Software?" <em>What Is Free Software? - GNU Project - Free Software Foundation,</em>
-          Free Software Foundation, Inc., 30 July 2019, 10:09:02,
-          <a href="www.gnu.org/philosophy/free-sw.html">www.gnu.org/philosophy/free-sw.html</a>.</li>
-        <li>Kroah-Hartman, G. (2007). Chapter 2: Requirements for Building and Using the Kernel.
-          In <em>Linux kernel in a nutshell</em> (pp. 5-6). Sebastopol, CA: O'Reilly.</li>
-        <li> "POSIX." <em>Wikipedia,</em> Wikimedia Foundation, 21 June 2020,
-          <a href="en.wikipedia.org/wiki/POSIX">en.wikipedia.org/wiki/POSIX</a>.</li>
-        <li> "Single UNIX Specification." <em>Wikipedia,</em> Wikimedia Foundation, 23 May 2020,
-          <a href="en.wikipedia.org/wiki/Single_UNIX_Specification">en.wikipedia.org/wiki/Single_UNIX_Specification</a>.</li>
-        <li> Kerrisk, Michael.  <em>The Linux Programming Interface</em>. San Francisco, CA, No Starch Press, 2010.</li>
-        <li> "Slackware." <em>Wikipedia,</em> Wikimedia Foundation, 8 June 2020,
-          <a href="en.wikipedia.org/wiki/Slackware"> en.wikipedia.org/wiki/Slackware</a>.</li>
+        <li>
+            "Linus Torvalds." <em>Wikipedia,</em> Wikimedia Foundation, 23 June 2020,
+            <a href="en.wikipedia.org/wiki/Linus_Torvalds">en.wikipedia.org/wiki/Linus_Torvalds</a>.
+        </li>
+
+        <li>
+            "Linux kernel." <em>Wikipedia,</em> Wikimedia Foundation, 26 June 2020,
+            <a href="https://en.wikipedia.org/wiki/Linux_kernel#History">https://en.wikipedia.org/wiki/Linux_kernel#History</a>.
+        </li>
+
+        <li>
+            Mitha, F. (2015, October 11). Why is there a Linux kernel policy to never break user space? Retrieved August 02, 2020, from
+            <a href="https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space">https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space</a>
+        </li>
+
+        <li>
+            "Overview of the GNU System." <em>Overview of the GNU System - GNU Project - Free Software Foundation,</em>
+            Free Software Foundation, Inc., 4 Sept. 2017, 10:21:27,
+            <a href="www.gnu.org/gnu/gnu-history.html">www.gnu.org/gnu/gnu-history.html</a>.
+        </li>
+
+        <li>
+            "What Is Free Software?" <em>What Is Free Software? - GNU Project - Free Software Foundation,</em>
+            Free Software Foundation, Inc., 30 July 2019, 10:09:02,
+            <a href="www.gnu.org/philosophy/free-sw.html">www.gnu.org/philosophy/free-sw.html</a>.
+        </li>
+
+        <li>
+            Kroah-Hartman, G. (2007). Chapter 2: Requirements for Building and Using the Kernel.
+            In <em>Linux kernel in a nutshell</em> (pp. 5-6). Sebastopol, CA: O'Reilly.
+        </li>
+
+        <li>
+            "POSIX." <em>Wikipedia,</em> Wikimedia Foundation, 21 June 2020,
+            <a href="en.wikipedia.org/wiki/POSIX">en.wikipedia.org/wiki/POSIX</a>.
+        </li>
+
+        <li>
+            "Single UNIX Specification." <em>Wikipedia,</em> Wikimedia Foundation, 23 May 2020,
+            <a href="en.wikipedia.org/wiki/Single_UNIX_Specification">en.wikipedia.org/wiki/Single_UNIX_Specification</a>.
+        </li>
+
+        <li>
+            Kerrisk, Michael.  <em>The Linux Programming Interface</em>. San Francisco, CA, No Starch Press, 2010.
+        </li>
+
+        <li>
+            "Slackware." <em>Wikipedia,</em> Wikimedia Foundation, 8 June 2020,
+            <a href="en.wikipedia.org/wiki/Slackware"> en.wikipedia.org/wiki/Slackware</a>.
+        </li>
     </ol>
 </div>
