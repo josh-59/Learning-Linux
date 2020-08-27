@@ -219,7 +219,16 @@ sup, sub {
 	margin-left: 60%;
 }
 
-#nav_home, #nav_bar_1, #nav_bar_2 {
+.content-wide {
+	margin-left: 150pt;
+	margin-right: 30pt;
+}
+
+// nav_home is used on landing page, "index.html"
+// nav_bar_1 and nav_bar_2 are used on content pages
+// nav_holder is an element to attach mouseover function to,
+// to allow pop-out animation when window is narrow.
+.nav {
 	padding: 0;
 	margin: 0;
 	overflow: auto;
