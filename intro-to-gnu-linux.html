@@ -110,7 +110,8 @@ last-updated: August, 2020
     <h2>GNU</h2>
     <p>
         The first serious attempt at producing a free and open-source Unix-like
-        operating system was undertaken by Richard Stallman in 1983.
+        operating system
+        <a href="https://www.gnu.org/gnu/initial-announcement.en.html#f1">was announced</a> by Richard Stallman in 1983.
         Stallman was, at the time, a graduate student at
         MIT's AI Laboratory,<sup><a href="https://en.wikipedia.org/wiki/Richard_Stallman#Harvard_University_and_MIT">[1]</a></sup>
         and his project was called "GNU," a recursive acronym for <em>GNU's Not Unix.</em><sup><a href="https://www.gnu.org/gnu/gnu-history.html">[2]</a></sup>
@@ -152,27 +153,25 @@ last-updated: August, 2020
         Rather, it means <em>free as in
             freedom.</em><sup><a href="https://www.gnu.org/philosophy/free-sw.html">[4]</a></sup>
             Thus, GNU's software is free in terms of both price and liberty;
-            the open-source community often uses
+            the open-source community sometimes uses
             the term <em>libre</em> to connote this kind of freedom.
     </p>
     <h3> See Also: </h3>
     <ul>
         <li><a href="https://www.gnu.org/philosophy/philosophy.html"> Philosophy of the GNU Project - GNU Project</a></li>
-        <li><a href="http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/">The Cathedral and the Bazaar</a></li>
+        
     </ul>
 </div>
 
 <div class="content" id="linux-kernel">
     <h2>The Linux Kernel</h2>
     <p>
-        This kernel was started by Linus Torvalds in 1991, then a graduate student
-        of the University of Helsinki.<sup><a href="https://en.wikipedia.org/wiki/Linus_Torvalds">[5]</a></sup>
-        Following the architecture of the Unix operating system,
-        he began writing an open-source operating system as "...a hobby, won't be big and professional like
-        [the GNU Project]."<sup><a href="https://en.wikipedia.org/wiki/Linux_kernel#History">[6]</a></sup>
-        He soon released it publicly under the GNU General Public License, version 2.
-        Since then, it has become very successful, and has become
-        the most-used Unix-like kernel in existence.
+        On August 25, 1991, a Finnish graduate student by the name of Linus Torvalds
+        anounced his own free operating system project, called Linux.  
+        Again following the architecture of the Unix operating system,
+        his project was intended to be "...just a hobby, won't be big and 
+        professional like gnu<sup>[sic]</sup>."<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[6]</a></sup>
+        He soon released it under the GNU General Public License, Version 2.
     </p>
 
     <div class="aside-right" style="font-size: 11pt;">
@@ -183,35 +182,41 @@ last-updated: August, 2020
     </div>
 
     <p>
-        Developing the kernel is not an easy task.
-        The development process must:
-    </p>
-
-    <ul>
-        <li> Facilitate change, so that new features may be incorporated </li>
-        <li> Yield stable kernels, for private and commercial use</li>
-        <li> Accept patches from thousands of unknown and volunteer developers each month</li>
-    </ul>
-
-    <p>
-        In addition, the kernel development team takes care not to break
-        user-space, so that what did work will continue to
-        work.<sup><a href="https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space">[7]</a></sup>
-        As such, the development process is somewhat involved.
-        Documentation about it is maintained
-        <a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/process?h=v5.8-rc1">within the source code.</a>
+        While the GNU Project ambitiously intended to produce an entire 
+        operating system single-handedly, the Linux project restricted its
+        attention to the kernel.
+        By October of 1991, Linus had Bash, GCC, GNU-Make and other 
+        programs running on his creation.<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[6]</a></sup>
+        Moreover, while GNU sought professionalism and officiality, 
+        Linux was, "...meant for hackers interested in operating systems
+        and 386's."<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[6]</a></sup>
     </p>
 
     <p>
-        Linus Torvalds remains the maintainer of the Development branch today.
-        Another major figure in Linux development is Greg Kroah-Hartman (pronounced "<em>Crow</em>-Hartman").
-        He is currently the maintainer of the Stable branch.
+        Interest in the Linux kernel flourished, in large part because
+        of the informality of the project:  Everybody was invited, to
+        do little more than tinker with it.
+        It has since become the most successful Unix-like kernel in existence.
     </p>
 
-    <h3>See Also:</h3>
+    <p>
+        The <a href="https://www.kernel.org/doc/html/latest/process/2.Process.html?highlight=merge window">kernel development process</a> has become more structured since 1991, though it remains open and transparent.
+        As of 2020, Linus Torvalds remains the maintainer of the Development branch.
+        Another major figure in Linux development is Greg Kroah-Hartman (pronounced "<em>Crow</em>-Hartman"), who is the maintainer of the Stable branch.
+        Although development of Linux began as a hobby, it is an occupation
+        for some, and serious affair for many.
+        In particular, the kernel development team takes great care to
+        <a href="https://lkml.org/lkml/2012/12/23/75">not break user-space</a>, 
+        meaning that what <em>did</em> work will continue to
+        work.
+    </p>
+
+        <h3>See Also:</h3>
     <ul>
-        <li><a href="https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/">The Linux Kernel Source Code</a> </li>
-        <li><a href="https://en.wikipedia.org/wiki/History_of_Linux">History of Linux - Wikipedia</a></li>
+    <li><a href="http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/">The Cathedral and the Bazaar</a> by Eric Raymond</li>
+    <li><a href="https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space">Why is there a Linux kernel policy to never break user-space?</a></li>
+    <li><a href="https://www.kernel.org"</a>Linux Kernel Source Code</a></li>
+    <li><a href="https://www.cs.cmu.edu/~awb/linux.history.html">LINUX History by Linus Torvalds</a></li>
     </ul>
 </div>
 
@@ -260,7 +265,7 @@ last-updated: August, 2020
 <div id="distributions" class="content">
     <h2> Linux Distributions </h2>
     <p>
-        A Linux <em>distribution</em> is a collection of software that, when installed, yields
+        A Linux distribution is a collection of software that, when installed, yields
         a functioning operating system.
         Each will include a kernel, some core utilities,
         and, usually, some user-space applications (e.g., Firefox).
