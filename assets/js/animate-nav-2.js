@@ -1,9 +1,10 @@
 $(document).ready(highlight_nav);
 $(document).on("scroll", highlight_nav);
 
+$(document).ready(check_navbars);
+$(window).resize(check_navbars);
 
 function highlight_nav() {
-
     const screenTop = $(document).scrollTop();
     const screenBottom = screenTop + $(window).height();
 
@@ -35,4 +36,31 @@ function highlight_nav() {
             }
         }
     });
+}
+
+// Hides nav_bar_2
+function hide_nav() {
+    $("#nav_bar_2").hide();
+    $(".content").each(function() {
+        $(this).addClass("content-wide");
+    });
+    $("#nav_home").css('width', '120pt');
+}
+
+
+// Shows nav_bar_2
+function show_nav() {
+    $("#nav_bar_2").show();
+    $(".content").each(function() {
+        $(this).removeClass("content-wide");
+    });
+    $("#nav_home").css('width', '240pt');
+}
+
+function check_navbars() {
+    if( window.innerWidth < 1150 ) {
+        hide_nav();
+    } else {
+        show_nav();
+    }
 }
