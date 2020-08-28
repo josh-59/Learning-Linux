@@ -5,10 +5,9 @@ last-updated: July 2020
 ---
 
 <!--
-  TODO
-  How to install random .deb:
-      navigate shell to containing directory
-      sudo apt install <my_random_unsafe_package>.deb
+
+    Correct way to install Atom
+        https://flight-manual.atom.io/getting-started/sections/installing-atom/
 
   Problems with installing random software:
       No automatic updates
@@ -38,8 +37,9 @@ last-updated: July 2020
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
-        <li><a href="#whatis-package"> What is a Package? </a></li>
+        <li><a href="#how-to-install"> How to install a Random Package </a></li>
         <li><a href="#package-managers"> Package Managers </a></li>
+        <li><a href="#whatis-package"> What is a Package? </a></li>
         <li><a href="#repositories"> Repositories </a></li>
         <li><a href="#references"> References </a></li>
     </ul>
@@ -51,22 +51,127 @@ last-updated: July 2020
     <h4>Under Construction!</h4>
 
   	<p>
-  		Packages provide a uniform way to distribute, install and patch software,
-      and exist in multiple contexts within the FOSS domain.
-      This essay will cover the big ideas of package management, and explain
-      how they can be used.
+        A package is a bundle of data that contains everything
+        required to implement a program, a set of related programs,
+        or a set of related features.
+        It is a container for software which also contains some data
+        describing the software it contains.
+  	    Packages provide a uniform way to distribute, install and patch software,
+        and exist in multiple contexts within the FOSS domain.
     </p>
 </div>
 
-<div class="content" id="whatis-package">
-  <h2>What is a Package?</h2>
+<div id="how-to-install" class="content">
+    <h2> How to Install a Random Package </h2>
+
+    <p>
+        I think packages will make the most sense if we just jump right in to
+        using them.
+        So, there's a piece of software that I really like, but which is
+        not available on the official Debian repositories.
+        It's the <a href="https://atom.io">Atom text editor</a>, and we'll
+        use it as a running example.
+    </p>
+
+    <p>
+        Although there is <a href=https://flight-manual.atom.io/getting-started/sections/installing-atom/">a way</a> to add Atom's repository to Debian systems,
+        I never do.
+        Instead, I usually just download the <code>.deb</code> package given on the landing
+        of their website, and install it manually, which goes like this:
+    </p>
+
+    <p>
+        Clicking the link downloads a single file, <code>atom-amd64.deb</code>, which is
+        your package. 
+        From here, open a terminal in the containing folder and
+        install it with,
+    </p>
+
+    <div class="code">
+        sudo apt install ./atom-amd64.deb
+    </div>
+
+    <p>
+        That's it. There's nothing more to it.  
+    </p>
+</div>
+
+<div class="content" id="package-managers">
+  <h2>Package Managers</h2>
   <p>
-    A package is a bundle of data that contains everything
-    required to implement a set of related commands or features.
-    It is a container for software that also contains some metadata,
-    in the form of files, which describes the software it contains.
+    The only <em>problem</em> with the above approach is that there's a lot
+    of software on the system.
+    Manual installation is fine for one-zies and two-zies, but 
+    A <em>package manager</em> is a command-line tool which installs new
+    software, updates existing, and removes unwanted software.
   </p>
 
+  <h3> APT </h3>
+  <p>
+    Debain's <em>Advanced Package Tool</em> (APT) is the distributions primary
+    package-management front-end.<sup><a href="https://wiki.debian.org/Apt">[3]</a></sup>
+    We can search with,
+  </p>
+
+  <div class="code">
+    apt search &lt;query&gt;
+  </div>
+
+
+
+  <h3> dpkg </h3>
+  <p>
+    "Native packaging systems"
+  </p>
+
+  <p>
+    https://unix.stackexchange.com/questions/138188/easily-unpack-deb-edit-postinst-and-repack-deb
+  </p>
+
+  <h4>Front-end's</h4>
+
+  <p>
+    <code>dpkg</code> is not intended as a user interface "front-end."
+    Instead, it is the backend tool of developers and software engineers:
+    It is stable enough to allow them to build on top of it.
+    There are a few pieces of software which are intended as the
+    user's front-end.
+  <p>
+
+  <ul>
+    <li><strong>APT</strong>&mdash;
+      "Advanced Package Tool (or APT), the main command-line package manager
+      for Debian and its derivatives. It provides command-line tools for
+      searching, managing and querying information about packages, as well
+      as low-level access to all features provided by the libapt-pkg and
+      libapt-inst libraries which higher-level package managers can depend
+      upon."<sup><a href="https://wiki.debian.org/Apt">[3]</a></sup></li>
+      apt install --install-recommends --install-suggests
+    <li><strong>aptitude</strong>&mdash;
+    "Aptitude is an Ncurses and command-line based front-end to numerous
+    Apt libraries, which are also used by Apt, the default Debian package
+    manager. Aptitude is text based and run from a terminal."<sup><a href="https://wiki.debian.org/Aptitude">[4]</a></sup> </li>
+    <li><strong>synaptic</strong></li>
+  </ul>
+
+  <p>
+    In addition, distributions often create their own graphical front-end.
+  </p>
+
+  <ul>
+    <li><strong>Mint Install</strong>&mdash; Written in Python,
+      Mint Install offers software from both
+      Debian and Flatpak repositories.<sup><a href="https://github.com/linuxmint/mintinstall">[4]</a></sup></li>
+    <li><strong>Ubuntu Software Center</strong>&mdash;
+      An easy-to-use interface that provides a central point for installing and removing software.<sup><a href="https://wiki.ubuntu.com/SoftwareCenter">[5]</a></sup></li>
+  </ul>
+
+</div>
+
+
+<div class="content" id="whatis-package">
+  <h2>What is a Package?</h2>
+  
   <p>
     Let's have a look at Debian's
     <a href="https://packages.debian.org/stable/utils/locate"><code>locate</code></a>,
@@ -199,76 +304,6 @@ last-updated: July 2020
   </ul>
 </div>
 
-
-
-<div class="content" id="package-managers">
-  <h2>Package Managers</h2>
-  <p>
-    A <em>package manager</em> is a command-line tool which installs new
-    software, updates existing, and removes unwanted software.
-  </p>
-
-  <h3> APT </h3>
-  <p>
-    Debain's <em>Advanced Package Tool</em> (APT) is the distributions primary
-    package-management front-end.<sup><a href="https://wiki.debian.org/Apt">[3]</a></sup>
-    We can search with,
-  </p>
-
-  <div class="code">
-    apt search &lt;query&gt;
-  </div>
-
-
-
-  <h3> dpkg </h3>
-  <p>
-    "Native packaging systems"
-  </p>
-
-  <p>
-    https://unix.stackexchange.com/questions/138188/easily-unpack-deb-edit-postinst-and-repack-deb
-  </p>
-
-  <h4>Front-end's</h4>
-
-  <p>
-    <code>dpkg</code> is not intended as a user interface "front-end."
-    Instead, it is the backend tool of developers and software engineers:
-    It is stable enough to allow them to build on top of it.
-    There are a few pieces of software which are intended as the
-    user's front-end.
-  <p>
-
-  <ul>
-    <li><strong>APT</strong>&mdash;
-      "Advanced Package Tool (or APT), the main command-line package manager
-      for Debian and its derivatives. It provides command-line tools for
-      searching, managing and querying information about packages, as well
-      as low-level access to all features provided by the libapt-pkg and
-      libapt-inst libraries which higher-level package managers can depend
-      upon."<sup><a href="https://wiki.debian.org/Apt">[3]</a></sup></li>
-      apt install --install-recommends --install-suggests
-    <li><strong>aptitude</strong>&mdash;
-    "Aptitude is an Ncurses and command-line based front-end to numerous
-    Apt libraries, which are also used by Apt, the default Debian package
-    manager. Aptitude is text based and run from a terminal."<sup><a href="https://wiki.debian.org/Aptitude">[4]</a></sup> </li>
-    <li><strong>synaptic</strong></li>
-  </ul>
-
-  <p>
-    In addition, distributions often create their own graphical front-end.
-  </p>
-
-  <ul>
-    <li><strong>Mint Install</strong>&mdash; Written in Python,
-      Mint Install offers software from both
-      Debian and Flatpak repositories.<sup><a href="https://github.com/linuxmint/mintinstall">[4]</a></sup></li>
-    <li><strong>Ubuntu Software Center</strong>&mdash;
-      An easy-to-use interface that provides a central point for installing and removing software.<sup><a href="https://wiki.ubuntu.com/SoftwareCenter">[5]</a></sup></li>
-  </ul>
-
-</div>
 
 <div class="content" id="repositories">
   <h2>Repositories</h2>
