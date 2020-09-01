@@ -98,7 +98,7 @@ last-updated: July, 2020
         <code>/</code>.
         While each absolute pathname denotes a unique point in the directory tree,
         it is not the case that an absolute pathname of a file is unique, because
-        the basename 
+        the basename
         <a href="files-and-filesystems.html#directories">may be one of many names of the same file.</a>
         The command <code>readlink</code> can report to us the absolute
         pathname of an arbitrary basename:
@@ -131,9 +131,10 @@ last-updated: July, 2020
 		$ locate <em>pattern</em>
 	</div>
 
-	<p>
-    By default, <code>locate</code> matches <em>*pattern*</em> against the pathname of each file,
-    using <a href="command-line-tutorial-introduction.html#globbing">shell globbing</a> to interpret the asterisks; essentially,
+    <p>
+        By default, <code>locate</code> matches <em>*pattern*</em> against the pathname of each file,
+        using <a href="command-line-tutorial-introduction.html#globbing">shell globbing</a> to interpret the asterisks.
+        In words,
     </p>
 
     <div class="code">
@@ -141,7 +142,7 @@ last-updated: July, 2020
     </div>
 
     <p>
-        says, "Print out all absolute filenames containing the string <em>pattern</em>.
+        says, "Print out all absolute filenames containing the string <em>pattern</em>."
 	</p>
 
     <p>
@@ -158,7 +159,7 @@ last-updated: July, 2020
     </p>
 
     <div class="code">
-        /var/lib/dpkg/info/texlive-<strong>bin</strong>aries.postinst
+        /var/lib/gems/2.5.0/<mark>bin</mark>
     </div>
 
     <p>
@@ -166,29 +167,28 @@ last-updated: July, 2020
     </p>
 
     <div class="code">
-        /var/lib/gems/2.5.0/<strong>bin</strong>
+        /var/lib/gems/2.5.0/<mark>bin</mark>/rdoc
     </div>
 
     <p>
-        and
+        in addition to,
     </p>
 
     <div class="code">
-        /var/lib/gems/2.5.0/<strong>bin</strong>/rdoc
+        /var/lib/dpkg/info/texlive-<mark>bin</mark>aries.postinst.
     </div>
 
     <p>
-      This will match hidden files, as well.
+      Locate matches hidden files, and files in hidden directories, as well.
     </p>
 
 	  <p>
-  	    A minor detail:
-  	  <em>locate</em> references a database of information
-      (see below) about files
-      on the system, and not the directories themselves.
-      This makes it much faster for ordinary searches.
-      If you're looking for new files,
-      then you must update this database with:
+  	  A minor detail:
+  	  <em>locate</em> and its variants reference a database of information
+      about files on the system, and not the directories themselves.
+      The "database" is literally just a file containing filenames (see below).
+      This makes it much faster for ordinary searches,
+      but if you're looking for new files, then you must update this database with:
     </p>
 
     <div class="code">
