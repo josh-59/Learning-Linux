@@ -224,7 +224,7 @@ last-updated: July, 2020
         <h4>Aside:</h4>
 
         <p>
-            <code>find</code> dates to the first edition of Unix.<sup><a href="http://man.cat-v.org/unix-1st/1/find">[000]</a></sup>
+            <code>find</code> dates to the first edition of Unix.<sup><a href="http://man.cat-v.org/unix-1st/1/find">[1]</a></sup>
             The 1970's were <a href="http://man.cat-v.org/unix-1st/1/">simpler times</a>.
         </p>
     </div>
@@ -246,22 +246,23 @@ last-updated: July, 2020
     </div>
 
     <p>
-        If no starting points are given, then <code>.</code> is assumed.<sup><a href="https://www.man7.org/linux/man-pages/man1/find.1.html">[1]</a></sup>
+        If no starting points are given, then <code>.</code> is assumed.
         <em>Expression</em> is a sequence of tests to be performed on files
         and/or actions to be carried out.
-        The default action is <em>print.</em>
+        If no action is stipulated, the default action is <code>-print</code>.
         Every element in <em>expression</em> resolves to either true or false;
-        <em>print</em> resolves to true.
+        <code>-print</code> resolves to true.
         For each file, <em>expression</em> is evaluated left-to-right, with
-        the default <em>print</em> occurring, conceptually, as the rightmost element.
+        the default <code>-print</code> occurring, conceptually, as the rightmost element.
         Finally, GNU <code>find</code> supports logical operators between subexpressions.
         If an operator is missing between two subexpressions, <code>-and</code>
-        is substituted; note the single hyphen.
+        is substituted.
+        Note the single hyphens.
     </p>
 
     <p>
-        Clearly, <code>find</code> is a powerful utility, but best reserved for scripts, I think.
-        We'll take two examples, then introduce a more user-friendly variant.
+        Clearly, <code>find</code> is a powerful utility, but is best reserved for scripts, I think.
+        It's included here mostly for its ubiquity.
     </p>
 
     <p>
@@ -274,7 +275,7 @@ last-updated: July, 2020
     </div>
 
     <p>
-        Or, to print the names of all files in our home directory ending in <code>.py</code>,
+        To print the names of all files in our home directory ending in <code>.py</code>,
     </p>
 
     <div class="code">
@@ -285,9 +286,8 @@ last-updated: July, 2020
     <h3><b>fd</b></h3>
 
     <p>
-        A more modern variant of <em>find</em> is <code><a href="https://github.com/sharkdp/fd">fd</a></code>.
-        Compared to GNU's <code>find</code>, <code>fd</code>
-        is intended to be faster and more user-friendly.
+        A more modern variant of GNU's <code>find</code> is <code><a href="https://github.com/sharkdp/fd">fd</a></code>.
+        It is intended to be fast and user-friendly.
         For day-to-day use, I recommend it.
     </p>
 
@@ -446,7 +446,12 @@ last-updated: July, 2020
     </div>
 
     <div id="regex" class="content">
-      <h2> Regex </h2>
+        <h2> Regex </h2>
+
+        <h3>See Also:</h3>
+        <ul>
+            <li><code><a href="http://man7.org/linux/man-pages/man7/regex.7.html"> man 7 regex </a></code></li>
+        </ul>
 
     </div>
 
@@ -548,11 +553,9 @@ last-updated: July, 2020
     <div id="references" class="content">
         <h2> References </h2>
         <ol>
-            <li><code><a href="http://www.man7.org/linux/man-pages/man1/locate.1.html"> man 1 locate</a></code></li>
-			      <li><code><a href="http://man7.org/linux/man-pages/man1/find.1.html">man 1 find</a></code></li>
-            <li><code><a href="http://www.man7.org/linux/man-pages/man1/grep.1.html">man 1 grep</a></code></li>
-            <li><a href="https://www.gnu.org/software/findutils/manual/find.html"> GNU Findutils Official Documentation</a></li>
-            <li><code><a href="http://man7.org/linux/man-pages/man7/regex.7.html"> man 7 regex </a></code></li>
+            <li>
+                Ritchie, D. (1971, November 3). Find(1) - Unix First Edition Manual Page. Retrieved September 01, 2020, from <a href="http://man.cat-v.org/unix-1st/1/find">http://man.cat-v.org/unix-1st/1/find</a>
+            </li>
         </ol>
 
     </div>
