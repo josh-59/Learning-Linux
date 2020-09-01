@@ -214,10 +214,9 @@ last-updated: July, 2020
     <h2> Find </h2>
     <p>
         The <code>locate</code> series of commands restricts itself to finding
-        files based upon (absolute) pathname alone.
+        files based upon (absolute) pathname.
         To search with greater precision, we turn to programs which
-        traverse the directory tree itself.
-        These we will call <em>find</em> commands.
+        inspect files directly.
     </p>
 
     <div class="aside-right">
@@ -230,11 +229,11 @@ last-updated: July, 2020
     </div>
 
     <p>
-        By recursively traversing the directory tree, these programs
-        can query the system about each file on a case-by-case basis.
-        Thus, they can ask about file size, file-type, etc..
         The most popular such utility is GNU's <code>find</code>, which is
         commonly included in Linux distributions.
+        By recursively traversing the directory tree, find programs
+        can query the system about each file on a case-by-case basis.
+        They can ask about basename, pathname, inode number, file size, type, etc..
     </p>
 
     <p>
@@ -263,10 +262,11 @@ last-updated: July, 2020
     <p>
         Clearly, <code>find</code> is a powerful utility, but is best reserved for scripts, I think.
         It's included here mostly for its ubiquity.
+        We'll take only two examples of usage, then move on to a similar, more user-centric utility.
     </p>
 
     <p>
-        For example, to print the names of all executable files smaller than
+        To print the names of all executable files smaller than
         4k, we can use,
     </p>
 
@@ -275,7 +275,7 @@ last-updated: July, 2020
     </div>
 
     <p>
-        To print the names of all files in our home directory ending in <code>.py</code>,
+        To print the names of all files in our home directory ending in <code>.py</code>, we could,
     </p>
 
     <div class="code">
