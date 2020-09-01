@@ -452,15 +452,32 @@ last-updated: August, 2020
   <h2> Globbing </h2>
 
   <p>
-    Shell globbing introduces the fine art of matching strings via metacharacters.
-    We'll keep this short, and consider only three such characters&dash;
-    two wildcards and a way to describe sets of characters.
-    First, the asterisk, <code>*</code>,
-    which matches zero-or-more of any character.
-    Second, the question mark, <code>?</code>,
-    which matches zero-or-one of any character.
-    And finally, brackets <code>[ ]</code> denote a set of character to consider;
-    a string must match exactly one character within the brackets.
+      Shell globbing introduces the fine art of matching strings via metacharacters.
+      We'll keep this short, and consider only three such characters&dash;
+      two wildcards and a way to describe sets of characters:
+  </p>
+
+  <ul style="list-style-type: none;">
+      <li>
+          <code>*</code>&emsp; Asterisk.  Matches zero-or-more of any character.
+      </li>
+
+      <li>
+          <code>?</code>&emsp; Question Mark.  Matches zero-or-one of any character.
+      </li>
+
+      <li>
+          <code>[ ]</code>&emsp; Brackets.  Matches exactly one of any of the characters contained.
+      </li>
+  </ul>
+
+  <p>
+      First, the asterisk, <code>*</code>,
+      which matches zero-or-more of any character.
+      Second, the question mark, <code>?</code>,
+      which matches zero-or-one of any character.
+      And finally, brackets <code>[ ]</code> denote a set of character to consider;
+      a string must match exactly one character within the brackets.
   </p>
 
   <p>
