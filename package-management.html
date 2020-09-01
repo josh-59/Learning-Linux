@@ -16,15 +16,15 @@ last-updated: July 2020
 
   https://www.debian.org/doc/manuals/debian-reference/ch02.en.html
   """
-      The apt command is a high-level commandline interface for package management.
-      It is basically a wrapper of apt-get, apt-cache and similar commands,
-      originally intended as an end-user interface and enables some options
-      better suited for interactive usage by default.
-      apt provides a friendly progress bar when installing packages using apt install.
-      apt will remove cached .deb packages by default after sucessful installation of downloaded packages.
+      apt(8) for all interactive command line operations, including package installation,
+      removal and dist-upgrades. Available since Debian Jessie (Debian 8).
 
-      Users are recommended to use the new apt(8) command for
-      interactive usage and use the apt-get(8) and apt-cache(8) commands in the shell script.
+      apt-get(8) for calling Debian package management system from scripts.
+      It is also a fallback option when apt is not available (often with older Debian systems).
+
+      aptitude(8) for an interactive text interface to manage the installed
+      packages and to search the available packages.
+
   """
 
   A section from the Linux Mint User Guide (old)
@@ -40,7 +40,6 @@ last-updated: July 2020
         <li><a href="#how-to-install"> How to install a Random Package </a></li>
         <li><a href="#package-managers"> Package Managers </a></li>
         <li><a href="#whatis-package"> What is a Package? </a></li>
-        <li><a href="#repositories"> Repositories </a></li>
         <li><a href="#references"> References </a></li>
     </ul>
 </div>
@@ -82,7 +81,7 @@ last-updated: July 2020
 
     <p>
         Clicking the link downloads a single file, <code>atom-amd64.deb</code>, which is
-        your package. 
+        your package.
         From here, open a terminal in the containing folder and
         install it with,
     </p>
@@ -92,21 +91,32 @@ last-updated: July 2020
     </div>
 
     <p>
-        That's it. There's nothing more to it.  
+        That's it. There's nothing more to it.
     </p>
 </div>
 
-<div class="content" id="package-managers">
-  <h2>Package Managers</h2>
+<div class="content" id="repositories">
+  <h2>Repositories</h2>
   <p>
-    The only <em>problem</em> with the above approach is that there's a lot
-    of software on the system.
-    Manual installation is fine for one-zies and two-zies, but 
-    A <em>package manager</em> is a command-line tool which installs new
-    software, updates existing, and removes unwanted software.
+      Collections of packages are called <em>repositories,</em> or
+      sometimes, "archives."
+      A repository belonging to a large project, such as Debian's,
+      is often mirrored by other organizations.
+      Packages are located in collections called <em>repositories.</em>
+      A repository may be remote, which is the usual case; or, it may be local,
+      such as, on a thumb-drive.
+      Repositories are often mirrored by
   </p>
+ </div>
 
-  <h3> APT </h3>
+ <div class="content" id="package-managers">
+     <h2>Package Managers</h2>
+     <p>
+         A package manager is a piece of software that automates the
+         location, installation, patching and removal of packages.
+     </p>   
+
+  <h3> Debian Apt </h3>
   <p>
     Debain's <em>Advanced Package Tool</em> (APT) is the distributions primary
     package-management front-end.<sup><a href="https://wiki.debian.org/Apt">[3]</a></sup>
@@ -116,27 +126,6 @@ last-updated: July 2020
   <div class="code">
     apt search &lt;query&gt;
   </div>
-
-
-
-  <h3> dpkg </h3>
-  <p>
-    "Native packaging systems"
-  </p>
-
-  <p>
-    https://unix.stackexchange.com/questions/138188/easily-unpack-deb-edit-postinst-and-repack-deb
-  </p>
-
-  <h4>Front-end's</h4>
-
-  <p>
-    <code>dpkg</code> is not intended as a user interface "front-end."
-    Instead, it is the backend tool of developers and software engineers:
-    It is stable enough to allow them to build on top of it.
-    There are a few pieces of software which are intended as the
-    user's front-end.
-  <p>
 
   <ul>
     <li><strong>APT</strong>&mdash;
@@ -171,7 +160,7 @@ last-updated: July 2020
 
 <div class="content" id="whatis-package">
   <h2>What is a Package?</h2>
-  
+
   <p>
     Let's have a look at Debian's
     <a href="https://packages.debian.org/stable/utils/locate"><code>locate</code></a>,
@@ -305,10 +294,10 @@ last-updated: July 2020
 </div>
 
 
-<div class="content" id="repositories">
-  <h2>Repositories</h2>
-</div>
-
+<p>
+  <code>dpkg</code> is not intended as a user interface "front-end."
+  Instead, it is the backend tool of developers and software engineers:
+<p>
 
 
 

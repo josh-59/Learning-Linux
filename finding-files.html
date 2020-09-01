@@ -9,7 +9,7 @@ last-updated: July, 2020
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#basename"> Pathnames and Basenames </a></li>
         <li><a href="#locate"> Locate </a></li>
-        <li><a href="#fd"> Find </a></li>
+        <li><a href="#fd"> fd </a></li>
         <li><a href="#regex"> Regex </a></li>
         <li><a href="#grep"> Grep </a></li>
         <li><a href="#engineer-man"> Engineer Man</a></li>
@@ -44,7 +44,9 @@ last-updated: July, 2020
         our search tools will often make a distinction between these two.
     </p>
 
-    <center><img style="width: 70%;" src="./assets/img/pathname-basename.png"></center>
+    <center>
+        <img style="width: 70%;" src="./assets/img/pathname-basename.png">
+    </center>
 
     <p>
         Every file in the system has a <em>basename,</em>
@@ -211,23 +213,27 @@ last-updated: July, 2020
 
     <h2> Fd </h2>
     <p>
-        A more powerful utility for finding files is <a href="https://github.com/shardp/fd">fd</a>.
-        It traverses the directory tree itself, which allows it to query the
-        system about each file on an individual basis.
+        The <code>locate</code> series of commands restricts itself to finding
+        files based upon (absolute) filename alone.
+        To search with greater resolution, we must turn to programs which
+        traverse the directory tree itself.
     </p>
 
     <p>
-        This specific utility, <em>fd,</em> is fairly new, having been first
-        released in 2017.
-        Written in Rust, it aims to be a "simple, fast and user-friendly alternative to
-        find."<sup><a href="https://github.com/shardp/fd">fd</a></sup>.
-        For its ease of use alone, I recommend that you install it, with either,
+        One of the most popular such commands is GNU's <code>find</code>, which is
+        commonly included in Linux distributions.
+        Another, similar utility is <code><a href="https://github.com/sharkdp/fd">fd</a></code>.
+        These two programs do essentially the same thing, but <code>fd</code>
+        is intended to be more user-friendly.
+        <code>Fd</code> is one of several new reimplementations of command-line
+        tools, written in Rust. For day-to-day use, I recommend it.
     </p>
 
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            On Debian distributions, the executable is named <code>fdfind</code>
+            On Debian distributions, the executable is named <code>fdfind</code>.
+            Alias it to <code>fd</code> for faster use!
         </p>
     </div>
 
@@ -236,29 +242,23 @@ last-updated: July, 2020
     </div>
 
     <p>
-        or
+        The essential format of a call to <code>fd</code> is
     </p>
 
     <div class="code">
-        $ sudo pacman -S fd
+        $ fd [FLAGS/OPTIONS] [&lt;pattern&gt;] [&lt;path&gt;...]
     </div>
 
     <p>
-        The essential format of a call to <em>fd</em> is
+        For a concise tutorial introduction to <code>fd</code>,
+        have a look at <a href="https://github.com/sharkdp/fd#tutorial">its creator's own documentation</a>.
     </p>
 
-    <div class="code">
-        $ fd [pattern] [path...]
-    </div>
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://github.com/sharkdp/fd#tutorial">fd tutorial</a></li>
+    </ul>
 
-    <p>
-        where <em>pattern</em> is a regex pattern.
-        This means that its behavior is very much like that
-        of locate, wherein <em>fd</em> will print the name of any
-        file whose wholename contains the string <em>pattern</em>.
-        We'll explain some regex as we go, and then cover it in
-        greater detail later.
-    </p>
 
     <!--
     <p>
