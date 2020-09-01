@@ -142,7 +142,7 @@ last-updated: August, 2020
         </li>
 
         <li>
-            EXT, EXT2, EXT3, EXT$
+            EXT, EXT2, EXT3, EXT4
         </li>
 
         <li>
@@ -173,10 +173,10 @@ last-updated: August, 2020
     <p>
         These, in turn can lead to security vulnerabilities, bugs and crashes.
         For instance, even something as elementary as
-        <a href="https://www.man7.org/linux/man-pages/man3/strcpy.3.html">copying a string</a>
-        introduces the possibility of attack and exploitation, if left unchecked.
-        Because the compiler does not warn you of these possibilities, this
-        makes it very difficult to write "correct" C.
+        <a href="https://www.man7.org/linux/man-pages/man3/strcpy.3.html">copying a string</a>,
+        if left unchecked, introduces the possibility of attack and exploitation.
+        Because the compiler does not warn you of these possibilities, it
+        is very difficult to write "correct" C.
         Moreover, as Brian Cantrill points out, even when one can write correct C,
         it is difficult to compose the work of multiple developers into a single
         whole (see video below).
@@ -199,11 +199,12 @@ last-updated: August, 2020
 
 <div id="rust" class="content">
     <h2> Rust </h2>
+
     <p>
         Rust is the up-and-coming systems programming language, and in my opinion,
         the bee's knees.
         Rust, like C, is a compiled systems-programming language.
-        However, it corrects C's faults with memory management by introducing a rigorous type
+        However, it mitigates C's memory management risks by introducing a rigorous type
         system and new ownership rules.
         Together, these allow the Rust compiler to guarantee (prove) the aforementioned
         "correctness" of code.
@@ -262,6 +263,8 @@ last-updated: August, 2020
             Inspired by <em>Rustlings</em>
         </li>
     </ul>
+
+    <img style='width: 90%;' src="assets/img/100rust.png">
 
     <h3>See Also:</h3>
     <ul>
