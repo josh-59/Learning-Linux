@@ -60,8 +60,8 @@ last-updated: July, 2020
 
       <p>
           I like to think of processes as the actors of the system.
-          Left to its own devices, the kernel does nothing;
-          all Unix-like operating systems depend upon processes to direct the kernel,
+          Left to its own devices, the kernel does nothing:
+          All Unix-like operating systems depend upon processes to direct the kernel,
           and through the kernel, processes direct the machine.
           The result is a clear demarcation between
           <em>what</em> to do (dictated by processes), and <em>how</em> to do
@@ -69,33 +69,18 @@ last-updated: July, 2020
       </p>
 
       <p>
-          The Linux Kernel:
+          The Kernel:
       </p>
 
       <ol>
           <li>
               Facilitates new process creation
-              <ul>
-                  <li>
-                      Processes can direct the kernel to create a new process, through the
-                      <em>fork</em> and <em>exec</em> system calls
-                  </li>
-              </ul>
           </li>
           <li>
               Allocates hardware resources to each process
-              <ul>
-                  <li>
-                      Gives them a chance to run, by giving them time on the CPU and some memory
-                  </li>
-              </ul>
           </li>
-          <li> Maintains information about processes, and assigns attributes to them
-              <ul>
-                  <li>
-                      This includes a unique PID and file access authority
-                  </li>
-              </ul>
+          <li>
+              Maintains information about processes, and assigns attributes to them
           </li>
       </ol>
 
@@ -137,11 +122,11 @@ last-updated: July, 2020
 
   <p>
     At the end of the boot sequence, the kernel launches a single program,
-    <code>/sbin/init</code>.<sup><a href="http://tldp.org/LDP/intro-linux/intro-linux.pdf">[2] CH4</a></sup>
+    <code>/sbin/init</code>.<sup><a href="http://tldp.org/LDP/intro-linux/intro-linux.pdf">[3]</a></sup>
     This program is responsible for
-    spawning all other processes.<sup><a href="https://arxiv.org/abs/0706.2748">[3]</a></sup>
+    spawning all other processes.<sup><a href="https://arxiv.org/abs/0706.2748">[4]</a></sup>
     While init schemes <a href="https://arxiv.org/abs/0706.2748">have evolved</a> over the years,
-    its purpose has not changed.  It is a process with root-level permissions that acts as a
+    their purpose has not changed.  It is a process with root-level permissions that acts as a
     trustee among processes; its central responsibility is to bring up
     userspace.<sup><a href="http://0pointer.de/blog/projects/systemd.html">[5]</a></sup>
   </p>
@@ -350,9 +335,22 @@ last-updated: July, 2020
 <div id="references" class="content">
   <h2> References </h2>
   <ol>
-    <li> Kerrisk, Michael.  <em>The Linux Programming Interface</em>. San Francisco, CA, No Starch Press, 2010.</li>
     <li>
-        Bryant, R. E., & O'Hallaron, D. R. (2016).  Processes. In <em>Computer Systems: A Programmer's Perspective</em> (3rd ed., p. 732).  Upper Saddle River, New Jersey: Pearson. </li>
+        Kerrisk, Michael.  <em>The Linux Programming Interface</em>. San Francisco, CA, No Starch Press, 2010.
+    </li>
+    <li>
+        Bryant, R. E., & O'Hallaron, D. R. (2016).  Processes. In <em>Computer Systems: A Programmer's Perspective</em> (3rd ed., p. 732).  Upper Saddle River, New Jersey: Pearson.
+    </li>
+    <li>
+        Garrels, M. (2008). <em>Introduction to Linux: A Hands on Guide.</em>
+    </li>
+    <li>
+        Royon, Y., &amp; Frenot, S. (2007). A Survey of Unix Init Schemes (Doctoral dissertation, Inria Rhone-Alpes) (p. 0-39). Mountbonnot Saint Ismier: Unite de recherche Inra Rhone-Alpes.
+    </li>
+    <li>
+        Poettering, L. (2010, April 30). Rethinking PID 1. Retrieved September 01, 2020, from <a href="http://0pointer.de/blog/projects/systemd.html">http://0pointer.de/blog/projects/systemd.html</a>
+    </li>
+
   </ol>
 
 </div>
