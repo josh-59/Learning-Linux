@@ -210,7 +210,7 @@ last-updated: August, 2020
 
     <p>
         The <a href="https://www.kernel.org/doc/html/latest/process/2.Process.html?highlight=merge window">kernel development process</a>
-        has become more structured since 1991, and today uses the
+        has become more structured since 1991, and today uses a
         <a href="http://127.0.0.1:4000/programming-in-nix.html#train-schedules">"train-schedule"</a> approach.
         Both the source-code and the development process remains open and transparent, and
         as of 2020, Linus Torvalds remains the maintainer of the Development branch.
@@ -224,7 +224,6 @@ Linux 1.0 https://github.com/kalamangga-net/linux-1.0
        Released 1994:
        Linus "judges the software to be mature"
        Red Hat, Suse enter 1.0
-
    -->
 
     <p>
@@ -247,8 +246,31 @@ Linux 1.0 https://github.com/kalamangga-net/linux-1.0
     </ul>
 </div>
 
+<!--
+    Linux Standard Base
+
+    https://en.wikipedia.org/wiki/Linux_Standard_Base
+
+-->
+
 <div class="content" id="posix">
     <h2> POSIX </h2>
+    <!--
+        In 1988 there were more than xxxxx operating systems following the
+        Unix architecture, including,
+        - One
+        - Two
+        - Three
+
+        The lack of uniformity among them caused difficulties in creating
+        portable software-- software that
+        could be transported from one system to another.
+
+        In 1988 IEEE released the first POSIX standard.
+
+        Today, the standard effectively codifies what it means to be "Unix-like."
+    -->
+
     <p>
         The system calls that an operating system provides
         determine the interface that any user-space process has
@@ -256,6 +278,14 @@ Linux 1.0 https://github.com/kalamangga-net/linux-1.0
         In order to assure software portability across operating systems, it is
         essential that this interface be (mostly) uniform.
     </p>
+
+    <div class="aside-left">
+        <h4>Aside:</h4>
+        <p>
+            Richard Stallman suggested the name <em>POSIX.</em>
+            It is pronounced <em>pahz-icks.</em>
+        </p>
+    </div>
 
     <p>
         The first <em>Portable Operating System Interface</em> specification
@@ -283,7 +313,7 @@ Linux 1.0 https://github.com/kalamangga-net/linux-1.0
 
     <h3> See Also: </h3>
     <ul>
-        <li><a href="https://pubs.opengroup.org/onlinepubs/9699919799/mindex.html">POSIX.1-2017</a>&mdash; The Current Standard</li>
+        <li><a href="https://pubs.opengroup.org/onlinepubs/9699919799/mindex.html">POSIX.1-2017</a>&mdash; The Latest Standard</li>
     </ul>
 </div>
 
@@ -292,7 +322,7 @@ Linux 1.0 https://github.com/kalamangga-net/linux-1.0
     <p>
         A Linux distribution is a collection of software that, when installed, yields
         a functioning operating system.
-        Each will include a kernel, some core utilities,
+        Each includes a kernel, some core utilities,
         and, usually, some user-space applications (e.g., Firefox).
         All of this is tested to work and will be packaged in a fashion that facilitates installation,
         (usually, an ISO).
@@ -354,7 +384,7 @@ Linux 1.0 https://github.com/kalamangga-net/linux-1.0
         This distribution is downstream of Debian, which means that
         it's a derivative of Debian.
         It inherits their package-management tool, <code>apt</code>,
-        and the philosophy towards software that this implies.
+        and also Debain's philosophy towards software.
         Linux Mint is a characteristically professional operating system, and focuses on
         productivity.  It is extremely new-user friendly, but retains the power
         of any other Unix-like operating system.
