@@ -131,8 +131,13 @@ img{
 table {
 	width: 70%;
 	margin: auto;
-	margin-top: 40px;
+	margin-top: 45px;
 	margin-bottom: 45px;
+	padding: 10px;
+}
+
+table td {
+	padding-left: 10px;
 }
 
 /* To facilitate the animated navigation, each section */
