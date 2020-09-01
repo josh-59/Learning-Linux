@@ -9,7 +9,7 @@ last-updated: July, 2020
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#basename"> Pathnames and Basenames </a></li>
         <li><a href="#locate"> Locate </a></li>
-        <li><a href="#fd"> fd </a></li>
+        <li><a href="#find"> Find </a></li>
         <li><a href="#regex"> Regex </a></li>
         <li><a href="#grep"> Grep </a></li>
         <li><a href="#engineer-man"> Engineer Man</a></li>
@@ -209,39 +209,116 @@ last-updated: July, 2020
 
 </div>
 
-<div id="fd" class="content">
+<div id="find" class="content">
 
-    <h2> Fd </h2>
+    <h2> Find </h2>
     <p>
         The <code>locate</code> series of commands restricts itself to finding
-        files based upon (absolute) filename alone.
-        To search with greater resolution, we must turn to programs which
+        files based upon (absolute) pathname alone.
+        To search with greater precision, we turn to programs which
         traverse the directory tree itself.
-    </p>
-
-    <p>
-        One of the most popular such commands is GNU's <code>find</code>, which is
-        commonly included in Linux distributions.
-        Another, similar utility is <code><a href="https://github.com/sharkdp/fd">fd</a></code>.
-        These two programs do essentially the same thing, but <code>fd</code>
-        is intended to be more user-friendly.
-        <code>Fd</code> is one of several new reimplementations of command-line
-        tools, written in Rust. For day-to-day use, I recommend it.
+        These we will call <em>find</em> commands.
     </p>
 
     <div class="aside-right">
         <h4>Aside:</h4>
+
         <p>
-            On Debian distributions, the executable is named <code>fdfind</code>.
-            Alias it to <code>fd</code> for faster use!
+            <code>find</code> dates to the first edition of Unix.<sup><a href="http://man.cat-v.org/unix-1st/1/find">[000]</a></sup>
+            The 1970's were <a href="http://man.cat-v.org/unix-1st/1/">simpler times</a>.
         </p>
     </div>
+
+    <p>
+        By recursively traversing the directory tree, these programs
+        can query the system about each file on a case-by-case basis.
+        Thus, they can ask about file size, file-type, etc..
+        The most popular such utility is GNU's <code>find</code>, which is
+        commonly included in Linux distributions.
+    </p>
+
+    <p>
+        The essential format of a call to <code>find</code> is,
+    </p>
+
+    <div class="code">
+        $ find [starting points...] [expression]
+    </div>
+
+    <p>
+        If no starting points are given, then <code>.</code> is assumed.<sup><a href="https://www.man7.org/linux/man-pages/man1/find.1.html">[1]</a></sup>
+        <em>Expression</em> is a sequence of tests to be performed on files
+        and/or actions to be carried out.
+        The default action is <em>print.</em>
+        Every element in <em>expression</em> resolves to either true or false;
+        <em>print</em> resolves to true.
+        For each file, <em>expression</em> is evaluated left-to-right, with
+        the default <em>print</em> occurring, conceptually, as the rightmost element.
+        Finally, GNU <code>find</code> supports logical operators between subexpressions.
+        If an operator is missing between two subexpressions, <code>-and</code>
+        is substituted; note the single hyphen.
+    </p>
+
+    <p>
+        Clearly, <code>find</code> is a powerful utility, but best reserved for scripts, I think.
+        We'll take two examples, then introduce a more user-friendly variant.
+    </p>
+
+    <p>
+        For example, to print the names of all executable files smaller than
+        4k, we can use,
+    </p>
+
+    <div class="code">
+        $ find / -size -4k -executable<br>
+    </div>
+
+    <p>
+        Or, to print the names of all files in our home directory ending in <code>.py</code>,
+    </p>
+
+    <div class="code">
+        $ cd <br>
+        $ find -name '*.py'
+    </div>
+
+    <h3><b>fd</b></h3>
+
+    <p>
+        A more modern variant of <em>find</em> is <code><a href="https://github.com/sharkdp/fd">fd</a></code>.
+        Compared to GNU's <code>find</code>, <code>fd</code>
+        is intended to be faster and more user-friendly.
+        For day-to-day use, I recommend it.
+    </p>
+
+    <div class="aside-right">
+        <h4>Pro Tip:</h4>
+        <p>
+            For concise help, avoid the man pages.  Instead use,
+
+            <br>
+        <code>
+            $ find --help
+        </code>
+        <br>
+        &emsp;&emsp;--or--
+        <br>
+        <code>
+            $ fd -h
+        </code>
+                </p>
+    </div>
+
+    <p>
+        On Debian-based systems, we can install it with,
+    </p>
 
     <div class="code">
         $ sudo apt install fd-find
     </div>
 
     <p>
+        On Debian distributions, the executable is named <code>fdfind</code>.
         The essential format of a call to <code>fd</code> is
     </p>
 
@@ -253,12 +330,6 @@ last-updated: July, 2020
         For a concise tutorial introduction to <code>fd</code>,
         have a look at <a href="https://github.com/sharkdp/fd#tutorial">its creator's own documentation</a>.
     </p>
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://github.com/sharkdp/fd#tutorial">fd tutorial</a></li>
-    </ul>
-
 
     <!--
     <p>
