@@ -46,7 +46,7 @@ last-updated: July, 2020
   <p>
   A process is an instance of an executing program.<sup><a href="#references">[1]</a></sup><sup><a href="#references">[2]</a></sup>
     A <em>program</em> (also known as an "executable file")
-    contains all information required to
+    contains the information required to
     construct a process.<sup><a href="#references">[1]</a></sup>
     The  process is, after the <em>file,</em> the most important
     abstraction of operating systems.
@@ -56,46 +56,66 @@ last-updated: July, 2020
 
   <div class="content" id="actors">
 
-  <h2> Actors </h2>
+      <h2> Actors </h2>
 
-  <p>
-    Conceptually, processes are the actors of the system.
-    Left to its own devices, the kernel does nothing;
-    all Unix-like operating systems depend upon processes to direct the kernel,
-    and through the kernel, processes direct the machine.
-    The result is a clear demarcation between
-    <em>what</em> to do (dictated by processes), and <em>how</em> to do
-    it (dictated by the kernel).
-  </p>
+      <p>
+          I like to think of processes as the actors of the system.
+          Left to its own devices, the kernel does nothing;
+          all Unix-like operating systems depend upon processes to direct the kernel,
+          and through the kernel, processes direct the machine.
+          The result is a clear demarcation between
+          <em>what</em> to do (dictated by processes), and <em>how</em> to do
+          it (dictated by the kernel).
+      </p>
 
-  <p>
-    There are processes for every function on the system.
-    There's one for the network manager,
-    another for the desktop environment,
-    another acting as a printer spooler, etc..
-    The simplest feasible Unix-like operating system would boot with a single
-    process, a shell program such as Bash.
-    Without a process, the kernel is unreachable, and the system is static.
-  </p>
+      <p>
+          The Linux Kernel:
+      </p>
 
-  <p>
-    The Linux Kernel:
-  </p>
+      <ol>
+          <li>
+              Facilitates new process creation
+              <ul>
+                  <li>
+                      Processes can direct the kernel to create a new process, through the
+                      <em>fork</em> and <em>exec</em> system calls
+                  </li>
+              </ul>
+          </li>
+          <li>
+              Allocates hardware resources to each process
+              <ul>
+                  <li>
+                      Gives them a chance to run, by giving them time on the CPU and some memory
+                  </li>
+              </ul>
+          </li>
+          <li> Maintains information about processes, and assigns attributes to them
+              <ul>
+                  <li>
+                      This includes a unique PID and file access authority
+                  </li>
+              </ul>
+          </li>
+      </ol>
 
-  <ol>
-    <li>
-      Facilitates new process creation
-      <ul><li>Processes can direct the kernel to create a new process, through the
-        <em>fork</em> and <em>exec</em> system calls</li></ul>
-    </li>
-    <li>
-      Allocates hardware resources to each process
-      <ul><li>Gives them a chance to run, by giving them time on the CPU and some memory</li></ul>
-    </li>
-    <li> Maintains information about processes, and assigns attributes to them
-      <ul><li>This includes a unique PID and file access authority</li></ul>
-    </li>
-  </ol>
+      <p>
+          There are processes for every function on the system.
+          There's one for the network manager,
+          another for the desktop environment,
+          another acting as a printer spooler, etc..
+          Without a process, the kernel is unreachable, and the system is static.
+      </p>
+
+      <p>
+          Historically, collections of running processes were
+          called <a href="http://www.linfo.org/runlevel_def.html">runlevels</a>;
+          different runlevels offered different services, and therefore
+          were intended to be used for different situations.
+          In particular, <a href="http://www.linfo.org/single_user_mode.html">single-user mode</a>
+          is analogous to <em>safe boot,</em> and <em>Runlevel 0</em> quits all processes in
+          preparation for system shutdown.
+      </p>
 
   <p>
     Under the Unix philosophy, each process has a narrowly defined role,
@@ -108,7 +128,7 @@ last-updated: July, 2020
   <h3> See Also: </h3>
   <ul>
     <li> <a href="https://www.man7.org/linux/man-pages/man1/strace.1.html">strace(1)</a></li>
-        <li><a href="https://www.man7.org/linux/man-pages/man7/daemon.7.html"> daemon(7)</a> (background actor)</li>
+    <li><a href="https://www.man7.org/linux/man-pages/man7/daemon.7.html"> daemon(7)</a> (background process)</li>
   </ul>
 </div>
 
