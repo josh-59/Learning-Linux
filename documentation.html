@@ -5,9 +5,9 @@ last-updated: August, 2020
 ---
 
 <!--
-	TODO
+TODO
 
-	Mailing Lists
+Mailing Lists
 -->
 
 <div id="nav_bar_2" class="nav">
@@ -190,275 +190,269 @@ last-updated: August, 2020
 		</li>
 
 		<li>
-			<a href="https://doc.rust-lang.org/stable/book/">
-				<a href="https://doc.rust-lang.org/std/">Rust's Library Documentation</a>&mdash;
-				This documentation scheme is fantastic.  It was created with the developer in mind,
-				and is easy to navigate, easy to read, and makes the libraries easy to
-				comprehend.
-				Moreover, facilities are included in the compiler itself,
-				which permit documentation extraction from source-code comments.
-				It's easy, fast and clean.
-			</li>
-		</ul>
+			<a href="https://doc.rust-lang.org/std/">Rust's Library Documentation</a>&mdash;
+			This documentation scheme is fantastic.  It was created with the developer in mind,
+			and is easy to navigate, easy to read, and makes the libraries easy to
+			comprehend.
+			Moreover, facilities are included in the compiler itself,
+			which permit documentation extraction from source-code comments.
+			It's easy, fast and clean.
+		</li>
+	</ul>
 
+</div>
+
+<div id="unofficial-documentation" class="content">
+	<h2> Unofficial Documentation </h2>
+	<p>
+		Most documentation is from unofficial, secondary sources.
+		Examples include this website, blogs, question/answer sites,
+		Youtube videos, podcasts, books, etc..
+		Think of unofficial documentation as commentary on the subject at hand.
+		It can be useful when the subject is difficult,
+		but official documentation should still be your reference.
+	</p>
+
+	<p>
+		Examples of good, unofficial documentation:
+	</p>
+
+	<ul class="big-list">
+		<li>
+			<a href="http://tldp.org/"> The Linux Documentation Project</a>&mdash;
+			From the website: "TLDP is short for The Linux Documentation Project,
+			an organization of volunteers authoring, reviewing and managing
+			documents about the Linux operating system. Documents basically
+			come in two formats based upon their length. The shorter ones
+			generally are called HOWTOs (or mini-HOWTOs, if they are really short),
+			the longer documents, called guides, deal in-depth with a Linux
+			feature."<sup><a href="http://tldp.org/history.html">[2]</a></sup>
+			<br>
+			<br>
+			TLDP is not maintained anymore, so that its content is sometimes
+			out-of-date (but still very good).
+
+		</li>
+		<li>
+			<a href="https://debian-handbook.info/"> Debian Administrator's Handbook</a>&mdash;
+			A free book written by Raphaël Hertzog and Roland Mas, two Debian developers.
+			It was originally written in French, and has been translated into
+			four other languages, with twenty(!) more in-progress.
+		</li>
+		<li>
+			<a href="http://www.linuxfromscratch.org/lfs/"> Linux From Scratch </a>&mdash;
+			From their website, "Linux From Scratch (LFS) is a project that provides
+			you with step-by-step instructions for building your own customized
+			Linux system entirely from source."<sup><a href="http://www.linuxfromscratch.org/lfs/index.html">[3]</a></sup>
+			It's a thing.
+		</li>
+		<li>
+			<a href="http://www.kroah.com/lkn/"> Linux Kernel in a Nutshell</a>&mdash;
+			A free book written by Greg Kroah-Hartman.
+			He says, "I want this book to help
+			bring more people into the Linux kernel development fold.
+			The act of building a customized kernel for your machine is one
+			of the basic tasks needed to become a Linux kernel developer.
+			The more people that try this out, and realize that there is
+			not any real magic behind the whole Linux kernel process, the
+			more people will be willing to jump in and help out in making
+			the kernel the best that it can be."<sup><a href="http://www.kroah.com/lkn/">[4]</a></sup>
+		</li>
+	</ul>
+</div>
+
+<div class="content" id="nf-books">
+	<h2>Nonfree Books</h2>
+	<p>
+		In the main, I recommend staying away from non-free *nix books.
+		There are several reasons for this.
+	</p>
+
+	<p>
+		First, non-free books are almost always secondary sources, and hence,
+		not authoritative.
+		The books you want to read are by those people closest to
+		the FOSS community, and they usually (but not always) write free books.
+		If it is free, they often offer a paperback copy for sale,
+		and/or a means to donate/support.
+	</p>
+
+	<div class="aside-right">
+		<h4>Aside:</h4>
+		<p>
+			My aim here is to warn the reader, not to make light of other peoples'
+			work.
+		</p>
 	</div>
 
-	<div id="unofficial-documentation" class="content">
-		<h2> Unofficial Documentation </h2>
+	<p>
+		Second, there's just too many of them, and very few are worthwhile.
+		For instance, I bought a handbook on UNIX system administration
+		that looked very promising, but taught me precious little.
+		In fact, the free <a href="https://debian-handbook.info/browse/stable/">Debian Administrator's Handbook</a>
+		proved a more succinct, more authoritative resource.
+	</p>
+
+	<p>
+		Third, they tend to be out-of-date.
+		For example, I really liked the premise of
+		<a href="https://www.pearson.com/us/higher-education/program/Molay-Understanding-UNIX-LINUX-Programming-A-Guide-to-Theory-and-Practice/PGM190781.html">
+			Understanding UNIX/LINUX Programming: A Guide to Theory and Practice
+		</a>.
+		It walks you through programming in Linux by recreating
+		common command-line tools, such as <code>cat</code> and <code>ls</code>, but it
+		was so out-of-date by the time I read it that the information in it couldn't be trusted.
+		It'd be great to see this rewritten in a modern context.
+	</p>
+
+	<p>
+		Some exceptions:
+	</p>
+
+	<ul class="big-list">
+		<li> <a href="https://www.man7.org/tlpi/index.html">The Linux Programming Interface</a>&mdash;
+			This is the definitive text on the programming interface
+			of the Linux Kernel.
+			If you want all the gory details of the system-call interface offered
+			by the Linux kernel, as well as sound explanations of its
+			internals, this is your book.
+			Its writer, Michael Kerrisk, is currently the maintainer of the
+			Linux Man Page project (see above),
+			and his work is simply terrific.
+		</li>
+		<li> <a href="https://en.wikipedia.org/wiki/The_C_Programming_Language">The C Programming Language, Second Edition</a>&mdash;
+			Written by the creators of the language itself, this is the
+			definitive resource on C.
+		</li>
+		<li> <a href="http://www.csapp.cs.cmu.edu/">Computer Systems: A Programmer's Perspective</a> &mdash;
+			From its preface: "This book (known as CS:APP) is for computer scientists, computer engineers,
+			and others who want to be able to write better programs by learning what is going on
+			"under the hood" of a computer system."<sup><a href="#references">[5]</a></sup>
+		</li>
+	</ul>
+
+</div>
+
+<div id="how-to" class="content">
+	<h2>How-to</h2>
+
+	<p>
+		I'd like to take a step back now and consider the process
+		of learning Linux itself.
+		In my experience, the best method of learning Linux is to focus on the
+		underlying concepts;
+		in view of the quote at the top, I'm not alone in this opinion.
+		When the concept is understood, one can usually "feel" one's way through
+		rectifying the situation at the command line.
+		Let's take an example.
+	</p>
+
+	<p>
+		Suppose you are working at the command-line, and you have a question about
+		copying files.
+		Knowing that the command <code>cp</code> copies a file,
+		you type <code>man cp</code>, and the manual page appears.
+		When you type <code>apropos copy</code>, looking for other
+		commands that can copy a file, it shows no results.
+		You know this to be an error, because <code>apropos</code>
+		is supposed to search manual pages and list all that
+		match "copy," which would certainly include <code>cp</code>.
+	</p>
+
+	<ol class="big-list" style="padding-bottom: 10px;">
+		<li>
+			<i>Figure out what your question is.</i>
+			<p>
+				Initially, your question might be <em>Why doesn't this work?</em>&mdash;
+				and that's totally fine.
+				Figuring out your question can be more difficult than you'd guess,
+				because you might not know how to phrase it.
+				Try to be specific:
+				When dealing with computers, things are <em>very</em> precisely defined.
+			</p>
+		</li>
+
+		<li>
+			<i>What would answer your question?</i>
+			<p>
+				This strikes you as such an obvious error
+				that any reasonable documentation should answer your question&mdash;
+				and you would be right.
+				So, you look first into the man pages, with
+				<code>man apropos</code>.
+				There, you discover that <code>apropos</code> doesn't search the man
+				pages <em>directly,</em> but instead searches a database of information
+				about them. (It does this because it's much faster.)
+			</p>
+
+			<p>
+				Reasonably, you suspect that there might be an error with this database,
+				such as, <em>It doesn't exist</em>.
+				A little further down the page, you read,
+				"The database searched by <code>apropos</code> is updated by <code>mandb</code>.
+				You try <code>mandb</code>, and voila! <code>apropos</code> works as it should.
+			</p>
+		</li>
+
+		<li>
+			<i>Be Patient.</i>
+
+			<p>
+				Databases like this pop up in other
+				contexts, as well.  For instance, in package management, a common
+				practice is to maintain a local database about available packages, so that
+				the user can search for packages without bothering public servers.
+				As such, updating these databases (on Debian/Ubuntu/Mint, with <code>apt update</code>)
+				is a precursive step to obtaining the latest packages.
+			</p>
+
+			<p>
+				The point here is that you should take the time to try to
+				learn underlying concepts, because it usually pays off in the long run.
+				Skill accrues. Answer one question at a time.
+			</p>
+		</li>
+	</ol>
+	
+	<div class="aside-right">
+		<h4>Aside:</h4>
 		<p>
-			Most documentation is from unofficial, secondary sources.
-			Examples include this website, blogs, question/answer sites,
-			Youtube videos, podcasts, books, etc..
-			Think of unofficial documentation as commentary on the subject at hand.
-			It can be useful when the subject is difficult,
-			but official documentation should still be your reference.
-		</p>
-
-		<p>
-			Examples of good, unofficial documentation:
-		</p>
-
-		<ul class="big-list">
-			<li>
-				<a href="http://tldp.org/"> The Linux Documentation Project</a>&mdash;
-				From the website: "TLDP is short for The Linux Documentation Project,
-				an organization of volunteers authoring, reviewing and managing
-				documents about the Linux operating system. Documents basically
-				come in two formats based upon their length. The shorter ones
-				generally are called HOWTOs (or mini-HOWTOs, if they are really short),
-				the longer documents, called guides, deal in-depth with a Linux
-				feature."<sup><a href="http://tldp.org/history.html">[2]</a></sup>
-				<br>
-				<br>
-				TLDP is not maintained anymore, so that its content is sometimes
-				out-of-date (but still very good).
-
-			</li>
-			<li>
-				<a href="https://debian-handbook.info/"> Debian Administrator's Handbook</a>&mdash;
-				A free book written by Raphaël Hertzog and Roland Mas, two Debian developers.
-				It was originally written in French, and has been translated into
-				four other languages, with twenty(!) more in-progress.
-			</li>
-			<li>
-				<a href="http://www.linuxfromscratch.org/lfs/"> Linux From Scratch </a>&mdash;
-				From their website, "Linux From Scratch (LFS) is a project that provides
-				you with step-by-step instructions for building your own customized
-				Linux system entirely from source."<sup><a href="http://www.linuxfromscratch.org/lfs/index.html">[3]</a></sup>
-				It's a thing.
-			</li>
-			<li>
-				<a href="http://www.kroah.com/lkn/"> Linux Kernel in a Nutshell</a>&mdash;
-				A free book written by Greg Kroah-Hartman.
-				He says, "I want this book to help
-				bring more people into the Linux kernel development fold.
-				The act of building a customized kernel for your machine is one
-				of the basic tasks needed to become a Linux kernel developer.
-				The more people that try this out, and realize that there is
-				not any real magic behind the whole Linux kernel process, the
-				more people will be willing to jump in and help out in making
-				the kernel the best that it can be."<sup><a href="http://www.kroah.com/lkn/">[4]</a></sup>
-			</li>
-		</ul>
-
-		<p>
-			Note:  GNU/Linux is an open-source community; respect it by avoiding
-			commercial (.com) sites that "offer" advice and documentation about Linux.
-			Also, StackOverflow is not the appropriate avenue for bug reports.
+			Where would you look to find the conventions adhered to in man pages?
 		</p>
 	</div>
 
-	<div class="content" id="nf-books">
-		<h2>Nonfree Books</h2>
-		<p>
-			In the main, I recommend staying away from non-free *nix books.
-			There are several reasons for this.
-		</p>
+	<p>
+		By far, the worst habit to get into is expecting to be spoon-fed solutions as though
+		by technical support.
+		Imagine, for a second, that you had *instantly* appealed to
+		Google, and there you found a response such as,
+		"Just run mandb."
+		This is correct, and it solves your problem, but you've learned nothing, and
+		if you continue "learning" this way, you'll be stuck memorizing trivial idioms.
+	</p>
 
-		<p>
-			First, non-free books are almost always secondary sources, and hence,
-			not authoritative.
-			The books you want to read are by those people closest to
-			the FOSS community, and they usually (but not always) write free books.
-			If it is free, they often offer a paperback copy for sale,
-			and/or a means to donate/support.
-		</p>
+	<p>
+		<em>Linux is written by programmers, for programmers.</em>
+		It is very pure with respect to computer science, and being a competent user
+		necessarily requires some CS know-how.
+		If you're not interested in learning that, then find somewhere else to go&mdash;
+		but if you are interested, stick around!
+	</p>
 
-		<div class="aside-right">
-			<h4>Aside:</h4>
-			<p>
-				My aim here is to warn the reader, not to make light of other peoples'
-				work.
-			</p>
-		</div>
-
-		<p>
-			Second, there's just too many of them, and very few are worthwhile.
-			For instance, I bought a handbook on UNIX system administration
-			that looked very promising, but taught me precious little.
-			In fact, the free <a href="https://debian-handbook.info/browse/stable/">Debian Administrator's Handbook</a>
-			proved a more succinct, more authoritative resource.
-		</p>
-
-		<p>
-			Third, they tend to be out-of-date.
-			For example, I really liked the premise of
-			<a href="https://www.pearson.com/us/higher-education/program/Molay-Understanding-UNIX-LINUX-Programming-A-Guide-to-Theory-and-Practice/PGM190781.html">
-				Understanding UNIX/LINUX Programming: A Guide to Theory and Practice</a>.
-				It walks you through programming in Linux by recreating
-				common command-line tools, such as <code>cat</code> and <code>ls</code>, but it
-				was so out-of-date by the time I read it that the information in it couldn't be trusted.
-				It'd be great to see this rewritten in a modern context.
-			</p>
-
-			<p>
-				Some exceptions:
-			</p>
-
-			<ul class="big-list">
-				<li> <a href="https://www.man7.org/tlpi/index.html">The Linux Programming Interface</a>&mdash;
-					This is the definitive text on the programming interface
-					of the Linux Kernel.
-					If you want all the gory details of the system-call interface offered
-					by the Linux kernel, as well as sound explanations of its
-					internals, this is your book.
-					Its writer, Michael Kerrisk, is currently the maintainer of the
-					Linux Man Page project (see above),
-					and his work is simply terrific.
-				</li>
-				<li> <a href="https://en.wikipedia.org/wiki/The_C_Programming_Language">The C Programming Language, Second Edition</a>&mdash;
-					Written by the creators of the language itself, this is the
-					definitive resource on C.
-				</li>
-				<li> <a href="http://www.csapp.cs.cmu.edu/">Computer Systems: A Programmer's Perspective</a> &mdash;
-					From its preface: "This book (known as CS:APP) is for computer scientists, computer engineers,
-					and others who want to be able to write better programs by learning what is going on
-					"under the hood" of a computer system."<sup><a href="#references">[5]</a></sup>
-				</li>
-			</ul>
-
-		</div>
-
-			<div id="how-to" class="content">
-				<h2>How-to</h2>
-
-				<p>
-					I'd like to take a step back now and consider the process
-					of learning Linux itself.
-					In my experience, the best method of learning Linux is to focus on the
-					underlying concepts;
-					in view of the quote at the top, I'm not alone in this opinion.
-					When the concept is understood, one can usually "feel" one's way through
-					rectifying the situation at the command line.
-					Let's take an example.
-				</p>
-
-				<p>
-					Suppose you are working at the command-line, and you have a question about
-					copying files.
-					Knowing that the command <code>cp</code> copies a file,
-					you type <code>man cp</code>, and the manual page appears.
-					When you type <code>apropos copy</code>, looking for other
-					commands that can copy a file, it shows no results.
-					You know this to be an error, because <code>apropos</code>
-					is supposed to search manual pages and list all that
-					match "copy," which would certainly include <code>cp</code>.
-				</p>
-
-				<ol class="big-list" style="padding-bottom: 10px;">
-					<li>
-						<i>Figure out what your question is.</i>
-						<p>
-							Initially, your question might be <em>Why doesn't this work?</em>&mdash;
-							and that's totally fine.
-							Figuring out your question can be more difficult than you'd guess,
-							because you might not know how to phrase it.
-							Try to be specific:
-							When dealing with computers, things are <em>very</em> precisely defined.
-						</p>
-					</li>
-
-					<li>
-						<i>What would answer your question?</i>
-						<p>
-							This strikes you as such an obvious error
-							that any reasonable documentation should answer your question&mdash;
-							and you would be right.
-							So, you look first into the man pages, with
-							<code>man apropos</code>.
-							There, you discover that <code>apropos</code> doesn't search the man
-							pages <em>directly,</em> but instead searches a database of information
-							about them. (It does this because it's much faster.)
-						</p>
-
-						<p>
-							Reasonably, you suspect that there might be an error with this database,
-							such as, <em>It doesn't exist</em>.
-							A little further down the page, you read,
-							"The database searched by <code>apropos</code> is updated by <code>mandb</code>.
-							You try <code>mandb</code>, and voila! <code>apropos</code> works as it should.
-						</p>
-					</li>
-
-					<li>
-						<i>Be Patient.</i>
-
-						<p>
-							Databases like this pop up in other
-							contexts, as well.  For instance, in package management, a common
-							practice is to maintain a local database about available packages, so that
-							the user can search for packages without bothering public servers.
-							As such, updating these databases (on Debian/Ubuntu/Mint, with <code>apt update</code>)
-							is a precursive step to obtaining the latest packages.
-						</p>
-
-						<p>
-							The point here is that you should take the time to try to
-							learn underlying concepts, because it usually pays off in the long run.
-							Skill accrues. Answer one question at a time.
-						</p>
-					</li>
-				</ol>
-
-				<div class="aside-right">
-					<h4>Aside:</h4>
-					<p>
-						Where would you look to find the conventions adhered to in man pages?
-					</p>
-				</div>
-
-				<p>
-					By far, the worst habit to get into is expecting to be spoon-fed solutions as though
-					by technical support.
-					Imagine, for a second, that you had *instantly* appealed to
-					Google, and there you found a response such as,
-					"Just run mandb."
-					This is correct, and it solves your problem, but you've learned nothing, and
-					if you continue "learning" this way, you'll be stuck memorizing trivial idioms.
-				</p>
-
-				<p>
-					<em>Linux is written by programmers, for programmers.</em>
-					It is very pure with respect to computer science, and being a competent user
-					necessarily requires some CS know-how.
-					If you're not interested in learning that, then find somewhere else to go&mdash;
-					but if you are interested, stick around!
-				</p>
-
-				<h3> See Also: </h3>
-				<ul>
-					<li><a href="https://www.gnu.org/philosophy/free-doc.html"> Why Free Software needs Free Documentation</a></li>
-				</ul>
-			</div>
+	<h3> See Also: </h3>
+	<ul>
+		<li><a href="https://www.gnu.org/philosophy/free-doc.html"> Why Free Software needs Free Documentation</a></li>
+	</ul>
+</div>
 
 
-			<div id="references" class="content">
-				<h2> References </h2>
-				<ol>
-					<li> <i>Unix Programmer's Manual, First Edition.</i>  <a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html"> https://www.bell-labs.com/usr/dmr/www/1stEdman.html </a> </li>
-					<li> Garrels, M. (n.d.). Linux Documentation Project History. Retrieved July 17, 2020, from <a href="http://tldp.org/history.html">http://tldp.org/history.html</a></li>
-					<li> What is Linux From Scratch? (n.d.). Retrieved July 16, 2020, from <a href="http://www.linuxfromscratch.org/lfs/index.html">http://www.linuxfromscratch.org/lfs/index.html</a> </li>
-					<li> Kroah-Hartman, G. (n.d.). Secret Goal (i.e. why I wrote this book and am giving it away for free online). Retrieved July 17, 2020, from <a href="http://www.kroah.com/lkn/">http://www.kroah.com/lkn/</a></li>
-					<li> Bryant, R. E., & O'Hallaron, D. R. (2016).  <em>Computer Systems: A Programmer's Perspective</em> (3rd ed.).  Upper Saddle River, New Jersey: Pearson. </li>
-				</ol>
-			</div>
+<div id="references" class="content">
+	<h2> References </h2>
+	<ol>
+		<li> <i>Unix Programmer's Manual, First Edition.</i>  <a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html"> https://www.bell-labs.com/usr/dmr/www/1stEdman.html </a> </li>
+		<li> Garrels, M. (n.d.). Linux Documentation Project History. Retrieved July 17, 2020, from <a href="http://tldp.org/history.html">http://tldp.org/history.html</a></li>
+		<li> What is Linux From Scratch? (n.d.). Retrieved July 16, 2020, from <a href="http://www.linuxfromscratch.org/lfs/index.html">http://www.linuxfromscratch.org/lfs/index.html</a> </li>
+		<li> Kroah-Hartman, G. (n.d.). Secret Goal (i.e. why I wrote this book and am giving it away for free online). Retrieved July 17, 2020, from <a href="http://www.kroah.com/lkn/">http://www.kroah.com/lkn/</a></li>
+		<li> Bryant, R. E., & O'Hallaron, D. R. (2016).  <em>Computer Systems: A Programmer's Perspective</em> (3rd ed.).  Upper Saddle River, New Jersey: Pearson. </li>
+	</ol>
+</div>
