@@ -8,6 +8,11 @@ last-updated: August, 2020
 TODO
 
 Mailing Lists
+
+News:
+	https://www.omgubuntu.co.uk/
+	https://www.youtube.com/channel/UC5UAwBUum7CPN5buc-_N1Fw
+		Also available on lbry
 -->
 
 <div id="nav_bar_2" class="nav">
@@ -49,21 +54,46 @@ Mailing Lists
 	<p>
 		The most useful asset in the Linux documentation pool is the
 		manual ("man") pages.
-		These date back to the first implementations of Unix,<sup><a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html">[1]</a></sup>
+		These date to the first implementations of Unix,<sup><a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html">[1]</a></sup>
 		where they were the user's primary source for information about the new operating system.
-		They often included examples, hints and useful suggestions, such as,
-		<a href="http://man.cat-v.org/unix-1st/1/cat">"<em>cat file</em> is about the easiest way to print a file."</a>
-	</p>
-
-	<p>
-		Today, each project maintains its own man page, except for the kernel.
-		The pages describing the Linux kernel and C library
-		<a href="https://www.kernel.org/doc/man-pages/">have become their own project,</a>
-		and are of excellent quality.
-		Man pages typically provide a concise overview, with further documentation
+		Man pages provide a concise overview of commands and features, with further documentation
 		existing elsewhere.
 		Learn to use man pages early, for they are a way of life.
 	</p>
+
+	<p>
+		Man pages are accessed at the command line:
+	</p>
+
+	<div class="code">
+		$ man cat
+	</div>
+
+	<p>
+		Once within the <code>man</code> utility, you can easily search the content
+		by typing a single forward slash, then your search term:
+	</p>
+
+	<div class="code">
+		/&lt;search-term&gt;
+	</div>
+
+	<p>
+		Then, <em>enter</em>.  To jump to the next result, type a single <b>n</b>.
+		To quit the <code>man</code> paging utility, type a single <code>q</code>.
+	</p>
+
+	<p>
+		Many of the controls of the man-pages coincide with those of
+		the <code>less</code> paging utility, and the <code>vim</code>
+		text editor, so they're worth learning.
+		For instance, to move down one line, type <b>j</b>.
+		To move up one line, type <b>k</b>.
+		And, to move down a screenful, press the spacebar.
+		Why the crazy controls?  They keep your fingers on the home row.
+	</p>
+
+	<h3>Sections</h3>
 
 	<div class="aside-right" style="margin-left: 25pt; padding-bottom: 0">
 		<h4>Manual Sections:</h4>
@@ -79,20 +109,29 @@ Mailing Lists
 	</div>
 
 	<p>
-		Man pages are accessed at the command line so:
+		The manual is divided into seven different sections.
+		We use a shorthand for specifying specific man pages:
+		<code>cat(1)</code> refers to the manual page for the command-line utility,
+		while <code>printf(3)</code> refers to the manual page of the C library function.
+	</p>
+
+	<p>
+		The <code>man</code> utility searches the sections in order, and so
+		defaults to the page with the lowest section number.
+		Hence,
 	</p>
 
 	<div class="code">
-		$ man app
+		$ man printf
 	</div>
 
 	<p>
-		You can search through available man pages with the <code>apropos</code> command,
-		as in,
+		displays <code>printf(1)</code>, if it exists.
+		To restrict <code>man</code>'s search to section three, we can use either
 	</p>
 
 	<div class="code">
-		$ apropos decompress
+		$ man 3 printf
 	</div>
 
 	<p>
@@ -100,47 +139,13 @@ Mailing Lists
 	</p>
 
 	<div class="code">
-		$ apropos extract
+		$ man printf.3
 	</div>
-
-	<p>
-		Once within the <code>man</code> utility, you can easily search the content
-		by typing a forward slash, then your search term:
-	</p>
-
-	<div class="code">
-		/&lt;search-term&gt;
-	</div>
-
-	<p>
-		Then, <em>enter</em>.  To jump to the next result, type a single <b>n</b>.
-		This makes it fast and easy to find relevant information.
-	</p>
-
-	<p>
-		Many of the controls of the man-pages coincide with those of
-		the <code>less</code> paging utility, and the <code>vim</code>
-		text editor, so they're worth learning.
-		For instance, to move down one line, type <b>j</b>.
-		To move up one line, type <b>k</b>.
-		And, move down a screenful by hitting the spacebar.
-		Why the crazy controls?  They keep your fingers on the home row.
-	</p>
-
-	<p>
-		The manual is structured into sections, as shown above.
-		We use a shorthand for denoting man pages:  "printf(3)" refers
-		to the page named <em>printf</em> in the third section,
-		while printf(1) refers to a page in the first section.
-	</p>
-
-	<p>
-		Finally, man pages usually contain directions for reporting bugs.
-	</p>
 
 	<h3>See Also:</h3>
 	<ul>
-		<li><a href="https://www.man7.org/linux/man-pages/man1/man.1.html">man(1)</a></li>
+		<li><code><a href="https://www.man7.org/linux/man-pages/man1/man.1.html">man(1)</a></code></li>
+		<li><code><a href="https://www.man7.org/linux/man-pages/man1/apropos.1.html">apropos(1)</a></code></li>
 	</ul>
 
 </div>
@@ -413,7 +418,7 @@ Mailing Lists
 			</p>
 		</li>
 	</ol>
-	
+
 	<div class="aside-right">
 		<h4>Aside:</h4>
 		<p>
@@ -444,7 +449,6 @@ Mailing Lists
 		<li><a href="https://www.gnu.org/philosophy/free-doc.html"> Why Free Software needs Free Documentation</a></li>
 	</ul>
 </div>
-
 
 <div id="references" class="content">
 	<h2> References </h2>
