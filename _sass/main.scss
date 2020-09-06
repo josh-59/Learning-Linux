@@ -215,9 +215,14 @@ sup, sub {
 		font-size: 15pt;
 }
 
+
 .content ul li {
     padding-top: 5px;
-		padding-bottom: 5px;
+	padding-bottom: 5px;
+}
+
+.content ul p {
+	margin-bottom: 0;
 }
 
 .content .quote-text {
