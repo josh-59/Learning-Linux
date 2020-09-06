@@ -13,175 +13,158 @@ last-updated: July, 2020
 
     https://wiki.ubuntu.com/Lvm
 
+    inode as indexing method:
+    https://wiki.osdev.org/File_Systems#Indexing_Methods
+
+    ext2:
+    http://cs.smith.edu/~nhowe/262/oldlabs/ext2.html#itable
+
+    ext4 Data Structures and Algorithms:
+    https://www.kernel.org/doc/html/latest/filesystems/ext4/index.html
+
 -->
 <div id="nav_bar_2" class="nav">
-  <ul>
-    <li><a href="#introduction"> Introduction </a></li>
-    <li><a href="#filesystems"> Filesystems </a></li>
-    <li><a href="#directories"> Directories </a></li>
-    <li><a href="#mounting-unmounting"> Mounting and Unmounting</a></li>
-    <li><a href="#fs-heir"> Filesystem Heirarchy </a></li>
-    <li><a href="#regular-files"> Regular Files </a></li>
-    <li><a href="#pseudo"> Pseudo Files </a></li>
-    <li><a href="#device-files"> Device Special Files </a></li>
-    <li><a href="#closing-remarks"> Closing Remarks </a></li>
-    <li><a href="#lvl1"> Level 1 Linux </a></li>
-    <li><a href="#references"> References </a></li>
-  </ul>
+    <ul>
+        <li><a href="#introduction"> Introduction </a></li>
+        <li><a href="#filesystems"> Filesystems </a></li>
+        <li><a href="#directories"> Directories </a></li>
+        <li><a href="#mounting-unmounting"> Mounting and Unmounting</a></li>
+        <li><a href="#fs-heir"> Filesystem Heirarchy </a></li>
+        <li><a href="#regular-files"> Regular Files </a></li>
+        <li><a href="#pseudo"> Pseudo Files </a></li>
+        <li><a href="#device-files"> Device Special Files </a></li>
+        <li><a href="#closing-remarks"> Closing Remarks </a></li>
+        <li><a href="#lvl1"> Level 1 Linux </a></li>
+        <li><a href="#references"> References </a></li>
+    </ul>
 </div>
 
 <div id="introduction" class="content">
-  <h1>Files and Filesystems</h1>
-  <h4 style="font-size: 15pt;">"In the beginning, the file was without form, and void;<br>
-  and emptiness was upon the face of the bits.<br>
-  And the Fingers of the Author moved upon the face of the keyboard.<br>
-  And the Author said, Let there be words, and there were words."</h4>
-  <div class="quote-ref" style="margin-left: 50%;">
-    &mdash;<a href="https://www.tldp.org/LDP/sag/html/intro.html">The Linux System Administrator's Guide</a>
-  </div>
+    <h1>Files and Filesystems</h1>
+    <h4 style="font-size: 15pt;">"In the beginning, the file was without form, and void;<br>
+        and emptiness was upon the face of the bits.<br>
+        And the Fingers of the Author moved upon the face of the keyboard.<br>
+        And the Author said, Let there be words, and there were words."</h4>
+        <div class="quote-ref" style="margin-left: 50%;">
+            &mdash;<a href="https://www.tldp.org/LDP/sag/html/intro.html">The Linux System Administrator's Guide</a>
+        </div>
 
 
-  <p>
-    Unix began life as a filesystem.<sup><a href=#references>[1]</a></sup>
-    Shortly thereafter, a means
-    of interacting with it was created&mdash; initially,
-    this consisted of the <em>exec</em>
-    system call, a shell, a text editor and an assembler.
-    Written entirely by Ken Thompson, these key components formed the nexus of
-    the time-sharing operating system that would eventually be called
-    <em>Unix</em>.
-  </p>
-
-  <p>
-    This file-first approach to operating system design is found in
-    the implementation as well as the history of Unix:
-    Unix and its derivatives use files for many things.
-    As such, there is a lot to be said about files.
-    This paper introduces the <em>filesystem</em>,
-    discusses the directory structure implemented on top of it,
-    and gives a practical overview of the contents of them.
-  </p>
-</div>
-
-<div id="filesystems" class="content">
-  <h2> Filesystems </h2>
-  <p>
-    A filesystem is a systematic method of organizing data on
-    disk.<sup><a href="https://wiki.osdev.org/Filesystem">[2]</a><a href="https://wiki.archlinux.org/index.php/File_systems">[3]</a></sup>
-    Conceptually, it is similar to a data structure, in that it defines a convention
-    to be followed in the storage and retrieval of data.
-    A given disk is usually <em>partitioned</em> into several logically-distinct components.
-    All partitions are contiguous with respect to the disk's address space, and
-    each entertains its own distinct filesystem, if any.
-    Preparing a partition for use by a particular filesystem
-    <a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">is known as formatting.</a>
-  </p>
-
-  <ul>
-    <h3>Some Common Filesystems:</h3>
-    <li>
-      <p>
-        <strong>EXT4</strong>:
-        Introduced in 2008,<sup><a href="https://en.wikipedia.org/wiki/Ext4">[4]</a></sup> EXT4 is
-        the current standard Linux filesystem.
-        It is an evolutionary enhancement on EXT3,
-        supporting larger filesizes, deeper subdirectory support,
-        faster handling of large files, along with many other improvements.<sup><a href="https://ext4.wiki.kernel.org/index.php/Ext4_Disk_Layout">[5]</a></sup>
-        It is mature, fast, and stable.
-      </p>
-    </li>
-
-    <div class="aside-right">
-      <h4>Aside</h4>
-      <p>
-        A filesystem describes how files are stored, but it is the kernel's responsibility to abide by this specification.
-        Thus, the details of creating, reading and writing files are left to the kernel.
-      </p>
+        <p>
+            Unix began life as a filesystem.<sup><a href=#references>[1]</a></sup>
+            Shortly thereafter, a means
+            of interacting with it was created&mdash; initially,
+            this consisted of the <em>exec</em>
+            system call, a shell, a text editor and an assembler.
+            Written entirely by Ken Thompson, these key components formed the nexus of
+            the time-sharing operating system that would eventually be called
+            <em>Unix</em>.
+        </p>
     </div>
 
-    <li>
-      <p>
-        <strong>ZFS</strong>:
-        "Don't use ZFS.  It's that simple." &mdash;<a href="https://www.realworldtech.com/forum/?threadid=189711&curpostid=189841">Linus Torvalds</a>.
-      </p>
+    <div id="filesystems" class="content">
+        <h2> Filesystems </h2>
+        <p>
+            A filesystem is a systematic method of organizing data on
+            disk.<sup><a href="https://wiki.osdev.org/Filesystem">[2]</a><a href="https://wiki.archlinux.org/index.php/File_systems">[3]</a></sup>
+            Conceptually, it is similar to a data structure, in that it defines a convention
+            to be followed in the storage and retrieval of data.
+        </p>
 
-      <p>
-        Introduced in 2005,<sup><a href="https://en.wikipedia.org/wiki/ZFS">[6]</a></sup> ZFS incorporates fancier features that are generally
-        out of place on a Linux desktop.
-        It was developed by Sun Microsystems, and became closed-source with Sun's acquisition by
-        Oracle.<sup><a href="https://en.wikipedia.org/wiki/ZFS">[6]</a></sup>
-        It was intended for enterprise use, and is
-        <a href="https://en.wikipedia.org/wiki/ZFS#Inappropriately_specified_systems">relatively easy to configure improperly.</a>
-      </p>
-    </li>
+        <p>
+            A given disk is <em><a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">partitioned</a></em> into one or more logically distinct components.
+            Partitions are contiguous with respect to the disk's address space, and
+            each entertains its own distinct filesystem, if any:
+            A filesystem cannot cross partition boundaries.
+            Writing a new and empty filesystem to a partition is known as
+            <em>formatting.</em>
+        </p>
 
-    <li>
-      <p>
-        <strong>FAT32</strong>: The "File Allcoation Table 32-bit" is a DOS-era filesystem,<sup><a href="https://en.wikipedia.org/wiki/File_Allocation_Table#FAT32">[7]</a></sup>
-        and is widely supported, though antiquated.
-        In particular, it is not a <a href="https://en.wikipedia.org/wiki/Journaling_file_system">journaling filesystem</a>,
-        so that changes to data are not recorded before being carried out (increasing the likelihood of
-        corruption in the event of, say, power outage).
-        This filesystem is often used to hold the bootloader, since it is virtually guaranteed to be supported by firmware,
-        and it will not be changed very often.
-      </p>
-    </li>
-  </ul>
+        <ul>
+            <h3>Some Common Filesystems:</h3>
+            <li>
+                <p>
+                    <strong>EXT4</strong>:
+                    Introduced in 2008,<sup><a href="https://en.wikipedia.org/wiki/Ext4">[4]</a></sup> EXT4 is
+                    the current standard Linux filesystem.
+                    It is an evolutionary enhancement on EXT3,
+                    supporting larger filesizes, deeper subdirectory support,
+                    faster handling of large files, along with many other improvements.<sup><a href="https://ext4.wiki.kernel.org/index.php/Ext4_Disk_Layout">[5]</a></sup>
+                    It is mature, fast, and stable.
+                </p>
+            </li>
 
-  <p>
-    System V Unix implemented its own filesystem as an integral part of the operating system;
-    it was unnamed, though well-documented (by, for instance, Maurice J. Bach in <em>The Design of the Unix Operating System</em>).
-    The Extended Filesystem (EXT) was an open-source derivative, and retained many distinctive features of the original;
-    since then, EXT2, EXT3, and EXT4 have continued to improve upon the design.
-  </p>
+            <li>
+                <p>
+                    <strong>ZFS</strong>:
+                    "Don't use ZFS.  It's that simple." &mdash;<a href="https://www.realworldtech.com/forum/?threadid=189711&curpostid=189841">Linus Torvalds</a>.
+                </p>
 
-  <h3> inodes </h3>
+                <p>
+                    Introduced in 2005,<sup><a href="https://en.wikipedia.org/wiki/ZFS">[6]</a></sup> ZFS incorporates fancier features that are generally
+                    out of place on a Linux desktop.
+                    It was developed by Sun Microsystems, and became closed-source with Sun's acquisition by
+                    Oracle.<sup><a href="https://en.wikipedia.org/wiki/ZFS#OpenZFS_and_ZFS">[6]</a></sup>
+                </p>
+            </li>
 
-  <p>
-    A key feature of the architecture of the System V filesystem
-    was the <em>inode.</em>
-    This feature has been retained throughout the Extended Filesystem series,
-    and is a key to understanding files in GNU/Linux.
-    The inode of a file serves as the filesystem's unique reference to the file.
-    It contains information describing where the data of the file is,
-    in addition to metadata about the file, such as its size, access permissions
-    and timestamps.
-  </p>
+            <li>
+                <p>
+                    <strong>FAT32</strong>: The "File Allcoation Table 32-bit" is a DOS-era filesystem,<sup><a href="https://en.wikipedia.org/wiki/File_Allocation_Table#FAT32">[7]</a></sup>
+                    and is widely supported, though antiquated.
+                    In particular, it is not a <a href="https://en.wikipedia.org/wiki/Journaling_file_system">journaling filesystem</a>,
+                    so that changes to data are not recorded before being carried out (increasing the likelihood of
+                    corruption in the event of, say, power outage).
+                    This filesystem is often used to hold the bootloader, since it is virtually guaranteed to be supported by firmware,
+                    and its contents will not be changed very often.
+                </p>
+            </li>
+        </ul>
 
-  <div class="aside-left">
-    <h4>Aside:</h4>
-    <p>
-      <em>Filesystem</em> is often abbreviated <em>fs.</em>
-    </p>
-  </div>
+        <p>
+            Early versions of Unix implemented its own filesystem as an integral part of the operating system.
+            It was referred to as, simply, <code>fs</code>, and was well-documented (by, for instance, Maurice J. Bach in <em>The Design of the Unix Operating System</em>).
+        </p>
 
-  <p>
-    The set of all inodes in a filesystem is organized in an array;
-    in most filesystems, this array is located near the beginning of the partition.
-    An inode number is an index into this array, and therefore serves as a
-    reference to a unique inode.
-    Each inode&mdash; and therefore each file&mdash; has a unique inode number within its
-    filesystem.
-  </p>
+        <p>
+            The Extended Filesystem (EXT) was the first open-source derivative, and retained many distinctive features of the original.
+            Since then, EXT2, EXT3, and EXT4 have continued to improve upon the design.
+        </p>
 
-  <p>
-    Intuitively, a file's inode number serves as the "hardware name" of a file,
-    since it uniquely identifies a file within a filesystem.
-    For the kernel, which often manages more than one filesystem at a time,
-    the information required to identify a file
-    is its inode number and the filesystem it belongs to.
-  </p>
+        <h3> inodes </h3>
 
-  <h3> See Also: </h3>
-  <ul>
-    <li> <a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">An Introduction to Disk Partitions - Fedora Docs Site</a></li>
-    <li> <a href="https://man7.org/linux/man-pages/man5/filesystems.5.html"> filesystems(5)</a></li>
-    <li> <a href="https://man7.org/linux/man-pages/man7/inode.7.html"> inode(7) </a></li>
-    <li> <a href="https://ext4.wiki.kernel.org/index.php/Main_Page">Ext4 (and Ext2/Ext3) Wiki </a></li>
-    <li> <a href="http://web.mit.edu/tytso/www/linux/ext2intro.html"> Design and Implementation of the Second Extended Filesystem</a> (Discusses inodes)</li>
-    <li> <a href="https://www.man7.org/tlpi/">The Linux Programming Interface</a>, Chapter 14: Filesystems </li>
-  </ul>
-</div>
+        <p>
+            A <a href="https://wiki.osdev.org/File_Systems#Indexing_Methods">key feature</a>
+            of these filesystems is the
+            <a href="http://www.science.unitn.it/~fiorella/guidelinux/tlk/node96.html#SECTION001111000000000000000">inode</a>.
+            Each file in the filesystem is represented and described by a single inode.
+            Each inode describes where the data of the file is located, the size of the file,
+            and contains other metadata about the file, such as its access permissions and timestamps.
+        </p>
+
+        <p>
+            The collection of all inodes of a filesystem is organized, conceptually, into
+            one large array; any inode may be identified by its location (index) in this array.
+            These indices are called <em>inode numbers.</em>
+        </p>
+
+        <p>
+            Intuitively, a file's inode number serves as the "hardware name" for the file,
+            since it uniquely identifies it within its respective filesystem.
+            For the kernel, which often manages more than one filesystem at a time,
+            the information required to identify a file
+            is its inode number and the filesystem it belongs to.
+        </p>
+
+        <h3> See Also: </h3>
+        <ul>
+            <li> <a href="http://web.mit.edu/tytso/www/linux/ext2intro.html"> Design and Implementation of the Second Extended Filesystem</a></li>
+            <li> <a href="http://cs.smith.edu/~nhowe/262/oldlabs/ext2.html"> The Ext2 Filesystem</a></li>
+            <li> <a href="https://www.kernel.org/doc/html/latest/filesystems/ext4/index.html"> ext4 Data Structures and Algorithms</a></li>
+            <li> <code><a href="https://man7.org/linux/man-pages/man5/filesystems.5.html"> filesystems(5)</a></code></li>
+            <li> <code><a href="https://man7.org/linux/man-pages/man7/inode.7.html"> inode(7) </a></code></li>
+        </ul>
+    </div>
 
 <div id="directories" class="content">
   <h2>Directories</h2>
