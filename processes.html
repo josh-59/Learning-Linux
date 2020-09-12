@@ -9,6 +9,10 @@ last-updated: July, 2020
   Current working directory -> Change with system call
       -> Absolute and relative pathnames -> kernel feature?
   Memory layout
+  Open file descriptors.
+
+  A Similar article:
+  https://www.brianstorti.com/an_introduction_to_unix_processes/
 -->
 
 <div id="nav_bar_2" class="nav">
@@ -19,7 +23,7 @@ last-updated: July, 2020
         <li><a href="#process-attributes"> Process Attributes </a></li>
         <li><a href="#sandbox"> Sandbox </a></li>
         <li><a href="#closing-remarks"> Closing Remarks </a></li>
-
+        <li><a href="#dr-fraser"> Dr. Brian Fraser </a></li>
         <li><a href="#references"> References </a></li>
     </ul>
 </div>
@@ -68,18 +72,7 @@ last-updated: July, 2020
         it (dictated by the kernel).
     </p>
 
-    <p>
-        A powerful utility to investigate the actions of a process is
-        <code><a href="https://www.man7.org/linux/man-pages/man1/strace.1.html">strace</a></code>, which executes the process and captures
-        all of its system calls.
-        These system calls are then listed and printed to standard error;
-        they include the arguments to the system call, in addition to its return value.
-        For example, the first line of an <code>strace</code> of a Python script of mine:
-    </p>
 
-    <div class="code">
-        execve("./ttable.py", ["./ttable.py"], 0x7ffd1af464a0 /* 54 vars */) = 0
-    </div>
 
     <p>
         The Kernel:
@@ -93,7 +86,10 @@ last-updated: July, 2020
             Allocates hardware resources to each process
         </li>
         <li>
-            Maintains information about processes, and assigns attributes to them
+            Maintains information about processes
+        </li>
+        <li>
+            Facilitates change of their attributes
         </li>
     </ol>
 
@@ -126,6 +122,7 @@ last-updated: July, 2020
     <h3> See Also: </h3>
     <ul>
         <li><a href="https://www.man7.org/linux/man-pages/man7/daemon.7.html"> daemon(7)</a> (Background Process)</li>
+        <li><a href="https://www.brianstorti.com/an_introduction_to_unix_processes/"> An introduction to UNIX processes</a> (An article similar to this one)</li>
     </ul>
 </div>
 
@@ -135,12 +132,10 @@ last-updated: July, 2020
     <p>
         At the end of the boot sequence, the kernel launches a single program,
         <code>/sbin/init</code>.<sup><a href="http://tldp.org/LDP/intro-linux/intro-linux.pdf">[3]</a></sup>
-        This program is responsible for
-        spawning all other processes.<sup><a href="https://arxiv.org/abs/0706.2748">[4]</a></sup>
         While init schemes <a href="https://arxiv.org/abs/0706.2748">have evolved</a> over the years,
-        their purpose has not changed.  It is a process with root-level permissions that acts as a
+        their purpose has not changed:  It is a process with root-level permissions that acts as a
         trustee among processes; its central responsibility is to bring up
-        userspace.<sup><a href="http://0pointer.de/blog/projects/systemd.html">[5]</a></sup>
+        userspace.<sup><a href="http://0pointer.de/blog/projects/systemd.html">[4]</a></sup>
     </p>
 
     <div class="aside-left">
@@ -156,17 +151,17 @@ last-updated: July, 2020
         the <em><a href="https://www.man7.org/linux/man-pages/man2/fork.2.html">fork()</a></em> system call.
         This instructs the kernel to make a copy of the current process&mdash;
         an exact copy is produced, save one difference: Each of the two
-        processes receives a distinct return value from <em>fork().</em>
+        processes receives a different return value from <em>fork().</em>
         The new process is called the <em>child</em> process; the
         old process is called the <em>parent</em> process.
     </p>
 
     <p>
-        The parent process usually goes on about its business, be it managing other
-        user-space processes, as in the case of <em>init;</em> or querying the user
-        for a new line of input, as in the case of a shell.
+        The parent process usually goes on about its business, such as managing other
+        user-space processes, or querying the user
+        for a new line of input.
         The child goes on to call <em><a href="https://www.man7.org/linux/man-pages/man2/execve.2.html">execve(pathname, argv, envp)</a>.</em>
-        This system call instructs the kernel to replace the current
+        This instructs the kernel to replace the current
         process with a new one by loading the executable file located at <em>pathname;</em>
         therein, execution begins at <em>main.</em>
     </p>
@@ -180,16 +175,20 @@ last-updated: July, 2020
         This is guaranteed to be unique to the process, remains constant throughout
         the process's life, and serves as the kernel's handle
         to the process.
-        For instance, the <code>/proc</code> pseudo filesystem is organized by PID.
+        Pragmatically speaking, process ID's begin at
+        <code>1</code> (with <em>init</em>) and count upwards until
+        <code>/proc/sys/kernel/pid_max - 1</code>.<sup><a href="kerrisk, p.115">[6]</a></sup>
+        After that, the kernel begins searching at <code>300</code> for the next free PID.<sup><a href="kerrisk, p.115">[6]</a></sup>
+        Thus, PID's are not guaranteed to be monotonically increasing.
     </p>
 
     <p>
         There are a few reasons to manage processes by PID numbers rather than names.
-        For instance, two processes spawned from the same executable can easily,
+        First, two processes spawned from the same executable can easily,
         and often, exist.
-        Yet, at runtime, these two instances of the same program are completely
-        distinct.
-        The only thing they share is the <em>text</em> segment of the program,
+        If we launch two instances of Firefox, for instance, then two distinct
+        processes exist.
+        The only thing they share is the <code>text</code> segment of the program,
         which contains the machine instructions, and which exists in the virtual
         memory of each process as read-only.
     </p>
@@ -362,6 +361,27 @@ last-updated: July, 2020
     Note that the contents of a file may be dynamic, or they may be static.
   </p>
 
+  <h3> <code>strace</code> </h3>
+
+  <p>
+      A powerful utility to investigate the actions of a process is
+      <code><a href="https://www.man7.org/linux/man-pages/man1/strace.1.html">strace</a></code>, which executes the process and captures
+      all of its system calls.
+      These system calls are then listed and printed to standard error;
+      they include the arguments to the system call, in addition to its return value.
+      For example, the first line of an <code>strace</code> of a Python script of mine:
+  </p>
+
+  <div class="code">
+      execve("./ttable.py", ["./ttable.py"], 0x7ffd1af464a0 /* 54 vars */) = 0
+  </div>
+
+</div>
+
+<div class="content" id="dr-fraser">
+    <h2 style="margin-bottom: 2pt;"> Dr. Brian Fraser </h2>
+    <h4 style="margin-bottom: 18pt;"> Linux fork() Introduction </h4>
+    <iframe class="video" src="https://www.youtube.com/embed/9seb8hddeK4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 
