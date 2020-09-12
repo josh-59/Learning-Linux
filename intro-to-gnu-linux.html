@@ -37,16 +37,72 @@ last-updated: August, 2020
         programs, known as processes, and to maintain persistent
         data, in the form of files.
         In addition, operating systems ease the task of creating
-        useful programs by giving processes a predictable environment.
+        useful programs by offering programmers a predictable environment.
         Modern, open-source GNU/Linux offers the single best programming environment
         available today.
     </p>
 </div>
 
+<!--
+<div id="unix" class="content">
+    <h2>Unix</h2>
+    <p>
+        Unix was born in the shadow of <em>Multics</em>, an over-engineered,
+        overly ambitious and ultimately infeasible operating system.
+        A joint venture between AT&T's Bell Laboratories, General Electric and MIT,
+        Multics was intended to provide "computing as a service," with users
+        connecting terminals to remote mainframes and paying for computation on
+        an as-used basis, à la telephony service.
+    </p>
+
+    <p>
+        For a variety of reasons, the project was doomed, and in 1969
+        Bell Labs abandoned it.
+        Operating systems research was put on the backburner by management,
+        and pursued only by a dedicated few.
+        After writing a videogame for an underpowered and disused PDP-7,
+        Ken Thompson had accrued skills and tools sufficient to implement
+        a filesystem he and other researchers had been devising.
+        At some point in ____, he realized that he was three weeks
+        from an operating system&mdash; all he needed was a shell, an exec
+        system call and a text editor.
+    </p>
+
+    <p>
+        Early development of the budding operating system focused on simplicity
+        (owing in part to the available hardware), and programability:
+        As early computer researchers, their goal for the new operating system
+        was to create an amiable programming environment.
+        To this end, it had to be stable, simple and well-documented.
+    </p>
+
+    <p>
+        Christened <em>UNIX</em> as a "somewhat treacherous pun on MULTICS" in ____,
+        the new operating system was rewritten in
+        In ____ the C programming language was devised as a high-level language
+        in which to rewrite Unix.
+        The performance penalty implied, around 20-30%, was deemed acceptable because
+        of the ease with which code could be written, read and rewritten.
+        Moreover, the C Unix implementation spawned the notion of <em>portability:</em>
+        In a time when instruction set architectures were unique to their machine,
+        if a programmer implemented a C compiler for their machine, then they
+        could simply compile (and run) Unix.
+    </p>
+
+    <p>
+        The earliest versions of the software were used
+        internally by Bell Labs to assist in patent applications.
+        The software then moved away from its nest under obtuse licenses to
+        universities, where it was studied and documented.
+        System V, the most successful commercial distribution,
+    </p>
+</div>
+-->
+
 <div id="unix-architecture" class="content">
     <h2>The Unix Architecture</h2>
     <p>
-        GNU/Linux belongs to a large class of operating systems called
+        Unix spawned a large class of operating systems called
         <em>Unix-like,</em> sometimes referred to as <em>*nix.</em>
         The Unix operating system had a clear and well-documented architecture,
         which has been replicated many times in both open-source and proprietary contexts.
@@ -168,7 +224,7 @@ last-updated: August, 2020
 
     <p>
         On August 25, 1991, a Finnish graduate student by the name of Linus Torvalds
-        announced his own free operating system project, called Linux.
+        announced his own free operating system project.
         Again following the architecture of the Unix operating system,
         his project was intended to be "...just a hobby, won't be big and
         professional like gnu<sup>[sic]</sup>."<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[5]</a></sup>
@@ -211,7 +267,7 @@ last-updated: August, 2020
     <p>
         The <a href="https://www.kernel.org/doc/html/latest/process/2.Process.html?highlight=merge window">kernel development process</a>
         has become more structured since 1991, and today uses a
-        <a href="http://127.0.0.1:4000/programming-in-nix.html#train-schedules">"train-schedule"</a> approach.
+        "<a href="http://127.0.0.1:4000/programming-in-nix.html#train-schedules">train-schedule</a>" approach.
         Today, Linus Torvalds remains the maintainer of the Development branch.
         Another major figure in Linux development is Greg Kroah-Hartman (pronounced "<em>Crow</em>-Hartman"), who is the maintainer of the Stable branch.
     </p>
@@ -425,7 +481,8 @@ Linux 1.0 https://github.com/kalamangga-net/linux-1.0
 </div>
 
 <div id="video" class="content">
-    <h2> Greg Kroah-Hartman </h2>
+    <h2 style="margin-bottom: 2pt;"> Greg Kroah-Hartman </h2>
+    <h4 style="margin-bottom: 18pt;"> Linux Kernel Development </h4>
     <iframe class="video" src="https://www.youtube.com/embed/vyenmLqJQjs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
