@@ -10,7 +10,6 @@ last-updated: July, 2020
         <li><a href="#basename"> Pathnames and Basenames </a></li>
         <li><a href="#locate"> Locate </a></li>
         <li><a href="#find"> Find </a></li>
-        <li><a href="#regex"> Regex </a></li>
         <li><a href="#grep"> Grep </a></li>
         <li><a href="#engineer-man"> Engineer Man</a></li>
         <li><a href="#references"> References </a></li>
@@ -21,7 +20,8 @@ last-updated: July, 2020
     <h1>Finding Files</h1>
     <div class="quote-text">
         "...though the advantages are obvious in hindsight, <br>
-        heirarchical file systems were not widely available before Multics and then Unix."
+        heirarchical file systems were not widely available <br>
+        before Multics and then Unix."
     </div>
 
     <div class="quote-ref">
@@ -31,7 +31,7 @@ last-updated: July, 2020
 
     <p>
         Finding files is a very common operation in Linux, and the tools
-        available are powerful, but not very new-user friendly.
+        available are powerful, but not new-user friendly.
         This paper will introduce the subject and some file-finding utilities.
     </p>
 </div>
@@ -333,25 +333,22 @@ last-updated: July, 2020
     </p>
     </div>
 
-    <div id="regex" class="content">
-        <h2> Regex </h2>
-
-        <h3>See Also:</h3>
-        <ul>
-            <li><code><a href="http://man7.org/linux/man-pages/man7/regex.7.html"> man 7 regex </a></code></li>
-        </ul>
-
-    </div>
-
     <div id="grep" class="content">
-        <h2>Egrep</h2>
-
+        <h2>Grep</h2>
         <p>
-            I'm pretty sure that <code>find</code> will let you test against
-            any possible system-level attribute that a file may have.
-            To go any deeper, we must look inside each file, and that is what
-            <code>egrep</code> will allow us to do.
+            The next collection of file-finding tools will look into files
+            themselves.
+            The first version of this utility was <code>grep</code>, which
+            was
+            Several modern variants exist:
         </p>
+
+        <ul>
+            <li><code>grep</code>&mdash; Included in most distributions</li>
+            <li><code>egrep</code>&mdash; Included in most distributions</li>
+            <li><code>ag</code>&mdash; The Silver Searcher: Faster.</li>
+            <li><code>ripgrep</code>&mdash; Fastest</li>
+        </ul>
 
         <div class="code">
             egrep [OPTION...] PATTERNS [FILE...]
@@ -425,7 +422,7 @@ last-updated: July, 2020
 	<h3>See Also:</h3>
 		<ul>
 			<li><a href="https://github.com/ziishaned/learn-regex">Learn Regex The Easy Way</a></li>
-			<li><a href="https://www.youtube.com/watch?v=bgBWp9EIlMM&">Regular Expressions - Enough to be Dangerous</a> (Youtube Video by Engineer Man)</li>
+            <li><code><a href="http://man7.org/linux/man-pages/man7/regex.7.html"> regex(7) </a></code></li>
 		</ul>
 
 	</div>

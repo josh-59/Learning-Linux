@@ -19,7 +19,8 @@ last-updated: July, 2020
 <div id="nav_bar_2" class="nav">
   <ul>
     <li><a href="#introduction"> Introduction </a></li>
-    <li><a href="#standard-file-descriptors"> Standard File Descriptors </a></li>
+    <li><a href="#commands"> Commands </a></li>
+
     <li><a href="#path-environment-variable"> The Path Environment Variable </a></li>
     <li><a href="#introduction-to-make"> Introduction to Make </a></li>
     <li><a href="#closing-remarks"> Closing Remarks </a></li>
@@ -28,114 +29,23 @@ last-updated: July, 2020
 </div>
 
 <div id="introduction" class="content">
-  <h1>The Command Line</h1>
+  <h1>The Command Line 2:</h1>
+  <h4>More Detail</h4>
   <h4>Under Construction!</h4>
 
   <p>
-    The command-line is uniquely *nix.
-    As a user interface, it is exceptionally powerful:
-    Anything that can be done on a Unix-like system can be done through
-    the command-line alone.
-    The graphical user interface (desktop environment) is best thought of as a superstructure;
-    it is often the case that it is literally a superstructure, with
-    GUI interfaces built on top of command-line tools.
-  </p>
 
+  </p>
 </div>
 
-<div id="standard-file-descriptors" class="content">
-  <h2> The Standard File Descriptors </h2>
-  <p>
-    Each process on a *nix system is created with three open files,
-    <em>Standard In,</em> <em>Standard Out</em> and <em>Standard Error:</em>
-  </p>
-
-  <figure>
-    <a href="assets/img/stdin-stdout-stderr.png"><img src="assets/img/stdin-stdout-stderr.png" style="width: 100%;"></a>
-  </figure>
-
-
-  <div class="aside-right">
-    <h4>Aside:</h4>
+<div class="content" id="commands">
+    <h2>Commands</h2>
     <p>
-      Although these files are opened for every process,
-      we interact with them most often at the command line.
+        The command-line interface, sometimes abbreviated CLI, is based around the
+        <em>command.</em>
+        A command is just a program; nothing more, and nothing less.
+
     </p>
-  </div>
-
-  <p>
-    By default the shell connects each command-line utility's standard-in to
-    the keyboard, and both standard out and standard error to the terminal screen.
-    These are, in fact, the shell's <em>own</em> connections; each
-    process that the <a href="processes.html#proccess-creation">shell creates</a>
-    inherits the shell's file descriptors.
-  </p>
-
-  <p>
-    Consider the <em>echo</em> utility.
-    This program reads each argument passed to it, and prints each to standard
-    out:
-  </p>
-
-  <div class="code">
-    $ echo one two three <br>
-    one two three <br>
-  </div>
-
-  <p>
-    Here, neither STDIN nor STDERR are used (although they are open).
-    Rather, the arguments are passed to the kernel during the
-    <em><a href="https://www.man7.org/linux/man-pages/man2/execve.2.html">execve(pathname, argv, envp)</a></em>
-    system call, which places them within the address space of <em>echo</em>,
-    which in turn simply reads them from within itself and prints them to (its) standard out:
-  </p>
-
-  <figure>
-    <a href="assets/img/echo-std.png"><img src="assets/img/echo-std.png" style="width: 80%;"></a>
-  </figure>
-
-  <p>
-    The name <em>argv</em> is short for <em>argument vector,</em> and
-    is a pointer to an array of character pointers.<sup><a href="#references">[1]</a></sup>
-    It exists within each process, and the first element it points to
-    is always the name of the called program.
-  </p>
-
-  <p>
-    We turn back to the operation of the shell.
-    As each line is read by the shell, it is broken down into tokens, which
-    are delimited by space(s) or tab(s).
-    The first token (here, '<code>echo</code>') is always interpreted as a command.
-    The other tokens were interpreted as arguments, so that our call to echo
-    passed three arguments.
-  </p>
-
-  <p>
-    By default, the shell connects each command-line utility <em>Standard-out</em>
-    to the terminal screen, <em>Standard-in</em> to the keyboard, and
-    <em>Standard-error</em> to the  We can change this, though:
-  </p>
-
-  <div class="code">
-    $ echo one two three > boo <br>
-  </div>
-
-  <p>
-    This is called <em>redirection</em>&mdash; Formally, we have redirected the
-    standard-out of the <code>echo</code> utility to a file called <code>boo</code> by using
-    the redirection operator <code>&gt;</code>.
-    This is a facility of the shell; <code>echo</code> is not involved in any way.
-  </p>
-
-  <p>
-    To explain, in the command above, the shell first opens
-    the file <code>boo</code>, creating it if it does not exist, and truncating it
-    to zero length if it does exist (and is writeable).
-    Then the shell connects its own standard out to it, and executes echo.
-    Echo blindly prints its output to <em>standard out,</em> which happens to
-    be the file <em>boo</em>, and not the terminal screen.
-  </p>
-
 </div>
 
 <div class="content" id="path-environment-variable">
