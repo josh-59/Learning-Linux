@@ -18,12 +18,7 @@
 </head>
 <body>
 
-    {% if page.home %}
-        {% include nav-bar-home.html %}
-    {% else %}
-        {% include nav-bar-1.html %}
-    {% endif %}
-
+    {% include nav-bar-1.html %}
 
     {{ content }}
 
