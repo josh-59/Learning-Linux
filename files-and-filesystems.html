@@ -75,6 +75,13 @@ last-updated: July, 2020
             <em><a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">formatting</a>.</em>
         </p>
 
+        <p>
+            Early versions of Unix referred to its own filesystem as, simply, <code>fs</code>.
+            It was well-documented (by, for instance, Maurice J. Bach in <em>The Design of the Unix Operating System</em>).
+            The Extended Filesystem (EXT) was the first open-source derivative, and retained many distinctive features of the original.
+            Since then, EXT2, EXT3, and EXT4 have continued to improve upon the design.
+        </p>
+
         <ul>
             <h3>Some Common Filesystems:</h3>
             <li>
@@ -84,7 +91,7 @@ last-updated: July, 2020
                     the current standard Linux filesystem.
                     It is an evolutionary enhancement on EXT3,
                     supporting larger filesizes, deeper subdirectory support,
-                    faster handling of large files, along with many other improvements.<sup><a href="https://ext4.wiki.kernel.org/index.php/Ext4_Disk_Layout">[6]</a></sup>
+                    faster handling of large files, along with <a href="https://kernelnewbies.org/Ext4">many other improvements</a>.
                     It is mature, fast, and stable.
                 </p>
             </li>
@@ -96,19 +103,19 @@ last-updated: July, 2020
                 </p>
 
                 <p>
-                    Introduced in 2005,<sup><a href="https://en.wikipedia.org/wiki/ZFS">[7]</a></sup> ZFS incorporates fancier features that are generally
+                    Introduced in 2005,<sup><a href="https://en.wikipedia.org/wiki/ZFS">[6]</a></sup> ZFS incorporates fancier features that are generally
                     out of place on a Linux desktop.
                     It was developed by Sun Microsystems, and became closed-source with Sun's acquisition by
-                    Oracle.<sup><a href="https://en.wikipedia.org/wiki/ZFS#OpenZFS_and_ZFS">[7]</a></sup>
+                    Oracle.<sup><a href="https://en.wikipedia.org/wiki/ZFS#OpenZFS_and_ZFS">[6]</a></sup>
                 </p>
             </li>
 
             <li>
                 <p>
-                    <strong>FAT32</strong>: The "File Allcoation Table 32-bit" is a DOS-era filesystem,<sup><a href="https://en.wikipedia.org/wiki/File_Allocation_Table#FAT32">[8]</a></sup>
+                    <strong>FAT32</strong>: The "File Allcoation Table 32-bit" is a DOS-era filesystem,<sup><a href="https://en.wikipedia.org/wiki/File_Allocation_Table#FAT32">[7]</a></sup>
                     and is widely supported, though antiquated.
                     In particular, it is not a <a href="https://en.wikipedia.org/wiki/Journaling_file_system">journaling filesystem</a>,
-                    so that changes to data are not recorded before being carried out (increasing the likelihood of
+                    so that changes to files are not recorded before being carried out (increasing the likelihood of
                     corruption in the event of, say, power outage).
                     This filesystem is often used to hold the bootloader, since it is virtually guaranteed to be supported by firmware,
                     and its contents will not be changed very often.
@@ -116,15 +123,7 @@ last-updated: July, 2020
             </li>
         </ul>
 
-        <p>
-            Early versions of Unix implemented its own filesystem as an integral part of the operating system.
-            It was referred to as, simply, <code>fs</code>, and was well-documented (by, for instance, Maurice J. Bach in <em>The Design of the Unix Operating System</em>).
-        </p>
 
-        <p>
-            The Extended Filesystem (EXT) was the first open-source derivative, and retained many distinctive features of the original.
-            Since then, EXT2, EXT3, and EXT4 have continued to improve upon the design.
-        </p>
 
         <h3> inodes </h3>
 
@@ -157,7 +156,6 @@ last-updated: July, 2020
             <li> <a href="http://cs.smith.edu/~nhowe/262/oldlabs/ext2.html"> The Ext2 Filesystem</a> (Includes labs)</li>
             <li> <a href="https://www.kernel.org/doc/html/latest/filesystems/ext4/index.html"> ext4 Data Structures and Algorithms</a> (Current, official)</li>
             <li> <code><a href="https://man7.org/linux/man-pages/man5/filesystems.5.html"> filesystems(5)</a></code> (Quick run-down of many filesystems)</li>
-            <li> <code><a href="https://man7.org/linux/man-pages/man7/inode.7.html"> inode(7) </a></code></li>
         </ul>
     </div>
 
@@ -390,7 +388,7 @@ last-updated: July, 2020
 
   <p>
     According the the standard, the system's root directory, <code>/</code>, should belong
-    to a minimal filesystem that is "adequate to boot, restore recover and/or repair the system."<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03.html">[9]</a></sup>
+    to a minimal filesystem that is "adequate to boot, restore recover and/or repair the system."<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03.html">[8]</a></sup>
     As such, <code>/bin</code>, <code>/sbin</code>, <code>/etc</code>, <code>/media</code>,
     and <code>/mnt</code> should each belong to the root filesystem.
     Moreover, critical user programs, such as <code>ls</code> and <code>bash</code>,
@@ -403,7 +401,7 @@ last-updated: July, 2020
     operation, and are not machine-specific.
     This stipulation allows multiple machines to share a single <code>/usr</code>
     directory by locating it on a network,
-    potentially saving large amounts of storage.<sup><a href="https://www.tldp.org/LDP/sag/html/fs-background.html">[10]</a></sup>
+    potentially saving large amounts of storage.<sup><a href="https://www.tldp.org/LDP/sag/html/fs-background.html">[9]</a></sup>
     For instance, man-pages are found in <code>/usr</code>, as are most user
     programs.
   </p>
@@ -597,7 +595,7 @@ last-updated: July, 2020
 
   <p>
     A <em>device special file</em> represents a device connected to the system;
-    they reside in the <code>/dev</code> directory.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[11]</a></sup>
+    they reside in the <code>/dev</code> directory.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[10]</a></sup>
     Each special device file serves as the principle reference to its respective device.
     Let's consider the task of creating a boot media, "the hard way."
   </p>
@@ -680,12 +678,12 @@ last-updated: July, 2020
         While each filesystem may implement its own functionality,
         most functionality is common;
         the Virtual File System provides a uniform interface by
-        implementing filesystem-related system calls, such as <code>open</code>, <code>read</code>, etc..<sup> <a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">[12]</a></sup>
+        implementing filesystem-related system calls, such as <code>open</code>, <code>read</code>, etc..<sup> <a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">[11]</a></sup>
       </p>
 
       <p>
         As for inodes, a more formal definition is given by kernel.org:
-        "An inode object represents an object within the filesystem."<sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">[12]</a></sup>
+        "An inode object represents an object within the filesystem."<sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">[11]</a></sup>
         That is, on filesystems that do not use inodes, they are imposed virtually by
         the VFS, as a means of representing files.
         As a consequence, the discussion about inodes given here remains
@@ -705,6 +703,11 @@ last-updated: July, 2020
       "We are going to mount a filesystem's root directory at <code>/home</code>."
     </p>
 
+    <h3>See Also:</h3>
+    <ul>
+        <li> <code><a href="https://man7.org/linux/man-pages/man7/inode.7.html"> inode(7) </a></code></li>
+    </ul>
+
     </div>
 
     <div id="lvl1" class="content">
@@ -721,7 +724,6 @@ last-updated: July, 2020
         <li> File Systems. (n.d.). Retrieved July 17, 2020, from <a href="https://wiki.osdev.org/Filesystem">https://wiki.osdev.org/Filesystem</a> </li>
         <li> File systems - ArchWiki. (n.d.). Retrieved July 17, 2020, from <a href="https://wiki.archlinux.org/index.php/File_systems">https://wiki.archlinux.org/index.php/File_systems</a> </li>
         <li> Ext4 - Wikipedia. (2020, June 14). Retrieved July 17, 2020, from <a href="https://en.wikipedia.org/wiki/Ext4">https://en.wikipedia.org/wiki/Ext4</a> </li>
-        <li> Ext4 Disk Layout - Ext4. (2019, August 26). Retrieved July 17, 2020, from <a href="https://ext4.wiki.kernel.org/index.php/Ext4_Disk_Layout">https://ext4.wiki.kernel.org/index.php/Ext4_Disk_Layout</a></li>
         <li> ZFS - Wikipedia. (2020, July 15). Retrieved July 17, 2020, from <a href="https://en.wikipedia.org/wiki/ZFS">https://en.wikipedia.org/wiki/ZFS</a></li>
         <li> File Allocation Table - Wikipedia. (2020, July 12). Retrieved July 17, 2020, from <a href="https://en.wikipedia.org/wiki/File_Allocation_Table">https://en.wikipedia.org/wiki/File_Allocation_Table</a></li>
         <li> LSB Workgroup, The Linux Foundation. (2015, March 9). The Root Filesystem. Retrieved July 17, 2020, from <a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03.html">https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03.html</a> </li>
