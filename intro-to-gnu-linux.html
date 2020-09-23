@@ -43,79 +43,93 @@ last-updated: August, 2020
     </p>
 </div>
 
-<!--
+
 <div id="unix" class="content">
     <h2>UNIX</h2>
     <p>
-        The Unix Operating System was born in the shadow of <a href="">Multics</a>,
-        a joint venture between MIT, AT&amp;T's Bell Laboratories, and General
-        Electric.<sup><a href="#references">[1]</a></sup>
-        Multics was an operating system which was intended to commercialize
-        computing by offering it as a service, similar to telephone or
-        electricity.<sup><a href="https://multicians.org/history.html">[2]</a></sup>
+        The Unix Operating System was born in late 1969 at Bell Labs, in the shadow
+        of <a href="https://multicians.org/history.html">Multics</a> (Kernighan, 2020, pp. 31-34).
+        Multics was an operating system intended to
+        commercialize computing by offering it as a service, similar to telephone or
+        electricity.<sup><a href="https://multicians.org/history.html">[1]</a></sup>
         Users would connnect their <a href="text-terminals.html">text terminals</a>
-        to a central mainframe, and pay for computation on an as-used basis.
-        In addition, Multics was a test-bed for many new operating
-        systems ideas, such as heirarchical
-        filesystems.<sup><a href="https://multicians.org/history.html">[2]</a></sup>
-        For a variety of reasons, the project was doomed, and in 1969
+        to a central mainframe, then pay for computation on an as-used basis.
+    </p>
+
+    <p>
+        Being a joint venture between MIT, AT&amp;T's Bell Laboratories, and General
+        Electric, Multics was a large and, in many ways, novel, project.
+        It introduced many new operating systems ideas&mdash; among them,
+        the hierarchical
+        file structure.<sup><a href="https://multicians.org/history.html">[1]</a></sup>
+        For a variety of reasons, the project never realized its dream, and in 1969
         Bell Labs abandoned it.
     </p>
 
     <p>
         Within Bell Labs, management put operating systems research on
-        the backburner, and research was continued only by a dedicated
-        few.<sup><a href="#references">[1]</a></sup>
-        After writing a videogame for an underpowered and disused PDP-7,
-        Ken Thompson had accrued skills and tools sufficient to implement
-        a filesystem he and others at the Labs had been devising.
-    </p>
-
-    <p> <b>QUOTE</b>
-        At some point in ____, he realized that he was three weeks
-        from an operating system&mdash; all he needed was a shell, an exec
-        system call and a text editor.
-        After "three perfect weeks," a new operating system was born.
+        the backburner, and refused to purchase new computing
+        equipment.<sup><a href="#references">[2]</a></sup><sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.pdf">[3]</a></sup>
+        After finding a disused and underpowered <a href="https://www.soemtron.org/pdp7.html">PDP-7</a>,
+        Ken Thompson first ported <em><a href="https://en.wikipedia.org/wiki/Space_Travel_(video_game)">Space Travel</a></em> to
+        it.<sup><a href="#references">[2]</a></sup><sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.pdf">[3]</a></sup>
+        In the process, he accrued the tools and skills necessary to implement
+        a filesystem he and others at Bell Laboratories had been devising on paper.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.pdf">[3]</a></sup>
     </p>
 
     <p>
-        In ____, the new operating system was christened <em>UNIX,</em>
+        At some point in 1969, Ken Thompson realized that he was three weeks
+        from an operating system.  All he needed was an
+        <em>exec</em> call, an assembler, a text editor and a shell.
+        In 1970, the new operating system was christened <em>UNIX,</em>
         as a "somewhat treacherous pun on
-        MULTICS."<sup><a href="#references">[1]</a></sup>
-        Owing in great part to the restrictive nature of available
-        hardware,<sup><a href="something">[3]</a></sup>
-        early development of the budding operating system focused on simplicity
-        and programability:
-        These early computer researchers were programmers as well as users,
-        so that their operating system facilitated programming as a means of use.
-        This theme has been echoed throughout the Unix history, and is a
-        key to understanding its success.
+        MULTICS."<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.pdf">[3]</a></sup>
     </p>
 
     <p>
-        In ____ the C programming language was devised as a high-level language
-        in which to rewrite Unix.(cite)
-        The performance penalty implied over assembly, which was around 20-30%, was
-        deemed acceptable due to the ease with which code could be written,
-        read and rewritten.(cite)
-        Moreover, this rewriting spawned the notion of
-        <em>portability:</em>
-        In a time when instruction set architectures were unique to their machine,
-        if a programmer implemented a C compiler for their machine, then they
-        could simply compile, then run, Unix (at least in theory).
-        Thus, C compilers and Unix were distributed hand-in-hand.
+        Owing in part to the restrictive nature of available
+        hardware, early development of the budding operating system focused
+        on simplicity and programability:
+        Early computer researchers were programmers as well as users,
+        so that their operating system facilitated programming as a means of use.
+        This theme has been echoed throughout Linux's history, and is a
+        key to understanding its success.
     </p>
 
     <p>
         The earliest versions of the new operating system were put to use
         internally by Bell Labs to assist in patent
-        applications.<sup><a href="#references">[1]</a></sup>
+        applications.<sup><a href="#references">[2]</a></sup><sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.pdf">[3]</a></sup>
         The software then moved away from its nest under obtuse licenses to
-        universities, where it was studied and documented.(cite)
-        In ____ there were [dozens/fifty] Unix installations.<sup><a href="#references">[1]</a></sup>
-        Finally, the software became commercially available:
-        AT&amp;T's <em>System V</em> is, to my mind, cannonical <em>UNIX.</em>
+        universities, where its code, though not free, was studied and documented.<sup><a href="#references">[2]</a></sup>
+        Finally, the software became commercially available, albeit through
+        extravagant licenses to corporate clients.
     </p>
+
+    <div class="aside-right">
+        <h4>Aside</h4>
+        <p>
+            The performance penalty implied by rewriting the kernel in C
+            has been estimated at 20-30% over assembly.
+        </p>
+    </div>
+
+    <p>
+        In 1973, after Dennis Ritchie introduced <em>struct</em>'s to the C programming language,
+        Ken Thompson was able to rewrite most of Unix in C (Kerninghan, p. 78);
+        this corresponded to <em>UNIX Version 6.</em>
+        This rewrite is especially important to the history of
+        computing because it spawned the notion of <em>portability</em>:
+        The same software, written in a high-level language, can be
+        compiled to run on different machines.
+        By 1978, Unix was running on several different architectures (Kernighan, p. 140).
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://www.bell-labs.com/usr/dmr/www/">Dennis Ritchie Home Page</li>
+        <li><a href="http://cs.bell-labs.co/who/ken/mig.html">That Time Ken Thompson Flew a MiG-29</a></li>
+    </ul>
 </div>
 -->
 
@@ -124,8 +138,8 @@ last-updated: August, 2020
     <p>
         Unix spawned a large class of operating systems called
         <em>Unix-like,</em> sometimes referred to as <em>*nix.</em>
-        The Unix operating system had a clear and well-documented architecture,
-        which has been replicated many times in both open-source and proprietary contexts.
+        Unix had a clear and well-documented architecture;
+        its derivatives share this architecture, in addition to the Unix philosophy.
         An overview of its architecture is as follows:
     </p>
 
@@ -189,8 +203,8 @@ last-updated: August, 2020
         operating system
         <a href="https://www.gnu.org/gnu/initial-announcement.en.html#f1">was announced</a> by Richard Stallman in 1983.
         Stallman was, at the time, a graduate student at
-        MIT's AI Laboratory,<sup><a href="https://en.wikipedia.org/wiki/Richard_Stallman#Harvard_University_and_MIT">[1]</a></sup>
-        and his project was called "GNU," a recursive acronym for <em>GNU's Not Unix.</em><sup><a href="https://www.gnu.org/gnu/gnu-history.html">[2]</a></sup>
+        MIT's AI Laboratory,<sup><a href="https://en.wikipedia.org/wiki/Richard_Stallman#Harvard_University_and_MIT">[4]</a></sup>
+        and his project was called "GNU," a recursive acronym for <em>GNU's Not Unix.</em><sup><a href="https://www.gnu.org/gnu/gnu-history.html">[5]</a></sup>
     </p>
 
 
@@ -205,7 +219,7 @@ last-updated: August, 2020
 
     <p>
         To create an entire operating system is an enormous task, but,
-        "...by 1990 [the GNU Project] had either found or written all the major components except one&ndash; the kernel."<sup><a href="https://www.gnu.org/gnu/gnu-history.html">[2]</a></sup>
+        "...by 1990 [the GNU Project] had either found or written all the major components except one&ndash; the kernel."<sup><a href="https://www.gnu.org/gnu/gnu-history.html">[5]</a></sup>
         GNU's own kernel, dubbed <a href="https://www.gnu.org/software/hurd/">Hurd</a>,
         is, as of 2020, <a href="https://www.gnu.org/software/hurd/news/2016-12-18-releases.html">in version 0.9</a>.
     </p>
@@ -219,7 +233,7 @@ last-updated: August, 2020
     <p>
         In particular, GNU's compiler collection, <code>gcc</code>, contains the de-facto C compiler
         of the open-source community.
-        This compiler is the only one capable of building Linux kernels.<sup><a href="http://files.kroah.com/lkn/lkn_pdf/ch02.pdf">[3]</a></sup>
+        This compiler is the only one capable of building Linux kernels.<sup><a href="http://files.kroah.com/lkn/lkn_pdf/ch02.pdf">[6]</a></sup>
         Similarly, their <code>Bash</code> shell is the default shell on many distributions.
     </p>
 
@@ -227,7 +241,7 @@ last-updated: August, 2020
         The GNU Project takes freedom very seriously.
         In their language, <em>free</em> does not mean merely, "costs nothing."
         Rather, it means <em>free as in
-            freedom.</em><sup><a href="https://www.gnu.org/philosophy/free-sw.html">[4]</a></sup>
+            freedom.</em><sup><a href="https://www.gnu.org/philosophy/free-sw.html">[7]</a></sup>
             Thus, GNU's software is free in terms of both price and liberty;
             the open-source community sometimes uses
             the term <em>libre</em> to connote this kind of freedom.
@@ -247,7 +261,7 @@ last-updated: August, 2020
         announced his own free operating system project.
         Again following the architecture of the Unix operating system,
         his project was intended to be "...just a hobby, won't be big and
-        professional like gnu<sup>[sic]</sup>."<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[5]</a></sup>
+        professional like gnu<sup>[sic]</sup>."<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[8]</a></sup>
         He soon released it under the GNU General Public License, Version 2.
     </p>
 
@@ -264,13 +278,13 @@ last-updated: August, 2020
         <a href="https://www.gnu.org/gnu/initial-announcement.en.html#f1">produce an entire operating system</a>, Linus restricted his
         attention to creating a kernel.
         By October, he had Bash, GCC, GNU-Make and other
-        programs running on his creation.<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[5]</a></sup>
+        programs running on his creation.<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[8]</a></sup>
     </p>
 
     <p>
         Moreover, while GNU sought professionalism and officiality,
         Linux was, "...meant for hackers interested in operating systems
-        and 386's."<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[5]</a></sup>
+        and 386's."<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[8]</a></sup>
         Interest in the Linux kernel flourished, in large part because
         of the informality of the project:  Everybody was invited, if only
         to tinker with it.
@@ -306,11 +320,11 @@ Linux 1.0 https://github.com/kalamangga-net/linux-1.0
         for some, and serious affair for many.
         In particular, the kernel development team
         takes great care not to break
-        user-space,<sup><a href="https://lkml.org/lkml/2012/12/23/75">[6]</a></sup>
+        user-space,<sup><a href="https://lkml.org/lkml/2012/12/23/75">[9]</a></sup>
         meaning that programs that <em>did</em> work will continue to
         work.
         In this way, they ensure the long-term stability of Linux-based
-        platforms.<sup><a href="https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space">[7]</a></sup>
+        platforms.<sup><a href="https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space">[10]</a></sup>
     </p>
 
         <h3>See Also:</h3>
@@ -364,17 +378,17 @@ Linux 1.0 https://github.com/kalamangga-net/linux-1.0
 
     <p>
         The first <em>Portable Operating System Interface</em> specification
-        was released as an IEEE standard in 1988,<sup><a href="https://en.wikipedia.org/wiki/POSIX#Name">[8]</a></sup>
+        was released as an IEEE standard in 1988,<sup><a href="https://en.wikipedia.org/wiki/POSIX#Name">[11]</a></sup>
         and specified the system-call interface available to user-space programs,
         among other things.
         Operating systems that abide by this standard are called <em>POSIX Compliant;</em>
-        systems developers general aim for POSIX compliance.<sup><a href="https://en.wikipedia.org/wiki/Single_UNIX_Specification">[9]</a></sup>
+        systems developers general aim for POSIX compliance.<sup><a href="https://en.wikipedia.org/wiki/Single_UNIX_Specification">[12]</a></sup>
     </p>
 
     <p>
         Posix has been refined since 1988.
         In addition, a stronger specification has been introduced, and is
-        called the <em>Single Unix Specification.</em><sup><a href="https://en.wikipedia.org/wiki/Single_UNIX_Specification">[9]</a></sup>
+        called the <em>Single Unix Specification.</em><sup><a href="https://en.wikipedia.org/wiki/Single_UNIX_Specification">[12]</a></sup>
         Certification to this standard is costly, and it is generally reserved for proprietary operating systems.
     </p>
 
@@ -408,7 +422,7 @@ Linux 1.0 https://github.com/kalamangga-net/linux-1.0
         Think of them as flavors of the Unix architecture, rather than distinct operating systems.
         The oldest distribution that's still maintained is
         <a href="http://www.slackware.com/">Slackware</a>, first released
-        in 1993.<sup><a href="https://en.wikipedia.org/wiki/Slackware">[10]</a></sup>
+        in 1993.<sup><a href="https://en.wikipedia.org/wiki/Slackware">[13]</a></sup>
     </p>
 
     <p>
@@ -509,6 +523,15 @@ Linux 1.0 https://github.com/kalamangga-net/linux-1.0
 <div id="references" class="content">
     <h2> References </h2>
     <ol style="margin-left: 0">
+        <li>
+            Multics History. (2020, September 20). Retrieved September 23, 2020, from <a href="https://multicians.org/history.html">https://multicians.org/history.html</a>
+        </li>
+        <li>
+            Kernighan, Brian. <i>Unix: A History and a Memoir.</i>  Published 2020, by Brian W. Kernighan via Kindle Direct Publishing.
+        </li>
+        <li>
+            Ritchie, D. M. (1984). The Evolution of the Unix Time-sharing System. <em>AT&amp;T Bell Laboratories Technical Journal,</em> 63(6), 2nd ser., 1577-1593.
+        </li>
         <li>
             Richard Stallman. (2020, August 16). Retrieved August 25, 2020, from <a href="https://en.wikipedia.org/wiki/Richard_Stallman">https://en.wikipedia.org/wiki/Richard_Stallman</a>
         </li>
