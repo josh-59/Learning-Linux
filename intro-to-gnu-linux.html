@@ -143,11 +143,11 @@ last-updated: August, 2020
 <div id="unix-architecture" class="content">
     <h2>The Unix Architecture</h2>
     <p>
-        Unix spawned a large class of operating systems called
-        <em>Unix-like,</em> sometimes referred to as <em>*nix.</em>
-        Unix had a clear and well-documented architecture;
-        its derivatives share this architecture, in addition to the Unix philosophy.
-        An overview of its architecture is as follows:
+        Unix had a simple, clear and well-documented architecture
+        that
+        <a href="https://upload.wikimedia.org/wikipedia/commons/7/77/Unix_history-simple.svg">inspired many operating systems</a>, and which has been key to 
+        its endurance. 
+        An overview is as follows:
     </p>
 
     <img src="assets/img/linux-architecture.png" style="height: 400px;">
@@ -155,18 +155,21 @@ last-updated: August, 2020
     <p>
         <strong>Hardware:</strong>
         At the heart of any machine is its hardware.
-        Each piece of hardware has a software interface defined by the engineers that
-        created it.
+        Each piece of hardware has a software interface defined by the 
+        engineering team that created it.
         These interfaces are varied at best.
     </p>
 
     <p>
         <strong>Drivers:</strong>
         These interact directly with hardware and provide the kernel with
-        a more-uniform interface to each piece. This software layer
+        a more-uniform interface to each piece. 
+        This software layer
         represents the deepest and most remote element of any operating system.
         Although drivers can be installed on an as-needed basis, in GNU/Linux
         the tendency is to include many drivers, and use only those that are required.
+
+        Drivers are not usually written by the hardware's engineers or vendors. 
     </p>
 
     <p>
@@ -185,19 +188,22 @@ last-updated: August, 2020
         From a source-code point of view, system calls "look" and "act" like ordinary function
         calls, but their actions are not restricted to user-space.  Rather, they
         transcend the software hierarchy, often propogating changes at the hardware level.
-        Unix-like operating systems have six central system calls:
-        <em>fork, exec, open, close, read,</em> and <em>write.</em>
+        Unix-like operating systems have six essential system calls:
+        <em>fork, exec, open, close, read,</em> and 
+        <em>write.</em><sup><a href="#references">[5]</a></sup>
     </p>
 
     <p>
         <strong>Processes:</strong>
         Sometimes called "user-space processes," a process is an executing
         program.
-        On *nix platforms, processes run the entire show.
-        They are the only means that a user has to interact with the system, and
-        the kernel depends on them to direct its actions.
+        On *nix operating systems, processes run the entire show:
+        The kernel is entirely dependant upon processes to tell it what to
+        do, and processes are the only means that a user has to interact with
+        the system.
         Processes are a critical component of a functioning operating system.
     </p>
+
 
     <h3>See Also:</h3>
     <ul>
@@ -212,8 +218,8 @@ last-updated: August, 2020
         operating system
         <a href="https://www.gnu.org/gnu/initial-announcement.en.html#f1">was announced</a> by Richard Stallman in 1983.
         Stallman was, at the time, a graduate student at
-        MIT's AI Laboratory,<sup><a href="https://en.wikipedia.org/wiki/Richard_Stallman#Harvard_University_and_MIT">[5]</a></sup>
-        and his project was called "GNU," a recursive acronym for <em>GNU's Not Unix.</em><sup><a href="https://www.gnu.org/gnu/gnu-history.html">[6]</a></sup>
+        MIT's AI Laboratory,<sup><a href="https://en.wikipedia.org/wiki/Richard_Stallman#Harvard_University_and_MIT">[6]</a></sup>
+        and his project was called "GNU," a recursive acronym for <em>GNU's Not Unix.</em><sup><a href="https://www.gnu.org/gnu/gnu-history.html">[7]</a></sup>
     </p>
 
 
@@ -228,9 +234,8 @@ last-updated: August, 2020
 
     <p>
         To create an entire operating system is an enormous task, but,
-        "...by 1990 [the GNU Project] had either found or written all the major components except one&ndash; the kernel."<sup><a href="https://www.gnu.org/gnu/gnu-history.html">[6]</a></sup>
-        GNU's own kernel, dubbed <a href="https://www.gnu.org/software/hurd/">Hurd</a>,
-        is, as of 2020, <a href="https://www.gnu.org/software/hurd/news/2016-12-18-releases.html">in version 0.9</a>.
+        "...by 1990 [the GNU Project] had either found or written all the major components except one&ndash; the kernel."<sup><a href="https://www.gnu.org/gnu/gnu-history.html">[7]</a></sup>
+        GNU's own kernel, dubbed <a href="https://www.gnu.org/software/hurd/">Hurd</a>, has not been completed.
     </p>
 
     <p>
@@ -240,20 +245,21 @@ last-updated: August, 2020
     </p>
 
     <p>
-        In particular, GNU's compiler collection, <code>gcc</code>, contains the de-facto C compiler
+    In particular, GNU's compiler collection, <a href="https://gcc.gnu.org">gcc</a>, contains the de-facto C compiler
         of the open-source community.
-        This compiler is the only one capable of building Linux kernels.<sup><a href="http://files.kroah.com/lkn/lkn_pdf/ch02.pdf">[7]</a></sup>
-        Similarly, their <code>Bash</code> shell is the default shell on many distributions.
+        This compiler is the only one capable of building Linux kernels.<sup><a href="http://files.kroah.com/lkn/lkn_pdf/ch02.pdf">[8]</a></sup>
+        Similarly, their <a href="https://www.gnu.org/software/bash/">Bash</a> shell is the default shell on many distributions.
     </p>
 
     <p>
         The GNU Project takes freedom very seriously.
         In their language, <em>free</em> does not mean merely, "costs nothing."
         Rather, it means <em>free as in
-            freedom.</em><sup><a href="https://www.gnu.org/philosophy/free-sw.html">[8]</a></sup>
-            Thus, GNU's software is free in terms of both price and liberty;
-            the open-source community sometimes uses
-            the term <em>libre</em> to connote this kind of freedom.
+            freedom.</em><sup><a href="https://www.gnu.org/philosophy/free-sw.html">[9]</a></sup>
+        Like freedom of speech, 
+        GNU's software is free in terms of both price and liberty;
+        the open-source community sometimes uses
+        the term <em>libre</em> to connote this kind of freedom.
     </p>
     <h3> See Also: </h3>
     <ul>
@@ -270,7 +276,7 @@ last-updated: August, 2020
         announced his own free operating system project.
         Again following the architecture of the Unix operating system,
         his project was intended to be "...just a hobby, won't be big and
-        professional like gnu<sup>[sic]</sup>."<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[9]</a></sup>
+        professional like gnu<sup>[sic]</sup>."<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[10]</a></sup>
         He soon released it under the GNU General Public License, Version 2.
     </p>
 
@@ -287,13 +293,13 @@ last-updated: August, 2020
         <a href="https://www.gnu.org/gnu/initial-announcement.en.html#f1">produce an entire operating system</a>, Linus restricted his
         attention to creating a kernel.
         By October, he had Bash, GCC, GNU-Make and other
-        programs running on his creation.<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[9]</a></sup>
+        programs running on his creation.<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[10]</a></sup>
     </p>
 
     <p>
         Moreover, while GNU sought professionalism and officiality,
         Linux was, "...meant for hackers interested in operating systems
-        and 386's."<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[9]</a></sup>
+        and 386's."<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[10]</a></sup>
         Interest in the Linux kernel flourished, in large part because
         of the informality of the project:  Everybody was invited, if only
         to tinker with it.
@@ -329,11 +335,11 @@ Linux 1.0 https://github.com/kalamangga-net/linux-1.0
         for some, and serious affair for many.
         In particular, the kernel development team
         takes great care not to break
-        user-space,<sup><a href="https://lkml.org/lkml/2012/12/23/75">[10]</a></sup>
+        user-space,<sup><a href="https://lkml.org/lkml/2012/12/23/75">[11]</a></sup>
         meaning that programs that <em>did</em> work will continue to
         work.
         In this way, they ensure the long-term stability of Linux-based
-        platforms.<sup><a href="https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space">[11]</a></sup>
+        platforms.<sup><a href="https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space">[12]</a></sup>
     </p>
 
         <h3>See Also:</h3>
@@ -409,17 +415,17 @@ Linux 1.0 https://github.com/kalamangga-net/linux-1.0
 
     <p>
         The first <em>Portable Operating System Interface</em> specification
-        was released as an IEEE standard in 1988,<sup><a href="https://en.wikipedia.org/wiki/POSIX#Name">[12]</a></sup>
+        was released as an IEEE standard in 1988,<sup><a href="https://en.wikipedia.org/wiki/POSIX#Name">[13]</a></sup>
         and specified the system-call interface available to user-space programs,
         among other things.
         Operating systems that abide by this standard are called <em>POSIX Compliant;</em>
-        systems developers general aim for POSIX compliance.<sup><a href="https://en.wikipedia.org/wiki/Single_UNIX_Specification">[13]</a></sup>
+        systems developers general aim for POSIX compliance.<sup><a href="https://en.wikipedia.org/wiki/Single_UNIX_Specification">[14]</a></sup>
     </p>
 
     <p>
         Posix has been refined since 1988.
         In addition, a stronger specification has been introduced, and is
-        called the <em>Single Unix Specification.</em><sup><a href="https://en.wikipedia.org/wiki/Single_UNIX_Specification">[13]</a></sup>
+        called the <em>Single Unix Specification.</em><sup><a href="https://en.wikipedia.org/wiki/Single_UNIX_Specification">[14]</a></sup>
         Certification to this standard is costly, and it is generally reserved for proprietary operating systems.
     </p>
 
@@ -453,7 +459,7 @@ Linux 1.0 https://github.com/kalamangga-net/linux-1.0
         Think of them as flavors of the Unix architecture, rather than distinct operating systems.
         The oldest distribution that's still maintained is
         <a href="http://www.slackware.com/">Slackware</a>, first released
-        in 1993.<sup><a href="https://en.wikipedia.org/wiki/Slackware">[14]</a></sup>
+        in 1993.<sup><a href="https://en.wikipedia.org/wiki/Slackware">[15]</a></sup>
     </p>
 
     <p>
@@ -567,6 +573,9 @@ Linux 1.0 https://github.com/kalamangga-net/linux-1.0
             Thompson, K. (2020, October 4). <em>Reflections on Trusting Trust.</em> Lecture presented at Turing Award Lecture.
         </li>
         <li>
+            Torvalds, L., &amp; Diamond, D. (2002). <em>Just for Fun: The story of an accidental revolutionary.</em> New York ; London ; Toronto ; Sydney: Harper.
+        </li>
+        <li>
             Richard Stallman. (2020, August 16). Retrieved August 25, 2020, from <a href="https://en.wikipedia.org/wiki/Richard_Stallman">https://en.wikipedia.org/wiki/Richard_Stallman</a>
         </li>
 
@@ -575,7 +584,6 @@ Linux 1.0 https://github.com/kalamangga-net/linux-1.0
             Free Software Foundation, Inc., 4 Sept. 2017, 10:21:27,
             <a href="www.gnu.org/gnu/gnu-history.html">www.gnu.org/gnu/gnu-history.html</a>.
         </li>
-
         <li>
             Kroah-Hartman, G. (2007). Chapter 2: Requirements for Building and Using the Kernel.
             In <em>Linux Kernel in a Nutshell</em> (pp. 5-6). Sebastopol, CA: O'Reilly.
