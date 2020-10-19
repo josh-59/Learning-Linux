@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Introduction to GNU/Linux
-last-updated: August, 2020
+last-updated: October, 2020
 ---
 
 <!--
@@ -17,7 +17,6 @@ last-updated: August, 2020
         <li><a href="#unix-architecture"> The Unix Architecture </a></li>
         <li><a href="#gnu"> GNU </a></li>
         <li><a href="#linux"> The Linux Kernel </a></li>
-        <li><a href="#posix"> POSIX </a></li>
         <li><a href="#distributions"> Linux Distributions </a></li>
         <li><a href="#mint"> Linux Mint </a></li>
         <li><a href="#video">Greg Kroah-Hartman </a></li>
@@ -145,8 +144,7 @@ last-updated: August, 2020
     <p>
         Unix had a simple, clear and well-documented architecture
         that
-        <a href="https://upload.wikimedia.org/wikipedia/commons/7/77/Unix_history-simple.svg">inspired many operating systems</a>, and which has been key to 
-        its endurance. 
+        <a href="https://upload.wikimedia.org/wikipedia/commons/7/77/Unix_history-simple.svg">inspired many operating systems</a>.
         An overview is as follows:
     </p>
 
@@ -155,7 +153,7 @@ last-updated: August, 2020
     <p>
         <strong>Hardware:</strong>
         At the heart of any machine is its hardware.
-        Each piece of hardware has a software interface defined by the 
+        Each piece of hardware has a software interface defined by the
         engineering team that created it.
         These interfaces are varied at best.
     </p>
@@ -163,13 +161,13 @@ last-updated: August, 2020
     <p>
         <strong>Drivers:</strong>
         These interact directly with hardware and provide the kernel with
-        a more-uniform interface to each piece. 
+        a more-uniform interface to each piece.
         This software layer
         represents the deepest and most remote element of any operating system.
         Although drivers can be installed on an as-needed basis, in GNU/Linux
         the tendency is to include many drivers, and use only those that are required.
 
-        Drivers are not usually written by the hardware's engineers or vendors. 
+        Drivers are not usually written by the hardware's engineers or vendors.
     </p>
 
     <p>
@@ -189,7 +187,7 @@ last-updated: August, 2020
         calls, but their actions are not restricted to user-space.  Rather, they
         transcend the software hierarchy, often propogating changes at the hardware level.
         Unix-like operating systems have six essential system calls:
-        <em>fork, exec, open, close, read,</em> and 
+        <em>fork, exec, open, close, read,</em> and
         <em>write.</em><sup><a href="#references">[5]</a></sup>
     </p>
 
@@ -201,7 +199,7 @@ last-updated: August, 2020
         The kernel is entirely dependant upon processes to tell it what to
         do, and processes are the only means that a user has to interact with
         the system.
-        Processes are a critical component of a functioning operating system.
+        Thus, processes are a critical component of a functioning *nix system.
     </p>
 
 
@@ -256,7 +254,7 @@ last-updated: August, 2020
         In their language, <em>free</em> does not mean merely, "costs nothing."
         Rather, it means <em>free as in
             freedom.</em><sup><a href="https://www.gnu.org/philosophy/free-sw.html">[9]</a></sup>
-        Like freedom of speech, 
+        Like freedom of speech,
         GNU's software is free in terms of both price and liberty;
         the open-source community sometimes uses
         the term <em>libre</em> to connote this kind of freedom.
@@ -280,21 +278,30 @@ last-updated: August, 2020
         He soon released it under the GNU General Public License, Version 2.
     </p>
 
-    <div class="aside-left" style="font-size: 11pt;">
+    <div class="aside-right" style="font-size: 11pt;">
         <h4>Aside:</h4>
         <p>
             Properly speaking, the name <em>Linux</em> refers only to the Linux kernel.
         </p>
     </div>
 
-
     <p>
         While the GNU Project ambitiously intended to
-        <a href="https://www.gnu.org/gnu/initial-announcement.en.html#f1">produce an entire operating system</a>, Linus restricted his
+        produce an entire operating system, Linus restricted his
         attention to creating a kernel.
         By October, he had Bash, GCC, GNU-Make and other
         programs running on his creation.<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[10]</a></sup>
     </p>
+
+    <div class="aside-left">
+        <h4>Aside:</h4>
+        <p>
+            Linus Torvalds became interested in operating systems only after
+            reading Andrew S. Tenenbaum's
+            <em><a href="https://en.wikipedia.org/wiki/Operating_Systems:_Design_and_Implementation">Operating Systems: Design and Implementation</a></em>,
+            in preparation for class.<sup><a href="#references">[5]</a></sup>
+        </p>
+    </div>
 
     <p>
         Moreover, while GNU sought professionalism and officiality,
@@ -306,13 +313,6 @@ last-updated: August, 2020
         It has since become the most successful Unix-like kernel in existence.
     </p>
 
-
-    <div class="img-right">
-        <figure>
-        <a title="https://github.com/icons8/flat-color-icons/graphs/contributors / MIT (http://opensource.org/licenses/mit-license.php)" href="https://commons.wikimedia.org/wiki/File:Icons8_flat_linux.svg"><img width="256" alt="Icons8 flat linux" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Icons8_flat_linux.svg/256px-Icons8_flat_linux.svg.png"></a>
-        <figcaption><center><a href="https://en.wikipedia.org/wiki/Tux_%28mascot%29">Tux</a>, the Linux Mascot</center></figcaption>
-    </div>
-
     <p>
         The <a href="https://www.kernel.org/doc/html/latest/process/2.Process.html?highlight=merge window">kernel development process</a>
         has become more structured since 1991, and today uses a
@@ -321,14 +321,11 @@ last-updated: August, 2020
         Another major figure in Linux development is Greg Kroah-Hartman (pronounced "<em>Crow</em>-Hartman"), who is the maintainer of the Stable branch.
     </p>
 
-    <!--
-Linux 1.0 https://github.com/kalamangga-net/linux-1.0
-
-   https://en.wikipedia.org/wiki/History_of_Linux#Chronology
-       Released 1994:
-       Linus "judges the software to be mature"
-       Red Hat, Suse enter 1.0
-   -->
+    <div class="img-right">
+        <figure>
+        <a title="https://github.com/icons8/flat-color-icons/graphs/contributors / MIT (http://opensource.org/licenses/mit-license.php)" href="https://commons.wikimedia.org/wiki/File:Icons8_flat_linux.svg"><img width="128" alt="Icons8 flat linux" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Icons8_flat_linux.svg/256px-Icons8_flat_linux.svg.png"></a>
+        <figcaption><center><a href="https://en.wikipedia.org/wiki/Tux_%28mascot%29">Tux</a>, the Linux Mascot</center></figcaption>
+    </div>
 
     <p>
         Although development of Linux began as a hobby, it is an occupation
@@ -356,6 +353,8 @@ Linux 1.0 https://github.com/kalamangga-net/linux-1.0
     https://en.wikipedia.org/wiki/Linux_Standard_Base
 
 -->
+
+<!--
 
 <div class="content" id="posix">
     <h2> POSIX </h2>
@@ -395,7 +394,6 @@ Linux 1.0 https://github.com/kalamangga-net/linux-1.0
         In 1988 IEEE released the first POSIX standard.
 
         Today, the standard effectively codifies what it means to be "Unix-like."
-    -->
 
     <p>
         The system calls that an operating system provides
@@ -409,7 +407,7 @@ Linux 1.0 https://github.com/kalamangga-net/linux-1.0
         <h4>Aside:</h4>
         <p>
             Richard Stallman suggested the name <em>POSIX.</em>
-            It is pronounced <em>pahz-icks.</em>
+            It is pronounced <em>pah-zicks.</em>
         </p>
     </div>
 
@@ -442,6 +440,8 @@ Linux 1.0 https://github.com/kalamangga-net/linux-1.0
         <li><a href="https://pubs.opengroup.org/onlinepubs/9699919799/mindex.html">POSIX.1-2017</a>&mdash; The Latest Standard</li>
     </ul>
 </div>
+
+-->
 
 <div id="distributions" class="content">
     <h2> Linux Distributions </h2>
