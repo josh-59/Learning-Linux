@@ -144,8 +144,10 @@ last-updated: October, 2020
     <p>
         Unix had a simple, clear and well-documented architecture
         that
-        <a href="https://upload.wikimedia.org/wikipedia/commons/7/77/Unix_history-simple.svg">inspired many operating systems</a>.
-        An overview is as follows:
+        <a href="https://upload.wikimedia.org/wikipedia/commons/7/77/Unix_history-simple.svg">inspired many operating systems</a>, including GNU/Linux.
+        It is organized as a heirarchy of layers: 
+        Each layer builds upon the one beneathe it, and supports
+        the layer immediately above it.
     </p>
 
     <img src="assets/img/linux-architecture.png" style="height: 400px;">
@@ -160,48 +162,55 @@ last-updated: October, 2020
 
     <p>
         <strong>Drivers:</strong>
-        These interact directly with hardware and provide the kernel with
+        Drivers interact with hardware, and provide the kernel with
         a more-uniform interface to each piece.
         This software layer
         represents the deepest and most remote element of any operating system.
         Although drivers can be installed on an as-needed basis, in GNU/Linux
         the tendency is to include many drivers, and use only those that are required.
-
         Drivers are not usually written by the hardware's engineers or vendors.
     </p>
 
     <p>
         <strong>Kernel:</strong>
-        While the heart of any machine is its hardware, the heart of any
+        While the heart of any machine is its hardware, the heart any 
         Unix-like operating system is its kernel.
-        The kernel uses drivers to direct the actions of the machine, at the
-        behest of processes.
-        At some 28 million lines of code, this is a large and involved piece of software.
+        The kernel is a large and involved piece of software, responsible for 
+        scheduling the CPU, allotting memory, supporting running programs
+        and maintaining file integrity.
+        In a non-trivial sense, it is the "brains" behind the operation.
     </p>
 
     <p>
         <strong>System Calls:</strong>
-        In order to permit interaction with the kernel, operating systems
-        employ a set of system calls.
-        From a source-code point of view, system calls "look" and "act" like ordinary function
-        calls, but their actions are not restricted to user-space.  Rather, they
-        transcend the software hierarchy, often propogating changes at the hardware level.
+        The operations that the kernel can undertake are, classically,
+        defined by the system calls it supports.
         Unix-like operating systems have six essential system calls:
         <em>fork, exec, open, close, read,</em> and
         <em>write.</em><sup><a href="#references">[5]</a></sup>
+        Both <em>fork</em> and <em>exec</em> are concerned with processes,
+        while <em>open, close, read,</em> and <em>write</em> are concerned with
+        files.
+        These effectively permit interaction with the kernel, and it is
+        often useful to know how the kernel responds to system calls. 
+        However, processes cannot dictate how the kernel carries system calls out;
+        in fact, the kernel may deny a system call (if, say, a file does not
+        exist, or the calling process does not have appropriate authority).
     </p>
 
     <p>
         <strong>Processes:</strong>
-        Sometimes called "user-space processes," a process is an executing
-        program.
-        On *nix operating systems, processes run the entire show:
-        The kernel is entirely dependant upon processes to tell it what to
-        do, and processes are the only means that a user has to interact with
-        the system.
-        Thus, processes are a critical component of a functioning *nix system.
+        A process, sometimes called a "user-space process" or "user-land process,"
+        is an executing program.
+        Within Unix and other Unix-like operating systems, processes run the entire show:
+        The kernel is entirely, and deliberately, dependant upon processes 
+        to tell it what to do.
+        It follows that there must exist at least one "trusted" process within
+        user-land, to get other processes on their feet&mdash;
+        and this is in-fact exactly the case.
+        At a deep level, this is one of the more beautiful elements of the
+        Unix architecture. 
     </p>
-
 
     <h3>See Also:</h3>
     <ul>
