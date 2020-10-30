@@ -241,7 +241,8 @@ last-updated: October, 2020
 
     <p>
         To create an entire operating system is an enormous task, but,
-        "...by 1990 [the GNU Project] had either found or written all the major components except one&ndash; the kernel."<sup><a href="https://www.gnu.org/gnu/gnu-history.html">[7]</a></sup>
+        seven years later, the GNU Project had
+        "either found or written all the major components except one&ndash; the kernel."<sup><a href="https://www.gnu.org/gnu/gnu-history.html">[7]</a></sup>
         GNU's own kernel, dubbed <a href="https://www.gnu.org/software/hurd/">Hurd</a>, has not been completed.
     </p>
 
@@ -249,13 +250,13 @@ last-updated: October, 2020
         Today, the GNU Project is well-regarded for producing high-quality, well-documented
         free software;
         they are as "official" as the open-source community gets.
-    </p>
-
-    <p>
-    In particular, GNU's compiler collection, <a href="https://gcc.gnu.org">gcc</a>, contains the de-facto C compiler
+        In particular, GNU's compiler collection, 
+        <code><a href="https://gcc.gnu.org">gcc</a></code>, contains the de-facto C compiler
         of the open-source community.
         This compiler is the only one capable of building Linux kernels.<sup><a href="http://files.kroah.com/lkn/lkn_pdf/ch02.pdf">[8]</a></sup>
-        Similarly, their <a href="https://www.gnu.org/software/bash/">Bash</a> shell is the default shell on many distributions.
+        Similarly, their shell, 
+        <code><a href="https://www.gnu.org/software/bash/">bash</a></code>
+        is the default shell on many distributions.
     </p>
 
     <p>
@@ -283,7 +284,7 @@ last-updated: October, 2020
         announced his own free operating system project.
         Again following the architecture of the Unix operating system,
         his project was intended to be "...just a hobby, won't be big and
-        professional like gnu<sup>[sic]</sup>."<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[10]</a></sup>
+        professional like GNU."<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[10]</a></sup>
         He soon released it under the GNU General Public License, Version 2.
     </p>
 
@@ -313,21 +314,29 @@ last-updated: October, 2020
     </div>
 
     <p>
-        Moreover, while GNU sought professionalism and officiality,
-        Linux was, "...meant for hackers interested in operating systems
-        and 386's."<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[10]</a></sup>
-        Interest in the Linux kernel flourished, in large part because
+        Interest in the kernel flourished, in large part because
         of the informality of the project:  Everybody was invited, if only
         to tinker with it.
-        It has since become the most successful Unix-like kernel in existence.
+        It has since become the most successful Unix-like kernel in existence, 
+        and accounts for fully half of the "GNU/Linux" namesake.
     </p>
 
     <p>
         The <a href="https://www.kernel.org/doc/html/latest/process/2.Process.html?highlight=merge window">kernel development process</a>
         has become more structured since 1991, and today uses a
         "<a href="http://127.0.0.1:4000/programming-in-nix.html#train-schedules">train-schedule</a>" approach.
-        Today, Linus Torvalds remains the maintainer of the Development branch.
-        Another major figure in Linux development is Greg Kroah-Hartman (pronounced "<em>Crow</em>-Hartman"), who is the maintainer of the Stable branch.
+        Linus Torvalds remains the maintainer of the Development branch, 
+        and often remarks upon the kernel's latest releases.  
+    </p>
+
+    <p>
+        Another major figure of modern Linux development is Greg Kroah-Hartman (pronounced "<em>Crow</em>-Hartman"), who is the maintainer of the Stable branch
+        and several subsystems.<sup><a href="https://en.wikipedia.org/wiki/Greg_Kroah-Hartman">[11]</a></sup>
+        According to Mr. Kroah-Hartman, interest in the kernel continues to
+        grow, with 1200 new developers joining the project each 
+        year.<sup><a href="https://www.theregister.com/2020/10/26/linux_kernel_intel/">[12]</a></sup>
+        Moreover, their main development bottlenecks are code review and 
+        maintainership.<sup><a href="https://www.theregister.com/2020/10/26/linux_kernel_intel/">[12]</a></sup>
     </p>
 
     <div class="img-right">
@@ -341,11 +350,11 @@ last-updated: October, 2020
         for some, and serious affair for many.
         In particular, the kernel development team
         takes great care not to break
-        user-space,<sup><a href="https://lkml.org/lkml/2012/12/23/75">[11]</a></sup>
+        user-space,<sup><a href="https://lkml.org/lkml/2012/12/23/75">[13]</a></sup>
         meaning that programs that <em>did</em> work will continue to
         work.
         In this way, they ensure the long-term stability of Linux-based
-        platforms.<sup><a href="https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space">[12]</a></sup>
+        platforms.<sup><a href="https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space">[14]</a></sup>
     </p>
 
         <h3>See Also:</h3>
@@ -422,17 +431,17 @@ last-updated: October, 2020
 
     <p>
         The first <em>Portable Operating System Interface</em> specification
-        was released as an IEEE standard in 1988,<sup><a href="https://en.wikipedia.org/wiki/POSIX#Name">[13]</a></sup>
+        was released as an IEEE standard in 1988,<sup><a href="https://en.wikipedia.org/wiki/POSIX#Name">[15]</a></sup>
         and specified the system-call interface available to user-space programs,
         among other things.
         Operating systems that abide by this standard are called <em>POSIX Compliant;</em>
-        systems developers general aim for POSIX compliance.<sup><a href="https://en.wikipedia.org/wiki/Single_UNIX_Specification">[14]</a></sup>
+        systems developers general aim for POSIX compliance.<sup><a href="https://en.wikipedia.org/wiki/Single_UNIX_Specification">[16]</a></sup>
     </p>
 
     <p>
         Posix has been refined since 1988.
         In addition, a stronger specification has been introduced, and is
-        called the <em>Single Unix Specification.</em><sup><a href="https://en.wikipedia.org/wiki/Single_UNIX_Specification">[14]</a></sup>
+        called the <em>Single Unix Specification.</em><sup><a href="https://en.wikipedia.org/wiki/Single_UNIX_Specification">[16]</a></sup>
         Certification to this standard is costly, and it is generally reserved for proprietary operating systems.
     </p>
 
@@ -468,7 +477,7 @@ last-updated: October, 2020
         Think of them as flavors of the Unix architecture, rather than distinct operating systems.
         The oldest distribution that's still maintained is
         <a href="http://www.slackware.com/">Slackware</a>, first released
-        in 1993.<sup><a href="https://en.wikipedia.org/wiki/Slackware">[15]</a></sup>
+        in 1993.<sup><a href="https://en.wikipedia.org/wiki/Slackware">[17]</a></sup>
     </p>
 
     <p>
@@ -609,6 +618,14 @@ last-updated: October, 2020
         </li>
 
         <li>
+            Greg Kroah-Hartman. (2020, September 29). Retrieved October 30, 2020, from <a href="https://en.wikipedia.org/wiki/Greg_Kroah-Hartman">https://en.wikipedia.org/wiki/Greg_Kroah-Hartman</a>
+        </li>
+        
+        <li>
+            Anderson, T. (2020, October 26). Linux kernel's Kroah-Hartman: We're not struggling to get new coders, it's code review that's the bottleneck. Retrieved October 30, 2020, from <a href="https://www.theregister.com/2020/10/26/linux_kernel_intel/">https://www.theregister.com/2020/10/26/linux_kernel_intel/</a>.
+        </li>
+
+        <li>
             Torvalds, L. (2012, December 23). Re: [Regression w/ patch] Media commit causes user space to misbahave (was: Re: Linux 3.8-rc1) [E-mail to 908835772 715625649 M. Chehab]. <a href="https://lkml.org/lkml/2012/12/23/75">https://lkml.org/lkml/2012/12/23/75</a>
         </li>
 
@@ -632,3 +649,4 @@ last-updated: October, 2020
         </li>
     </ol>
 </div>
+
