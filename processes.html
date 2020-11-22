@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Processes
-last-updated: July, 2020
+last-updated: November, 2020
 ---
 
 <!--
@@ -19,7 +19,7 @@ last-updated: July, 2020
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#actors"> Actors </a></li>
-        <li><a href="#proccess-creation"> Process Creation </a></li>
+        <li><a href="#proccess-creation"> Process Creation and System Startup </a></li>
         <li><a href="#process-attributes"> Process Attributes </a></li>
         <li><a href="#sandbox"> Sandbox </a></li>
         <li><a href="#closing-remarks"> Closing Remarks </a></li>
@@ -63,7 +63,7 @@ last-updated: July, 2020
     <h2> Actors </h2>
 
     <p>
-        I like to think of processes as the actors of the system.
+        Think of processes as the actors of the operating system.
         Left to its own devices, the kernel does nothing:
         All Unix-like operating systems depend upon processes to direct the kernel,
         and through the kernel, processes direct the machine.
@@ -75,7 +75,7 @@ last-updated: July, 2020
 
 
     <p>
-        The Kernel:
+        The kernel:
     </p>
 
     <ol>
@@ -98,25 +98,26 @@ last-updated: July, 2020
         There's one for the network manager,
         another for the desktop environment,
         another acting as a printer spooler, etc..
+        If you're working at the command line, then there is one process
+        acting as a terminal emulator, and another acting as a shell.
         Without a process, the kernel is unreachable, and the system is static.
-    </p>
-
-    <p>
-        Historically, collections of running processes were
-        called <a href="http://www.linfo.org/runlevel_def.html">runlevels</a>;
-        different runlevels offered different services, and therefore
-        were intended to be used for different situations.
-        In particular, <a href="http://www.linfo.org/single_user_mode.html">single-user mode</a>
-        was (and is) analogous to <em>safe boot,</em> and <em>runlevel 0</em> quit all processes in
-        preparation for system shutdown.
     </p>
 
     <p>
         Under the Unix philosophy, each process has a narrowly defined role,
         which it is expected to do well.  It might copy a file, list the
         contents of a directory, or interpret and execute commands from the user.
-        Together, these disparate parts field the running operating system known
-        as <em>GNU/Linux.</em>
+    </p>
+
+    <h3> Runlevels</h3>
+    <p>
+        Historically, collections of running processes were
+        called <a href="http://www.linfo.org/runlevel_def.html">runlevels</a>;
+        different runlevels offered different services, and therefore
+        were intended to be used for different situations.
+        In particular, <a href="http://www.linfo.org/single_user_mode.html">single-user mode</a>
+        was (and is) analogous to <em>safe boot,</em> and <em>runlevel 0</em>
+        quits all processes in preparation for system shutdown.
     </p>
 
     <h3> See Also: </h3>
@@ -127,7 +128,7 @@ last-updated: July, 2020
 </div>
 
 <div class="content" id="proccess-creation">
-    <h2> Process Creation </h2>
+    <h2> Process Creation and System Startup</h2>
 
     <p>
         At the end of the boot sequence, the kernel launches a single program,
@@ -136,6 +137,7 @@ last-updated: July, 2020
         their purpose has not changed:  It is a process with root-level permissions that acts as a
         trustee among processes; its central responsibility is to bring up
         userspace.<sup><a href="http://0pointer.de/blog/projects/systemd.html">[4]</a></sup>
+        After <em>init</em>, process creation is delegated to processes themselves.
     </p>
 
     <div class="aside-left">
@@ -152,11 +154,12 @@ last-updated: July, 2020
         This instructs the kernel to make a copy of the current process&mdash;
         an exact copy is produced, save one difference: Each of the two
         processes receives a different return value from <em>fork().</em>
-        The new process is called the <em>child</em> process; the
-        old process is called the <em>parent</em> process.
+        The video below explains the <em>fork()</em> system call well.
     </p>
 
     <p>
+        The new process is called the <em>child</em> process; the
+        old process is called the <em>parent</em> process.
         The parent process usually goes on about its business, such as managing other
         user-space processes, or querying the user
         for a new line of input.
@@ -164,6 +167,13 @@ last-updated: July, 2020
         This instructs the kernel to replace the current
         process with a new one by loading the executable file located at <em>pathname;</em>
         therein, execution begins at <em>main.</em>
+    </p>
+
+    <p>
+        Before the calls to <em>fork</em> and <em>exec()</em>, there was one process.
+        After <em>fork()</em>, there are two nearly-duplicate processes.
+        After <em>exec()</em>, there are two distinct processes.
+        Note: Any process, including child processes, may call <em>fork()</em> and <em>exec()</em>.
     </p>
 
 </div>
@@ -179,7 +189,7 @@ last-updated: July, 2020
         <code>1</code> (with <em>init</em>) and count upwards until
         <code>/proc/sys/kernel/pid_max - 1</code>.<sup><a href="kerrisk, p.115">[6]</a></sup>
         After that, the kernel begins searching at <code>300</code> for the next free PID.<sup><a href="kerrisk, p.115">[6]</a></sup>
-        Thus, PID's are not guaranteed to be monotonically increasing.
+        That is, PID's are not guaranteed to be monotonically increasing.
     </p>
 
     <p>
@@ -189,17 +199,12 @@ last-updated: July, 2020
         If we launch two instances of Firefox, for instance, then two distinct
         processes exist.
         The only thing they share is the <code>text</code> segment of the program,
-        which contains the machine instructions, and which exists in the virtual
+        which contains the program's instructions, and which exists in the virtual
         memory of each process as read-only.
     </p>
 
     <p>
-        For detailed information about processes in the Linux environment, see
-        <a href="https://www.man7.org/tlpi/"> The Linux Programming Interface</a>.
-    </p>
-
-    <p>
-        Each process on the system has:
+        Beyond PID, each process on the system has:
     </p>
 
     <ul>
@@ -208,6 +213,13 @@ last-updated: July, 2020
         <li>Environment variables</li>
         <li>Its own directory in <code>/proc</code></li>
     </ul>
+
+    <p>
+        For detailed information about processes in the Linux environment, see
+        <a href="https://www.man7.org/tlpi/"> The Linux Programming Interface</a>.
+    </p>
+
+
 
     <h3> See Also: </h3>
     <ul>
@@ -218,7 +230,7 @@ last-updated: July, 2020
 <div class="content" id="sandbox">
   <h2>Sandbox</h2>
   <p>
-    One of the major ideas of modern computing is that each process is isolated
+    One of the major ideas of processes is that each process is isolated
     from both the kernel and from other processes.
     This is done for a few reasons.
     First, we want to ensure that no process is capable of jeopardizing the
@@ -269,7 +281,7 @@ last-updated: July, 2020
     form of a distinct <em>address space.</em>
     An address space is a collection of memory addresses; on all modern architectures,
     memory (RAM) is byte-addressable, so that each address refers to exactly one byte.
-    Addresses themselves are simply numbers.
+    Addresses themselves are simply numbers, usually expressed in hexadecimal.
   </p>
 
   <div class="img-right" style="background: #f1f1f1;">
@@ -289,11 +301,11 @@ last-updated: July, 2020
   <em>Modern operating systems provide each process with a distinct
       address space.</em>
     The result has been a profound improvement in system stability.
-    The addresses that the process uses are called "virtual"
-    because they exist for that process alone.
+    The addresses that any process uses are relative to that process alone;
+    they are called "virtual" because they exist, effectively, for that process alone.
     These virtual addresses are mapped onto physical addresses by
     the CPU, without the process ever being aware of it.
-    This is referred to colloquially as "virtual memory."
+    This scheme is referred to colloquially as "virtual memory."
   </p>
 
   <p>
@@ -301,16 +313,17 @@ last-updated: July, 2020
     and CPU.
     For each process, the kernel maintains an address translation table, which maps
     virtual addresses onto physical ones.
-    This is loaded onto the <a href="https://en.wikipedia.org/wiki/Memory_management_unit">MMU</a>
+    This is loaded onto the CPU's
+    <a href="https://en.wikipedia.org/wiki/Memory_management_unit">Memory Management Unit</a>
     whenever the process runs,
     and the MMU carries out address translation automatically whenever in user mode.
   </p>
 
   <p>
-    Crucially, not every virtual address needs to be mapped to a physical address&mdash;
-    it only needs to <em>appear</em> so when the process accesses it.
-    If a process references a virtual address that is not mapped,
-    the CPU interrupts execution of the process and defers control to the kernel.
+    Crucially, not every virtual address needs to be mapped to a physical address.
+    Rather, when a process references a virtual address that is not mapped,
+    the MMU instructs the CPU to interrupt execution of the process; the CPU
+    defers control to the kernel.
     If the memory address should be mapped, the kernel loads that data into memory,
     modifies the translation table and returns control to the process.
     If the memory should not be mapped (i.e., it is an undefined address), the
@@ -319,12 +332,11 @@ last-updated: July, 2020
 
   <p>
     Through the mechanism of virtual memory, each process is presented with
-    the illusion that it has the entirity of the machine's memory to
+    the illusion that it has the entirety of the machine's memory to
     itself.
-    Other processes are intrinsically protected from memory tampering:
+    Other processes are implicitly protected from memory tampering:
     Their memory simply does not exist within the context of the
-    currently running process, and therefore cannot be read from, nor written to,
-    by it.
+    currently running process, and therefore cannot be read from, nor written to.
     As with limited direct execution, virtual memory facilitates
     the safe and efficient use of a machine resource.
   </p>

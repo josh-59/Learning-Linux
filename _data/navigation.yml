@@ -2,12 +2,12 @@
   link: /
 - name: Introduction to GNU/Linux
   link: /intro-to-gnu-linux.html
-- name: Documentation
-  link: /documentation.html
 - name: Files and Filesystems
   link: /files-and-filesystems.html
 - name: Processes
   link: /processes.html
+- name: Documentation
+  link: /documentation.html
 - name: "Command Line 1: A Tutorial Introduction"
   link: /command-line-1-tutorial-introduction.html
 - name: "Command Line 2: More Detail"
