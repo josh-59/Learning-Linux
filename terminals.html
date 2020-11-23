@@ -1,0 +1,719 @@
+---
+layout: default
+title: Terminals
+last-updated: November, 2020
+---
+
+<div id="nav_bar_2" class="nav">
+	<ul>
+		<li><a href="#introduction"> Introduction </a></li>
+		<li><a href="#history"> History </a></li>
+		<li><a href="#terminals"> Terminals </a></li>
+		<li><a href="#device_files"> Device Files </a></li>
+		<li><a href="#escape_sequences"> Escape Sequences </a></li>
+		<li><a href="#shell"> Shell </a></li>
+		<li><a href="#terminal_line_discipline"> Terminal Line Discipline </a></li>
+		<li><a href="#special-characters"> Special Characters </a></li>
+		<li><a href="#lgr_video"> An LGR Thing </a></li>
+		<li><a href="#references"> References </a></li>
+	</ul>
+</div>
+
+<div id="introduction" class="content">
+	<h1> Terminals </h1>
+	<h4>Under Construction! </h4>
+	<p>
+		A <i>text terminal</i> is a computer peripheral similar to a keyboard and monitor combination
+		(<a href="https://tldp.org/HOWTO/Text-Terminal-HOWTO-1.html#ss1.6">Lawyer, Section 1.6</a>).
+		However, whereas a modern monitor receives a pixel-wise description of output to display
+		from the computer several times a second, a text terminal receives a description of
+		the characters to display only once, and uses an onboard buffer to store that information.
+		Text terminals are an archaic and largely obsolete technology, but were instrumental to the
+		development of modern GNU/Linux.
+		This paper looks at the technology and its ramifications as seen in Linux today.
+	</p>
+</div>
+
+<div id="history" class = "content">
+	<h2> History </h2>
+	<p>
+		The history of Unix is well outside the scope of this discussion.
+		However, the text terminal is best understood from a historical
+		perspective.
+	</p>
+
+	<div class="aside-right">
+		<h4>Aside:</h4>
+		<p>
+			<i>Teletype</i> was a trade name of the Teletype Corporation, and was subsequently abbreviated to <i>tty</i>.
+			<a href="http://www.pdp8.net/asr33/videos.shtml">The Model 33</a> was among the most popular hard-copy terminals,
+			with around 600,000 units sold (<a href="#references">Libes 129</a>).
+		</p>
+	</div>
+
+	<p>
+		The computers of the 1960's and 70's were prohibitively expensive.
+		The "Programmed Data Processor-7," which the first inklings of Unix can be traced to,<sup><a href=#references style="text-decoration: none">[1]</a></sup>
+		would have cost the equivalent of about $600,000 in 2020, and shipped with 18 kilobytes of memory.
+		These computers were bought and maintained by
+		organizations, with the idea of developing timesharing (i.e., multiuser) operating systems.
+		In fact, it was once envisioned that computing would be offered as a utility,
+		piped into homes and businesses like telephone or electricity.
+		This vision formed the impetus of Multics, the precursor to Unix.<sup><a href=#references style="text-decoration: none">[1]</a></sup>
+	</p>
+
+	<p>
+		Second, the technological state of the 1960's included the <a href="https://mysite.du.edu/~jcalvert/tel/teletype.htm"<i>teletypewriter</i></a>,
+		a device for sending telegrams.
+		These were, essentially, remote-controlled typewriters, and in the 1960's, they were repurposed to
+		interface with computers.
+		The resulting abstraction formed the basis of the input/output mechanism of early interactive computing.
+		Paper-based terminals persisted well into the 1970's, and later electronic typewriters
+		<a href="https://www.youtube.com/watch?v=z-u4kUeIqDI">sometimes support "terminal mode,"</a>
+		allowing them to interface with computers via serial cable.
+	</p>
+
+	<center>
+		<a href="http://bitsavers.org/pdf/dataTerminalsAndCommunications/DTC-302_Brochure.pdf">
+			<img height=500 src="./assets/img/tty_terminal.jpeg" href="http://bitsavers.org/pdf/dataTerminalsAndCommunications/DTC-302_Brochure.pdf"
+			title="Data Terminals and Communications HyWriter"> </img>
+			<br>
+		</a>
+		DTC-302 HyWriter, released 1976
+	</center>
+
+</div>
+
+<div id="terminals" class="content">
+
+	<h2> Terminals </h2>
+
+	<p>
+		As interactive computing became more popular, hard-copy terminals were phased out in favor of
+		screen-based entities.
+		The resulting devices, referred to as <i>text terminals,</i> consisted of a monitor and a keyboard;
+		the monitor was unlike a modern monitor in that it contained a buffer
+		(on the order of a few kilobytes<sup><a href=#references style="text-decoration: none">[3]</a></sup>)
+		which maintained the text currently on screen, and in that it contained a character-to-bitmap font table to be referenced
+		when drawing each character; that is, it included its own font.
+	</p>
+	<a class="img-left" title="The original uploader was Frotz at English Wikipedia. / CC BY-SA (http://creativecommons.org/licenses/by-sa/3.0/)" href="https://commons.wikimedia.org/wiki/File:VT78.jpg"><img width="300" alt="VT78" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/VT78.jpg/512px-VT78.jpg"></a>
+
+	<p>
+		The computer itself was not required to draw each character on-screen; that was the responsibility of
+		the terminal.
+		Rather, the mainframe was only expected to tell the terminal <i>which</i> characters to draw, once.
+		Users would sit at a terminal, connected to a (possibly distant) machine, would type in
+		programs, issue commands, enter data, etc.; a serial cable connected this I/O device to the computer,
+		and it was termed a <i>terminal,</i> since it was located at the terminal end of this cable.
+	</p>
+	<a class="img-right" title="Jacek Rużyczka / CC BY-SA (https://creativecommons.org/licenses/by-sa/3.0)" href="https://commons.wikimedia.org/wiki/File:VT420_with_German_keyboard.jpg"><img width="350" alt="VT420 with German keyboard" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/VT420_with_German_keyboard.jpg/512px-VT420_with_German_keyboard.jpg"></a>
+
+	<p>
+		The text terminal <a href="https://www.vt100.net/dec/vt_history">was used for decades</a> as the principle means of interactive computing.
+		It's worth noting that each new model implemented a superset of a previous model's capabilities,
+		so that, for instance, a VT200-series terminal can-do anything a VT100 could-do<sup><a href="#references">[4]</a></sup>
+		Today, text terminals are obsolete, but the abstraction persists in both modern Linux and Unix,
+		via emulated terminals, tty device files, virtual terminals, and the associated back-end software required to support them.
+	</p>
+
+	<p>
+		It's worth noting that the idea of mainframe-driven utility computation suggests that the computer's organization
+		follows the sctructure of a mathematical tree:
+		The "root user" would sit at the root of this tree, exercising super-user priveledges over the machine,
+		while end-users would be positioned at the leaves of the tree.
+	</p>
+
+	<br>
+	<center>
+		<a title="Email terminals at Oulu uni 2008" href="https://commons.wikimedia.org/wiki/File:Email_terminals_at_Oulu_uni_2008.jpg"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Email_terminals_at_Oulu_uni_2008.jpg/1024px-Email_terminals_at_Oulu_uni_2008.jpg"></a>
+	</center>
+
+	<h3> Emulation </h3>
+	<p>
+		Primarily, terminals persist in modern Linux in the form of <i>terminal emulators</i>.
+		These are user-space processes that, well, emulate an old terminal!
+		Specifically, they provide a GUI-compatable front-end to an old-school interface.
+		Terminal emulation is notoriously difficult,
+		and is characterized by <i>which</i> terminal device you are emulating (Shuford).
+	</p>
+
+	<p>
+		Information about the capabilities of supported terminals is stored locally in a database known as <code>terminfo</code><sup><a href="#references">[5]</a></sup>.
+		Terminal emulators are typically backward-compatable with the VT100 (xterm, for instance, is backward compatable with the both the VT100 and VT220<sup><a href="#references">[6]</a></sup>),
+		but often support additional capabilities, such as color, and so often have a distinct entry in the terminfo database.
+	</p>
+
+	<p>
+		Some fun and interesting terminal emulators from around the web (suggestions/recommendations are welcome!):
+	</p>
+
+	<p>
+		<ul style="list-style: none;">
+			<li> <a href="https://invisible-island.net/xterm/xterm.faq.html">xterm</a>&mdash; The standard terminal emulator for X Window System </li>
+			<li> <a href="https://github.com/alacritty/alacritty "> alacritty</a>&mdash; A GPU-accelerated terminal emulator </li>
+			<li> <a href="https://github.com/GitSquared/edex-ui#screenshots">edex-ui</a>&mdash; A terminal emulator designed to make you look <i>insanely badass</i> </li>
+			<li> <a href="https://st.suckless.org/"> suckless st</a>&mdash; a terminal emulator that sucks less </li>
+		</ul>
+	</p>
+</div>
+
+<div id="device_files" class="content">
+	<h2> Device Files </h2>
+
+	<p>
+		A terminal is connected to a computer by a full-duplex communication pipeline.
+		In days' past, this was a serial port.
+		The Unix environment presents an abstraction of the terminal as a special device file.
+		Located in <code>/dev</code>, the <code>tty</code> files are available to each user-space process
+		using a terminal for input or output.
+		A program can open, read from and write to a tty file, with the operating system
+		being responsible for the details.
+	</p>
+
+	<div class="aside-left" style="width: 30%;">
+		<center><b><code>/dev</code></b></center>
+		/dev/tty&emsp;Controlling Console <br>
+		/dev/tty0		Current virtual console <br>
+		/dev/tty1		First Virtual Console <br>
+		/dev/tty2   Second Virtual Console <br>
+		/dev/tty3		Third Virtual Console <br>
+		&emsp;&emsp;&emsp;.<br>
+		&emsp;&emsp;&emsp;.<br>
+		/dev/tty63	63rd Virtual Console <br>
+		<br>
+		<br>
+		/dev/console System Console<br>
+		/dev/ptmx/ &emsp;PTY Master
+		/dev/pts/ &emsp;&emsp;PTY Slaves<br>
+		<br>
+		<center>
+			Source: <br>
+			<i> <a href="https://www.kernel.org/doc/html/v5.4/admin-guide/devices.html"> Kernel.org Admininstrator's Guide </a> </i>
+		</center>
+	</div>
+
+	<p>
+		By this method, user-space programs have access to nontrivial, if elementary, input and output,
+		by the trivial method of file access.
+		Moreover, for a Unix system accessed through a terminal, the flow of data
+		through the tty files represents the entirety of input and output.
+	</p>
+
+	<p>
+		Common to all tty devices is the application of a kernel module called
+		the <i>terminal line discipline</i>, which serves to interpret
+		input and produce a more human-amiable interface.
+		For instance, input is line-buffered by default, so that the user can modify a line
+		(e.g., backspace) before sending the input to their program.
+	</p>
+
+	<h3> Virtual Terminals: <br><code>/dev/tty1</code> thru <code>/dev/tty63</code> </h3>
+	<p>
+		Virtual terminals are the closest re-imaging of the classic terminal-bound
+		interface to be found in modern operating systems.
+		They are full-screen terminal displays on the system video monitor,
+		and are accessible by pressing the key combination CTRL+ALT+F[1-9]
+		(use CTRL-ALT+F7 to get back!).
+		You may log in to different virtual terminals simultaneously,
+		and thus have a few different sessions with the computer going on at the same time.
+		In the example below, 'josh' (me) owns the second virtual terminal
+		(in fact, it's because I'm signed in there!).
+	</p>
+
+	<div class="code">
+		$ ls -lF /dev/tty[0-9] <br>
+		crw--w---- 1 root tty 4, 0 Mar 31 06:29 /dev/tty0 <br>
+		crw--w---- 1 root tty 4, 1 Mar 31 05:33 /dev/tty1 <br>
+		crw------- 1 josh tty 4, 2 Mar 31 06:28 /dev/tty2 <br>
+		crw--w---- 1 root tty 4, 3 Mar 31 05:33 /dev/tty3 <br>
+		crw--w---- 1 root tty 4, 4 Mar 31 05:33 /dev/tty4 <br>
+		crw--w---- 1 root tty 4, 5 Mar 31 05:33 /dev/tty5 <br>
+		crw--w---- 1 root tty 4, 6 Mar 31 05:33 /dev/tty6 <br>
+		crw--w---- 1 root tty 4, 7 Mar 31 05:33 /dev/tty7 <br>
+		crw--w---- 1 root tty 4, 8 Mar 31 05:33 /dev/tty8 <br>
+		crw--w---- 1 root tty 4, 9 Mar 31 05:33 /dev/tty9 <br>
+	</div>
+
+	<p>
+		Virtual terminals are more than just a throwback to multiuser operating
+		system days:  They allow access to the machine
+		without a graphical user interface and, in particular, without the associated
+		software (namely, without a window server, window manager, and desktop environment).
+		In modern desktop GNU/Linux distributions, it is often the case that
+		GUI-based systems software is merely an additional front-end layer to command-line tools
+		(a common example is the
+		<a href="https://www.nongnu.org/synaptic/"> Synaptic Package Manager</a>).
+		That is, the command-line interface usually offers more and finer control over
+		the machine, through less and more robust software.
+		Virtual terminals are still highly relevant within the context of server applications.
+	</p>
+
+	<p>
+		The user of a modern GNU/Linux distribution running a GUI is usually logged into the
+		seventh virtual terminal, <code>/dev/tty7</code>.
+		For completeness' sake, we will briefly explore how it is that the system arrives in this
+		state.
+		At the end of the kernel's boot sequence, the kernel launches a single
+		user-space process with root permissions<sup><a href=#references style="text-decoration: none">[7]</a></sup>
+		<sup><a href=#references style="text-decoration: none">[8]</a></sup>
+		(commonly, <i><a href="https://wiki.archlinux.org/index.php/Systemd">systemd</a></i>).
+		This process then launches the local window system, which, in turn, logs in at
+		an empty virtual terminal.
+		This process is almost always X Window Server, and it logs in to <code>tty7</code>,
+		and launches the graphical user interface<sup><a href=#references style="text-decoration: none">[9]</a></sup>.
+		One can emulate this sequence by logging into a virtual terminal and launching
+		the system's window server by, for instance, <code>sudo startx</code>.
+	</p>
+
+	<p>
+		<code>/dev/tty0</code> is a somewhat special virtual terminal device because it is
+		a synonym for the current virtual terminal.
+		That is, if you are currently looking at the seventh virtual terminal, <code>tty7</code>, then data sent to <code>tty0</code>
+		is sent to <code>tty7</code> (and not any other terminal).
+		<a href="https://unix.stackexchange.com/questions/60641/linux-difference-between-dev-console-dev-tty-and-dev-tty0">
+			This unix.stackexchange answer</a> provides a great explanation, and a demonstration.
+		</p>
+
+		<h3>The Controlling Terminal:<br> /dev/tty </h3>
+		<p>
+			<code>/dev/tty</code> is a handle to the process's current tty device, if it exists<sup><a href=#references style="text-decoration: none">[10]</a></sup>.
+			It is, effectively, a process-specific file: Any process that is connected to a terminal
+			may access its terminal here
+			<sup><a href=#references style="text-decoration: none">[11]</a></sup>.
+		</p>
+
+		<h4> Demonstration </h4>
+		<ol>
+			<li> Open up two terminal emulators</li>
+			<li> Navigate each to <code>/dev</code></li>
+			<li> In each, confirm that <code>tty</code> exists, is a character device, and has universal write permissions</li>
+			<li> In each, confirm that writing to <code>tty</code> (e.g. <code>echo "stuff" > tty</code>) does not write to the other </li>
+		</ol>
+
+		<h3> Pseudoterminals: <br>pts/ </h3>
+		<p>
+			From
+			<a href="https://www.kernel.org/doc/html/v5.4/admin-guide/devices.html#terminal-devices"> Kernel.org Documentation</a>,
+			"Pseudoterminals are used to create login sessions or provide other capabilities
+			requiring a TTY line discipline to arbitrary data-generation processes."
+			Pseudoterminals have no physical devices connected; rather, they are
+			intended to pipe information through the kernel's terminal line discipline
+			by connecting two distinct points in the file system,
+			a <i>master</i>, <code>/dev/ptmx</code>, and a
+			<i>slave</i>, a file with an integral filename, found in <code>/dev/pts</code>.
+		</p>
+
+		<div class="aside-right">
+			<h4> Aside </h4>
+			<p>
+				Historically, there have been
+				<a href="https://www.tldp.org/HOWTO/Text-Terminal-HOWTO-2.html">many names for terminal devices.</a>
+				This essay develops <i>terminal</i> exclusively, for the sake of
+				clarity and relevance in the modern domain.
+				The only other synonym in common usage is "console," as in, "<i><code>/dev/tty1</code>
+					through <code>/dev/tty7</code> are virtual consoles</i>
+					<sup><a href=#references style="text-decoration: none">[12]</a></sup>."
+				</p>
+			</div>
+
+			<p>
+				A user-space process opens the "master" side, <code>/dev/ptmx</code>,
+				as an ordinary file.
+				The kernel responds by returning a new file descriptor,
+				and also by creating a new <i>slave</i> device file in <code>/dev/pts</code>.
+				The process can then call <code>ptsname(int fd)</code>, passing the file
+				descriptor given by opening the master side, whereby the kernel will return
+				the pathname to the corresponding slave (terminal) device file.
+			</p>
+
+			<p>
+				At this point, the process can treat the slave side of the pipe
+				as a tty device, and the kernel will modify the stream as
+				appropriate.
+				The most common use of pseudoterminals is by terminal emulator programs.
+				See <a href="https://linux.die.net/man/4/ptmx"> man 4 ptmx </a> and
+				<a href="https://linux.die.net/man/3/ptsname"> man 3 ptsname </a>
+				for more information.
+			</p>
+
+			<p>
+				There are a lot of things you can do with pseudoterminals, and studying
+				them goes a long way towards understanding the Unix filesystem concept.
+				What you're doing is, you're piping a stream of characters through the kernel,
+				and requesting that the kernel modify this stream in a way peculiar to
+				a kernel module called the "terminal line discipline."
+				We'll get into more detail about the terminal line discipline in the
+				next section.
+			</p>
+
+			<h4> Demonstration </h4>
+			<ol>
+				<li> Open exactly two terminal emulators</li>
+				<li> Navigate one to <code>/dev/pts</code></li>
+				<li> List the directory contents and note its entries (should be nonempty)</li>
+				<li> For each integral entry, write a string to the file, (e.g., <code>echo hello &gt; 2</code>) </li>
+			</ol>
+
+
+			<h3> System Console: <br><code>/dev/console</code> </h3>
+			<p>
+				This is the superuser's device.
+				Kernel errors and other messages are sent here<sup><a href=#references style="text-decoration: none">[12]</a></sup>, and the device
+				is owned entirely by the root user:
+			</p>
+
+			<div class="code">
+				$ ls -lF /dev/console<br>
+				crw------- 1 root root 5, 1 Mar 31 05:33 /dev/console
+			</div>
+
+		</div>
+
+		<div id="escape_sequences" class="content">
+			<h2> Escape Sequences </h2>
+			<p>
+				It's worth repeating at this point that the terminal <i>proper</i> only sends a stream of bytes, and
+				merely receives a stream of bytes.
+				That is, the only method of sending data to a terminal monitor is by the same channel as
+				printable characters.
+				As a consequence, it is necessary to establish some common standard for communicating to the terminal
+				non-printable, or <i>control</i>, characters, such as "newline."
+				In the US, printable characters were traditionally mapped via ASCII (with the exception of <a href="https://en.wikipedia.org/wiki/EBCDIC"> some early IBM mainframes</a>).
+				The first 32 ASCII characters (decimal 0 through 31) are control characters, rather than printable.
+				They include the famous bell character, and both tab and newline (aka, "linefeed");
+				in order to delete previously written text, one can print the backspace
+				character, decimal 8 (see <a href="http://man7.org/linux/man-pages/man7/ascii.7.html"> man ascii </a> for more information).
+			</p>
+
+			<p>
+				Most of these control characters quickly became antiquated, so that the majority are not widely used.
+				For instance, ASCII alone does not provide provisions for moving the cursor or scrolling.
+				As a consequence, the more extensible mechanism of <a href="https://en.wikipedia.org/wiki/Escape_sequence">escape sequences</a> was developed.
+				The sequences in use were soon standardized by ANSI, and their support became ubiquitous.
+				Each of these sequences begins with the ASCII "escape" control character (decimal 27)
+				and the left-bracket "<code>[</code>" printable<sup><a href="#references">[13]</a></sup>.
+				They are sequences of entirely ASCII characters.
+				Technically, the're terminal-specific, but are still viable today
+				because modern emulators typically
+				<a href="https://unix.stackexchange.com/questions/43945/whats-the-difference-between-various-term-variables">implement a superset</a>
+				of older terminals' escape sequences.
+				Within C, to print <i>Hello World!</i> in reverse, we could do
+			</p>
+
+			<div class="code">
+				#include &lt;stdio.h&gt;<br>
+				<br>
+				int main() {<br>
+					&emsp;&emsp;&emsp;&emsp;printf("\033[7m Hello World! \033[m"); <br>
+				}<br>
+			</div>
+
+			<p>
+				So, by merely printing a special sequence through stdout to the terminal, we have
+				modified the state of the recipient terminal.
+				A few notes:
+			</p>
+
+			<ol>
+				<li> <code>033</code> above is octal format, with decimal equivalent 27. </li>
+				<li> This "setting" is persistent (try omitting the trailing <code>\033[m</code> ) </li>
+				<li> To send an escape sequence from the keyboard, type CTRL+V, then ESC.  You should see <code>^[</code></li>
+				<li> Why can't you just type <code>^[</code>?  <a href="http://unixwiz.net/techtips/termios-vmin-vtime.html"> Don't ask.</a> </li>
+			</ol>
+
+
+			<p>
+				<a href="http://ascii-table.com/ansi-escape-sequences-vt-100.php"> There are often dozens of such escaped sequences</a>,
+				including such novelties as "set smooth scroll"; most real terminals can even change fonts.
+				Some escape sequences may take parameters such as coordinates.
+				In this case, the parameters
+				<a href="http://tldp.org/HOWTO/Text-Terminal-HOWTO-8.html#ss8.3">become part of</a> the escape sequence.
+			</p>
+
+		</div>
+
+		<div id="shell" class="content">
+			<h2> Shell </h2>
+			<p>
+				Typically, when "interacting" with a computer, data from a tty file is read by a particular program called
+				a <a href="https://wiki.archlinux.org/index.php/Command-line_shell"> shell</a>.
+				There are many variants, such as the antiquated <code>sh</code>, its modern successor <code>bash</code>,
+				the disused <code>csh</code>, the feature-laden <code>zsh</code>, and a relative newcomer, the Friendly Interactive Shell, <code>fish</code>.
+				Each of these are ordinary programs, and exist within a running operating system as an ordinary
+				<a href="https://en.wikipedia.org/wiki/Process_(computing)">user-space processes</a>; they have no special attributes or permissions.
+				They simply read from a file (which might or might-not be your tty file), interpret and execute commands.
+				The commands they "know" are determined <i>by the shell itself</i>, and can be determined by looking at
+				the <code>PATH</code> environment variable:
+			</p>
+
+			<div class="code">
+				$ echo $PATH
+			</div>
+
+			<div class="aside-right">
+				<h4> Aside </h4>
+				<p>
+					Desktop environments serve a role analagous to shells, but in GUI-based environments.
+					In fact, they are sometimes called <i><a href="https://en.wikipedia.org/wiki/Shell_(computing)#GUI">Graphical Shells</a>.</i>
+					My favorite is Cinnamon!  Which one is yours?
+				</p>
+			</div>
+
+			<p>
+				Shells are customizable in a variety of ways.
+				Here we'll take a look at customizing the prompt in Bash.
+				The prompt is the short string printed before the shell asks you for input.
+				It usually looks like,
+			</p>
+
+			<div class="code">
+				-->
+			</div>
+
+		<p>
+			or perhaps,
+		</p>
+
+		<div class="code">
+			josh@home:~$
+		</div>
+
+		<p>
+			Within Bash, the prompt is determined by the contents of the <code>PS1</code> variable.
+			That is, Bash, in addition to being an interactive program, is an interpreted language, and has variables;
+			among these is <code>PS1</code>.
+			Each time Bash wishes to ask you for a new command, it reads and prints <code>PS1</code>
+			before doing so.  Nothing more, and nothing less.
+		</p>
+
+		<p>
+			Thus, we can modify the prompt by setting PS1 to our liking:
+		</p>
+
+		<div class="code">
+			PS1="-->"
+		</div>
+
+		<p>
+			Everybody has their own thing&ndash; I prefer a simple and readable prompt.
+			So, I wish the prompt to print my current working directory, in bold, so as to distinguish it from
+			other lines.
+		</p>
+
+		<p>
+			You might have guessed that what we're going to do is tell Bash to print
+			an ANSI escape sequence saying, "Turn bold on," followed by the
+			current working directory (another variable within Bash),
+			followed by the ANSI escape sequence turning bold back off:
+		</p>
+
+		<div class="code">
+			PS1='\033[1m$PWD\033[m'
+		</div>
+
+		<p>
+			This will work correctly on any terminal supporting ANSI escape sequences (which is most, if
+			not all, of them).
+			However, there's one "gotcha," that, well, got me:
+			<code>bash</code> requires that each sequence of non-printing characters be wrapped in
+			<code>\[</code> and <code>\]</code> (or else <code>bash</code> will allow text to wrap around
+			in a very perplexing manner).
+			So, we have:
+		</p>
+
+		<div class="code">
+			PS1='\[\033[1m\]$PWD\[\033[m\]'
+		</div>
+
+		<p>
+			Thanks Derek Taylor of <a href="https://www.youtube.com/channel/UCVls1GmFKf6WlTraIb_IaJg">
+			DistroTube</a>, for helping me out!
+			Finally, we append an indicator telling us whether we are root user or not, along with a space:
+		</p>
+
+		<div class="code">
+			PS1='\033[1m$PWD\$\033[m '
+		</div>
+
+		<p>
+			Note single quotes!
+			See the <a href="https://www.gnu.org/software/bash/manual/bash.pdf">
+				GNU Bash Reference Manual</a> ("Controlling the Prompt") for more information.
+			</p>
+		</div>
+
+		<div id="terminal_line_discipline" class="content">
+			<h2> Terminal Line Discipline </h2>
+
+			<p>
+				For all text terminals, bytes flow from the keyboard to the computer, and bytes flow from the computer to the screen.
+				In particular, bytes do not flow directly from the keyboard to the terminal's monitor;
+				the reflection of typed characters on-screen is a function of the computer itself,
+				and not a function of the terminal.
+				We can shut off this functionality by the following:
+			</p>
+
+			<p>
+				From the shell,
+			</p>
+			<div class="code">
+				$ stty -echo
+			</div>
+
+			<p>
+				Or, in a Posix-conforming environment,
+			</p>
+
+			<div class="code">
+				#import &lt;termios.h&gt;<br>
+				<br>
+				[...]<br>
+				<br>
+				// Turn off echo, so typed user input does not show up<br>
+				assert( tcgetattr(STDIN_FILENO, &term) >= 0 );<br>
+				term.c_lflag &amp;= ~ECHO;<br>
+				assert( tcsetattr(STDIN_FILENO, TCSANOW, &term) >= 0 );<br>
+			</div>
+
+			<p>
+				Both of the above examples manipulate a very important C <code>struct</code>
+				called <i>termios</i>.
+				The termios struct belongs to the kernel; specifically, it belongs to a
+				kernel module called the <i>terminal line discipline</i>.
+				All characters which pass through a terminal device file
+				pass through the terminal line discipline;
+				the <a href="http://man7.org/linux/man-pages/man3/termios.3.html">termios struct</a> is how we manipulate its behavior, and thus,
+				the behavior of keypresses.
+			</p>
+
+			<div class = "aside-left">
+				<h4> Aside: X Window System </h4>
+				<p>
+					The X Window System serves a role roughly analgous to the terminal line discipline:
+					It facilitates the interaction between mouse, keyboard and monitors with application programs,
+					though it exists in user-space rather than kernel-space.
+					It is <i>server</i> it controls system resources,
+					and provides an interface for other programs to interact with<sup><a href="#references">[14]</a></sup>.
+				</p>
+			</div>
+
+			<p>
+				To explain, we start at the root. All keyboards send
+				<a href="http://www.tldp.org/HOWTO/Keyboard-and-Console-HOWTO-2.html">scancodes</a>
+				to the computer. These are received and interpreted by a terminal
+				device driver, yielding <i>keycodes</i>.  Then, within the same driver, are usually converted to ASCII.
+			</p>
+
+			<p>
+				This information is then passed on to our terminal line discipline.
+				The examples above modify the terminal line discipline's default
+				behavior by manipulating the termios struct (indirectly in the first case,
+				and directly in the second case).
+				The default behavior is what is present at a shell prompt, and is intended
+				to allow reasonable line-wise input by humans; it is called "canonical" or "cooked"
+				mode, as opposed to "raw" mode (in which the terminal line discipline
+				does nothing).
+			</p>
+
+			<p>
+				This information, once it has been passed to the terminal line discipline,
+				is then sent to a <code>tty</code> file, where a program can access
+				it by reading the file.  The terminal line discipline is
+				positioned exactly between the keyboard's hardware driver and
+				each program's read/write system call.
+				This allows it to intercept character combinations, such as
+				CTRL+S and CTRL+D, map them
+				to non-characters, and send the information (called <i>signals</i>)
+				to the appropriate place.
+			</p>
+
+			<p>
+				The termios struct is often manipulated by text-based programs,
+				for instance, to turn off line-buffering and generate an interactive program.
+				A common library for facilitating this is <a href="http://www.tldp.org/HOWTO/NCURSES-Programming-HOWTO/intro.html">NCURSES</a>.
+				Its sister libraries <code>panel</code>, <code>menu</code> and <code>form</code> provide an extension to the basic curses library.
+			</p>
+
+			<img width=100% src="./assets/img/tty_xmas.gif">
+
+			<center style="font-size: 12pt;">
+				Example from ncurses library
+			</center>
+
+			<p>
+				For another example of nCurses usage, check out AlsaMixer (probably already installed).
+			</p>
+
+		</div>
+
+		<div id="special-characters" class="content">
+			<h2>Special Characters</h2>
+
+			<p>
+				Terminal special characters are like escape sequences, but in the other
+				direction.  They are key-combinations typed at the keyboard
+				which are interpreted by the terminal driver and mapped to special
+				actions.
+				There are sixteen commonly mapped terminal special characters;<sup><a href="#references">[15]</a></sup>
+				most of them can be remapped by manipulating the <code>termios</code> struct.
+				Here are a few:
+			</p>
+
+			<ul>
+				<li>CTRL-C&mdash; Send the interrupt signal, <code>SIGINT</code>, to the foreground process. This is the principal
+					means of terminating an unresponsive process.</li>
+				<li>CTRL-D&mdash; Write the End-of-File character, <code>EOF</code>, to
+					standard-in of the foreground process.  This will terminate a Bash session,
+					for instance, or an interactive Python session.</li>
+				<li>CTRL-S&mdash; "<code>STOP</code>" Upon receiving this character combination, the terminal
+					driver stops, and attempts to store, all data to and from the terminal.
+				This can make it appear as though the terminal has frozen.</li>
+				<li>CTRL-Q&mdash; "<code>START</code>" Restart terminal input and output.
+					If input or output is queued, the terminal driver will send it first, then resume normal operation.</li>
+			</ul>
+
+			<p>
+				<em>Start</em> and <em>Stop</em> were more useful in times' past: The effect was to pause scrolling.
+				In addition, the bell character was traditionally sounded when output was stopped and the terminal
+				line discipline's buffer became full, thereby warning the user that data was being discarded.
+				From the command prompt, we can list all bindings to special characters, in addition to other terminal attributes by,
+			</p>
+
+			<div class="code">
+				$ stty -a
+			</div>
+
+			<p>
+				Hope you enjoyed this&mdash; more to come!
+			</p>
+		</div>
+
+
+
+		<div id="lgr_video" class="content">
+			<h2> An LGR Thing </h2>
+
+			<iframe class="video" src="https://www.youtube.com/embed/RuZUPpmXfT0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		</div>
+
+		<div id="references" class="content">
+			<h2> References </h2>
+			<ol>
+				<li> Kernighan, Brian. <i>Unix: A History and a Memoir.</i>  Published 2020, by Brian W. Kernighan via Kindle Direct Publishing. </li>
+				<li> Libes, Sol.  <i>Small Computer Systems Handbook</i>.  Published 1978, by Hayden Book Co. </li>
+				<li> Lawyer, David S. <i>Text-Terminal-HOWTO</i> <a href="https://tldp.org/HOWTO/Text-Terminal-HOWTO.html#toc1"> https://tldp.org/HOWTO/Text-Terminal-HOWTO-8.html</a>.  The Linux Documentation Project.  Retrieved April 6, 2020. </li>
+				<li> Shuford, Richard S. <a href="https://invisible-mirror.net/archives/shuford/terminal/first_principles.html"><i>First Thoughts about Terminal Emulation</i></a>. </li>
+				<li> Ben-Halim, Zeyd M., Raymond, Eric S., Dickey, Thomas E. <a href="http://man7.org/linux/man-pages/man5/terminfo.5.html">man 5 terminfo</a>.  The Linux Man-Pages Project. Retrieved April 6, 2020.</li>
+				<li> Dickey, Thomas E.  <a href="https://invisible-island.net/xterm/xterm.faq.html#what_is_vt220"><i>"What is a VT220?"</i></a>. Retrieved April 6, 2020.</li>
+				<li> <a href="http://man7.org/linux/man-pages/man7/boot.7.html">man 7 boot</a>. The Linux Man-Pages Project. Written March 11, 2015.</li>
+				<li> <a href="http://man7.org/linux/man-pages/man7/bootup.7.html">man 7 bootup</a>. The Linux Man-Pages Project.</li>
+				<li> <a href="https://askubuntu.com/questions/27339/what-is-tty7-in-the-commandline">"What is tty7 in the command line?"</a>.  AskUbuntu question, posed by Fusky.</li>
+				<li> <a href="http://man7.org/linux/man-pages/man4/tty.4.html">man 4 tty</a>. The Linux Man-Pages Project. Published March 6, 2019.</li>
+				<li> <a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/tty/Kconfig?id=HEAD">Kernel Driver Source</a>.  Maintained by Linux Torvalds.</li>
+				<li> <a href="https://www.kernel.org/doc/html/v5.4/admin-guide/devices.html">The Kernel Administrators Guide; Linux Allocated Devices</a>. </li>
+				<li> <a href="http://ascii-table.com/ansi-escape-sequences-vt-100.php">ANSI Escape Sequences</a>. ASCII-Table.com.  Retrieved April 6, 2020.</li>
+				<li> <a href="https://linux.die.net/man/7/x"> man 7 x </a>.  Written by X.Org Foundation, LLC.  Hosted by die.net hosting.</li>
+				<li> Kerrisk, Michael.  <em>The Linux Programming Interface</em>. San Francisco, CA, No Starch Press, 2010.</li>
+			</ol>
+		</div>
