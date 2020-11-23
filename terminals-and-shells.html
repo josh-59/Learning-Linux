@@ -5,20 +5,20 @@ last-updated: November, 2020
 ---
 
 <!--
-	Terminals
-	Shells
+	Terminals, then shells
 -->
 
 <div id="nav_bar_2" class="nav">
 	<ul>
 		<li><a href="#introduction"> Introduction </a></li>
 		<li><a href="#standard-file-descriptors"> Standard File Descriptors </a></li>
-		<li><a href="#terminal-emulators"> Terminal Emulators</a></li>
+		<li><a href="#terminal-emulators"> Terminal Emulators </a></li>
 		<li><a href="#device_files"> Device Files </a></li>
+		<li><a href="#terminal_line_discipline"> Terminal Line Discipline </a></li>
 		<li><a href="#shell"> Shell </a></li>
 		<li><a href="#redirection"> Redirection </a></li>
-		<li><a href="#terminal_line_discipline"> Terminal Line Discipline </a></li>
-		<li><a href="#special-characters"> Special Characters </a></li>
+		<li><a href="#shell-globbing"> Globbing </a></li>
+		<li><a href="#shell-features"> Other Shell Features </a></li>
 		<li><a href="#references"> References </a></li>
 	</ul>
 </div>
@@ -27,56 +27,18 @@ last-updated: November, 2020
 	<h1> Terminals and Shells</h1>
 	<h4>Under Construction! </h4>
 	<p>
-		
+
 	</p>
 </div>
 
-<div id="terminals" class="content">
+<div id="standard-file-descriptors" class="content">
+	<h2> Standard File Descriptors </h2>
 
-	<h2> Terminals </h2>
+</div>
 
-	<p>
-		As interactive computing became more popular, hard-copy terminals were phased out in favor of
-		screen-based entities.
-		The resulting devices, referred to as <i>text terminals,</i> consisted of a monitor and a keyboard;
-		the monitor was unlike a modern monitor in that it contained a buffer
-		(on the order of a few kilobytes<sup><a href=#references style="text-decoration: none">[3]</a></sup>)
-		which maintained the text currently on screen, and in that it contained a character-to-bitmap font table to be referenced
-		when drawing each character; that is, it included its own font.
-	</p>
-	<a class="img-left" title="The original uploader was Frotz at English Wikipedia. / CC BY-SA (http://creativecommons.org/licenses/by-sa/3.0/)" href="https://commons.wikimedia.org/wiki/File:VT78.jpg"><img width="300" alt="VT78" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/VT78.jpg/512px-VT78.jpg"></a>
+<div id="terminal-emulators" class="content">
+	<h2> Terminal Emulators </h2>
 
-	<p>
-		The computer itself was not required to draw each character on-screen; that was the responsibility of
-		the terminal.
-		Rather, the mainframe was only expected to tell the terminal <i>which</i> characters to draw, once.
-		Users would sit at a terminal, connected to a (possibly distant) machine, would type in
-		programs, issue commands, enter data, etc.; a serial cable connected this I/O device to the computer,
-		and it was termed a <i>terminal,</i> since it was located at the terminal end of this cable.
-	</p>
-	<a class="img-right" title="Jacek Rużyczka / CC BY-SA (https://creativecommons.org/licenses/by-sa/3.0)" href="https://commons.wikimedia.org/wiki/File:VT420_with_German_keyboard.jpg"><img width="350" alt="VT420 with German keyboard" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/VT420_with_German_keyboard.jpg/512px-VT420_with_German_keyboard.jpg"></a>
-
-	<p>
-		The text terminal <a href="https://www.vt100.net/dec/vt_history">was used for decades</a> as the principle means of interactive computing.
-		It's worth noting that each new model implemented a superset of a previous model's capabilities,
-		so that, for instance, a VT200-series terminal can-do anything a VT100 could-do<sup><a href="#references">[4]</a></sup>
-		Today, text terminals are obsolete, but the abstraction persists in both modern Linux and Unix,
-		via emulated terminals, tty device files, virtual terminals, and the associated back-end software required to support them.
-	</p>
-
-	<p>
-		It's worth noting that the idea of mainframe-driven utility computation suggests that the computer's organization
-		follows the sctructure of a mathematical tree:
-		The "root user" would sit at the root of this tree, exercising super-user priveledges over the machine,
-		while end-users would be positioned at the leaves of the tree.
-	</p>
-
-	<br>
-	<center>
-		<a title="Email terminals at Oulu uni 2008" href="https://commons.wikimedia.org/wiki/File:Email_terminals_at_Oulu_uni_2008.jpg"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Email_terminals_at_Oulu_uni_2008.jpg/1024px-Email_terminals_at_Oulu_uni_2008.jpg"></a>
-	</center>
-
-	<h3> Emulation </h3>
 	<p>
 		Primarily, terminals persist in modern Linux in the form of <i>terminal emulators</i>.
 		These are user-space processes that, well, emulate an old terminal!
@@ -317,6 +279,110 @@ last-updated: November, 2020
 
 		</div>
 
+		<div id="terminal_line_discipline" class="content">
+			<h2> Terminal Line Discipline </h2>
+
+			<p>
+				For all text terminals, bytes flow from the keyboard to the computer, and bytes flow from the computer to the screen.
+				In particular, bytes do not flow directly from the keyboard to the terminal's monitor;
+				the reflection of typed characters on-screen is a function of the computer itself,
+				and not a function of the terminal.
+				We can shut off this functionality by the following:
+			</p>
+
+			<p>
+				From the shell,
+			</p>
+			<div class="code">
+				$ stty -echo
+			</div>
+
+			<p>
+				Or, in a Posix-conforming environment,
+			</p>
+
+			<div class="code">
+				#import &lt;termios.h&gt;<br>
+				<br>
+				[...]<br>
+				<br>
+				// Turn off echo, so typed user input does not show up<br>
+				assert( tcgetattr(STDIN_FILENO, &term) >= 0 );<br>
+				term.c_lflag &amp;= ~ECHO;<br>
+				assert( tcsetattr(STDIN_FILENO, TCSANOW, &term) >= 0 );<br>
+			</div>
+
+			<p>
+				Both of the above examples manipulate a very important C <code>struct</code>
+				called <i>termios</i>.
+				The termios struct belongs to the kernel; specifically, it belongs to a
+				kernel module called the <i>terminal line discipline</i>.
+				All characters which pass through a terminal device file
+				pass through the terminal line discipline;
+				the <a href="http://man7.org/linux/man-pages/man3/termios.3.html">termios struct</a> is how we manipulate its behavior, and thus,
+				the behavior of keypresses.
+			</p>
+
+			<div class = "aside-left">
+				<h4> Aside: X Window System </h4>
+				<p>
+					The X Window System serves a role roughly analgous to the terminal line discipline:
+					It facilitates the interaction between mouse, keyboard and monitors with application programs,
+					though it exists in user-space rather than kernel-space.
+					It is <i>server</i> it controls system resources,
+					and provides an interface for other programs to interact with<sup><a href="#references">[14]</a></sup>.
+				</p>
+			</div>
+
+			<p>
+				To explain, we start at the root. All keyboards send
+				<a href="http://www.tldp.org/HOWTO/Keyboard-and-Console-HOWTO-2.html">scancodes</a>
+				to the computer. These are received and interpreted by a terminal
+				device driver, yielding <i>keycodes</i>.  Then, within the same driver, are usually converted to ASCII.
+			</p>
+
+			<p>
+				This information is then passed on to our terminal line discipline.
+				The examples above modify the terminal line discipline's default
+				behavior by manipulating the termios struct (indirectly in the first case,
+				and directly in the second case).
+				The default behavior is what is present at a shell prompt, and is intended
+				to allow reasonable line-wise input by humans; it is called "canonical" or "cooked"
+				mode, as opposed to "raw" mode (in which the terminal line discipline
+				does nothing).
+			</p>
+
+			<p>
+				This information, once it has been passed to the terminal line discipline,
+				is then sent to a <code>tty</code> file, where a program can access
+				it by reading the file.  The terminal line discipline is
+				positioned exactly between the keyboard's hardware driver and
+				each program's read/write system call.
+				This allows it to intercept character combinations, such as
+				CTRL+S and CTRL+D, map them
+				to non-characters, and send the information (called <i>signals</i>)
+				to the appropriate place.
+			</p>
+
+			<p>
+				The termios struct is often manipulated by text-based programs,
+				for instance, to turn off line-buffering and generate an interactive program.
+				A common library for facilitating this is <a href="http://www.tldp.org/HOWTO/NCURSES-Programming-HOWTO/intro.html">NCURSES</a>.
+				Its sister libraries <code>panel</code>, <code>menu</code> and <code>form</code> provide an extension to the basic curses library.
+			</p>
+
+			<img width=100% src="./assets/img/tty_xmas.gif">
+
+			<center style="font-size: 12pt;">
+				Example from ncurses library
+			</center>
+
+			<p>
+				For another example of nCurses usage, check out AlsaMixer (probably already installed).
+			</p>
+
+		</div>
+
 		<div id="escape_sequences" class="content">
 			<h2> Escape Sequences </h2>
 			<p>
@@ -490,109 +556,7 @@ last-updated: November, 2020
 			</p>
 		</div>
 
-		<div id="terminal_line_discipline" class="content">
-			<h2> Terminal Line Discipline </h2>
 
-			<p>
-				For all text terminals, bytes flow from the keyboard to the computer, and bytes flow from the computer to the screen.
-				In particular, bytes do not flow directly from the keyboard to the terminal's monitor;
-				the reflection of typed characters on-screen is a function of the computer itself,
-				and not a function of the terminal.
-				We can shut off this functionality by the following:
-			</p>
-
-			<p>
-				From the shell,
-			</p>
-			<div class="code">
-				$ stty -echo
-			</div>
-
-			<p>
-				Or, in a Posix-conforming environment,
-			</p>
-
-			<div class="code">
-				#import &lt;termios.h&gt;<br>
-				<br>
-				[...]<br>
-				<br>
-				// Turn off echo, so typed user input does not show up<br>
-				assert( tcgetattr(STDIN_FILENO, &term) >= 0 );<br>
-				term.c_lflag &amp;= ~ECHO;<br>
-				assert( tcsetattr(STDIN_FILENO, TCSANOW, &term) >= 0 );<br>
-			</div>
-
-			<p>
-				Both of the above examples manipulate a very important C <code>struct</code>
-				called <i>termios</i>.
-				The termios struct belongs to the kernel; specifically, it belongs to a
-				kernel module called the <i>terminal line discipline</i>.
-				All characters which pass through a terminal device file
-				pass through the terminal line discipline;
-				the <a href="http://man7.org/linux/man-pages/man3/termios.3.html">termios struct</a> is how we manipulate its behavior, and thus,
-				the behavior of keypresses.
-			</p>
-
-			<div class = "aside-left">
-				<h4> Aside: X Window System </h4>
-				<p>
-					The X Window System serves a role roughly analgous to the terminal line discipline:
-					It facilitates the interaction between mouse, keyboard and monitors with application programs,
-					though it exists in user-space rather than kernel-space.
-					It is <i>server</i> it controls system resources,
-					and provides an interface for other programs to interact with<sup><a href="#references">[14]</a></sup>.
-				</p>
-			</div>
-
-			<p>
-				To explain, we start at the root. All keyboards send
-				<a href="http://www.tldp.org/HOWTO/Keyboard-and-Console-HOWTO-2.html">scancodes</a>
-				to the computer. These are received and interpreted by a terminal
-				device driver, yielding <i>keycodes</i>.  Then, within the same driver, are usually converted to ASCII.
-			</p>
-
-			<p>
-				This information is then passed on to our terminal line discipline.
-				The examples above modify the terminal line discipline's default
-				behavior by manipulating the termios struct (indirectly in the first case,
-				and directly in the second case).
-				The default behavior is what is present at a shell prompt, and is intended
-				to allow reasonable line-wise input by humans; it is called "canonical" or "cooked"
-				mode, as opposed to "raw" mode (in which the terminal line discipline
-				does nothing).
-			</p>
-
-			<p>
-				This information, once it has been passed to the terminal line discipline,
-				is then sent to a <code>tty</code> file, where a program can access
-				it by reading the file.  The terminal line discipline is
-				positioned exactly between the keyboard's hardware driver and
-				each program's read/write system call.
-				This allows it to intercept character combinations, such as
-				CTRL+S and CTRL+D, map them
-				to non-characters, and send the information (called <i>signals</i>)
-				to the appropriate place.
-			</p>
-
-			<p>
-				The termios struct is often manipulated by text-based programs,
-				for instance, to turn off line-buffering and generate an interactive program.
-				A common library for facilitating this is <a href="http://www.tldp.org/HOWTO/NCURSES-Programming-HOWTO/intro.html">NCURSES</a>.
-				Its sister libraries <code>panel</code>, <code>menu</code> and <code>form</code> provide an extension to the basic curses library.
-			</p>
-
-			<img width=100% src="./assets/img/tty_xmas.gif">
-
-			<center style="font-size: 12pt;">
-				Example from ncurses library
-			</center>
-
-			<p>
-				For another example of nCurses usage, check out AlsaMixer (probably already installed).
-			</p>
-
-		</div>
 
 		<div id="special-characters" class="content">
 			<h2>Special Characters</h2>
