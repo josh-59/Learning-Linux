@@ -6,6 +6,8 @@
   link: /files-and-filesystems.html
 - name: Processes
   link: /processes.html
+- name: Terminal Theory
+  link: /terminals.html
 - name: Documentation
   link: /documentation.html
 - name: "Command Line 1: A Tutorial Introduction"
