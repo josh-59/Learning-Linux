@@ -145,7 +145,7 @@ last-updated: October, 2020
         Unix had a simple, clear and well-documented architecture
         that
         <a href="https://upload.wikimedia.org/wikipedia/commons/7/77/Unix_history-simple.svg">inspired many operating systems</a>, including GNU/Linux.
-        It is organized as a heirarchy of layers: 
+        It is organized as a heirarchy of layers:
         Each layer builds upon the one beneathe it, and supports
         the layer immediately above it.
     </p>
@@ -173,9 +173,9 @@ last-updated: October, 2020
 
     <p>
         <strong>Kernel:</strong>
-        While the heart of any machine is its hardware, the heart any 
+        While the heart of any machine is its hardware, the heart any
         Unix-like operating system is its kernel.
-        The kernel is a large and involved piece of software, responsible for 
+        The kernel is a large and involved piece of software, responsible for
         scheduling the CPU, allotting memory, supporting running programs
         and maintaining file integrity.
         In a non-trivial sense, it is the "brains" behind the operation.
@@ -192,7 +192,7 @@ last-updated: October, 2020
         while <em>open, close, read,</em> and <em>write</em> are concerned with
         files.
         These effectively permit interaction with the kernel, and it is
-        often useful to know how the kernel responds to system calls. 
+        often useful to know how the kernel responds to system calls.
         However, processes cannot dictate how the kernel carries system calls out;
         in fact, the kernel may deny a system call (if, say, a file does not
         exist, or the calling process does not have appropriate authority).
@@ -203,19 +203,15 @@ last-updated: October, 2020
         A process, sometimes called a "user-space process" or "user-land process,"
         is an executing program.
         Within Unix and other Unix-like operating systems, processes run the entire show:
-        The kernel is entirely, and deliberately, dependant upon processes 
+        The kernel is entirely, and deliberately, dependant upon processes
         to tell it what to do.
         It follows that there must exist at least one "trusted" process within
         user-land, to get other processes on their feet&mdash;
         and this is in-fact exactly the case.
         At a deep level, this is one of the more beautiful elements of the
-        Unix architecture. 
+        Unix architecture.
     </p>
 
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/">Operating Systems: Three Easy Pieces</a> by Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau</li>
-    </ul>
 </div>
 
 <div class="content" id="gnu">
@@ -242,7 +238,7 @@ last-updated: October, 2020
     <p>
         To create an entire operating system is an enormous task, but,
         seven years later, the GNU Project had
-        "either found or written all the major components except one&ndash; the kernel."<sup><a href="https://www.gnu.org/gnu/gnu-history.html">[7]</a></sup>
+        either found or written all major components except one&ndash; the kernel.<sup><a href="https://www.gnu.org/gnu/gnu-history.html">[7]</a></sup>
         GNU's own kernel, dubbed <a href="https://www.gnu.org/software/hurd/">Hurd</a>, has not been completed.
     </p>
 
@@ -250,11 +246,11 @@ last-updated: October, 2020
         Today, the GNU Project is well-regarded for producing high-quality, well-documented
         free software;
         they are as "official" as the open-source community gets.
-        In particular, GNU's compiler collection, 
+        In particular, GNU's compiler collection,
         <code><a href="https://gcc.gnu.org">gcc</a></code>, contains the de-facto C compiler
         of the open-source community.
         This compiler is the only one capable of building Linux kernels.<sup><a href="http://files.kroah.com/lkn/lkn_pdf/ch02.pdf">[8]</a></sup>
-        Similarly, their shell, 
+        Similarly, their shell,
         <code><a href="https://www.gnu.org/software/bash/">bash</a></code>
         is the default shell on many distributions.
     </p>
@@ -299,7 +295,7 @@ last-updated: October, 2020
         While the GNU Project ambitiously intended to
         produce an entire operating system, Linus restricted his
         attention to creating a kernel.
-        By October, he had Bash, GCC, GNU-Make and other
+        By October, he had GNU's Bash, GCC, Make and other
         programs running on his creation.<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[10]</a></sup>
     </p>
 
@@ -317,7 +313,7 @@ last-updated: October, 2020
         Interest in the kernel flourished, in large part because
         of the informality of the project:  Everybody was invited, if only
         to tinker with it.
-        It has since become the most successful Unix-like kernel in existence, 
+        It has since become the most successful Unix-like kernel in existence,
         and accounts for fully half of the "GNU/Linux" namesake.
     </p>
 
@@ -325,17 +321,17 @@ last-updated: October, 2020
         The <a href="https://www.kernel.org/doc/html/latest/process/2.Process.html?highlight=merge window">kernel development process</a>
         has become more structured since 1991, and today uses a
         "<a href="http://127.0.0.1:4000/programming-in-nix.html#train-schedules">train-schedule</a>" approach.
-        Linus Torvalds remains the maintainer of the Development branch, 
-        and often remarks upon the kernel's latest releases.  
+        Linus Torvalds remains the maintainer of the Development branch,
+        and often remarks upon the kernel's latest releases.
     </p>
 
     <p>
         Another major figure of modern Linux development is Greg Kroah-Hartman (pronounced "<em>Crow</em>-Hartman"), who is the maintainer of the Stable branch
         and several subsystems.<sup><a href="https://en.wikipedia.org/wiki/Greg_Kroah-Hartman">[11]</a></sup>
         According to Mr. Kroah-Hartman, interest in the kernel continues to
-        grow, with 1200 new developers joining the project each 
+        grow, with 1200 new developers joining the project each
         year.<sup><a href="https://www.theregister.com/2020/10/26/linux_kernel_intel/">[12]</a></sup>
-        Moreover, their main development bottlenecks are code review and 
+        Moreover, their main development bottlenecks are code review and
         maintainership.<sup><a href="https://www.theregister.com/2020/10/26/linux_kernel_intel/">[12]</a></sup>
     </p>
 
@@ -620,7 +616,7 @@ last-updated: October, 2020
         <li>
             Greg Kroah-Hartman. (2020, September 29). Retrieved October 30, 2020, from <a href="https://en.wikipedia.org/wiki/Greg_Kroah-Hartman">https://en.wikipedia.org/wiki/Greg_Kroah-Hartman</a>
         </li>
-        
+
         <li>
             Anderson, T. (2020, October 26). Linux kernel's Kroah-Hartman: We're not struggling to get new coders, it's code review that's the bottleneck. Retrieved October 30, 2020, from <a href="https://www.theregister.com/2020/10/26/linux_kernel_intel/">https://www.theregister.com/2020/10/26/linux_kernel_intel/</a>.
         </li>
@@ -649,4 +645,3 @@ last-updated: October, 2020
         </li>
     </ol>
 </div>
-
