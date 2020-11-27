@@ -8,6 +8,8 @@
   link: /processes.html
 - name: Terminals and Shells
   link: /terminals-and-shells.html
+- name: Package Management
+  link: /package-management.html
 - name: Documentation
   link: /documentation.html
 - name: "Command Line 1: A Tutorial Introduction"
@@ -20,7 +22,5 @@
   link: /text-terminals.html
 - name: Finding Files
   link: /finding-files.html
-- name: Package Management
-  link: /package-management.html
 - name: "Going Further: Programming in *nix"
   link: /programming-in-nix.html

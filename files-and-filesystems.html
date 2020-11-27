@@ -26,11 +26,11 @@ last-updated: July, 2020
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
+        <li><a href="#regular-files"> Files </a></li>
         <li><a href="#filesystems"> Filesystems </a></li>
         <li><a href="#directories"> Directories </a></li>
         <li><a href="#mounting-unmounting"> Mounting and Unmounting</a></li>
         <li><a href="#fs-heir"> Filesystem Heirarchy </a></li>
-        <li><a href="#regular-files"> Regular Files </a></li>
         <li><a href="#pseudo"> Pseudo Files </a></li>
         <li><a href="#device-files"> Device Special Files </a></li>
         <li><a href="#closing-remarks"> Closing Remarks </a></li>
@@ -41,21 +41,115 @@ last-updated: July, 2020
 
 <div id="introduction" class="content">
     <h1>Files and Filesystems</h1>
-    <h4 style="font-size: 15pt;">"In the beginning, the file was without form, and void;<br>
-        and emptiness was upon the face of the bits.<br>
-        And the Fingers of the Author moved upon the face of the keyboard.<br>
-        And the Author said, Let there be words, and there were words."</h4>
-        <div class="quote-ref" style="margin-left: 50%;">
-            &mdash;<a href="https://www.tldp.org/LDP/sag/html/intro.html">The Linux System Administrator's Guide</a>
-        </div>
 
-        <p>
-            The protogenesis of Unix was a filesystem.<sup><a href=#references>[1]</a><a href="https://www.bell-labs.com/usr/dmr/www/hist.pdf">[2]</a></sup>
-            Designed and implemented primarily by Ken Thompson,
-            this piece of software became an operating system upon the
-            introduction of a means of interacting with it.
-        </p>
-    </div>
+    <p>
+
+        The protogenesis of Unix was a filesystem.<sup><a href=#references>[1]</a><a href="https://www.bell-labs.com/usr/dmr/www/hist.pdf">[2]</a></sup>
+        Designed by the reasearchers of Bell Laboratories, and
+        implemented primarily by Ken Thompson,
+        this piece of software became an operating system upon the
+        introduction of a means of interacting with, and executing, its contents.
+    </p>
+</div>
+
+<div id="regular-files" class="content">
+  <h2>Files</h2>
+
+  <div class="aside-right">
+      <h4>Aside:</h4>
+      <p>
+          This definition is sufficiently abstract to allow, for instance, a keyboard
+          to appear as a file.
+      </p>
+  </div>
+
+  <p>
+    In Unix, a file is a sequence of bytes.<sup><a href=#references>[1]</a></sup>
+    Unix-like kernels facilitate interaction with files via four classic system calls:
+    </p>
+
+    <ol>
+        <li><code>open(2)</code></li>
+        <li><code>close(2)</code></li>
+        <li><code>read(2)</code></li>
+        <li><code>write(2)</code></li>
+    </ol>
+
+    <p>
+        In particular, the <code>read</code> system call fills a given
+        buffer with the contents of a file.
+        Order is preserved across calls to <code>read</code>:
+        If the buffer is smaller than the file,
+        then repeated calls to <code>read</code> both return
+        the file's next data (if any).
+    </p>
+
+    <p>
+    Ken Thompson's <em>Unix</em> kernel facilitated reading and writing of files,
+    but otherwise refrained from interjecting upon their use.
+    This approach was quite novel for its time. Earlier
+    operating systems interposed upon the handling of files, so that
+    some files could only be read by some programs, and not by others.<sup><a href=#references>[1]</a></sup>
+    In my opinion, this uniformity begins <a href="https://en.wikipedia.org/wiki/Unix_philosophy">"The Unix Philosophy."</a>
+  </p>
+
+  <h3>Regular Files</h3>
+
+  <p>
+    A regular file contains data which is stored on disk.
+    The regular file is the typical file type:
+    Approximately 80% of files are regular files (Stevens, 98).
+  </p>
+
+  <p>
+    In Unix-like operating systems, each file has an owner.
+    Important (system) files are owned by <code>root</code>, the superuser of the system.
+    Because the owner of a given file is permitted to do anything to it, we typically wish
+    to avoid acting as <code>root</code>, and instead use <code>sudo(8)</code> wherever possible.
+  </p>
+
+  <p>
+    Here we have a typical <code>ls(1)</code> listing:
+  </p>
+
+  <a href="assets/img/ls-long.pdf" target="_blank"><img src="assets/img/ls-long.png" style="width: 100%" title="Click for printable" ></a>
+
+  <p>
+    We see that <code>bash(1)</code> is executable by anybody, but can
+    only be written to (changed by) <code>root</code>.
+  </p>
+
+  <p>
+    Beyond <code>ls(1)</code>, two other command-line tools are useful for peeking
+    into a file. They are <code>file(1)</code>, which gives a brief description of
+    the file's type, and <code>stat(1)</code>, which gives a human-readable
+    summary of the file's inode contents:
+  </p>
+
+  <div class="code">
+    $ file /bin/bash<br>
+    /bin/bash: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), <br>
+    dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, <br>
+    BuildID[sha1]=a43fec47192ff49c2d3fed671f2be8df7e83784a, for <br>
+    GNU/Linux 3.2.0, stripped<br><br>
+    $ stat /bin/bash<br>
+    File: /bin/bash<br>
+    Size: 1183448   	Blocks: 2312       IO Block: 4096   regular file<br>
+    Device: 802h/2050d	Inode: 1835042     Links: 1<br>
+    Access: (0755/-rwxr-xr-x)  Uid: (    0/    root)   Gid: (    0/    root)<br>
+    Access: 2020-07-14 13:33:43.628528710 -0500<br>
+    Modify: 2020-02-25 06:03:22.000000000 -0600<br>
+    Change: 2020-07-09 11:20:12.676956656 -0500<br>
+    Birth: -<br>
+  </div>
+
+  <h3>See Also:</h3>
+  <ul>
+    <li><a href="https://www.man7.org/linux/man-pages/man1/chmod.1.html">chmod(1)</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/File_system_permissions#Numeric_notation">File System Permissions - Numeric Notation - Wikipedia </a></li>
+  </ul>
+
+</div>
 
     <div id="filesystems" class="content">
         <h2> Filesystems </h2>
@@ -421,97 +515,7 @@ last-updated: July, 2020
   </ul>
 </div>
 
-<div id="regular-files" class="content">
-  <h2>Regular Files</h2>
 
-  <p>
-    In Unix, a file is a sequence of bytes.<sup><a href=#references>[1]</a></sup>
-    This definition is sufficiently abstract to allow, for instance, a keyboard
-    to appear as a file.
-    Ken Thompson's <em>Unix</em> kernel facilitated reading and writing of files,
-    but otherwise refrained from interjection.
-    This approach was quite novel for its time: Earlier
-    operating systems interposed upon the handling of files, so that
-    some files could only be read by some programs, and not by others.<sup><a href=#references>[1]</a></sup>
-    In my opinion, this uniformity begins <a href="https://en.wikipedia.org/wiki/Unix_philosophy">"The Unix Philosophy."</a>
-  </p>
-
-  <p>
-    A regular file contains data which is stored on-disk.
-    The regular file is the prototypical "file" type;
-    approximately 80% of files are regular files (Stevens, 98).
-  </p>
-
-  <div class="aside-left">
-    <h4> Aside: </h4>
-    <p>
-      <em>Root</em> has such power over the system that I
-      like to think of it as acting on behalf of the system itself.
-      It is not a <em>user</em>, per se.
-    </p>
-  </div>
-
-  <p>
-    In both Unix and its derivatives, each file has an owner, and belongs to a group.
-    Important files are owned by <code>root</code>, the superuser of the system.
-    Because the owner of a given file is permitted to do anything to it, we typically wish
-    to avoid acting as <code>root</code>, and instead use <code>sudo</code> wherever possible.
-  </p>
-
-  <p>
-    The accessibility of each file is controlled by
-    nine <em>access permission bits</em>, also called <em>mode bits</em>.
-    Only the owner of the file can change these.
-    They are:
-    <code>read</code>, <code>write</code> and <code>execute</code> for each,
-    <em>owner</em>, <em>group</em>, <em>everyone else</em>.
-    These bits are maintained within the file's inode.
-  </p>
-
-  <p>
-    Here we have a typical listing:
-  </p>
-
-  <a href="assets/img/ls-long.pdf" target="_blank"><img src="assets/img/ls-long.png" style="width: 100%" title="Click for printable" ></a>
-
-  <p>
-    We see that <code>bash</code> is executable by anybody, but can
-    only be written to (changed by) <code>root</code>.
-    File mode bits can be changed with the
-    <a href="https://www.man7.org/linux/man-pages/man1/chmod.1.html"><code>chmod(1)</code></a> utility.
-  </p>
-
-  <p>
-    Beyond <code>ls</code>, two other command-line tools are useful for peeking
-    into a file. They are <code>file</code>, which gives a brief description of
-    the file's type, and <code>stat</code>, which gives a human-readable
-    summary of the file's inode's metadata:
-  </p>
-
-  <div class="code">
-    $ file /bin/bash<br>
-    /bin/bash: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), <br>
-    dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, <br>
-    BuildID[sha1]=a43fec47192ff49c2d3fed671f2be8df7e83784a, for <br>
-    GNU/Linux 3.2.0, stripped<br><br>
-    $ stat /bin/bash<br>
-    File: /bin/bash<br>
-    Size: 1183448   	Blocks: 2312       IO Block: 4096   regular file<br>
-    Device: 802h/2050d	Inode: 1835042     Links: 1<br>
-    Access: (0755/-rwxr-xr-x)  Uid: (    0/    root)   Gid: (    0/    root)<br>
-    Access: 2020-07-14 13:33:43.628528710 -0500<br>
-    Modify: 2020-02-25 06:03:22.000000000 -0600<br>
-    Change: 2020-07-09 11:20:12.676956656 -0500<br>
-    Birth: -<br>
-  </div>
-
-  <h3>See Also:</h3>
-  <ul>
-    <li><a href="https://www.man7.org/linux/man-pages/man1/chmod.1.html">chmod(1)</a></li>
-    <li><a href="https://en.wikipedia.org/wiki/File_system_permissions#Numeric_notation">File System Permissions - Numeric Notation - Wikipedia </a></li>
-  </ul>
-
-</div>
 
 <div class="content" id="pseudo">
   <h2>Pseudo Files</h2>
