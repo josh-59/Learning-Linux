@@ -4,12 +4,6 @@ title: Introduction to GNU/Linux
 last-updated: October, 2020
 ---
 
-<!--
-    Unix Philosophy:
-        Avoid special cases
-        Simple is better
--->
-
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
@@ -326,7 +320,7 @@ last-updated: October, 2020
     </p>
 
     <p>
-        Another major figure of modern Linux development is Greg Kroah-Hartman (pronounced "<em>Crow</em>-Hartman"), who is the maintainer of the Stable branch
+        A major figure of modern Linux development is Greg Kroah-Hartman (pronounced "<em>Crow</em>-Hartman"), who is the maintainer of the Stable branch
         and several subsystems.<sup><a href="https://en.wikipedia.org/wiki/Greg_Kroah-Hartman">[11]</a></sup>
         According to Mr. Kroah-Hartman, interest in the kernel continues to
         grow, with 1200 new developers joining the project each
@@ -361,153 +355,59 @@ last-updated: October, 2020
     </ul>
 </div>
 
-<!--
-    Linux Standard Base
-
-    https://en.wikipedia.org/wiki/Linux_Standard_Base
-
--->
-
-<!--
-
-<div class="content" id="posix">
-    <h2> POSIX </h2>
-    <!--
-        In 1988 there were more than xxxxx Unix-Like operating systems, including:
-        <ul>
-            <li>
-                University of California Berkley's <em>BSD</em>
-            </li>
-
-            <li>
-                AT&T's <em>System V</em>
-                <p>
-                    Bell Labs <em>Version 5</em>
-                </p>
-            </li>
-
-
-            <li>
-                HP's <em>UX</em>
-            </li>
-
-            <li>
-                SCO's <em>Xenix</em>
-                <p>
-                    Originally created by Microsoft, Xenix was sold to
-                    <em>Santa Cruz Operations</em> in 198x after Microsoft
-                    signed a deal with IBM to produce ____ (DOS).
-                </p>
-            </li>
-        </ul>
-
-        The lack of uniformity among them caused difficulties in creating
-        portable software
-        could be transported from one system to another.
-
-        In 1988 IEEE released the first POSIX standard.
-
-        Today, the standard effectively codifies what it means to be "Unix-like."
-
-    <p>
-        The system calls that an operating system provides
-        determine the interface that any user-space process has
-        to the operating system, and thus to the machine.
-        In order to assure software portability across operating systems, it is
-        essential that this interface be (mostly) uniform.
-    </p>
-
-    <div class="aside-left">
-        <h4>Aside:</h4>
-        <p>
-            Richard Stallman suggested the name <em>POSIX.</em>
-            It is pronounced <em>pah-zicks.</em>
-        </p>
-    </div>
-
-    <p>
-        The first <em>Portable Operating System Interface</em> specification
-        was released as an IEEE standard in 1988,<sup><a href="https://en.wikipedia.org/wiki/POSIX#Name">[15]</a></sup>
-        and specified the system-call interface available to user-space programs,
-        among other things.
-        Operating systems that abide by this standard are called <em>POSIX Compliant;</em>
-        systems developers general aim for POSIX compliance.<sup><a href="https://en.wikipedia.org/wiki/Single_UNIX_Specification">[16]</a></sup>
-    </p>
-
-    <p>
-        Posix has been refined since 1988.
-        In addition, a stronger specification has been introduced, and is
-        called the <em>Single Unix Specification.</em><sup><a href="https://en.wikipedia.org/wiki/Single_UNIX_Specification">[16]</a></sup>
-        Certification to this standard is costly, and it is generally reserved for proprietary operating systems.
-    </p>
-
-    <p>
-        While the system-call interface is not the only means of interacting with
-        the kernel, and properly speaking belongs to the kernel,
-        I feel it a sufficiently important abstraction layer to be depicted separately:
-        Most interactions between processes and the operating system occur
-        through the system-call interface.
-    </p>
-
-    <h3> See Also: </h3>
-    <ul>
-        <li><a href="https://pubs.opengroup.org/onlinepubs/9699919799/mindex.html">POSIX.1-2017</a>&mdash; The Latest Standard</li>
-    </ul>
-</div>
-
--->
-
 <div id="distributions" class="content">
     <h2> Linux Distributions </h2>
     <p>
         A Linux distribution is a collection of software that, when installed, yields
         a functioning operating system.
-        Each includes a kernel, some core utilities,
+        Each includes some variant of the Linux kernel, some core utilities,
         and, usually, some user-space applications (e.g., Firefox).
-        All of this is tested to work and will be packaged in a fashion that facilitates installation,
-        (usually, an ISO).
+        All of this is tested to work and is packaged in a fashion that 
+        facilitates installation, (usually, an ISO).
     </p>
 
     <p>
         In my opinion, distributions are more similar than dissimilar.
-        Think of them as flavors of the Unix architecture, rather than distinct operating systems.
+        Think of them as flavors of the Unix architecture, rather than 
+        incompatible operating systems.
         The oldest distribution that's still maintained is
         <a href="http://www.slackware.com/">Slackware</a>, first released
         in 1993.<sup><a href="https://en.wikipedia.org/wiki/Slackware">[17]</a></sup>
     </p>
 
     <p>
-        One of the key distinctions between distributions is the package management
-        system that is provided.
-        The package-management system is intended to be the user's interface
-        to obtaining, installing and upgrading software; it's similar
-        to a <em>Store</em> on closed-source OS's.
-        While the user is free to install software "by hand," this is generally
-        discouraged because the package-management system allows centralized
-        and automated updating.
+        Almost always, a distribution becomes a project, around which
+        a community forms.  
+        These communities usually produce tangentially related software 
+        (such as installation mechanisms), and provide support and documentation
+        for their work.
     </p>
 
     <p>
-        Distributions differ in philosophy towards the software that's appropriate
-        to their operating system.
-        Loosely, newer software has newer features, but
-        is less stable than older software.
-        For an operating system intended to be used on a server (e.g., <a href="https://www.debian.org/">Debian</a>),
-        the maintainers would tend towards reliable, stable,
-        and well-tested user-space software.
-        Similarly, a distribution geared towards development
-        (e.g., <a href="https://getfedora.org/">Fedora</a>) would employ software which is newer and less-tested.
+        These communities often differ in the precise goals for their work.
+        For instance, the <a href="https://www.debian.org/">Debian</a> project
+        intends to produce a stable operating system appropriate for use in 
+        servers, while the <a href="https://getfedora.org/">Fedora</a> project
+        intends to stay closer to the cutting edge, and is willing to
+        sacrifice some stability to do so.
     </p>
 
     <p>
-        Some distributions follow a "rolling release" development cycle&mdash; notably,
-        <a href="https://wiki.archlinux.org/index.php/Arch_Linux">Arch.</a>
-        This method of delivering software focuses on obtaining and using the
-        latest version of each.
-        Under the rolling release paradigm, new software releases are expected to
-        work correctly only with the latest software releases.
-        The user is expected to update/upgrade frequently, but is guaranteed that
-        each system-wide update will yield a coherent collection of software.
+        When browsing for your next new operating system, you will often
+        hear the term "downstream," which warrants some explanation.
+        Since these projects are free software, it is permitted to
+        copy, then modify it; in the case of 
+        Linux distributions, such a modification is called an <em>derivative,</em> 
+        and the modified software is said to be <em>downstream</em> of the old 
+        software.
+    </p>
+
+    <p>
+        For instance, <a href="https://ubuntu.com">Ubuntu</a> is downstream of
+        Debian, and <a href="https://manjaro.org">Manjaro</a> is downstream of
+        Arch.
+        Usually, these derivatives focus on superficial and quality-of-life
+        improvements, and as a rule of thumb, you can trust free software.
     </p>
 
     <h3> See Also: </h3>
@@ -520,13 +420,21 @@ last-updated: October, 2020
 <div id="mint" class="content">
     <h2> Linux Mint </h2>
     <p>
-        I like <a href="https://linuxmint.com/">Linux Mint,</a> but then, I'm a simple guy.
-        This distribution is downstream of Debian, which means that
-        it's a derivative of Debian.
-        It inherits their package-management tool, <code>apt</code>,
-        and also Debain's philosophy towards software.
-        Linux Mint is a characteristically professional operating system, and focuses on
-        productivity.  It is extremely new-user friendly, but retains the power
+        My favorite Linux distribution is 
+        <a href="https://linuxmint.com/">Linux Mint,</a> 
+        but then, I'm a simple guy.
+        This distribution is actually downstream of Ubuntu, although
+        they do offer a version that is a first-order derivative of Debian 
+        (which I prefer). 
+        Either way, Mint inherits Debain's philosophy towards software, meaning 
+        that it focuses on stability.
+    </p>
+
+    <p>
+        Linux Mint is a characteristically professional operating system, 
+        and focuses on productivity, which means that you'll be up and
+        running before you know it.  
+        It is extremely new-user friendly, and maintains the power
         of any other Unix-like operating system.
     </p>
     <a title="RealNZZN / CC BY-SA (https://creativecommons.org/licenses/by-sa/4.0)" href="https://upload.wikimedia.org/wikipedia/commons/b/b3/Cinnamon_4.4.8_on_Linux_Mint_19.3.png"><img width="100%" alt="Cinnamon 4.4.8 on Linux Mint 19.3" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Cinnamon_4.4.8_on_Linux_Mint_19.3.png/1024px-Cinnamon_4.4.8_on_Linux_Mint_19.3.png"></a>
