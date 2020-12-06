@@ -5,17 +5,17 @@ last-updated: November, 2020
 ---
 
 <!--
-	Terminals, then shells
+
 -->
 
 <div id="nav_bar_2" class="nav">
 	<ul>
 		<li><a href="#introduction"> Introduction </a></li>
-		<li><a href="#standard-file-descriptors"> Standard File Descriptors </a></li>
-		<li><a href="#terminal-emulators"> Terminal Emulators </a></li>
-		<li><a href="#device_files"> Device Files </a></li>
+		<li><a href="#terminals"> Terminals </a></li>
+		<li><a href="#virtual-terminals"> Virtual Terminals</a></li>
 		<li><a href="#terminal_line_discipline"> Terminal Line Discipline </a></li>
 		<li><a href="#shell"> Shell </a></li>
+		<li><a href="#standard-file-descriptors"> Standard File Descriptors </a></li>
 		<li><a href="#redirection"> Redirection </a></li>
 		<li><a href="#shell-globbing"> Globbing </a></li>
 		<li><a href="#shell-features"> Other Shell Features </a></li>
@@ -27,57 +27,87 @@ last-updated: November, 2020
 	<h1> Terminals and Shells</h1>
 	<h4>Under Construction! </h4>
 	<p>
-
+		Unix was born in the years immediately following punch-card
+		machines.
+		At the time, the primary interface for users was the <a href="./text-terminals.html">text terminal</a>.
+		Although hard copy terminals are antiquated, the idea persists in
+		modern contexts because it is a very good low-level interface to the machine:
+		It is often used by developers and system administrators.
 	</p>
 </div>
 
-<div id="standard-file-descriptors" class="content">
-	<h2> Standard File Descriptors </h2>
-
-</div>
-
-<div id="terminal-emulators" class="content">
-	<h2> Terminal Emulators </h2>
-
+<div id="terminals" class="content">
+	<h2> Terminals </h2>
 	<p>
-		Primarily, terminals persist in modern Linux in the form of <i>terminal emulators</i>.
+		Terminals persist on modern hardware in the form of <i>terminal emulators</i>.
 		These are user-space processes that, well, emulate an old terminal!
-		Specifically, they provide a GUI-compatable front-end to an old-school interface.
-		Terminal emulation is notoriously difficult,
-		and is characterized by <i>which</i> terminal device you are emulating (Shuford).
+		Specifically, they provide a GUI front-end to a
+		typewriter-style, line-by-line interface.
 	</p>
 
 	<p>
-		Information about the capabilities of supported terminals is stored locally in a database known as <code>terminfo</code><sup><a href="#references">[5]</a></sup>.
-		Terminal emulators are typically backward-compatable with the VT100 (xterm, for instance, is backward compatable with the both the VT100 and VT220<sup><a href="#references">[6]</a></sup>),
-		but often support additional capabilities, such as color, and so often have a distinct entry in the terminfo database.
-	</p>
-
-	<p>
-		Some fun and interesting terminal emulators from around the web (suggestions/recommendations are welcome!):
+		Some modern terminal emulators:
 	</p>
 
 	<p>
 		<ul style="list-style: none;">
-			<li> <a href="https://invisible-island.net/xterm/xterm.faq.html">xterm</a>&mdash; The standard terminal emulator for X Window System </li>
+			<li> <a href="https://wiki.gnome.org/Apps/Terminal">GNOME Terminal</a>&mdash; A terminal emulator for GNOME. Common</li>
+			<li> <a href="https://invisible-island.net/xterm/xterm.faq.html">xterm</a>&mdash; A terminal emulator for the X Window System.  Common, old, stable</li>
 			<li> <a href="https://github.com/alacritty/alacritty "> alacritty</a>&mdash; A GPU-accelerated terminal emulator </li>
 			<li> <a href="https://github.com/GitSquared/edex-ui#screenshots">edex-ui</a>&mdash; A terminal emulator designed to make you look <i>insanely badass</i> </li>
-			<li> <a href="https://st.suckless.org/"> suckless st</a>&mdash; a terminal emulator that sucks less </li>
 		</ul>
 	</p>
-</div>
 
-<div id="device_files" class="content">
-	<h2> Device Files </h2>
+	<figure>
+		<img src="assets/img/gnome-terminal.png">
+		<figcaption><center>GNOME Terminal</center></figcaption>
+	</figure>
 
 	<p>
-		A terminal is connected to a computer by a full-duplex communication pipeline.
-		In days' past, this was a serial port.
-		The Unix environment presents an abstraction of the terminal as a special device file.
-		Located in <code>/dev</code>, the <code>tty</code> files are available to each user-space process
-		using a terminal for input or output.
-		A program can open, read from and write to a tty file, with the operating system
-		being responsible for the details.
+		From the machine's perspective, terminals can be written to and
+		read from as though they were typewriters.
+		Characters written to them are written on screen, and appear as output.
+		Characters read from them appear as input, sent from the user to the machine.
+	</p>
+
+	<div class="aside-right">
+		<h4>Aside:</h4>
+		<p>
+			The files we are interested in are <code>/dev/pts/*</code>
+		</p>
+	</div>
+
+	<p>
+		The Unix environment presents these connections as files.
+		Since they are emulating a device, we can expect to find them in
+		<code>/dev</code>.
+		By this method, user-space programs have access to input and output
+		via the elementary means of file access.
+	</p>
+
+	<h3>See Also:</h3>
+	<ul>
+		<li><code><a href="https://man7.org/linux/man-pages/man7/pty.7.html">pty(7)</a></code></li>
+		<li><code><a href="https://man7.org/linux/man-pages/man4/pts.4.html">pts(4)</a></code></li>
+	</ul>
+
+</div>
+
+<div id="virtual-terminals" class="content">
+
+	<h2 style="margin-bottom: 2pt;"> Virtual Terminals</h2>
+	<h4> You can safely skip this section</h4>
+
+	<p>
+		Virtual terminals are the closest re-imaging of the classic terminal-bound
+		interface to be found in modern operating systems.
+		They are full-screen terminal displays on the system video monitor,
+		and are accessible by pressing the key combination CTRL+ALT+F[1-9]
+		(use CTRL-ALT+F7 to get back!).
+		You may log in to different virtual terminals simultaneously,
+		and thus have a few different sessions with the computer going on at the same time.
+		In the example below, 'josh' (me) owns the second virtual terminal
+		(in fact, it's because I'm signed in there!).
 	</p>
 
 	<div class="aside-left" style="width: 30%;">
@@ -101,34 +131,6 @@ last-updated: November, 2020
 			<i> <a href="https://www.kernel.org/doc/html/v5.4/admin-guide/devices.html"> Kernel.org Admininstrator's Guide </a> </i>
 		</center>
 	</div>
-
-	<p>
-		By this method, user-space programs have access to nontrivial, if elementary, input and output,
-		by the trivial method of file access.
-		Moreover, for a Unix system accessed through a terminal, the flow of data
-		through the tty files represents the entirety of input and output.
-	</p>
-
-	<p>
-		Common to all tty devices is the application of a kernel module called
-		the <i>terminal line discipline</i>, which serves to interpret
-		input and produce a more human-amiable interface.
-		For instance, input is line-buffered by default, so that the user can modify a line
-		(e.g., backspace) before sending the input to their program.
-	</p>
-
-	<h3> Virtual Terminals: <br><code>/dev/tty1</code> thru <code>/dev/tty63</code> </h3>
-	<p>
-		Virtual terminals are the closest re-imaging of the classic terminal-bound
-		interface to be found in modern operating systems.
-		They are full-screen terminal displays on the system video monitor,
-		and are accessible by pressing the key combination CTRL+ALT+F[1-9]
-		(use CTRL-ALT+F7 to get back!).
-		You may log in to different virtual terminals simultaneously,
-		and thus have a few different sessions with the computer going on at the same time.
-		In the example below, 'josh' (me) owns the second virtual terminal
-		(in fact, it's because I'm signed in there!).
-	</p>
 
 	<div class="code">
 		$ ls -lF /dev/tty[0-9] <br>
