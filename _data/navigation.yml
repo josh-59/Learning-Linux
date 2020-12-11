@@ -14,10 +14,6 @@
   link: /documentation.html
 - name: "Command Line 1: A Tutorial Introduction"
   link: /command-line-1-tutorial-introduction.html
-- name: "Command Line 2: More Detail"
-  link: /command-line-2-more-detail.html
-- name: "Command Line 3: Redirection"
-  link: /command-line-3-redirection.html
 - name: Text Terminals
   link: /text-terminals.html
 - name: Finding Files

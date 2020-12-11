@@ -11,12 +11,13 @@ last-updated: November, 2020
 <div id="nav_bar_2" class="nav">
 	<ul>
 		<li><a href="#introduction"> Introduction </a></li>
+		<li><a href="#history"> History </a></li>
 		<li><a href="#terminals"> Terminals </a></li>
 		<li><a href="#virtual-terminals"> Virtual Terminals</a></li>
-		<li><a href="#terminal_line_discipline"> Terminal Line Discipline </a></li>
-		<li><a href="#shell"> Shell </a></li>
+		<li><a href="#shells"> Shells </a></li>
 		<li><a href="#standard-file-descriptors"> Standard File Descriptors </a></li>
 		<li><a href="#redirection"> Redirection </a></li>
+		<li><a href="#terminal_line_discipline"> Terminal Line Discipline </a></li>
 		<li><a href="#shell-globbing"> Globbing </a></li>
 		<li><a href="#shell-features"> Other Shell Features </a></li>
 		<li><a href="#references"> References </a></li>
@@ -29,11 +30,112 @@ last-updated: November, 2020
 	<p>
 		Unix was born in the years immediately following punch-card
 		machines.
-		At the time, the primary interface for users was the <a href="./text-terminals.html">text terminal</a>.
-		Although hard copy terminals are antiquated, the idea persists in
+		At the time, the preferred interface for users was the <a href="./text-terminals.html">physical terminal</a>.
+		Although physical terminals are antiquated, the idea persists in
 		modern contexts because it is a very good low-level interface to the machine:
-		It is often used by developers and system administrators.
+		It is often used by developers and system administrators to quickly get work done.
 	</p>
+</div>
+
+<div id="history" class="content">
+	<h1>History</h1>
+	<h4>Physical Terminals</h4>
+
+	<p>
+		As interactive computing became more popular, hard-copy terminals were phased out in favor of
+		screen-based entities.
+		The resulting devices, referred to as <i>text terminals,</i> consisted of a monitor and a keyboard;
+		the monitor was unlike a modern monitor in that it contained a buffer
+		(on the order of a few kilobytes<sup><a href=#references style="text-decoration: none">[3]</a></sup>)
+		which maintained the text currently on screen, and in that it contained a character-to-bitmap font table to be referenced
+		when drawing each character; that is, it included its own font.
+	</p>
+
+	<p>
+		A <i>physical terminal</i> is a computer peripheral similar to a typewriter.
+		The earliest examples printed output onto paper, and were therefore
+		nearest to typewriters.
+		Later variants stored these characters in an onboard buffer, and
+		displayed them on a screen.
+	</p>
+
+	<div class="aside-right">
+		<h4>Aside:</h4>
+		<p>
+			In contrast to a modern monitor, a physical terminal
+			can only display characters, and receives a description of the characters to display only once.
+		</p>
+	</div>
+
+	<!--
+		Outline:
+			Early computing -> Punch cards to job-lot
+			Time-sharing computing & text terminals
+				-> Stress the importance of text terminals to efficient programming
+			Multics & Unix
+	<p>
+	-->
+
+
+	<p>
+		Second, the technological state of the 1960's included the <a href="https://mysite.du.edu/~jcalvert/tel/teletype.htm"<i>teletypewriter</i></a>,
+		a device for sending telegrams.
+		These were, essentially, remote-controlled typewriters, and in the 1960's, they were repurposed to
+		interface with computers.
+		The resulting abstraction formed the basis of the input/output mechanism of early interactive computing.
+		Paper-based terminals persisted well into the 1970's, and later electronic typewriters
+		<a href="https://www.youtube.com/watch?v=z-u4kUeIqDI">sometimes support "terminal mode,"</a>
+		allowing them to interface with computers via serial cable.
+	</p>
+
+	<center>
+		<a title="Peter Hamer, CC BY-SA 2.0 &lt;https://creativecommons.org/licenses/by-sa/2.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Ken_Thompson_(sitting)_and_Dennis_Ritchie_at_PDP-11_(2876612463).jpg"><img width="1024" alt="Ken Thompson (sitting) and Dennis Ritchie at PDP-11 (2876612463)" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Ken_Thompson_%28sitting%29_and_Dennis_Ritchie_at_PDP-11_%282876612463%29.jpg/1024px-Ken_Thompson_%28sitting%29_and_Dennis_Ritchie_at_PDP-11_%282876612463%29.jpg"></a>
+		Ken Thompson (sitting) and Dennis Ritchie at PDP-11 in the "UNIX Room" of Bell Labs
+	</center>
+
+	<p>
+		The computer itself was not required to draw each character on-screen; that was the responsibility of
+		the terminal.
+		Rather, the mainframe was only expected to tell the terminal <i>which</i> characters to draw, once.
+		Users would sit at a terminal, connected to a (possibly distant) machine, would type in
+		programs, issue commands, enter data, etc.; a serial cable connected this I/O device to the computer,
+		and it was termed a <i>terminal,</i> since it was located at the terminal end of this cable.
+	</p>
+
+	<a class="img-left" title="Methem (Mikko J. Putkonen), Public domain, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Email_terminals_at_Oulu_uni_2008.jpg"><img width="512" alt="Email terminals at Oulu uni 2008" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Email_terminals_at_Oulu_uni_2008.jpg/512px-Email_terminals_at_Oulu_uni_2008.jpg"></a>
+
+	<p>
+		Physical terminals <a href="https://www.vt100.net/dec/vt_history">were used for decades,</a>
+		especially in situations mandating multiple access to large databases, such
+		as libraries.
+	</p>
+
+	<p>
+		It's worth noting that the idea of mainframe-driven utility computation suggests that the computer's organization
+		follows the sctructure of a mathematical tree:
+		The "root user" would sit at the root of this tree, exercising super-user priveledges over the machine,
+		while end-users would be positioned at the leaves of the tree.
+	</p>
+
+	<div class="aside-right">
+		<h4>Aside:</h4>
+		<p>
+			<i>Teletype</i> was a trade name of the Teletype Corporation, and was subsequently abbreviated to <i>tty</i>.
+			<a href="http://www.pdp8.net/asr33/videos.shtml">The Model 33</a> was among the most popular hard-copy terminals,
+			with around 600,000 units sold (<a href="#references">Libes 129</a>).
+		</p>
+	</div>
+
+
+
+
+
+
+	<h3>See Also:</h3>
+	<ul>
+		<li><a href="https://www.youtube.com/watch?v=RuZUPpmXfT0">DEC VT320: The Classic 1987 Library Computer Terminal</a> (Youtube Video)</li>
+		<li><a href="https://tldp.org/HOWTO/Text-Terminal-HOWTO.html#toc1">Text-Terminal HOWTO</a> (TLDP Deep Dive)</li>
+	</ul>
 </div>
 
 <div id="terminals" class="content">
@@ -44,6 +146,12 @@ last-updated: November, 2020
 		Specifically, they provide a GUI front-end to a
 		typewriter-style, line-by-line interface.
 	</p>
+
+
+	<figure>
+		<img src="assets/img/gnome-terminal.png">
+		<figcaption><center>GNOME Terminal (Emulator)</center></figcaption>
+	</figure>
 
 	<p>
 		Some modern terminal emulators:
@@ -58,18 +166,6 @@ last-updated: November, 2020
 		</ul>
 	</p>
 
-	<figure>
-		<img src="assets/img/gnome-terminal.png">
-		<figcaption><center>GNOME Terminal</center></figcaption>
-	</figure>
-
-	<p>
-		From the machine's perspective, terminals can be written to and
-		read from as though they were typewriters.
-		Characters written to them are written on screen, and appear as output.
-		Characters read from them appear as input, sent from the user to the machine.
-	</p>
-
 	<div class="aside-right">
 		<h4>Aside:</h4>
 		<p>
@@ -78,15 +174,26 @@ last-updated: November, 2020
 	</div>
 
 	<p>
-		The Unix environment presents these connections as files.
+		These emulators are "dumb", in the sense that they do nothing except
+		display text and return text.
+		Per tradition, the Unix environment presents these connections as files.
 		Since they are emulating a device, we can expect to find them in
 		<code>/dev</code>.
-		By this method, user-space programs have access to input and output
-		via the elementary means of file access.
+	</p>
+
+	<p>
+		Terminal emulation can become quite involved;
+		for this introduction, and for most purposes, it is sufficient to recognize that
+		terminals and <a href="#shells">shells</a> are distinct, cooperating processes.
+	</p>
+
+	<p>
+
 	</p>
 
 	<h3>See Also:</h3>
 	<ul>
+		<li><a href="http://ascii-table.com/ansi-escape-sequences-vt-100.php">Commonly-Supported Escape Sequences</a></li>
 		<li><code><a href="https://man7.org/linux/man-pages/man7/pty.7.html">pty(7)</a></code></li>
 		<li><code><a href="https://man7.org/linux/man-pages/man4/pts.4.html">pts(4)</a></code></li>
 	</ul>
@@ -281,6 +388,280 @@ last-updated: November, 2020
 
 		</div>
 
+
+
+
+
+		<div id="shells" class="content">
+			<h2> Shells </h2>
+
+			<p>
+				  A shell is a program which interprets and executes our (arbitrary) commands;
+				  it is a <em>shell</em> in the sense that it is the outermost layer of the
+				  operating system, the one which the user has direct contact.
+				  Unix deviates from most operating systems designs by entertaining
+				  the shell as an ordinary user-space process:  From a software
+				  architecture standpoint, it is just a running program.
+			 </p>
+
+			 <p>
+				  As depicted so far, it might appear that the shell exists "within" the terminal,
+				  but that is not the case, and it's a mistake to adopt that sentiment.
+				  Rather, the shell exists as a separately executing program, and <em>writes</em> to
+				  the terminal as though it were a file.
+				  Moreover, the shell gathers your input by <em>reading</em>
+				  from the terminal as though it were a file.
+				  This is possible because of the uniquely elegant file interface that
+				  was created for Unix.
+			</p>
+
+			<p>
+				Typically, when "interacting" with a computer, data from a tty file is read by a particular program called
+				a <a href="https://wiki.archlinux.org/index.php/Command-line_shell"> shell</a>.
+				There are many variants, such as the antiquated <code>sh</code>, its modern successor <code>bash</code>,
+				the disused <code>csh</code>, the feature-laden <code>zsh</code>, and a relative newcomer, the Friendly Interactive Shell, <code>fish</code>.
+				Each of these are ordinary programs, and exist within a running operating system as an ordinary
+				<a href="https://en.wikipedia.org/wiki/Process_(computing)">user-space processes</a>; they have no special attributes or permissions.
+				They simply read from a file (which might or might-not be your tty file), interpret and execute commands.
+				The commands they "know" are determined <i>by the shell itself</i>, and can be determined by looking at
+				the <code>PATH</code> environment variable:
+			</p>
+
+			<div class="code">
+				$ echo $PATH
+			</div>
+
+			<div class="aside-right">
+				<h4> Aside </h4>
+				<p>
+					Desktop environments serve a role analagous to shells, but in GUI-based environments.
+					In fact, they are sometimes called <i><a href="https://en.wikipedia.org/wiki/Shell_(computing)#GUI">Graphical Shells</a>.</i>
+					My favorite is Cinnamon!  Which one is yours?
+				</p>
+			</div>
+
+			<p>
+				Shells are customizable in a variety of ways.
+				Here we'll take a look at customizing the prompt in Bash.
+				The prompt is the short string printed before the shell asks you for input.
+				It usually looks like,
+			</p>
+
+			<div class="code">
+				-->
+			</div>
+
+		<p>
+			or perhaps,
+		</p>
+
+		<div class="code">
+			josh@home:~$
+		</div>
+
+		<p>
+			Within Bash, the prompt is determined by the contents of the <code>PS1</code> variable.
+			That is, Bash, in addition to being an interactive program, is an interpreted language, and has variables;
+			among these is <code>PS1</code>.
+			Each time Bash wishes to ask you for a new command, it reads and prints <code>PS1</code>
+			before doing so.  Nothing more, and nothing less.
+		</p>
+
+		<p>
+			Thus, we can modify the prompt by setting PS1 to our liking:
+		</p>
+
+		<div class="code">
+			PS1="-->"
+		</div>
+
+		<p>
+			Everybody has their own thing&ndash; I prefer a simple and readable prompt.
+			So, I wish the prompt to print my current working directory, in bold, so as to distinguish it from
+			other lines.
+		</p>
+
+		<p>
+			You might have guessed that what we're going to do is tell Bash to print
+			an ANSI escape sequence saying, "Turn bold on," followed by the
+			current working directory (another variable within Bash),
+			followed by the ANSI escape sequence turning bold back off:
+		</p>
+
+		<div class="code">
+			PS1='\033[1m$PWD\033[m'
+		</div>
+
+		<p>
+			This will work correctly on any terminal supporting ANSI escape sequences (which is most, if
+			not all, of them).
+			However, there's one "gotcha," that, well, got me:
+			<code>bash</code> requires that each sequence of non-printing characters be wrapped in
+			<code>\[</code> and <code>\]</code> (or else <code>bash</code> will allow text to wrap around
+			in a very perplexing manner).
+			So, we have:
+		</p>
+
+		<div class="code">
+			PS1='\[\033[1m\]$PWD\[\033[m\]'
+		</div>
+
+		<p>
+			Thanks Derek Taylor of <a href="https://www.youtube.com/channel/UCVls1GmFKf6WlTraIb_IaJg">
+			DistroTube</a>, for helping me out!
+			Finally, we append an indicator telling us whether we are root user or not, along with a space:
+		</p>
+
+		<div class="code">
+			PS1='\033[1m$PWD\$\033[m '
+		</div>
+
+		<p>
+			Note single quotes!
+			See the <a href="https://www.gnu.org/software/bash/manual/bash.pdf">
+				GNU Bash Reference Manual</a> ("Controlling the Prompt") for more information.
+			</p>
+		</div>
+
+		<div id="standard-file-descriptors" class="content">
+		  <h2> The Standard File Descriptors </h2>
+		  <p>
+		    Each process on a *nix system is created with three open files,
+		    <em>Standard In,</em> <em>Standard Out</em> and <em>Standard Error:</em>
+		  </p>
+
+		  <figure>
+		    <a href="assets/img/stdin-stdout-stderr.png"><img src="assets/img/stdin-stdout-stderr.png" style="width: 100%;"></a>
+		  </figure>
+
+
+		  <div class="aside-right">
+		    <h4>Aside:</h4>
+		    <p>
+		      Although these files are opened for every process,
+		      we interact with them most often at the command line.
+		    </p>
+		  </div>
+
+		  <p>
+		    By default the shell connects each command-line utility's standard-in to
+		    the keyboard, and both standard out and standard error to the terminal screen.
+		    These are, in fact, the shell's <em>own</em> connections; each
+		    process that the <a href="processes.html#proccess-creation">shell creates</a>
+		    inherits the shell's file descriptors.
+		  </p>
+
+		  <p>
+		    Consider the <em>echo</em> utility.
+		    This program reads each argument passed to it, and prints each to standard
+		    out:
+		  </p>
+
+		  <div class="code">
+		    $ echo one two three <br>
+		    one two three <br>
+		  </div>
+
+		  <p>
+		    Here, neither STDIN nor STDERR are used (although they are open).
+		    Rather, the arguments are passed to the kernel during the
+		    <em><a href="https://www.man7.org/linux/man-pages/man2/execve.2.html">execve(pathname, argv, envp)</a></em>
+		    system call, which places them within the address space of <em>echo</em>,
+		    which in turn simply reads them from within itself and prints them to (its) standard out:
+		  </p>
+
+		  <figure>
+		    <a href="assets/img/echo-std.png"><img src="assets/img/echo-std.png" style="width: 80%;"></a>
+		  </figure>
+
+		  <p>
+		    The name <em>argv</em> is short for <em>argument vector,</em> and
+		    is a pointer to an array of character pointers.<sup><a href="#references">[1]</a></sup>
+		    It exists within each process, and the first element it points to
+		    is always the name of the called program.
+		  </p>
+
+		  <p>
+		    We turn back to the operation of the shell.
+		    As each line is read by the shell, it is broken down into tokens, which
+		    are delimited by space(s) or tab(s).
+		    The first token (here, '<code>echo</code>') is always interpreted as a command.
+		    The other tokens were interpreted as arguments, so that our call to echo
+		    passed three arguments.
+		  </p>
+
+		  <p>
+		    By default, the shell connects each command-line utility <em>Standard-out</em>
+		    to the terminal screen, <em>Standard-in</em> to the keyboard, and
+		    <em>Standard-error</em> to the  We can change this, though:
+		  </p>
+
+		  <div class="code">
+		    $ echo one two three > boo <br>
+		  </div>
+
+		  <p>
+		    This is called <em>redirection</em>&mdash; Formally, we have redirected the
+		    standard-out of the <code>echo</code> utility to a file called <code>boo</code> by using
+		    the redirection operator <code>&gt;</code>.
+		    This is a facility of the shell; <code>echo</code> is not involved in any way.
+		  </p>
+
+		  <p>
+		    To explain, in the command above, the shell first opens
+		    the file <code>boo</code>, creating it if it does not exist, and truncating it
+		    to zero length if it does exist (and is writeable).
+		    Then the shell connects its own standard out to it, and executes echo.
+		    Echo blindly prints its output to <em>standard out,</em> which happens to
+		    be the file <em>boo</em>, and not the terminal screen.
+		  </p>
+
+		</div>
+
+
+
+		<div id="special-characters" class="content">
+			<h2>Special Characters</h2>
+
+			<p>
+				Terminal special characters are like escape sequences, but in the other
+				direction.  They are key-combinations typed at the keyboard
+				which are interpreted by the terminal driver and mapped to special
+				actions.
+				There are sixteen commonly mapped terminal special characters;<sup><a href="#references">[15]</a></sup>
+				most of them can be remapped by manipulating the <code>termios</code> struct.
+				Here are a few:
+			</p>
+
+			<ul>
+				<li>CTRL-C&mdash; Send the interrupt signal, <code>SIGINT</code>, to the foreground process. This is the principal
+					means of terminating an unresponsive process.</li>
+				<li>CTRL-D&mdash; Write the End-of-File character, <code>EOF</code>, to
+					standard-in of the foreground process.  This will terminate a Bash session,
+					for instance, or an interactive Python session.</li>
+				<li>CTRL-S&mdash; "<code>STOP</code>" Upon receiving this character combination, the terminal
+					driver stops, and attempts to store, all data to and from the terminal.
+				This can make it appear as though the terminal has frozen.</li>
+				<li>CTRL-Q&mdash; "<code>START</code>" Restart terminal input and output.
+					If input or output is queued, the terminal driver will send it first, then resume normal operation.</li>
+			</ul>
+
+			<p>
+				<em>Start</em> and <em>Stop</em> were more useful in times' past: The effect was to pause scrolling.
+				In addition, the bell character was traditionally sounded when output was stopped and the terminal
+				line discipline's buffer became full, thereby warning the user that data was being discarded.
+				From the command prompt, we can list all bindings to special characters, in addition to other terminal attributes by,
+			</p>
+
+			<div class="code">
+				$ stty -a
+			</div>
+
+			<p>
+				Hope you enjoyed this&mdash; more to come!
+			</p>
+		</div>
+
 		<div id="terminal_line_discipline" class="content">
 			<h2> Terminal Line Discipline </h2>
 
@@ -446,160 +827,6 @@ last-updated: November, 2020
 				<a href="http://tldp.org/HOWTO/Text-Terminal-HOWTO-8.html#ss8.3">become part of</a> the escape sequence.
 			</p>
 
-		</div>
-
-		<div id="shell" class="content">
-			<h2> Shell </h2>
-			<p>
-				Typically, when "interacting" with a computer, data from a tty file is read by a particular program called
-				a <a href="https://wiki.archlinux.org/index.php/Command-line_shell"> shell</a>.
-				There are many variants, such as the antiquated <code>sh</code>, its modern successor <code>bash</code>,
-				the disused <code>csh</code>, the feature-laden <code>zsh</code>, and a relative newcomer, the Friendly Interactive Shell, <code>fish</code>.
-				Each of these are ordinary programs, and exist within a running operating system as an ordinary
-				<a href="https://en.wikipedia.org/wiki/Process_(computing)">user-space processes</a>; they have no special attributes or permissions.
-				They simply read from a file (which might or might-not be your tty file), interpret and execute commands.
-				The commands they "know" are determined <i>by the shell itself</i>, and can be determined by looking at
-				the <code>PATH</code> environment variable:
-			</p>
-
-			<div class="code">
-				$ echo $PATH
-			</div>
-
-			<div class="aside-right">
-				<h4> Aside </h4>
-				<p>
-					Desktop environments serve a role analagous to shells, but in GUI-based environments.
-					In fact, they are sometimes called <i><a href="https://en.wikipedia.org/wiki/Shell_(computing)#GUI">Graphical Shells</a>.</i>
-					My favorite is Cinnamon!  Which one is yours?
-				</p>
-			</div>
-
-			<p>
-				Shells are customizable in a variety of ways.
-				Here we'll take a look at customizing the prompt in Bash.
-				The prompt is the short string printed before the shell asks you for input.
-				It usually looks like,
-			</p>
-
-			<div class="code">
-				-->
-			</div>
-
-		<p>
-			or perhaps,
-		</p>
-
-		<div class="code">
-			josh@home:~$
-		</div>
-
-		<p>
-			Within Bash, the prompt is determined by the contents of the <code>PS1</code> variable.
-			That is, Bash, in addition to being an interactive program, is an interpreted language, and has variables;
-			among these is <code>PS1</code>.
-			Each time Bash wishes to ask you for a new command, it reads and prints <code>PS1</code>
-			before doing so.  Nothing more, and nothing less.
-		</p>
-
-		<p>
-			Thus, we can modify the prompt by setting PS1 to our liking:
-		</p>
-
-		<div class="code">
-			PS1="-->"
-		</div>
-
-		<p>
-			Everybody has their own thing&ndash; I prefer a simple and readable prompt.
-			So, I wish the prompt to print my current working directory, in bold, so as to distinguish it from
-			other lines.
-		</p>
-
-		<p>
-			You might have guessed that what we're going to do is tell Bash to print
-			an ANSI escape sequence saying, "Turn bold on," followed by the
-			current working directory (another variable within Bash),
-			followed by the ANSI escape sequence turning bold back off:
-		</p>
-
-		<div class="code">
-			PS1='\033[1m$PWD\033[m'
-		</div>
-
-		<p>
-			This will work correctly on any terminal supporting ANSI escape sequences (which is most, if
-			not all, of them).
-			However, there's one "gotcha," that, well, got me:
-			<code>bash</code> requires that each sequence of non-printing characters be wrapped in
-			<code>\[</code> and <code>\]</code> (or else <code>bash</code> will allow text to wrap around
-			in a very perplexing manner).
-			So, we have:
-		</p>
-
-		<div class="code">
-			PS1='\[\033[1m\]$PWD\[\033[m\]'
-		</div>
-
-		<p>
-			Thanks Derek Taylor of <a href="https://www.youtube.com/channel/UCVls1GmFKf6WlTraIb_IaJg">
-			DistroTube</a>, for helping me out!
-			Finally, we append an indicator telling us whether we are root user or not, along with a space:
-		</p>
-
-		<div class="code">
-			PS1='\033[1m$PWD\$\033[m '
-		</div>
-
-		<p>
-			Note single quotes!
-			See the <a href="https://www.gnu.org/software/bash/manual/bash.pdf">
-				GNU Bash Reference Manual</a> ("Controlling the Prompt") for more information.
-			</p>
-		</div>
-
-
-
-		<div id="special-characters" class="content">
-			<h2>Special Characters</h2>
-
-			<p>
-				Terminal special characters are like escape sequences, but in the other
-				direction.  They are key-combinations typed at the keyboard
-				which are interpreted by the terminal driver and mapped to special
-				actions.
-				There are sixteen commonly mapped terminal special characters;<sup><a href="#references">[15]</a></sup>
-				most of them can be remapped by manipulating the <code>termios</code> struct.
-				Here are a few:
-			</p>
-
-			<ul>
-				<li>CTRL-C&mdash; Send the interrupt signal, <code>SIGINT</code>, to the foreground process. This is the principal
-					means of terminating an unresponsive process.</li>
-				<li>CTRL-D&mdash; Write the End-of-File character, <code>EOF</code>, to
-					standard-in of the foreground process.  This will terminate a Bash session,
-					for instance, or an interactive Python session.</li>
-				<li>CTRL-S&mdash; "<code>STOP</code>" Upon receiving this character combination, the terminal
-					driver stops, and attempts to store, all data to and from the terminal.
-				This can make it appear as though the terminal has frozen.</li>
-				<li>CTRL-Q&mdash; "<code>START</code>" Restart terminal input and output.
-					If input or output is queued, the terminal driver will send it first, then resume normal operation.</li>
-			</ul>
-
-			<p>
-				<em>Start</em> and <em>Stop</em> were more useful in times' past: The effect was to pause scrolling.
-				In addition, the bell character was traditionally sounded when output was stopped and the terminal
-				line discipline's buffer became full, thereby warning the user that data was being discarded.
-				From the command prompt, we can list all bindings to special characters, in addition to other terminal attributes by,
-			</p>
-
-			<div class="code">
-				$ stty -a
-			</div>
-
-			<p>
-				Hope you enjoyed this&mdash; more to come!
-			</p>
 		</div>
 
 
