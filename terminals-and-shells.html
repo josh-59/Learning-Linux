@@ -46,49 +46,12 @@ last-updated: November, 2020
 
 	<p>
 		A <i>physical terminal</i> is a computer peripheral similar to a typewriter.
-		The earliest examples printed output onto paper, and were therefore
-		nearest to typewriters.
-		Later variants stored these characters in an onboard buffer, and
-		displayed them on a screen.
-	</p>
-
-	<p>
-		As technology developed and interactive computing became more popular,
-		hard-copy terminals were phased out in favor of
-		screen-based entities.
-		The resulting devices, referred to as <i>physical terminals,</i> consisted of a monitor and a keyboard;
-		the monitor was unlike a modern monitor in that it contained a buffer
-		(on the order of a few kilobytes<sup><a href=#references style="text-decoration: none">[3]</a></sup>)
-		which maintained the text currently on screen, and in that it contained a character-to-bitmap font table to be referenced
-		when drawing each character; that is, it included its own font.
-	</p>
-
-	<div class="aside-right">
-		<h4>Aside:</h4>
-		<p>
-			In contrast to a modern monitor, a physical terminal
-			can only display characters, and receives a description of the characters to display only once.
-		</p>
-	</div>
-
-	<!--
-		Outline:
-			Early computing -> Punch cards to job-lot
-			Time-sharing computing & text terminals
-				-> Stress the importance of text terminals to efficient programming
-			Multics & Unix
-	<p>
-	-->
-
-
-	<p>
-		Second, the technological state of the 1960's included the <a href="https://mysite.du.edu/~jcalvert/tel/teletype.htm"<i>teletypewriter</i></a>,
+		The earliest examples printed output onto paper;
+		this technology was carried over from the
+		<a href="https://mysite.du.edu/~jcalvert/tel/teletype.htm"<i>teletypewriter</i></a>,
 		a device for sending telegrams.
-		These were, essentially, remote-controlled typewriters, and in the 1960's, they were repurposed to
-		interface with computers.
-		The resulting abstraction formed the basis of the input/output mechanism of early interactive computing.
 		Paper-based terminals persisted well into the 1970's, and later electronic typewriters
-		<a href="https://www.youtube.com/watch?v=z-u4kUeIqDI">sometimes support "terminal mode,"</a>
+		<a href="https://www.youtube.com/watch?v=z-u4kUeIqDI">sometimes support terminal mode,</a>
 		allowing them to interface with computers via serial cable.
 	</p>
 
@@ -98,48 +61,25 @@ last-updated: November, 2020
 	</center>
 
 	<p>
-		The computer itself was not required to draw each character on-screen; that was the responsibility of
-		the terminal.
-		Rather, the mainframe was only expected to tell the terminal <i>which</i> characters to draw, once.
-		Users would sit at a terminal, connected to a (possibly distant) machine, would type in
-		programs, issue commands, enter data, etc.; a serial cable connected this I/O device to the computer,
-		and it was termed a <i>terminal,</i> since it was located at the terminal end of this cable.
+		As technology developed and interactive computing became more popular,
+		hard-copy terminals were phased out in favor of
+		screen-based entities.
+		The resulting devices consisted of a monitor and keyboard.
+		The monitor was unlike a modern monitor in that it contained a buffer
+		(on the order of a few kilobytes<sup><a href=#references>[3]</a></sup>)
+		which maintained the text currently on screen.
+		In addition, it contained a font table to be referenced
+		when drawing each character&mdash; that is, it included its own font.
 	</p>
-
-	<a class="img-left" title="Methem (Mikko J. Putkonen), Public domain, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Email_terminals_at_Oulu_uni_2008.jpg"><img width="512" alt="Email terminals at Oulu uni 2008" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Email_terminals_at_Oulu_uni_2008.jpg/512px-Email_terminals_at_Oulu_uni_2008.jpg"></a>
 
 	<p>
 		Physical terminals <a href="https://www.vt100.net/dec/vt_history">were used for decades,</a>
-		especially in situations mandating multiple access to large databases, such
-		as libraries.
+		especially in situations demanding multiple access to large databases, such
+		as airlines and libraries.
+		In such a situation, the computational infrastructure forms a tree,
+		with the system's administrators at the root, and users at terminals.
 	</p>
 
-	<p>
-		It's worth noting that the idea of mainframe-driven utility computation suggests that the computer's organization
-		follows the sctructure of a mathematical tree:
-		The "root user" would sit at the root of this tree, exercising super-user priveledges over the machine,
-		while end-users would be positioned at the leaves of the tree.
-	</p>
-
-	<div class="aside-right">
-		<h4>Aside:</h4>
-		<p>
-			<i>Teletype</i> was a trade name of the Teletype Corporation, and was subsequently abbreviated to <i>tty</i>.
-			<a href="http://www.pdp8.net/asr33/videos.shtml">The Model 33</a> was among the most popular hard-copy terminals,
-			with around 600,000 units sold (<a href="#references">Libes 129</a>).
-		</p>
-	</div>
-
-
-
-
-
-
-	<h3>See Also:</h3>
-	<ul>
-		<li><a href="https://www.youtube.com/watch?v=RuZUPpmXfT0">DEC VT320: The Classic 1987 Library Computer Terminal</a> (Youtube Video)</li>
-		<li><a href="https://tldp.org/HOWTO/Text-Terminal-HOWTO.html#toc1">Text-Terminal HOWTO</a> (TLDP Deep Dive)</li>
-	</ul>
 </div>
 
 <div id="terminals" class="content">
@@ -188,7 +128,7 @@ last-updated: November, 2020
 	<p>
 		Terminal emulation can become quite involved;
 		for this introduction, and for most purposes, it is sufficient to recognize that
-		terminals and <a href="#shells">shells</a> are distinct, cooperating processes.
+		terminals and shells are distinct, cooperating processes.
 	</p>
 
 	<p>
