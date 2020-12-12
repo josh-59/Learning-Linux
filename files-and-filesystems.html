@@ -68,12 +68,11 @@ last-updated: July, 2020
 	</div>
 
     <p>
-
         The protogenesis of Unix was a filesystem.<sup><a href=#references>[1]</a><a href="https://www.bell-labs.com/usr/dmr/www/hist.pdf">[2]</a></sup>
         Designed by the researchers of Bell Laboratories and
         implemented primarily by Ken Thompson,
         this piece of software became an operating system upon the
-        introduction of a means of interacting with, and executing, its contents.
+        introduction of a means of interacting with its contents.
     </p>
 </div>
 
@@ -83,54 +82,59 @@ last-updated: July, 2020
   <div class="aside-right">
       <h4>Aside:</h4>
       <p>
-          This definition is sufficiently abstract to allow, for instance, a keyboard
-          to appear as a file.
+          For each open file on the system, the kernel keeps a few data structures
+          to track them.  One of their entries is <em>file offset</em>,
+          which is used to preserve order across <code>read</code>'s.
+          See <a href="https://man7.org/tlpi/index.html">The Linux Programming Interface</a>
+          for more detail!
       </p>
   </div>
 
   <p>
     In Unix, a file is a sequence of bytes.<sup><a href=#references>[1]</a></sup>
+    This definition is sufficiently abstract to allow, for instance, a keyboard
+    to appear as a file.
     Unix-like kernels facilitate interaction with files via four classic system calls:
     </p>
 
     <ol>
-        <li><code>open(2)</code></li>
-        <li><code>close(2)</code></li>
-        <li><code>read(2)</code></li>
-        <li><code>write(2)</code></li>
+        <li><code><a href="https://www.man7.org/linux/man-pages/man2/open.2.html">open(2)</a></code></li>
+        <li><code><a href="https://www.man7.org/linux/man-pages/man2/close.2.html">close(2)</a></code></li>
+        <li><code><a href="https://man7.org/linux/man-pages/man2/read.2.html">read(2)</a></code></li>
+        <li><code><a href="https://man7.org/linux/man-pages/man2/write.2.html">write(2)</a></code></li>
     </ol>
 
     <p>
         In particular, the <code>read</code> system call fills a given
-        buffer with the contents of a file.
-        Order is preserved across calls to <code>read</code>:
-        If the buffer is smaller than the file,
-        then repeated calls to <code>read</code> both return
-        the file's next data (if any).
+        buffer with the contents of a file;
+        order is preserved across calls to <code>read</code>.
+        When a process requests a read, the kernel suspends the process
+        until data is available.
     </p>
+
+    <p>
+      In Unix-like operating systems, each file has an owner.
+      Important (system) files are owned by <code>root</code>, the superuser of the system.
+      Because the owner of a file is permitted to do anything to it,
+      including delete it, we typically wish
+      to avoid acting as <code>root</code>, and instead use <code>sudo(8)</code> wherever possible.
+    </p>
+
 
     <p>
     Ken Thompson's <em>Unix</em> kernel facilitated reading and writing of files,
     but otherwise refrained from interjecting upon their use.
-    This approach was quite novel for its time. Earlier
+    This approach was quite novel for its time: Earlier
     operating systems interposed upon the handling of files, so that
     some files could only be read by some programs, and not by others.<sup><a href=#references>[1]</a></sup>
-    In my opinion, this uniformity begins <a href="https://en.wikipedia.org/wiki/Unix_philosophy">"The Unix Philosophy."</a>
   </p>
 
   <h3>Regular Files</h3>
 
   <p>
     A regular file contains data which is stored on disk.
-    The regular file is the typical file type:
-    Approximately 80% of files are regular files (Stevens, 98).
-  </p>
-
-  <p>
-    In Unix-like operating systems, each file has an owner.
-    Important (system) files are owned by <code>root</code>, the superuser of the system.
-    Because the owner of a given file is permitted to do anything to it, we typically wish
-    to avoid acting as <code>root</code>, and instead use <code>sudo(8)</code> wherever possible.
+    The regular file is the typical file type;
+    most files are regular files.
   </p>
 
   <p>
@@ -139,15 +143,15 @@ last-updated: July, 2020
 
   <a href="assets/img/ls-long.pdf" target="_blank"><img src="assets/img/ls-long.png" style="width: 100%" title="Click for printable" ></a>
 
-  <p>
-    We see that <code>bash(1)</code> is executable by anybody, but can
-    only be written to (changed by) <code>root</code>.
-  </p>
+    <p>
+      We see that <code>bash(1)</code> is a regular file executable by anybody, but can
+      only be written to by <code>root</code>.
+      </p>
 
   <p>
-    Beyond <code>ls(1)</code>, two other command-line tools are useful for peeking
-    into a file. They are <code>file(1)</code>, which gives a brief description of
-    the file's type, and <code>stat(1)</code>, which gives a human-readable
+    Beyond <code>ls(1)</code>, two other command-line tools useful for peeking
+    into a file are <code>file(1)</code>, which gives a brief description of
+    the file's type, and <code>stat(1)</code>, which gives a
     summary of the file's inode contents:
   </p>
 
@@ -168,10 +172,42 @@ last-updated: July, 2020
     Birth: -<br>
   </div>
 
+  <p>
+      To find out more about this particular file, we can query the program it
+      contains with
+      </p>
+
+      <div class="aside-right">
+          <h4>Aside:</h4>
+          <p>
+              We use an absolute pathname here in order to avoid
+              <a href="terminals-and-shells.html#authomatic-file-location">automatic file location</a> by the shell.
+        </p>
+    </div>
+
+
+      <div class="code">
+          $ /bin/bash --help
+          </div>
+
+          <p>
+              or
+        </p>
+
+        <div class="code">
+            $ /bin/bash --version
+        </div>
+
+    <p>
+        This is typical of executable files, but potentially dangerous
+        (you are executing that program).
+    </p>
+
+
   <h3>See Also:</h3>
   <ul>
-    <li><a href="https://www.man7.org/linux/man-pages/man1/chmod.1.html">chmod(1)</a></li>
-    <li><a href="https://en.wikipedia.org/wiki/File_system_permissions#Numeric_notation">File System Permissions - Numeric Notation - Wikipedia </a></li>
+      <li><a href="https://en.wikipedia.org/wiki/Unix_philosophy">The Unix Philosophy</a></li>
+      <li><a href="https://www.man7.org/linux/man-pages/man1/chmod.1.html">chmod(1)</a></li>
   </ul>
 
 </div>
@@ -633,7 +669,7 @@ last-updated: July, 2020
     I would like to install Arch Linux onto my PineBook Pro.
     I download a new installation image via torrent, then compare the resulting file
     against the checksum file included in the same directory, using <code>sha256sum(1)</code>.
-    It matches character-wise; this means that the file is correct and intact.
+    They are identical; this means that the file is correct and intact.
   </p>
 
   <p>
@@ -659,7 +695,7 @@ last-updated: July, 2020
   </div>
 
   <p>
-    And, success! Granted, <code>dd</code> would have been faster and safer.
+    And, success! Granted, <code>sudo dd</code> would have been faster and safer.
   </p>
 
   <p>
