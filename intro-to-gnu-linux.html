@@ -242,7 +242,7 @@ last-updated: December, 2020
     </p>
 
     <p>
-        Today, the GNU Project is well-regarded for producing high-quality, well-documented
+        Today, the <a href="https://www.gnu.org/">GNU Project</a> is well-regarded for producing high-quality, well-documented
         free software;
         they are as "official" as the open-source community gets.
         In particular, GNU's compiler collection,
@@ -303,33 +303,31 @@ last-updated: December, 2020
             Linus Torvalds became interested in operating systems after
             finding an error in the source code of his <a href="https://en.wikipedia.org/wiki/Sinclair_QL">Sinclair QL's</a> QDOS.
             <sup><a href="#references">[5]</a></sup>
+            In college, Andrew Tanenbaum's
+            <a href="https://en.wikipedia.org/wiki/Operating_Systems:_Design_and_Implementation"><em>Operating Systems: Design and Implementation</em></a>
+            furthered this interest.<sup><a href="#references">[5]</a></sup>
         </p>
     </div>
 
     <p>
         Interest in the kernel flourished, in large part because
-        of the informality of the project:  Everybody was invited, if only
-        to tinker with it.
-        It has since become the most successful Unix-like kernel in existence,
+        of the informality of the project:
+        <a href="assets/free-minix-like-kernel-sources-for-386-at.html">Everybody was invited,</a> if only
+        to tinker.
+        This development model&mdash; "release early and often, delegate everything you can,
+        be open to the point of promiscuity"<sup><a href="http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/index.html#catbmain">[11]</a></sup>&mdash; <a href="http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/index.html#catbmain">raised eyebrows</a> at the time,
+        but has proven sound in virtue of the overwhelming success of
+        the project:
+        The Linux kernel has become the most successful Unix-like kernel of all time,
         and accounts for fully half of the "GNU/Linux" namesake.
     </p>
 
     <p>
         The <a href="https://www.kernel.org/doc/html/latest/process/2.Process.html?highlight=merge window">kernel development process</a>
-        has become more structured since 1991, and today uses a
-        "<a href="http://127.0.0.1:4000/programming-in-nix.html#train-schedules">train-schedule</a>" approach.
+        has become somewhat more structured since 1991, and today uses an (organic)
+        <a href="http://127.0.0.1:4000/programming-in-nix.html#train-schedules">train-schedule</a> approach.
         Linus Torvalds remains the maintainer of the Development branch,
         and often remarks upon the kernel's latest releases.
-    </p>
-
-    <p>
-        A major figure of modern Linux development is Greg Kroah-Hartman (pronounced "<em>Crow</em>-Hartman"), who is the maintainer of the Stable branch
-        and several subsystems.<sup><a href="https://en.wikipedia.org/wiki/Greg_Kroah-Hartman">[11]</a></sup>
-        According to Mr. Kroah-Hartman, interest in the kernel continues to
-        grow, with 1200 new developers joining the project each
-        year.<sup><a href="https://www.theregister.com/2020/10/26/linux_kernel_intel/">[12]</a></sup>
-        Moreover, their main development bottlenecks are code review and
-        maintainership.<sup><a href="https://www.theregister.com/2020/10/26/linux_kernel_intel/">[12]</a></sup>
     </p>
 
     <div class="img-right">
@@ -339,15 +337,25 @@ last-updated: December, 2020
     </div>
 
     <p>
+        A major figure of modern Linux development is Greg Kroah-Hartman (pronounced "<em>Crow</em>-Hartman"), who is the maintainer of the Stable branch
+        and several subsystems.<sup><a href="https://en.wikipedia.org/wiki/Greg_Kroah-Hartman">[12]</a></sup>
+        According to Mr. Kroah-Hartman, interest in the kernel continues to
+        grow, with 1200 new developers joining the project each
+        year.<sup><a href="https://www.theregister.com/2020/10/26/linux_kernel_intel/">[13]</a></sup>
+        Moreover, their main development bottlenecks are code review and
+        maintainership.<sup><a href="https://www.theregister.com/2020/10/26/linux_kernel_intel/">[13]</a></sup>
+    </p>
+
+    <p>
         Although development of Linux began as a hobby, it is an occupation
         for some, and serious affair for many.
         In particular, the kernel development team
         takes great care not to break
-        user-space,<sup><a href="https://lkml.org/lkml/2012/12/23/75">[13]</a></sup>
+        user-space,<sup><a href="https://lkml.org/lkml/2012/12/23/75">[14]</a></sup>
         meaning that programs that <em>did</em> work will continue to
         work.
         In this way, they ensure the long-term stability of Linux-based
-        platforms.<sup><a href="https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space">[14]</a></sup>
+        platforms.<sup><a href="https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space">[15]</a></sup>
     </p>
 
         <h3>See Also:</h3>
@@ -374,7 +382,7 @@ last-updated: December, 2020
         incompatible operating systems.
         The oldest distribution that's still maintained is
         <a href="http://www.slackware.com/">Slackware</a>, first released
-        in 1993.<sup><a href="https://en.wikipedia.org/wiki/Slackware">[17]</a></sup>
+        in 1993.<sup><a href="https://en.wikipedia.org/wiki/Slackware">[16]</a></sup>
     </p>
 
     <p>
@@ -474,6 +482,14 @@ last-updated: December, 2020
     </ul>
 </div>
 
+<div id="closing-remarks" class="content">
+    <h2 style="margin-bottom: 2pt;">Closing Remarks:</h2>
+    <h4>Standardization</h4>
+    <p>
+
+    </p>
+</div>
+
 <div id="video" class="content">
     <h2 style="margin-bottom: 2pt;"> Greg Kroah-Hartman </h2>
     <h4 style="margin-bottom: 18pt;"> Linux Kernel Development </h4>
@@ -523,6 +539,10 @@ last-updated: December, 2020
         </li>
 
         <li>
+            Raymond, E. S. (2002, August 02). The Cathedral and the Bazaar. Retrieved December 12, 2020, from <a href="http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/index.html#catbmain">http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/index.html#catbmain</a>
+        </li>
+
+        <li>
             Greg Kroah-Hartman. (2020, September 29). Retrieved October 30, 2020, from <a href="https://en.wikipedia.org/wiki/Greg_Kroah-Hartman">https://en.wikipedia.org/wiki/Greg_Kroah-Hartman</a>
         </li>
 
@@ -539,6 +559,11 @@ last-updated: December, 2020
         </li>
 
         <li>
+            "Slackware." <em>Wikipedia,</em> Wikimedia Foundation, 8 June 2020,
+            <a href="en.wikipedia.org/wiki/Slackware"> en.wikipedia.org/wiki/Slackware</a>.
+        </li>
+
+        <li>
             "POSIX." <em>Wikipedia,</em> Wikimedia Foundation, 21 June 2020,
             <a href="en.wikipedia.org/wiki/POSIX">en.wikipedia.org/wiki/POSIX</a>.
         </li>
@@ -546,11 +571,6 @@ last-updated: December, 2020
         <li>
             "Single UNIX Specification." <em>Wikipedia,</em> Wikimedia Foundation, 23 May 2020,
             <a href="en.wikipedia.org/wiki/Single_UNIX_Specification">en.wikipedia.org/wiki/Single_UNIX_Specification</a>.
-        </li>
-
-        <li>
-            "Slackware." <em>Wikipedia,</em> Wikimedia Foundation, 8 June 2020,
-            <a href="en.wikipedia.org/wiki/Slackware"> en.wikipedia.org/wiki/Slackware</a>.
         </li>
     </ol>
 </div>
