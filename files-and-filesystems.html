@@ -69,7 +69,7 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
     </div>
 
     <p>
-        The protogenesis of Unix was a filesystem.<sup><a href=#references>[1]</a><a href="https://www.bell-labs.com/usr/dmr/www/hist.pdf">[2]</a></sup>
+        The protogenesis of Unix was a filesystem.<sup><a href=#references>[1]</a><a href="http://read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[2]</a></sup>
         Designed by the researchers of Bell Laboratories and
         implemented primarily by Ken Thompson,
         this piece of software became an operating system upon the
@@ -137,6 +137,15 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
 
 <div id="filesystems" class="content">
     <h2> Filesystems </h2>
+
+    <div class="aside-right">
+        <h4>Remember:</h4>
+        <p>
+            A given disk may entertain more than one partition,
+            but a given partition can only entertain a single filesystem.
+        </p>
+    </div> 
+
     <p>
         A <a href="https://wiki.osdev.org/File_Systems#File_System_Theory">filesystem</a> is a systematic method of organizing data on
         disk.<sup><a href="https://wiki.osdev.org/Filesystem">[3]</a><a href="https://wiki.archlinux.org/index.php/File_systems">[4]</a></sup>
@@ -144,24 +153,20 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
         to be followed in the storage and retrieval of data.
     </p>
 
+    </p>
+
     <p>
         A given disk is <em><a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">partitioned</a></em> into one or more logically distinct components.
-        Partitions are contiguous with respect to address space, and
+        Partitions are contiguous with respect to the disk's address space, and
         each entertains its own distinct filesystem, if any.
-        That is, a filesystem cannot cross partition boundaries.
+        A filesystem cannot cross partition boundaries.
         Writing a new and empty filesystem to a partition is known as
         <em><a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">formatting</a>.</em>
     </p>
 
-    <p>
-        Early versions of Unix referred to its own filesystem as, simply, <code>fs</code>.
-        It was well-documented (by, for instance, Maurice J. Bach in <em>The Design of the Unix Operating System</em>).
-        The Extended Filesystem (EXT) was the first open-source derivative, and retained many distinctive features of the original.
-        Since then, EXT2, EXT3, and EXT4 have continued to improve upon the design.
-    </p>
+    <h3>Some Common Filesystems:</h3>
 
     <ul>
-        <h3>Some Common Filesystems:</h3>
         <li>
             <p>
                 <strong>EXT4</strong>:
@@ -193,8 +198,8 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
                 <strong>FAT32</strong>: The "File Allcoation Table 32-bit" is a DOS-era filesystem,<sup><a href="https://en.wikipedia.org/wiki/File_Allocation_Table#FAT32">[7]</a></sup>
                 and is widely supported, though antiquated.
                 In particular, it is not a <a href="https://en.wikipedia.org/wiki/Journaling_file_system">journaling filesystem</a>,
-                so that changes to files are not recorded before being carried out (increasing the likelihood of
-                corruption in the event of, say, power outage).
+                so that changes to files are not recorded before being carried out.
+                This increases the likelihood of corruption in the event of, say, power outage.
                 This filesystem is often used to hold the bootloader, since it is virtually guaranteed to be supported by firmware,
                 and its contents will not be changed very often.
             </p>
@@ -202,16 +207,20 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
     </ul>
 
 
+    <p>
+        Early versions of Unix referred to its own filesystem as, simply, <code>fs</code>.
+        It was well-documented (by, for instance, Maurice J. Bach in <em>The Design of the Unix Operating System</em>).
+        The Extended Filesystem (EXT) was the first open-source derivative, and retained many distinctive features of the original.
+        Since then, EXT2, EXT3, and EXT4 have continued to improve upon the design.
+    </p>
 
     <h3> inodes </h3>
 
     <p>
-        A <a href="https://wiki.osdev.org/File_Systems#Indexing_Methods">key feature</a>
-        of these filesystems is the
-        <a href="http://www.science.unitn.it/~fiorella/guidelinux/tlk/node96.html#SECTION001111000000000000000">inode</a>.
-        Each file in the filesystem is represented and described by a single inode.
+        A key feature of these filesystems is the inode:
+        Each file in the filesystem is described by a single inode.
         Each inode describes where the data of the file is located, the size of the file,
-        and contains other metadata about the file, such as its access permissions and timestamps.
+        and contains other metadata about the file, such as access permissions and timestamps.
     </p>
 
     <p>
@@ -230,10 +239,8 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
 
     <h3> See Also: </h3>
     <ul>
-        <li> <a href="http://web.mit.edu/tytso/www/linux/ext2intro.html"> Design and Implementation of the Second Extended Filesystem</a> (Written by the creators and maintainers of EXT2/3/4)</li>
-        <li> <a href="http://cs.smith.edu/~nhowe/262/oldlabs/ext2.html"> The Ext2 Filesystem</a> (Includes labs)</li>
-        <li> <a href="https://www.kernel.org/doc/html/latest/filesystems/ext4/index.html"> ext4 Data Structures and Algorithms</a> (Current, official)</li>
-        <li> <code><a href="https://man7.org/linux/man-pages/man5/filesystems.5.html"> filesystems(5)</a></code> (Quick run-down of many filesystems)</li>
+        <li><a href="https://wiki.osdev.org/File_Systems">File Systems</a> by OSDev Wiki</li>
+        <li> <code><a href="https://man7.org/linux/man-pages/man5/filesystems.5.html"> filesystems(5)</a></code> </li>
     </ul>
 </div>
 
@@ -789,6 +796,7 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
     <h2> References </h2>
     <ol>
         <li> Kernighan, Brian. <i>Unix: A History and a Memoir.</i>  Published 2020, by Brian W. Kernighan via Kindle Direct Publishing. </li>
+        <li>Ritchie, D. M. (1984). The Evolution of the Unix Time-sharing System. <em>AT&amp;T Bell Laboratories Technical Journal,</em> 63(6), 2nd ser., 1577-1593.</li>
         <li> File Systems. (n.d.). Retrieved July 17, 2020, from <a href="https://wiki.osdev.org/Filesystem">https://wiki.osdev.org/Filesystem</a> </li>
         <li> File systems - ArchWiki. (n.d.). Retrieved July 17, 2020, from <a href="https://wiki.archlinux.org/index.php/File_systems">https://wiki.archlinux.org/index.php/File_systems</a> </li>
         <li> Ext4 - Wikipedia. (2020, June 14). Retrieved July 17, 2020, from <a href="https://en.wikipedia.org/wiki/Ext4">https://en.wikipedia.org/wiki/Ext4</a> </li>
