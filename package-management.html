@@ -13,34 +13,26 @@ Problems with installing random software:
 No automatic updates
 No man pages
 
-
-https://www.debian.org/doc/manuals/debian-reference/ch02.en.html
-"""
-apt(8) for all interactive command line operations, including package installation,
-removal and dist-upgrades. Available since Debian Jessie (Debian 8).
-
-apt-get(8) for calling Debian package management system from scripts.
-It is also a fallback option when apt is not available (often with older Debian systems).
-
-aptitude(8) for an interactive text interface to manage the installed
-packages and to search the available packages.
-
-"""
-
 A section from the Linux Mint User Guide (old)
 https://www.linuxmint.com/documentation/user-guide/Cinnamon/english_18.0.pdf
 
 Debian Recommends vs. Suggests ("Declaring relationships between packages")
 https://www.debian.org/doc/debian-policy/ch-relationships.html
+
+Really becomes a question of distributions,
+which should make for a tidy close.  
+
++ Downstream 
++ Rolling Release
+
 -->
 
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
-        <li><a href="#how-to-install"> How to install a Random Package </a></li>
+        <li><a href="#packages-intro"> Introduction to Packages </a></li>
         <li><a href="#package-managers"> Package Managers </a></li>
         <li><a href="#repositories"> Repositories </a></li>
-        <li><a href="#whatis-package"> What is a Package? </a></li>
         <li><a href="#references"> References </a></li>
     </ul>
 </div>
@@ -52,16 +44,17 @@ https://www.debian.org/doc/debian-policy/ch-relationships.html
     <p>
         A package is a bundle of data that contains everything
         required to implement a program, a set of related programs,
-        or a set of related features.
-        It is a container for software which also contains some data
-        describing the software it contains.
-        Packages provide a way to distribute, install and patch software,
+        or a set of related features.<sup><a href="https://wiki.debian.org/Packaging/Intro">[1]</a></sup>
+        It is a container which includes an executable binary file, and
+        files describing the files it contains (so-called "metadata").
+        Packages provide a way to automate the distribution of, 
+        installation of, and patching of software,<sup><a href="https://wiki.debian.org/Packaging/Intro">[1]</a></sup>
         and exist in multiple contexts within the FOSS domain.
     </p>
 </div>
 
-<div id="how-to-install" class="content">
-    <h2> How to Install a Random Package </h2>
+<div id="packages-intro" class="content">
+    <h2> Introduction to Packages  </h2>
 
     <p>
         I think packages will make the most sense if we just jump right in to
@@ -78,10 +71,18 @@ https://www.debian.org/doc/debian-policy/ch-relationships.html
 
     <p>
         Although there is <a href=https://flight-manual.atom.io/getting-started/sections/installing-atom/">a way</a> to add Atom's repository to Debian systems,
-        I never do.
+        I never do (shame on me!).
         Instead, I usually just download the <code>.deb</code> package given on the landing
         of their website, and install it manually, which goes like this:
     </p>
+
+    <div class="aside-right">
+        <h4>Asdide:</h4> 
+        <p>
+            <code>apt</code> is Debian's preferred command-line interface for its package management system.
+            It is a front-end for <code>apt-get</code> and <code>apt-cache</code>.<sup><a href="https://manpages.debian.org/buster/apt/apt.8.en.html">[2]</a></sup>
+        </p>
+    </div>
 
     <p>
         Clicking the link downloads a single file, <code>atom-amd64.deb</code>, which is
@@ -99,6 +100,10 @@ https://www.debian.org/doc/debian-policy/ch-relationships.html
     </p>
 
     <p>
+        Packages are to be platform-specific, so that <code>.deb</code> packages can be
+    </p>
+    
+    <p>
         There are two good reasons that this is not the preferred method of
         distributing software.
     </p>
@@ -107,21 +112,23 @@ https://www.debian.org/doc/debian-policy/ch-relationships.html
         <li>
             Updating software becomes a pain.
             <p>
-                To keep Atom up to date, I must check manually to see if a new version has been released.
+                To keep Atom up to date, I must check manually to see if a new version has been released
+                (which I never do).  
+                Alternatively, 
             </p>
 
             <p>
-                Another way to keep Atop up-to-date might be to include some code within Atom itself
+                Another way to keep Atop up-to-date might be to introduce some code within the application itself
                 which checks its own version, and updates itself if a newer version is available.
                 This solution is not preferred because that version-checking code would need to be
-                included (i.e., repeated) in each package.  Such repetition is, as a rule,
-                avoided in software development because it is inefficient and error-prone.
+                included (i.e., repeated) in each piece of software.  Such repetition is, as a rule,
+                avoided in software development because we are lazy and it is error-prone.
             </p>
         </li>
         <li>
             Locating relevant software becomes difficult.
             <p>
-                There are some 85,000 packages available to my machine; remembering a website
+                With some 85,000 packages available on the Debian repositories, remembering a website
                 for each is simply infeasible.
             </p>
         </li>
@@ -176,7 +183,7 @@ https://www.debian.org/doc/debian-policy/ch-relationships.html
 </div>
 
 
-
+<!-- 
 
 <div class="content" id="whatis-package">
     <h2>What is a Package?</h2>
@@ -312,6 +319,8 @@ https://www.debian.org/doc/debian-policy/ch-relationships.html
                 <li><a href="https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html#package"> Basics of the Debian package management system </a></li>
             </ul>
         </div>
+
+    -->
 
 
         <p>
