@@ -1,41 +1,35 @@
 ---
 layout: default
-title: "Going Further: Programming in *nix"
-last-updated: August, 2020
+title: "Going Further: Using GNU/Linux"
+last-updated: December, 2020
 ---
 
 
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
+        <li><a href="#office-suites">Office Suites</a></li>
         <li><a href="#getting-started"> Getting Started </a></li>
         <li><a href="#c"> C </a></li>
         <li><a href="#rust"> Rust </a></li>
-        <li><a href="#c-plus-plus"> C++ </a></li>
         <li><a href="#general-cs"> General Computer Science </a></li>
         <li><a href="#train-schedules"> Train Schedules </a></li>
-        <li><a href="#closing-remarks"> Closing Remarks </a></li>
+        <li><a href="#thanks">Thanks for Reading!</a></li>
         <li><a href="#bryan-cantrill"> Bryan Cantrill </a></li>
         <li><a href="#references"> References </a></li>
     </ul>
 </div>
 
 <div id="introduction" class="content">
-    <h1>Going Further: Programming in *nix</h1>
-    <div class="quote-text">
-        "Theory and practice sometimes clash. <br>
-        And when that happens, theory loses.
-        Every single time."
-    </div>
-    <div class="quote-ref">
-        &mdash;<a href="https://lwn.net/Articles/326505/">Linus Torvalds</a>
-    </div>
-
+    <h1>Going Further: Using GNU/Linux</h1>
     <p>
-        An operating system serves as an intermediary between the programmer and the machine;
-        it allows one "to drive" the machine, much like a steering wheel allows one to drive a car.
-        For its openness and its adherence to the Unix way, there is not a
-        better programming environment than Linux.
+        GNU/Linux, like any other operating system, is a tool:
+        It enables individuals to use computer hardware.
+        For several decades, it has been the operating system of 
+        choice for servers, mainframes and supercomputers.
+        For its openness, programming has been the most natural 
+        use to put it to, and for several decades, improvements
+        have been made to software approachable by laymen.
     </p>
 </div>
 
@@ -270,61 +264,6 @@ last-updated: August, 2020
     </ul>
 </div>
 
-<div id="c-plus-plus" class="content">
-    <h2> C++ </h2>
-    <p>
-        I'm just gonna say it: Stay away from C++.
-        Originally, this language was called <em>C with Classes,</em> and this name
-        reflects an attempt to augment the C language by arbitrarily introducing
-        object-oriented programming (via classes).
-        The result is a very large, very complicated language.
-    </p>
-
-    <p>
-        There are two issues with using such a language.
-        First, because C is fully supported within C++,
-        and C is a complete language, C++ is redundantly complete.
-        Anywhere you might use C++, you can instead use C.
-        Second, in practice, the tendency is to use only a portion of the full
-        language, meaning that handy features go unused, simply because they are
-        not known.
-    </p>
-
-    <p>
-        Moreover, owing to its C heritage, it is <em>unsafe</em> in the sense that
-        it, like C, makes no guarantees about the use of memory.
-        Consequently, it is easy to build bugs and security vulnerabilities;
-        this problem is exacerbated by the complexity of the language.
-        Curiously, experienced programmers who have switched from C++ to Rust have
-        likened it to getting out of a bad relationship<sup><a href="https://corecursive.com/013-rust-and-bitter-c-developers-with-jim-blandy/">[4]</a><a href="https://youtu.be/HgtRAbE1nBM">[5]</a></sup>
-    </p>
-
-    <p>
-        But hey&mdash; if you want to write C++, don't let me stop you!
-        There's plenty of good software written in it:
-    </p>
-
-    <ul>
-        <li>
-            <a href="https://en.wikipedia.org/wiki/KDE_Plasma_5">KDE's Plasma</a>&mdash; Linux's premier desktop environment
-        </li>
-
-        <li>
-            <a href="https://en.wikipedia.org/wiki/Qt_(software)">QT</a>&mdash; a GUI Backend
-        </li>
-
-        <li>
-            <a href="https://en.wikipedia.org/wiki/Unreal_Engine">Unreal Engine</a>
-        </li>
-    </ul>
-
-    <h3> See Also: </h3>
-    <ul>
-        <li><a href="https://lwn.net/Articles/249460/"> Linus Torvalds on C++ </a></li>
-        <li><a href="https://en.wikiquote.org/wiki/Ken_Thompson#%22Coders_At_Work%22,_2009"> Ken Thompson on C++</a></li>
-    </ul>
-</div>
-
 <div class="content" id="general-cs">
     <h2> General Computer Science </h2>
     <p>
@@ -393,7 +332,7 @@ last-updated: August, 2020
                 but honestly wonder how useful it is.  It looks into the abstractions presented by
                 hardware itself, such as signed and unsigned numbers, and instruction set architectures.
                 A good development of this
-                material is highly mathematical, and correspondingly not-easy.
+                material is highly mathematical.
                 I liked <a href="http://www.csapp.cs.cmu.edu/">Computer Systems: A Programmer's Perspective</a>.
             </p>
         </li>
@@ -411,7 +350,7 @@ last-updated: August, 2020
         This approach is widely used to provide
         "stability without stagnation."<sup><a href="https://blog.rust-lang.org/2014/10/30/Stability.html">[6]</a></sup>
         We will use Firefox as a case study, but note that, for instance,
-        the Linux kernel development uses a similar approach.
+        Linux kernel development follows a similar approach.
     </p>
 
 
@@ -423,8 +362,8 @@ last-updated: August, 2020
         A new Firefox version is scheduled for release every four weeks.<sup><a href="https://wiki.mozilla.org/Release_Management/Release_Process">[7]</a></sup>
         That is, each version spends four weeks in the <em>Mature</em> category,
         being the officially-supported, current version of Firefox.
-        When here, no new features are implemented&mdash; rather, only security patches, bug-fixes, etc.
-        are implemented and pushed to the user.
+        When here, no new features are implemented&mdash; rather, only 
+        security patches and bug-fixes are implemented and pushed to the user.
         After its four weeks in the spotlight, it is discarded, for the next version is ready.
     </p>
 
@@ -433,6 +372,7 @@ last-updated: August, 2020
         corresponding to the <em>Initial Release</em> above.
         When a release enters the <em>Beta</em> stage, only patches aimed at improving
         stability are accepted.<sup><a href="https://wiki.mozilla.org/Release_Management/Release_Process">[6]</a></sup>
+        Each release spends four weeks as a beta.
         Finally, there is the <a href="https://www.mozilla.org/en-US/firefox/80.0a1/releasenotes/">Nightly</a> build,
         which contains the latest (and most untested) features.
     </p>
@@ -461,7 +401,6 @@ last-updated: August, 2020
         and, <a href="https://www.mozilla.org/en-US/firefox/enterprise/">Extended Support Release</a>,
         which is upgraded every 42 weeks, and intended for deployment in
         enterprise settings.
-        These also, I believe, follow a train schedule.
     </p>
 
     <h3>See Also:</h3>
@@ -501,10 +440,9 @@ last-updated: August, 2020
 
 -->
 
-<div class="content" id="closing-remarks">
-    <h2>Closing Remarks</h2>
+<div class="content" id="thanks">
+    <h2>Thanks for Reading!</h2>
     <p>
-        Thanks for reading!
         I'd like to say <em>"Thanks"</em> to a few other people, as well.
         While I never met them, they each are heroes of mine:
     </p>
@@ -517,7 +455,7 @@ last-updated: August, 2020
         <li>
             Brian Kernigham&mdash;
             Whose book, <a href="https://www.cs.princeton.edu/~bwk/memoir.html"><em>Unix: A History and Memoir</em></a>,
-            grounded this study in concrete history
+            grounded this study in history
         </li>
 
         <li>
