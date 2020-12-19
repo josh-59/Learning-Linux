@@ -150,14 +150,13 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
         A <a href="https://wiki.osdev.org/File_Systems#File_System_Theory">filesystem</a> is a systematic method of organizing data on
         disk.<sup><a href="https://wiki.osdev.org/Filesystem">[3]</a><a href="https://wiki.archlinux.org/index.php/File_systems">[4]</a></sup>
         It is similar to a data structure, in that it defines a convention
-        to be followed in the storage and retrieval of data.<sup><a href="https://wiki.debian.org/Packaging/Intro">[1]</a></sup>
-    </p>
-
+        to be followed in the storage and retrieval of data.<sup><a href="https://wiki.debian.org/Packaging/Intro">[3]</a></sup>
     </p>
 
     <p>
-        A given disk is <em><a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">partitioned</a></em> into one or more logically distinct components.
-        Partitions are contiguous with respect to the disk's address space, and
+        A given disk is 
+        <em><a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">partitioned</a></em> into one or more distinct components.
+        All partitions are contiguous with respect to the disk's address space, and
         each entertains its own distinct filesystem, if any.
         A filesystem cannot cross partition boundaries.
         Writing a new and empty filesystem to a partition is known as
@@ -210,31 +209,40 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
     <p>
         Early versions of Unix referred to its own filesystem as, simply, <code>fs</code>.
         It was well-documented (by, for instance, Maurice J. Bach in <em>The Design of the Unix Operating System</em>).
-        The Extended Filesystem (EXT) was the first open-source derivative, and retained many distinctive features of the original.
-        Since then, EXT2, EXT3, and EXT4 have continued to improve upon the design.
+        The Extended Filesystem (EXT) was an open-source implementation, and 
+        retained many distinctive features of the original.
+        Since then, EXT2, EXT3, and EXT4 have continued to 
+        improve upon the design.
     </p>
 
     <h3> inodes </h3>
+    
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Data about a file is known as its <em>metadata.</em>
+        </p>
+    </div>
 
     <p>
         A key feature of these filesystems is the inode:
         Each file in the filesystem is described by a single inode.
         Each inode describes where the data of the file is located, the size of the file,
-        and contains other metadata about the file, such as access permissions and timestamps.
+        and contains other data about the file, such as access permissions and timestamps.
     </p>
 
     <p>
-        The collection of all inodes of a filesystem is organized, conceptually, into
-        one large array; any inode may be identified by its location (index) in this array.
+        The collection of all inodes of a filesystem is organized, conceptually, 
+        into one large array; any inode may be identified by its index 
+        in this array.
         These indices are called <em>inode numbers.</em>
     </p>
 
     <p>
-        Inode numbers serve as "hardware names" for files,
-        since it uniquely identifies a file within its respective filesystem.
-        For the kernel, which often manages more than one filesystem at a time,
-        the information required to identify a file
-        is its inode number and the filesystem it belongs to.
+        An inode number serves as the "hardware name" for a file,
+        since it uniquely identifies the file within its filesystem.
+        Under this scheme, all we need to do to implement filenames
+        is associate a string of text with an inode number.
     </p>
 
     <h3> See Also: </h3>
@@ -329,9 +337,9 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
     <h2>Directories</h2>
 
     <p>
-        A directory is a file containing a table with two columns:
+        A directory is a file containing a table with two columns, 
         <a href="finding-files.html#basename">basename</a> and inode number.
-        Each entry in a directory's table is called a <em>hard link.</em>
+        Each entry in a directory is called a <em>hard link.</em>
     </p>
 
     <p>
@@ -353,9 +361,8 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
         <p>
             The idea of using numerical values as names (i.e., unique identifiers)
             is common throughout computing.
-            As we'll see later, each process has a
-            unique numerical identifier, called its PID,
-            which is used as the system's "handle" to the process.
+            As we'll see later, each process is given a
+            unique numerical identifier.
             Other examples include user id's and memory addresses.
         </p>
     </div>
@@ -370,7 +377,7 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
         Files may be hard-linked more than once.
         This allows a file to appear in more than one directory, and/or more than once
         in a single directory.
-        We can create new hard links with the <code>ln</code> command:
+        We can create new hard links with the <code>ln</code> ("link") command:
     </p>
 
     <div class="code">
@@ -398,15 +405,16 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
     <p>
         A question arises: <em>"What if we delete newfile?"</em>
         With the above implementation in mind, there are two distinct operations
-        that must take place to delete a file: First, remove all hardlinks to the file
-        (that is, delete all directory entries linking it).
+        that must take place to delete a file: First, remove all hardlinks to the file; and,
         Second, free the file (i.e., allow its inodes and data blocks to be reused).
         Deleting hardlinks is precisely what the <code>rm</code> command does.
         Freeing the file from the filesystem is left to the kernel, and
-        takes place only after there are zero hard links to it.
+        takes place after there are no hard links to it (and the file is not
+        open by any process on the system).
     </p>
 
     <h3>Structure</h3>
+    <h4>tl;dr Forms a Tree</h4>
 
     <p>
         While each file on the system, including directories, is owned by a user,
@@ -461,14 +469,14 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
         Unlike Windows systems, which create a new, distinct directory tree
         for each storage device on the system (<code>C:\, D:\</code>, etc.),
         *nix systems place a new filesystem's directory tree within the existing
-        directory tree by placing the new root directory in the existing directory
-        tree.
+        directory tree by placing the new filesystem's root directory 
+        in the existing directory tree.
         This operation is called
         <a href="https://unix.stackexchange.com/questions/3192/what-is-meant-by-mounting-a-device-in-linux"><em>mounting</em></a>.
     </p>
 
     <p>
-        Let's take a look at this operation, for this is new.
+        Let's take a look at this operation, for it is new.
         Suppose you have a usb stick with some music on it, and you'd
         like to access its contents.
         After it's plugged in, the hardware, then the kernel,
@@ -479,8 +487,14 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
 
     <p>
         When mounting new devices manually, the usual method is to identify the device
-        to be mounted with <a href="https://man7.org/linux/man-pages/man8/lsblk.8.html"><code>lsblk(8)</code></a>, then mount it with
-        <a href="https://www.man7.org/linux/man-pages/man8/mount.8.html"><code>sudo mount DEVICE MOUNTPOINT</code></a>.
+        to be mounted with <a href="https://man7.org/linux/man-pages/man8/lsblk.8.html"><code>lsblk(8)</code></a>, then mount it via
+    </p>
+
+    <div class="code">
+        $ sudo mount [DEVICE] [MOUNTPOINT]
+        </div>
+
+        <p>
         The device to be mounted should be a partition, and can usually be determined by its size and
         its mountpoint (which should be none).
         Most GNU/Linux distributions provide two places to mount temporary
