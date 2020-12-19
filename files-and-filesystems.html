@@ -465,18 +465,25 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
 
     <h2>Mounting and Unmounting</h2>
 
-    <p>
-        Unlike Windows systems, which create a new, distinct directory tree
-        for each storage device on the system (<code>C:\, D:\</code>, etc.),
-        *nix systems place a new filesystem's directory tree within the existing
-        directory tree by placing the new filesystem's root directory 
-        in the existing directory tree.
-        This operation is called
-        <a href="https://unix.stackexchange.com/questions/3192/what-is-meant-by-mounting-a-device-in-linux"><em>mounting</em></a>.
-    </p>
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            On most modern distributions, mounting is carried out automatically
+            (and devices are mounted to <code>/media/[user]/</code>)
+        </p>
+    </div>
 
     <p>
-        Let's take a look at this operation, for it is new.
+        Unlike Windows systems, which create a new, distinct directory tree
+        for each storage device on the system (e.g., <code>C:\, D:\</code>, etc.),
+        Unix-based systems collect all filesystems into a single
+        directory tree by placing any new filesystem's root directory 
+        in the existing directory tree.
+        This operation is called <a href="https://unix.stackexchange.com/questions/3192/what-is-meant-by-mounting-a-device-in-linux"><em>mounting</em></a>.
+    </p>
+
+        <p>
+        Let's take a look at this, for it is new.
         Suppose you have a usb stick with some music on it, and you'd
         like to access its contents.
         After it's plugged in, the hardware, then the kernel,
@@ -485,7 +492,7 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
 
     <img style="width:80%" src="assets/img/mounting.png">
 
-    <p>
+        <p>
         When mounting new devices manually, the usual method is to identify the device
         to be mounted with <a href="https://man7.org/linux/man-pages/man8/lsblk.8.html"><code>lsblk(8)</code></a>, then mount it via
     </p>
@@ -508,6 +515,8 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
         where <code>PATH</code> is the location of the mounted filesystem.
     </p>
 
+
+
     <p>
         A few details:
         First, device names that appear in <code>/dev</code> or <code>lsblk</code>
@@ -528,12 +537,14 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
     <h2>Filesystem Heirarchy</h2>
 
     <p>
-        Now, we turn to more pragmatic matters.
         Within any GNU/Linux distribution, some common themes will be found.
         For instance, <code>bin</code> directories are found in several places, such as
-        <code>/bin</code> and <code>/sbin</code>, along with <code>/usr/bin</code>.
-        These contain binary executable files (programs), such as <code>ls</code>, which
-        can be ran as commands from the shell.
+        <code>/bin</code> and <code>/sbin</code>, along with <code>/usr/bin</code>
+        and <code>/home/[user]/bin</code>.
+        These contain binary executable files (programs), such as 
+        <code>bash(1)</code> and <code>ls(1)</code>; 
+        they are usually associated with the shell, so
+        that they may be ran as commands from the shell.
     </p>
 
     <div class="aside-right" style="font-size: 15px;">
@@ -547,15 +558,6 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
     </div>
 
     <p>
-        The directory <code>/etc</code> (usually read "<em>et</em>-see") contains
-        system-specific configuration files; as a consequence, you can expect to fiddle
-        with the contents of this directory when configuring the system for the first time
-        (or otherwise).
-        It contains, for instance, files describing the configuration of the system's package
-        manager, printers, and, well, etcetera.
-    </p>
-
-    <p>
         <code>/home</code> contains user's home directories.
         Per-user configuration files are contained here either as
         hidden files, or in the directory <code>~/.config</code>.
@@ -566,8 +568,19 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
         storage space.
     </p>
 
+
+
     <p>
-        According the the standard, the system's root directory, <code>/</code>, should belong
+        The directory <code>/etc</code> (usually read "<em>et</em>-see") contains
+        system-specific configuration files; you can expect to fiddle
+        with the contents of this directory when configuring the system for the first time
+        (or otherwise).
+        It contains, for instance, files describing the configuration of the system's package
+        manager, printers, and, well, etcetera.
+    </p>
+
+        <p>
+        According to the standard, the system's root directory, <code>/</code>, should belong
         to a minimal filesystem that is "adequate to boot, restore recover and/or repair the system."<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03.html">[8]</a></sup>
         As such, <code>/bin</code>, <code>/sbin</code>, <code>/etc</code>, <code>/media</code>,
         and <code>/mnt</code> should each belong to the root filesystem.
@@ -579,24 +592,23 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
         The last directory we will cover is <code>/usr</code>, which contains
         files which are shareable across systems&mdash; they do not change in normal
         operation, and are not machine-specific.
-        This stipulation allows multiple machines to share a single <code>/usr</code>
+        For instance, man pages are found in <code>/usr</code>, as are most user
+        programs.
+        This allows multiple machines to share a single <code>/usr</code>
         directory by locating it on a network,
         potentially saving large amounts of storage.<sup><a href="https://www.tldp.org/LDP/sag/html/fs-background.html">[9]</a></sup>
-        For instance, man-pages are found in <code>/usr</code>, as are most user
-        programs.
     </p>
 
     <p>
         The GNU/Linux operating system shows its multi-user/time-sharing
         heritage in the above standards:  They are well-developed to support
         the centralization of computing hardware.
-        On small, single-user installations, most of the directories belong to
+        On small, single-user installations, most directories belong to
         a single filesystem.
     </p>
 
     <h3>See Also:</h3>
     <ul>
-        <li><a href="https://refspecs.linuxfoundation.org/fhs.shtml">Linux Filesystem Heirarchy Standard</a></li>
         <li><a href="https://www.tldp.org/LDP/sag/html/dir-tree-overview.html">Overview of the Directory Tree: Linux System Administrator's Guide</a></li>
     </ul>
 </div>
