@@ -202,27 +202,26 @@ last-updated: November, 2020
     </p>
 
     <p>
-        There reason we manage processes by PID numbers rather than names
-        is that two processes may spawned from the same executable file,
-        and be running concurrently.
-        When this is the case, the only thing they share is the 
-        "<code>text</code>" segment,
-        which contains the program's instructions, and which exists in the virtual
-        memory of each process as read-only.
-    </p>
-
-    <p>
-        Beyond PID, each process on the system has:
+        Beyond the executable file associated with each process, the kernel 
+        maintains a great deal of information about each process:
     </p>
 
     <ul>
+        <li>Location of next instruction within the executable</li>
+        <li>Files currently open by the process</li>
+        <ul>
+            <li>Access Mode (read, write, read and write)</li>
+            <li>Location wihin file</li>
+        </ul>
         <li>Current working directory</li>
-        <li>File Access Permissions</li>
+        <li>Owner, group</li>
         <li>Environment variables</li>
-        <li>Its own directory in <code>/proc</code></li>
     </ul>
 
     <p>
+        Most of this information is available for perusal in the 
+        <code>/proc/</code> directory, which contains one subdirectory
+        for each process on the system.  
         For detailed information about processes in the Linux environment, see
         <a href="https://www.man7.org/tlpi/"> The Linux Programming Interface</a>.
     </p>
@@ -231,7 +230,7 @@ last-updated: November, 2020
 
     <h3> See Also: </h3>
     <ul>
-        <li><a href="https://man7.org/linux/man-pages/man5/proc.5.html"> proc(5)</a></li>
+        <li><code><a href="https://man7.org/linux/man-pages/man5/proc.5.html"> proc(5)</a></code></li>
     </ul>
 </div>
 
