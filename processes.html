@@ -105,8 +105,6 @@ last-updated: November, 2020
         There's one for the network manager,
         another for the desktop environment,
         another acting as a printer spooler, etc..
-        If you're working at the command line, then there is one process
-        acting as a terminal emulator, and another acting as a shell.
         Without a process, the kernel is unreachable, and the system is static.
     </p>
 
@@ -114,17 +112,22 @@ last-updated: November, 2020
         Under the Unix philosophy, each process has a narrowly defined role,
         which it is expected to do well.  It might copy a file, list the
         contents of a directory, or interpret and execute commands from the user.
+        It is intended that these small programs work together to
+        accomplish any given task, thereby easing programming and maintenance,
+        and increasing the modularity of the resulting whole.
     </p>
 
     <h3> Runlevels</h3>
+
     <p>
         Historically, collections of running processes were
         called <a href="http://www.linfo.org/runlevel_def.html">runlevels</a>;
-        different runlevels offered different services, and therefore
+        these runlevels were managed by the initialization ("init") process.
+        Different runlevels offered different services, and therefore
         were intended to be used for different situations.
-        In particular, <a href="http://www.linfo.org/single_user_mode.html">single-user mode</a>
-        was (and is) analogous to <em>safe boot,</em> and <em>runlevel 0</em>
-        quits all processes in preparation for system shutdown.
+        For instance, <a href="http://www.linfo.org/single_user_mode.html">single-user mode</a> (runlevel 1)
+        was analogous to <em>safe boot,</em> and runlevel 0
+        told <em>init</em> to kill all processes and shut down the system.
     </p>
 
     <h3> See Also: </h3>
@@ -142,9 +145,11 @@ last-updated: November, 2020
         <code>/sbin/init</code>.<sup><a href="http://tldp.org/LDP/intro-linux/intro-linux.pdf">[3]</a></sup>
         While init schemes <a href="https://arxiv.org/abs/0706.2748">have evolved</a> over the years,
         their purpose has not changed:  It is a process with root-level permissions that acts as a
-        trustee among processes; its central responsibility is to bring up
+        trustee among processes.
+        Init's central responsibility is to bring up
         userspace.<sup><a href="http://0pointer.de/blog/projects/systemd.html">[4]</a></sup>
-        After <em>init</em>, process creation is delegated to processes themselves.
+        After the execution of <code>/sbin/init</code> by the kernel, 
+        process creation is delegated to processes themselves.
     </p>
 
     <div class="aside-left">
@@ -161,27 +166,24 @@ last-updated: November, 2020
         This instructs the kernel to make a copy of the current process&mdash;
         an exact copy is produced, save one difference: Each of the two
         processes receives a different return value from <em>fork().</em>
-        The video below explains the <em>fork()</em> system call well.
     </p>
 
     <p>
-        The new process is called the <em>child</em> process; the
+        The new process is called the <em>child</em> process, and the
         old process is called the <em>parent</em> process.
-        The parent process usually goes on about its business, such as managing other
-        user-space processes, or querying the user
-        for a new line of input.
-        The child goes on to call <em><a href="https://www.man7.org/linux/man-pages/man2/execve.2.html">execve(pathname, argv, envp)</a>.</em>
+        Both parent and child begin execution exactly after the call to <em>fork()</em>.
+        The parent process usually goes back to what it was doing; 
+        the child process goes on to call <em><a href="https://www.man7.org/linux/man-pages/man2/execve.2.html">execve(pathname, argv, envp)</a>.</em>
         This instructs the kernel to replace the current
         process with a new one by loading the executable file located at <em>pathname;</em>
-        therein, execution begins at <em>main.</em>
+        therein, execution begins at <em>main()</em>.
     </p>
 
-    <p>
-        Before the calls to <em>fork</em> and <em>exec()</em>, there was one process.
-        After <em>fork()</em>, there are two nearly-duplicate processes.
-        After <em>exec()</em>, there are two distinct processes.
-        Note: Any process, including child processes, may call <em>fork()</em> and <em>exec()</em>.
-    </p>
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://unix.stackexchange.com/questions/158872/does-systemd-still-know-about-runlevels">
+                Does systemd still know about runlevels?</a> - Unix &amp; Linux Stack Exchange</li>
+    </ul>
 
 </div>
 
@@ -200,12 +202,11 @@ last-updated: November, 2020
     </p>
 
     <p>
-        There are a few reasons to manage processes by PID numbers rather than names.
-        First, two processes spawned from the same executable can easily,
-        and often, exist.
-        If we launch two instances of Firefox, for instance, then two distinct
-        processes exist.
-        The only thing they share is the <code>text</code> segment of the program,
+        There reason we manage processes by PID numbers rather than names
+        is that two processes may spawned from the same executable file,
+        and be running concurrently.
+        When this is the case, the only thing they share is the 
+        "<code>text</code>" segment,
         which contains the program's instructions, and which exists in the virtual
         memory of each process as read-only.
     </p>
