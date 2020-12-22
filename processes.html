@@ -29,6 +29,7 @@ last-updated: November, 2020
         <li><a href="#actors"> Actors </a></li>
         <li><a href="#proccess-creation"> Process Creation and System Startup </a></li>
         <li><a href="#process-attributes"> Process Attributes </a></li>
+        <li><a href="#standard-file-descriptors">Standard File Descriptors </a></li>
         <li><a href="#what-is"> Yeah But What Is It? </a></li>
         <li><a href="#dr-fraser"> Dr. Brian Fraser </a></li>
         <li><a href="#references"> References </a></li>
@@ -201,12 +202,24 @@ last-updated: November, 2020
     </p>
 
     <p>
-        Beyond the executable file associated with each process, the kernel 
-        maintains a great deal of information about each process:
+        For each process on the system, the kernel 
+        maintains a great deal of information, including:
     </p>
 
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            For detailed information about processes in the Linux environment, see
+            <a href="https://www.man7.org/tlpi/"> The Linux Programming Interface</a>.
+        </p>
+    </div>
+
+
     <ul>
-        <li>Location of next instruction within the executable</li>
+        <li>Location of executable file</li>
+        <ul>
+            <li>Location of next instruction </li>
+        </ul>
         <li>Files currently open by the process</li>
         <ul>
             <li>Access Mode (read, write, read and write)</li>
@@ -221,9 +234,45 @@ last-updated: November, 2020
         Most of this information is available for perusal in the 
         <code>/proc/</code> directory, which contains one subdirectory
         for each process on the system.  
-        For detailed information about processes in the Linux environment, see
-        <a href="https://www.man7.org/tlpi/"> The Linux Programming Interface</a>.
+        For now, we'll consider just one of these, in order to give
+        some idea of how the kernel behaves, and how one interacts with it.
     </p>
+
+    <h3>File Descriptors</h3>
+    <p>
+        Each open file that a process has is assigned a number
+        by the kernel (specifically, a small integer).
+        This number is called a <em>file descriptor</em>.
+        These integers are used by the process whenever the process
+        requests an operation from a file. 
+        In the following call to 
+        <code><a href="https://man7.org/linux/man-pages/man2/read.2.html">read(2)</a></code>,
+        the program is instructing
+        the kernel to read from the file associated with
+        the number <em>3</em>.
+    </p>
+
+    <div class="code">
+        num_bytes_read = read(3, buff, buff_size);
+    </div>
+
+    <p>
+        This instructs the kernel to read at-most <code>buff_size</code>
+        bytes from the file associated with the number <code>3</code>, 
+        and to store the data into <code>buff</code>.
+        If all goes well, the system call will return with a nonnegative value;
+        if the kernel encountered an error, it will return with a 
+        negative value.
+        In either case, this <em>return value</em> will be assigned to 
+        <code>num_bytes_read</code>.
+    </p>
+
+
+
+
+
+
+
 
 
 
@@ -231,6 +280,11 @@ last-updated: November, 2020
     <ul>
         <li><code><a href="https://man7.org/linux/man-pages/man5/proc.5.html"> proc(5)</a></code></li>
     </ul>
+</div>
+
+<div class="content" id="standard-file-descriptors">
+    <h2> Standard File Descriptors </h2>
+    
 </div>
 
 <div class="content" id="what-is">
