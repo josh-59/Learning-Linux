@@ -6,9 +6,6 @@ last-updated: November, 2020
 
 <!--
   TODO
-  Current working directory (among process attributes)
-        -> Change with system call
-  Open file descriptors.
   Memory layout
 
   Terminating Processes:
@@ -19,8 +16,6 @@ last-updated: November, 2020
         Possibly:
             EOF and EOF character
 
-  A Similar article:
-  https://www.brianstorti.com/an_introduction_to_unix_processes/
 -->
 
 <div id="nav_bar_2" class="nav">
@@ -30,6 +25,7 @@ last-updated: November, 2020
         <li><a href="#proccess-creation"> Process Creation and System Startup </a></li>
         <li><a href="#process-attributes"> Process Attributes </a></li>
         <li><a href="#standard-file-descriptors">Standard File Descriptors </a></li>
+        <li><a href="#signals-and-termination">Signals and Process Termination</a></li>
         <li><a href="#what-is"> Yeah But What Is It? </a></li>
         <li><a href="#dr-fraser"> Dr. Brian Fraser </a></li>
         <li><a href="#references"> References </a></li>
@@ -70,7 +66,7 @@ last-updated: November, 2020
     <h2> Actors </h2>
 
     <p>
-        Think of processes as the actors of the operating system.
+        Think of processes as the actors of the system.
         Left to its own devices, the kernel does nothing:
         All Unix-like operating systems depend upon processes to direct the kernel,
         and through the kernel, processes direct the machine.
@@ -78,8 +74,6 @@ last-updated: November, 2020
         <em>what</em> to do (dictated by processes), and <em>how</em> to do
         it (dictated by the kernel).
     </p>
-
-
 
     <p>
         The kernel:
@@ -114,7 +108,7 @@ last-updated: November, 2020
         contents of a directory, or interpret and execute commands from the user.
         It is intended that these small programs work together to
         accomplish any given task, thereby easing programming and maintenance,
-        and increasing the modularity of the resulting whole.
+        and increasing the modularity of the whole.
     </p>
 
     <h3> Runlevels</h3>
@@ -162,7 +156,7 @@ last-updated: November, 2020
 
     <p>
         From within a process, creating a new process begins with
-        the <em><a href="https://www.man7.org/linux/man-pages/man2/fork.2.html">fork()</a></em> system call.
+        the <a href="https://www.man7.org/linux/man-pages/man2/fork.2.html"><code>fork(2)</code></a> system call.
         This instructs the kernel to make a copy of the current process&mdash;
         an exact copy is produced, save one difference: Each of the two
         processes receives a different return value from <em>fork().</em>
@@ -171,11 +165,13 @@ last-updated: November, 2020
     <p>
         The new process is called the <em>child</em> process, and the
         old process is called the <em>parent</em> process.
-        Both parent and child begin execution exactly after the call to <em>fork()</em>.
+        Both parent and child continue execution of the parent executable
+        exactly after the call to <em>fork()</em>.
         The parent process usually goes back to what it was doing; 
-        the child process goes on to call <em><a href="https://www.man7.org/linux/man-pages/man2/execve.2.html">execve(pathname, argv, envp)</a>.</em>
-        This instructs the kernel to replace the current
-        process with a new one by loading the executable file located at <em>pathname;</em>
+        the child process goes on to call 
+        <a href="https://www.man7.org/linux/man-pages/man2/execve.2.html"><code>exec(2)</code></a>.
+        This instructs the kernel to replace the currently executing
+        program with another;
         therein, execution begins at <em>main()</em>.
     </p>
 
@@ -218,7 +214,7 @@ last-updated: November, 2020
     <ul>
         <li>Location of executable file</li>
         <ul>
-            <li>Location of next instruction </li>
+            <li>Location of next instruction within</li>
         </ul>
         <li>Files currently open by the process</li>
         <ul>
@@ -234,13 +230,14 @@ last-updated: November, 2020
         Most of this information is available for perusal in the 
         <code>/proc/</code> directory, which contains one subdirectory
         for each process on the system.  
-        For now, we'll consider just one of these, in order to give
-        some idea of how the kernel behaves, and how one interacts with it.
+        In order to give some idea of how the kernel manages processes,
+        and how processes interact with the kernel,
+        we will consider one of these attributes: Files opened by processes.
     </p>
 
     <h3>File Descriptors</h3>
     <p>
-        Each open file that a process has is assigned a number
+        Each file that a process has open is assigned a number
         by the kernel (specifically, a small integer).
         This number is called a <em>file descriptor</em>.
         These integers are used by the process whenever the process
@@ -256,9 +253,20 @@ last-updated: November, 2020
         num_bytes_read = read(3, buff, buff_size);
     </div>
 
+    <div class="aside-left">
+        <h4>Note:</h4>
+        <p>
+            You are not expected to memorize these interfaces.
+            The 
+            <a href="https://man7.org/linux/man-pages/man2/read.2.html">manual page</a>
+            for <code>read(2)</code> describes each field, and the kernel's 
+            response, in detail.
+        </p>
+    </div>
+
     <p>
         This instructs the kernel to read at-most <code>buff_size</code>
-        bytes from the file associated with the number <code>3</code>, 
+        bytes from the file associated with file descriptor <code>3</code>, 
         and to store the data into <code>buff</code>.
         If all goes well, the system call will return with a nonnegative value;
         if the kernel encountered an error, it will return with a 
@@ -267,17 +275,17 @@ last-updated: November, 2020
         <code>num_bytes_read</code>.
     </p>
 
-
-
-
-
-
-
-
+    <p>
+        <a href="https://man7.org/linux/man-pages/man2/write.2.html"><code>Write(2)</code></a> 
+        is handled analogously. 
+        Every system call has a well-defined and stable interface.
+    </p>
 
 
     <h3> See Also: </h3>
     <ul>
+        <li><a href="https://man7.org/linux/man-pages/man2/open.2.html"><code>open(2)</code></a> </li>
+        <li><a href="https://man7.org/linux/man-pages/man2/close.2.html"><code>close(2)</code></a> </li>
         <li><code><a href="https://man7.org/linux/man-pages/man5/proc.5.html"> proc(5)</a></code></li>
     </ul>
 </div>
@@ -285,6 +293,10 @@ last-updated: November, 2020
 <div class="content" id="standard-file-descriptors">
     <h2> Standard File Descriptors </h2>
     
+</div>
+
+<div class="content" id="signals-and-termination">
+    <h2> Signals and Process Termination </h2>
 </div>
 
 <div class="content" id="what-is">
