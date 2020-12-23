@@ -292,6 +292,40 @@ last-updated: November, 2020
 
 <div class="content" id="termination">
     <h2> Process Termination </h2>
+    <p>
+        A process may terminate for a few reasons:
+    </p>
+
+    <ul>
+        <li> 
+            Return from <em>main()</em> 
+            <p>
+                This is the usual and preferred route to terminate a process:
+                It finishes its job, and explicitly requests to return.
+            </p>
+        </li>
+        <li>
+            It is told to terminate
+            <p>
+                A process may be told to terminate by any other process with
+                the same owner.
+                A process owned by root (that is, a process with superuser priveledges) 
+                can instruct any process to terminate.
+            </p>
+        </li> 
+        <li>
+            It does something wrong
+            <p>
+                Almost always, this happens when the offending process tries to read or write
+                a memory location not assigned to it, a condition known in Linux
+                as <em>segmentation fault</em>.
+            </p>
+        </li>
+    </ul>
+
+    <p>
+        It should be noted that the kernel does not arbitrarily terminate processes.
+    </p>
 </div>
 
 <div class="content" id="what-is">
