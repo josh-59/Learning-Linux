@@ -24,8 +24,8 @@ last-updated: November, 2020
         <li><a href="#actors"> Actors </a></li>
         <li><a href="#proccess-creation"> Process Creation and System Startup </a></li>
         <li><a href="#process-attributes"> Process Attributes </a></li>
-        <li><a href="#standard-file-descriptors">Standard File Descriptors </a></li>
-        <li><a href="#signals-and-termination">Signals and Process Termination</a></li>
+        <li><a href="#termination">Process Termination</a></li>
+        <li><a href="#signals">Signals and IPC</a></li>
         <li><a href="#what-is"> Yeah But What Is It? </a></li>
         <li><a href="#dr-fraser"> Dr. Brian Fraser </a></li>
         <li><a href="#references"> References </a></li>
@@ -290,29 +290,20 @@ last-updated: November, 2020
     </ul>
 </div>
 
-<div class="content" id="standard-file-descriptors">
-    <h2> Standard File Descriptors </h2>
-    
-</div>
-
-<div class="content" id="signals-and-termination">
-    <h2> Signals and Process Termination </h2>
+<div class="content" id="termination">
+    <h2> Process Termination </h2>
 </div>
 
 <div class="content" id="what-is">
-  <h2>Yeah But What Is It?</h2>
-  <p>
-    One of the major ideas of processes is that each process is isolated
-    from both the kernel and from other processes.
-    This is done for a few reasons.
-    First, we want to ensure that no process is capable of jeopardizing the
-    stability of the system.
-    Second, we want to ensure that no process can affect any other process
-    in an unpredictable manner.
-    We do this by running each process in a "sandboxed" environment, composed
-    of restricted access to the machine's CPU, and a virtualized memory address
-    space.
-  </p>
+    <h2>Yeah But What Is It?</h2>
+
+    <p>
+        Processes are one of the big ideas of operating systems.
+        Through it, operating systems can isolate every running program
+        from every other running program, and from the machine itself.
+        The best analogy to describe a process is that it is a 
+        sandbox in which a piece of code runs.
+    </p>
 
   <h3> Limited Direct Execution </h3>
 
@@ -322,7 +313,9 @@ last-updated: November, 2020
     <em>Kernel mode,</em> sometimes called "supervisor mode," is the unrestricted mode.
     Here, all CPU instructions are available, so that code running in this mode
     has complete access to the machine.
-    <em>User mode</em> is a proper subset of kernel mode; all processes run in user mode.
+    <em>User mode</em> is a proper subset of kernel mode; code running in user mode
+    does not have access to all instruction.  
+    All processes run in user mode.
     If a process, running in user mode, attempts to execute a restricted instruction,
     its execution is halted, and control is given to the kernel.
     At that point, it is up to the operating system to determine what to do
