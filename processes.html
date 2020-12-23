@@ -6,15 +6,8 @@ last-updated: November, 2020
 
 <!--
   TODO
-  Memory layout
-
-  Terminating Processes:
-        -> Signals
-        -> kill
-        -> killall
-
-        Possibly:
-            EOF and EOF character
+        Memory layout
+        <li><a href="#signals">Signals and IPC</a></li>
 
 -->
 
@@ -25,8 +18,7 @@ last-updated: November, 2020
         <li><a href="#proccess-creation"> Process Creation and System Startup </a></li>
         <li><a href="#process-attributes"> Process Attributes </a></li>
         <li><a href="#termination">Process Termination</a></li>
-        <li><a href="#signals">Signals and IPC</a></li>
-        <li><a href="#what-is"> Yeah But What Is It? </a></li>
+        <li><a href="#sandbox"> Sandbox </a></li>
         <li><a href="#dr-fraser"> Dr. Brian Fraser </a></li>
         <li><a href="#references"> References </a></li>
     </ul>
@@ -241,12 +233,12 @@ last-updated: November, 2020
         by the kernel (specifically, a small integer).
         This number is called a <em>file descriptor</em>.
         These integers are used by the process whenever the process
-        requests an operation from a file. 
+        requests an operation on a file. 
         In the following call to 
         <code><a href="https://man7.org/linux/man-pages/man2/read.2.html">read(2)</a></code>,
-        the program is instructing
+        the calling program is instructing
         the kernel to read from the file associated with
-        the number <em>3</em>.
+        the number <em>3:</em>
     </p>
 
     <div class="code">
@@ -265,9 +257,9 @@ last-updated: November, 2020
     </div>
 
     <p>
-        This instructs the kernel to read at-most <code>buff_size</code>
+        The kernel will read at-most <code>buff_size</code>
         bytes from the file associated with file descriptor <code>3</code>, 
-        and to store the data into <code>buff</code>.
+        and store the data into <code>buff</code>.
         If all goes well, the system call will return with a nonnegative value;
         if the kernel encountered an error, it will return with a 
         negative value.
@@ -278,7 +270,8 @@ last-updated: November, 2020
     <p>
         <a href="https://man7.org/linux/man-pages/man2/write.2.html"><code>Write(2)</code></a> 
         is handled analogously. 
-        Every system call has a well-defined and stable interface.
+        Every system call has a well-defined and stable interface, and an entry in
+        the man pages.
     </p>
 
 
@@ -296,12 +289,19 @@ last-updated: November, 2020
         A process may terminate for a few reasons:
     </p>
 
-    <ul>
+    <ul class="big-list">
         <li> 
             Return from <em>main()</em> 
             <p>
                 This is the usual and preferred route to terminate a process:
                 It finishes its job, and explicitly requests to return.
+            </p>
+
+            <p>
+                When this occurs on the command line, the process's return value (and it must offer one) is available 
+                for inspection.  
+                By convention, a return value of zero indicates success, while nonzero return
+                values indicate error or fault.
             </p>
         </li>
         <li>
@@ -312,6 +312,13 @@ last-updated: November, 2020
                 A process owned by root (that is, a process with superuser priveledges) 
                 can instruct any process to terminate.
             </p>
+
+            <p>
+                Command-line tools for terminating processes are <code><a href="https://www.man7.org/linux/man-pages/man1/kill.1.html">kill(1)</a></code>,
+                which refers to processes by their PID numbers, and
+                <code><a href="https://www.man7.org/linux/man-pages/man1/killall.1.html">killall(1)</a></code>,
+                which kills processes by name.
+            </p>
         </li> 
         <li>
             It does something wrong
@@ -320,23 +327,29 @@ last-updated: November, 2020
                 a memory location not assigned to it, a condition known in Linux
                 as <em>segmentation fault</em>.
             </p>
+
+            <p>
+                Note that when this occurs, it is not the case that the process is 
+                "trying to read/write some other process's memory."
+                Rather, every process is given its own virtual memory address space (see below);
+                the kernel kills it because the memory in question is not associated
+                with the process in any meaningful way.
+            </p>
         </li>
     </ul>
 
-    <p>
-        It should be noted that the kernel does not arbitrarily terminate processes.
-    </p>
 </div>
 
-<div class="content" id="what-is">
-    <h2>Yeah But What Is It?</h2>
+<div class="content" id="sandbox">
+    <h2>Sandbox</h2>
 
     <p>
         Processes are one of the big ideas of operating systems.
         Through it, operating systems can isolate every running program
         from every other running program, and from the machine itself.
-        The best analogy to describe a process is that it is a 
-        sandbox in which a piece of code runs.
+        Effectively, every program on the machine executes in a 
+        sandboxed environment, composed of restricted access to the CPU
+        and a distinct memory space.
     </p>
 
   <h3> Limited Direct Execution </h3>
@@ -347,6 +360,8 @@ last-updated: November, 2020
     <em>Kernel mode,</em> sometimes called "supervisor mode," is the unrestricted mode.
     Here, all CPU instructions are available, so that code running in this mode
     has complete access to the machine.
+  </p>
+    <p>
     <em>User mode</em> is a proper subset of kernel mode; code running in user mode
     does not have access to all instruction.  
     All processes run in user mode.
