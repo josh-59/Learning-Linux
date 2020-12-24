@@ -330,7 +330,7 @@ last-updated: November, 2020
 
             <p>
                 Note that when this occurs, it is not the case that the process is 
-                "trying to read/write some other process's memory."
+                trying to read or write some other process's memory.
                 Rather, every process is given its own virtual memory address space (see below);
                 the kernel kills it because the memory in question is not associated
                 with the process in any meaningful way.
@@ -342,6 +342,7 @@ last-updated: November, 2020
 
 <div class="content" id="sandbox">
     <h2>Sandbox</h2>
+    <h4>You can skip this</h4>
 
     <p>
         Processes are one of the big ideas of operating systems.
