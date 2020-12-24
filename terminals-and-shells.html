@@ -6,10 +6,11 @@ last-updated: November, 2020
 
 <!--
 To Do:
-Section:
-Automatic File Location
-Scripting
-
+    Shells: 
+        Builtin vs. program
+    Standard File Descriptors:
+        Include redirection
+    Scripting
         Possibly:
             EOF and EOF character
 -->
@@ -40,7 +41,7 @@ Scripting
 		At the time, the preferred interface for users was the <a href="./text-terminals.html">physical terminal</a>.
 		Although physical terminals are antiquated, the idea persists in
 		modern contexts because it is a very good low-level interface to the machine:
-		It is often used by developers and system administrators to quickly get work done.
+		It is often used by developers and system administrators to quickly get things done.
 	</p>
 </div>
 
@@ -135,13 +136,17 @@ Scripting
 		for this introduction, and for most purposes, it is sufficient to recognize that
 		terminals and shells are distinct, cooperating processes.
 	</p>
-
-
-
 </div>
 
 <div id="shells" class="content">
 	<h2> Shells </h2>
+
+    <div class="aside-right">
+		<h4>Aside:</h4>
+		<p>
+		    Desktop environment serve a role analogous to shells.
+		<p>
+	</div>
 
 	<p>
 		A shell is a program which interprets and executes our (arbitrary) commands;
@@ -151,15 +156,6 @@ Scripting
 		the shell as an ordinary user-space process:  From a software
 		architecture standpoint, it is just another running program.
 	</p>
-
-	<div class="aside-right">
-		<h4>Aside:</h4>
-		<p>
-			I use plain-old <code>bash</code>, in part because it is
-			ubiquitous&mdash; but do as you please!
-			My next shell will be written in Rust.
-		<p>
-	</div>
 
 	<p>
 		Some modern shells:
@@ -171,121 +167,79 @@ Scripting
 		<li><a href="https://fishshell.com/">fish</a>&mdash; The Friendly Interactive Shell</li>
 	</ul>
 
-	</div>
+    <p>
+        Learning to use a shell amounts to learning how it handles
+        each command given to it.  
+        Here we'll study <code>bash</code>, but note that other shells
+        in Linux operate similarly.
+    </p>
+</div>
 
-	<div id="automatic-program-location" class="content">
-		<h2>Automatic Program Location</h2>
+<div class="content" id="decomposing-lines">
+    <h2 style="margin-bottom: 0;">Decomposing Lines</h2>
+    <h4>aka "Parsing"</h4>
 
+</div>
+
+<div class="content" id="command-location">
+    <h2>Commands and Builtin's</h2>
+
+    <p>
+		It is often valuable to know how <code>bash</code> searches
+        for programs.
+        Most commands that users enter into a shell are separate programs.
+        For instance, when a user enters,
+    </p>
+
+    <div class="code">
+        $ ls
+    </div>
+
+    <p>
+        the shell finds the <code>ls(1)</code> executable, forks itself, and
+        instructs the child process to execute that binary. 
+        The <code>ls</code> program then reads its current directory's
+        entries and prints them out.
+        The shell 
+        <a href="https://man7.org/linux/man-pages/man2/wait.2.html">waits</a>
+        until <code>ls</code> terminates, then returns with a prompt.
+        This happens very quickly.
+    </p>
+
+     <div class="aside-right">
+        <h4>Alternative:</h4>
+        <p>
+            <code><a href="https://the.exa.website"</a>exa</a></code>
+            is a modern replacement for <code>ls</code>.
+        </p>
+    </div>
+
+    <p>
+        While this strategy is certainly preferrable, there are times 
+        where it will not work.
+        For instance, changing the current directory must be carried out 
+        by <code>bash</code> itself, since it is a per-process attribute.
+        Commands such as these are called <em>builtins</em>, and can be
+        listed by,
+    </p>
+
+    <div class="code">
+        $ help
+    </div>
+
+    <p>
+        Where <code>help</code> is, itself, a builtin.
+    </p>
+
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
 		<p>
-			Automatic Program Location, or Automatic Program Location for short,
-			is
-
-		Typically, when "interacting" with a computer, data from a tty file is read by a particular program called
-		a <a href="https://wiki.archlinux.org/index.php/Command-line_shell"> shell</a>.
-		There are many variants, such as the antiquated <code>sh</code>, its modern successor <code>bash</code>,
-		the disused <code>csh</code>, the feature-laden <code>zsh</code>, and a relative newcomer, the Friendly Interactive Shell, <code>fish</code>.
-		Each of these are ordinary programs, and exist within a running operating system as an ordinary
-		<a href="https://en.wikipedia.org/wiki/Process_(computing)">user-space processes</a>; they have no special attributes or permissions.
-		They simply read from a file (which might or might-not be your tty file), interpret and execute commands.
-		The commands they "know" are determined <i>by the shell itself</i>, and can be determined by looking at
-		the <code>PATH</code> environment variable:
-	</p>
-
-	<div class="code">
-		$ echo $PATH
-	</div>
-
-	<div class="aside-right">
-		<h4> Aside </h4>
-		<p>
-			Desktop environments serve a role analagous to shells, but in GUI-based environments.
-			In fact, they are sometimes called <i><a href="https://en.wikipedia.org/wiki/Shell_(computing)#GUI">Graphical Shells</a>.</i>
-			My favorite is Cinnamon!  Which one is yours?
+			Desktop environments serve a role analagous to shells.
 		</p>
 	</div>
-
-	<p>
-		Shells are customizable in a variety of ways.
-		Here we'll take a look at customizing the prompt in Bash.
-		The prompt is the short string printed before the shell asks you for input.
-		It usually looks like,
-	</p>
-
-	<div class="code">
-	-->
 </div>
 
-<p>
-	or perhaps,
-</p>
-
-<div class="code">
-	josh@home:~$
-</div>
-
-<p>
-	Within Bash, the prompt is determined by the contents of the <code>PS1</code> variable.
-	That is, Bash, in addition to being an interactive program, is an interpreted language, and has variables;
-	among these is <code>PS1</code>.
-	Each time Bash wishes to ask you for a new command, it reads and prints <code>PS1</code>
-	before doing so.  Nothing more, and nothing less.
-</p>
-
-<p>
-	Thus, we can modify the prompt by setting PS1 to our liking:
-</p>
-
-<div class="code">
-	PS1="-->"
-</div>
-
-<p>
-	Everybody has their own thing&ndash; I prefer a simple and readable prompt.
-	So, I wish the prompt to print my current working directory, in bold, so as to distinguish it from
-	other lines.
-</p>
-
-<p>
-	You might have guessed that what we're going to do is tell Bash to print
-	an ANSI escape sequence saying, "Turn bold on," followed by the
-	current working directory (another variable within Bash),
-	followed by the ANSI escape sequence turning bold back off:
-</p>
-
-<div class="code">
-	PS1='\033[1m$PWD\033[m'
-</div>
-
-<p>
-	This will work correctly on any terminal supporting ANSI escape sequences (which is most, if
-	not all, of them).
-	However, there's one "gotcha," that, well, got me:
-	<code>bash</code> requires that each sequence of non-printing characters be wrapped in
-	<code>\[</code> and <code>\]</code> (or else <code>bash</code> will allow text to wrap around
-	in a very perplexing manner).
-	So, we have:
-</p>
-
-<div class="code">
-	PS1='\[\033[1m\]$PWD\[\033[m\]'
-</div>
-
-<p>
-	Thanks Derek Taylor of <a href="https://www.youtube.com/channel/UCVls1GmFKf6WlTraIb_IaJg">
-		DistroTube</a>, for helping me out!
-		Finally, we append an indicator telling us whether we are root user or not, along with a space:
-	</p>
-
-	<div class="code">
-		PS1='\033[1m$PWD\$\033[m '
-	</div>
-
-	<p>
-		Note single quotes!
-		See the <a href="https://www.gnu.org/software/bash/manual/bash.pdf">
-			GNU Bash Reference Manual</a> ("Controlling the Prompt") for more information.
-		</p>
-	</div>
 
 	<div id="standard-file-descriptors" class="content">
 		<h2> The Standard File Descriptors </h2>

@@ -15,7 +15,7 @@ last-updated: November, 2020
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#actors"> Actors </a></li>
-        <li><a href="#proccess-creation"> Process Creation and System Startup </a></li>
+        <li><a href="#process-creation"> Process Creation and System Startup </a></li>
         <li><a href="#process-attributes"> Process Attributes </a></li>
         <li><a href="#termination">Process Termination</a></li>
         <li><a href="#sandbox"> Sandbox </a></li>
@@ -123,7 +123,7 @@ last-updated: November, 2020
     </ul>
 </div>
 
-<div class="content" id="proccess-creation">
+<div class="content" id="process-creation">
     <h2> Process Creation and System Startup</h2>
 
     <p>
@@ -227,7 +227,7 @@ last-updated: November, 2020
         we will consider one of these attributes: Files opened by processes.
     </p>
 
-    <h3>File Descriptors</h3>
+    <h3 id="file-descriptors">File Descriptors</h3>
     <p>
         Each file that a process has open is assigned a number
         by the kernel (specifically, a small integer).
