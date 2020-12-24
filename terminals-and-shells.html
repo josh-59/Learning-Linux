@@ -21,10 +21,9 @@ To Do:
 		<li><a href="#history"> History </a></li>
 		<li><a href="#terminals"> Terminals </a></li>
 		<li><a href="#shells"> Shells </a></li>
-		<li><a href="#automatic-program-location"> Automatic Program Location</a></li>
+        <li><a href="#decomposing-lines">Decomposing Lines</a></li>
+        <li><a href="#searching-for-commands">Searching for Commands</a></li>
 		<li><a href="#standard-file-descriptors"> Standard File Descriptors </a></li>
-		<li><a href="#redirection"> Redirection </a></li>
-		<li><a href="#terminal_line_discipline"> Terminal Line Discipline </a></li>
 		<li><a href="#shell-globbing"> Globbing </a></li>
 		<li><a href="#shell-features"> Other Shell Features </a></li>
 		<li><a href="#lgr"> An LGR Thing </a></li>
@@ -173,21 +172,11 @@ To Do:
         Here we'll study <code>bash</code>, but note that other shells
         in Linux operate similarly.
     </p>
-</div>
 
-<div class="content" id="decomposing-lines">
-    <h2 style="margin-bottom: 0;">Decomposing Lines</h2>
-    <h4>aka "Parsing"</h4>
-
-</div>
-
-<div class="content" id="command-location">
-    <h2>Commands and Builtin's</h2>
+    <h3>Commands and Builtin's</h3>
 
     <p>
-		It is often valuable to know how <code>bash</code> searches
-        for programs.
-        Most commands that users enter into a shell are separate programs.
+        Most commands that users enter into <code>bash</code> are separate programs.
         For instance, when a user enters,
     </p>
 
@@ -219,6 +208,10 @@ To Do:
         where it will not work.
         For instance, changing the current directory must be carried out 
         by <code>bash</code> itself, since it is a per-process attribute.
+        Therefore, <code>cd</code> is carried out by <code>bash</code>.
+    </p>
+
+    <p>
         Commands such as these are called <em>builtins</em>, and can be
         listed by,
     </p>
@@ -232,109 +225,73 @@ To Do:
     </p>
 
 
-    <div class="aside-right">
-        <h4>Aside:</h4>
-		<p>
-			Desktop environments serve a role analagous to shells.
-		</p>
-	</div>
+</div>
+
+<div class="content" id="decomposing-lines">
+    <h2 style="margin-bottom: 0;">Decomposing Lines</h2>
+    <h4>aka "Parsing"</h4>
+
+</div>
+
+<div class="content" id="searching-for-commands">
+    <h2>Searching for Commands</h2>
 </div>
 
 
-	<div id="standard-file-descriptors" class="content">
-		<h2> The Standard File Descriptors </h2>
-		<p>
-			Each process on a *nix system is created with three open files,
-			<em>Standard In,</em> <em>Standard Out</em> and <em>Standard Error:</em>
-		</p>
+<div id="standard-file-descriptors" class="content">
+	<h2> The Standard File Descriptors </h2>
+	<p>
+        In interactive use, <code>bash</code> is connected to its terminal
+        by open files.  
+        The first file, represented within <code>bash</code> as 
+        <a href="processes.html#file-descriptors">file descriptor <em>0</em></a>,
+        is the keyboard:
+        Writing to it is not permitted, and reading from it amounts to
+        waiting for the next line of input.
+        The second file, file descriptor <em>1</em>, is the terminal
+        screen: Reading from it is not permitted, and anything written to it
+        is printed on screen.
+    </p>
 
-		<figure>
-			<a href="assets/img/stdin-stdout-stderr.png"><img src="assets/img/stdin-stdout-stderr.png" style="width: 100%;"></a>
-		</figure>
+    <p>
+	    Recall that each process created by the <code>fork(2)</code> system
+        call <a href="processes.html#process-creation">inherits</a> 
+        its parent's attributes, and that these attributes
+        include file descriptors.
+        This implies that each fork of <code>bash</code> will have a 
+        keyboard present at file descriptor zero, and a terminal screen
+        at file descriptor one.
+	</p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Can you do it?
+            Yes you can!
+        </p>
+    </div>
+
+    <p>
+        This spawned the convention of <em>Standard file descriptors</em>:
+        Descriptors 0, 1 and 2 are referred to as 
+        <code>STDIN</code>,
+        <code>STDOUT</code>,
+        and <code>STDERR</code>, respectively.
+        By this convention, writing an <code>ls</code> clone becomes simple:
+        For each <a href="https://www.man7.org/linux/man-pages/man3/readdir.3.html">entry</a> in the current directory, <a href="https://man7.org/linux/man-pages/man3/printf.3.html">print</a> it out!
+    </p>
 
 
-		<div class="aside-right">
-			<h4>Aside:</h4>
-			<p>
-				Although these files are opened for every process,
-				we interact with them most often at the command line.
-			</p>
-		</div>
+    <p>
+        Standard error (<code>STDERR</code>) is the same
+        terminal screen as <code>STDOUT</code>, but is reserved for
+        errors, logs and other red-letter messages.
+        In a moment, we'll see why this is useful.
+    </p>
 
-		<p>
-			By default the shell connects each command-line utility's standard-in to
-			the keyboard, and both standard out and standard error to the terminal screen.
-			These are, in fact, the shell's <em>own</em> connections; each
-			process that the <a href="processes.html#proccess-creation">shell creates</a>
-			inherits the shell's file descriptors.
-		</p>
 
-		<p>
-			Consider the <em>echo</em> utility.
-			This program reads each argument passed to it, and prints each to standard
-			out:
-		</p>
-
-		<div class="code">
-			$ echo one two three <br>
-			one two three <br>
-		</div>
-
-		<p>
-			Here, neither STDIN nor STDERR are used (although they are open).
-			Rather, the arguments are passed to the kernel during the
-			<em><a href="https://www.man7.org/linux/man-pages/man2/execve.2.html">execve(pathname, argv, envp)</a></em>
-			system call, which places them within the address space of <em>echo</em>,
-			which in turn simply reads them from within itself and prints them to (its) standard out:
-		</p>
-
-		<figure>
-			<a href="assets/img/echo-std.png"><img src="assets/img/echo-std.png" style="width: 80%;"></a>
-		</figure>
-
-		<p>
-			The name <em>argv</em> is short for <em>argument vector,</em> and
-			is a pointer to an array of character pointers.<sup><a href="#references">[1]</a></sup>
-			It exists within each process, and the first element it points to
-			is always the name of the called program.
-		</p>
-
-		<p>
-			We turn back to the operation of the shell.
-			As each line is read by the shell, it is broken down into tokens, which
-			are delimited by space(s) or tab(s).
-			The first token (here, '<code>echo</code>') is always interpreted as a command.
-			The other tokens were interpreted as arguments, so that our call to echo
-			passed three arguments.
-		</p>
-
-		<p>
-			By default, the shell connects each command-line utility <em>Standard-out</em>
-			to the terminal screen, <em>Standard-in</em> to the keyboard, and
-			<em>Standard-error</em> to the  We can change this, though:
-		</p>
-
-		<div class="code">
-			$ echo one two three > boo <br>
-		</div>
-
-		<p>
-			This is called <em>redirection</em>&mdash; Formally, we have redirected the
-			standard-out of the <code>echo</code> utility to a file called <code>boo</code> by using
-			the redirection operator <code>&gt;</code>.
-			This is a facility of the shell; <code>echo</code> is not involved in any way.
-		</p>
-
-		<p>
-			To explain, in the command above, the shell first opens
-			the file <code>boo</code>, creating it if it does not exist, and truncating it
-			to zero length if it does exist (and is writeable).
-			Then the shell connects its own standard out to it, and executes echo.
-			Echo blindly prints its output to <em>standard out,</em> which happens to
-			be the file <em>boo</em>, and not the terminal screen.
-		</p>
-
-	</div>
+    <h3> Redirection </h3>
+</div>
 
 
 
@@ -378,110 +335,6 @@ To Do:
 						<p>
 							Hope you enjoyed this&mdash; more to come!
 						</p>
-					</div>
-
-					<div id="terminal_line_discipline" class="content">
-						<h2> Terminal Line Discipline </h2>
-
-						<p>
-							For all text terminals, bytes flow from the keyboard to the computer, and bytes flow from the computer to the screen.
-							In particular, bytes do not flow directly from the keyboard to the terminal's monitor;
-							the reflection of typed characters on-screen is a function of the computer itself,
-							and not a function of the terminal.
-							We can shut off this functionality by the following:
-						</p>
-
-						<p>
-							From the shell,
-						</p>
-						<div class="code">
-							$ stty -echo
-						</div>
-
-						<p>
-							Or, in a Posix-conforming environment,
-						</p>
-
-						<div class="code">
-							#import &lt;termios.h&gt;<br>
-							<br>
-							[...]<br>
-							<br>
-							// Turn off echo, so typed user input does not show up<br>
-							assert( tcgetattr(STDIN_FILENO, &term) >= 0 );<br>
-							term.c_lflag &amp;= ~ECHO;<br>
-							assert( tcsetattr(STDIN_FILENO, TCSANOW, &term) >= 0 );<br>
-						</div>
-
-						<p>
-							Both of the above examples manipulate a very important C <code>struct</code>
-							called <i>termios</i>.
-							The termios struct belongs to the kernel; specifically, it belongs to a
-							kernel module called the <i>terminal line discipline</i>.
-							All characters which pass through a terminal device file
-							pass through the terminal line discipline;
-							the <a href="http://man7.org/linux/man-pages/man3/termios.3.html">termios struct</a> is how we manipulate its behavior, and thus,
-							the behavior of keypresses.
-						</p>
-
-						<div class = "aside-left">
-							<h4> Aside: X Window System </h4>
-							<p>
-								The X Window System serves a role roughly analgous to the terminal line discipline:
-								It facilitates the interaction between mouse, keyboard and monitors with application programs,
-								though it exists in user-space rather than kernel-space.
-								It is <i>server</i> it controls system resources,
-								and provides an interface for other programs to interact with<sup><a href="#references">[14]</a></sup>.
-							</p>
-						</div>
-
-						<p>
-							To explain, we start at the root. All keyboards send
-							<a href="http://www.tldp.org/HOWTO/Keyboard-and-Console-HOWTO-2.html">scancodes</a>
-							to the computer. These are received and interpreted by a terminal
-							device driver, yielding <i>keycodes</i>.  Then, within the same driver, are usually converted to ASCII.
-						</p>
-
-						<p>
-							This information is then passed on to our terminal line discipline.
-							The examples above modify the terminal line discipline's default
-							behavior by manipulating the termios struct (indirectly in the first case,
-							and directly in the second case).
-							The default behavior is what is present at a shell prompt, and is intended
-							to allow reasonable line-wise input by humans; it is called "canonical" or "cooked"
-							mode, as opposed to "raw" mode (in which the terminal line discipline
-							does nothing).
-						</p>
-
-						<p>
-							This information, once it has been passed to the terminal line discipline,
-							is then sent to a <code>tty</code> file, where a program can access
-							it by reading the file.  The terminal line discipline is
-							positioned exactly between the keyboard's hardware driver and
-							each program's read/write system call.
-							This allows it to intercept character combinations, such as
-							CTRL+S and CTRL+D, map them
-							to non-characters, and send the information (called <i>signals</i>)
-							to the appropriate place.
-						</p>
-
-						<p>
-							The termios struct is often manipulated by text-based programs,
-							for instance, to turn off line-buffering and generate an interactive program.
-							A common library for facilitating this is <a href="http://www.tldp.org/HOWTO/NCURSES-Programming-HOWTO/intro.html">NCURSES</a>.
-							Its sister libraries <code>panel</code>, <code>menu</code> and <code>form</code> provide an extension to the basic curses library.
-						</p>
-
-						<img width=100% src="./assets/img/tty_xmas.gif">
-
-						<center style="font-size: 12pt;">
-							Example from ncurses library
-						</center>
-
-						<p>
-							For another example of nCurses usage, check out AlsaMixer (probably already installed).
-						</p>
-
 					</div>
 
 					<div id="escape_sequences" class="content">
