@@ -8,9 +8,9 @@ last-updated: December, 2020
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
-        <li><a href="#getting-started"> Getting Started </a></li>
         <li><a href="#c"> C </a></li>
         <li><a href="#rust"> Rust </a></li>
+        <li><a href="#scripting-languages">Scripting Languages</a></li>
         <li><a href="#general-cs"> General Computer Science </a></li>
         <li><a href="#train-schedules"> Train Schedules </a></li>
         <li><a href="#thanks">Thanks for Reading!</a></li>
@@ -32,83 +32,6 @@ last-updated: December, 2020
     </p>
 </div>
 
-<div id="getting-started" class="content">
-    <h2> Getting Started</h2>
-
-    <p>
-        The only way to learn programming is to do it.
-        There are several languages that are well-suited to the novice,
-        including Python, Ruby and JavaScript.
-        These are each object-oriented languages, and none of them are
-        "toy" languages.
-    </p>
-
-    <p>
-        For instance, the Linux Mint update manager, <a href="https://github.com/linuxmint/mintupgrade/blob/master/usr/bin/mintupgrade">Mint Upgrade</a>,
-        is written in Python.
-        This is an excellent use-case for the language:
-        Because it isn't ran very often, it doesn't need to maximize performance.
-        In addition, readability of the code is, in this case, very important.
-        It could easily be the case that someone other than its original
-        author needs to come in and orient themselves quickly.
-        In fact, <a href="https://github.com/linuxmint">according to GitHub</a>,
-        most of the Linux Mint development team's work is in Python.
-    </p>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            If you're not sure which of these language to choose, go with
-            Python&ndash;
-            It even <a href="https://docs.python.org/3/library/stdtypes.html?highlight=set#set-types-set-frozenset">
-                has sets</a>!
-        </p>
-    </div>
-
-    <p>
-        Another piece of software that I use a lot is <a href="https://jekyllrb.com/">Jekyll</a>, a
-        static site-builder, which is written in Ruby.
-        It lets you build websites according to custom templates, and also allows
-        you to serve them to yourself locally.
-        For what I do, it's very easy to use; it's also the default site-generator
-        of Github:  I don't actually upload webpages; rather, I upload files
-        describing <em>how the website should to be built according to Jekyll,</em>
-        and the Github backend takes care of the rest.
-        Admittedly, this might not be the best use-case for Ruby, with
-        <a href="https://gohugo.io/">Hugo</a> coming into maturity and its
-        being written in a proper systems programming language.
-    </p>
-
-    <p>
-        And, of course, JavaScript, being the standard scripting language of the web, is used everywhere.
-        It <a href="https://youtu.be/mVCbeOYeDww">has been claimed (Youtube video)</a> that
-        JavaScript is the inevitable future of programming,
-        that everything from toasters to automobiles will be programmed through JavaScript.
-        This is owed to its migration from the web, first to the <a href="https://nodejs.org/en/">NodeJS</a> runtime environment,
-        which lets you access systems API's from within the language,
-        and then on to the <a href="https://www.electronjs.org/">Electron</a> application framework,
-        which lets you create desktop applications that are identical across platforms, with the language.
-        If you've ever used the <a href="https://atom.io/">Atom</a> text editor, then you've experienced <em>Electron.</em>
-    </p>
-
-    <p>
-        Outside of reading and writing code,
-        several sources exist to aid the newcomer into the wonderful world of programming.
-        Books offer in-depth explanations and theoretical background.
-        Videos offer lecture-style, if curated, material.
-        Open classes cover more ground systematically.
-        The best aides, though, are websites that present programming problems,
-        and let the student solve them.
-        Two of these are listed below.
-    </p>
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://www.hackerrank.com/">HackerRank</a></li>
-        <li><a href="https://emkc.org/">Engineer Man Knowledge Center</a></li>
-    </ul>
-</div>
-
 <!-- 
     To do:
         Make more historical, 
@@ -120,9 +43,9 @@ last-updated: December, 2020
 <div id="c" class="content">
     <h2> C </h2>
     <p>
-        C has been called the <em>lingua franca</em> of
-        programming,<sup><a href="https://wiki.osdev.org/Required_Knowledge">[1]</a><a href="#references">[2]</a></sup>
-        and for good reason.
+        C was developed alongside Unix at Bell Laboratories, 
+        and is considered to be the <em>lingua franca</em> of
+        programming.<sup><a href="https://wiki.osdev.org/Required_Knowledge">[1]</a><a href="#references">[2]</a></sup>
         Consider some of the projects carried out in C:
     </p>
 
@@ -135,16 +58,11 @@ last-updated: December, 2020
     </div>
 
     <ul>
-
         <li>
-            <a href="https://elinux.org/Executable_and_Linkable_Format_(ELF)">ELF</a>&mdash; The format of the executable binary file in Linux
+            The Unix kernel, starting with version 6
         </li>
 
-        <li>
-            EXT, EXT2, EXT3, EXT4
-        </li>
-
-        <li>
+        <li> 
             The Linux Kernel
         </li>
 
@@ -153,8 +71,13 @@ last-updated: December, 2020
         </li>
 
         <li>
-            <a href="https://en.wikipedia.org/wiki/CPython">CPython</a>&mdash; The reference Python interpreter
+            <a href="https://en.wikipedia.org/wiki/CPython">CPython</a>, the reference Python interpreter
         </li>
+
+        <li>
+            <a href="https://elinux.org/Executable_and_Linkable_Format_(ELF)">ELF</a>, the format of the executable binary file in Linux
+        </li>
+
     </ul>
 
     <p>
@@ -175,18 +98,17 @@ last-updated: December, 2020
         <a href="https://www.man7.org/linux/man-pages/man3/strcpy.3.html">copying a string</a>,
         if left unchecked, introduces the possibility of attack and exploitation.
         Because the compiler does not warn you of these possibilities, it
-        is very difficult to write "correct" C.
-        Moreover, as Brian Cantrill points out, even when one can write correct C,
+        is very difficult to master the language. 
+        Moreover, as Brian Cantrill points out below, even when one does write correct C,
         it is difficult to compose the work of multiple developers into a single
-        whole (see video below).
+        whole.
     </p>
 
     <p>
-        Nonetheless, C is a great language, and is here to stay; it just shows its
-        age a bit.
-        C is often called "portable assembly" because it closely
-        mirrors the abstractions of the machine itself.
-        It has been the standard systems programming language for fifty years.
+        Nonetheless, C is a great language: 
+        It has been the standard systems programming language for fifty years,
+        it is considered <a href="https://wiki.osdev.org/Required_Knowledge">required knowledge</a> for operating systems developers, 
+        and it is here to stay.
     </p>
 
     <h3> See Also: </h3>
@@ -271,6 +193,131 @@ last-updated: December, 2020
     </ul>
 </div>
 
+<div class="content" id="scripting-languages">
+    <h2>Scripting Languages</h2>
+
+    <p>
+        C and Rust belong to a class of languages called <em>systems programming
+        languages:</em> They produce binary executable files 
+        which can potentially run on bare metal.
+        <em>Scripting languages</em> build upon the work of systems programming
+        languages: Their executable files are plain-text (they
+        execute source-code files), and they require an interpretting 
+        run-time environment.
+    </p>
+
+    <p>
+        Some examples of scripting languages:
+    </p>
+
+    <ul> 
+        <li> 
+            <code>bash</code> 
+        </li>
+        <li> 
+            <code>python</code> 
+        </li>
+    </ul>
+
+    <p>
+        Scripting languages are, for several reasons, easier to work within
+        than systems programming languages.
+        First, since they have an interpretted runtime environment, they
+        can offer abstract data structures not built directly into the machine.
+        Python, for instance, uses <em>lists</em> extensively, and also
+        offers sets and dictionaries.
+    </p>
+
+    <p>
+        Second, their source-code files tend to be shorter, and easier to read and write.
+        Since we, the authors, are not required to define a <em>list</em>, <em>set</em>
+        or <em>dictionary</em>, but can instead just assume their existence,
+        we can leave substantial amounts of (highly technical) code out of every program.
+    </p>
+
+    <p>
+        Third, since their source-code files are their executables,
+        there is no need to compile code and no need to track binary executables.
+        These facets make scripting languages conceptually simpler, and speed development considerably.
+    </p>
+
+    <h3>My Opinion</h3>
+    <p>
+        Shell scripting has been around since the dawn of shells, 
+        but is deprecated and should be relegated to individual use.
+        Instead, the shell should be designed for <em>principally interactive</em>
+        use, with a single, separate, dedicated language (specifically, Python)
+        used for automation and scripting.
+        There are a few good reasons for this.
+    </p>
+
+    <p>
+        First, shells are a <em>pain in the ass</em> to program.
+        This makes program creation, and more importantly, maintenance, 
+        unnecessarily difficult.
+        Since each line may be given from a live user via an interactive
+        session, it must pass through a maze of parsing for any meaningful
+        programming to be carried out. For instance,
+        to express, "If x is less than 5, print 'Hello'" in Bash:
+    </p>
+
+    <div class="code">
+        if [[ $x -lt 5 ]]; then <br>
+            &emsp;&emsp;&emsp;echo 'Hello' <br>
+        fi
+    </div>
+
+    <p>
+        The corresponding code in Python:
+    </p>
+
+    <div class="code">
+        if x &lt; 5:<br>
+            &emsp;&emsp;&emsp;print("Hello")
+    </div>
+
+    <p>
+        Note that the <code>bash</code> code above must be entered character-wise
+        perfect (including spaces and that semicolon, which marks the end
+        of one logical line).
+    </p>
+
+    <p>
+        Second, such a delineation between interaction and automation
+        more closely follows the Unix philosophy:  Do one thing, and do it 
+        well.
+        <code>Bash</code> is not easy to use interactively because it 
+        also accomodates programming features.
+        The shell <em>should not</em> be a full-fledged programming language,
+        it should restrict its attention to interactivity.
+    </p>
+
+    <p>
+        Finally, <em>there is nothing to be gained</em> by continuing to 
+        program in shells.  
+        All scripting languages require an interpretting runtime environment,
+        and are therefore architecturally identical.
+        Making this change would make GNU/Linux easier to learn, easier to
+        use, and cleaner, from an architectural standpoint.
+    </p>
+
+    <p>
+        There are two arguments against this.
+        The first is that, with Bash in hand, scripting is as
+        easy as saving a sequence of commands to a file.
+        I say, <em>Preserve that.</em> 
+        There's nothing wrong with this, and it would be trivial to implement
+        in a new shell.
+        What's wrong is including features that are not intended for interactivity.
+        A second argument is that Bash is not architecturally
+        identical to Python, since most of Bash's 
+        commands are executable files.
+        To this, I respond the functionality for executing separate
+        programs exists within Python, and can be used for the purpose of scripting.
+    </p>
+
+</div>
+
 <div class="content" id="general-cs">
     <h2> General Computer Science </h2>
     <p>
@@ -288,33 +335,6 @@ last-updated: December, 2020
                 This can be useful in language development and compiler design, for instance.
             </p>
 
-            <p>
-                This subject was (effectively) founded by
-                Christopher Strachey, in his 38-page
-                <a href="https://github.com/papers-we-love/papers-we-love/blob/master/languages-theory/fundamental-concepts-in-programming-languages.pdf">
-                    Fundamental Concepts of Programming Languages.
-                </a>
-            </p>
-        </li>
-        <li style="padding-top: 0;">
-            <p>
-                <strong>Operating Systems</strong>&mdash; A very large topic, it again
-                discusses operating systems in the abstract.  A good, if lighthearted,
-                development is given by Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau in
-                their free <a href="http://pages.cs.wisc.edu/~remzi/OSTEP/"> Operating Systems: Three Easy Pieces</a>.
-            </p>
-        </li>
-        <li style="padding-top: 0;">
-            <p><strong>Discrete Mathematics</strong>&mdash; At the end of abstraction, there
-                is always math, it seems.  Discrete mathematics is not a difficult subject,
-                on par with a first semester in calculus.  It will introduce enough
-                logic to give informal proofs, cover graphs and advanced counting techniques, among other things.
-                Given the inherently discrete nature of the bit, this
-                subject founds all of computer science.
-                The canonical text for computer scientists is
-                <a href="https://en.wikipedia.org/wiki/Concrete_Mathematics">Concrete Mathematics</a>,
-                but I prefer <a href="http://discrete.openmathbooks.org/dmoi3.html"> Discrete Mathematics - An Open Introduction</a>
-            </p>
         </li>
         <li style="padding-top: 0;">
             <p><strong>Data Structures</strong>&mdash;
@@ -333,6 +353,16 @@ last-updated: December, 2020
                 The canonical text of algorithms is <a href="https://mitpress.mit.edu/books/introduction-algorithms-third-edition">Introduction to Algorithms</a>.
             </p>
         </li>
+
+        <li style="padding-top: 0;">
+            <p>
+                <strong>Operating Systems</strong>&mdash; A very large topic, it
+                discusses operating systems in the abstract.  
+                A good, if lighthearted, development is given by 
+                Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau in
+                their free <a href="http://pages.cs.wisc.edu/~remzi/OSTEP/"> Operating Systems: Three Easy Pieces</a>.
+            </p>
+        </li>
         <li style="padding-top: 0; padding-bottom: 10px;">
             <p>
                 <strong>Computer Architecture</strong>&mdash; Ah, computer architecture.  I loved studying this subject,
@@ -343,7 +373,27 @@ last-updated: December, 2020
                 I liked <a href="http://www.csapp.cs.cmu.edu/">Computer Systems: A Programmer's Perspective</a>.
             </p>
         </li>
+
+        <li style="padding-top: 0;">
+            <p><strong>Discrete Mathematics</strong>&mdash; At the end of abstraction, there
+                is always math, it seems.  Discrete mathematics is not a difficult subject,
+                on par with a first semester in calculus.  It will introduce enough
+                logic to give informal proofs, cover graphs and advanced counting techniques, among other things.
+                Given the inherently discrete nature of the bit, this
+                subject founds all of computer science.
+                The canonical text for computer scientists is
+                <a href="https://en.wikipedia.org/wiki/Concrete_Mathematics">Concrete Mathematics</a>,
+                but I prefer <a href="http://discrete.openmathbooks.org/dmoi3.html"> Discrete Mathematics - An Open Introduction</a>
+            </p>
+        </li>
+                </ul>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://www.hackerrank.com/">HackerRank</a></li>
+        <li><a href="https://emkc.org/">Engineer Man Knowledge Center</a></li>
     </ul>
+
 </div>
 
 <div class="content" id="train-schedules">
@@ -351,10 +401,10 @@ last-updated: December, 2020
     <h4>How Open Source Works</h4>
 
     <p>
-        Software development is fundamentally reiterative:
+        Open-source software development is fundamentally reiterative:
         You build something, publish it, improve it, then re-release it.
         "Train scheduling" formalizes this by placing the cycle on a schedule.
-        This approach is widely used to provide
+        This approach is used by Mozilla to provide
         "stability without stagnation."<sup><a href="https://blog.rust-lang.org/2014/10/30/Stability.html">[6]</a></sup>
         We will use Firefox as a case study, but note that, for instance,
         Linux kernel development follows a similar approach.
