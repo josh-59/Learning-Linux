@@ -14,8 +14,6 @@
   link: /documentation.html
 - name: "Command Line 1: A Tutorial Introduction"
   link: /command-line-1-tutorial-introduction.html
-- name: Text Terminals
-  link: /text-terminals.html
 - name: Finding Files
   link: /finding-files.html
 - name: "Going Further: Programming in *nix"
