@@ -1,17 +1,10 @@
 ---
 layout: default
 title: Package Management
-last-updated: July 2020
+last-updated: December 2020
 ---
 
 <!--
-
-Correct way to install Atom
-https://flight-manual.atom.io/getting-started/sections/installing-atom/
-
-Problems with installing random software:
-No automatic updates
-No man pages
 
 A section from the Linux Mint User Guide (old)
 https://www.linuxmint.com/documentation/user-guide/Cinnamon/english_18.0.pdf
@@ -19,11 +12,20 @@ https://www.linuxmint.com/documentation/user-guide/Cinnamon/english_18.0.pdf
 Debian Recommends vs. Suggests ("Declaring relationships between packages")
 https://www.debian.org/doc/debian-policy/ch-relationships.html
 
-Really becomes a question of distributions,
-which should make for a tidy close.  
+Other Package Managers:
+    Snap
+    Zero Install
 
-+ Downstream 
-+ Rolling Release
+    https://blog.linuxmint.com/?p=3766 (Critique of Snap)
+    https://blog.linuxmint.com/?p=3906 (Chromium empty package) "In Linux Mint 20, APT will forbid snapd from getting installed.""
+
+
+    From https://linuxmint-user-guide.readthedocs.io/en/latest/snap.html
+           "The Snap Store, also known as the Ubuntu Store, is a commercial centralized software store operated by Canonical."
+
+
+    Installing Ruby:
+         https://jekyllrb.com/docs/installation/ubuntu/
 
 -->
 
@@ -31,7 +33,6 @@ which should make for a tidy close.
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#packages-intro"> Introduction to Packages </a></li>
-        <li><a href="#package-managers"> Package Managers </a></li>
         <li><a href="#repositories"> Repositories </a></li>
         <li><a href="#references"> References </a></li>
     </ul>
@@ -39,16 +40,16 @@ which should make for a tidy close.
 
 <div id="introduction" class="content">
     <h1>Package Management </h1>
-    <h4>How Free Software is Organized and Distributed</h4>
 
     <p>
-        A package is a bundle of data that contains everything
+        A package is a bundle of data that contains the things 
         required to implement a program, a set of related programs,
         or a set of related features.<sup><a href="https://wiki.debian.org/Packaging/Intro">[1]</a></sup>
-        It is a container which includes an executable binary file, and
-        files describing the files it contains (so-called "metadata").
-        Packages provide a way to automate the distribution of, 
-        installation of, and patching of software,<sup><a href="https://wiki.debian.org/Packaging/Intro">[1]</a></sup>
+        It contains the primary binary executable, other assets required
+        by it, a description of the software included, and 
+        a list of other dependancies (if any).
+        Packages provide a way to automate the 
+        installation of software,<sup><a href="https://wiki.debian.org/Packaging/Intro">[1]</a></sup>
         and exist in multiple contexts within the FOSS domain.
     </p>
 </div>
@@ -76,14 +77,6 @@ which should make for a tidy close.
         of their website, and install it manually, which goes like this:
     </p>
 
-    <div class="aside-right">
-        <h4>Asdide:</h4> 
-        <p>
-            <code>apt</code> is Debian's preferred command-line interface for its package management system.
-            It is a front-end for <code>apt-get</code> and <code>apt-cache</code>.<sup><a href="https://manpages.debian.org/buster/apt/apt.8.en.html">[2]</a></sup>
-        </p>
-    </div>
-
     <p>
         Clicking the link downloads a single file, <code>atom-amd64.deb</code>, which is
         the package.
@@ -99,262 +92,70 @@ which should make for a tidy close.
         That's it. There's nothing more to it.
     </p>
 
+    <h3>Advantages</h3>
+
     <p>
-        Packages are to be platform-specific, so that <code>.deb</code> packages can be
-    </p>
-    
-    <p>
-        There are two good reasons that this is not the preferred method of
-        distributing software.
+        On other operating systems, it is common to download an executable file,
+        then execute it, to install new software.
+        Centralized software management offers a few advantages over
+        this design:
     </p>
 
-    <ol>
+    <ol class="big-list">
         <li>
-            Updating software becomes a pain.
+            Eliminating Repeated Code
             <p>
-                To keep Atom up to date, I must check manually to see if a new version has been released
-                (which I never do).  
-                Alternatively, 
-            </p>
-
-            <p>
-                Another way to keep Atop up-to-date might be to introduce some code within the application itself
-                which checks its own version, and updates itself if a newer version is available.
-                This solution is not preferred because that version-checking code would need to be
-                included (i.e., repeated) in each piece of software.  Such repetition is, as a rule,
-                avoided in software development because we are lazy and it is error-prone.
+                Packages eliminate the need to include an installation 
+                solution, since they abdicate this to a utility
+                (here, <code>apt</code>).
+                In software development, repition is not only avoided,
+                it is also discouraged.
             </p>
         </li>
         <li>
-            Locating relevant software becomes difficult.
+            More Controlled Installation
             <p>
-                With some 85,000 packages available on the Debian repositories, remembering a website
-                for each is simply infeasible.
+                <code>apt</code> controls where each file is
+                placed.  
+                Thereby, a uniformity across the system may be maintained.
             </p>
         </li>
-    <ol>
-</div>
+        <li>
+            Centralized Updating
+            <p>
+                Typically, all of the software on a system is managed
+                by the package manager.
+                Thereby, all of the software on a system (that is, the
+                system itself) may be kept up-to-date by a single utility.
+            </p>
+        </li>
+    </ol>
 
-<div class="content" id="package-managers">
-    <h2>Package Managers</h2>
-    <p>
-        A package manager is a piece of software that automates the
-        locating, installation, patching and removal of packages.
-        That is, it acts as a
-    </p>
-
-    <p>
-        Since packages provide a neat solution to
-    </p>
-
-    <h3>Debian APT</h3>
-
-    <p>
-        Debain's <em>Advanced Package Tool</em> (APT) is the distribution's primary
-        package-management front-end.<sup><a href="https://wiki.debian.org/Apt">[3]</a></sup>
-        We can search with,
-    </p>
-
-    <div class="code">
-        apt search &lt;query&gt;
-    </div>
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html#package"> Basics of the Debian package management system </a></li>
+    </ul> 
 </div>
 
 <div class="content" id="repositories">
     <h2>Repositories</h2>
     <p>
         Collections of packages are called <em>repositories,</em> or
-        sometimes, "archives."
+        sometimes, <em>archives.</em>
+        A repository may be remote (the usual case), or it may be local
+        (e.g., on a thumb-drive).
+    </p>
+
+    <p>
         A repository belonging to a large project, such as Debian's,
         is often mirrored by other organizations.
-        Packages are located in collections called <em>repositories.</em>
-        A repository may be remote, which is the usual case; or, it may be local,
-        such as, on a thumb-drive.
-        Repositories are often mirrored by
     </p>
-
-    <!--
-    https://help.launchpad.net/Packaging/PPA
-    PPA: Personal Package Archive
-    Upload source -> Launchpad builds and hosts them in 'your own apt repository'
-    Ubuntu-specific.
-    Somebody's personal repository
--->
 </div>
 
-
-<!-- 
-
-<div class="content" id="whatis-package">
-    <h2>What is a Package?</h2>
-
-    <p>
-        Let's have a look at Debian's
-        <a href="https://packages.debian.org/stable/utils/locate"><code>locate</code></a>,
-        as an example.
-        We download the file from a Debian repository mirror, and receive a single
-        file, <code>locate_4.6.0+git+20190209-2_amd64.deb</code>.
-        Note the <em>.deb</em> extension.
-    </p>
-
-    <p>
-        This is a compressed file, and may be uncompressed in a few ways.
-    </p>
-
+<div id="references" class="content">
+    <h2> References </h2>
     <ol>
-        <li>On Mint, by right-clicking and selecting "Extract Here"</li>
-        <li>From the command line, with traditional tools:<br>
-            <code>$ ar x locate_4.6.0+git+20190209-2_amd64.deb</code></li>
-        </ol>
-
-        <p>
-            In either case, we find two archives,  <em>control.tar.xz</em>,
-            and <em>data.tar.xz</em>.
-            Let's first look at the <em>data</em> file.
-        </p>
-
-        <ol>
-            <li>On Mint, right-click and select "Extract Here"</li>
-            <li>From the command line:<br>
-                <code>$ tar -xJf data.tar.xz</code></li>
-            </ol>
-
-            <p>
-                And, we find:
-            </p>
-
-            <div class="code">
-                ~/Downloads/locate/data$ tree <br>
-                <br>
-                . <br>
-                ├── data.tar.xz <br>
-                ├── etc <br>
-                │   └── cron.daily <br>
-                │       └── locate <br>
-                ├── usr <br>
-                │   ├── bin <br>
-                │   │   ├── locate.findutils <br>
-                │   │   └── updatedb.findutils <br>
-                │   ├── lib <br>
-                │   │   └── x86_64-linux-gnu <br>
-                │   │       └── locate <br>
-                │   │           └── frcode <br>
-                │   └── share <br>
-                │       ├── doc <br>
-                │       │   └── locate <br>
-                │       │       ├── changelog.Debian.gz <br>
-                │       │       ├── changelog.gz <br>
-                │       │       ├── copyright <br>
-                │       │       └── README.Debian <br>
-                │       └── man <br>
-                │           ├── man1 <br>
-                │           │   ├── locate.findutils.1.gz <br>
-                │           │   └── updatedb.findutils.1.gz <br>
-                │           └── man5 <br>
-                │               └── locatedb.5.gz <br>
-                └── var <br>
-                &emsp; &ensp;  └── cache <br>
-                &emsp; &emsp; &emsp; &emsp; └── locate <br>
-
-                16 directories, 12 files
-            </div>
-
-
-            <p>
-                Next, let's look at the <em>control</em> file.
-                This archive contains the metadata files; each is plaintext,
-                and can be viewed with <code>cat</code> or <code>less</code>.
-            </p>
-
-            <div class="aside-right">
-                <h4>Aside:</h4>
-                <p>
-                    The "debian-binary" file, also included, lists the package-format version
-                    number.<sup><a href="https://en.wikipedia.org/wiki/Deb_%28file_format%29#Implementation">[1]</a></sup>
-                    As of this writing, the latest version is 2.0.
-                </p>
-            </div>
-
-            <div class="code">
-                $ cat control <br>
-                Package: locate<br>
-                Source: findutils<br>
-                Version: 4.6.0+git+20190209-2<br>
-                Architecture: amd64<br>
-                Maintainer: Andreas Metzler <br>
-                Installed-Size: 421<br>
-                Depends: findutils (>> 4.2.31-1), libc6 (>= 2.14)<br>
-                Breaks: slocate (<= 3.1-1.1)<br>
-                Replaces: findutils (&lt;&lt; 4.2.31-2)<br>
-                Section: utils<br>
-                Priority: optional<br>
-                Multi-Arch: foreign<br>
-                Homepage: https://savannah.gnu.org/projects/findutils/<br>
-                Description: maintain and query an index of a directory tree<br>
-                &emsp;updatedb generates an index of files and directories. <br>
-                &emsp;GNU locate can be used to quickly query this index.<br>
-            </div>
-
-            <p>
-                This might look familiar: It is the result of querying <code>apt</code>
-                about a particular package: <br> <code> $ apt show locate </code>
-                returns similar results.
-            </p>
-
-            <p>
-                From the ArchWiki <code>pacman</code> page:
-                A package is an archive containing:
-            </p>
-
-
-            <ul>
-                <li> The compiled files of an application </li>
-                <li> Metadata about the application (application name, version, dependencies, etc.) </li>
-                <li> Installation directives for <code>pacman</code> </li>
-                <li> Extra, optional files, such as scripts </li>
-            </ul>
-
-            <h3>See Also:</h3>
-            <ul>
-                <li><a href="https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html#package"> Basics of the Debian package management system </a></li>
-            </ul>
-        </div>
-
-    -->
-
-
-        <p>
-            <code>dpkg</code> is not intended as a user interface "front-end."
-            Instead, it is the backend tool of developers and software engineers:
-            <p>
-
-
-
-                <div class="content" id="other">
-                    <h2> Other Package Managers </h2>
-
-                    <p>
-                        There are other packaging schemes, which we will cover briefly.
-                    </p>
-
-                    Snap
-                    https://blog.linuxmint.com/?p=3766 (Critique of Snap)
-                    https://blog.linuxmint.com/?p=3906 (Chromium empty package) "In Linux Mint 20, APT will forbid snapd from getting installed.""
-
-
-                    From https://linuxmint-user-guide.readthedocs.io/en/latest/snap.html
-                    "The Snap Store, also known as the Ubuntu Store, is a commercial centralized software store operated by Canonical."
-                </div>
-
-                "zero install"
-
-                Installing Ruby:
-                https://jekyllrb.com/docs/installation/ubuntu/
-
-                <div id="references" class="content">
-                    <h2> References </h2>
-                    <ol>
-                        <li> <i>Unix Programmer's Manual, First Edition.</i>  <a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html"> https://www.bell-labs.com/usr/dmr/www/1stEdman.html </a> </li>
-                        <li> WHATWG HTML Living Standard Section 1.6, History. <a href="https://html.spec.whatwg.org/multipage/introduction.html#history-2">https://html.spec.whatwg.org/multipage/introduction.html#history-2</a> </li>
-                    </ol>
-                </div>
+        <li> <i>Unix Programmer's Manual, First Edition.</i>  <a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html"> https://www.bell-labs.com/usr/dmr/www/1stEdman.html </a> </li>
+        <li> WHATWG HTML Living Standard Section 1.6, History. <a href="https://html.spec.whatwg.org/multipage/introduction.html#history-2">https://html.spec.whatwg.org/multipage/introduction.html#history-2</a> </li>
+    </ol>
+</div>
