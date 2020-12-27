@@ -8,7 +8,6 @@ last-updated: August, 2020
   <ul>
     <li><a href="#introduction"> Introduction </a></li>
     <li><a href="#bringing-up-the-command-line"> Bringing Up The Command Line</a></li>
-    <li><a href="#shells-and-terminals"> Shells vs. Terminals </a></li>
     <li><a href="#some-shell-features"> Some Shell Features </a></li>
     <li><a href="#editing-text"> Editing Text </a></li>
     <li><a href="#globbing"> Globbing </a></li>
@@ -136,74 +135,6 @@ last-updated: August, 2020
     when you're done.
   </p>
 
-</div>
-
-<div id="shells-and-terminals" class="content">
-  <h2> Shells vs. Terminals </h2>
-  <p>
-    A terminal <a href="text-terminals.html">used to be</a> a physical i/o device&mdash;
-    a keyboard-plus-monitor setup.
-    The only functionality it offered was text i/o; clearly,
-    this implies a command line.
-    This was the technological climate that Unix was created in.
-    As terminals
-    got replaced with proper monitors, the functionality
-    of the terminal was preserved by terminal emulators, which is
-    what we use today.
-  </p>
-
-  <p>
-    The shell is the program which interprets and executes our commands.
-    As depicted so far, it might appear that the shell exists "within" the terminal,
-    but that is not the case, and it's a mistake to adopt that sentiment.
-    Rather, the shell exists as a separately executing program, and <em>writes</em> to
-    the terminal as though it were a file.
-    Moreover, the shell gathers your input by <em>reading</em>
-    from the terminal as though it were a file.
-    This is possible because of the uniquely elegant file interface that
-    was created for Unix.
-  </p>
-
-  <p>
-    You might ask, "Why bother keeping the command-line?"
-    The answer is that it's easy to write code that interprets (and prints)
-    text, so the command-line represents a great abstraction layer for
-    systems-level software.
-    For instance, a few more interesting commands:
-  </p>
-
-  <ul>
-    <li> <code>lscpu</code>&mdash; List CPU information </li>
-    <li> <code>lsmem</code>&mdash; List memory information </li>
-    <li> <code>df --all --human-readable</code>&mdash; Report file system disk space usage </li>
-  </ul>
-
-  <p>
-    When the output of these commands is sufficiently stable, programmers
-    can depend on them, allowing so-called <em>scripts</em> to be written.
-    Taken to its limit, these commands can form
-    the "back-end" for graphical programs.
-    An example of this is the <a href="https://www.nongnu.org/synaptic/">Synaptic package manager</a>, which is a popular GUI
-    frontend for Debian's <code>apt</code> collection of command-line tools.
-    </p>
-
-  <p>
-    In addition, most programming tools (such as compilers and interpreters)
-    often deal in simple text, so that the command line is a natural interface
-    to them.
-    Finally, with the inclusion of variables, conditionals,
-    and loops, shells have become full-fledged programming languages of their own.
-    </p>
-
-    <p>
-    Let's look at some more powerful constructs within Bash.
-  </p>
-
-  <h3>See Also:</h3>
-  <ul>
-    <li><a href="https://guide.bash.academy/"> The Bash Guide </a></li>
-    <li><a href="https://devblogs.microsoft.com/commandline/introducing-windows-terminal/">Introducing Windows Terminal</a> (Commands not guaranteed to be the same)</li>
-  </ul>
 </div>
 
 <div class="content" id="some-shell-features">
@@ -508,7 +439,7 @@ last-updated: August, 2020
       Most shells support <em>tab completion:</em>
       If you've typed enough of a command-name or filename to
       uniquely identify it, you can press "tab," and it will complete it for you.
-    <p/>
+    </p>p>
   </div>
 
   <div class="code">
