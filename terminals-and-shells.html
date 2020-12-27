@@ -19,7 +19,7 @@ To Do:
 	<ul>
 		<li><a href="#introduction"> Introduction </a></li>
 		<li><a href="#history"> History </a></li>
-		<li><a href="#terminals"> Terminals </a></li>
+		<li><a href="#terminal-emulators"> Terminal Emulators </a></li>
 		<li><a href="#shells"> Shells </a></li>
         <li><a href="#decomposing-lines">Decomposing Lines</a></li>
         <li><a href="#searching-for-commands">Searching for Commands</a></li>
@@ -87,19 +87,19 @@ To Do:
 
 </div>
 
-<div id="terminals" class="content">
-	<h2> Terminals </h2>
+<div id="terminal-emulators" class="content">
+	<h2> Terminal Emulators </h2>
 	<p>
 		Terminals persist on modern hardware in the form of <i>terminal emulators</i>.
 		These are user-space processes that, well, emulate an old terminal!
-		Specifically, they provide a GUI front-end to a
-		typewriter-style, line-by-line interface:
+		Specifically, it is a program that runs within the context of a desktop environment,
+		and emulates the functionality of a physical terminal.
 	</p>
 
 
 	<figure>
 		<img src="assets/img/gnome-terminal.png">
-		<figcaption><center>GNOME Terminal (Emulator)</center></figcaption>
+		<figcaption><center>GNOME Terminal Emulator</center></figcaption>
 	</figure>
 
 	<p>
@@ -123,7 +123,7 @@ To Do:
 	</div>
 
 	<p>
-		These emulators are "dumb", in the sense that they do nothing except
+		Terminal emulators are "dumb" in the sense that they do nothing except
 		display text and return text.
 		Per tradition, the Unix environment presents these connections as files.
 		Since they are emulating a device, we can expect to find them in
