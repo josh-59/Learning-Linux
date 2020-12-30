@@ -23,8 +23,12 @@ To Do:
         <li><a href="#word-splitting">Word Splitting</a></li>
         <li><a href="#searching-for-commands">Searching for Commands</a></li>
 		<li><a href="#standard-file-descriptors"> Standard File Descriptors </a></li>
-		<li><a href="#shell-globbing"> Globbing </a></li>
+		
+		<!--
+        <li><a href="#shell-globbing"> Globbing </a></li>
 		<li><a href="#shell-features"> Other Shell Features </a></li>
+        <li><a href="#special-characters">Terminal Special Characters</a></li>
+        -->
 		<li><a href="#missing-semester"> Missing Semester </a></li>
 		<li><a href="#references"> References </a></li>
 	</ul>
@@ -350,136 +354,56 @@ To Do:
     <h3> Redirection </h3>
 </div>
 
+<!--
 
+<div id="special-characters" class="content">
+	<h2>Terminal Special Characters</h2>
 
-	<div id="special-characters" class="content">
-		<h2>Special Characters</h2>
+	<p>
+		Terminal special characters are key combinations 
+        which are interpreted <em>by the terminal driver</em> 
+        and mapped to special actions.
+		There are sixteen commonly mapped terminal special characters,<sup><a href="#references">[15]</a></sup>
+		but only a few are used daily:
+	</p>
 
-		<p>
-			Terminal special characters are like escape sequences, but in the other
-			direction.  They are key-combinations typed at the keyboard
-			which are interpreted by the terminal driver and mapped to special
-			actions.
-			There are sixteen commonly mapped terminal special characters;<sup><a href="#references">[15]</a></sup>
-			most of them can be remapped by manipulating the <code>termios</code> struct.
-			Here are a few:
-		</p>
+	<ul>
+        <li>CTRL-C&mdash; Send <code><a href="https://en.wikipedia.org/wiki/Signal_(IPC)">SIGINT</a></code>, the interrupt signal, 
+            to the foreground process. This is one means 
+			of terminating a process.
+        </li>
+		<li>CTRL-D&mdash; Write <code>EOF</code>, the End-of-File character. 
+            This indicates the end of input, and 
+            will terminate a Bash session, or an interactive Python session.
+        </li>
+    </ul>
+</div>
 
-		<ul>
-			<li>CTRL-C&mdash; Send the interrupt signal, <code>SIGINT</code>, to the foreground process. This is the principal
-				means of terminating an unresponsive process.</li>
-				<li>CTRL-D&mdash; Write the End-of-File character, <code>EOF</code>, to
-					standard-in of the foreground process.  This will terminate a Bash session,
-					for instance, or an interactive Python session.</li>
-					<li>CTRL-S&mdash; "<code>STOP</code>" Upon receiving this character combination, the terminal
-						driver stops, and attempts to store, all data to and from the terminal.
-						This can make it appear as though the terminal has frozen.</li>
-						<li>CTRL-Q&mdash; "<code>START</code>" Restart terminal input and output.
-							If input or output is queued, the terminal driver will send it first, then resume normal operation.</li>
-						</ul>
+-->
 
-						<p>
-							<em>Start</em> and <em>Stop</em> were more useful in times' past: The effect was to pause scrolling.
-							In addition, the bell character was traditionally sounded when output was stopped and the terminal
-							line discipline's buffer became full, thereby warning the user that data was being discarded.
-							From the command prompt, we can list all bindings to special characters, in addition to other terminal attributes by,
-						</p>
+<div class="content" id="missing-semester">
+	<h2 style="margin-bottom: 2pt;">Missing Semester</h2>
+	<h4 style="margin-bottom: 18pt;">Lecture 1: Course Overview + The Shell (2020)</h4>
+	<iframe class="video" src="https://www.youtube.com/embed/Z56Jmr9Z34Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
-						<div class="code">
-							$ stty -a
-						</div>
-
-						<p>
-							Hope you enjoyed this&mdash; more to come!
-						</p>
-					</div>
-
-					<div id="escape_sequences" class="content">
-						<h2> Escape Sequences </h2>
-						<p>
-							It's worth repeating at this point that the terminal <i>proper</i> only sends a stream of bytes, and
-							merely receives a stream of bytes.
-							That is, the only method of sending data to a terminal monitor is by the same channel as
-							printable characters.
-							As a consequence, it is necessary to establish some common standard for communicating to the terminal
-							non-printable, or <i>control</i>, characters, such as "newline."
-							In the US, printable characters were traditionally mapped via ASCII (with the exception of <a href="https://en.wikipedia.org/wiki/EBCDIC"> some early IBM mainframes</a>).
-							The first 32 ASCII characters (decimal 0 through 31) are control characters, rather than printable.
-							They include the famous bell character, and both tab and newline (aka, "linefeed");
-							in order to delete previously written text, one can print the backspace
-							character, decimal 8 (see <a href="http://man7.org/linux/man-pages/man7/ascii.7.html"> man ascii </a> for more information).
-						</p>
-
-						<p>
-							Most of these control characters quickly became antiquated, so that the majority are not widely used.
-							For instance, ASCII alone does not provide provisions for moving the cursor or scrolling.
-							As a consequence, the more extensible mechanism of <a href="https://en.wikipedia.org/wiki/Escape_sequence">escape sequences</a> was developed.
-							The sequences in use were soon standardized by ANSI, and their support became ubiquitous.
-							Each of these sequences begins with the ASCII "escape" control character (decimal 27)
-							and the left-bracket "<code>[</code>" printable<sup><a href="#references">[13]</a></sup>.
-							They are sequences of entirely ASCII characters.
-							Technically, the're terminal-specific, but are still viable today
-							because modern emulators typically
-							<a href="https://unix.stackexchange.com/questions/43945/whats-the-difference-between-various-term-variables">implement a superset</a>
-							of older terminals' escape sequences.
-							Within C, to print <i>Hello World!</i> in reverse, we could do
-						</p>
-
-						<div class="code">
-							#include &lt;stdio.h&gt;<br>
-							<br>
-							int main() {<br>
-								&emsp;&emsp;&emsp;&emsp;printf("\033[7m Hello World! \033[m"); <br>
-							}<br>
-						</div>
-
-						<p>
-							So, by merely printing a special sequence through stdout to the terminal, we have
-							modified the state of the recipient terminal.
-							A few notes:
-						</p>
-
-						<ol>
-							<li> <code>033</code> above is octal format, with decimal equivalent 27. </li>
-							<li> This "setting" is persistent (try omitting the trailing <code>\033[m</code> ) </li>
-							<li> To send an escape sequence from the keyboard, type CTRL+V, then ESC.  You should see <code>^[</code></li>
-							<li> Why can't you just type <code>^[</code>?  <a href="http://unixwiz.net/techtips/termios-vmin-vtime.html"> Don't ask.</a> </li>
-						</ol>
-
-
-						<p>
-							<a href="http://ascii-table.com/ansi-escape-sequences-vt-100.php"> There are often dozens of such escaped sequences</a>,
-							including such novelties as "set smooth scroll"; most real terminals can even change fonts.
-							Some escape sequences may take parameters such as coordinates.
-							In this case, the parameters
-							<a href="http://tldp.org/HOWTO/Text-Terminal-HOWTO-8.html#ss8.3">become part of</a> the escape sequence.
-						</p>
-
-					</div>
-
-					<div class="content" id="missing-semester">
-						<h2 style="margin-bottom: 2pt;">Missing Semester</h2>
-						<h4 style="margin-bottom: 18pt;">Lecture 1: Course Overview + The Shell (2020)</h4>
-						<iframe class="video" src="https://www.youtube.com/embed/Z56Jmr9Z34Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-					</div>
-
-					<div id="references" class="content">
-						<h2> References </h2>
-						<ol>
-							<li> Kernighan, Brian. <i>Unix: A History and a Memoir.</i>  Published 2020, by Brian W. Kernighan via Kindle Direct Publishing. </li>
-							<li> Libes, Sol.  <i>Small Computer Systems Handbook</i>.  Published 1978, by Hayden Book Co. </li>
-							<li> Lawyer, David S. <i>Text-Terminal-HOWTO</i> <a href="https://tldp.org/HOWTO/Text-Terminal-HOWTO.html#toc1"> https://tldp.org/HOWTO/Text-Terminal-HOWTO-8.html</a>.  The Linux Documentation Project.  Retrieved April 6, 2020. </li>
-							<li> Shuford, Richard S. <a href="https://invisible-mirror.net/archives/shuford/terminal/first_principles.html"><i>First Thoughts about Terminal Emulation</i></a>. </li>
-							<li> Ben-Halim, Zeyd M., Raymond, Eric S., Dickey, Thomas E. <a href="http://man7.org/linux/man-pages/man5/terminfo.5.html">man 5 terminfo</a>.  The Linux Man-Pages Project. Retrieved April 6, 2020.</li>
-							<li> Dickey, Thomas E.  <a href="https://invisible-island.net/xterm/xterm.faq.html#what_is_vt220"><i>"What is a VT220?"</i></a>. Retrieved April 6, 2020.</li>
-							<li> <a href="http://man7.org/linux/man-pages/man7/boot.7.html">man 7 boot</a>. The Linux Man-Pages Project. Written March 11, 2015.</li>
-							<li> <a href="http://man7.org/linux/man-pages/man7/bootup.7.html">man 7 bootup</a>. The Linux Man-Pages Project.</li>
-							<li> <a href="https://askubuntu.com/questions/27339/what-is-tty7-in-the-commandline">"What is tty7 in the command line?"</a>.  AskUbuntu question, posed by Fusky.</li>
-							<li> <a href="http://man7.org/linux/man-pages/man4/tty.4.html">man 4 tty</a>. The Linux Man-Pages Project. Published March 6, 2019.</li>
-							<li> <a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/tty/Kconfig?id=HEAD">Kernel Driver Source</a>.  Maintained by Linux Torvalds.</li>
-							<li> <a href="https://www.kernel.org/doc/html/v5.4/admin-guide/devices.html">The Kernel Administrators Guide; Linux Allocated Devices</a>. </li>
-							<li> <a href="http://ascii-table.com/ansi-escape-sequences-vt-100.php">ANSI Escape Sequences</a>. ASCII-Table.com.  Retrieved April 6, 2020.</li>
-							<li> <a href="https://linux.die.net/man/7/x"> man 7 x </a>.  Written by X.Org Foundation, LLC.  Hosted by die.net hosting.</li>
-							<li> Kerrisk, Michael.  <em>The Linux Programming Interface</em>. San Francisco, CA, No Starch Press, 2010.</li>
-						</ol>
-					</div>
+<div id="references" class="content">
+	<h2> References </h2>
+	<ol>
+		<li> Kernighan, Brian. <i>Unix: A History and a Memoir.</i>  Published 2020, by Brian W. Kernighan via Kindle Direct Publishing. </li>
+		<li> Libes, Sol.  <i>Small Computer Systems Handbook</i>.  Published 1978, by Hayden Book Co. </li>
+		<li> Lawyer, David S. <i>Text-Terminal-HOWTO</i> <a href="https://tldp.org/HOWTO/Text-Terminal-HOWTO.html#toc1"> https://tldp.org/HOWTO/Text-Terminal-HOWTO-8.html</a>.  The Linux Documentation Project.  Retrieved April 6, 2020. </li>
+		<li> Shuford, Richard S. <a href="https://invisible-mirror.net/archives/shuford/terminal/first_principles.html"><i>First Thoughts about Terminal Emulation</i></a>. </li>
+		<li> Ben-Halim, Zeyd M., Raymond, Eric S., Dickey, Thomas E. <a href="http://man7.org/linux/man-pages/man5/terminfo.5.html">man 5 terminfo</a>.  The Linux Man-Pages Project. Retrieved April 6, 2020.</li>
+		<li> Dickey, Thomas E.  <a href="https://invisible-island.net/xterm/xterm.faq.html#what_is_vt220"><i>"What is a VT220?"</i></a>. Retrieved April 6, 2020.</li>
+		<li> <a href="http://man7.org/linux/man-pages/man7/boot.7.html">man 7 boot</a>. The Linux Man-Pages Project. Written March 11, 2015.</li>
+		<li> <a href="http://man7.org/linux/man-pages/man7/bootup.7.html">man 7 bootup</a>. The Linux Man-Pages Project.</li>
+		<li> <a href="https://askubuntu.com/questions/27339/what-is-tty7-in-the-commandline">"What is tty7 in the command line?"</a>.  AskUbuntu question, posed by Fusky.</li>
+		<li> <a href="http://man7.org/linux/man-pages/man4/tty.4.html">man 4 tty</a>. The Linux Man-Pages Project. Published March 6, 2019.</li>
+		<li> <a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/tty/Kconfig?id=HEAD">Kernel Driver Source</a>.  Maintained by Linux Torvalds.</li>
+		<li> <a href="https://www.kernel.org/doc/html/v5.4/admin-guide/devices.html">The Kernel Administrators Guide; Linux Allocated Devices</a>. </li>
+		<li> <a href="http://ascii-table.com/ansi-escape-sequences-vt-100.php">ANSI Escape Sequences</a>. ASCII-Table.com.  Retrieved April 6, 2020.</li>
+		<li> <a href="https://linux.die.net/man/7/x"> man 7 x </a>.  Written by X.Org Foundation, LLC.  Hosted by die.net hosting.</li>
+		<li> Kerrisk, Michael.  <em>The Linux Programming Interface</em>. San Francisco, CA, No Starch Press, 2010.</li>
+	</ol>
+</div>
