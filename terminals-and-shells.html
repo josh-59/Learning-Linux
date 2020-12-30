@@ -6,8 +6,6 @@ last-updated: November, 2020
 
 <!--
 To Do:
-    Shells: 
-        Builtin vs. program
     Standard File Descriptors:
         Include redirection
     Scripting
@@ -21,7 +19,7 @@ To Do:
 		<li><a href="#history"> History </a></li>
 		<li><a href="#terminal-emulators"> Terminal Emulators </a></li>
 		<li><a href="#shells"> Shells </a></li>
-        <li><a href="#decomposing-lines">Decomposing Lines</a></li>
+        <li><a href="#word-splitting">Word Splitting</a></li>
         <li><a href="#searching-for-commands">Searching for Commands</a></li>
 		<li><a href="#standard-file-descriptors"> Standard File Descriptors </a></li>
 		<li><a href="#shell-globbing"> Globbing </a></li>
@@ -183,7 +181,7 @@ To Do:
 
     <p>
         Most commands that users enter into <code>bash</code> are separate programs.
-        For instance, when a user enters,
+        For instance, <code>ls</code> is a separate program, and when a user enters,
     </p>
 
     <div class="code">
@@ -191,13 +189,14 @@ To Do:
     </div>
 
     <p>
-        the shell finds the <code>ls(1)</code> executable, forks itself, and
+        the shell finds the <code>ls(1)</code> executable, 
+        <a href="processes.html#process-creation">forks</a> itself, and
         instructs the child process to execute that binary. 
         The <code>ls</code> program then reads its current directory's
         entries and prints them out.
         The shell 
         <a href="https://man7.org/linux/man-pages/man2/wait.2.html">waits</a>
-        until <code>ls</code> terminates, then returns with a prompt.
+        for <code>ls</code> to terminate, then returns with a prompt.
         This happens very quickly.
     </p>
 
@@ -210,8 +209,8 @@ To Do:
     </div>
 
     <p>
-        While this strategy is certainly preferrable, there are times 
-        where it will not work.
+        For a few reasons, this strategy is preferrable; however, 
+        there are times where it will not work.
         For instance, changing the current directory must be carried out 
         by <code>bash</code> itself, since it is a per-process attribute.
         Therefore, <code>cd</code> is carried out by <code>bash</code>.
@@ -229,18 +228,69 @@ To Do:
     <p>
         Where <code>help</code> is, itself, a builtin.
     </p>
-
-
 </div>
 
-<div class="content" id="decomposing-lines">
-    <h2 style="margin-bottom: 0;">Decomposing Lines</h2>
-    <h4>aka "Parsing"</h4>
+<div class="content" id="word-splitting">
+    <h2 style="margin-bottom: 0;">Word Splitting</h2>
+    <h4>and Simple Commands</h4>
 
+    <div class="aside-right">
+        <p>
+            In Bash, this is referred to as a <em>simple command.</em>
+        </p>
+    </div>
+
+    <p>
+        A typical line of input given to a shell is as follows:
+    </p>
+
+    <div class="code">
+        command [arg1] [arg2] [arg3] ...
+    </div>
+
+    <p>
+        Where <em>command</em> is mandatory, each argument is optional,
+        and each element ("word") is separated by whitespace.
+        In the following example, the <code>shutdown</code> command is given
+        with the single argument <code>now</code>:
+    </p>
+
+    <div class="code">
+        $ shutdown now
+    </div>
+
+    <p>
+        If, for some reason, we need to include whitespace in
+        an argument, we can wrap said argument in single-quotes.
+        These tell Bash to preserve the text exactly as-is; Bash
+        discards quoting characters.
+    </p>
+
+    <p>
+        For example, in the following command, 
+    </p>
+
+    <div class="code">
+        $ cd 'Random Access Memories'
+    </div>
+
+    <p>
+        the <code>cd</code> command recieves a single argument,
+        <code>Random Acccess Memories</code>.
+    </p>
+
+    <p>
+        In Bash, this procedure is known as <em>word splitting</em>, 
+        and is the conceptual center of command interpretation.
+    </p>
+        
 </div>
 
 <div class="content" id="searching-for-commands">
     <h2>Searching for Commands</h2>
+    <p>
+        Within Bash, builtins <a href="https://www.gnu.org/software/bash/manual/html_node/Command-Search-and-Execution.html#Command-Search-and-Execution">take precedence</a> over external commands.
+    </p>
 </div>
 
 
