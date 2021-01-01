@@ -5,9 +5,38 @@ last-updated: November, 2020
 ---
 
 <!--
-  TODO
-        Memory layout
-        Signals and IPC
+TODO
+    IPC:
+        Primitives:
+            Sockets - Shuffle data
+            Signals - Events
+            Shared Memory - Is what it is
+            FIFO Pipes - More later
+
+        <div class="aside-right">
+            <h4>Aside</h4>
+            <p>
+                D-Bus is an excellent example of what a process 
+                is capable of, but 
+                has been effectively depricated by <code>kdbus</code>,
+                which is easier to use, more efficient, and more secure, among
+                other things.
+            </p>
+        </div>
+
+        D-Bus
+            Provide a high-level IPC interface, based principally around
+                Object-Oriented methodologies (methods, attributes, etc),
+                but which runs as a process.
+            Also, a "point-to-point communications library", libdbus
+
+            System daemon!
+                Inefficient!
+            Method Call Transactions: Call a method from another process and
+                get a response
+
+        mirror.linuux.org.au/pub/linux.conf.au/2014/Friday/104-D-Bus_in_the_kernel_-_Lennart_Poettering.mp4
+
 
 -->
 
