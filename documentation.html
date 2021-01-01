@@ -1,27 +1,20 @@
 ---
 layout: default
 title: Documentation
-last-updated: October, 2020
+last-updated: January 2021
 ---
 
 <!--
 TODO
-
-Mailing Lists
-
-News:
-	https://www.omgubuntu.co.uk/
-	https://www.youtube.com/channel/UC5UAwBUum7CPN5buc-_N1Fw
-		Also available on lbry
-	https://www.usenix.org/system/files/login/issues/login_spring18_issue.pdf
+    Rewrite Manual Pages
 -->
 
 <div id="nav_bar_2" class="nav">
 	<ul>
 		<li><a href="#introduction"> Introduction </a></li>
-		<li><a href="#man-pages"> Man Pages </a></li>
 		<li><a href="#official-documentation"> Official Documen-<br>tation</a></li>
 		<li><a href="#unofficial-documentation"> Unofficial Documen-<br>tation</a></li>
+		<li><a href="#man-pages"> Manual Pages </a></li>
 		<li><a href="#nf-books"> Nonfree Books </a></li>
 		<li><a href="#how-to"> How-To </a></li>
 		<li><a href="#references"> References </a></li>
@@ -35,7 +28,7 @@ News:
 	<div class="aside-right">
 		<h4>Aside:</h4>
 		<p>
-			In days' past, it was common practice to inspect source code as documentation.
+			In days' past, source code often served as primary documentation.
 		</p>
 	</div>
 
@@ -45,23 +38,131 @@ News:
 		Official documentation, if it exists, is part of the project.
 		Outside the project, there is unofficial documentation.
 		Finally, at the periphery, is opinion.
-		Good, organized documentation is very important to the success of a project.
-		This paper discusses different sources of information, and where they may be appropriate.
 	</p>
 
+    <p>
+		Good, organized documentation is very important to the success of a project:
+		It reduces the time required for new users to orient themselves within the work.
+	</p>
+</div>
+
+<div id="official-documentation" class="content">
+	<h2> Official Documentation </h2>
+
+	<p>
+		Official documentation originates from the group or organization
+		that is producing the work: It's part of the project itself.
+		Official documentation is suitably positioned to be both exhaustive 
+        and authoritative; it should be maintained as rigorously as
+        the project itself.
+	</p>
+
+    <div class="aside-right">
+        <h4 style="font-style: normal;">Pro Tip:</h4>
+        <p>
+            <em>Reconsider your sources.</em>
+            Official documentation should should be your primary documentation.
+        </p>
+    </div>
+
+
+    
+	<p>
+		Like the projects they are part of, official documentation is usually
+		community-driven.
+	</p>
+
+	<p>
+        Some good examples:
+	</p>
+	<ul class="big-list">
+        <li>
+            <a href="https://man7.org/linux/man-pages/man1/man.1.html">The Linux Manual Pages Project</a>: A collection of system reference manuals.
+        </li>
+		<li>
+			<a href="https://www.kernel.org/doc/html/latest/"> The Linux Kernel Documentation</a>:
+			A website documenting the Linux kernel.
+		</li>
+    
+		<li>
+			<a href="https://wiki.archlinux.org/"> Arch Linux's Wiki</a>:
+			The official documentation of the Arch distribution is this wiki.
+			It is an excellent resource; its material often applies to 
+            distributions outside of Arch (for which it would be considered unofficial documentation).
+		</li>
+
+		<li>
+			<a href="https://www.gnu.org/doc/doc.html"> GNU's Official Docs</a>:
+            These documents are available in multiple formats, including websites and downloadable pdf's.
+			However, owing to their technical precision, this collection is often hard to read.
+		</li>
+	</ul>
 
 </div>
 
-<div id="man-pages" class="content">
-	<h2> Man Pages </h2>
+
+
+<div id="unofficial-documentation" class="content">
+	<h2> Unofficial Documentation </h2>
 	<p>
-		By far, the most useful asset in the Linux documentation pool is the
+		Most documentation is from unofficial, secondary sources.
+		Examples include this website, blogs, question/answer sites,
+		Youtube videos, podcasts, books, etc..
+		The best of these sources are those that originate
+        from someone closely associated with the project.
+	</p>
+
+	<p>
+		Examples of good, unofficial documentation:
+	</p>
+
+	<ul class="big-list">
+        <li>
+			<a href="http://www.kroah.com/lkn/"> Linux Kernel in a Nutshell</a>&mdash;
+			A free book by Greg Kroah-Hartman.
+			He says, "I want this book to help
+			bring more people into the Linux kernel development fold.
+			The act of building a customized kernel for your machine is one
+			of the basic tasks needed to become a Linux kernel developer.
+			The more people that try this out, and realize that there is
+			not any real magic behind the whole Linux kernel process, the
+			more people will be willing to jump in and help out in making
+			the kernel the best that it can be."<sup><a href="http://www.kroah.com/lkn/">[4]</a></sup>
+		</li>
+
+        <li>
+			<a href="https://debian-handbook.info/"> Debian Administrator's Handbook</a>&mdash;
+			A free book written by Raphaël Hertzog and Roland Mas, two Debian developers.
+			It was originally written in French, and has been translated into
+			four other languages, with twenty(!) more translations in-progress.
+		</li>
+
+		<li>
+			<a href="http://tldp.org/"> The Linux Documentation Project</a>&mdash;
+			TLDP is not maintained anymore, so that its content is usually 
+			out-of-date (but sometimes appropriate).
+		</li>
+				<li>
+			<a href="http://www.linuxfromscratch.org/lfs/"> Linux From Scratch </a>&mdash;
+			From their website, "Linux From Scratch (LFS) is a project that provides
+			you with step-by-step instructions for building your own customized
+			Linux system entirely from source."<sup><a href="http://www.linuxfromscratch.org/lfs/index.html">[3]</a></sup>
+			Ya.
+			It's a thing.
+		</li>
+    </ul>
+</div>
+
+<div id="man-pages" class="content">
+	<h2> Manual Pages </h2>
+	<p>
+		The most useful asset in the Linux documentation pool is the
 		manual ("man") pages.
 		These date to the first implementations of Unix,<sup><a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html">[1]</a></sup>
 		where they were the user's primary source for information about the new operating system.
 		Man pages provide a concise overview of commands and features, with further documentation
 		existing elsewhere.
-		Learn to use man pages early, for they are a way of life.
+		Learn to use them early, for they are a way of life.
 	</p>
 
 	<p>
@@ -155,126 +256,14 @@ News:
 
 </div>
 
-<div id="official-documentation" class="content">
-	<h2> Official Documentation </h2>
 
-	<p>
-		Official documentation originates from the group or organization
-		that is producing the work; it's part of the project itself.
-		It is suitably positioned to be both exhaustive and authoritative over the subject.
-		Think of official documentation like the primary sources
-		from history class.
-	</p>
 
-	<p>
-		Like the projects they are part of, official documentation is usually
-		community-driven.
-		Moreover, it is typically found in web-page format.
-	</p>
 
-	<p>
-		Several examples spring to mind:
-	</p>
-	<ul class="big-list">
-		<li>
-			<a href="https://www.kernel.org/doc/html/latest/"> The Linux Kernel Documentation</a>&mdash;
-			A book-like website documenting the latest kernel.
-		</li>
-		<li>
-			<a href="https://wiki.archlinux.org/"> Arch Linux's Wiki</a>&mdash;
-			The official documentation of the Arch distribution.
-			This is an excellent resource, and its material often applies to distributions outside of Arch.
-		</li>
-
-		<li>
-			<a href="https://www.gnu.org/doc/doc.html"> GNU's Official Docs</a>&mdash;
-			Excellent documentation. It is both supremely authoritative and exhaustive,
-			but owing to its precision, and the precision of the work they do, it can be
-			difficult to read.
-		</li>
-
-		<li>
-			<a href="https://godotengine.org/">Godot Open Source Game Engine</a>&mdash;
-			Godot is an MIT-licensed open source game engine.
-			Its <a href="https://docs.godotengine.org/en/stable/">official documentation</a> is community-driven.
-		</li>
-
-		<li>
-			<a href="https://doc.rust-lang.org/std/">Rust's Library Documentation</a>&mdash;
-			This documentation scheme is fantastic.  It was created with the developer in mind,
-			and is easy to navigate, easy to read, and makes the libraries easy to
-			comprehend.
-			Moreover, facilities are included in the compiler itself,
-			which permit documentation extraction from source-code comments.
-			It's easy, fast and clean.
-		</li>
-	</ul>
-
-</div>
-
-<div id="unofficial-documentation" class="content">
-	<h2> Unofficial Documentation </h2>
-	<p>
-		Most documentation is from unofficial, secondary sources.
-		Examples include this website, blogs, question/answer sites,
-		Youtube videos, podcasts, books, etc..
-		Think of unofficial documentation as commentary on the subject at hand.
-		It can be useful when the subject is difficult,
-		but official documentation should still be your reference.
-	</p>
-
-	<p>
-		Examples of good, unofficial documentation:
-	</p>
-
-	<ul class="big-list">
-		<li>
-			<a href="http://tldp.org/"> The Linux Documentation Project</a>&mdash;
-			From the website: "TLDP is short for The Linux Documentation Project,
-			an organization of volunteers authoring, reviewing and managing
-			documents about the Linux operating system. Documents basically
-			come in two formats based upon their length. The shorter ones
-			generally are called HOWTOs (or mini-HOWTOs, if they are really short),
-			the longer documents, called guides, deal in-depth with a Linux
-			feature."<sup><a href="http://tldp.org/history.html">[2]</a></sup>
-			<br>
-			<br>
-			TLDP is not maintained anymore, so that its content is sometimes
-			out-of-date (but still very good).
-
-		</li>
-		<li>
-			<a href="https://debian-handbook.info/"> Debian Administrator's Handbook</a>&mdash;
-			A free book written by Raphaël Hertzog and Roland Mas, two Debian developers.
-			It was originally written in French, and has been translated into
-			four other languages, with twenty(!) more in-progress.
-		</li>
-		<li>
-			<a href="http://www.linuxfromscratch.org/lfs/"> Linux From Scratch </a>&mdash;
-			From their website, "Linux From Scratch (LFS) is a project that provides
-			you with step-by-step instructions for building your own customized
-			Linux system entirely from source."<sup><a href="http://www.linuxfromscratch.org/lfs/index.html">[3]</a></sup>
-			It's a thing.
-		</li>
-		<li>
-			<a href="http://www.kroah.com/lkn/"> Linux Kernel in a Nutshell</a>&mdash;
-			A free book written by Greg Kroah-Hartman.
-			He says, "I want this book to help
-			bring more people into the Linux kernel development fold.
-			The act of building a customized kernel for your machine is one
-			of the basic tasks needed to become a Linux kernel developer.
-			The more people that try this out, and realize that there is
-			not any real magic behind the whole Linux kernel process, the
-			more people will be willing to jump in and help out in making
-			the kernel the best that it can be."<sup><a href="http://www.kroah.com/lkn/">[4]</a></sup>
-		</li>
-	</ul>
-</div>
 
 <div class="content" id="nf-books">
 	<h2>Nonfree Books</h2>
 	<p>
-		In the main, I recommend staying away from non-free *nix books.
+		In the main, I recommend staying away from non-free Linux books.
 		There are several reasons for this.
 	</p>
 
@@ -308,29 +297,29 @@ News:
 	</p>
 
 	<p>
-		Some exceptions:
+	    The Exception:
 	</p>
 
 	<ul class="big-list">
 		<li> <a href="https://www.man7.org/tlpi/index.html">The Linux Programming Interface</a>&mdash;
-			This is the definitive text on the programming interface
-			of the Linux Kernel.
+			For me, this is the definitive text on the programming interface
+			of the Linux kernel.
+			Its writer, Michael Kerrisk, is the maintainer of the
+			Linux Man Page project (above),
+			and his work is simply terrific.
 			If you want all the gory details of the system-call interface offered
 			by the Linux kernel, as well as sound explanations of its
 			internals, this is your book.
-			Its writer, Michael Kerrisk, is currently the maintainer of the
-			Linux Man Page project (see above),
-			and his work is simply terrific.
-		</li>
-		<li> <a href="http://www.csapp.cs.cmu.edu/">Computer Systems: A Programmer's Perspective</a> &mdash;
-			From its preface: "This book (known as CS:APP) is for computer scientists, computer engineers,
-			and others who want to be able to write better programs by learning what is going on
-			"under the hood" of a computer system."<sup><a href="#references">[5]</a></sup>
 		</li>
 	</ul>
 
-</div>
+    <p>
+        This caution applies only to books about GNU/Linux itself:
+        The best resources for computer science in general
+        are usually nonfree.
+    </p>
 
+</div>
 <div id="how-to" class="content">
 	<h2>How-to</h2>
 
