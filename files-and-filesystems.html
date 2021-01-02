@@ -359,7 +359,7 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            The idea of using numerical values as names (i.e., unique identifiers)
+            The idea of using numerical values as names 
             is common throughout computing.
             As we'll see later, each process is given a
             unique numerical identifier.
@@ -368,7 +368,7 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
     </div>
 
     <div class="code">
-        $ echo "hello world" > newfile <br>
+        $ echo "hello world" &gt; newfile <br>
         $ ls -i newfile <br>
         2112949 newfile
     </div>
@@ -413,15 +413,17 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
         open by any process on the system).
     </p>
 
-    <h3>Structure</h3>
-    <h4>tl;dr Forms a Tree</h4>
+    <h3>Directory Structure</h3>
 
     <p>
-        While each file on the system, including directories, is owned by a user,
-        the contents of directories are, effectively, owned by the kernel.
-        User-space processes are not permitted to read or write
-        directly to directories.
-        System calls exist to:
+        Although each file on the system, including directories, is owned by a user,
+        the contents of directories are effectively owned by the kernel.
+        No user-space process is permitted to read or write
+        directly to the directories of an in-use filesystem.
+    </p>
+
+    <p>
+        Instead, system calls exist to:
     </p>
 
     <ul style="columns: 2; width: 80%; margin-left: 10%; margin-bottom: 20px;">
@@ -436,23 +438,27 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
 
     <p>
         The layer of indirection offered by these interfaces affords the kernel
-        the opportunity to restrict the manipulation of directories, and therefore,
-        to impose structure upon the directories within a filesystem.
-        In particular, directories are not allowed to be arbitrarily hard-linked
+        the opportunity to restrict the manipulation of directories, and thereby
+        to impose structure upon the directories of a filesystem.
+    </p>
+
+    <p>
+        First, directories cannot be arbitrarily hard-linked
         (i.e., you cannot create new hardlinks to existing directories).
     </p>
 
     <p>
-        Each directory contains at least two hard links, which cannot be changed, and
-        which help define the filesystem's directory structure.  They are,
+        Second, each directory contains at least two hard links; 
+        these cannot be changed, nor removed.
+        They are, 
         <code>.</code> ("dot"), which refers to the containing directory itself,
         and <code>..</code> ("dot dot"), which refers to its parent directory.
         The root directory's parent directory is the root directory itself.
-        Finally, each filesystem has a single root directory.
     </p>
 
     <p>
-        These restrictions guarantee that the directory structure forms a tree.
+        Therefore, each directory has exactly one parent directory,
+        and the directory structure forms a tree.
     </p>
 
     <h3> See Also: </h3>
