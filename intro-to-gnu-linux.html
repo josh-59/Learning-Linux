@@ -4,6 +4,31 @@ title: Introduction to GNU/Linux
 last-updated: December, 2020
 ---
 
+<!--
+    To Do:
+
+    UNIX:
+        Create new subsection: C
+
+    GNU:
+        GNU License: Overview as a legal device 
+        From Torvald's Book:
+            "Under the terms of the GPL, money is not the issue.
+            You can charge a million bucks if someone is willing to pay
+            for it, but you have to make sources available.  
+            And the person you give or sell the source to has to have
+            all the rights you have.
+            It's a brilliant device."
+
+    Linux:
+        Released under GPL: 
+            "The fact is, to make Linux useable, I had relied on a lot of
+            tools that had been distributed freely over the Internet&mdash;
+            I had hoisted myself up on the shoulders of giants.
+            The most important of these free software programs was the GCC
+            compiler."
+-->
+
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
@@ -90,21 +115,6 @@ last-updated: December, 2020
         Owing in part to the restrictive nature of available
         hardware, the budding operating system focused
         on simplicity.<sup><a href="#references">[4]</a></sup>
-        In addition, early computer researchers were programmers as well as users,
-        so that their operating system facilitated programming as a means of use.
-        This theme has been echoed throughout Linux's history, and is a
-        key to understanding its success.
-    </p>
-
-    <div class="aside-right">
-        <h4>Aside</h4>
-        <p>
-            The performance penalty implied by rewriting the kernel in C
-            has been estimated at 20-30% over assembly.
-        </p>
-    </div>
-
-    <p>
         The earliest versions of the new operating system were put to use
         internally by Bell Labs to assist in patent
         applications.<sup><a href="#references">[2]</a></sup><sup><a href="#references">[3]</a></sup>
@@ -116,13 +126,13 @@ last-updated: December, 2020
 
     <p>
         In 1973, after Dennis Ritchie introduced <em>struct</em>'s to the C programming language,
-        Ken Thompson was able to rewrite most of Unix in C (Kerninghan, p. 78);
+        Ken Thompson was able to rewrite most of Unix in C;<sup><a href="#references">[1]</a></sup>
         this corresponded to <em>UNIX Version 6.</em>
         This rewrite is especially important to the history of
         computing because it spawned the notion of <em>portability</em>:
-        The same software, written in a high-level language, can be
+        The same source, written in a high-level language, could be
         compiled to run on different machines.
-        By 1978, Unix was running on several different architectures (Kernighan, p. 140).
+        By 1978, Unix was running on several different architectures.<sup><a href="#references">[1]</a></sup>
     </p>
 
     <h3>See Also:</h3>
@@ -216,14 +226,12 @@ last-updated: December, 2020
 <div class="content" id="gnu">
     <h2>GNU</h2>
     <p>
-        The first serious attempt at producing a free and open-source Unix-like
-        operating system
+        The first attempt at producing a deliberately free and open-source Unix clone
         <a href="https://www.gnu.org/gnu/initial-announcement.en.html#f1">was announced</a> by Richard Stallman in 1983.
         Stallman was, at the time, a graduate student at
-        MIT's AI Laboratory,<sup><a href="#references">[6]</a></sup>
-        and his project was called "GNU," a recursive acronym for <em>GNU's Not Unix.</em><sup><a href="#references">[7]</a></sup>
+        MIT's AI Laboratory;<sup><a href="#references">[6]</a></sup>
+        his project was called "GNU," a recursive acronym for <em>GNU's Not Unix.</em><sup><a href="#references">[7]</a></sup>
     </p>
-
 
     <div class="aside-right">
         <h4> From <a href="https://www.gnu.org/philosophy/free-sw.html">gnu.org</a>:</h4>
@@ -250,7 +258,7 @@ last-updated: December, 2020
         of the open-source community.
         This compiler is the only one capable of building Linux kernels.<sup><a href="#references">[8]</a></sup>
         Similarly, their shell,
-        <code><a href="https://www.gnu.org/software/bash/">bash</a></code>
+        <code><a href="https://www.gnu.org/software/bash/">bash</a></code>,
         is the default shell on many distributions.
     </p>
 
@@ -266,7 +274,7 @@ last-updated: December, 2020
     </p>
     <h3> See Also: </h3>
     <ul>
-        <li><a href="https://www.gnu.org/philosophy/philosophy.html"> Philosophy of the GNU Project - GNU Project</a></li>
+        <li><a href="https://www.gnu.org/gnu/thegnuproject.html">About the GNU Project</a></li>
     </ul>
 </div>
 
