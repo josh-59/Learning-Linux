@@ -360,7 +360,7 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
         <h4>Aside:</h4>
         <p>
             The idea of using numerical values as names 
-            is common throughout computing.
+            is common in computing.
             As we'll see later, each process is given a
             unique numerical identifier.
             Other examples include user id's and memory addresses.
@@ -480,30 +480,22 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
     </p>
 
     <p>
-        For example, the  <code>/proc/filesystems</code> file contains the
-        filesystems supported by the running kernel:
+        For example, the  <code>/proc/meminfo</code> file reports statistics about
+        memory usage on the system:<sup><a href="https://man7.org/linux/man-pages/man5/procfs.5.html">[25]</a></sup>
     </p>
 
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Other interesting pseudo files are <code>/proc/meminfo</code>,
-            and <code>/dev/urandom</code>.
-        </p>
-    </div>
-
     <div class="code">
-        $ cat /proc/filesystems <br>
-        nodev	sysfs<br>
-        nodev	tmpfs<br>
-        nodev	bdev<br>
-        nodev	proc<br>
-        ext3<br>
-        ext2<br>
-        ext4<br>
-        squashfs<br>
-        vfat<br>
-        ...<br>
+        $ head /proc/meminfo<br>
+        MemTotal:        3887988 kB<br>
+        MemFree:         1619568 kB<br>
+        MemAvailable:    2450268 kB<br>
+        Buffers:          120152 kB<br>
+        Cached:           984208 kB<br>
+        SwapCached:            0 kB<br>
+        Active:           324532 kB<br>
+        Inactive:        1528196 kB<br>
+        Active(anon):       9476 kB<br>
+        Inactive(anon):  1061224 kB
     </div>
 
     <p>
@@ -848,3 +840,4 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
     </ol>
 
 </div>
+
