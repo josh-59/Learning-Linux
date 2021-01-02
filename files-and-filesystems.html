@@ -258,8 +258,7 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
 
     <p>
         A regular file contains data which is stored on disk.
-        The regular file is the typical file type;
-        most files are regular files.
+        Most files are regular files.
     </p>
 
     <p>
@@ -329,7 +328,7 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
 
     <h3>See Also:</h3>
     <ul>
-        <li><a href="https://www.man7.org/linux/man-pages/man1/chmod.1.html">chmod(1)</a></li>
+        <li><a href="https://www.man7.org/linux/man-pages/man1/chmod.1.html"><code>chmod(1)</code></a></li>
     </ul>
 </div>
 
@@ -536,7 +535,6 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
     </ul>
 </div>
 
-
 <div class="content" id="mounting-unmounting">
 
     <h2>Mounting and Unmounting</h2>
@@ -689,72 +687,73 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
     </ul>
 </div>
 
-
-
 <div id="device-files" class="content">
     <h2>Device Special Files</h2>
 
     <p>
-        A <em>device special file</em> represents a device connected to the system;
+        A <em>device special file</em> represents a device connected to the system; 
         they reside in the <code>/dev</code> directory.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[10]</a></sup>
-        Each special device file serves as the principle reference to its respective device.
-        Let's consider the task of creating a boot media, "the hard way."
+        Each of these files serves as the principle reference to a device;
+        the kernel takes care of the particulars.
+    </p>
+
+    <p>
+        For instance, when a usb thumb drive is inserted into my machine,
+        a new device special file appears in <code>/dev</code>.
+        It's worth noting that the essential capabilities of this device 
+        coincide with those of a file: We can read from it and write to it.
+    </p>
+
+    <p>
+        Let's consider the task of creating a boot media using this interface.
     </p>
 
     <p>
         I would like to install Arch Linux onto my PineBook Pro.
-        I download a new installation image via torrent, then compare the resulting file
-        against the checksum file included in the same directory, using <code>sha256sum(1)</code>.
-        They are identical; this means that the file is correct and intact.
+        I download a new installation image, and compare the resulting file
+        against the original by comparing its official checksum value against
+        the results of <code>sha256sum(1)</code>.
+        They are identical; this means that the <a href="cacr.uwaterloo.ca/hac/about/chap1.pdf">integrity</a> of the file has been
+        preserved.
     </p>
 
     <p>
-        Next, I insert my USB stick and locate it with <code>lsblk</code>; it
-        has been mounted, and I need it unmounted so that I can write to the
-        device directly (without filesystem), through its device special file.
-        I unmount the device, and double-check with another call to <code>lsblk</code>.
+        Next, I insert the USB stick and locate it with <code>lsblk</code>; 
+        it has appeared as <code>/dev/sdb</code>, but its partitions
+        have been mounted automatically. 
+        These partitions must be unmounted so that the device can be written to 
+        directly.
+        So, I unmount its partitions, and double-check with another call to <code>lsblk</code>.
     </p>
 
     <p>
-        This is where things get hairy, because we will be writing to a device
-        (in this case, <em>/dev/sdb</em>) with root privileges.
-        Note that my system's hard drive is <em>/dev/sda</em>.
-        Because I can, I decide to create the boot media with <code>cat</code>
-        (a thorough investigation revealed that
-        <em><a href="https://www.man7.org/linux/man-pages/man1/cat.1.html">cat</a></em>
-        and <em><a href="https://www.man7.org/linux/man-pages/man1/dd.1.html">dd</a></em> are exceptionally similar).
-        The caveat is that one must be acting as superuser:
+        With the machine in this configuration, we can write the file:
     </p>
 
     <div class="code">
-        # cat archlinux-2020.07.02-pbp.img > /dev/sdb
+        # cat archlinux-2020.07.02-pbp.img &gt; /dev/sdb
     </div>
 
     <p>
-        And, success! Granted, <code>sudo dd</code> would have been faster and safer.
+    And, success! The file <code>archlinux-2020.07.02-pbp.img</code> has been 
+    perfectly copied (byte-wise) onto the first <em>n</em> bytes of the usb stick, 
+    where <em>n</em> is the length of said file.
+    That file, a disk image, includes a few filesystems, a kernel,
+    and is bootable.
     </p>
 
     <p>
-        As the command above points out, my usb stick, <em>/dev/sdb</em>
-        appears in the system as a file: We can read from it, and write to it.
-        Moreover, all operations that we need to do can be done through this interface.
-        For instance, if we wanted to partition a drive:
+        Granted, <code>sudo dd</code> would have been faster and safer.
     </p>
 
-    <div class="code">
-        $ sudo fdisk /dev/sdb
-    </div>
+    <h3> Putting it All Together </h3>
 
-    <p>
-        This utility will read the existing partition table on the device and
-        tell us about it, and it will allow us to write a new partition table to the device.
-        Furthermore, the <em>mkfs</em> (make filesystem) utilities write
-        a new/empty filesystem to a file, allowing us to format a partition.
-    </p>
 
     <h3>See Also:</h3>
     <ul>
         <li><a href="https://wiki.archlinux.org/index.php/Device_file">Device File - ArchWiki</a></li>
+        <li><a href="https://man7.org/linux/man-pages/man8/fdisk.8.html"><code>fdisk(8)</code></a> - manipulate disk partition table</li>
+        <li><a href="https://man7.org/linux/man-pages/man8/mkfs.8.html"><code>mkfs(8)</a></code> - build a Linux filesystem</li>
     </ul>
 </div>
 
@@ -796,9 +795,9 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
         The terms <em>filesystem</em> and <em>directory tree</em> were developed here
         precisely, in order to make a clear distinction between the two.
         However, the terms overlap, somewhat:
-        In *nix, each filesystem must entertain exactly one directory tree
+        In Linux, each filesystem must entertain exactly one directory tree
         (specifically, it must contain exactly one root directory).
-        Because of this, each filesystem implies a directory tree;
+        Because of this, each filesystem implies exactly one directory tree;
         this is the sense in which it is valid to say, "We are going to mount
         a filesystem at <code>/home</code>," when in fact we mean,
         "We are going to mount a filesystem's root directory at <code>/home</code>."
@@ -819,7 +818,7 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
     <p>
         Note: This video belongs to <em>Lesson 2: File Systems</em> of <a href="https://www.udacity.com/course/gt-refresher-advanced-os--ud098">Advanced OS Refresher</a> by Georgia Tech,
         which is quick and worthwhile.
-        It is free, but you must make an account.
+        It is monetarily free, but you must make an account.
     </p>
 </div>
 
