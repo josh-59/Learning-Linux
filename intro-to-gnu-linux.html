@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Introduction to GNU/Linux
-last-updated: December, 2020
+last-updated: January 2021
 ---
 
 <!--
@@ -27,6 +27,14 @@ last-updated: December, 2020
             I had hoisted myself up on the shoulders of giants.
             The most important of these free software programs was the GCC
             compiler."
+
+    Distributions:
+        Why is it called a distribution?
+            Because the people assembling these operating systems don't
+            bother to claim the software as their own (though they could).
+            Rather, GCC's Bash is simply <em>distributed</em>, thereby
+            simplify logistics (namely, I, the operating system's engineer,
+            do not have to play 'middle-man').
 -->
 
 <div id="nav_bar_2" class="nav">
@@ -34,7 +42,7 @@ last-updated: December, 2020
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#unix"> Unix </a></li>
         <li><a href="#unix-architecture"> The Unix Architecture </a></li>
-        <li><a href="#gnu"> GNU </a></li>
+        <li><a href="#free-as-in-freedom"> Free as in Freedom </a></li>
         <li><a href="#linux"> The Linux Kernel </a></li>
         <li><a href="#distributions"> Linux Distributions </a></li>
         <li><a href="#mint"> Linux Mint </a></li>
@@ -56,15 +64,15 @@ last-updated: December, 2020
     </div>
 
     <p>
-        An operating system is a collection of software designed to facilitate
+        An operating system is a collection of software which facilitates
         the use of a computer.
         To this end, its two main responsibilities are to support running
-        programs, known as processes, and to maintain persistent
+        programs, callled processes, and to maintain persistent
         data, in the form of files.
         In addition, operating systems ease the task of creating
         useful programs by offering programmers a predictable environment.
-        Modern, open-source GNU/Linux offers the single best programming environment
-        available today.
+        Modern GNU/Linux has evolved to offer the single best 
+        programming environment available today.
     </p>
 </div>
 
@@ -95,7 +103,7 @@ last-updated: December, 2020
         Within Bell Labs, management put operating systems research on
         the backburner, and refused to purchase new computing
         equipment.<sup><a href="#references">[2]</a></sup><sup><a href="#references">[3]</a></sup>
-        After finding a disused and underpowered <a href="https://www.soemtron.org/pdp7.html">PDP-7</a>,
+        After finding a disused <a href="https://www.soemtron.org/pdp7.html">PDP-7</a>,
         Ken Thompson rewrote <em><a href="https://en.wikipedia.org/wiki/Space_Travel_(video_game)">Space Travel</a></em> for
         it.<sup><a href="#references">[2]</a></sup><sup><a href="#references">[3]</a></sup>
         In the process, he accrued the tools and skills necessary to implement
@@ -103,7 +111,7 @@ last-updated: December, 2020
     </p>
 
     <p>
-        At some point in 1969, Ken Thompson realized that he was three weeks
+        At some point in 1969, while working on his filesystem, Ken Thompson realized that he was three weeks
         from an operating system.  All he needed was an
         <em>exec</em> call, an assembler, a text editor and a shell.
         In 1970, the new operating system was christened <em>UNIX,</em>
@@ -119,20 +127,9 @@ last-updated: December, 2020
         internally by Bell Labs to assist in patent
         applications.<sup><a href="#references">[2]</a></sup><sup><a href="#references">[3]</a></sup>
         The software then moved away from its nest under obtuse licenses to
-        universities, where its code, though not free, was studied and documented.<sup><a href="#references">[2]</a></sup>
+        universities, where its source code, though not free, was studied and documented.<sup><a href="#references">[2]</a></sup>
         Finally, Unix became commercially available, to principally
         to corporate clients.<sup><a href="#references">[2]</a></sup>
-    </p>
-
-    <p>
-        In 1973, after Dennis Ritchie introduced <em>struct</em>'s to the C programming language,
-        Ken Thompson was able to rewrite most of Unix in C;<sup><a href="#references">[1]</a></sup>
-        this corresponded to <em>UNIX Version 6.</em>
-        This rewrite is especially important to the history of
-        computing because it spawned the notion of <em>portability</em>:
-        The same source, written in a high-level language, could be
-        compiled to run on different machines.
-        By 1978, Unix was running on several different architectures.<sup><a href="#references">[1]</a></sup>
     </p>
 
     <h3>See Also:</h3>
@@ -141,7 +138,6 @@ last-updated: December, 2020
         <li><a href="http://cs.bell-labs.co/who/ken/mig.html">That Time Ken Thompson Flew a MiG-29</a></li>
     </ul>
 </div>
--->
 
 <div id="unix-architecture" class="content">
     <h2>The Unix Architecture</h2>
@@ -158,7 +154,7 @@ last-updated: December, 2020
 
     <p>
         <strong>Hardware:</strong>
-        At the heart of any machine is its hardware.
+        At the heart of any computer is its hardware.
         Each piece of hardware has a software interface defined by the
         engineering team that created it.
         These interfaces are varied at best.
@@ -177,12 +173,12 @@ last-updated: December, 2020
 
     <p>
         <strong>Kernel:</strong>
-        While the heart of any machine is its hardware, the heart any
+        While the heart of any computer is its hardware, the heart any
         Unix-like operating system is its kernel.
-        The kernel is a large and involved piece of software, responsible for
+        The kernel is responsible for 
         scheduling the CPU, allotting memory, supporting running programs
-        and maintaining file integrity.
-        In a non-trivial sense, it is the "brains" behind the operation.
+        and maintaining file integrity;
+        it is a large and involved piece of software.
     </p>
 
     <p>
@@ -207,24 +203,24 @@ last-updated: December, 2020
         A process, sometimes called a "user-space process" or "user-land process,"
         is an executing program.
         Within Unix and other Unix-like operating systems, processes run the entire show:
-        The kernel is entirely, and deliberately, dependant upon processes
+        The kernel is entirely dependant upon processes
         to tell it what to do.
         It follows that there must exist at least one "trusted" process within
         user-land, to get other processes on their feet&mdash;
-        and this is in-fact exactly the case.
-        At a deep level, this is one of the more beautiful elements of the
+        and this is exactly the case.
+        This is one of the more beautiful elements of the
         Unix architecture.
     </p>
 
     <h2>See Also:</h2>
     <ul>
-        <li><a href="https://en.wikipedia.org/wiki/Operating_Systems:_Design_and_Implementation">Operating Systems: Design and Implementation</a>  by Andrew S. Tanenbaum</li>
+        <li><a href="https://en.wikipedia.org/wiki/Unix_architecture">Unix Architecture</a> - Wikipedia</li>
     </ul>
 
 </div>
 
-<div class="content" id="gnu">
-    <h2>GNU</h2>
+<div class="content" id="free-as-in-freedom">
+    <h2>Free as in Freedom</h2>
     <p>
         The first attempt at producing a deliberately free and open-source Unix clone
         <a href="https://www.gnu.org/gnu/initial-announcement.en.html#f1">was announced</a> by Richard Stallman in 1983.
@@ -274,7 +270,7 @@ last-updated: December, 2020
     </p>
     <h3> See Also: </h3>
     <ul>
-        <li><a href="https://www.gnu.org/gnu/thegnuproject.html">About the GNU Project</a></li>
+        <li><a href="https://www.gnu.org/gnu/thegnuproject.html">About the GNU Project</a> by Richard Stallman </li>
     </ul>
 </div>
 
@@ -376,8 +372,8 @@ last-updated: December, 2020
 <div id="distributions" class="content">
     <h2> Linux Distributions </h2>
     <p>
-        A Linux distribution is a collection of software that, when installed, yields
-        a functioning operating system.
+        A Linux distribution is a collection of software that, 
+        when installed, yields a functioning operating system.
         Each includes some variant of the Linux kernel, some core utilities,
         and, usually, some user-space applications (e.g., Firefox).
         All of this is tested to work and packaged in a fashion that
