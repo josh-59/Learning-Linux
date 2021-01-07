@@ -213,8 +213,9 @@ sup, sub {
 
 .content .code, code {
     font-family: 'Ubuntu Mono', monospace;
-		font-size: 15pt;
+    font-size: inherit;
 }
+
 
 
 .content ul li {
