@@ -12,6 +12,13 @@ To Do:
         Possibly:
             EOF and EOF character
     Bash Command Interpretation Cheat Sheet
+
+    Other Nice Features:
+        Filename completion via tab 
+            - Filename list via tab
+        Command completion via tab
+            - Command list via tab
+
 -->
 
 <div id="nav_bar_2" class="nav">
@@ -152,7 +159,9 @@ To Do:
     <div class="aside-right">
 		<h4>Aside:</h4>
 		<p>
-		    Desktop environment serve a role analogous to shells.
+		    <a href="https://itsfoss.com/what-is-desktop-environment/">
+                Desktop environments</a>
+            serve a role analogous to shells.
 		<p>
 	</div>
 
@@ -160,9 +169,12 @@ To Do:
 		A shell is a program which interprets and executes our (arbitrary) commands;
 		it is a <em>shell</em> in the sense that it is the outermost layer of the
 		operating system, and the one which the user has direct contact.
+	</p>
+
+    <p>
 		Unix deviates from most operating systems designs by entertaining
-		the shell as an ordinary user-space process:  From a software
-		architecture standpoint, it is just another running program.
+		the shell as an ordinary user-space process:  From
+        the operating system's perspective, it is just another running program.
 	</p>
 
 	<p>
@@ -242,6 +254,7 @@ To Do:
     <div class="aside-right">
         <p>
             In Bash, this is referred to as a <em>simple command.</em>
+            Here it will be referred to by <code style="font-size: inherit;">[command]</code>.
         </p>
     </div>
 
@@ -342,7 +355,6 @@ To Do:
         For each <a href="https://www.man7.org/linux/man-pages/man3/readdir.3.html">entry</a> in the current directory, <a href="https://man7.org/linux/man-pages/man3/printf.3.html">print</a> it out!
     </p>
 
-
     <p>
         Standard error (<code>STDERR</code>) is the same
         terminal screen as <code>STDOUT</code>, but is reserved for
@@ -350,8 +362,17 @@ To Do:
         In a moment, we'll see why this is useful.
     </p>
 
-
     <h3> Redirection </h3>
+
+    <ul style="list-style-type: none;">
+        <li> <code> [command] &gt; file </code> &emsp; Redirect <code>STDOUT</code> to file, then execute simple command </li>
+        <li> <code> [command] &lt; file </code> &emsp; Redirect <code>STDIN</code>
+            to file, then execute simple command </li>
+    </ul>
+
+    <p>
+
+    </p>
 </div>
 
 <!--
