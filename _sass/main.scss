@@ -102,9 +102,7 @@ img{
 	outline: 2px solid black;
 }
 
-.aside-left code, .aside-right code, #pro-tip code {
-	font-size: 13pt;
-}
+
 
 .aside-left, .aside-right, {
 	width: 20%;
@@ -219,8 +217,8 @@ sup, sub {
     font-size: 15pt;
 }
 
-code {
-    font-size: inherit;
+.aside-left code, .aside-right code, #pro-tip code, code{
+	font-size: inherit;
 }
 
 .content ul li {
