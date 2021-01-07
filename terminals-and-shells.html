@@ -280,13 +280,17 @@ To Do:
 
     <p>
         In Bash, this procedure is known as <em>word splitting</em>, 
-        and is the conceptual center of command interpretation.
+        and is the first step of command interpretation.
     </p>
+
+
         
 </div>
 
 <div class="content" id="searching-for-commands">
     <h2>Searching for Commands</h2>
+
+
    
      <h3>Commands and Builtin's</h3>
 
@@ -420,7 +424,7 @@ To Do:
     </div>
 
     <p>
-        There's actually not much to these, so we'll just jump into using them.
+        Let's just jump into using them.
         Suppose we had <a href="https://ocw.mit.edu/ans7870/6/6.006/s08/lecturenotes/files/t8.shakespeare.txt">the complete works of Shakespeare in a single file</a> (5.3MB), and we wanted to copy them.
         We could use <code>cp</code>, but for poetic reasons, we want the computer
         <em>to read</em> them, and therefore, we must use <code>cat</code> instead.
@@ -458,29 +462,41 @@ To Do:
         </p>
     </div>
 
-
-
     <p>
-        Much better.  After word splitting, <code>Bash</code> inspects
+        Much better.  
+    </p>
+    
+    <p>
+        After word splitting, <code>Bash</code> inspects
         each word; here, it found the redirection operator <code>&gt;</code>.
         It took the next word, <code>shakespeare_backup</code>, to be
-        a filename. Since that file did not exist, it created it
-        (if it had existed, <code>bash</code> would have truncated its length
-        to zero, effectively erasing the file).
+        a filename. Since that file did not exist, it created it.
+        (If it had existed, <code>bash</code> would have truncated its length
+        to zero, effectively erasing the file.)
         Then it assigned the file to <code>STDOUT</code> and
         executed <code>cat</code> with a single argument, <code>t8.shakespeare.txt</code>.
         Finally, <code>cat</code> naively printed to <code>STDOUT</code>, and 
         thereby copied the contents of the file.
     </p>
 
-    
-    <ul style="list-style-type: none;">
-        <li> <code> [command] &gt;&gt; file </code> &ensp; Redirect <code>STDOUT</code>
-            to file, then execute command. Concatenate.</li>
+    <p>
+        This was a simplified introduction to redirection.
+        The most important part is the order in which <code>bash</code> takes action.
+        For instance, if <code>cat</code> had failed (it was mispelled, for instance),
+        the redirection still would have taken place.  
+        Therefore, a new file would have been created; or, if the file had existed,
+        its contents would have been deleted.
+    </p>
 
-    </ol>
+    <p>
+        For the full suite of what <code>bash</code> can do, see the links below.
+    </p>
 
-
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://wiki.bash-hackers.org/syntax/redirection">Redirection - Bash Hackers Wiki</a></li>
+        <li><a href="https://www.gnu.org/software/bash/manual/html_node/Redirections.html"> Redirections - Bash Reference Manual</a></li>
+    </ul>
 
 </div>
 
