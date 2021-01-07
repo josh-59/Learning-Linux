@@ -209,22 +209,27 @@ To Do:
     <p>
         Learning to use a shell amounts to learning how it handles
         commands given to it.  
-        Here we'll study <code>bash</code>, but note that other shells
+        Here we'll study <code>bash</code>, but other shells
         in Linux operate similarly.
     </p>
+
+    <p>
+        Finally, note that we will typically omit the picture of the terminal,
+        so that the above command would be depicted:
+    </p>
+
+    <div class="code">
+        $ ps <br>
+        PID &ensp;TTY   &emsp;&emsp;&emsp;&emsp;&emsp;TIME CMD <br>
+        3142 pts/1   00:00:00 bash <br>
+        3148 pts/1   00:00:00 ps
+    </div>
 
    </div>
 
 <div class="content" id="word-splitting">
     <h2 style="margin-bottom: 0;">Word Splitting</h2>
     <h4>and Simple Commands</h4>
-
-    <div class="aside-right">
-        <p>
-            In Bash, this is referred to as a <em>simple command.</em>
-            Here it will be referred to by <code style="font-size: inherit;">[command]</code>.
-        </p>
-    </div>
 
     <p>
         A typical line of input given to a shell is as follows:
@@ -243,6 +248,14 @@ To Do:
 
     <div class="code">
         $ shutdown now
+    </div>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            In Bash, these are referred to as a <em>simple commands.</em>
+            Here they will be denoted by <code style="font-size: inherit;">[command]</code>.
+        </p>
     </div>
 
     <p>
