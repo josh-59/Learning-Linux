@@ -166,8 +166,8 @@ To Do:
 	</div>
 
 	<p>
-		A shell is a program which interprets and executes our (arbitrary) commands;
-		it is a <em>shell</em> in the sense that it is the outermost layer of the
+		A shell is a program which interprets and executes our (arbitrary) commands.
+		It is a <em>shell</em> in the sense that it is the outermost layer of the
 		operating system, and the one which the user has direct contact.
 	</p>
 
@@ -188,64 +188,29 @@ To Do:
 	</ul>
 
     <p>
+        A shell is launched for you when a terminal emulator window is opened.
+    </p>
+
+    <p>
+        You can find out which shell is running by purusing the settings of 
+        your terminal, or from within a terminal with the <code>ps</code> command:
+    </p>
+
+    <div class="code">
+        $ ps <br>
+        PID &emsp;&ensp;TTY  &emsp;    TIME &emsp;&ensp;   CMD <br>
+        39410 pts/5    00:00:00 bash <br>
+        39851 pts/5    00:00:00 ps
+    </div>
+
+    <p>
         Learning to use a shell amounts to learning how it handles
         each command given to it.  
         Here we'll study <code>bash</code>, but note that other shells
         in Linux operate similarly.
     </p>
 
-    <h3>Commands and Builtin's</h3>
-
-    <p>
-        Most commands that users enter into <code>bash</code> are separate programs.
-        For instance, <code>ls</code> is a separate program. When a user enters,
-    </p>
-
-    <div class="code">
-        $ ls
-    </div>
-
-    <p>
-        the shell finds the <code>ls(1)</code> executable, 
-        <a href="processes.html#process-creation">forks</a> itself, and
-        instructs the child process to execute that binary. 
-        The <code>ls</code> program then reads its current directory's
-        entries and prints them out.
-        The shell 
-        <a href="https://man7.org/linux/man-pages/man2/wait.2.html">waits</a>
-        for <code>ls</code> to terminate, then returns with a prompt.
-        This happens very quickly.
-    </p>
-
-     <div class="aside-right">
-        <h4>Alternative:</h4>
-        <p>
-            <code><a href="https://the.exa.website"</a>exa</a></code>
-            is a modern replacement for <code>ls</code>.
-        </p>
-    </div>
-
-    <p>
-        For a few reasons, this strategy is preferrable; however, 
-        there are times where it will not work.
-        For instance, changing the current directory must be carried out 
-        by <code>bash</code> itself, since it is a per-process attribute.
-        Therefore, <code>cd</code> is carried out by <code>bash</code>.
-    </p>
-
-    <p>
-        Commands such as these are called <em>builtins</em>, and can be
-        listed by,
-    </p>
-
-    <div class="code">
-        $ help
-    </div>
-
-    <p>
-        Where <code>help</code> is, itself, a builtin.
-    </p>
-</div>
+   </div>
 
 <div class="content" id="word-splitting">
     <h2 style="margin-bottom: 0;">Word Splitting</h2>
@@ -306,14 +271,70 @@ To Do:
 
 <div class="content" id="searching-for-commands">
     <h2>Searching for Commands</h2>
+   
+     <h3>Commands and Builtin's</h3>
+
+    <p>
+        Most commands that users enter into <code>bash</code> are separate programs.
+        For instance, <code>ls</code> is a separate program. When a user enters,
+    </p>
+
+    <div class="code">
+        $ ls
+    </div>
+
+    <p>
+        the shell finds the <code>ls(1)</code> executable, 
+        <a href="processes.html#process-creation">forks</a> itself, and
+        instructs the child process to execute that binary. 
+        The <code>ls</code> program then reads its current directory's
+        entries and prints them out.
+        The shell 
+        <a href="https://man7.org/linux/man-pages/man2/wait.2.html">waits</a>
+        for <code>ls</code> to terminate, then returns with a prompt.
+        This happens very quickly.
+    </p>
+
+     <div class="aside-right">
+        <h4>Alternative:</h4>
+        <p>
+            <code><a href="https://the.exa.website"</a>exa</a></code>
+            is a modern replacement for <code>ls</code>.
+        </p>
+    </div>
+
+    <p>
+        For a few reasons, this strategy is preferrable; however, 
+        there are times where it will not work.
+        For instance, changing the current directory must be carried out 
+        by <code>bash</code> itself, since it is a per-process attribute.
+        Therefore, <code>cd</code> is carried out by <code>bash</code>.
+    </p>
+
+    <p>
+        Commands such as these are called <em>builtins</em>, and can be
+        listed by,
+    </p>
+
+    <div class="code">
+        $ help
+    </div>
+
+    <p>
+        Where <code>help</code> is, itself, a builtin.
+    </p>
+
     <p>
         Within Bash, builtins <a href="https://www.gnu.org/software/bash/manual/html_node/Command-Search-and-Execution.html#Command-Search-and-Execution">take precedence</a> over external commands.
     </p>
+
+
 </div>
 
 
 <div id="standard-file-descriptors" class="content">
-	<h2> The Standard File Descriptors </h2>
+	<h2 style="margin-bottom: 0;"> The Standard File Descriptors </h2>
+    <h4> and Redirection</h4>
 	<p>
         In interactive use, <code>bash</code> is connected to its terminal
         by open files.  
@@ -364,15 +385,87 @@ To Do:
 
     <h3> Redirection </h3>
 
+    <p>
+        Redirection is the act of assigning a different file to the standard
+        file descriptors before executing a command.
+    </p>
+
     <ul style="list-style-type: none;">
-        <li> <code> [command] &gt; file </code> &emsp; Redirect <code>STDOUT</code> to file, then execute simple command </li>
+        <li> <code> [command] &gt; file </code> &emsp; Redirect <code>STDOUT</code> to file, then execute command. Creates or overwrites file. </li>
         <li> <code> [command] &lt; file </code> &emsp; Redirect <code>STDIN</code>
-            to file, then execute simple command </li>
+            to file, then execute command </li>
     </ul>
 
-    <p>
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            "O, that infected moisture of his eye..."
+        </p>
+    </div>
 
+    <p>
+        There's actually not much to these, so we'll just jump into using them.
+        Suppose we had <a href="https://ocw.mit.edu/ans7870/6/6.006/s08/lecturenotes/files/t8.shakespeare.txt">the complete works of Shakespeare in a single file</a> (5.3MB), and we wanted to copy them.
+        We could use <code>cp</code>, but for poetic reasons, we want the computer
+        <em>to read</em> them, and therefore, we must use <code>cat</code> instead.
     </p>
+
+    <div class="code">
+        $ cat t8.shakespeare.txt <br>
+        This is the 100th Etext file presented by Project Gutenberg, and <br>
+        is presented in cooperation with World Library, Inc., from their <br>
+        Library of the Future and Shakespeare CDROMS.  Project Gutenberg <br>
+        often releases Etexts that are NOT placed int he Public Domain!! <br>
+        <br>
+        Shakespeare <br>
+        <br>
+        *This Etext has certain copyright implications you should read!* <br>
+        <br>
+        &lt;&lt;THIS ELECTRONIC VERSION OF THE COMPLETE WORKS OF WILLIAM <br>
+        ...  
+    </div>
+
+    <p>
+        Whoops!  That printed to the terminal screen (1.662 seconds)!
+        What we wanted to do was <em>redirect</em> that output to a different file:
+    </p>
+
+    <div class="code">
+        $ cat t8.shakespeare.txt &gt; shakespeare_backup
+    </div>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Since <code>STDERR</code> was not redirected, any errors would 
+            have been printed to our terminal screen.
+        </p>
+    </div>
+
+
+
+    <p>
+        Much better.  After word splitting, <code>Bash</code> inspects
+        each word; here, it found the redirection operator <code>&gt;</code>.
+        It took the next word, <code>shakespeare_backup</code>, to be
+        a filename. Since that file did not exist, it created it
+        (if it had existed, <code>bash</code> would have truncated its length
+        to zero, effectively erasing the file).
+        Then it assigned the file to <code>STDOUT</code> and
+        executed <code>cat</code> with a single argument, <code>t8.shakespeare.txt</code>.
+        Finally, <code>cat</code> naively printed to <code>STDOUT</code>, and 
+        thereby copied the contents of the file.
+    </p>
+
+    
+    <ul style="list-style-type: none;">
+        <li> <code> [command] &gt;&gt; file </code> &ensp; Redirect <code>STDOUT</code>
+            to file, then execute command. Concatenate.</li>
+
+    </ol>
+
+
+
 </div>
 
 <!--
@@ -428,3 +521,4 @@ To Do:
 		<li> Kerrisk, Michael.  <em>The Linux Programming Interface</em>. San Francisco, CA, No Starch Press, 2010.</li>
 	</ol>
 </div>
+
