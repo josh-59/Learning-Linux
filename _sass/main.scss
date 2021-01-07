@@ -203,6 +203,10 @@ sup, sub {
     height: 600px;
 }
 
+.content .code, code {
+    font-family: 'Ubuntu Mono', monospace;
+}
+
 .content .code{
     width: inherit;
     padding-top: 20px;
@@ -211,12 +215,13 @@ sup, sub {
     margin: auto;
 }
 
-.content .code, code {
-    font-family: 'Ubuntu Mono', monospace;
-    font-size: inherit;
+.content .code {
+    font-size: 15pt;
 }
 
-
+code {
+    font-size: inherit;
+}
 
 .content ul li {
     padding-top: 5px;
