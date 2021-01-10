@@ -1,3 +1,8 @@
+// To do:
+//      - Preserve aspect ratio of videos across window resizing
+//      - Eliminate nav-bar 'flicker' when navigating across pages in 
+//          narrow-window mode
+
 $(document).ready(highlight_nav);
 $(document).on("scroll", highlight_nav);
 
