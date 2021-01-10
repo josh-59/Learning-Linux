@@ -4,43 +4,46 @@ title: Files and Filesystems
 last-updated: December, 2020
 ---
 
-<!-- To Do:
-Citation needed in "regular files" -> heirarchical filestructure taken from Multics
+<!-- 
 
-XDG Directory Specification
-~/.config is defined as part of the XDG specification
+To Do:
 
+Filesystems:
+    inode as indexing method:
+        https://wiki.osdev.org/File_Systems#Indexing_Methods
+    
+    Move following quote to Introduction to GNU/Linux:
+        "Unix was well-documented (by, for instance, Maurice J. Bach in 
+        <em>The Design of the Unix Operating System</em>)."
 
-https://wiki.ubuntu.com/Lvm
+    In more detail:
+        ext2:
+        http://cs.smith.edu/~nhowe/262/oldlabs/ext2.html#itable
 
-inode as indexing method:
-https://wiki.osdev.org/File_Systems#Indexing_Methods
+        ext4 Data Structures and Algorithms:
+        https://www.kernel.org/doc/html/latest/filesystems/ext4/index.html
 
-ext2:
-http://cs.smith.edu/~nhowe/262/oldlabs/ext2.html#itable
+Regular Files:
+    Citation needed: heirarchical filestructure taken from Multics
 
-ext4 Data Structures and Algorithms:
-https://www.kernel.org/doc/html/latest/filesystems/ext4/index.html
+Filesystem Heirarchy:
+    XDG Directory Specification
+        ~/.config is defined as part of the XDG specification
+    /var: 
+        (Double check:) Per-runtime variable files
 
--->
+        https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch05.html:
+            /var contains logs, transient and temporary files
+            Not shareable across systems
 
-<!--
-<div id="isos-and-hashes" class="content">
-<h2>ISO Images and Hashing</h2>
-<p>
+Device Special Files:
+    Find better source to discuss "integrity" of a file/message/piece of information
+    
+    Round out iso-files by mounting a regular file(?)
 
-</p>
+Logical Volume Management:
+    https://wiki.ubuntu.com/Lvm
 
-1. Justification of Study
-2. What is an ISO
-A. A kind of file
-3. SSH hashing
-A. Confirms file integrity and authenticity
-
-"A hash function maps some arbitrary input to a fixed size output."
-https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
-
-</div>
 -->
 <div id="nav_bar_2" class="nav">
     <ul>
@@ -225,7 +228,7 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
     </div>
 
     <p>
-        A key feature of these filesystems is the inode:
+        A common feature of Unix-like filesystems is the inode:
         Each file in the filesystem is described by a single inode.
         Each inode describes where the data of the file is located, the size of the file,
         and contains other data about the file, such as access permissions and timestamps.
@@ -642,8 +645,6 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
         storage space.
     </p>
 
-
-
     <p>
         The directory <code>/etc</code> (usually read "<em>et</em>-see") contains
         system-specific configuration files; you can expect to fiddle
@@ -700,7 +701,7 @@ https://leanpub.com/gocrypto/read#leanpub-auto-chapter-5-digital-signatures
     <p>
         For instance, when a usb thumb drive is inserted into my machine,
         a new device special file appears in <code>/dev</code>.
-        It's worth noting that the essential capabilities of this device 
+        Note that the essential capabilities of this device 
         coincide with those of a file: We can read from it and write to it.
     </p>
 
