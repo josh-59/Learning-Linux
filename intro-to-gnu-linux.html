@@ -7,26 +7,48 @@ last-updated: January 2021
 <!--
     To Do:
 
-    UNIX Architecture:
-        GNU's definition of an operating system
+    Linux Distributions:
+        (https://tldp.org/history.html)
+            - This was about the time the Linux Documentation Project got started
+            - Linux FAQ (one big file, split into sections)
+            - Grew and became a collection of HOWTO's, each describing some part 
 
-    GNU:
+        https://en.wikipedia.org/wiki/Linux_distributions#History
 
-        https://www.gnu.org/gnu/gnu-structure.html
-            "...the GNU Project advocates and promotes <a>software freedom</a>, the
-            core philosophy of the free software movement."
+        History-based:
+            SLS 
+                - Yielded both Slackware and Debian
+                    - Both initially released in 1993
+                - Two different approaches to the task of building an operating
+                  system
+
+        Debian:
+            Rather than try to anticipate the needs of the community, Ian
+            simply made the process open, so that the community could participate
+            in the distribution creation process.
+            
+        https://www.debian.org/doc/manuals/project-history/manifesto.en.html
+
+            "Distributions eliminate the need for the user to locate,
+            download, compile, install and integrate a fairly large number
+            of essential tools to assemble a working Linux system."
+
+            "The Debian design process is open to ensure that the system is of the
+            highest quality and that it reflects the needs of the user community."
 
 
-    Linux:
-        Released under GPL: 
-               Distributions:
-        Why is it called a distribution?
-            Because the people assembling these operating systems don't
-            bother to claim the software as their own (though they could).
-            Rather, GCC's Bash is simply <em>distributed</em>, thereby
-            simplify logistics (namely, I, the operating system's engineer,
-            do not have to play 'middle-man').
--->
+        https://www.debian.org/devel/constitution
+            "This document describes the organisational structure for the formal
+            decision-making in the Project."
+
+        https://www.debian.org/intro/philosophy
+            "Debian was begun in August 1993 by Ian Murdock, as a new distribution
+            which would be made openly, in the spirit of
+            Linux and GNU."
+            "Debian is produced by almost a thousand active developers spread
+            around the world who volunteer in their spare time."
+
+    -->
 
 <div id="nav_bar_2" class="nav">
     <ul>
@@ -214,7 +236,8 @@ last-updated: January 2021
 <div class="content" id="free-as-in-freedom">
     <h2>Free as in Freedom</h2>
     <p>
-        The first attempt at producing a deliberately free and open-source Unix clone
+        The first attempt at producing a deliberately free and open-source Unix
+        clone
         <a href="https://www.gnu.org/gnu/initial-announcement.en.html#f1">was announced</a> by Richard Stallman in 1983.
         Stallman was, at the time, a graduate student at
         MIT's AI Laboratory,<sup><a href="#references">[6]</a></sup> and
@@ -296,7 +319,6 @@ last-updated: January 2021
         Again following the architecture of the Unix operating system,
         his project was intended to be "...just a hobby, won't be big and
         professional like GNU."<sup><a href="#references">[10]</a></sup>
-        He soon released it under the GNU General Public License, Version 2.
     </p>
 
     <div class="aside-right" style="font-size: 11pt;">
@@ -306,14 +328,26 @@ last-updated: January 2021
         </p>
     </div>
 
+
     <p>
-        While the GNU Project ambitiously intended to
+        While the GNU Project sought to
         produce an entire operating system, Linus restricted his
         attention to creating a kernel.
-        By October, GNU's Bash, GCC, Make and other
+        By October of 1991, GNU's Bash, GCC, Make and other
         programs were running on his creation.<sup><a href="#references">[10]</a></sup>
+        He soon released it under the GNU General Public License, Version 2.
+        Later, he would write:
+    </p>
+    
+    <p style="width: 90%; margin-left: 5%;">
+        "The fact is, to make Linux usable, I had relied on a lot of tools that had
+        been distributed freely over the Internet&mdash;I had hoisted myself up
+        on the shoulders of giants.  The most important of these free software
+        programs was the GCC compiler."<sup><a href="#references">[5]</a></sup>
     </p>
 
+    
+    
     <div class="aside-left">
         <h4>Aside:</h4>
         <p>
@@ -388,13 +422,29 @@ last-updated: January 2021
         A Linux distribution is a collection of software that, 
         when installed, yields a functioning operating system.
         Each includes some variant of the Linux kernel, some core utilities,
-        and, usually, some user-space applications (e.g., Firefox).
-        All of this is tested to work and packaged in a fashion that
-        facilitates installation (usually, an ISO disk image).
+        and, usually, some other user-space applications (e.g., Firefox).
+        The collection is tested to work and packaged in a fashion that
+        facilitates installation (usually, an ISO disk image);
+        because the assembler of these operating systems do not typically
+        lay claim to the software, it is more accurate to say that they are 
+        <em>distributing</em> others' software.
     </p>
 
+    <p>
+        Linux distributions are more similar than dissimilar.
+        They tend <em>not</em> to be strictly incompatible operating systems,
+        and so 
+        Think of them as flavors of the Unix architecture, rather than
+        strictly incompatible operating systems.
+        The oldest distribution that's still maintained is
+        <a href="http://www.slackware.com/">Slackware</a>, first released
+        in 1993.<sup><a href="#references">[16]</a></sup>
+    </p>
+
+
+
     <div class="aside-right">
-        <h4>Aside:</h4>
+        <h4>Nerd Heaven:</h4>
         <p>
             Nearly all GNU/Linux distributions ship with
             programming tools installed&mdash; Expect to find
@@ -403,30 +453,22 @@ last-updated: January 2021
         </p>
     </div>
 
-    <p>
-        In my opinion, distributions are more similar than dissimilar.
-        Think of them as flavors of the Unix architecture, rather than
-        incompatible operating systems.
-        The oldest distribution that's still maintained is
-        <a href="http://www.slackware.com/">Slackware</a>, first released
-        in 1993.<sup><a href="#references">[16]</a></sup>
-    </p>
 
+    <p>
+        The creators and maintainers of a distribution often have precise goals for their project.
+        For instance, the <a href="https://www.debian.org/">Debian</a> project
+        intends to produce a stable operating system appropriate for use in
+        servers, while the <a href="https://getfedora.org/">Fedora</a> project
+        wishes to stay closer to the cutting edge, and is willing to
+        sacrifice some stability to do so.
+    </p>
+    
     <p>
         Almost always, a distribution becomes a project, around which
         a community forms.
         These communities usually produce tangentially related software
         (such as installation mechanisms), and provide support and documentation
         for their work.
-    </p>
-
-    <p>
-        Communities often differ in the precise goals for their project.
-        For instance, the <a href="https://www.debian.org/">Debian</a> project
-        intends to produce a stable operating system appropriate for use in
-        servers, while the <a href="https://getfedora.org/">Fedora</a> project
-        wishes to stay closer to the cutting edge, and is willing to
-        sacrifice some stability to do so.
     </p>
 
     <div class="aside-left">
@@ -437,7 +479,7 @@ last-updated: January 2021
         </p>
     </div>
 
-    <p>
+       <p>
         When browsing for your next new operating system, you will often
         hear the term "downstream," which warrants some explanation.
         Since these projects are free software, it is permitted to
@@ -465,6 +507,15 @@ last-updated: January 2021
 
 <div id="mint" class="content">
     <h2> Linux Mint </h2>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Mint is downstream of Ubuntu, so all remarks and examples 
+            in this text apply to it as well.
+        </p>
+    </div>
+
     <p>
         I like
         <a href="https://linuxmint.com/">Linux Mint,</a>
