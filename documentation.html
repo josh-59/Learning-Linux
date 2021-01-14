@@ -23,27 +23,23 @@ TODO
 
 <div id="introduction" class="content">
 	<h1>Documentation</h1>
-	
-
-	<div class="aside-right">
-		<h4>Aside:</h4>
-		<p>
-			In days' past, source code often served as primary documentation.
-		</p>
-	</div>
-
-	<p>
-		The Free-and-Open-Source Software community centers around projects.
-		At the center of each project is its code.
-		Official documentation, if it exists, is part of the project.
-		Outside the project, there is unofficial documentation.
-		Finally, at the periphery, is opinion.
-	</p>
 
     <p>
-		Good, organized documentation is very important to the success of a project:
-		It reduces the time required for users to orient themselves within, 
-        and aids the use of, unfamiliar software.
+        The first versions of the Linux kernel were released in late 1991,
+        at which point producing an operating system around it was very much
+        a do-it-yourself affair.
+        In 1992, as the kernel's user base began to grow, the first documentation
+        about it began to appear.
+        Called <em>The Linux FAQ,</em> it was distributed as a single large
+        file, split into sections;<sup><a href="https://tldp.org/history.html">[1]</a></sup>
+        from this, the <a href="https://tldp.org">Linux Documentation Project</a> grew.<sup><a href="https://tldp.org/history.html">[1]</a></sup>
+    </p>
+	
+	<p>
+		Good, organized documentation is very important to the success of an
+        open-source software project:
+		It reduces the time required for users to orient themselves within 
+        unfamiliar software.
 	</p>
 </div>
 
@@ -54,7 +50,7 @@ TODO
 		Official documentation originates from the group or organization
 		that is producing the work: It's part of the project itself.
 		Official documentation is suitably positioned to be both exhaustive 
-        and authoritative; it should be maintained as rigorously as
+        and authoritative, and it should be maintained as rigorously as
         the project itself.
 	</p>
 
@@ -65,8 +61,6 @@ TODO
             Official documentation should should be your primary documentation.
         </p>
     </div>
-
-
     
 	<p>
 		Like the projects they are part of, official documentation is usually
@@ -76,13 +70,15 @@ TODO
 	<p>
         Some good examples:
 	</p>
+
 	<ul class="big-list">
         <li>
             <a href="https://man7.org/linux/man-pages/man1/man.1.html">The Linux Manual Pages Project</a>: A collection of system reference manuals.
         </li>
-		<li>
+
+       	<li>
 			<a href="https://www.kernel.org/doc/html/latest/"> The Linux Kernel Documentation</a>:
-			A website documenting the Linux kernel.
+			A website documenting the latest Linux kernel.
 		</li>
     
 		<li>
@@ -95,7 +91,7 @@ TODO
 		<li>
 			<a href="https://www.gnu.org/doc/doc.html"> GNU's Official Docs</a>:
             These documents are available in multiple formats, including websites and downloadable pdf's.
-			However, owing to their technical precision, this collection is often hard to read.
+			However, owing to their technical precision, this collection can be difficult to read.
 		</li>
 	</ul>
 
@@ -118,6 +114,7 @@ TODO
 	</p>
 
 	<ul class="big-list">
+      
         <li>
 			<a href="http://www.kroah.com/lkn/"> Linux Kernel in a Nutshell</a>&mdash;
 			A free book by Greg Kroah-Hartman.
@@ -128,7 +125,7 @@ TODO
 			The more people that try this out, and realize that there is
 			not any real magic behind the whole Linux kernel process, the
 			more people will be willing to jump in and help out in making
-			the kernel the best that it can be."<sup><a href="http://www.kroah.com/lkn/">[4]</a></sup>
+			the kernel the best that it can be."<sup><a href="http://www.kroah.com/lkn/">[2]</a></sup>
 		</li>
 
         <li>
@@ -159,8 +156,6 @@ TODO
 	<p>
 		The most useful asset in the Linux documentation pool is the
 		manual ("man") pages.
-		These date to the first implementations of Unix,<sup><a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html">[1]</a></sup>
-		where they were the user's primary source for information about the new operating system.
 		Man pages provide a concise overview of commands and features, with further documentation
 		existing elsewhere.
 		Learn to use them early, for they are a way of life.
@@ -175,7 +170,9 @@ TODO
 	</div>
 
 	<p>
-		Once within the <code>man</code> utility, you can easily search the content
+	    This fires up the <code>man</code> paging utility, which lets you
+        view and search the pages through a read-only interface.
+		Once within the <code>man</code> utility, you can search the content
 		by typing a single forward slash, then your search term:
 	</p>
 
@@ -248,6 +245,14 @@ TODO
 		$ man printf.3
 	</div>
 
+
+    <p>
+		Man pages date all the way to Bell Laboratories,<sup><a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html">[4]</a></sup>
+		where they were users' primary source for information about the new operating system.
+		Moreover, early versions of the Unix operating system were numbered by
+        the version of the man pages included.
+	</p>
+
 	<h3>See Also:</h3>
 	<ul>
 		<li><code><a href="https://www.man7.org/linux/man-pages/man1/man.1.html">man(1)</a></code></li>
@@ -273,8 +278,6 @@ TODO
 		not authoritative.
 		The books you want to read are by those people closest to
 		the FOSS community, and they usually (but not always) write free books.
-		If it is free, they often offer a paperback copy for sale,
-		and/or a means to donate/support.
 	</p>
 
 	<p>
@@ -282,7 +285,7 @@ TODO
 		For instance, I bought a handbook on UNIX system administration
 		that looked very promising, but taught me precious little.
 		In fact, the free <a href="https://debian-handbook.info/browse/stable/">Debian Administrator's Handbook</a>
-		proved a more succinct, more authoritative resource.
+		proved a more succinct, and more authoritative, resource.
 	</p>
 
 	<p>
@@ -308,7 +311,7 @@ TODO
 			Its writer, Michael Kerrisk, is the maintainer of the
 			Linux Man Page project (above),
 			and his work is simply terrific.
-			If you want all the gory details of the system-call interface offered
+			If you want all the details of the system-call interface offered
 			by the Linux kernel, as well as sound explanations of its
 			internals, this is your book.
 		</li>
@@ -329,8 +332,8 @@ TODO
 		of learning Linux itself.
 		In my experience, the best method of learning Linux is to focus on the
 		underlying concepts:
-		When the concept is understood, one can usually "feel" one's way through
-		rectifying the situation at the command line.
+		When the concept is understood, the problem becomes specific and the 
+        solution obvious. 
 		Let's take an example.
 	</p>
 
@@ -414,10 +417,9 @@ TODO
 <div id="references" class="content">
 	<h2> References </h2>
 	<ol>
-		<li> <i>Unix Programmer's Manual, First Edition.</i>  <a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html"> https://www.bell-labs.com/usr/dmr/www/1stEdman.html </a> </li>
 		<li> Garrels, M. (n.d.). Linux Documentation Project History. Retrieved July 17, 2020, from <a href="http://tldp.org/history.html">http://tldp.org/history.html</a></li>
-		<li> What is Linux From Scratch? (n.d.). Retrieved July 16, 2020, from <a href="http://www.linuxfromscratch.org/lfs/index.html">http://www.linuxfromscratch.org/lfs/index.html</a> </li>
 		<li> Kroah-Hartman, G. (n.d.). Secret Goal (i.e. why I wrote this book and am giving it away for free online). Retrieved July 17, 2020, from <a href="http://www.kroah.com/lkn/">http://www.kroah.com/lkn/</a></li>
-		<li> Bryant, R. E., & O'Hallaron, D. R. (2016).  <em>Computer Systems: A Programmer's Perspective</em> (3rd ed.).  Upper Saddle River, New Jersey: Pearson. </li>
+		<li> What is Linux From Scratch? (n.d.). Retrieved July 16, 2020, from <a href="http://www.linuxfromscratch.org/lfs/index.html">http://www.linuxfromscratch.org/lfs/index.html</a> </li>
+		<li> <i>Unix Programmer's Manual, First Edition.</i>  <a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html"> https://www.bell-labs.com/usr/dmr/www/1stEdman.html </a> </li>
 	</ol>
 </div>
