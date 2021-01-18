@@ -7,46 +7,89 @@ last-updated: January 2021
 <!--
     To Do:
 
-    Linux Distributions:
-        (https://tldp.org/history.html)
-            - This was about the time the Linux Documentation Project got started
-            - Linux FAQ (one big file, split into sections)
-            - Grew and became a collection of HOWTO's, each describing some part 
+    Linux Distributions: A Brief History:
 
-        https://en.wikipedia.org/wiki/Linux_distributions#History
+    <h4> Linux Distributions: A Brief History </h4>
 
-        History-based:
-            SLS 
-                - Yielded both Slackware and Debian
-                    - Both initially released in 1993
-                - Two different approaches to the task of building an operating
-                  system
+        Early Linux Kernels:
+            The first versions of the Linux kernel were distributed
+            in source-code form.<sup><a href="#references">[10]</a></sup> 
+
+        HJ Lu's Boot/Root floppies:
+            In 1992, developers had the idea to start packaging utilities with the Linux kernel https://www.maketecheasier.com/history-of-early-linux-distros/
+            First known distribution, and came on a pair of 5.25" floppie diskettes.https://itsfoss.com/earliest-linux-distros/
+            and worked only on the 386.  
+
+            "After a while you got a command prompt." 
+                https://lwn.net/Articles/91371/
+
+            Photo: https://en.wikipedia.org/wiki/File:Linux_0_12.jpg
+
+        SLS:
+            Between 1992 and 1994, there were only a few distributions of Linux;
+            the most significant of these was SLS, Softlanding Linux System.
+            The company was founded in 1992 by Peter MacDonald
+                https://en.wikipedia.org/wiki/Softlanding_Linux_System
+
+            A commercial distribution
+
+            was the first widely used Linux distribution.
+                https://lwn.net/Articles/91371/
+
+        Slackware:
+            Patrick Volkerding 
 
         Debian:
             Rather than try to anticipate the needs of the community, Ian
             simply made the process open, so that the community could participate
             in the distribution creation process.
             
-        https://www.debian.org/doc/manuals/project-history/manifesto.en.html
+            https://www.debian.org/doc/manuals/project-history/manifesto.en.html
+                "Distributions eliminate the need for the user to locate,
+                download, compile, install and integrate a fairly large number
+                of essential tools to assemble a working Linux system."
+    
+                "The Debian design process is open to ensure that the system is of the
+                highest quality and that it reflects the needs of the user community."
 
-            "Distributions eliminate the need for the user to locate,
-            download, compile, install and integrate a fairly large number
-            of essential tools to assemble a working Linux system."
+            https://www.debian.org/devel/constitution
+                "This document describes the organisational structure for the formal
+                decision-making in the Project."
 
-            "The Debian design process is open to ensure that the system is of the
-            highest quality and that it reflects the needs of the user community."
+            https://www.debian.org/intro/philosophy
+                "Debian was begun in August 1993 by Ian Murdock, as a new distribution
+                which would be made openly, in the spirit of
+                Linux and GNU."
+                "Debian is produced by almost a thousand active developers spread
+                around the world who volunteer in their spare time."
+
+        Ubuntu:
+            Today's most popular desktop distribution.
 
 
-        https://www.debian.org/devel/constitution
-            "This document describes the organisational structure for the formal
-            decision-making in the Project."
+        <div class="aside-right">
+            <h4>Aside:</h4>
+            <p>
+                If you can't tell the difference, then it doesn't matter anyways.
+            </p>
+        </div>
 
-        https://www.debian.org/intro/philosophy
-            "Debian was begun in August 1993 by Ian Murdock, as a new distribution
-            which would be made openly, in the spirit of
-            Linux and GNU."
-            "Debian is produced by almost a thousand active developers spread
-            around the world who volunteer in their spare time."
+        Conclusion:
+            With the internet came a veritable cornacopia of Linux distributions.
+
+            Since these are each based around the same kernel, and the kernel
+            has the property that it does not change behavior across versions,
+            they are all similar operating systems.
+
+            Some strive to be <a href="https://opensource.com/article/19/6/linux-distros-to-try">very small</a>, running on ~300MB of RAM;
+            others strive to be <a href="https://itsfoss.com/beautiful-linux-distributions/">very beautiful</a>, but relatively few strive to be <a href="https://itsfoss.com/best-linux-beginners/">very good</a>.
+            For newcomers, I might recommend
+                -Ubuntu
+                -Linux Mint
+                -Elementary OS
+
+            <li> <a href="https://archiveos.org/biebian">Biebian</a>, 
+            the Justin Bieber Linux Distribution </a></li>
 
     -->
 
@@ -57,7 +100,8 @@ last-updated: January 2021
         <li><a href="#unix-architecture"> The Unix Architecture </a></li>
         <li><a href="#free-as-in-freedom"> Free as in Freedom </a></li>
         <li><a href="#linux"> The Linux Kernel </a></li>
-        <li><a href="#distributions"> Linux Distributions </a></li>
+        <li><a href="#distributions"> Linux Distributions: A Brief History </a></li>
+
         <li><a href="#mint"> Linux Mint </a></li>
         <li><a href="#video">Greg Kroah-Hartman </a></li>
         <li><a href="#references"> References </a></li>
@@ -426,7 +470,7 @@ last-updated: January 2021
         and, usually, some other user-space applications (e.g., Firefox).
         The collection is tested to work and packaged in a fashion that
         facilitates installation (usually, an ISO disk image);
-        because the assembler of these operating systems do not typically
+        because the assemblers of these operating systems do not typically
         lay claim to the software, it is more accurate to say that they are 
         <em>distributing</em> others' software.
     </p>
