@@ -7,91 +7,14 @@ last-updated: January 2021
 <!--
     To Do:
 
-    Linux Distributions: A Brief History:
+    Linux Mint:
+        Include paragraph of history about it
+        Change Screenshot
 
-    <h4> Linux Distributions: A Brief History </h4>
+    GNU/Free as in Freedom:
+        Introduce notes on the conflict surrounding the creation of the GPL
 
-        Early Linux Kernels:
-            The first versions of the Linux kernel were distributed
-            in source-code form.<sup><a href="#references">[10]</a></sup> 
-
-        HJ Lu's Boot/Root floppies:
-            In 1992, developers had the idea to start packaging utilities with the Linux kernel https://www.maketecheasier.com/history-of-early-linux-distros/
-            First known distribution, and came on a pair of 5.25" floppie diskettes.https://itsfoss.com/earliest-linux-distros/
-            and worked only on the 386.  
-
-            "After a while you got a command prompt." 
-                https://lwn.net/Articles/91371/
-
-            Photo: https://en.wikipedia.org/wiki/File:Linux_0_12.jpg
-
-        SLS:
-            Between 1992 and 1994, there were only a few distributions of Linux;
-            the most significant of these was SLS, Softlanding Linux System.
-            The company was founded in 1992 by Peter MacDonald
-                https://en.wikipedia.org/wiki/Softlanding_Linux_System
-
-            A commercial distribution
-
-            was the first widely used Linux distribution.
-                https://lwn.net/Articles/91371/
-
-        Slackware:
-            Patrick Volkerding 
-
-        Debian:
-            Rather than try to anticipate the needs of the community, Ian
-            simply made the process open, so that the community could participate
-            in the distribution creation process.
-            
-            https://www.debian.org/doc/manuals/project-history/manifesto.en.html
-                "Distributions eliminate the need for the user to locate,
-                download, compile, install and integrate a fairly large number
-                of essential tools to assemble a working Linux system."
-    
-                "The Debian design process is open to ensure that the system is of the
-                highest quality and that it reflects the needs of the user community."
-
-            https://www.debian.org/devel/constitution
-                "This document describes the organisational structure for the formal
-                decision-making in the Project."
-
-            https://www.debian.org/intro/philosophy
-                "Debian was begun in August 1993 by Ian Murdock, as a new distribution
-                which would be made openly, in the spirit of
-                Linux and GNU."
-                "Debian is produced by almost a thousand active developers spread
-                around the world who volunteer in their spare time."
-
-        Ubuntu:
-            Today's most popular desktop distribution.
-
-
-        <div class="aside-right">
-            <h4>Aside:</h4>
-            <p>
-                If you can't tell the difference, then it doesn't matter anyways.
-            </p>
-        </div>
-
-        Conclusion:
-            With the internet came a veritable cornacopia of Linux distributions.
-
-            Since these are each based around the same kernel, and the kernel
-            has the property that it does not change behavior across versions,
-            they are all similar operating systems.
-
-            Some strive to be <a href="https://opensource.com/article/19/6/linux-distros-to-try">very small</a>, running on ~300MB of RAM;
-            others strive to be <a href="https://itsfoss.com/beautiful-linux-distributions/">very beautiful</a>, but relatively few strive to be <a href="https://itsfoss.com/best-linux-beginners/">very good</a>.
-            For newcomers, I might recommend
-                -Ubuntu
-                -Linux Mint
-                -Elementary OS
-
-            <li> <a href="https://archiveos.org/biebian">Biebian</a>, 
-            the Justin Bieber Linux Distribution </a></li>
-
-    -->
+        -->
 
 <div id="nav_bar_2" class="nav">
     <ul>
@@ -270,7 +193,7 @@ last-updated: January 2021
         Unix architecture.
     </p>
 
-    <h2>See Also:</h2>
+    <h3>See Also:</h3>
     <ul>
         <li><a href="https://en.wikipedia.org/wiki/Unix_architecture">Unix Architecture</a> - Wikipedia</li>
     </ul>
@@ -372,7 +295,6 @@ last-updated: January 2021
         </p>
     </div>
 
-
     <p>
         While the GNU Project sought to
         produce an entire operating system, Linus restricted his
@@ -413,7 +335,7 @@ last-updated: January 2021
         be open to the point of promiscuity"<sup><a href="#references">[11]</a></sup>&mdash; <a href="http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/index.html#catbmain">raised eyebrows</a> at the time,
         but has proven sound in virtue of its overwhelming success:
         The Linux kernel has become the most successful Unix-like kernel of all time,
-        and accounts for fully half of the "GNU/Linux" namesake.
+        running on each of the top 500 supercomputers, 
     </p>
 
     <p>
@@ -461,89 +383,134 @@ last-updated: January 2021
 </div>
 
 <div id="distributions" class="content">
-    <h2> Linux Distributions </h2>
+
+    <h2> Linux Distributions: A Brief History </h2>
 
     <p>
-        A Linux distribution is a collection of software that, 
-        when installed, yields a functioning operating system.
-        Each includes some variant of the Linux kernel, some core utilities,
-        and, usually, some other user-space applications (e.g., Firefox).
-        The collection is tested to work and packaged in a fashion that
-        facilitates installation (usually, an ISO disk image);
-        because the assemblers of these operating systems do not typically
-        lay claim to the software, it is more accurate to say that they are 
-        <em>distributing</em> others' software.
+        The first versions of the Linux kernel were available 
+        only in source-code form, and required compilation on a 
+        host machine.<sup><a href="#references">[10]</a></sup> 
+        More, no other software was included, so that the 
+        creation of a Linux-based machine required obtaining, compiling and
+        assembling a number of software components by the user.
     </p>
 
-    <p>
-        Linux distributions are more similar than dissimilar.
-        They tend <em>not</em> to be strictly incompatible operating systems,
-        and so 
-        Think of them as flavors of the Unix architecture, rather than
-        strictly incompatible operating systems.
-        The oldest distribution that's still maintained is
-        <a href="http://www.slackware.com/">Slackware</a>, first released
-        in 1993.<sup><a href="#references">[16]</a></sup>
-    </p>
-
-    <div class="aside-right">
-        <h4>Nerd Heaven:</h4>
-        <p>
-            Nearly all GNU/Linux distributions ship with
-            programming tools installed&mdash; Expect to find
-            <code>gcc</code>, <code>python</code>, <code>make</code>
-            and others ready to go!
-        </p>
+    <div class="img-right">
+        <a title="Shermozle at English Wikipedia, CC BY-SA 3.0 &lt;https://creativecommons.org/licenses/by-sa/3.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Linux_0_12.jpg"><img width="256" alt="Linux 0 12" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Linux_0_12.jpg/512px-Linux_0_12.jpg"></a>
+        <center style="font-size: 12pt;">HJ Lu's Boot/Root Floppies</center>
     </div>
 
     <p>
-        The creators and maintainers of a distribution often have precise goals for their project.
-        For instance, the <a href="https://www.debian.org/">Debian</a> project
-        intends to produce a stable operating system appropriate for use in
-        servers, while the <a href="https://getfedora.org/">Fedora</a> project
-        wishes to stay closer to the cutting edge, and is willing to
-        sacrifice some stability to do so.
-    </p>
-    
-    <p>
-        Almost always, a distribution becomes a project, around which
-        a community forms.
-        These communities usually produce tangentially related software
-        (such as installation mechanisms), and provide support and documentation
-        for their work.
+        In 1992, <a href="https://en.wikipedia.org/wiki/HJ_Lu">HJ Lu</a>
+        began packaging utilities alongside the kernel and distributing the
+        collection together on a pair of 5.25" disks.<sup><a href="https://www.maketecheasier.com/history-of-early-linux-distros/">[16]</a><a href="https://itsfoss.com/earliest-linux-distros/">[17]</a></sup>
+        Known as <em>boot/root</em> floppies, they are
+        the first known Linux distribution,<sup><a href="https://itsfoss.com/earliest-linux-distros/">[17]</a></sup>
+        and worked similarly to a live CD:
+        You booted from one disk, then replaced it when prompted.
+        "After a while," says Joe Klemmer, "you got a command prompt."<sup><a href="https://lwn.net/Articles/91371/">[18]</a></sup>
     </p>
 
-    <div class="aside-left">
-        <h4>Fun Fact:</h4>
-        <p>
-            <a href="https://store.steampowered.com/steamos">SteamOS</a>
-            is downstream of Debian 8.
-        </p>
+    <p>
+        Linux's next major breakthrough was a commercial venture,
+        SoftLanding System.<sup><a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">[19]</a></sup>
+        Also released in 1992, SLS was the first widely recognized and used Linux distribution.<sup><a href="https://lwn.net/Articles/91371/">[18]</a></sup>
+        It was sold under the slogan "Gentle touchdowns for DOS bailouts",<sup><a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">[19]</a></sup>
+        but users complained that the software was buggy,<sup><a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">[19]</a><a href="https://www.linuxjournal.com/article/2750">[20]</a></sup> and when its developers
+        decided to change the executable file format, began to leave.<sup><a href="https://lwn.net/Articles/91371/">[18]</a></sup>
+    </p>
+
+    <h3> Two Approaches </h3>
+
+    <p>
+        In late 1992, Patrick Volkerding needed a LISP interpreter for a project
+        at school, and, having heard that <code>clisp</code> ran on SLS Linux, 
+        downloaded them both.<sup><a href="https://www.linuxjournal.com/article/2750">[20]</a></sup>
+        His professor got wind, and asked Patrick to help him install the software
+        on school computers.<sup><a href="https://www.linuxjournal.com/article/2750">[20]</a></sup>
+
+        Volkerding walked him through installing, fixing and patching SLS, and
+        afterward, his professor asked, "Is there some way we can fix the install disks so
+        that the new machines will have these fixes right away?"<sup><a href="https://www.linuxjournal.com/article/2750">[20]</a></sup>
+    </p>
+
+    <p>
+        So Volkerding began improving SLS, and internally named his project
+        <em>Slackware;</em> Patrick didn't want people to take it too seriously.<sup><a href="https://www.linuxjournal.com/article/2750">[20]</a></sup>
+        By May, though, the improvements were more than cosmetic, and when
+        first released on the internet in June, proved so popular that the 
+        number of download requests crashed the system hosting it.<sup><a href="https://www.linuxjournal.com/article/2750">[20]</a></sup>
+        Volkerding hadn't intended to produce a distribution,<sup><a href="https://www.linuxjournal.com/article/2750">[20]</a></sup> but still
+        maintains <a href="http://www.slackware.com/">Slackware</a> today.<sup><a href="www.slackware.com/about">[21]</a></sup>
+        The Slackware Linux Project is aimed at producing the most UNIX-like
+        Linux distribution available.<sup><a href="www.slackware.com/info/">[22]</a></sup>
+    </p>
+
+    <div class="img-center">
+
+    <a title="Patrick Volkerding
+    Screenshot:
+
+    Seth Kenlon/Opensource.com, GPL &lt;http://www.gnu.org/licenses/gpl.html&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Slackware_1.01_screenshot.png"><img width="1024" alt="Slackware 1.01 screenshot" src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Slackware_1.01_screenshot.png"></a>
+    <center>Slackware 1.01, released 1993</center>
     </div>
 
-       <p>
-        When browsing for your next new operating system, you will often
-        hear the term "downstream," which warrants some explanation.
-        Since these projects are free software, it is permitted to
-        copy, then modify it; in the case of
-        Linux distributions, such a modification is called an <em>derivative,</em>
-        and the modified software is said to be <em>downstream</em> of its
-        source.
+    <p>
+        In 1993, Ian Murdock also grew unhappy with SLS Linux, and, more,
+        sought a better solution to distribution creation than single-person 
+        or closed-room schemes.
+        Ian wanted an operating system that lived up to the Linux name, 
+        was carefully and conscientiously assembled, and which was maintained
+        with equal diligence.
+        In particular, he wanted a free operating system that could
+        compete with commercial distributions.
     </p>
 
     <p>
-        For instance, <a href="https://ubuntu.com">Ubuntu</a> is downstream of
-        Debian, and <a href="https://manjaro.org">Manjaro</a> is downstream of
-        <a href="https://www.archlinux.org/">Arch</a>.
-        Usually, these derivatives focus on quality-of-life
-        improvements, and as a rule of thumb, you can trust free software.
+        He decided to make the process open, in the spirit of GNU and Linux,<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[17]</a></sup>
+        thereby ensuring satisfaction of user's requirements while also 
+        unloading the burden of creation and maintainership.
+        He named the project <a href="https://www.debian.org">Debian</a>, 
+        a portmadeu of <em>Debrah,</em> his wife, and <em>Ian,</em> himself;
+        the project's openness attracted developers, and today around 
+        a thousand people volunteer their spare time.
+        Debian is one of the most respected distributions of our time,
+        and is oft-used as an upstream source for other distributions.
+    </p>
+
+    <div class="img-center">
+        <a title="The Debian Project (GPL &lt;http://www.gnu.org/licenses/gpl.html&gt; or Copyrighted free use), via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Debian_Etch-ja.png"><img width="1024" alt="Debian Etch-ja" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Debian_Etch-ja.png/1024px-Debian_Etch-ja.png"></a>
+        <center>Debian 4 "Etch", released 2007</center>
+    </div>
+    <!--
+
+    <p>
+            https://www.debian.org/devel/constitution
+                "This document describes the organisational structure for the formal
+                decision-making in the Project."
+
+            https://www.debian.org/intro/philosophy
+                "Debian was begun in August 1993 by Ian Murdock, as a new distribution
+                which would be made openly, in the spirit of
+                Linux and GNU."
+                "Debian is produced by almost a thousand active developers spread
+                around the world who volunteer in their spare time."
+    </p>
+
+    -->
+    <p>
+        With the internet came innumerable Linux distributions;
+        I like to think of them as flavors of the same thing, rather than
+        necessarily different.
+        Since they are each based around the Linux kernel, and the kernel
+        has the property that it does not change behavior across versions,
+        they are all similar operating systems.
     </p>
 
     <h3> See Also: </h3>
     <ul>
         <li><a href="https://www.balena.io/etcher/"> balenaEtcher - Flash OS images to SD cards & USB drives</a> (Free, cross-platform) </li>
-        <li><a href="https://github.com/aleksandar-todorovic/awesome-linux#--linux-"> Awesome Linux</a>&mdash; A run-down of distributions, desktop environments, resources, etc</li>
-        <li><a href="https://youtu.be/d2vRCPS9rmE">The Top Five Linux Distros of 2020</a> by Distrotube (Youtube Video)</li>
+        <li><a href="https://distrowatch.com/dwres.php?resource=major">DistroWatch: Major Distributions</a></li>
     </ul>
 </div>
 
@@ -553,8 +520,8 @@ last-updated: January 2021
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            Mint is downstream of Ubuntu, so all remarks and examples 
-            in this text apply to it as well.
+            Mint is downstream of Debian and Ubuntu, so all remarks and examples 
+            in this text apply to them as well.
         </p>
     </div>
 
@@ -570,28 +537,29 @@ last-updated: January 2021
     </p>
 
     <p>
-        New for Linux Mint 19 is <em>Timeshift.</em> From <a href="https://github.com/linuxmint/timeshift">their github:</a>
-        "Timeshift protects your system by taking incremental
-        snapshots of the file system at regular intervals. These snapshots
-        can be restored at a later date to undo all changes to the system."
-    </p>
-
-    <a title="RealNZZN / CC BY-SA (https://creativecommons.org/licenses/by-sa/4.0)" href="https://upload.wikimedia.org/wikipedia/commons/b/b3/Cinnamon_4.4.8_on_Linux_Mint_19.3.png"><img width="100%" alt="Cinnamon 4.4.8 on Linux Mint 19.3" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Cinnamon_4.4.8_on_Linux_Mint_19.3.png/1024px-Cinnamon_4.4.8_on_Linux_Mint_19.3.png"></a>
-    <center>By <a href="//commons.wikimedia.org/w/index.php?title=User:RealNZZN&amp;action=edit&amp;redlink=1" class="new" title="User:RealNZZN (page does not exist)">RealNZZN</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="https://creativecommons.org/licenses/by-sa/4.0" title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=86878031">Link</a></center>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            It has been said that one can spend a lifetime customizing
-            Linux desktops.
-        </p>
-    </div>
-    <p>
         Mint offers the Cinnamon desktop environment;
         Windows users will feel right at home.
         I find it to be an attractive desktop, but it's only moderately customizable.
         Like many users, I just want a desktop environment that stays out of my way,
         and Cinnamon does exactly that.
+    </p>
+    
+    <a title="RealNZZN / CC BY-SA (https://creativecommons.org/licenses/by-sa/4.0)" href="https://upload.wikimedia.org/wikipedia/commons/b/b3/Cinnamon_4.4.8_on_Linux_Mint_19.3.png"><img width="100%" alt="Cinnamon 4.4.8 on Linux Mint 19.3" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Cinnamon_4.4.8_on_Linux_Mint_19.3.png/1024px-Cinnamon_4.4.8_on_Linux_Mint_19.3.png"></a>
+    <center>By <a href="//commons.wikimedia.org/w/index.php?title=User:RealNZZN&amp;action=edit&amp;redlink=1" class="new" title="User:RealNZZN (page does not exist)">RealNZZN</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="https://creativecommons.org/licenses/by-sa/4.0" title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=86878031">Link</a></center>
+
+    <div class="aside-right">
+        <h4>Warning:</h4>
+        <p>
+            It has been said that one can spend a lifetime customizing
+            Linux desktops.
+        </p>
+    </div>
+    
+    <p>
+        New for Mint 19 is <em>Timeshift.</em> From <a href="https://github.com/linuxmint/timeshift">their github:</a>
+        "Timeshift protects your system by taking incremental
+        snapshots of the file system at regular intervals. These snapshots
+        can be restored at a later date to undo all changes to the system."
     </p>
 
 
@@ -676,18 +644,13 @@ last-updated: January 2021
         </li>
 
         <li>
-            "Slackware." <em>Wikipedia,</em> Wikimedia Foundation, 8 June 2020,
-            <a href="en.wikipedia.org/wiki/Slackware"> en.wikipedia.org/wiki/Slackware</a>.
+            Delony, D. (2012, September 12). History of Early Linux Distros. Retrieved January 20, 2021, from <a href="https://www.maketecheasier.com/history-of-early-linux-distros/">https://www.maketecheasier.com/history-of-early-linux-distros/</a>
         </li>
 
         <li>
-            "POSIX." <em>Wikipedia,</em> Wikimedia Foundation, 21 June 2020,
-            <a href="en.wikipedia.org/wiki/POSIX">en.wikipedia.org/wiki/POSIX</a>.
+            Bandyopadhyay, A. (2020, October 29). The Earliest Linux Distros: Before Mainstream Distros Became So Popular. Retrieved January 20, 2021, from <a href="https://itsfoss.com/earliest-linux-distros">/https://itsfoss.com/earliest-linux-distros</a>
         </li>
 
-        <li>
-            "Single UNIX Specification." <em>Wikipedia,</em> Wikimedia Foundation, 23 May 2020,
-            <a href="en.wikipedia.org/wiki/Single_UNIX_Specification">en.wikipedia.org/wiki/Single_UNIX_Specification</a>.
-        </li>
     </ol>
 </div>
+
