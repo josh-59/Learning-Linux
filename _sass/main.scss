@@ -157,10 +157,11 @@ table td {
 
 sup, sub {
 	line-height: 0;
+	font-size: 0.8em;
 }
 
 .content p {
-	line-height: 1.3;
+	line-height: 1.5;
 }
 
 /*  In written work and any superscript, no underline. */
@@ -189,11 +190,16 @@ sup, sub {
     padding-top: 25px;
 }
 
-.content .directory {
+#landing-directory ul {
     text-align: center;
     list-style-type: none;
     padding: 0;
-    margin: 0
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+#landing-directory h3 {
+    margin-bottom: 0;
 }
 
 .content .video {
