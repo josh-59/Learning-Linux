@@ -281,14 +281,22 @@ Logical Volume Management:
     <a href="assets/img/ls-long.pdf" target="_blank"><img src="assets/img/ls-long.png" style="width: 100%" title="Click for printable" ></a>
 
     <p>
-        We see that <code>bash(1)</code> is a regular file executable by anybody, but can
-        only be written to by <code>root</code>.
+        The first character, a hyphen (<code>-</code>), tells us that 
+        <code>/bin/bash</code> is a regular file. 
+        The next nine characters are the file's 
+        <a href="http://linfo.org/permissions.html">permission bits</a>;
+        the <code>r</code> and <code>x</code> present in each set indicates 
+        that this file is readable and executable (respectively) by any user on 
+        the system.
+        The <code>w</code> present only in the owner set indicates that the
+        file may only be written to by its owner, who in this case 
+        is <code>root</code>.
     </p>
 
     <p>
-        Beyond <code>ls(1)</code>, two other command-line tools useful for peeking
+        Two other tools useful for peeking
         into a file are <code>file(1)</code>, which gives a brief description of
-        the file's type, and <code>stat(1)</code>, which gives a
+        the file's contents, and <code>stat(1)</code>, which gives a
         summary of the file's inode contents:
     </p>
 
@@ -310,8 +318,37 @@ Logical Volume Management:
     </div>
 
     <p>
-        We can find out more about the program it contains by querying it
-        with
+        Outside of these utilities, methods for inspecting an executable file
+        are restricted.  
+        We can:
+    </p>
+
+    <ul>
+        <li style="padding-bottom: 0;">
+            Inspect its source code
+            <ul>
+                <li style="padding-bottom: 0;">
+                    If the file is a script, then it is its source
+                </li>
+            </ul>
+        </li>
+        <li>
+            Reverse engineer it (a formidable task)
+        </li>
+        <li>
+            Pursue documentation
+            <ul>
+                <li><code>man</code> pages</li>
+                <li>Other documentation</li>
+            </ul>
+        </li>
+    </ul>
+            
+    <p>
+        Free software has the property that the first option is
+        always available to us.
+        If we are comfortable with the given program, 
+        we can find out more by querying it: 
     </p>
 
     <div class="aside-right">
@@ -335,8 +372,10 @@ Logical Volume Management:
     </div>
 
     <p>
-        This is typical of executable files, but potentially dangerous
-        (we are executing that program).
+        This is typical of command-line programs, but potentially dangerous:
+        We are executing the given program.
+        Finally, we can view the contents of a file with the 
+        <code>less</code> paging utility.
     </p>
 
     <h3>See Also:</h3>
