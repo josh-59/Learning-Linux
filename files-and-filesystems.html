@@ -58,13 +58,13 @@ Logical Volume Management:
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#files"> Files </a></li>
-        <li><a href="#filesystems"> Filesystems </a></li>
         <li><a href="#regular-files"> Regular Files</a></li>
-        <li><a href="#directories"> Directories </a></li>
-        <li><a href="#pseudo"> Pseudo Files </a></li>
-        <li><a href="#mounting-unmounting"> Mounting and Unmounting</a></li>
+        <li><a href="#pseudo-files"> Pseudo Files </a></li>
+        <li><a href="#device-files"> Device Files </a></li>
         <li><a href="#fs-heir"> Filesystem Heirarchy </a></li>
-        <li><a href="#device-files"> Device Special Files </a></li>
+        <li><a href="#filesystems"> Filesystems </a></li>
+        <li><a href="#directories"> Directories </a></li>
+        <li><a href="#mounting-unmounting"> Mounting and Unmounting</a></li>
         <li><a href="#closing-remarks"> Closing Remarks </a></li>
         <li><a href="#udacity"> Udacity </a></li>
         <li><a href="#references"> References </a></li>
@@ -147,131 +147,12 @@ Logical Volume Management:
     </ul>
 </div>
 
-<div id="filesystems" class="content">
-    <h2> Filesystems </h2>
-
-    <div class="aside-right">
-        <h4>Remember:</h4>
-        <p>
-            A given disk may entertain more than one partition,
-            but a given partition can only entertain a single filesystem.
-        </p>
-    </div> 
-
-    <p>
-        A <a href="https://wiki.osdev.org/File_Systems#File_System_Theory">filesystem</a> is a systematic method of organizing data on
-        disk.<sup><a href="https://wiki.osdev.org/Filesystem">[3]</a><a href="https://wiki.archlinux.org/index.php/File_systems">[4]</a></sup>
-        It is similar to a data structure, in that it defines a convention
-        to be followed in the storage and retrieval of data.<sup><a href="https://wiki.debian.org/Packaging/Intro">[3]</a></sup>
-    </p>
-
-    <p>
-        A given disk is 
-        <em><a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">partitioned</a></em> into one or more distinct components.
-        All partitions are contiguous with respect to the disk's address space, and
-        each entertains its own distinct filesystem, if any.
-        A filesystem cannot cross partition boundaries.
-        Writing a new and empty filesystem to a partition is known as
-        <em><a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">formatting</a>.</em>
-    </p>
-
-    <h3>Some Common Filesystems:</h3>
-
-    <ul>
-        <li>
-            <p>
-                <strong>EXT4</strong>:
-                Introduced in 2008,<sup><a href="https://en.wikipedia.org/wiki/Ext4">[5]</a></sup> EXT4 is
-                the current standard Linux filesystem.
-                It is an evolutionary enhancement on EXT3,
-                supporting larger filesizes, deeper subdirectory support,
-                faster handling of large files, along with <a href="https://kernelnewbies.org/Ext4">many other improvements</a>.
-                It is mature, fast, and stable.
-            </p>
-        </li>
-
-        <li>
-            <p>
-                <strong>ZFS</strong>:
-                "Don't use ZFS.  It's that simple." &mdash;<a href="https://www.realworldtech.com/forum/?threadid=189711&curpostid=189841">Linus Torvalds</a>.
-            </p>
-
-            <p>
-                Introduced in 2005,<sup><a href="https://en.wikipedia.org/wiki/ZFS">[6]</a></sup> ZFS incorporates fancier features that are generally
-                out of place on a Linux desktop.
-                It was developed by Sun Microsystems, and became closed-source with Sun's acquisition by
-                Oracle.<sup><a href="https://en.wikipedia.org/wiki/ZFS#OpenZFS_and_ZFS">[6]</a></sup>
-            </p>
-        </li>
-
-        <li>
-            <p>
-                <strong>FAT32</strong>: The "File Allcoation Table 32-bit" is a DOS-era filesystem,<sup><a href="https://en.wikipedia.org/wiki/File_Allocation_Table#FAT32">[7]</a></sup>
-                and is widely supported, though antiquated.
-                In particular, it is not a <a href="https://en.wikipedia.org/wiki/Journaling_file_system">journaling filesystem</a>,
-                so that changes to files are not recorded before being carried out.
-                This increases the likelihood of corruption in the event of, say, power outage.
-                This filesystem is often used to hold the bootloader, since it is virtually guaranteed to be supported by firmware,
-                and its contents will not be changed very often.
-            </p>
-        </li>
-    </ul>
-
-
-    <p>
-        Early versions of Unix referred to its own filesystem as, simply, <code>fs</code>.
-        It was well-documented (by, for instance, Maurice J. Bach in <em>The Design of the Unix Operating System</em>).
-        The Extended Filesystem (EXT) was an open-source implementation, and 
-        retained many distinctive features of the original.
-        Since then, EXT2, EXT3, and EXT4 have continued to 
-        improve upon the design.
-    </p>
-
-    <h3> inodes </h3>
-    
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Data about a file is known as its <em>metadata.</em>
-        </p>
-    </div>
-
-    <p>
-        A common feature of Unix-like filesystems is the inode:
-        Each file in the filesystem is described by a single inode.
-        Each inode describes where the data of the file is located, the size of the file,
-        and contains other data about the file, such as access permissions and timestamps.
-    </p>
-
-    <p>
-        The collection of all inodes of a filesystem is organized, conceptually, 
-        into one large array; any inode may be identified by its index 
-        in this array.
-        These indices are called <em>inode numbers.</em>
-    </p>
-
-    <p>
-        An inode number serves as the "hardware name" for a file,
-        since it uniquely identifies the file within its filesystem.
-        Under this scheme, all we need to do to implement filenames
-        is associate a string of text with an inode number.
-    </p>
-
-    <h3> See Also: </h3>
-    <ul>
-        <li><a href="https://wiki.osdev.org/File_Systems">File Systems</a> - OSDev Wiki</li>
-        <li> <code><a href="https://man7.org/linux/man-pages/man5/filesystems.5.html"> filesystems(5)</a></code> </li>
-        <li> <code><a href="https://man7.org/linux/man-pages/man7/inode.7.html">inode(7)</a></code></li>
-    </ul>
-</div>
-
-
 <div class="content" id="regular-files">
     <h2>Regular Files</h2>
 
     <p>
         A regular file contains data which is stored on disk.
-        Most files are regular files.
+        Most files are regular files. 
     </p>
 
     <p>
@@ -279,6 +160,7 @@ Logical Volume Management:
     </p>
 
     <a href="assets/img/ls-long.pdf" target="_blank"><img src="assets/img/ls-long.png" style="width: 100%" title="Click for printable" ></a>
+    <center style="font-size:12pt;">Click for printable PDF</center>
 
     <p>
         The first character, a hyphen (<code>-</code>), tells us that 
@@ -384,141 +266,7 @@ Logical Volume Management:
     </ul>
 </div>
 
-<div id="directories" class="content">
-    <h2>Directories</h2>
-
-    <p>
-        A directory is a file containing a table with two columns, 
-        <a href="finding-files.html#basename">basename</a> and inode number.
-        Each entry in a directory is called a <em>hard link.</em>
-    </p>
-
-    <p>
-        An inode number is sufficient to uniquely identify a file only within
-        the filesystem the directory belongs to.
-        Consequently, <em>hard links may not cross filesystem boundaries.</em>
-        Another way of saying this is, "Every file belongs to the same filesystem
-        as the directories which hard-link it."
-    </p>
-
-    <p>
-        Every file on the system has an inode number.
-        We list the contents of a directory with the usual <code>ls</code> command,
-        and can list inode numbers using the <code>-i</code> switch:
-    </p>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            The idea of using numerical values as names 
-            is common in computing.
-            As we'll see later, each process is given a
-            unique numerical identifier.
-            Other examples include user id's and memory addresses.
-        </p>
-    </div>
-
-    <div class="code">
-        $ echo "hello world" &gt; newfile <br>
-        $ ls -i newfile <br>
-        2112949 newfile
-    </div>
-
-    <p>
-        Files may be hard-linked more than once.
-        This allows a file to appear in more than one directory, and/or more than once
-        in a single directory.
-        We can create new hard links with the <code>ln</code> ("link") command:
-    </p>
-
-    <div class="code">
-        $ ln newfile 2newfile <br>
-        $ ls -i newfile 2newfile <br>
-        2112949 newfile <br>
-        2112949 2newfile <br>
-    </div>
-
-    <p>
-        The name "2newfile" is equivalent to the name
-        "newfile", since they link to the same inode number.
-        If we modify the file using one name,
-        then we have modified the file referred to by the other:
-    </p>
-
-    <div class="code">
-        $ cat 2newfile <br>
-        hello world<br>
-        $ echo "hello from 2newfile" > 2newfile<br>
-        $ cat newfile<br>
-        hello from 2newfile
-    </div>
-
-    <p>
-        A question arises: <em>"What if we delete newfile?"</em>
-        With the above implementation in mind, there are two distinct operations
-        that must take place to delete a file: First, remove all hardlinks to the file; and,
-        Second, free the file (i.e., allow its inodes and data blocks to be reused).
-        Deleting hardlinks is precisely what the <code>rm</code> command does.
-        Freeing the file from the filesystem is left to the kernel, and
-        takes place after there are no hard links to it (and the file is not
-        open by any process on the system).
-    </p>
-
-    <h3>Directory Structure</h3>
-
-    <p>
-        Although each file on the system, including directories, is owned by a user,
-        the contents of directories are effectively owned by the kernel.
-        No user-space process is permitted to read or write
-        directly to the directories of an in-use filesystem.
-    </p>
-
-    <p>
-        Instead, system calls exist to:
-    </p>
-
-    <ul style="columns: 2; width: 80%; margin-left: 10%; margin-bottom: 20px;">
-        <li><a href="https://www.man7.org/linux/man-pages/man2/open.2.html">Create a new file</a></li>
-        <li><a href="https://man7.org/linux/man-pages/man2/link.2.html">Create a new hardlink</a></li>
-        <li><a href="https://man7.org/linux/man-pages/man2/unlink.2.html">Delete a hardlink</a></li>
-        <li><a href="https://www.man7.org/linux/man-pages/man2/mkdir.2.html">Create a directory</a></li>
-        <li><a href="https://www.man7.org/linux/man-pages/man2/rmdir.2.html">Remove a directory</a></li>
-        <li><a href="https://www.man7.org/linux/man-pages/man2/getdents.2.html">Get directory entries</a></li>
-    </ul>
-
-
-    <p>
-        The layer of indirection offered by these interfaces affords the kernel
-        the opportunity to restrict the manipulation of directories, and thereby
-        to impose structure upon the directories of a filesystem.
-    </p>
-
-    <p>
-        First, directories cannot be arbitrarily hard-linked
-        (i.e., you cannot create new hardlinks to existing directories).
-    </p>
-
-    <p>
-        Second, each directory contains at least two hard links; 
-        these cannot be changed, nor removed.
-        They are, 
-        <code>.</code> ("dot"), which refers to the containing directory itself,
-        and <code>..</code> ("dot dot"), which refers to its parent directory.
-        The root directory's parent directory is the root directory itself.
-    </p>
-
-    <p>
-        Therefore, each directory has exactly one parent directory,
-        and the directory structure forms a tree.
-    </p>
-
-    <h3> See Also: </h3>
-    <ul>
-        <li><a href="https://en.wikipedia.org/wiki/Symbolic_link#Overview"> Symbolic Link (Overview) - Wikipedia </a> </li>
-    </ul>
-</div>
-
-<div class="content" id="pseudo">
+<div class="content" id="pseudo-files">
     <h2>Pseudo Files</h2>
 
     <p>
@@ -532,7 +280,7 @@ Logical Volume Management:
 
     <p>
         For example, the  <code>/proc/meminfo</code> file reports statistics about
-        memory usage on the system:<sup><a href="https://man7.org/linux/man-pages/man5/procfs.5.html">[25]</a></sup>
+        memory usage on the system:
     </p>
 
     <div class="code">
@@ -604,81 +352,76 @@ Logical Volume Management:
     <h3>See Also:</h3>
     <ul>
         <li> <a href="https://www.kernel.org/doc/html/latest/filesystems/proc.html">The /proc Filesystem &ndash; The Linux Kernel documentation </a></li>
-        <li> <a href="https://www.man7.org/linux/man-pages/man1/watch.1.html"> <code> watch(1) </code> </a> </li>
     </ul>
 </div>
 
-<div class="content" id="mounting-unmounting">
-
-    <h2>Mounting and Unmounting</h2>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            On most modern distributions, mounting is carried out automatically
-            (and devices are mounted to <code>/media/[user]/</code>)
-        </p>
-    </div>
+<div id="device-files" class="content">
+    <h2>Device Files</h2>
 
     <p>
-        Unlike Windows systems, which create a new, distinct directory tree
-        for each storage device on the system (e.g., <code>C:\, D:\</code>, etc.),
-        Unix-based systems collect all filesystems into a single
-        directory tree by placing any new filesystem's root directory 
-        in the existing directory tree.
-        This operation is called <a href="https://unix.stackexchange.com/questions/3192/what-is-meant-by-mounting-a-device-in-linux"><em>mounting</em></a>.
+        A <em>device file</em> represents a device connected to the system; 
+        they reside in the <code>/dev</code> directory.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[10]</a></sup>
+        Each of these files serves as the principle reference to its
+        respective device.
     </p>
 
-        <p>
-        Let's take a look at this, for it is new.
-        Suppose you have a usb stick with some music on it, and you'd
-        like to access its contents.
-        After it's plugged in, the hardware, then the kernel,
-        recognize it, but it may not be accessible:
+    <p>
+        For instance, when a usb thumb drive is inserted into my machine,
+        a new file appears in <code>/dev</code>.
+        It is interesting to note that the essential capabilities of this device 
+        coincide with those of a file: We can read from it and write to it.
     </p>
 
-    <img style="width:80%" src="assets/img/mounting.png">
+    <p>
+        Let's consider the task of creating a boot media using this interface.
+    </p>
 
-        <p>
-        When mounting new devices manually, the usual method is to identify the device
-        to be mounted with <a href="https://man7.org/linux/man-pages/man8/lsblk.8.html"><code>lsblk(8)</code></a>, then mount it via
+    <p>
+        I would like to install Arch Linux onto my PineBook Pro.
+        I download a new installation image, and compare the resulting file
+        against the original by comparing its official checksum value against
+        the results of <code>sha256sum(1)</code>.
+        They are identical; this means that the <a href="cacr.uwaterloo.ca/hac/about/chap1.pdf">integrity</a> of the file has been
+        preserved.
+    </p>
+
+    <p>
+        Next, I insert the USB stick and locate it with <code>lsblk</code>; 
+        it has appeared as <code>/dev/sdb</code>, but its partitions
+        have been mounted automatically. 
+        These partitions must be unmounted so that the device can be written to 
+        directly.
+        So, I unmount its partitions, and double-check with another call to <code>lsblk</code>.
+    </p>
+
+    <p>
+        With the machine in this configuration, we can write the file:
     </p>
 
     <div class="code">
-        $ sudo mount [DEVICE] [MOUNTPOINT]
-        </div>
+        # cat archlinux-2020.07.02-pbp.img &gt; /dev/sdb
+    </div>
 
-        <p>
-        The device to be mounted should be a partition, and can usually be determined by its size and
-        its mountpoint (which should be none).
-        Most GNU/Linux distributions provide two places to mount temporary
-        filesystems: <code>/mnt</code> and <code>/media/[user]</code>.
+    <p>
+    And, success! The file <code>archlinux-2020.07.02-pbp.img</code> has been 
+    perfectly copied (byte-wise) onto the first <em>n</em> bytes of the usb stick, 
+    where <em>n</em> is the length of said file.
+    That file, a disk image, includes a few filesystems, a kernel,
+    and is bootable.
     </p>
 
     <p>
-        Similarly, to unmount a filesystem, we first identify the correct
-        partition with <code>lsblk</code>,
-        then unmount it with <a href="https://www.man7.org/linux/man-pages/man8/umount.8.html"><code>sudo umount PATH</code></a>,
-        where <code>PATH</code> is the location of the mounted filesystem.
+        Granted, <code>sudo dd</code> would have been faster and safer.
     </p>
 
-
-
-    <p>
-        A few details:
-        First, device names that appear in <code>/dev</code> or <code>lsblk</code>
-        <em>are not</em> guaranteed to be stable across reboots&mdash; The devices are named in the
-        order that they are found.
-        Second, when mounting a new filesystem, if any files exist at the
-        mount point, they will be "hidden" by the files of the new filesystem
-        (they become inaccessible).
-        They are not deleted, and unmounting the new filesystem will "reveal" them again.
-        To avoid this, create a new directory and mount there.
-        Third, a filesystem cannot be in use while unmounting; in particular,
-        you must <code>cd</code> out of the device before calling <code>umount</code>.
-        Finally, unmount (eject) before unplugging!
-    </p>
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://wiki.archlinux.org/index.php/Device_file">Device File - ArchWiki</a></li>
+        <li><a href="https://man7.org/linux/man-pages/man8/fdisk.8.html"><code>fdisk(8)</code></a> - manipulate disk partition table</li>
+        <li><a href="https://man7.org/linux/man-pages/man8/mkfs.8.html"><code>mkfs(8)</a></code> - build a Linux filesystem</li>
+    </ul>
 </div>
+
 
 <div id="fs-heir" class="content">
     <h2>Filesystem Heirarchy</h2>
@@ -758,74 +501,355 @@ Logical Volume Management:
     </ul>
 </div>
 
-<div id="device-files" class="content">
-    <h2>Device Special Files</h2>
+<div id="filesystems" class="content">
+    <h2> Filesystems </h2>
+
+    <div class="aside-right">
+        <h4>Remember:</h4>
+        <p>
+            A given disk may entertain more than one partition,
+            but a given partition can only entertain a single filesystem.
+        </p>
+    </div> 
 
     <p>
-        A <em>device special file</em> represents a device connected to the system; 
-        they reside in the <code>/dev</code> directory.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[10]</a></sup>
-        Each of these files serves as the principle reference to a device;
-        the kernel takes care of the particulars.
+        A <a href="https://wiki.osdev.org/File_Systems#File_System_Theory">filesystem</a> is a systematic method of organizing data on
+        disk.<sup><a href="https://wiki.osdev.org/Filesystem">[3]</a><a href="https://wiki.archlinux.org/index.php/File_systems">[4]</a></sup>
+        It is similar to a data structure, in that it defines a convention
+        to be followed in the storage and retrieval of data.<sup><a href="https://wiki.debian.org/Packaging/Intro">[3]</a></sup>
     </p>
 
     <p>
-        For instance, when a usb thumb drive is inserted into my machine,
-        a new device special file appears in <code>/dev</code>.
-        Note that the essential capabilities of this device 
-        coincide with those of a file: We can read from it and write to it.
+        A given disk is 
+        <em><a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">partitioned</a></em> into one or more 
+        distinct components.
+        Partitions are restricted to a single (logical) disk, and they are
+        contiguous with respect to the disk's address space. 
+        Each partition may entertain at most a single filesystem,
+        and filesystems cannot cross partition boundaries.
+        Writing a new and empty filesystem to a partition is known as
+        <em><a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">formatting</a>.</em>
     </p>
+
+    <h3>Some Common Filesystems:</h3>
+
+    <ul>
+        <li>
+            <p>
+                <strong>EXT4</strong>:
+                Introduced in 2008,<sup><a href="https://en.wikipedia.org/wiki/Ext4">[5]</a></sup> EXT4 is
+                the current standard Linux filesystem.
+                It is an evolutionary enhancement on EXT3,
+                supporting larger filesizes, deeper subdirectory support,
+                faster handling of large files, along with <a href="https://kernelnewbies.org/Ext4">many other improvements</a>.
+                It is mature, fast, and stable.
+            </p>
+        </li>
+
+        <li>
+            <p>
+                <strong>ZFS</strong>:
+                "Don't use ZFS.  It's that simple." &mdash;<a href="https://www.realworldtech.com/forum/?threadid=189711&curpostid=189841">Linus Torvalds</a>.
+            </p>
+
+            <p>
+                Introduced in 2005,<sup><a href="https://en.wikipedia.org/wiki/ZFS">[6]</a></sup> ZFS incorporates fancier features that are generally
+                out of place on a Linux desktop.
+                It was developed by Sun Microsystems, and became closed-source with Sun's acquisition by
+                Oracle.<sup><a href="https://en.wikipedia.org/wiki/ZFS#OpenZFS_and_ZFS">[6]</a></sup>
+            </p>
+        </li>
+
+        <li>
+            <p>
+                <strong>FAT32</strong>: The "File Allcoation Table 32-bit" is a DOS-era filesystem,<sup><a href="https://en.wikipedia.org/wiki/File_Allocation_Table#FAT32">[7]</a></sup>
+                and is widely supported, though antiquated.
+                In particular, it is not a <a href="https://en.wikipedia.org/wiki/Journaling_file_system">journaling filesystem</a>,
+                so that changes to files are not recorded before being carried out.
+                This increases the likelihood of corruption in the event of, say, power outage.
+                This filesystem is often used to hold the bootloader, since it is virtually guaranteed to be supported by firmware,
+                and its contents will not be changed very often.
+            </p>
+        </li>
+    </ul>
+
 
     <p>
-        Let's consider the task of creating a boot media using this interface.
+        Early versions of Unix referred to its own filesystem as, simply, <code>fs</code>.
+        It was well-documented (by, for instance, Maurice J. Bach in <em>The Design of the Unix Operating System</em>).
+        The Extended Filesystem (EXT) was an open-source implementation, and 
+        retained many distinctive features of the original.
+        Since then, EXT2, EXT3, and EXT4 have continued to 
+        improve upon the design.
     </p>
 
-    <p>
-        I would like to install Arch Linux onto my PineBook Pro.
-        I download a new installation image, and compare the resulting file
-        against the original by comparing its official checksum value against
-        the results of <code>sha256sum(1)</code>.
-        They are identical; this means that the <a href="cacr.uwaterloo.ca/hac/about/chap1.pdf">integrity</a> of the file has been
-        preserved.
-    </p>
-
-    <p>
-        Next, I insert the USB stick and locate it with <code>lsblk</code>; 
-        it has appeared as <code>/dev/sdb</code>, but its partitions
-        have been mounted automatically. 
-        These partitions must be unmounted so that the device can be written to 
-        directly.
-        So, I unmount its partitions, and double-check with another call to <code>lsblk</code>.
-    </p>
-
-    <p>
-        With the machine in this configuration, we can write the file:
-    </p>
-
-    <div class="code">
-        # cat archlinux-2020.07.02-pbp.img &gt; /dev/sdb
+    <h3> inodes </h3>
+    
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Data about a file is known as its <em>metadata.</em>
+        </p>
     </div>
 
     <p>
-    And, success! The file <code>archlinux-2020.07.02-pbp.img</code> has been 
-    perfectly copied (byte-wise) onto the first <em>n</em> bytes of the usb stick, 
-    where <em>n</em> is the length of said file.
-    That file, a disk image, includes a few filesystems, a kernel,
-    and is bootable.
+        A common feature of Unix-like filesystems is the inode:
+        Each file in such a filesystem is described by a single inode.
+        Each inode describes where the data of the file is located, the size 
+        of the file, and contains other data about the file, such as 
+        its access permissions and timestamps.
     </p>
 
     <p>
-        Granted, <code>sudo dd</code> would have been faster and safer.
+        The collection of all inodes of a filesystem is organized, conceptually, 
+        into one large array; any inode may be identified by its index 
+        in this array.
+        These indices are called <em>inode numbers.</em>
     </p>
 
-    <h3> Putting it All Together </h3>
+    <p>
+        An inode number serves as the "hardware name" for a file,
+        since it uniquely identifies the file within its filesystem.
+        Under this scheme, all we must do in order to implement filenames
+        is associate a string of text with an inode number.
+    </p>
 
-
-    <h3>See Also:</h3>
+    <h3> See Also: </h3>
     <ul>
-        <li><a href="https://wiki.archlinux.org/index.php/Device_file">Device File - ArchWiki</a></li>
-        <li><a href="https://man7.org/linux/man-pages/man8/fdisk.8.html"><code>fdisk(8)</code></a> - manipulate disk partition table</li>
-        <li><a href="https://man7.org/linux/man-pages/man8/mkfs.8.html"><code>mkfs(8)</a></code> - build a Linux filesystem</li>
+        <li><a href="https://wiki.osdev.org/File_Systems">File Systems</a> - OSDev Wiki</li>
+        <li> <code><a href="https://man7.org/linux/man-pages/man5/filesystems.5.html"> filesystems(5)</a></code> </li>
+        <li> <code><a href="https://man7.org/linux/man-pages/man7/inode.7.html">inode(7)</a></code></li>
     </ul>
+</div>
+
+<div id="directories" class="content">
+    <h2>Directories</h2>
+
+    <p>
+        A directory is, conceptually, a file containing a table with two columns, 
+        <a href="finding-files.html#basename">basename</a> and inode number.
+        Directories are maintained by the kernel, and are not directly
+        readable nor writeable by processes (specific system calls exist
+        to query the kernel about directories).
+    </p>
+
+    <p>
+        We can list inode numbers with <code>ls -i</code>:
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            By convention alone, filenames which begin with a 
+            period <code>.</code> are considered hidden, 
+            including <code>.</code> and <code>..</code>.
+        </p>
+    </div>
+
+    <div class="code">
+        $ ls -ia ~/Public/Learning-Linux <br>
+        645278 ./<br>
+        384844 ../<br>
+        775487 assets/<br>
+        641473 command-line-1-tutorial-introduction.html<br>
+        645403 _config.yml<br>
+        775449 _data/<br>
+        642188 documentation.html<br>
+        642185 files-and-filesystems.html<br>
+        641460 finding-files.html<br>
+        775463 _future/<br>
+        645377 .git/<br>
+        645401 .gitignore<br>
+        775479 _includes/<br>
+        641295 index.html<br>
+        642186 intro-to-gnu-linux.html<br>
+        777671 .jekyll-cache/<br>
+        775483 _layouts/<br>
+        641300 package-management.html<br>
+        641293 processes.html<br>
+        642193 programming-in-nix.html<br>
+        641472 README.md<br>
+        775485 _sass/<br>
+        898840 _site/<br>
+        642693 systemd.html<br>
+        641291 terminals-and-shells.html<br>
+    </div>
+
+    <p>
+        Each entry in a directory is called a <em>hard link.</em>
+        A file may have more than one hard link, but when it has zero,
+        it is no longer accessible through the directory structure, and
+        the kernel will prepare to delete it.
+
+    </p>
+   
+    <p>
+        We can create new hard links with the <code>ln</code> "link" command,
+        as the following sequence demonstrates:
+    </p>
+
+    <div class="code">
+        $ echo "hello world" &gt; newfile <br>
+        $ ls -i newfile <br>
+        2112949 newfile <br>
+        $ ln newfile 2file <br>
+        $ ls -i newfile 2file <br>
+        2112949 newfile <br>
+        2112949 2file <br>
+    </div>
+
+    <p>
+        The name "2file" is equivalent to the name
+        "newfile", since they link to the same file.
+        If we modify the file using one name,
+        then we have modified the file referred to by the other:
+    </p>
+
+    <div class="code">
+        $ echo "hello from 2file" > 2file<br>
+        $ cat newfile<br>
+        hello from 2file
+    </div>
+
+    <p>
+        They are simply different names for the same file.
+        <code>ls --long</code> lists the number of hard links to a given file 
+        (see above). 
+    </p>
+
+    <h3>Directory Structure</h3>
+
+    <p>
+        Although each file on the system, including directories, is owned by a user,
+        the contents of directories are effectively owned by the kernel.
+        No user-space process is permitted to read or write
+        directly to the directories of an in-use filesystem.
+    </p>
+
+    <p>
+        Instead, system calls exist to:
+    </p>
+
+    <ul style="columns: 2; width: 80%; margin-left: 10%; margin-bottom: 20px;">
+        <li><a href="https://www.man7.org/linux/man-pages/man2/open.2.html">Create a new file</a></li>
+        <li><a href="https://man7.org/linux/man-pages/man2/link.2.html">Create a new hardlink</a></li>
+        <li><a href="https://man7.org/linux/man-pages/man2/unlink.2.html">Delete a hardlink</a></li>
+        <li><a href="https://www.man7.org/linux/man-pages/man2/mkdir.2.html">Create a directory</a></li>
+        <li><a href="https://www.man7.org/linux/man-pages/man2/rmdir.2.html">Remove a directory</a></li>
+        <li><a href="https://www.man7.org/linux/man-pages/man2/getdents.2.html">Get directory entries</a></li>
+    </ul>
+
+
+    <p>
+        The layer of indirection offered by these interfaces affords the kernel
+        the opportunity to restrict the manipulation of directories, and thereby
+        to impose structure upon the directories of a filesystem.
+    </p>
+
+    <p>
+        First, directories cannot be arbitrarily hard-linked
+        (i.e., you cannot create new hardlinks to existing directories).
+    </p>
+
+    <p>
+        Second, each directory contains at least two hard links; 
+        these cannot be changed, nor removed.
+        They are, 
+        <code>.</code> ("dot"), which refers to the containing directory itself,
+        and <code>..</code> ("dot dot"), which refers to its parent directory.
+        The root directory's parent directory is the root directory itself.
+    </p>
+
+    <p>
+        Therefore, each directory has exactly one parent directory,
+        and the directory structure forms a tree.
+    </p>
+
+    <p>
+        Inode numbers can uniquely identify a file only within a single
+        filesystem.
+        Consequently, <em>Hard links may not cross filesystem boundaries.</em>
+        Another way of saying this is, "Every file belongs to the same filesystem
+        as the directories which hard link it."
+    </p>
+
+
+    <h3> See Also: </h3>
+    <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Symbolic_link#Overview"> Symbolic Link (Overview) - Wikipedia </a> </li>
+    </ul>
+</div>
+
+<div class="content" id="mounting-unmounting">
+
+    <h2>Mounting and Unmounting</h2>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            On most modern distributions, mounting is carried out automatically
+            (and devices are mounted to <code>/media/[user]/</code>)
+        </p>
+    </div>
+
+    <p>
+        Unlike Windows systems, which create a new, distinct directory tree
+        for each storage device on the system (e.g., <code>C:\, D:\</code>, etc.),
+        Unix-based systems collect all filesystems into a single
+        directory tree by placing any new filesystem's root directory 
+        in the existing directory tree.
+        This operation is called <a href="https://unix.stackexchange.com/questions/3192/what-is-meant-by-mounting-a-device-in-linux"><em>mounting</em></a>.
+    </p>
+
+        <p>
+        Let's take a look at this, for it is new.
+        Suppose you have a usb stick with some music on it, and you'd
+        like to access its contents.
+        After it's plugged in, the hardware, then the kernel,
+        recognize it, but it may not be accessible:
+    </p>
+
+    <img style="width:80%" src="assets/img/mounting.png">
+
+        <p>
+        When mounting new devices manually, the usual method is to identify the device
+        to be mounted with <a href="https://man7.org/linux/man-pages/man8/lsblk.8.html"><code>lsblk(8)</code></a>, then mount it via
+    </p>
+
+    <div class="code">
+        $ sudo mount [DEVICE] [MOUNTPOINT]
+        </div>
+
+        <p>
+        The device to be mounted should be a partition, and can usually be determined by its size and
+        its mountpoint (which should be none).
+        Most GNU/Linux distributions provide two places to mount temporary
+        filesystems: <code>/mnt</code> and <code>/media/[user]</code>.
+    </p>
+
+    <p>
+        Similarly, to unmount a filesystem, we first identify the correct
+        partition with <code>lsblk</code>,
+        then unmount it with <a href="https://www.man7.org/linux/man-pages/man8/umount.8.html"><code>sudo umount PATH</code></a>,
+        where <code>PATH</code> is the location of the mounted filesystem.
+    </p>
+
+
+
+    <p>
+        A few details:
+        First, device names that appear in <code>/dev</code> or <code>lsblk</code>
+        <em>are not</em> guaranteed to be stable across reboots&mdash; The devices are named in the
+        order that they are found.
+        Second, when mounting a new filesystem, if any files exist at the
+        mount point, they will be "hidden" by the files of the new filesystem
+        (they become inaccessible).
+        They are not deleted, and unmounting the new filesystem will "reveal" them again.
+        To avoid this, create a new directory and mount there.
+        Third, a filesystem cannot be in use while unmounting; in particular,
+        you must <code>cd</code> out of the device before calling <code>umount</code>.
+        Finally, unmount (eject) before unplugging!
+    </p>
 </div>
 
 
