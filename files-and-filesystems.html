@@ -12,6 +12,21 @@ Pseudofiles:
    Write subsection:
    <h3> The <code>/proc</code> Filesystem </h3>
 
+Device Special Files:
+    Find better source to discuss "integrity" of a file/message/piece of information
+
+    Round out iso-files by mounting a regular file(?)
+    
+    Neat use of 'file' command:
+
+    $pinebookpro-debian-desktop-mrfixit191226.img
+    pinebookpro-debian-desktop-mrfixit191226.img: DOS/MBR boot sector; partition 1 : ID=0xc, active, start-CHS (0x2,10,9), end-CHS (0xa,50,40), startsector 32768, 131072 sectors; partition 2 : ID=0x83, active, start-CHS (0x10,81,2), end-CHS (0x28d,185,44), startsector 262144, 10240000 sectors
+
+Logical Volume Management:
+    https://wiki.ubuntu.com/Lvm
+
+
+
 Filesystems:
     inode as indexing method:
         https://wiki.osdev.org/File_Systems#Indexing_Methods
@@ -39,19 +54,6 @@ Filesystem Heirarchy:
         https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch05.html:
             /var contains logs, transient and temporary files
             Not shareable across systems
-
-Device Special Files:
-    Find better source to discuss "integrity" of a file/message/piece of information
-    
-    Round out iso-files by mounting a regular file(?)
-    
-    Neat use of 'file' command:
-
-    $pinebookpro-debian-desktop-mrfixit191226.img
-    pinebookpro-debian-desktop-mrfixit191226.img: DOS/MBR boot sector; partition 1 : ID=0xc, active, start-CHS (0x2,10,9), end-CHS (0xa,50,40), startsector 32768, 131072 sectors; partition 2 : ID=0x83, active, start-CHS (0x10,81,2), end-CHS (0x28d,185,44), startsector 262144, 10240000 sectors
-
-Logical Volume Management:
-    https://wiki.ubuntu.com/Lvm
 
 -->
 <div id="nav_bar_2" class="nav">
@@ -366,7 +368,7 @@ Logical Volume Management:
     </p>
 
     <p>
-        For instance, when a usb thumb drive is inserted into my machine,
+        For instance, when a micro-SD card is inserted into my laptop,
         a new file appears in <code>/dev</code>.
         It is interesting to note that the essential capabilities of this device 
         coincide with those of a file: We can read from it and write to it.
@@ -386,28 +388,23 @@ Logical Volume Management:
     </p>
 
     <p>
-        Next, I insert the USB stick and locate it with <code>lsblk</code>; 
-        it has appeared as <code>/dev/sdb</code>, but its partitions
-        have been mounted automatically. 
-        These partitions must be unmounted so that the device can be written to 
-        directly.
-        So, I unmount its partitions, and double-check with another call to <code>lsblk</code>.
-    </p>
-
-    <p>
-        With the machine in this configuration, we can write the file:
+        Next, I insert the micro-SD and locate it with <code>lsblk</code>.
+        It has appeared as <code>/dev/mmcblk1</code>, and its partitions
+        have not been mounted, so we are ready to write the file:
     </p>
 
     <div class="code">
-        # cat archlinux-2020.07.02-pbp.img &gt; /dev/sdb
+        # cat archlinux-2020.07.02-pbp.img &gt; /dev/mmcblk1
     </div>
 
     <p>
-    And, success! The file <code>archlinux-2020.07.02-pbp.img</code> has been 
-    perfectly copied (byte-wise) onto the first <em>n</em> bytes of the usb stick, 
-    where <em>n</em> is the length of said file.
-    That file, a disk image, includes a few filesystems, a kernel,
-    and is bootable.
+        And, success! 
+        The file <code>archlinux-2020.07.02-pbp.img</code> has been 
+        copied (byte-wise perfectly) onto the first <em>n</em> bytes of the 
+        card, 
+        where <em>n</em> is the length of said file.
+        That file, a disk image, includes a few filesystems, a kernel,
+        and is bootable.
     </p>
 
     <p>
