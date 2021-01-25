@@ -104,7 +104,7 @@ img{
 
 
 
-.aside-left, .aside-right, {
+.aside-left, .aside-right {
 	width: 20%;
 	margin-top: 5px;
 	margin-bottom: 20px;
@@ -112,6 +112,11 @@ img{
 	padding-bottom: 0;
     font-size: 11pt;
 }
+
+.content .aside-left em, .content .aside-right em {
+    font-size: 12pt;
+}
+
 
 .aside-right {
     float: right;
@@ -153,6 +158,10 @@ table td {
     margin-right: 40px;
     max-width: 800px;
     font-size: 14pt;
+}
+
+.content p em {
+    font-size: 15pt;
 }
 
 sup, sub {
@@ -237,6 +246,8 @@ code{
     margin: 0;
     font-size: 14pt;
 }
+
+
 
 .content ul li {
     padding-top: 5px;
