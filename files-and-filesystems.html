@@ -8,6 +8,15 @@ last-updated: December, 2020
 
 To Do:
 
+    <p>
+        Inode numbers can uniquely identify a file only within a single
+        filesystem.
+        Consequently, <em>Hard links may not cross filesystem boundaries.</em>
+        Another way of saying this is, "Every file belongs to the same filesystem
+        as the directories which hard link it."
+    </p>
+
+
 Introduction:
     Everything is a file
     Unix-like operating systems are typified by a single directory tree.
@@ -579,9 +588,12 @@ Filesystem Heirarchy:
 
     <p>
         Let's take a look at this, for it is new.
+    </p>
+
+    <p>
         Suppose we have a usb stick with some music on it, and we'd
         like to access its contents.
-        We plug it in, and the hardware, then the kernel,
+        When we plug it in, the hardware, then the kernel,
         recognize it, but it may not be accessible:
     </p>
 
@@ -601,7 +613,7 @@ Filesystem Heirarchy:
     </div>
 
     <p>
-        Superuser priveledges allow us to mount a device anywhere.  
+        Superuser priveledges allow us to mount a filesystem anywhere.  
         When a new filesystem is mounted in a directory that is not empty,
         its contents become "hidden" by the new filesystem, and are 
         inaccessible while the filesystem is mounted.  
@@ -618,7 +630,7 @@ Filesystem Heirarchy:
 
     <p>
         Devices should be unmounted before being removed; this operation is
-        encapsulated in "ejecting".
+        encapsulated in the "eject" operation.
         To unmount a device manually, we again assert the correct device 
         with <code>lsblk</code>,
         then unmount it with 
@@ -626,11 +638,6 @@ Filesystem Heirarchy:
         where <code>PATH</code> is the location of the mounted filesystem.
     </p>
 
-    <p>
-        Finally, a filesystem cannot be in use while unmounting&mdash; 
-        In particular, you must <code>cd</code> out of the device before calling 
-        <code>umount</code>!
-    </p>
 </div>
 
 
@@ -812,7 +819,6 @@ Filesystem Heirarchy:
         A file may have more than one hard link, but when it has zero,
         it is no longer accessible through the directory structure, and
         the kernel will prepare to delete it.
-
     </p>
    
     <p>
@@ -854,8 +860,7 @@ Filesystem Heirarchy:
     <p>
         Although each file on the system, including directories, is owned by a user,
         the contents of directories are effectively owned by the kernel.
-        No user-space process is permitted to read or write
-        directly to the directories of an in-use filesystem.
+        No process is permitted to read or write directly to directories.
     </p>
 
     <p>
@@ -873,39 +878,74 @@ Filesystem Heirarchy:
 
 
     <p>
-        The layer of indirection offered by these interfaces affords the kernel
-        the opportunity to restrict the manipulation of directories, and thereby
-        to impose structure upon the directories of a filesystem.
+        The layer of indirection offered by this interface affords the kernel
+        the opportunity to restrict the manipulation of directories, and thereby,
+        to impose structure upon the directory tree.
+        We will briefly outline these restrictions, and the resulting structure.
+    </p>
+
+    <div class="aside-right">
+        <h4>Behind the Curtain:</h4>
+        <p>
+            From the printout at the beginning of this section,
+            we see that <code>/home/josh/Public/Learning-Linux</code>
+            has been assigned inode number 645278,
+            and <code>/home/josh/Public</code>
+            has been assigned inode number 384844.
+        </p>
+    </div>
+
+    <p>
+        First, each directory contains a hard link to itself, 
+        <code>.</code> ("dot").
     </p>
 
     <p>
-        First, directories cannot be arbitrarily hard-linked
-        (i.e., you cannot create new hardlinks to existing directories).
+        At the command line, 
+    </p>
+
+    <div class="code">
+        $ ./
+    </div>
+
+    <p>
+        is synonymous with "here," or, "from this directory."
     </p>
 
     <p>
-        Second, each directory contains at least two hard links; 
-        these cannot be changed, nor removed.
-        They are, 
-        <code>.</code> ("dot"), which refers to the containing directory itself,
-        and <code>..</code> ("dot dot"), which refers to its parent directory.
-        The root directory's parent directory is the root directory itself.
+        Second, each directory is hard linked to a single parent directory,
+        <code>..</code> ("dot dot").
+        At the command line, 
+    </p>
+
+    <div class="code">
+        $ cd ..
+    </div>
+
+    <p>
+        means, "go to the parent directory,"
+        and is sometimes aliased to
+    </p>
+
+    <div class="code">
+        $ ..
+    </div>
+
+    <p>
+        for convenience. 
     </p>
 
     <p>
-        Therefore, each directory has exactly one parent directory,
-        and the directory structure forms a tree.
+        Third, the root directory's parent directory is the root directory itself.
     </p>
 
     <p>
-        Inode numbers can uniquely identify a file only within a single
-        filesystem.
-        Consequently, <em>Hard links may not cross filesystem boundaries.</em>
-        Another way of saying this is, "Every file belongs to the same filesystem
-        as the directories which hard link it."
+        Finally, directories cannot be arbitrarily hard-linked&mdash;
+        That is, you cannot create new hard links to existing directories.
+        This prevents cycles from forming within the directory structure,
+        and ensures that the directories form a tree.
     </p>
-
-
+    
     <h3> See Also: </h3>
     <ul>
         <li><a href="https://en.wikipedia.org/wiki/Symbolic_link#Overview"> Symbolic Link (Overview) - Wikipedia </a> </li>
@@ -946,15 +986,15 @@ Filesystem Heirarchy:
 
     <h3> Filesystem vs. Directory Tree</h3>
     <p>
-        The terms <em>filesystem</em> and <em>directory tree</em> were developed here
+        The terms <em>filesystem</em> and <em>directory tree</em> were developed 
         precisely, in order to make a clear distinction between the two.
         However, the terms overlap, somewhat:
         In Linux, each filesystem must entertain exactly one directory tree
         (specifically, it must contain exactly one root directory).
-        Because of this, each filesystem implies exactly one directory tree;
-        this is the sense in which it is valid to say, "We are going to mount
-        a filesystem at <code>/home</code>," when in fact we mean,
-        "We are going to mount a filesystem's root directory at <code>/home</code>."
+        Because of this, each filesystem implies exactly one directory tree.
+        This is the sense in which it is valid to say, "We are going to mount
+        the filesystem at <code>/home</code>," when in fact we mean,
+        "We are going to mount the filesystem's root directory at <code>/home</code>."
     </p>
 
     <h3>See Also:</h3>
