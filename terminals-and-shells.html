@@ -6,12 +6,22 @@ last-updated: November, 2020
 
 <!--
 To Do:
+    Introduction:
+        Chronological wrt command execution,
+        but can be read piecewise.
+
+        Intended to be easier to remember, more palatable: 
+        Language differs from official documentation
+
+        BASH has been around for xx years, and is at this point a
+        very fine piece of software
+            Well-defined and well-known behavior.
+        This is a simplified introduction
+
+    Bash Command Interpretation Cheat Sheet
+
     Standard File Descriptors:
         Include redirection
-    Scripting
-        Possibly:
-            EOF and EOF character
-    Bash Command Interpretation Cheat Sheet
 
     Other Nice Features:
         Filename completion via tab 
@@ -19,23 +29,42 @@ To Do:
         Command completion via tab
             - Command list via tab
 
+    Closing Remarks:
+        It is the opinion of this author....
+        Shells should be restricted to interactive use...
+        Although shell scripting is neat in concept, it is obtuse in practice.
+        Better suited to the days when system administration was a full-time job.
+        In other words, with scripting languages like Python at our
+            disposal, we are unambiguously beyond using shell 
+            as a programming language
+
     Explanation of sudo:
     https://www.linuxjournal.com/sites/default/files/2018-11/GeekGuide-BeyondTrust-BeyondSudo.pdf
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Most shells support <em>tab completion:</em>
+            If you've typed enough of a command-name or filename to
+            uniquely identify it, you can press "tab," and it will complete it for you.
+        </p>
+    </div>
+
 
 -->
 
 <div id="nav_bar_2" class="nav">
 	<ul>
 		<li><a href="#introduction"> Introduction </a></li>
-		<li><a href="#history"> History </a></li>
+		<li><a href="#physical-terminals"> Physical Terminals </a></li>
 		<li><a href="#terminal-emulators"> Terminal Emulators </a></li>
 		<li><a href="#shells"> Shells </a></li>
         <li><a href="#word-splitting">Word Splitting</a></li>
+        <li><a href="#shell-expansion">Shell Expansion</a></li>
         <li><a href="#searching-for-commands">Searching for Commands</a></li>
 		<li><a href="#standard-file-descriptors"> Standard File Descriptors </a></li>
 		
 		<!--
-        <li><a href="#shell-globbing"> Globbing </a></li>
 		<li><a href="#shell-features"> Other Shell Features </a></li>
         <li><a href="#special-characters">Terminal Special Characters</a></li>
         -->
@@ -57,12 +86,12 @@ To Do:
 	</p>
 </div>
 
-<div id="history" class="content">
-	<h2 style="margin-bottom: 2pt;">History:</h2>
-	<h4>Physical Terminals</h4>
+<div id="physical-terminals" class="content">
+	<h2 style="margin-bottom: 2pt;">Physical Terminals</h2>
+	<h4>A Brief History</h4>
 
 	<p>
-		A <i>physical terminal</i> is a computer peripheral similar to a typewriter.
+		A <i>physical terminal</i> was a computer peripheral similar to a typewriter.
 		The earliest examples printed output onto paper;
 		this technology was carried over from the
 		<a href="https://mysite.du.edu/~jcalvert/tel/teletype.htm"<i>teletypewriter</i></a>,
@@ -285,15 +314,148 @@ To Do:
         In Bash, this procedure is known as <em>word splitting</em>, 
         and is the first step of command interpretation.
     </p>
+</div>
 
+<div class="content" id="shell-expansion">
+    <h2 style="margin-bottom: 0;">Shell Expansion</h2>
+    <h4>and Quote Removal</h4>
 
-        
+    <p>
+        The next step on the journey of command execution is <em>shell
+        expansion.</em> 
+        Bash searches each word, from left to right, in two consequetive passes.
+        If a word is single-quoted, then it is exempt from expansion.
+        After expansion, quotes are removed.
+    </p>
+
+    <p>
+        The first pass searches for:
+    </p>
+
+    <ol>
+        <li>
+            <a href="https://www.gnu.org/software/bash/manual/html_node/Brace-Expansion.html">Braces</a>&emsp; <code>{}</code>
+            <br>
+            <code>a{1,2,3}b</code> becomes <code>a1b a2b a3b</code>
+        </li>
+        <li>
+            <a href="https://www.gnu.org/software/bash/manual/html_node/Tilde-Expansion.html">Tilde</a>&emsp;  <code>~</code>
+            <br>
+            Expands to the absolute pathname of your home directory, or 
+            <code>HOME</code> parameter, if it is set.
+        </li>
+        <li>
+            <a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html">Parameter</a> &emsp;  <code>$</code>
+            <br>
+            <code>$NAME</code> is replaced by the value of <code>NAME</code> 
+            parameter, if it exists, and null string otherwise. 
+        </li>
+        <li>
+            <a href="https://www.gnu.org/software/bash/manual/html_node/Command-Substitution.html">Command</a> &emsp;  <code>$( </code><em>command</em><code> )</code>
+            <br>
+            Executes <em>command</em> in a subshell environment, captures output
+            and replaces <br> <code>$(</code><em>command</em><code>)</code>
+            with said output
+        </li>
+        <li>
+            <a href="https://www.gnu.org/software/bash/manual/html_node/Arithmetic-Expansion.html">Arithmetic</a>&emsp;  <code>$(( </code><em>expression</em><code>  ))</code>
+            <br>
+            Evaluates <em>expression</em> and replaces <code>$((</code><em>expression</em><code>))</code> with result
+
+        </li>
+    </ol>
+
+    <p>
+        Expansions can be understood through prodigious use of the
+        <code>echo</code> command, which simply prints out whatever arguments
+        it recieves.
+        For instance, in the following example, the <code>echo</code> command
+        recieves exactly two arguments, <code>12</code> and <code>13</code>,
+        and it is the shell that has done the work:
+    </p>
+
+    <div class="code">
+        $ echo 1{2,3}<br>
+        12 13
+    </div>
+
+    <p>
+        The second expansion pass is <em>filename expansion,</em> sometimes 
+        crudely referred to as <em>globbing.</em>
+        These expansions let you manipulate multiple files quickly.
+        If any word contains an asterisk <code>*</code>, question mark 
+        <code>?</code>, or brackets <code>[]</code>, then it is regarded as a 
+        <em>pattern,</em> and is replaced by an alphabetical list of all
+        filenames in the current directory matching that pattern.
+    </p>
+
+    <p>
+        The meanings of these metacharacters are as follows:
+    </p>
+
+    <ul style="list-style-type: none;">
+        <li>
+            <code>*</code>&emsp; Asterisk.  Matches zero-or-more of any character.
+        </li>
+
+        <li>
+            <code>?</code>&emsp; Question Mark.  Matches zero-or-one of any character.
+        </li>
+
+        <li>
+            <code>[ ]</code>&emsp; Brackets.  Matches exactly one of any of the characters contained.
+        </li>
+    </ul>
+
+    <p>
+        In patterns, all other characters are treated literally.
+        For example,
+    </p>
+
+    <div class="aside-right">
+        <h4>Note:</h4>
+        <p>
+            <a href="https://www.gnu.org/software/bash/manual/html_node/Filename-Expansion.html">By default</a>, hidden files must be matched explicitly. 
+        </p>
+    </div>
+  
+    <div class="code">
+        *
+    </div>
+
+    <p>
+        expands to all files in the current directory.
+    </p>
+
+    <div class="code">
+        *.pdf
+    </div>
+
+    <p>
+        expands to all files ending in <code>.pdf</code>; and,
+    </p>
+
+    <div class="code">
+        *.[gx]z
+    </div>
+
+    <p>
+        expands to all files ending in either <code>.xz</code> or <code>.gz</code>.
+    </p>
+
+    <p>
+        After these steps have been completed, Bash removes unquoted
+        quotes, and prepares to execute the command.
+    </p>
+   
+  <h3> See Also: </h3>
+  <ul>
+    <li><a href="http://mywiki.wooledge.org/glob"> glob - Greg's Wiki </a></li>
+  </ul>
 </div>
 
 <div class="content" id="searching-for-commands">
     <h2>Searching for Commands</h2>
-
-
    
      <h3>Commands and Builtin's</h3>
 
