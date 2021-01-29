@@ -5,6 +5,39 @@ last-updated: December 2020
 ---
 
 <!--
+    So, we're going to have to BUILD the idea of modern package
+    management.
+
+    Slackware package format
+        www.slackbook.org/html/package-management.html
+
+        <div class="code">
+            ./
+            usr/
+            usr/bin/
+            usr/bin/makehejaz
+            usr/doc/
+            usr/doc/makehejaz-1.0/
+            usr/doc/makehejaz-1.0/COPYING
+            usr/doc/makehejaz-1.0/README
+            usr/man/
+            usr/man/man1
+            usr/man/man1/makehejaz.1.gz
+            install/
+            install/doinst.sh
+        </div>
+
+        Package must be a tar gzipped file
+            - Explain the archaic, rudimentary tools
+
+        explodepkg
+            - Extracts package to the current directory
+
+        
+    Dependencies
+        <em>Where the magic happens</em>
+        Slackware's package management is comparatively primitive 
+            (And they like it that way)
 
 A section from the Linux Mint User Guide (old)
 https://www.linuxmint.com/documentation/user-guide/Cinnamon/english_18.0.pdf
