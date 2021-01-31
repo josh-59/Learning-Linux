@@ -7,26 +7,29 @@ last-updated: November, 2020
 <!--
 To Do:
     Introduction:
-        
         Chronological wrt command execution,
         but can be read piecewise.
-
-        BASH has been around for xx years, and is at this point a
-        very fine piece of software
-            Well-defined and well-known behavior.
 
     Bash Command Interpretation Cheat Sheet
 
     Standard File Descriptors:
         Include redirection
 
-    Other Nice Features:
-        Filename completion via tab 
-            - Filename list via tab
-        Command completion via tab
-            - Command list via tab
+    Pipeline
+
+    Basic Bash Grammar:
+        Pipeline and Lists
+
+    Shell programming:
+        https://medium.com/better-programming/the-ultimate-programmers-guide-to-bash-scripting-2d11d4e6e978       
+        help for
+        help if
+        help [[
 
     Closing Remarks:
+              Next Shell:
+            nushell 
+
         It is the opinion of this author....
         Shells should be restricted to interactive use...
         Although shell scripting is neat in concept, it is obtuse in practice.
@@ -35,12 +38,22 @@ To Do:
             disposal, we are unambiguously beyond using shell 
             as a programming language
 
+        https://wiki.bash-hackers.org/syntax/basicgrammar
+
     Explanation of sudo:
     https://www.linuxjournal.com/sites/default/files/2018-11/GeekGuide-BeyondTrust-BeyondSudo.pdf
+
+
+     Other Nice Features:
+        Filename completion via tab 
+            - Filename list via tab
+        Command completion via tab
+            - Command list via tab
 
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
+
             Most shells support <em>tab completion:</em>
             If you've typed enough of a command-name or filename to
             uniquely identify it, you can press "tab," and it will complete it for you.
@@ -254,6 +267,9 @@ To Do:
         3148 pts/1   00:00:00 ps
     </div>
 
+    <h3>See Also:</h3>
+    <li><a href="https://www.in-ulm.de/~mascheck/bourne/index.html#origins">Origins of the Bourne Shell</a></li>
+
    </div>
 
 <div class="content" id="word-splitting">
@@ -453,6 +469,14 @@ To Do:
 
 <div class="content" id="searching-for-commands">
     <h2>Searching for Commands</h2>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            The <code>type</code> command can be used to check if a command
+            is a builtin.
+        </p>
+    </div>
    
      <h3>Commands and Builtin's</h3>
 
