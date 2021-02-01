@@ -1,0 +1,93 @@
+<!--
+    
+-->
+
+<div class="content" id="programs">
+    <h2> Programs </h2>
+
+    <p>
+        A program is a file containing instructions on how to create
+        a process; <em>program</em> is synonymous with <em>executable file.</em>
+        Most programs are in binary format, meaning that they
+        have been compiled to run directly on the machine's CPU, but
+        others are not compiled, and run directly from source code.
+    </p>
+</div>
+
+<div class="content" id="first-binary-executables">
+    <h2> Unix's first binary executable format</h2>
+    <h4> a.out </h4>
+
+    <p>
+        The first Unix binary executable file format was called <em>a.out,</em>
+        which stood for <em>assembler output.</em><sup><a href="https://en.wikipedia.org/wiki/A.out">[5]</a></sup>
+        This was a very simple format, with three distinct data segments that
+        coincided with the layout of the resulting process's memory:
+    </p>
+
+    <ol>
+        <li> Text &mdash; Machine instructions </li>
+        <li> Data &mdash; Initial values for global and static variables</li>
+        <li> BSS &mdash; Uninitialized global and static variable values; assigned arithmetic zero by the kernel upon loading</li>
+    </ol>
+</div>
+
+<div class="content" id="elf">
+    <h2>ELF format</h2>
+
+    <p>
+        The binary format currently in use is
+        <a href="https://wiki.osdev.org/ELF">ELF</a>.
+        Command-line tools for peeking into such a file
+        include:<sup><a href="https://en.wikipedia.org/wiki/Executable_and_Linkable_Format#Tools">[21]</a></sup>
+    </p>
+
+    <ul>
+        <li> <code>file</code> &mdash; Provide a brief description of any filetype</li>
+        <li> <code>size</code> &mdash; List section sizes above<li>
+        <li> <code>readelf</code> &mdash; Display detailed information about ELF files</li>
+        <li> <code>objdump</code> &mdash; "... mostly useful to programmers who are working on compilation tools,
+      as opposed to programmers who just want their program to compile and
+      work."<sup><a href="https://www.man7.org/linux/man-pages/man1/objdump.1.html">[19]</a></sup></li>
+  </ul>
+</div>
+
+<div class="content" id="scripts">
+    <h2> Script </h2>
+    <p>
+        A script is a text file that is executable.
+        Scripts must begin with the magic characters <em>#!</em> , then the
+        complete pathname of the desired interpreter, as in
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            To execute a file in the current working directory, use
+            <br><center><code>./file</code></center><br>
+        </p>
+    </div>
+
+  <div class="code">
+    #! /bin/bash
+  </div>
+
+  <p>
+    or
+  </p>
+
+  <div class="code">
+    #! /usr/bin/python.
+  </div>
+
+  <p>
+    This line is often called <em>shebang</em> or <em>hashbang</em>.
+    Note that this feature is implemented by the kernel:  The kernel
+    itself is passed the script via <em>exec</em>, and
+    goes about executing the interpreter given, with the file as an
+    argument to it.<sup><a href="https://en.wikipedia.org/wiki/Shebang_(Unix)#History">[5]</a></sup>
+    Also, Bash will attempt to execute the file within a subshell,
+    if no hashbang line exists.<sup><a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Scripts.html#Shell-Scripts">[22]</a></sup>
+  </p>
+
+</div>
