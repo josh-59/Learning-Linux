@@ -7,8 +7,17 @@ last-updated: January 2021
 <!--
     To Do:
 
+    Unix Architecture:
+        Drivers (imply) generality:
+
+        https://www.oreilly.com/openbook/freedom/ch07.html
+        """
+        To facilitate this process, the developers in charge of designing the dominant Unix strains made sure to keep an extra layer of abstraction between the software and the machine. Instead of tailoring the operating system to take advantage of a specific machine's resources-as the AI Lab hackers had done with ITS and the PDP-10-Unix developers favored a more generic, off-the-rack approach. Focusing more on the interlocking standards and specifications that held the operating system's many subcomponents together, rather than the actual components themselves, they created a system that could be quickly modified to suit the tastes of any machine. If a user quibbled with a certain portion, the standards made it possible to pull out an individual subcomponent and either fix it or replace it with something better. Simply put, what the Unix approach lacked in terms of style or aesthetics, it more than made up for in terms of flexibility and economy, hence its rapid adoption.
+        """
+
+
     Linux Kernel:
-        Find better 'See Also' material
+        Rewrite, focusing on Torvald's interest in technology
 
     Linux Mint:
         Rewrite to "Beginner Linux Distributions"?
@@ -39,6 +48,8 @@ last-updated: January 2021
         - FSF promotes user freedom
         
         - Closed-source software is about the money.
+        
+
 
 
 
@@ -251,47 +262,72 @@ last-updated: January 2021
     </p>
 
     <p>
-        In 1981, that culture collapsed as its members left to form
-        a commercial venture, 
-        <a href="https://en.wikipedia.org/wiki/Symbolics">Symbolics</a>.<sup><a href="https://www.gnu.org/gnu/thegnuproject.html">[6]</a></sup>
+        In 1981, that culture collapsed as 
+        commercial ventures hired away most of the
+        lab.<sup><a href="https://www.gnu.org/gnu/thegnuproject.html">[6]</a><a href="https://www.oreilly.com/openbook/freedom/ch07.html">[7]</a></sup>
         In 1982, when administrators purchased a new PDP-10, they opted for a 
-        closed-source, proprietary operating system, 
-        and Stallman decided to respond.<sup><a href="https://www.gnu.org/gnu/thegnuproject.html">[6]</a></sup>
-        His project was called "GNU," a recursive acronym for 
-        <em>GNU's Not Unix.</em><sup><a href="https://www.gnu.org/gnu/gnu-history.html">[7]</a></sup>
+        closed-source, proprietary operating system, and indirectly threatened
+        to seal the fate of software freedom.
+        Stallman began to consider the merits of sharing software in 
+        itself,
+        in the process deriving an analogy to scientific cooperation, a pillar of
+        the University's  morals.<sup><a href="https://www.gnu.org/gnu/why-programs-should-be-shared.html">[8]</a><a href="https://www.gnu.org/gnu/yes-give-it-away.html">[9]</a></sup>
     </p>
 
     <p>
-        To create an entire operating system is an enormous task, but,
-        seven years later, the GNU Project had
-        either found or written all major components except one&mdash; the kernel.<sup><a href="https://www.gnu.org/gnu/gnu-history.html">[7]</a></sup>
-        GNU's own kernel, dubbed <a href="https://www.gnu.org/software/hurd/">Hurd</a>, has yet to be completed.
+        Yet, proprietary software was becoming the norm, with students working
+        on projects intended for profit<sup><a href="https://www.gnu.org/gnu/why-programs-should-be-shared.html">[8]</a></sup>
+        and companies going so far as to require  
+        nondisclosure agreements be signed to get an 
+        executable.<sup><a href="https://www.gnu.org/gnu/thegnuproject.html">[6]</a></sup>
+        On September 27, 1983, Stallman announced his resolution:
+        To produce a "complete Unix-compatible software system," and to 
+        "give it away free."<a href="https://www.gnu.org/gnu/initial-announcement.en.html#f1"><sup>[10]</sup></a>
+        He called the project <a href="https://gnu.org">GNU</a>, a recursive 
+        acronym for 
+        <em>GNU's Not Unix.</em><sup><a href="https://www.gnu.org/gnu/gnu-history.html">[11]</a></sup>
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+        These ideas are expressed formally and generally through <em><a href="https://en.wikipedia.org/wiki/Copyleft">copyleft</a>.</em><sup><a href="https://www.gnu.org/gnu/thegnuproject.html">[6]</a></sup>
+        </p>
+    </div>
+
+    <p>
+        At the time of announcement, Stallman had not yet quantified his 
+        own intentions behind the word <em>free.</em>
+        Certainly, "a free copy" did not embody the 
+        culture of code-sharing MIT was once home to.
+        More, he could not put the code in the public domain because 
+        modified versions of it it could become proprietary.<sup><a href="https://en.wikipedia.org/wiki/Copyleft#History">[12]</a></sup>
+        By 1985, Stallman had sorted these issues out: 
+    </p>
+    
+    <blockquote>
+        <p>
+            GNU is not in the public domain. Everyone will be permitted to 
+            modify and redistribute GNU, but no distributor will be allowed to 
+            restrict its further redistribution. That is to say, proprietary 
+            modifications will not be allowed. I want to make sure that all 
+            versions of GNU remain free.<sup><a href="https://www.gnu.org/gnu/manifesto.html">[13]</a></sup>
+        </p>
+    </blockquote>
+        
+    <p>
+        Thus, software freedom became <em>users'</em> freedoms: 
+        Users can run, study, modify, copy and distribute the software;
+        but, if they distribute, then those freedoms must be preserved.  
+        Software freedom was implemented in different forms in the various 
+        licenses of early GNU products; in 1989, parts of these licenses were taken 
+        together to form the GNU 
+        <a href="https://en.wikipedia.org/wiki/GNU_General_Public_License#History">General Public License</a>, 
+        version 1.<sup><a href="https://en.wikipedia.org/wiki/GNU_General_Public_License#History">[14]</a></sup>
     </p>
 
     <p>
-        Today, the <a href="https://www.gnu.org/">GNU Project</a> is well-regarded for producing high-quality, well-documented
-        free software;
-        they are as "official" as the open-source community gets.
-        In particular, their compiler collection,
-        <code><a href="https://gcc.gnu.org">gcc</a></code>, contains the 
-        de-facto C compiler of the open-source community, if not the world.
-        It is the only compiler capable of building Linux kernels.<sup><a href="#references">[8]</a></sup>
-    </p>
-
-    <h3> GNU General Public License </h3>
-
-    <p>
-        Of arguably greater importance than the software created by the 
-        GNU Project was the license invented to distribute it.
-        Called the 
-        <a href="https://www.gnu.org/licenses/licenses.html#gpl">GNU General Public License,</a> 
-        it ensures that users can 
-        <a href="https://www.gnu.org/philosophy/philosophy.html">run, copy, distribute, study, change and improve</a>
-        the software.
-    </p>
-
-    <p>
-        About the device, Linus Torvalds writes:
+        About it, Linus Torvalds writes:
     </p>
 
     <p style="width: 90%; margin-left: 5%;">
@@ -299,15 +335,31 @@ last-updated: January 2021
         You can charge a million bucks if someone is willing to pay
         for it, but you have to make sources available.  
         And the person you give or sell the source to has to have
-        all the rights you have. It's a brilliant device."<sup><a href="#references">[5]</a></sup>
+        all the rights you have. 
+        It's a brilliant device."<sup><a href="#references">[5]</a></sup>
     </p>
 
+    <div class="aside-left">
+        <h4>Aside:</h4>
+        <p>
+            GNU's own kernel, <a href="https://www.gnu.org/software/hurd/">Hurd</a>,
+            has not, as of 2021, been completed.
+        </p>
+    </div>
+
     <p>
-        GNU remains both <a href="https://www.gnu.org/keepingup.html">active and prominent</a> 
-        among the free software
-        community, fighting the good fight with the help of the 
-        <a href="https://www.fsf.org">Free Software Foundation</a>.<sup><a href="https://www.gnu.org/gnu/gnu-structure.html">[9]</a></sup> 
-        Richard Stallman remains Chief GNUisance.<sup><a href="https://www.gnu.org/gnu/gnu-structure.html">[9]</a></sup> 
+        To create an entire operating system is an enormous task, but
+        by 1990, the GNU Project had
+        either found or written all major components except one&mdash; the kernel.<sup><a href="https://www.gnu.org/gnu/gnu-history.html">[11]</a></sup>
+        Today, the <a href="https://www.gnu.org/">GNU Project</a> is renowned
+        for producing high-quality, well-documented free software;
+        they are as "official" as the open-source community gets.
+        They remain
+        <a href="https://www.gnu.org/keepingup.html">active and prominent</a> 
+        among the free software community, fighting the good fight with the 
+        help of the 
+        <a href="https://www.fsf.org">Free Software Foundation</a>.<sup><a href="https://www.gnu.org/gnu/gnu-structure.html">[15]</a></sup> 
+        Richard Stallman remains Chief GNUisance.<sup><a href="https://www.gnu.org/gnu/gnu-structure.html">[15]</a></sup> 
     </p>
 
     <h3> See Also: </h3>
@@ -324,7 +376,7 @@ last-updated: January 2021
         announced his own free operating system project.
         Again following the architecture of the Unix operating system,
         his project was intended to be "...just a hobby, won't be big and
-        professional like GNU."<sup><a href="#references">[10]</a></sup>
+        professional like GNU."<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[16]</a></sup>
     </p>
 
     <div class="aside-right" style="font-size: 11pt;">
@@ -339,7 +391,7 @@ last-updated: January 2021
         produce an entire operating system, Linus restricted his
         attention to creating a kernel.
         By October of 1991, GNU's Bash, GCC, Make and other
-        programs were running on his creation.<sup><a href="#references">[10]</a></sup>
+        programs were running on his creation.<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[16]</a></sup>
         He soon released it under the GNU General Public License, Version 2.
         Later, he would write:
     </p>
@@ -369,7 +421,7 @@ last-updated: January 2021
         <a href="assets/free-minix-like-kernel-sources-for-386-at.html">Everybody was invited,</a> if only
         to tinker.
         This development model&mdash; "release early and often, delegate everything you can,
-        be open to the point of promiscuity"<sup><a href="#references">[11]</a></sup>&mdash; <a href="http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/index.html#catbmain">raised eyebrows</a> at the time,
+        be open to the point of promiscuity"<sup><a href="#references">[17]</a></sup>&mdash; <a href="http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/index.html#catbmain">raised eyebrows</a> at the time,
         but has proven sound in virtue of its overwhelming success:
         The Linux kernel has become the most-used Unix-like kernel of all time.
     </p>
@@ -391,12 +443,12 @@ last-updated: January 2021
     <p>
         A major figure of today's Linux development team is Greg Kroah-Hartman 
         (pronounced "<em>Crow</em>-Hartman"), who maintains the Stable branch, 
-        in addition to various subsystems.<sup><a href="#references">[12]</a></sup>
+        in addition to various subsystems.<sup><a href="https://en.wikipedia.org/wiki/Greg_Kroah-Hartman">[18]</a></sup>
         According to Mr. Kroah-Hartman, interest in the kernel continues to
         grow, with 1200 new developers contributing each
-        year.<sup><a href="#references">[13]</a></sup>
+        year.<sup><a href="https://www.theregister.com/2020/10/26/linux_kernel_intel/">[19]</a></sup>
         Their main development bottlenecks are code review and
-        maintainership.<sup><a href="#references">[13]</a></sup>
+        maintainership.<sup><a href="https://www.theregister.com/2020/10/26/linux_kernel_intel/">[19]</a></sup>
     </p>
 
     <p>
@@ -404,11 +456,11 @@ last-updated: January 2021
         for some, and serious affair for many.
         In particular, the kernel development team
         takes great care not to break
-        user-space,<sup><a href="#references">[14]</a></sup>
+        user-space,<sup><a href="https://lkml.org/lkml/2012/12/23/75">[20]</a></sup>
         meaning that programs that <em>did</em> work will continue to
         work.
         In this way, they ensure the long-term stability of Linux-based
-        systems.<sup><a href="#references">[15]</a></sup>
+        systems.<sup><a href="https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space">[21]</a></sup>
     </p>
 
         <h3>See Also:</h3>
@@ -424,7 +476,7 @@ last-updated: January 2021
     <p>
         The first versions of the Linux kernel were available 
         only in source-code form, and required compilation on a 
-        host machine.<sup><a href="#references">[10]</a></sup> 
+        host machine.<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[16]</a></sup> 
         More, no other software was included, so that the 
         creation of a Linux-based machine required obtaining, compiling and
         assembling a number of software components by the user.
@@ -438,20 +490,20 @@ last-updated: January 2021
     <p>
         In 1992, <a href="https://en.wikipedia.org/wiki/HJ_Lu">HJ Lu</a>
         began packaging utilities alongside the kernel and distributing the
-        collection together on a pair of 5.25" disks.<sup><a href="https://www.maketecheasier.com/history-of-early-linux-distros/">[16]</a><a href="https://itsfoss.com/earliest-linux-distros/">[17]</a></sup>
+        collection together on a pair of 5.25" disks.<sup><a href="https://www.maketecheasier.com/history-of-early-linux-distros/">[22]</a><a href="https://itsfoss.com/earliest-linux-distros/">[23]</a></sup>
         Known as <em>boot/root</em> floppies, they are
-        the first known Linux distribution,<sup><a href="https://itsfoss.com/earliest-linux-distros/">[17]</a></sup>
+        the first known Linux distribution,<sup><a href="https://itsfoss.com/earliest-linux-distros/">[23]</a></sup>
         and worked similarly to a live CD:
         You booted from one disk, then replaced it when prompted.
-        "After a while," says Joe Klemmer, "you got a command prompt."<sup><a href="https://lwn.net/Articles/91371/">[18]</a></sup>
+        "After a while," says Joe Klemmer, "you got a command prompt."<sup><a href="https://lwn.net/Articles/91371/">[24]</a></sup>
     </p>
 
     <p>
-        Linux's first widely recognized and used distribution was a commercial 
-        venture, Soft Landing System.<sup><a href="https://lwn.net/Articles/91371/">[18]</a></sup>
-        Also released in 1992, SLS was sold under the slogan "Gentle Touchdowns for DOS Bailouts",<sup><a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">[19]</a></sup>
-        but users complained that the software was buggy,<sup><a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">[19]</a><a href="https://www.linuxjournal.com/article/2750">[20]</a></sup> and when its developers
-        decided to change the executable file format, began to leave.<sup><a href="https://lwn.net/Articles/91371/">[18]</a></sup>
+        Linux's first widely recognized and used distribution was, ironically, 
+        a commercial venture: Soft Landing System.<sup><a href="https://lwn.net/Articles/91371/">[24]</a></sup>
+        Released in late 1992, SLS was sold under the slogan "Gentle Touchdowns for DOS Bailouts",<sup><a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">[25]</a></sup>
+        but users complained that the software was buggy,<sup><a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">[25]</a><a href="https://www.linuxjournal.com/article/2750">[26]</a></sup> and when its developers
+        decided to change the executable file format, began to leave.<sup><a href="https://lwn.net/Articles/91371/">[14]</a></sup>
     </p>
 
     <h3> Two Approaches </h3>
@@ -459,25 +511,25 @@ last-updated: January 2021
     <p>
         In late 1992, Patrick Volkerding needed a LISP interpreter for a project
         at school, and, having heard that <code>clisp</code> ran on SLS Linux, 
-        downloaded them both.<sup><a href="https://www.linuxjournal.com/article/2750">[20]</a></sup>
+        downloaded them both.<sup><a href="https://www.linuxjournal.com/article/2750">[26]</a></sup>
         His professor got wind, and asked Patrick to help him install the software
-        on school computers.<sup><a href="https://www.linuxjournal.com/article/2750">[20]</a></sup>
+        on school computers.<sup><a href="https://www.linuxjournal.com/article/2750">[26]</a></sup>
 
         Volkerding walked him through installing, fixing and patching SLS, and
         afterward, his professor asked, "Is there some way we can fix the install disks so
-        that the new machines will have these fixes right away?"<sup><a href="https://www.linuxjournal.com/article/2750">[20]</a></sup>
+        that the new machines will have these fixes right away?"<sup><a href="https://www.linuxjournal.com/article/2750">[26]</a></sup>
     </p>
 
     <p>
         So Volkerding began improving SLS, and internally named his project
-        <em>Slackware;</em> Patrick didn't want people to take it too seriously.<sup><a href="https://www.linuxjournal.com/article/2750">[20]</a></sup>
+        <em>Slackware;</em> he didn't want the project taken too seriously.<sup><a href="https://www.linuxjournal.com/article/2750">[26]</a></sup>
         By May, though, the improvements were becoming substantial, and when
         first released on the internet in June, proved so popular that the 
-        number of download requests crashed the system hosting it.<sup><a href="https://www.linuxjournal.com/article/2750">[20]</a></sup>
-        Volkerding hadn't intended to produce a distribution,<sup><a href="https://www.linuxjournal.com/article/2750">[20]</a></sup> but still
-        maintains <a href="http://www.slackware.com/">Slackware</a> today.<sup><a href="http://www.slackware.com/about">[21]</a></sup>
-        The Slackware Linux Project is aimed at producing the most UNIX-like
-        Linux distribution available.<sup><a href="http://www.slackware.com/info/">[22]</a></sup>
+        number of download requests crashed the system hosting it.<sup><a href="https://www.linuxjournal.com/article/2750">[26]</a></sup>
+        Volkerding hadn't intended to produce a distribution,<sup><a href="https://www.linuxjournal.com/article/2750">[26]</a></sup> but still
+        maintains <a href="http://www.slackware.com/">Slackware</a> today.<sup><a href="http://www.slackware.com/about">[27]</a></sup>
+        The Slackware Linux Project is aimed at producing, "the most UNIX-like
+        Linux distribution out there."<sup><a href="http://www.slackware.com/info/">[28]</a></sup>
     </p>
 
     <div class="img-center">
@@ -490,24 +542,24 @@ last-updated: January 2021
     </div>
 
     <p>
-        In 1993, Ian Murdock also grew frustrated with SLS Linux,<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[23]</a></sup>
+        In 1993, Ian Murdock also grew frustrated with SLS Linux,<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[29]</a></sup>
         and, more, sought a better solution to distribution creation than 
-        single-person or closed-room schemes.<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[23]</a></sup>
+        single-person or closed-room schemes.<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[29]</a></sup>
         Ian wanted an operating system that lived up to the Linux name, 
         was carefully and conscientiously assembled, and which was maintained
-        with equal diligence.<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[23]</a></sup>
+        with equal diligence.<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[29]</a></sup>
         In particular, he wanted a free operating system that could
-        compete with commercial distributions.<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[23]</a></sup>
+        compete with commercial distributions.<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[29]</a></sup>
     </p>
 
     <p>
         Murdock decided to make the process open, in the spirit of GNU and Linux,
         thereby ensuring satisfaction of user's requirements while also 
-        unloading the burden of creation and maintainership.<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[23]</a></sup>
+        unloading the burden of creation and maintainership.<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[29]</a></sup>
         He named it <a href="https://www.debian.org">Debian</a>, 
-        a portmanteau of <em>Debra,</em> his wife, and <em>Ian,</em> himself.<sup><a href="https://www.debian.org/doc/manuals/project-history/intro.en.html">[24]</a></sup>
+        a portmanteau of <em>Debra,</em> his wife, and <em>Ian,</em> himself.<sup><a href="https://www.debian.org/doc/manuals/project-history/intro.en.html">[30]</a></sup>
         The project's openness attracted developers, and today around 
-        a thousand people volunteer their spare time.<sup><a href="https://www.debian.org/intro/philosophy">[25]</a></sup>
+        a thousand people volunteer their spare time.<sup><a href="https://www.debian.org/intro/philosophy">[31]</a></sup>
         Debian is one of the most respected distributions of our time,
         and is oft-used as an upstream source for other distributions.
     </p>
@@ -609,16 +661,22 @@ last-updated: January 2021
 <div id="references" class="content">
     <h2> References </h2>
     <ol style="margin-left: 0">
-        <li> Multics History. (2020, September 20). Retrieved September 23, 2020, from <a href="https://multicians.org/history.html">https://multicians.org/history.html</a></li>
+        <li> 
+            Multics History. (2020, September 20). Retrieved September 23, 2020, from <a href="https://multicians.org/history.html">https://multicians.org/history.html</a>
+        </li>
+
         <li>
             Kernighan, Brian. <i>Unix: A History and a Memoir.</i>  Published 2020, by Brian W. Kernighan via Kindle Direct Publishing.
         </li>
+
         <li>
             Ritchie, D. M. (1984). The Evolution of the Unix Time-sharing System. <em>AT&amp;T Bell Laboratories Technical Journal,</em> 63(6), 2nd ser., 1577-1593.
         </li>
+
         <li>
             Thompson, K. (2020, October 4). <em>Reflections on Trusting Trust.</em> Lecture presented at Turing Award Lecture.
         </li>
+
         <li>
             Torvalds, L., &amp; Diamond, D. (2002). <em>Just for Fun: The story of an accidental revolutionary.</em> New York ; London ; Toronto ; Sydney: Harper.
         </li>
@@ -629,17 +687,49 @@ last-updated: January 2021
         </li>
 
         <li>
+            Williams, S. (2002). A Stark Moral Choice. In <a href="https://www.oreilly.com/openbook/freedom/ch07.html"><em>Free as in freedom: Richard Stallman's crusade for free software</em></a> (1st ed.). California: O'Reilly.
+        </li>
+
+        <li>
+            Stallman, R. (n.d.). Why Programs Should be Shared. Retrieved February 01, 2021, from <a href="https://www.gnu.org/gnu/why-programs-should-be-shared.html">https://www.gnu.org/gnu/why-programs-should-be-shared.html</a>
+        </li>
+
+        <li>
+            Stallman, R. (n.d.). Yes, Give It Away. Retrieved February 01, 2021, from <a href="https://www.gnu.org/gnu/yes-give-it-away.html">https://www.gnu.org/gnu/yes-give-it-away.html</a>
+        </li>
+
+        <li>
+            Stallman, R. (n.d.). Initial Announcement. Retrieved February 01, 2021, from <a href="https://www.gnu.org/gnu/initial-announcement.html">https://www.gnu.org/gnu/initial-announcement.html</a>
+        </li>
+
+        <li>
             "Overview of the GNU System." <em>Overview of the GNU System - GNU Project - Free Software Foundation,</em>
             Free Software Foundation, Inc., 4 Sept. 2017, 10:21:27,
             <a href="http://www.gnu.org/gnu/gnu-history.html">www.gnu.org/gnu/gnu-history.html</a>.
         </li>
 
         <li>
-            Kroah-Hartman, G. (2007). Chapter 2: Requirements for Building and Using the Kernel.
-            In <em>Linux Kernel in a Nutshell</em> (pp. 5-6). Sebastopol, CA: O'Reilly.
+            Copyleft. (2021, January 31). Retrieved February 01, 2021, from <a href="https://en.wikipedia.org/wiki/Copyleft">https://en.wikipedia.org/wiki/Copyleft</a>
         </li>
 
         <li>
+            Stallman, R. (n.d.). The GNU Manifesto. Retrieved February 01, 2021, from <a href="https://www.gnu.org/gnu/manifesto.html">https://www.gnu.org/gnu/manifesto.html</a>
+        </li>
+
+        <li>
+            GNU General Public License. (2021, January 31). Retrieved February 01, 2021, from <a href="https://en.wikipedia.org/wiki/GNU_General_Public_License#History">https://en.wikipedia.org/wiki/GNU_General_Public_License#History</a>
+        </li>
+
+
+
+
+
+
+
+
+
+
+               <li>
             The Structure and Administration of the GNU Project. <em>The Structure and Administration of the GNU Project - GNU Project - Free Software Foundation,</em>
             Free Software Foundation, Inc., 10 October 2020, 13:07:59,
             <a href="https://www.gnu.org/gnu/gnu-structure.html">https://www.gnu.org/gnu/gnu-structure.html</a>.
@@ -668,6 +758,14 @@ last-updated: January 2021
         <li>
             Mitha, F. (2015, October 11).  Why is there a Linux kernel policy to never break user space? Retrieved August 02, 2020, from <a href="https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space">https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space"</a>
         </li>
+
+        <!-- End Linus Kernel
+
+            Begin Linux Distributions-->
+
+            
+
+
 
         <li>
             Delony, D. (2012, September 12). History of Early Linux Distros. Retrieved January 20, 2021, from <a href="https://www.maketecheasier.com/history-of-early-linux-distros/">https://www.maketecheasier.com/history-of-early-linux-distros/</a>
