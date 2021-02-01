@@ -132,7 +132,7 @@ last-updated: July, 2020
 <div id="locate" class="content">
     <h2> Locate </h2>
     <p>
-        Starting out, your best bet is the <code>locate</code> command:
+        For quick searches, your best bet is the <code>locate</code> command:
 	</p>
 
 	<div class="code">
@@ -140,21 +140,18 @@ last-updated: July, 2020
 	</div>
 
     <p>
-        By default, <code>locate</code> matches <em>*pattern*</em> against the pathname of each file,
-        using <a href="command-line-tutorial-introduction.html#globbing">shell globbing</a> to interpret the asterisks.
-        In words,
+        By default, <code>locate</code> matches <em>*pattern*</em> against the 
+        pathname of each known file,
+        using <a href="terminals-and-shells.html#globbing">shell globbing</a> 
+        to interpret the asterisks.
+        Filenames which match are printed to <code>stdout</code>, with
+        a newline separating matches.
+        In addition, <code>locate</code> searches, matches and prints hidden 
+        files and files in hidden directories, as well.
     </p>
 
-    <div class="code">
-        $ locate <em>pattern</em>
-    </div>
-
     <p>
-        says, "Print out all absolute filenames containing the string <em>pattern</em>."
-	</p>
-
-    <p>
-        For instance,
+        For example,
     </p>
 
     <div class="code">
@@ -162,9 +159,10 @@ last-updated: July, 2020
     </div>
 
     <p>
-        prints all files whose pathname includes
-        the string "bin", so that
-    </p>
+        says, "Print out all absolute filenames containing the string <em>bin</em>,"
+        so that
+	</p>
+
 
     <div class="code">
         /var/lib/gems/2.5.0/<mark>bin</mark>
@@ -186,17 +184,22 @@ last-updated: July, 2020
         /var/lib/dpkg/info/texlive-<mark>bin</mark>aries.postinst.
     </div>
 
-    <p>
-      Locate matches hidden files, and files in hidden directories, as well.
-    </p>
+   
+    <div class="aside-right">
+        <h4>Behind the Curtain:</h4>
+        <p>
+            This "database" is 
+            <a href="https://jvns.ca/blog/2015/03/05/how-the-locate-command-works-and-lets-rewrite-it-in-one-minute/">literally just a text file</a>
+            containing filenames.
+        </p>
+    </div>
 
-	  <p>
-  	  A minor detail:
-  	  <em>locate</em> and its variants reference a database of information
-      about files on the system, and not the directories themselves.
-      The "database" is literally just a file containing filenames (see below).
-      This makes it much faster for ordinary searches,
-      but if you're looking for new files, then you must update this database with:
+	<p>
+  	    A minor detail:
+  	    <code>locate</code> references a database of information
+        about files on the system, and not the directories themselves.
+        This makes it much faster, but if you're looking for new files, 
+        then you must update said database with:
     </p>
 
     <div class="code">
@@ -204,14 +207,9 @@ last-updated: July, 2020
     </div>
 
     <p>
-        Upon installation of the findutils package, the above command
-        is executed for you daily.<sup><a href="">CITE</a></sup>
+        If <code>locate</code> is installed on your machine, 
+        then this command is executed for you daily.
     </p>
-
-    <h3>See Also:</h3>
-    <ul>
-      <li><a href="https://jvns.ca/blog/2015/03/05/how-the-locate-command-works-and-lets-rewrite-it-in-one-minute/"> How the locate command works and let's write a faster version in one minute!</a> (Shoutout to <a href="https://wiki.archlinux.org/index.php/Mlocate">ArchWiki</a> for this link!)</li>
-    </ul>
 
 </div>
 
