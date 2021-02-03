@@ -5,39 +5,51 @@ last-updated: December 2020
 ---
 
 <!--
-    So, we're going to have to BUILD the idea of modern package
-    management.
-
     Slackware package format
         www.slackbook.org/html/package-management.html
 
-        <div class="code">
-            ./
-            usr/
-            usr/bin/
-            usr/bin/makehejaz
-            usr/doc/
-            usr/doc/makehejaz-1.0/
-            usr/doc/makehejaz-1.0/COPYING
-            usr/doc/makehejaz-1.0/README
-            usr/man/
-            usr/man/man1
-            usr/man/man1/makehejaz.1.gz
-            install/
-            install/doinst.sh
-        </div>
+    Package managers:
+    <div class="code">
+        sudo apt install ./atom-amd64.deb
+    </div>
 
-        Package must be a tar gzipped file
-            - Explain the archaic, rudimentary tools
+    <p>
+        That's it. There's nothing more to it.
+    </p>
+
+    The relationship between packages and distributions:
+        Package management and Linux distributions are uniquely intertwined:
+        The software that composes a system defines the distribution.
+        More, package management is the purview of the distribution's creator.
+        
+    Repositories:
+        Subsection?
+
+    Rolling Releases:
+        
+        Some people think that rolling releases are 
+        the future of Linux distributions
+        <sup><a href="https://frontpagelinux.com/news/centos-crosses-streams-with-the-community/">[1]</a></sup>
+
 
         explodepkg
             - Extracts package to the current directory
 
+    Arch User's Repository, AUR
+
         
     Dependencies
         <em>Where the magic happens</em>
-        Slackware's package management is comparatively primitive 
-            (And they like it that way)
+    <p>
+        The more sophisticated package distribution solutions of other
+        distributions allows greater automation:
+        You ask the package manager to install <code>X</code>, it
+        informs you that <code>X</code> also needs <code>Y</code> and 
+        <code>Z</code>, 
+        and offers to install them all for you.
+    </p>
+
+
 
 A section from the Linux Mint User Guide (old)
 https://www.linuxmint.com/documentation/user-guide/Cinnamon/english_18.0.pdf
@@ -56,9 +68,7 @@ Other Package Managers:
     From https://linuxmint-user-guide.readthedocs.io/en/latest/snap.html
            "The Snap Store, also known as the Ubuntu Store, is a commercial centralized software store operated by Canonical."
 
-
-    Installing Ruby:
-         https://jekyllrb.com/docs/installation/ubuntu/
+    PIP:
 
 -->
 
@@ -66,6 +76,7 @@ Other Package Managers:
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#packages-intro"> Introduction to Packages </a></li>
+        <li><a href="#metadata-and-payload"> Common Package Attributes </a></li>
         <li><a href="#repositories"> Repositories </a></li>
         <li><a href="#references"> References </a></li>
     </ul>
@@ -75,100 +86,136 @@ Other Package Managers:
     <h1>Package Management </h1>
 
     <p>
-        A package is a bundle of data that contains the things 
+        A package is a file that contains the things 
         required to implement a program, a set of related programs,
         or a set of related features.<sup><a href="https://wiki.debian.org/Packaging/Intro">[1]</a></sup>
-        It contains the primary binary executable, other assets required
-        by it, a description of the software included, and 
-        a list of other dependancies (if any).
-        Packages provide a way to automate the 
-        installation of software,<sup><a href="https://wiki.debian.org/Packaging/Intro">[1]</a></sup>
-        and exist in multiple contexts within the FOSS domain.
+        Packages obviate the need to obtain
+        source code, configure it, compile it and install the results by hand.<sup><a href="https://www.slackbook.org/html/package-management.html">[2]</a></sup>
+        Packages are well-suited to automation by utility programs,
+        and aid the distribution of software. Each Linux distribution handles
+        packages in their own way.
     </p>
 </div>
 
 <div id="packages-intro" class="content">
-    <h2> Introduction to Packages  </h2>
+    <h2 style="margin-bottom: 0;"> Introduction to Packages:</h2>
+    <h4> Compressed Archives</h4>
 
     <p>
-        I think packages will make the most sense if we just jump right in to
-        using them.
-        So, there's a piece of software that I really like, but which is
-        not available on the official Debian repositories.
-        It's the <a href="https://atom.io">Atom text editor</a>:
-    </p>
-
-    <figure>
-        <a href="assets/img/atom.png"><img style="width: 100%" src=assets/img/atom.png></a>
-        <figcaption><center><b>Atom</b></center></figcaption>
-    </figure>
-
-    <p>
-        Although there is <a href=https://flight-manual.atom.io/getting-started/sections/installing-atom/">a way</a> to add Atom's repository to Debian systems,
-        I never do (shame on me!).
-        Instead, I usually just download the <code>.deb</code> package given on the landing
-        of their website, and install it manually, which goes like this:
+        Among major distributions, the Slackware Project entertains the 
+        oldest, and possibly simplest, packaging scheme.
+        By modern standards, it may be considered crude, 
+        because it leaves dependency resolution to the user.<sup><a href="https://www.slackbook.org/html/package-management.html">[2]</a></sup>
+        For us, it represents a nice jumping-off point.
     </p>
 
     <p>
-        Clicking the link downloads a single file, <code>atom-amd64.deb</code>, which is
-        the package.
-        From here, open a terminal in the containing folder and
-        install it with,
+        A Slackware package arrives to the user as a single compressed archive.
+        In this file is a directory tree reflective of the Slackware operating
+        system:
     </p>
-
+    
     <div class="code">
-        sudo apt install ./atom-amd64.deb
+        $ tree makehejaz <br>
+        . <br>
+        ├── install <br>
+        │   └── doinst.sh <br>
+        └── usr <br>
+            &ensp;&ensp;&ensp;&ensp;├── bin <br>
+            &ensp;&ensp;&ensp;&ensp;│   └── makehejaz <br>
+            &ensp;&ensp;&ensp;&ensp;├── doc <br>
+            &ensp;&ensp;&ensp;&ensp;│   └── makehejaz-1.0 <br>
+            &ensp;&ensp;&ensp;&ensp;│   &ensp;&ensp;&ensp;&ensp;├── COPYING <br>
+            &ensp;&ensp;&ensp;&ensp;│   &ensp;&ensp;&ensp;&ensp;└── README <br>
+            &ensp;&ensp;&ensp;&ensp;└── man <br>
+            &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;└── man1 <br>
+            &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;└── makehejaz.1.gz
+    </pre>
     </div>
 
     <p>
-        That's it. There's nothing more to it.
+        To install the package, the files are 
+        copied into the appropriate directories of the operating system;
+        if a directory does not exist, it is created; 
+        the <code>install</code> directory is ignored.
+        After these files are copied, the script 
+        <code>./install/doist.sh</code> is executed, if it exists.
     </p>
-
-    <h3>Advantages</h3>
 
     <p>
-        On other operating systems, it is common to download an executable file,
-        then execute it, to install new software.
-        Centralized software management offers a few advantages over
-        this design:
+        ...And that's it! 
     </p>
 
-    <ol class="big-list">
+    <p>
+        Installation is handled by a utility&mdash; in this case either
+        <a href="https://www.slackbook.org/html/package-management-package-utilities.html"><code>installpkg</code> or <code>pkgtools</code></a>&mdash;
+        which must be granted superuser priveledges.
+        The archive is a <a href="https://en.wikipedia.org/wiki/Tar_(computing)">tarball</a>, courtesy of GNU's <code>tar</code>, 
+        and compression upon the archive is, currently, 
+        <a href="https://tukaani.org/xz/">Tukaani's</a> <code>xz</code>. 
+    </p>
+
+    <p>
+        All major distributions package software using compressed archives
+        of "reflective directory trees", though each to their own taste:
+    </p>
+
+    <ul>
         <li>
-            Eliminating Repeated Code
-            <p>
-                Packages eliminate the need to include an installation 
-                solution, since they abdicate this to a utility
-                (here, <code>apt</code>).
-                In software development, repition is not only avoided,
-                it is also discouraged.
-            </p>
+            Slackware <code>.txz</code>:
+            <code>xz</code>-compressed tarball
         </li>
+
         <li>
-            More Controlled Installation
-            <p>
-                <code>apt</code> controls where each file is
-                placed.  
-                Thereby, a uniformity across the system may be maintained.
-            </p>
+            Fedora / Red Hat <code>.rpm</code>:
+            A custom file format which contains four sections: Lead, signature, 
+            header, and payload (<code>zstd</code>-compressed <code>cpio</code>
+            archive).<sup><a href="https://en.wikipedia.org/wiki/RPM_Package_Manager#Binary_format">[2]</a></sup>
         </li>
+
         <li>
-            Centralized Updating
-            <p>
-                Typically, all of the software on a system is managed
-                by the package manager.
-                Thereby, all of the software on a system (that is, the
-                system itself) may be kept up-to-date by a single utility.
-            </p>
+            Debian <code>.deb</code>: 
+            An archive containing three files:
+            <code>debian-binary</code>, denoting package format version number;
+            <code>control.tar.xz</code>, serving a role analogous to <code>install</code> above; and
+            <code>data.tar.xz</code>, the actual payload
         </li>
-    </ol>
+
+        <li>
+            Arch:
+            <code>zstd</code>-compressed tarball 
+        </li>
+    </ul>
+
+    <p>
+        More, while packages of the same program (e.g., <code>vim</code>) may 
+        be similar across distributions, they are not cross-distribution compatible.
+    </p>
 
     <h3>See Also:</h3>
     <ul>
-        <li><a href="https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html#package"> Basics of the Debian package management system </a></li>
-    </ul> 
+        <li><a href="https://en.wikipedia.org/wiki/Tar_(computing)">tar (computing) - Wikipedia </a></li>
+    </ul>
+
 </div>
+
+<div class="content" id="metadata-and-payload">
+    <h2 style="margin-bottom: 0;">Common Package Attributes:</h2>
+    <h4>Metadata and Payload</h4>
+
+    <p>
+        
+    </p>
+
+</div>
+
+<div class="content" id="dependencies">
+    <h2>Dependencies</h2>
+    <p>
+
+    </p>
+</div>
+
 
 <div class="content" id="repositories">
     <h2>Repositories</h2>
@@ -192,3 +239,4 @@ Other Package Managers:
         <li> WHATWG HTML Living Standard Section 1.6, History. <a href="https://html.spec.whatwg.org/multipage/introduction.html#history-2">https://html.spec.whatwg.org/multipage/introduction.html#history-2</a> </li>
     </ol>
 </div>
+
