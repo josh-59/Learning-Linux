@@ -187,8 +187,12 @@ sup, sub {
 	font-size: 0.8em;
 }
 
-.content p {
+.content p, .content blockquote {
 	line-height: 1.5;
+}
+
+.content blockquote {
+    width: 85%;
 }
 
 /*  In written work and any superscript, no underline. */
