@@ -9,7 +9,7 @@
 - name: Terminals and Shells
   link: /terminals-and-shells.html
 - name: Packages 
-  link: /package-management.html
+  link: /packages.html
 - name: Documentation
   link: /documentation.html
 - name: Finding Files
