@@ -76,7 +76,7 @@ Other Package Managers:
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#packages-intro"> Introduction to Packages </a></li>
-        <li><a href="#metadata-and-payload"> Common Package Attributes </a></li>
+        <li><a href="#metadata-and-payload"> Package Contents </a></li>
         <li><a href="#repositories"> Repositories </a></li>
         <li><a href="#references"> References </a></li>
     </ul>
@@ -167,7 +167,7 @@ Other Package Managers:
 
     <p>
         All major distributions package software using compressed archives
-        of "reflective directory trees", though each to their own taste:
+        of "reflective directory trees," though each to their own taste:
     </p>
 
     <ul>
@@ -180,7 +180,7 @@ Other Package Managers:
             Fedora / Red Hat <code>.rpm</code>:
             A custom file format which contains four sections: Lead, signature, 
             header, and payload (<code>zstd</code>-compressed <code>cpio</code>
-            archive).<sup><a href="https://en.wikipedia.org/wiki/RPM_Package_Manager#Binary_format">[2]</a></sup>
+            archive).<sup><a href="https://en.wikipedia.org/wiki/RPM_Package_Manager#Binary_format">[3]</a></sup>
         </li>
 
         <li>
@@ -198,7 +198,7 @@ Other Package Managers:
     </ul>
 
     <p>
-        More, while packages of the same program (e.g., <codde>vim</code>) may 
+        Whil packages of the same program (e.g., <codde>vim</code>) may 
         be similar across distributions, they are not cross-distribution compatible.
     </p>
 
@@ -215,13 +215,13 @@ Other Package Managers:
 
     <p>
         The contents of a package may be split into two 
-        categories: Metadata and Payload.
+        parts: Metadata and Payload.
         In Slackware's format, metadata is restricted to the <code>./install</code>
-        directory, and consists of a post-copy script <code>doinst.sh</code>, 
+        directory, and consists of the post-copy script <code>doinst.sh</code>, 
         and a description of the software, <code>slack-desc</code>.
         Other package management schemes incorporate more metadata; here
         we'll take a look at Debian's, since it is more complete
-        and is well-organized. 
+        and is also well-organized. 
     </p>
 
     <p>
@@ -247,12 +247,12 @@ Other Package Managers:
     <div class="code">
         $ tar --list -f control.tar.xz <br>
         ./ <br>
-        <a href="">./control</a> <br>
-        <a href="">./md5sums </a><br>
-        <a href="">./postinst</a> <br>
-        <a href="">./postrm</a> <br>
-        <a href="">./preinst</a> <br>
-        <a href="">./prerm</a> <br>
+        <a href="./pre/control.html">./control</a> <br>
+        <a href="./pre/md5sums.html">./md5sums </a><br>
+        <a href="./pre/postinst.html">./postinst</a> <br>
+        <a href="./pre/postrm.html">./postrm</a> <br>
+        <a href="./pre/preinst.html">./preinst</a> <br>
+        <a href="./pre/prerm.html">./prerm</a> <br>
     </div>
 
     <p>
@@ -288,6 +288,30 @@ Other Package Managers:
         (or less). <br>
 
     </div>
+
+
+$ tree
+.
+├── data.tar.xz
+└── usr
+    ├── bin
+    │   └── vim.basic
+    └── share
+        ├── bug
+        │   └── vim
+        │       ├── presubj
+        │       └── script
+        ├── doc
+        │   └── vim
+        │       ├── changelog.Debian.gz
+        │       ├── changelog.gz
+        │       ├── copyright
+        │       └── NEWS.Debian.gz
+        └── lintian
+            └── overrides
+                └── vim
+
+9 directories, 9 files
 
 </div>
 
@@ -325,3 +349,25 @@ https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html
 
 
 
+$ tree
+.
+├── data.tar.xz
+└── usr
+    ├── bin
+    │   └── vim.basic
+    └── share
+        ├── bug
+        │   └── vim
+        │       ├── presubj
+        │       └── script
+        ├── doc
+        │   └── vim
+        │       ├── changelog.Debian.gz
+        │       ├── changelog.gz
+        │       ├── copyright
+        │       └── NEWS.Debian.gz
+        └── lintian
+            └── overrides
+                └── vim
+
+9 directories, 9 files
