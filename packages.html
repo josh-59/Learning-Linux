@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Package Management
+title: Packages and Package Management
 last-updated: December 2020
 ---
 
@@ -83,17 +83,26 @@ Other Package Managers:
 </div>
 
 <div id="introduction" class="content">
-    <h1>Package Management </h1>
+    <h1>Packages </h1>
+    <h4>and Package Management</h4>
+
+    <div class="aside-right">
+        <h4>Note:</h4>
+        <p>
+            Throughout this chapter, we will restrict our attention to binary 
+            packages (programs).
+        </p>
+    </div>
 
     <p>
         A package is a file that contains the things 
         required to implement a program, a set of related programs,
         or a set of related features.<sup><a href="https://wiki.debian.org/Packaging/Intro">[1]</a></sup>
-        Packages obviate the need to obtain
+        They obviate the need to obtain
         source code, configure it, compile it and install the results by hand,
         and simplify software management greatly.<sup><a href="https://www.slackbook.org/html/package-management.html">[2]</a></sup>
         They are well-suited to automation by utility programs,
-        and aid the distribution of software. 
+        and aid the distribution of software.
         Each Linux distribution handles packages in their own way.
     </p>
 </div>
@@ -119,7 +128,8 @@ Other Package Managers:
         $ tree slackware-vim-fake <br>
         . <br>
         ├── install <br>
-        │   └── doinst.sh <br>
+        │   ├── doinst.sh <br>
+        │   └── slack-desc <br>
         └── usr <br>
             &ensp;&ensp;&ensp;&ensp;├── bin <br>
             &ensp;&ensp;&ensp;&ensp;│   └── vim <br>
@@ -147,7 +157,7 @@ Other Package Managers:
     </p>
 
     <p>
-        Installation is handled by a utility&mdash; in this case either
+        Installation is usually handled by a utility&mdash; in this case either
         <a href="https://www.slackbook.org/html/package-management-package-utilities.html"><code>installpkg</code> or <code>pkgtools</code></a>&mdash;
         which must be granted superuser priveledges.
         The archive is a <a href="https://en.wikipedia.org/wiki/Tar_(computing)">tarball</a>, courtesy of GNU's <code>tar</code>, 
@@ -188,7 +198,7 @@ Other Package Managers:
     </ul>
 
     <p>
-        More, while packages of the same program (e.g., <code>vim</code>) may 
+        More, while packages of the same program (e.g., <codde>vim</code>) may 
         be similar across distributions, they are not cross-distribution compatible.
     </p>
 
@@ -200,12 +210,84 @@ Other Package Managers:
 </div>
 
 <div class="content" id="metadata-and-payload">
-    <h2 style="margin-bottom: 0;">Common Package Attributes:</h2>
+    <h2 style="margin-bottom: 0;">Package Contents:</h2>
     <h4>Metadata and Payload</h4>
 
     <p>
-        
+        The contents of a package may be split into two 
+        categories: Metadata and Payload.
+        In Slackware's format, metadata is restricted to the <code>./install</code>
+        directory, and consists of a post-copy script <code>doinst.sh</code>, 
+        and a description of the software, <code>slack-desc</code>.
+        Other package management schemes incorporate more metadata; here
+        we'll take a look at Debian's, since it is more complete
+        and is well-organized. 
     </p>
+
+    <p>
+        First, we obtain a package and extract it:
+    </p>
+
+    <div class="code">
+        $ ls <br>
+        vim_8.1.0875-5_amd64.deb <br>
+        <br>
+        $ ar -xf vim_8.1.0875-5_amd64.deb <br>
+        <br>
+        $ ls <br>
+        control.tar.xz  data.tar.xz  debian-binary  vim_8.1.0875-5_amd64.deb <br>
+    </div>
+
+    <p>
+        The package's metadata is contained within the <code>control</code>
+        archive, and payload within <code>data</code>. Both can be extracted
+        with <code>tar</code>, but for now we'll just take a peek:
+    </p>
+
+    <div class="code">
+        $ tar --list -f control.tar.xz <br>
+        ./ <br>
+        <a href="">./control</a> <br>
+        <a href="">./md5sums </a><br>
+        <a href="">./postinst</a> <br>
+        <a href="">./postrm</a> <br>
+        <a href="">./preinst</a> <br>
+        <a href="">./prerm</a> <br>
+    </div>
+
+    <p>
+        The file <code>./control</code> contains most interesting information,
+        including dependencies and a description.  You might recognize
+        this file format if you've used Debian's <code>apt show</code>
+        utility:
+    </p>
+        
+        
+    <div class="code">
+        Package: vim <br>
+        Version: 2:8.1.0875-5 <br>
+        Architecture: amd64 <br>
+        Maintainer: Debian Vim Maintainers <team+vim@tracker.debian.org> <br>
+        Installed-Size: 2800 <br>
+        Depends: vim-common (= 2:8.1.0875-5), vim-runtime (= 2:8.1.0875-5), libacl1 (>= 2.2.23), libc6 (>= 2.15), libgpm2 (>= 1.20.7), libselinux1 (>= 1.32), libtinfo6 (>= 6) <br>
+        Suggests: ctags, vim-doc, vim-scripts <br>
+        Provides: editor <br>
+        Section: editors <br>
+        Priority: optional <br>
+        Homepage: https://www.vim.org/ <br>
+        Description: Vi IMproved - enhanced vi editor <br>
+        Vim is an almost compatible version of the UNIX editor Vi. <br>
+        . <br>
+        Many new features have been added: multi level undo, syntax <br>
+        highlighting, command line history, on-line help, filename <br>
+        completion, block operations, folding, Unicode support, etc. <br>
+        . <br>
+        This package contains a version of vim compiled with a rather <br>
+        standard set of features.  This package does not provide a GUI <br>
+        version of Vim.  See the other vim-* packages if you need more <br>
+        (or less). <br>
+
+    </div>
 
 </div>
 
@@ -213,6 +295,7 @@ Other Package Managers:
     <h2>Dependencies</h2>
     <p>
 
+https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html
     </p>
 </div>
 
@@ -239,4 +322,6 @@ Other Package Managers:
         <li> WHATWG HTML Living Standard Section 1.6, History. <a href="https://html.spec.whatwg.org/multipage/introduction.html#history-2">https://html.spec.whatwg.org/multipage/introduction.html#history-2</a> </li>
     </ol>
 </div>
+
+
 

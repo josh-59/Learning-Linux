@@ -8,7 +8,7 @@
   link: /processes.html
 - name: Terminals and Shells
   link: /terminals-and-shells.html
-- name: Package Management
+- name: Packages 
   link: /package-management.html
 - name: Documentation
   link: /documentation.html
