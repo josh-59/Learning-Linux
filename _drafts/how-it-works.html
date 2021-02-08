@@ -1,0 +1,841 @@
+---
+layout: default
+title: How Open Source Works
+last-updated: January 2021
+---
+
+<!--
+To Do:
+    Forking Repositories:
+        An introduction to git usage and repositories
+
+    Train Schedules:
+        Move from "Programming in *nix"
+
+    Slow Like Train:
+        *Stable!*
+
+    Modularity:
+        Open Source Architecture
+        Notepad++ built upon the "scintilla editor component"
+        https://en.wikipedia.org/wiki/Scintilla_(software)
+
+
+        What is open source?
+
+        What is open source?
+        What does it mean?
+        How does it work, and what does it do?
+        
+    <div class="aside-right">
+        <h4>Note:</h4>
+        <p>
+            Licenses that do not perpetuate themselves are known as 
+            <a href="https://en.wikipedia.org/wiki/Permissive_software_license#Comparison_to_copyleft"><em>permissive</em></a>.
+        </p>
+    </div>
+
+        Software differs from material objects in
+        that it can be copied cheaply and 
+        easily.https://gnu.org/philosophy/philosophy.html
+        Because it can be distributed cheaply, free software is like math 
+        or science: It belongs to everyone, and to no one; and, its
+        results are tangible, immediate, tractable.
+
+        The people who take such subjects further do so principally because
+        they find them interesting.
+        For them, the open-source domain naturally beckons.
+        This, in a nutshell, is the story of Linus Torvalds: His kernel 
+        grew out of a multithreaded terminal emulator project intended to 
+        explore the capabilities of his new 386 CPU, and his career was
+        defined by the pursuit of interesting.
+
+        I think it's great:
+            Professional-class software is fascinating.  
+            More, it has interesting properties:
+                It persists, and improves over time; it seems <em>worth</em> studying
+        
+        Most popular license is MIT's (permissive) license.
+        Most people who contribute to open-source do so just as a hobby;
+        they differ from Stallman in that they are not concerned
+        with where the code ends up.
+
+https://opensource.org/faq#permissive
+
+http://web.archive.org/web/19981206185148/http://www.opensource.org/history.html
+"We realized it was time to dump the confrontational attitude that has been
+associated with 'free software' in the past and sell the idea strictly on
+the same pragmatic, business-case grounds that motivated Netscape"
+    (The result was the term 'open-source')
+
+        Open Source Ecology
+            https://opensourceecology.dozuki.com/
+
+-->
+
+<div id="nav_bar_2" class="nav">
+    <ul>
+        <li><a href="#introduction"> Introduction </a></li>
+        <li><a href="#unix"> Unix </a></li>
+        <li><a href="#unix-architecture"> The Unix Architecture </a></li>
+        <li><a href="#free-as-in-freedom"> Free as in Freedom </a></li>
+        <li><a href="#linux"> The Linux Kernel </a></li>
+        <li><a href="#distributions"> Linux Distributions: A Brief History</a></li>
+        <li><a href="#mint"> Linux Mint </a></li>
+        <li><a href="#video">Greg Kroah-Hartman </a></li>
+        <li><a href="#references"> References </a></li>
+    </ul>
+</div>
+
+<div id="introduction" class="content">
+    <h1>What is Open Source?</h1>
+    <div class="quote-text">
+        "Those who do not understand UNIX
+        <span style="display:inline-block; width: 50pt;"></span><br>
+        <span style="display:inline-block; width: 50pt;"></span>
+        are condemned to reinvent it, poorly."
+    </div>
+    <div class="quote-ref">
+        Henry Spence, Programmer
+    </div>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Before the beginning, computers were programmed by their creators.
+        </p>
+    </div>
+
+    <p>
+        In the beginning, hackers shared code in much the
+        same way that chefs share recipes. 
+    </p>
+
+    <p>
+        An operating system is a collection of software which facilitates
+        the use of a computer.
+        To this end, its two main responsibilities are to support running
+        programs, callled processes, and to maintain persistent
+        data, in the form of files.
+        In addition, operating systems ease the task of creating
+        useful programs by offering programmers a logical architecture
+        and predictable environment.
+        GNU/Linux has evolved to offer the single best 
+        programming environment available today.
+    </p>
+</div>
+
+
+<div id="unix" class="content">
+    <h2>UNIX</h2>
+    <p>
+        The Unix Operating System was born in late 1969 at Bell Labs, in the shadow
+        of <a href="https://multicians.org/history.html">Multics</a>.
+        Multics was an operating system intended to
+        commercialize computing by offering it as a service, similar to telephone or
+        electricity.<sup><a href="https://multicians.org/history.html">[1]</a></sup>
+        The intent was for users to connect <a href="terminals-and-shells.html">terminals</a>
+        to a central mainframe, then pay for computation on an as-used basis.
+    </p>
+
+    <p>
+        Being a joint venture between MIT, AT&amp;T's Bell Laboratories, and General
+        Electric, Multics was a large and, in many ways, novel, project.
+        It introduced many new operating systems ideas&mdash; among them,
+        the hierarchical
+        file structure.<sup><a href="https://multicians.org/history.html">[1]</a></sup>
+        For a variety of reasons, the project never realized its dream, and in 1969
+        Bell Laboratories abandoned it.
+    </p>
+
+    <p>
+        Within Bell Labs, management put operating systems research on
+        the backburner, and refused to purchase new computing
+        equipment.<sup><a href="#references">[2]</a></sup><sup><a href="#references">[3]</a></sup>
+        After finding a disused <a href="https://www.soemtron.org/pdp7.html">PDP-7</a>,
+        Ken Thompson rewrote <em><a href="https://en.wikipedia.org/wiki/Space_Travel_(video_game)">Space Travel</a></em> for
+        it.<sup><a href="#references">[2]</a></sup><sup><a href="#references">[3]</a></sup>
+        In the process, he accrued the tools and skills necessary to implement
+        a filesystem he and others at Bell Laboratories had been devising on paper.<sup><a href="#references">[3]</a></sup>
+    </p>
+
+    <p>
+        At some point in 1969, while working on his filesystem, Ken Thompson realized that he was three weeks
+        from an operating system.  All he needed was an
+        <em>exec</em> call, an assembler, a text editor and a shell.
+        In 1970, the new operating system was christened <em>UNIX,</em>
+        as a "somewhat treacherous pun on
+        MULTICS."<sup><a href="#references">[3]</a></sup>
+    </p>
+
+    <p>
+        Owing in part to the restrictive nature of available
+        hardware, the budding operating system focused
+        on simplicity.<sup><a href="#references">[4]</a></sup>
+        The earliest versions of the new operating system were put to use
+        internally by Bell Labs to assist in patent
+        applications.<sup><a href="#references">[2]</a></sup><sup><a href="#references">[3]</a></sup>
+        The software then moved away from its nest under obtuse licenses to
+        universities, where its source code, though not free, was studied and documented.<sup><a href="#references">[2]</a></sup>
+        Finally, Unix became commercially available, to principally
+        corporate clients.<sup><a href="#references">[2]</a></sup>
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://www.cs.princeton.edu/~bwk/memoir.html">Unix: A History and a Memoir</a> by Brian Kernighham</li>
+        <li><a href="http://cs.bell-labs.co/who/ken/mig.html">That Time Ken Thompson Flew a MiG-29</a></li>
+    </ul>
+</div>
+
+<div id="unix-architecture" class="content">
+    <h2>The Unix Architecture</h2>
+    <p>
+        Unix had a clear, simple, and well-documented architecture
+        that
+        <a href="https://upload.wikimedia.org/wikipedia/commons/7/77/Unix_history-simple.svg">inspired many operating systems</a>, including GNU/Linux.
+        It is organized as a heirarchy of layers:
+        Each layer builds upon the one beneathe it, and supports
+        the layer immediately above it.
+    </p>
+
+    <img src="assets/img/linux-architecture.png" style="height: 400px;">
+
+    <p>
+        <strong>Hardware:</strong>
+        At the heart of any computer is its hardware.
+        Each piece of hardware has a software interface defined by the
+        engineering team that created it.
+        These interfaces are varied at best.
+    </p>
+
+    <p>
+        <strong>Drivers:</strong>
+        Drivers interact with hardware, and provide the kernel with
+        a more-uniform interface to each piece.
+        This software layer
+        represents the deepest and most remote element of any operating system.
+        Although drivers can be installed on an as-needed basis, in GNU/Linux
+        the tendency is to include many drivers, and use only those that are required.
+        Drivers are not usually written by the hardware's engineers or vendors.
+    </p>
+
+    <p>
+        <strong>Kernel:</strong>
+        While the heart of any computer is its hardware, the heart any
+        Unix-like operating system is its kernel.
+        The kernel is responsible for 
+        supporting running programs,
+        scheduling the CPU, allotting memory,
+        and maintaining file integrity.
+        It is a large and involved piece of software, and can be likened
+        to the "brains" of the operating system.
+        In Unix-like operating systems, it is not possible to interact directly
+        with the kernel.
+    </p>
+
+    <p>
+        <strong>System Calls:</strong>
+        The operations that the kernel can undertake are 
+        defined by the system calls it supports.
+        Unix-like operating systems have six essential system calls:
+        <em>fork, exec, open, close, read,</em> and
+        <em>write.</em><sup><a href="#references">[5]</a></sup>
+        Both <em>fork</em> and <em>exec</em> are concerned with launching
+        programs, while <em>open, close, read,</em> and <em>write</em> 
+        constitute the essential operations of interaction with files.
+        Processes cannot dictate how the kernel carries system calls out,
+        and in fact, the kernel may deny a system call if, say, a file does not
+        exist, or the calling process does not have appropriate authority.
+    </p>
+
+    <p>
+        <strong>Processes:</strong>
+        A process, sometimes called a "user-space process" or "user-land process,"
+        is an executing program.
+        Within Unix and other Unix-like operating systems, processes run the entire show:
+        The kernel is entirely dependant upon processes
+        to tell it what to do.
+        It follows that there must exist at least one "trusted" process within
+        user-land, to get other processes on their feet&mdash;
+        and this is exactly the case.
+        This is one of the more beautiful elements of the
+        Unix architecture.
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="http://linffo.org/kernel.html">Kernel Definition</a> by the Linux Information Project (LINFO)</li>
+    </ul>
+
+</div>
+
+<div class="content" id="free-as-in-freedom">
+    <h2>Free as in Freedom</h2>
+
+    <div class="img-right">
+        <a title="Ruben Rodriguez, CC BY 4.0 &lt;https://creativecommons.org/licenses/by/4.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Richard_Stallman_at_LibrePlanet_2019.jpg"><img width="256" alt="Richard Stallman at LibrePlanet 2019" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Richard_Stallman_at_LibrePlanet_2019.jpg/512px-Richard_Stallman_at_LibrePlanet_2019.jpg"></a>
+        <center>Richard Stallman</center>
+    </div>
+
+    <p>
+        The first attempt at producing a deliberately free and open-source 
+        Unix clone was
+        <a href="https://www.gnu.org/gnu/initial-announcement.en.html#f1">announced</a> by Richard Stallman in 1983.
+        Stallman had been working at MIT's AI Laboratory for over a decade,
+        and had grown accustomed to its culture of sharing source code:
+        "If you saw someone using an unfamiliar and interesting program, you
+        could always ask to see the source code, so that you could read it, change
+        it, or cannibalize parts of it to make a new 
+        program."<sup><a href="https://www.gnu.org/gnu/thegnuproject.html">[6]</a></sup>
+    </p>
+
+    <p>
+        In 1981, that culture collapsed as 
+        commercial ventures hired away most of the
+        lab.<sup><a href="https://www.gnu.org/gnu/thegnuproject.html">[6]</a><a href="https://www.oreilly.com/openbook/freedom/ch07.html">[7]</a></sup>
+        In 1982, when administrators purchased a new PDP-10, they opted for a 
+        closed-source, proprietary operating system, and indirectly threatened
+        to seal the fate of software freedom.
+        Stallman began to consider the merits of sharing software in 
+        itself,
+        in the process deriving an analogy to scientific cooperation, a pillar of
+        the University's  morals.<sup><a href="https://www.gnu.org/gnu/why-programs-should-be-shared.html">[8]</a><a href="https://www.gnu.org/gnu/yes-give-it-away.html">[9]</a></sup>
+    </p>
+
+    <p>
+        Yet, proprietary software was becoming the norm, with students working
+        on projects intended for profit<sup><a href="https://www.gnu.org/gnu/why-programs-should-be-shared.html">[8]</a></sup>
+        and companies going so far as to require  
+        nondisclosure agreements be signed to get an 
+        executable.<sup><a href="https://www.gnu.org/gnu/thegnuproject.html">[6]</a></sup>
+        On September 27, 1983, Stallman announced his resolution:
+        To produce a "complete Unix-compatible software system," and to 
+        "give it away free."<a href="https://www.gnu.org/gnu/initial-announcement.en.html#f1"><sup>[10]</sup></a>
+        He called the project <a href="https://gnu.org">GNU</a>, a recursive 
+        acronym for 
+        <em>GNU's Not Unix.</em><sup><a href="https://www.gnu.org/gnu/gnu-history.html">[11]</a></sup>
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+        These ideas are expressed formally and generally through <em><a href="https://en.wikipedia.org/wiki/Copyleft">copyleft</a>.</em><sup><a href="https://www.gnu.org/gnu/thegnuproject.html">[6]</a></sup>
+        </p>
+    </div>
+
+    <p>
+        At the time of announcement, Stallman had not yet quantified his 
+        own intentions behind the word <em>free.</em>
+        Certainly, "a free copy" did not embody the 
+        culture of code-sharing MIT was once home to.
+        More, he could not put the code in the public domain because 
+        modified versions of it it could become proprietary.<sup><a href="https://en.wikipedia.org/wiki/Copyleft#History">[12]</a></sup>
+        By 1985, Stallman had sorted these issues out: 
+    </p>
+    
+    <blockquote>
+            GNU is not in the public domain. Everyone will be permitted to 
+            modify and redistribute GNU, but no distributor will be allowed to 
+            restrict its further redistribution. That is to say, proprietary 
+            modifications will not be allowed. I want to make sure that all 
+            versions of GNU remain free.<sup><a href="https://www.gnu.org/gnu/manifesto.html">[13]</a></sup>
+    </blockquote>
+
+           
+    <p>
+        Thus, software freedom became <em>users'</em> freedoms: 
+        Users can run, study, modify, copy and distribute the software;
+        but, if they distribute, then those freedoms must be preserved.  
+        Software freedom was implemented in different forms in the various 
+        licenses of early GNU products; in 1989, parts of these licenses were taken 
+        together to form the GNU 
+        <a href="https://en.wikipedia.org/wiki/GNU_General_Public_License#History">General Public License</a>, 
+        version 1.<sup><a href="https://en.wikipedia.org/wiki/GNU_General_Public_License#History">[14]</a></sup>
+    </p>
+
+    <p>
+        About it, Linus Torvalds writes:
+    </p>
+
+    <blockquote>
+        "Under the terms of the GPL, money is not the issue.
+        You can charge a million bucks if someone is willing to pay
+        for it, but you have to make sources available.  
+        And the person you give or sell the source to has to have
+        all the rights you have. 
+        It's a brilliant device."<sup><a href="#references">[5]</a></sup>
+    </blockquote>
+
+    <div class="aside-left">
+        <h4>Aside:</h4>
+        <p>
+            GNU's own kernel, <a href="https://www.gnu.org/software/hurd/">Hurd</a>,
+            has not, as of 2021, been completed.
+        </p>
+    </div>
+
+    <p>
+        To create an entire operating system is an enormous task, but
+        by 1990, the GNU Project had
+        either found or written all major components except one&mdash; the kernel.<sup><a href="https://www.gnu.org/gnu/gnu-history.html">[11]</a></sup>
+        Today, the <a href="https://www.gnu.org/">GNU Project</a> is renowned
+        for producing high-quality, well-documented free software;
+        they are as "official" as the open-source community gets.
+        They remain
+        <a href="https://www.gnu.org/keepingup.html">active and prominent</a> 
+        among the free software community, fighting the good fight with the 
+        help of the 
+        <a href="https://www.fsf.org">Free Software Foundation</a>.<sup><a href="https://www.gnu.org/gnu/gnu-structure.html">[15]</a></sup> 
+        Richard Stallman remains Chief GNUisance.<sup><a href="https://www.gnu.org/gnu/gnu-structure.html">[15]</a></sup> 
+    </p>
+
+    <h3> See Also: </h3>
+    <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Portal:Free_and_open-source_software">Portal: Free and open-source software - Wikipedia</a></li>
+    </ul>
+</div>
+
+<div class="content" id="linux">
+    <h2>The Linux Kernel </h2>
+
+    <p>
+        On August 25, 1991, a Finnish graduate student by the name of Linus Torvalds
+        announced his own free operating system project.
+        Again following the architecture of the Unix operating system,
+        his project was intended to be "...just a hobby, won't be big and
+        professional like GNU."<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[16]</a></sup>
+    </p>
+
+    <div class="aside-right" style="font-size: 11pt;">
+        <h4>Aside:</h4>
+        <p>
+            Properly speaking, the name <em>Linux</em> refers only to the Linux kernel.
+        </p>
+    </div>
+
+    <p>
+        While the GNU Project sought to
+        produce an entire operating system, Linus restricted his
+        attention to creating a kernel.
+        By October of 1991, GNU's Bash, GCC, Make and other
+        programs were running on his creation.<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[16]</a></sup>
+        He soon released it under the GNU General Public License, Version 2.
+        Later, he would write:
+    </p>
+    
+    <blockquote>
+        "The fact is, to make Linux usable, I had relied on a lot of tools that had
+        been distributed freely over the Internet&mdash;I had hoisted myself up
+        on the shoulders of giants.  The most important of these free software
+        programs was the GCC compiler."<sup><a href="#references">[5]</a></sup>
+    </blockquote>
+
+    <div class="aside-left">
+        <h4>Aside:</h4>
+        <p>
+            Linus Torvalds became interested in operating systems after
+            finding an error in the source code of his <a href="https://en.wikipedia.org/wiki/Sinclair_QL">Sinclair QL's</a> QDOS.
+            <sup><a href="#references">[5]</a></sup>
+            In college, Andrew Tanenbaum's
+            <a href="https://en.wikipedia.org/wiki/Operating_Systems:_Design_and_Implementation"><em>Operating Systems: Design and Implementation</em></a>
+            took this interest to new heights.<sup><a href="#references">[5]</a></sup>
+        </p>
+    </div>
+
+    <p>
+        Interest in the kernel flourished, in large part because
+        of the informality of the project:
+        <a href="pre/free-minix-like-kernel-sources-for-386-at.html">Everybody was invited,</a> if only
+        to tinker.
+        This development model&mdash; "release early and often, delegate everything you can,
+        be open to the point of promiscuity"<sup><a href="#references">[17]</a></sup>&mdash; <a href="http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/index.html#catbmain">raised eyebrows</a> at the time,
+        but has proven sound in virtue of its overwhelming success:
+        The Linux kernel has become the most-used Unix-like kernel of all time.
+    </p>
+
+    <p>
+        The <a href="https://www.kernel.org/doc/html/latest/process/2.Process.html?highlight=merge window">kernel development process</a>
+        has become more structured since 1991, and today uses a
+        <a href="http://127.0.0.1:4000/programming-in-nix.html#train-schedules">train-schedule</a> approach.
+        Linus Torvalds remains the maintainer of the Development branch,
+        and often remarks upon the kernel's latest releases.
+    </p>
+
+    <div class="img-right">
+        <figure>
+        <a title="https://github.com/icons8/flat-color-icons/graphs/contributors / MIT (http://opensource.org/licenses/mit-license.php)" href="https://commons.wikimedia.org/wiki/File:Icons8_flat_linux.svg"><img width="128" alt="Icons8 flat linux" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Icons8_flat_linux.svg/256px-Icons8_flat_linux.svg.png"></a>
+        <figcaption><center><a href="https://en.wikipedia.org/wiki/Tux_%28mascot%29">Tux</a>, the Linux Mascot</center></figcaption>
+    </div>
+
+    <p>
+        A major figure of today's Linux development team is Greg Kroah-Hartman 
+        (pronounced "<em>Crow</em>-Hartman"), who maintains the Stable branch, 
+        in addition to various subsystems.<sup><a href="https://en.wikipedia.org/wiki/Greg_Kroah-Hartman">[18]</a></sup>
+        According to Mr. Kroah-Hartman, interest in the kernel continues to
+        grow, with 1200 new developers contributing each
+        year.<sup><a href="https://www.theregister.com/2020/10/26/linux_kernel_intel/">[19]</a></sup>
+        Their main development bottlenecks are code review and
+        maintainership.<sup><a href="https://www.theregister.com/2020/10/26/linux_kernel_intel/">[19]</a></sup>
+    </p>
+
+    <p>
+        Although the Linux kernel began as a hobby, it is an occupation
+        for some, and serious affair for many.
+        In particular, the kernel development team
+        takes great care not to break
+        user-space,<sup><a href="https://lkml.org/lkml/2012/12/23/75">[20]</a></sup>
+        meaning that programs that <em>did</em> work will continue to
+        work.
+        In this way, they ensure the long-term stability of Linux-based
+        systems.<sup><a href="https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space">[21]</a></sup>
+    </p>
+
+        <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://frontpagelinux.com">Front Page Linux</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Tux_Racer">Tux Racer - Wikipedia</a></li>
+    </ul>
+</div>
+
+<div id="distributions" class="content">
+
+    <h2> Linux Distributions: A Brief History </h2>
+
+    <p>
+        The first versions of the Linux kernel were available 
+        only in source-code form, and required compilation on a 
+        host machine.<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[16]</a></sup> 
+        More, no other software was included, so that the 
+        creation of a Linux-based machine required obtaining, compiling and
+        assembling a number of software components by the user.
+    </p>
+
+    <div class="img-right">
+        <a title="Shermozle at English Wikipedia, CC BY-SA 3.0 &lt;https://creativecommons.org/licenses/by-sa/3.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Linux_0_12.jpg"><img width="256" alt="Linux 0 12" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Linux_0_12.jpg/512px-Linux_0_12.jpg"></a>
+        <center style="font-size: 12pt;">HJ Lu's Boot/Root Floppies</center>
+    </div>
+
+    <p>
+        In 1992, <a href="https://en.wikipedia.org/wiki/HJ_Lu">HJ Lu</a>
+        began packaging utilities alongside the kernel and distributing the
+        collection together on a pair of 5.25" disks.<sup><a href="https://www.maketecheasier.com/history-of-early-linux-distros/">[22]</a><a href="https://itsfoss.com/earliest-linux-distros/">[23]</a></sup>
+        Known as <em>boot/root</em> floppies, they are
+        the first known Linux distribution,<sup><a href="https://itsfoss.com/earliest-linux-distros/">[23]</a></sup>
+        and worked similarly to a live CD:
+        You booted from one disk, then replaced it when prompted.
+        "After a while," says Joe Klemmer, "you got a command prompt."<sup><a href="https://lwn.net/Articles/91371/">[24]</a></sup>
+    </p>
+
+    <p>
+        Linux's first widely recognized and used distribution was, ironically, 
+        a commercial venture: Soft Landing System.<sup><a href="https://lwn.net/Articles/91371/">[24]</a></sup>
+        Released in late 1992, SLS was sold under the slogan "Gentle Touchdowns for DOS Bailouts",<sup><a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">[25]</a></sup>
+        but users complained that the software was buggy,<sup><a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">[25]</a><a href="https://www.linuxjournal.com/article/2750">[26]</a></sup> and when its developers
+        decided to change the executable file format, began to leave.<sup><a href="https://lwn.net/Articles/91371/">[14]</a></sup>
+    </p>
+
+    <h3> Two Approaches </h3>
+
+    <p>
+        In late 1992, Patrick Volkerding needed a LISP interpreter for a project
+        at school, and, having heard that <code>clisp</code> ran on SLS Linux, 
+        downloaded them both.<sup><a href="https://www.linuxjournal.com/article/2750">[26]</a></sup>
+        His professor got wind, and asked Patrick to help him install the software
+        on school computers.<sup><a href="https://www.linuxjournal.com/article/2750">[26]</a></sup>
+
+        Volkerding walked him through installing, fixing and patching SLS, and
+        afterward, his professor asked, "Is there some way we can fix the install disks so
+        that the new machines will have these fixes right away?"<sup><a href="https://www.linuxjournal.com/article/2750">[26]</a></sup>
+    </p>
+
+    <p>
+        So Volkerding began improving SLS, and internally named his project
+        <em>Slackware;</em> he didn't want the project taken too seriously.<sup><a href="https://www.linuxjournal.com/article/2750">[26]</a></sup>
+        By May, though, the improvements were becoming substantial, and when
+        first released on the internet in June, proved so popular that the 
+        number of download requests crashed the system hosting it.<sup><a href="https://www.linuxjournal.com/article/2750">[26]</a></sup>
+        Volkerding hadn't intended to produce a distribution,<sup><a href="https://www.linuxjournal.com/article/2750">[26]</a></sup> but still
+        maintains <a href="http://www.slackware.com/">Slackware</a> today.<sup><a href="http://www.slackware.com/about">[27]</a></sup>
+        The Slackware Linux Project is aimed at producing, "the most UNIX-like
+        Linux distribution out there."<sup><a href="http://www.slackware.com/info/">[28]</a></sup>
+    </p>
+
+    <div class="img-center">
+
+    <a title="Patrick Volkerding
+    Screenshot:
+
+    Seth Kenlon/Opensource.com, GPL &lt;http://www.gnu.org/licenses/gpl.html&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Slackware_1.01_screenshot.png"><img width="1024" alt="Slackware 1.01 screenshot" src="https://upload.wikimedia.org/wikipedia/commons/c/ca/Slackware_1.01_screenshot.png"></a>
+    <center>Slackware 1.01, released 1993</center>
+    </div>
+
+    <p>
+        In 1993, Ian Murdock also grew frustrated with SLS Linux,<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[29]</a></sup>
+        and, more, sought a better solution to distribution creation than 
+        single-person or closed-room schemes.<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[29]</a></sup>
+        Ian wanted an operating system that lived up to the Linux name, 
+        was carefully and conscientiously assembled, and which was maintained
+        with equal diligence.<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[29]</a></sup>
+        In particular, he wanted a free operating system that could
+        compete with commercial distributions.<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[29]</a></sup>
+    </p>
+
+    <p>
+        Murdock decided to make the process open, in the spirit of GNU and Linux,
+        thereby ensuring satisfaction of user's requirements while also 
+        unloading the burden of creation and maintainership.<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[29]</a></sup>
+        He named it <a href="https://www.debian.org">Debian</a>, 
+        a portmanteau of <em>Debra,</em> his wife, and <em>Ian,</em> himself.<sup><a href="https://www.debian.org/doc/manuals/project-history/intro.en.html">[30]</a></sup>
+        The project's openness attracted developers, and today around 
+        a thousand people volunteer their spare time.<sup><a href="https://www.debian.org/intro/philosophy">[31]</a></sup>
+        Debian is one of the most respected distributions of our time,
+        and is oft-used as an upstream source for other distributions.
+    </p>
+
+    <div class="img-center">
+        <a title="The Debian Project (GPL &lt;http://www.gnu.org/licenses/gpl.html&gt; or Copyrighted free use), via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Debian_Etch-ja.png"><img width="1024" alt="Debian Etch-ja" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Debian_Etch-ja.png/1024px-Debian_Etch-ja.png"></a>
+        <center>Debian 4 "Etch", released 2007</center>
+    </div>
+
+    <p>
+        With the internet came 
+        <a href="https://distrowatch.com/dwres.php?resource=major">many</a>
+        Linux distributions.
+        I think of them as flavors of the same thing, rather than
+        necessarily different.
+        Since they are each based around the Linux kernel, and the kernel
+        has the property that it does not change behavior across versions,
+        they are all fundamentally similar operating systems.
+    </p>
+
+    <h3> See Also: </h3>
+    <ul>
+        <li><a href="https://www.linuxjournal.com/article/2750">Interview with Patrick Volkerding</a> by the Linux Journal, conducted April 1, 1994</a></li>
+    </ul>
+</div>
+
+<div id="mint" class="content">
+    <h2> Linux Mint </h2>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Mint is downstream of Debian and Ubuntu.
+        </p>
+    </div>
+
+    <p>
+        I like
+        <a href="https://linuxmint.com/">Linux Mint,</a>
+        but then, I'm a simple guy.
+        Mint is a characteristically professional operating system,
+        and focuses on productivity&mdash; that means you'll be up and
+        running before you know it.
+        It is extremely new-user friendly, and maintains the power
+        of any other Unix-like operating system.
+    </p>
+
+    <p>
+        Mint offers the Cinnamon desktop environment;
+        Windows users will feel right at home.
+        I find it to be an attractive desktop, but it's only moderately customizable.
+        Like many users, I just want a desktop environment that stays out of my way,
+        and Cinnamon does exactly that.
+    </p>
+
+    <div class="img-center">
+<a title="Linux Mint team, GPLv2 &lt;https://www.gnu.org/licenses/old-licenses/gpl-2.0.html&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Linux_Mint_19.1_%22Tessa%22_(Cinnamon).png"><img width="1024" alt="Linux Mint 19.1 &quot;Tessa&quot; (Cinnamon)" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Linux_Mint_19.1_%22Tessa%22_%28Cinnamon%29.png/512px-Linux_Mint_19.1_%22Tessa%22_%28Cinnamon%29.png"></a>
+        <center>Linux Mint 19.1 "Tessa", Released 2018</center>
+    </div>
+    
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            It has been said that one can spend a lifetime customizing
+            Linux desktops.
+        </p>
+    </div>
+    
+    <p>
+        New for Mint 19 is <em>Timeshift.</em> From <a href="https://github.com/linuxmint/timeshift">their github:</a>
+        "Timeshift protects your system by taking incremental
+        snapshots of the file system at regular intervals. These snapshots
+        can be restored at a later date to undo all changes to the system."
+    </p>
+
+
+
+    <p>
+        Mint isn't perfect:  It tends to be boring.
+        Changes from release to release are minor, and the software available from 
+        Debian's
+        repositories tends to be mature and stable, as opposed to new and unproven.
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://www.balena.io/etcher/"> balenaEtcher - Flash OS images to SD cards & USB drives</a> (Free, cross-platform) </li>
+        <li><a href="https://linuxmint-installation-guide.readthedocs.io/en/latest/index.html"> Linux Mint Installation Guide</a> (Official)</li>
+    </ul>
+</div>
+
+<div id="video" class="content">
+    <h2 style="margin-bottom: 2pt;"> Greg Kroah-Hartman </h2>
+    <h4 style="margin-bottom: 18pt;"> Linux Kernel Development </h4>
+    <iframe class="video" src="https://www.youtube.com/embed/vyenmLqJQjs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<div id="references" class="content">
+    <h2> References </h2>
+    <ol style="margin-left: 0">
+        <li> 
+            Multics History. (2020, September 20). Retrieved September 23, 2020, from <a href="https://multicians.org/history.html">https://multicians.org/history.html</a>
+        </li>
+
+        <li>
+            Kernighan, Brian. <i>Unix: A History and a Memoir.</i>  Published 2020, by Brian W. Kernighan via Kindle Direct Publishing.
+        </li>
+
+        <li>
+            Ritchie, D. M. (1984). The Evolution of the Unix Time-sharing System. <em>AT&amp;T Bell Laboratories Technical Journal,</em> 63(6), 2nd ser., 1577-1593.
+        </li>
+
+        <li>
+            Thompson, K. (2020, October 4). <em>Reflections on Trusting Trust.</em> Lecture presented at Turing Award Lecture.
+        </li>
+
+        <li>
+            Torvalds, L., &amp; Diamond, D. (2002). <em>Just for Fun: The story of an accidental revolutionary.</em> New York ; London ; Toronto ; Sydney: Harper.
+        </li>
+
+        <li>
+            "The GNU Project."  <em>About the GNU Project - GNU Project - Free Software Foundation,</em> Free Software Foundation, Inc., 12 Sept. 2020, 02:00:07,
+            <a href="https://www.gnu.org/gnu/thegnuproject.html">https://www.gnu.org/gnu/thegnuproject.html</a>.
+        </li>
+
+        <li>
+            Williams, S. (2002). A Stark Moral Choice. In <a href="https://www.oreilly.com/openbook/freedom/ch07.html"><em>Free as in freedom: Richard Stallman's crusade for free software</em></a> (1st ed.). California: O'Reilly.
+        </li>
+
+        <li>
+            Stallman, R. (n.d.). Why Programs Should be Shared. Retrieved February 01, 2021, from <a href="https://www.gnu.org/gnu/why-programs-should-be-shared.html">https://www.gnu.org/gnu/why-programs-should-be-shared.html</a>
+        </li>
+
+        <li>
+            Stallman, R. (n.d.). Yes, Give It Away. Retrieved February 01, 2021, from <a href="https://www.gnu.org/gnu/yes-give-it-away.html">https://www.gnu.org/gnu/yes-give-it-away.html</a>
+        </li>
+
+        <li>
+            Stallman, R. (n.d.). Initial Announcement. Retrieved February 01, 2021, from <a href="https://www.gnu.org/gnu/initial-announcement.html">https://www.gnu.org/gnu/initial-announcement.html</a>
+        </li>
+
+        <li>
+            "Overview of the GNU System." <em>Overview of the GNU System - GNU Project - Free Software Foundation,</em>
+            Free Software Foundation, Inc., 4 Sept. 2017, 10:21:27,
+            <a href="http://www.gnu.org/gnu/gnu-history.html">www.gnu.org/gnu/gnu-history.html</a>.
+        </li>
+
+        <li>
+            Copyleft. (2021, January 31). Retrieved February 01, 2021, from <a href="https://en.wikipedia.org/wiki/Copyleft">https://en.wikipedia.org/wiki/Copyleft</a>
+        </li>
+
+        <li>
+            Stallman, R. (n.d.). The GNU Manifesto. Retrieved February 01, 2021, from <a href="https://www.gnu.org/gnu/manifesto.html">https://www.gnu.org/gnu/manifesto.html</a>
+        </li>
+
+        <li>
+            GNU General Public License. (2021, January 31). Retrieved February 01, 2021, from <a href="https://en.wikipedia.org/wiki/GNU_General_Public_License#History">https://en.wikipedia.org/wiki/GNU_General_Public_License#History</a>
+        </li>
+
+
+
+
+
+
+
+
+
+
+               <li>
+            The Structure and Administration of the GNU Project. <em>The Structure and Administration of the GNU Project - GNU Project - Free Software Foundation,</em>
+            Free Software Foundation, Inc., 10 October 2020, 13:07:59,
+            <a href="https://www.gnu.org/gnu/gnu-structure.html">https://www.gnu.org/gnu/gnu-structure.html</a>.
+        </li>
+
+        <li>
+            Torvalds, L. (1992, July 31).  LINUX's History.  Retrieved August 27, 2020, from <a href="https://www.cs.cmu.edu/~awb/linux.history.html">https://www.cs.cmu.edu/~awb/linux.history.html</a>
+        </li>
+
+        <li>
+            Raymond, E. S. (2002, August 02). The Cathedral and the Bazaar. Retrieved December 12, 2020, from <a href="http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/index.html#catbmain">http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/index.html#catbmain</a>
+        </li>
+
+        <li>
+            Greg Kroah-Hartman. (2020, September 29). Retrieved October 30, 2020, from <a href="https://en.wikipedia.org/wiki/Greg_Kroah-Hartman">https://en.wikipedia.org/wiki/Greg_Kroah-Hartman</a>
+        </li>
+
+        <li>
+            Anderson, T. (2020, October 26). Linux kernel's Kroah-Hartman: We're not struggling to get new coders, it's code review that's the bottleneck. Retrieved October 30, 2020, from <a href="https://www.theregister.com/2020/10/26/linux_kernel_intel/">https://www.theregister.com/2020/10/26/linux_kernel_intel/</a>.
+        </li>
+
+        <li>
+            Torvalds, L. (2012, December 23). Re: [Regression w/ patch] Media commit causes user space to misbahave (was: Re: Linux 3.8-rc1) [E-mail to 908835772 715625649 M. Chehab]. <a href="https://lkml.org/lkml/2012/12/23/75">https://lkml.org/lkml/2012/12/23/75</a>
+        </li>
+
+        <li>
+            Mitha, F. (2015, October 11).  Why is there a Linux kernel policy to never break user space? Retrieved August 02, 2020, from <a href="https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space">https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space"</a>
+        </li>
+
+        <!-- End Linus Kernel
+
+            Begin Linux Distributions-->
+
+            
+
+
+
+        <li>
+            Delony, D. (2012, September 12). History of Early Linux Distros. Retrieved January 20, 2021, from <a href="https://www.maketecheasier.com/history-of-early-linux-distros/">https://www.maketecheasier.com/history-of-early-linux-distros/</a>
+        </li>
+
+        <li>
+            Bandyopadhyay, A. (2020, October 29). The Earliest Linux Distros: Before Mainstream Distros Became So Popular. Retrieved January 20, 2021, from <a href="https://itsfoss.com/earliest-linux-distros">https://itsfoss.com/earliest-linux-distros</a>
+        </li>
+
+        <li>
+            Klemmer, J. (n.d.). A Short History of Linux Distributions. Retrieved January 20, 2021, from <a href="https://lwn.net/Articles/91371/">/https://lwn.net/Articles/91371/</a>
+        </li>
+
+        <li>
+            Softlanding Linux System. (2020, February 23). Retrieved January 20, 2021, from <a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">https://en.wikipedia.org/wiki/Softlanding_Linux_System</a>
+        </li>
+
+        <li>
+            Hughes, P. (1994, April 1). Interview with Patrick Volkerding. Retrieved January 20, 2021, from <a href="https://www.linuxjournal.com/article/2750">https://www.linuxjournal.com/article/2750</a>
+        </li>
+
+        <li>
+            The Slackware Linux Project: About This Site. (n.d.). Retrieved January 20, 2021, from <a href="http://www.slackware.com/about/">http://www.slackware.com/about/</a>
+        </li>
+
+        <li>
+            The Slackware Linux Project: General Information. (n.d.). Retrieved January 20, 2021, from <a href="https://www.slackware.com/info/">https://www.slackware.com/info/</a>
+        </li>
+
+        <li>
+            Murdock, I. A. (1994, January 6). The Debian Manifesto. Retrieved January 20, 2021, from <a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">https://www.debian.org/doc/manuals/project-history/manifesto.en.html</a>
+        </li>
+
+        <li>
+            Introduction -- What is the Debian Project? (n.d.). Retrieved January 20, 2021, from <a href="https://www.debian.org/doc/manuals/project-history/intro.en.html">https://www.debian.org/doc/manuals/project-history/intro.en.html</a>
+        </li>
+
+        <li>
+            Our philosophy: Why we do it and how we do it. (2021, January 8). Retrieved January 20, 2021, from <a href="https://www.debian.org/intro/philosophy">https://www.debian.org/intro/philosophy</a>
+        </li>
+
+    </ol>
+</div>
+
