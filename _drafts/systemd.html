@@ -1,18 +1,54 @@
 systemd
+<h4>What We Have and Why We Don't Like It</h4>
 
+Bit of History:
+    /sbin/init was, for many years, a network of shell scripts.
 
 https://access.redhat.com/videos/403833
     "More than just a classic init system"
-    Is a SYSTEM manager 
-        ...and a SERVICE manager
-
 
     So, provides system services similar to d-bus
-    But, implies a monolithic (non-modular) system structure:
-        Processes which take advantage of systemd's capabilities 
-        become dependant upon it.
-        (Potentially)
 
+    https://www.youtube.com/watch?v=_2aa34Uzr3c
+    "covers a lot of ground" 
+    "high level OS objects" --
+        services users, sessions, containers, apps, ...
+        vs. kernel "primitives", e.g., files, processes, sockets...
+        sorta like "dynamic libraries"
+    transparent, so that one can always figure out what's going on
+    config files are human-readable
+    the software will still boot (into defaults) if no config files are present
+
+    https://en.wikipedia.org/wiki/File:Systemd_components.svg
+
+
+Extensive argument resulted in a fork from Debian, Devuan
 
 arch linux wiki on systemd + "see this blog post"
+
+Threatens to become an inalienable component of GNU/Linux platforms.
+
+
+
+
+Lennart Poettering:
+    https://thenewstack.io/unix-greatest-inspiration-behind-systemd/
+    A Red Hat employee working on PulseAudio, 
+    "Since PulseAudio is a service I kept thinking about service management."
+
+    "systemd's core business: service management"
+
+    unifying "pointless difference between distributions", by providing the
+    following three general functions:
+    - A system and service manager (manages both the system, by applying various configurations, and its services)
+    - A software platform (serves as a basis for developing other software)
+    - The glue between applications and the kernel (provides various interfaces that expose functionalities provided by the kernel)
+    http://0pointer.de/public/gnomeasia2014.pdf
+
+    An argument against it:
+    "unifying pointless differences" is not the function of the init program,
+    and violates the Unix philosophy of "do one thing and do it well."
+    The nonmodularity of the result reduces the ability of individuals and
+    organizations to iterate on the implementation.
+
 
