@@ -6,31 +6,31 @@ last-updated: January 2021
 
 <!--
     To Do:
-    Multics:
 
-        Main Idea:
+    Unix: 
+        Expand upon Multics
             Multics was intended to provide "computing as a service", a la
             telephony, and was investigated by Bell Labs, MIT, and GE.
+            Lot of money went into this; a lot of new, novel, and good 
+            features came about.
 
-        Lot of money went into this; a lot of new, novel, and good features came about.
 
-    https://www.bell-labs.com/usr/dmr/www/chist.html
-    """
-Thompson wanted to create a comfortable computing environment constructed according to his own design, using whatever means were available. His plans, it is evident in retrospect, incorporated many of the innovative aspects of Multics, including an explicit notion of a process as a locus of control, a tree-structured file system, a command interpreter as user-level program, simple representation of text files, and generalized access to devices. They excluded others, such as unified access to memory and to files. At the start, moreover, he and the rest of us deferred another pioneering (though not original) element of Multics, namely writing almost exclusively in a higher-level language. PL/I, the implementation language of Multics, was not much to our tastes, but we were also using other languages, including BCPL, and we regretted losing the advantages of writing programs in a language above the level of assembler, such as ease of writing and clarity of understanding. At the time we did not put much weight on portability; interest in this arose later. 
-    """
+            https://www.bell-labs.com/usr/dmr/www/chist.html
+                Novel features of Multics that would appear in Unix
+                    - processes as a locus of control,
+                    - tree-structured file system
+                    - command interpreter as user-level program
+                    - simple representation of text files
+                    - generalized access to devices
 
-    Unix:
 
         https://www.bell-labs.com/usr/dmr/www/chist.html
-        """
-        Thompson was faced with a hardware environment cramped and spartan even
-        for the time: the DEC PDP-7 on which he started in 1968 was a machine with 8K 18-bit words of memory and no software useful to him. While wanting to use a higher-level language, he wrote the original Unix system in PDP-7 assembler. At the start, he did not even program on the PDP-7 itself, but instead used a set of macros for the GEMAP assembler on a GE-635 machine. A postprocessor generated a paper tape readable by the PDP-7. 
-        """ 
+        Dennis Ritchie calling "cramped and spartan even for the time."
 
 
     Unix Architecture:
-        The abstraction layer that drivers offer means that a given kernel
-        can run on a variety of machines.<sup><a href="https://www.oreilly.com/openbook/freedom/ch07.html">[a]</a></sup>
+        The abstraction layer that drivers offer implies that a single kernel
+        can potentially run on a variety of machines.<sup><a href="https://www.oreilly.com/openbook/freedom/ch07.html">[a]</a></sup>
         In addition, this modularity breaks development into logical
         components, which helps to distribute it over a large group of 
         people. 
@@ -84,7 +84,6 @@ Switching to Linux:
     LibreOffice software suite; RythmBox media player,  etc..
     And expect it to be stable- Stability, we have, in spades.
 
-Linux Mint:
     For the new user, many distributions are appropriate, including
     Mint, Ubuntu, Debian, Manjaro, and Elementary.
     The most common problem of Linux today is Wifi not working&mdash; at this 
@@ -194,7 +193,8 @@ Closing Remarks:
 <div id="unix" class="content">
     <h2>UNIX</h2>
     <p>
-        The Unix Operating System was born in late 1969 at Bell Labs, in the shadow
+        The UNIX operating system was born in late 1969 at AT&amp;T's 
+        Bell Laboratories, in the shadow
         of <a href="https://multicians.org/history.html">Multics</a>.
         Multics was an operating system intended to
         commercialize computing by offering it as a service, similar to telephone or
@@ -225,7 +225,8 @@ Closing Remarks:
     </p>
 
     <p>
-        At some point in 1969, while working on his filesystem, Ken Thompson realized that he was three weeks
+        At some point in 1969, while working on this filesystem, 
+        Thompson realized that he was three weeks
         from an operating system.  All he needed was an
         <em>exec</em> call, an assembler, a text editor and a shell.
         In 1970, the new operating system was christened <em>UNIX,</em>
@@ -385,7 +386,7 @@ Closing Remarks:
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-        These ideas are expressed formally and generally through <em><a href="https://www.gnu.org/copyleft/">copyleft</a>.
+        These ideas are expressed formally and generally through <em><a href="https://www.gnu.org/copyleft/">copyleft</a></em>.
         </p>
     </div>
 
