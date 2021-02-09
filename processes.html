@@ -96,31 +96,32 @@ TODO
     <h2> Actors </h2>
 
     <p>
-        Think of processes as the actors of the system.
-        Left to its own devices, the kernel does nothing:
+        In Unix and its derivatives, processes are the actors of the system:
+        Left to its own devices, the kernel does nothing.
+        This is a defining feature of the Unix architecture&mdash;
         All Unix-like operating systems depend upon processes to direct the kernel,
         and through the kernel, processes direct the machine.
         The result is a clear demarcation between
-        <em>what</em> to do (dictated by processes), and <em>how</em> to do
+        what to do (dictated by processes), and how to do
         it (dictated by the kernel).
     </p>
 
     <p>
-        The kernel:
+        The kernel is responsible for:
     </p>
 
     <ol>
         <li>
-            Facilitates new process creation
+            Facilitating new process creation
         </li>
         <li>
-            Allocates hardware resources to each process
+            Allocating hardware resources to each process
         </li>
         <li>
-            Maintains information about processes
+            Maintaining information about processes
         </li>
         <li>
-            Facilitates change of their attributes
+            Facilitating change of their attributes
         </li>
     </ol>
 
@@ -128,30 +129,33 @@ TODO
         There are processes for every function on the system.
         There's one for the network manager,
         another for the desktop environment,
-        another acting as a printer spooler, etc..
-        Without a process, the kernel is unreachable, and the system is static.
+        another acting as a printer spooler, 
+        Firefox runs as a process, etc..
     </p>
 
     <p>
         Under the Unix philosophy, each process has a narrowly defined role,
         which it is expected to do well.  It might copy a file, list the
-        contents of a directory, or interpret and execute commands from the user.
-        It is intended that these small programs work together to
-        accomplish any given task, thereby easing programming and maintenance,
-        and increasing the modularity of the whole.
+        contents of a directory, provide audio services, or browse the internet.
+        It is intended that these programs work together to
+        accomplish any given task, thereby 
+        increasing the modularity of the whole, and,
+        consequently, easing programming and maintenance.
     </p>
 
     <h3> Runlevels</h3>
 
     <p>
         Historically, collections of running processes were
-        called <a href="http://www.linfo.org/runlevel_def.html">runlevels</a>;
-        these runlevels were managed by the initialization ("init") process.
+        called <a href="http://www.linfo.org/runlevel_def.html">runlevels</a>,
+        and were managed by the initialization ("init") process.
         Different runlevels offered different services, and therefore
-        were intended to be used for different situations.
+        were intended to be used in different situations.
         For instance, <a href="http://www.linfo.org/single_user_mode.html">single-user mode</a> (runlevel 1)
-        was analogous to <em>safe boot,</em> and runlevel 0
-        told <em>init</em> to kill all processes and shut down the system.
+        was analogous to <em>safe boot,</em> 
+        runlevel 5 corresponded to multi-user/GUI mode,
+        and runlevel 0 told <em>init</em> to kill all processes and shut down the 
+        system.<sup><a href="http://www.linfo.org/runlevel_def.html">[3]</a></sup>
     </p>
 
     <h3> See Also: </h3>
@@ -162,18 +166,20 @@ TODO
 </div>
 
 <div class="content" id="process-creation">
-    <h2> Process Creation and System Startup</h2>
+    <h2 style="margin-bottom: 0;"> Process Creation</h2>
+    <h4>and System Startup</h4>
 
     <p>
         At the end of the boot sequence, the kernel launches a single program,
-        <code>/sbin/init</code>.<sup><a href="http://tldp.org/LDP/intro-linux/intro-linux.pdf">[3]</a></sup>
-        While init schemes <a href="https://arxiv.org/abs/0706.2748">have evolved</a> over the years,
-        their purpose has not changed:  It is a process with root-level permissions that acts as a
-        trustee among processes.
-        Init's central responsibility is to bring up
-        userspace.<sup><a href="http://0pointer.de/blog/projects/systemd.html">[4]</a></sup>
-        After the execution of <code>/sbin/init</code> by the kernel, 
+        <code>/sbin/init</code>,<sup><a href="http://tldp.org/LDP/intro-linux/intro-linux.pdf">[4]</a></sup>
+        and in so doing creates the system's first process.
+        After <code>/sbin/init</code> begins execution, 
         process creation is delegated to processes themselves.
+        While init schemes 
+        <a href="https://arxiv.org/abs/0706.2748">have evolved</a> 
+        over the years, its purpose has not changed:  
+        It is a process with root-level permissions that acts as a 
+        manager of the system and trustee among processes.
     </p>
 
     <div class="aside-left">
@@ -192,46 +198,115 @@ TODO
     </div>
 
     <p>
-        From within a process, creating a new process begins with
-        the <a href="https://www.man7.org/linux/man-pages/man2/fork.2.html"><code>fork(2)</code></a> system call.
-        This instructs the kernel to make a copy of the current process&mdash;
-        an exact copy is produced, save one difference: Each of the two
-        processes receives a different return value from <em>fork().</em>
+        <code>init</code>'s first responsibility is to bring up userspace. 
+        It does this by launching a sequence of programs, most of which
+        act as services, some of which the user interacts with directly.
+        After this, it operates in the background, managing these services,
+        restarting them if they falter, and logging events for administrative
+        purposes.
+        Its final responsibility is to shut the system down cleanly. 
     </p>
 
     <p>
-        The new process is called the <em>child</em> process, and the
-        old process is called the <em>parent</em> process.
-        Both parent and child continue execution of the parent executable
-        exactly after the call to <em>fork()</em>.
-        The parent process usually goes back to what it was doing; 
-        the child process goes on to call 
-        <a href="https://www.man7.org/linux/man-pages/man2/execve.2.html"><code>exec(2)</code></a>.
+        From within a process, launching another program is broken into two steps:
+        Duplicate the current process, then instruct the new 
+        process to execute a different program.
+    </p>
+
+    <p>
+        The first step is to copy the current process using the 
+        <a href="https://www.man7.org/linux/man-pages/man2/fork.2.html"><code>fork(2)</code></a> system call. 
+        This system call instructs the kernel to duplicate the current process; 
+        the two resulting processes are nearly identical.<sup><a href="https://www.man7.org/linux/man-pages/man2/fork.2.html">[4]</a></sup>
+        Of note, they both continue execution of the same program at the same spot, 
+        they have identical (but separate) memory spaces, and they 
+        have the same files open.
+    </p>
+
+    <p>
+        The newly created process is referred to as the <em>child</em> process, 
+        the old one is referred to as the <em>parent</em> process, and we say 
+        that the child process <em>inherits</em> its parent's attributes.
+        Of the ways that parent and child differ, one is important to us 
+        now:
+        They each recieve a different return value from <em>fork()</em>.
+        This allows them to act differently within the same program:
+    </p>
+
+    <div class="aside-right">
+        <h4>Note:</h4>
+        <p>
+            Any process may call <em>fork()</em>.
+        </p>
+    </div>
+
+        <pre>
+        pid_t rv = fork();
+        if(rv == 0) {
+            // I am child
+
+        } else if (rv &gt; 0) {
+            // I am parent
+
+        }
+        </pre>
+
+    <p>
+        The second step is to instruct the child to launch a different program
+        using
+        <a href="https://www.man7.org/linux/man-pages/man2/execve.2.html"><code>execve(2)</code></a> or one of its variants.
         This instructs the kernel to replace the currently executing
         program with another;
         therein, execution begins at <em>main()</em>.
     </p>
 
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://unix.stackexchange.com/questions/158872/does-systemd-still-know-about-runlevels">
-                Does systemd still know about runlevels?</a> - Unix &amp; Linux Stack Exchange</li>
-    </ul>
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Any process may call <em>execve()</em>.
+        </p>
+    </div>
+
+    <pre>
+        pid_t rv = fork();
+        if( rv == 0 ) {
+            // I am child
+            char *args[] = {"ls", "-l", NULL};
+            execve(args[0], args, NULL);
+
+        } else if ( rv &gt; 0 ) {
+            // I am parent
+            return 0;
+
+        }
+    </pre>
+
+    <p>
+        This sequence is traditionally called <em>fork and exec,</em>
+        and results in one process (the parent) launching another program
+        (the child).
+        It was present in Ken Thompson's original implementation of Unix at Bell 
+        Laboratories, and for reasons we'll see later, is ideal for 
+        programs at the command-line.
+    </p>
+
+    <p>
+        Finally, note that each process, less <code>init</code>, has a 
+        unique parent process. 
+        As such, the collection of processes on the system forms a tree,
+        with <code>init</code> at root.
+    </p>
 
 </div>
 
 <div class="content" id="process-attributes">
     <h2> Process Attributes </h2>
     <p>
-        Upon birth, each process is given its own process id (PID) number by the kernel.
-        This is guaranteed to be unique to the process, remains constant throughout
-        the process's life, and serves as the kernel's handle
+        Upon birth, each process is given its own process id (PID) number by the 
+        kernel.
+        This is guaranteed to be unique to the process, and remains constant 
+        throughout the process's life; it serves as the system's handle
         to the process.
-        Pragmatically speaking, process ID's begin at
-        <code>1</code> (with <em>init</em>) and count upwards until
-        <code>/proc/sys/kernel/pid_max - 1</code>.<sup><a href="kerrisk, p.115">[6]</a></sup>
-        After that, the kernel begins searching at <code>300</code> for the next free PID.<sup><a href="kerrisk, p.115">[6]</a></sup>
-        That is, PID's are not guaranteed to be monotonically increasing.
     </p>
 
     <p>
@@ -522,6 +597,13 @@ TODO
     </li>
     <li>
         Bryant, R. E., & O'Hallaron, D. R. (2016).  Processes. In <em>Computer Systems: A Programmer's Perspective</em> (3rd ed., p. 732).  Upper Saddle River, New Jersey: Pearson.
+    </li>
+    <li>
+        Runlevel Definition. (2007, September 6). Retrieved February 09, 2021, from <a href="http://www.linfo.org/runlevel_def.html">http://www.linfo.org/runlevel_def.html</a>
+
+    </li>
+    <li>
+        Kerrisk, M. (2020, December 21). Fork(2) - Linux manual page. Retrieved February 09, 2021, from <a href="https://www.man7.org/linux/man-pages/man2/fork.2.html">https://www.man7.org/linux/man-pages/man2/fork.2.html</a>
     </li>
     <li>
         Garrels, M. (2008). <em>Introduction to Linux: A Hands on Guide.</em>
