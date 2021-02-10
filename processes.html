@@ -272,7 +272,7 @@ TODO
         if( rv == 0 ) {
             // I am child
             char *args[] = {"ls", "-l", NULL};
-            execve(args[0], args, NULL);
+            execve("/usr/bin/ls", args, NULL);
 
         } else if ( rv &gt; 0 ) {
             // I am parent
