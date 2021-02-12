@@ -27,6 +27,8 @@ last-updated: January 2021
         https://www.bell-labs.com/usr/dmr/www/chist.html
         Dennis Ritchie calling "cramped and spartan even for the time."
 
+Thompson wanted to create a comfortable computing environment constructed according to his own design, using whatever means were available. His plans, it is evident in retrospect, incorporated many of the innovative aspects of Multics, including an explicit notion of a process as a locus of control, a tree-structured file system, a command interpreter as user-level program, simple representation of text files, and generalized access to devices. 
+
 
     Unix Architecture:
         The abstraction layer that drivers offer implies that a single kernel
@@ -184,7 +186,7 @@ Closing Remarks:
         In addition, operating systems ease the task of creating
         useful programs by offering programmers a logical architecture
         and predictable environment.
-        GNU/Linux has evolved to offer the single best 
+        Free and open source GNU/Linux has evolved to offer the single best 
         programming environment available today.
     </p>
 </div>
@@ -194,23 +196,15 @@ Closing Remarks:
     <h2>UNIX</h2>
     <p>
         The UNIX operating system was born in late 1969 at AT&amp;T's 
-        Bell Laboratories, in the shadow
-        of <a href="https://multicians.org/history.html">Multics</a>.
+        <em>Bell Laboratories,</em> in the shadow
+        of Multics.
         Multics was an operating system intended to
         commercialize computing by offering it as a service, similar to telephone or
         electricity.<sup><a href="https://multicians.org/history.html">[1]</a></sup>
         The intent was for users to connect <a href="terminals-and-shells.html">terminals</a>
         to a central mainframe, then pay for computation on an as-used basis.
-    </p>
-
-    <p>
-        Being a joint venture between MIT, AT&amp;T's Bell Laboratories, and General
-        Electric, Multics was a large and, in many ways, novel, project.
-        It introduced many new operating systems ideas&mdash; among them,
-        the hierarchical
-        file structure.<sup><a href="https://multicians.org/history.html">[1]</a></sup>
         For a variety of reasons, the project never realized its dream, and in 1969
-        Bell Laboratories abandoned it.
+        AT&amp;T abandoned it.
     </p>
 
     <p>
@@ -218,29 +212,44 @@ Closing Remarks:
         the backburner, and refused to purchase new computing
         equipment.<sup><a href="#references">[2]</a></sup><sup><a href="#references">[3]</a></sup>
         After finding a disused <a href="https://www.soemtron.org/pdp7.html">PDP-7</a>,
-        Ken Thompson rewrote <em><a href="https://en.wikipedia.org/wiki/Space_Travel_(video_game)">Space Travel</a></em> for
-        it.<sup><a href="#references">[2]</a></sup><sup><a href="#references">[3]</a></sup>
-        In the process, he accrued the tools and skills necessary to implement
-        a filesystem he and others at Bell Laboratories had been devising on paper.<sup><a href="#references">[3]</a></sup>
+        Kenneth Thompson and Dennis Ritchie rewrote <em><a href="https://en.wikipedia.org/wiki/Space_Travel_(video_game)">Space Travel</a></em> for
+        it;
+        after, Thompson continued to work with the PDP-7, implementing a 
+        filesystem he and others at Bell Laboratories had been 
+        devising on paper.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[3]</a></sup>
     </p>
 
     <p>
         At some point in 1969, while working on this filesystem, 
-        Thompson realized that he was three weeks
-        from an operating system.  All he needed was an
-        <em>exec</em> call, an assembler, a text editor and a shell.
-        In 1970, the new operating system was christened <em>UNIX,</em>
-        as a "somewhat treacherous pun on
-        MULTICS."<sup><a href="#references">[3]</a></sup>
+        Thompson realized that he was very close to 
+        an operating system:  All he needed was an
+        assembler, a text editor, a shell and an <em>exec</em> system call.<sup><a href="#references">[2]</a></sup> 
+        The <em>exec</em> call was "trivial", and the other three components were
+        done in one week each.<sup><a href="#references">[2]</a></sup>
     </p>
 
     <p>
-        Owing in part to the restrictive nature of available
-        hardware, the budding operating system focused
-        on simplicity.<sup><a href="#references">[4]</a></sup>
-        The earliest versions of the new operating system were put to use
-        internally by Bell Labs to assist in patent
-        applications.<sup><a href="#references">[2]</a></sup><sup><a href="#references">[3]</a></sup>
+        About his colleague's work, Dennis Ritchie said,
+    </p>
+
+    <blockquote>
+        Thompson wanted to create a comfortable computing environment 
+        constructed according to his own design, using whatever means were 
+        available. His plans, it is evident in retrospect, incorporated many 
+        of the innovative aspects of Multics, including an explicit notion of 
+        a process as a locus of control, a tree-structured file system, a 
+        command interpreter as user-level program, simple representation of 
+        text files, and generalized access to devices.<sup><a href="https://www.bell-labs.com/usr/dmr/www/chist.html">[4]</a></sup>
+    </blockquote>
+
+    <p>
+        The new operating system soon became a communal affair, and 
+        in 1970 was christened <em>UNIX,</em>
+        as a "somewhat treacherous pun on
+        MULTICS."<sup><a href="#references">[2]</a><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[3]</a></sup>
+        The earliest versions were put to use
+        internally by Bell Labs to assist in word processing and patent
+        applications.<sup><a href="#references">[2]</a><a href="#references">[3]</a></sup>
         The software then moved away from its nest under obtuse licenses to
         universities, where its source code, though not free, was studied and documented.<sup><a href="#references">[2]</a></sup>
         Finally, Unix became commercially available, to principally
@@ -281,8 +290,6 @@ Closing Remarks:
         a more-uniform interface to each piece.
         This software layer
         represents the deepest and most remote element of any operating system.
-        Although drivers can be installed on an as-needed basis, in GNU/Linux
-        the tendency is to include many drivers, and use only those that are required.
         Drivers are not usually written by the hardware's engineers or vendors.
     </p>
 
@@ -292,12 +299,11 @@ Closing Remarks:
         Unix-like operating system is its kernel.
         The kernel is responsible for 
         supporting running programs,
-        scheduling the CPU, allotting memory,
+        scheduling the CPU, 
+        allotting memory,
         and maintaining file integrity.
         It is a large and involved piece of software, and can be likened
         to the "brains" of the operating system.
-        In Unix-like operating systems, it is not possible to interact directly
-        with the kernel.
     </p>
 
     <p>
@@ -764,11 +770,11 @@ Closing Remarks:
         </li>
 
         <li>
-            Ritchie, D. M. (1984). The Evolution of the Unix Time-sharing System. <em>AT&amp;T Bell Laboratories Technical Journal,</em> 63(6), 2nd ser., 1577-1593.
+            Ritchie, D. M. (1984). <a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">The Evolution of the Unix Time-sharing System</a>. <em>AT&amp;T Bell Laboratories Technical Journal,</em> 63(6), 2nd ser., 1577-1593.
         </li>
 
         <li>
-            Thompson, K. (2020, October 4). <em>Reflections on Trusting Trust.</em> Lecture presented at Turing Award Lecture.
+            Ritchie, D. M. (2003). The development of the C Language*. Retrieved February 12, 2021, from <a href="https://www.bell-labs.com/usr/dmr/www/chist.html">https://www.bell-labs.com/usr/dmr/www/chist.html</a>
         </li>
 
         <li>
