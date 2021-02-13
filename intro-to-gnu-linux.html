@@ -7,32 +7,15 @@ last-updated: January 2021
 <!--
     To Do:
 
-    Unix: 
-        Expand upon Multics
-            Multics was intended to provide "computing as a service", a la
-            telephony, and was investigated by Bell Labs, MIT, and GE.
-            Lot of money went into this; a lot of new, novel, and good 
-            features came about.
-
-
-            https://www.bell-labs.com/usr/dmr/www/chist.html
-                Novel features of Multics that would appear in Unix
-                    - processes as a locus of control,
-                    - tree-structured file system
-                    - command interpreter as user-level program
-                    - simple representation of text files
-                    - generalized access to devices
-
-
-        https://www.bell-labs.com/usr/dmr/www/chist.html
-        Dennis Ritchie calling "cramped and spartan even for the time."
-
-Thompson wanted to create a comfortable computing environment constructed according to his own design, using whatever means were available. His plans, it is evident in retrospect, incorporated many of the innovative aspects of Multics, including an explicit notion of a process as a locus of control, a tree-structured file system, a command interpreter as user-level program, simple representation of text files, and generalized access to devices. 
-
-
     Unix Architecture:
-        The abstraction layer that drivers offer implies that a single kernel
-        can potentially run on a variety of machines.<sup><a href="https://www.oreilly.com/openbook/freedom/ch07.html">[a]</a></sup>
+    <p>
+        Relevant to us is a minor facet of modern hardware not widely known:
+        Modern CPU's offer two modes of operation. The first, kernel mode, 
+        offers running software complete access to the machine; 
+        the second, <em>user mode,</em> restricts running software to a subset of
+        instructions.
+    </p>
+
         In addition, this modularity breaks development into logical
         components, which helps to distribute it over a large group of 
         people. 
@@ -247,8 +230,8 @@ Closing Remarks:
         UNIX had a clear, simple, and well-documented architecture
         that
         <a href="https://upload.wikimedia.org/wikipedia/commons/7/77/Unix_history-simple.svg">inspired many operating systems</a>, including GNU/Linux.
-        It is organized as a heirarchy of layers:
-        Each layer builds upon the one beneathe it, and supports
+        It is organized as a heirarchy of layers;
+        each layer builds upon the one beneathe it, and supports
         the layer immediately above it.
     </p>
 
@@ -256,61 +239,75 @@ Closing Remarks:
 
     <p>
         <strong>Hardware:</strong>
-        At the heart of any computer is its hardware.
+        A computer's hardware can be likened to its body.
         Each piece of hardware has a software interface defined by the
-        engineering team that created it.
-        These interfaces are varied at best.
+        engineers that created it; these interfaces are varied at best.
     </p>
 
     <p>
         <strong>Drivers:</strong>
-        Drivers interact with hardware, and provide the kernel with
-        a more-uniform interface to each piece.
-        This software layer
-        represents the deepest and most remote element of any operating system.
-        Drivers are not usually written by the hardware's engineers or vendors.
+        Drivers interact with hardware, and simplify the interface between
+        kernel and hardware.  
+        This software represents the deepest and most remote element
+        of any operating system, and 
+        the abstraction layer it offers allows a single kernel
+        to run on a variety of machines.
     </p>
 
     <p>
         <strong>Kernel:</strong>
-        While the heart of any computer is its hardware, the heart any
-        UNIX-like operating system is its kernel.
-        The kernel is responsible for 
+        The heart of any UNIX-like operating system is its kernel.
+        The kernel is responsible for
         supporting running programs,
         scheduling the CPU, 
-        allotting memory,
-        and maintaining file integrity.
+        allotting memory, and
+        maintaining file integrity, in addition to many other tasks.
         It is a large and involved piece of software, and can be likened
-        to the "brains" of the operating system.
+        to the "brains" of the operation.
     </p>
 
     <p>
         <strong>System Calls:</strong>
-        The operations that the kernel can undertake are 
+        The set of operations that the kernel can undertake is 
         defined by the system calls it supports.
         UNIX-like operating systems have six essential system calls:
         <em>fork, exec, open, close, read,</em> and
         <em>write.</em><sup><a href="#references">[5]</a></sup>
         Both <em>fork</em> and <em>exec</em> are concerned with launching
         programs, while <em>open, close, read,</em> and <em>write</em> 
-        constitute the essential operations of interaction with files.
-        Processes cannot dictate how the kernel carries system calls out,
-        and in fact, the kernel may deny a system call if, say, a file does not
-        exist, or the calling process does not have appropriate authority.
+        constitute the essential interactions a process can have with files.
+        Processes cannot dictate how the kernel carries these operations out,
+        and in fact, the kernel may deny one if, for instance, 
+        a file does not exist, or the calling process does not have 
+        appropriate authority.
     </p>
 
     <p>
         <strong>Processes:</strong>
-        A process, sometimes called a "user-space process" or "user-land process,"
+        A <em>process,</em> sometimes called a "user-space process,"
         is an executing program.
-        Within UNIX and like operating systems, processes run the entire show:
-        The kernel is entirely dependant upon processes
-        to tell it what to do.
-        It follows that there must exist at least one "trusted" process within
-        user-land, to get other processes on their feet&mdash;
-        and this is exactly the case.
-        This is one of the more beautiful elements of the
-        UNIX architecture.
+        Within UNIX and like operating systems, processes run the show:
+        The kernel is entirely dependant upon processes to tell it what to do,
+        and so has no "mind" of its own.
+    </p>
+
+    <p>
+        These layers constitute the "minimium viable" for an operating system
+        which is 
+    </p>
+
+    <ul style="margin-left: 15%;">
+        <li>Stable</li>
+        <li>Secure</li>
+        <li>Portable</li>
+    </ul>
+
+    <p>
+        Moreover, owing to its heritage, it is also <em>time-sharing</em> or 
+        <em>multi-user</em>&mdash;
+        that is, capable of supporting more than one interactive session at a time.
+        Although foriegn to us now, the idea is not thematically different
+        than running more than one program at a time.
     </p>
 
     <h3>See Also:</h3>
