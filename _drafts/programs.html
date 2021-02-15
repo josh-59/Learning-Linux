@@ -1,4 +1,6 @@
 <!--
+    Kind of an interesting take on "programming": Start with the
+    end-result, rather than the act of creating it.
     
 -->
 
@@ -6,8 +8,9 @@
     <h2> Programs </h2>
 
     <p>
-        A program is a file containing instructions on how to create
-        a process; <em>program</em> is synonymous with <em>executable file.</em>
+        A <em>program</em> is a file containing instructions on how to create
+        a process. In Unix-land, <em>program</em> is synonymous with 
+        <em>executable file.</em>
         Most programs are in binary format, meaning that they
         have been compiled to run directly on the machine's CPU, but
         others are not compiled, and run directly from source code.
@@ -20,9 +23,10 @@
 
     <p>
         The first Unix binary executable file format was called <em>a.out,</em>
-        which stood for <em>assembler output.</em><sup><a href="https://en.wikipedia.org/wiki/A.out">[5]</a></sup>
-        This was a very simple format, with three distinct data segments that
-        coincided with the layout of the resulting process's memory:
+        shorthand for
+        <em>assembler output.</em><sup><a href="https://en.wikipedia.org/wiki/A.out">[5]</a></sup>
+        This was a very simple format, consisting of three distinct data 
+        segments that coincided with the layout of the resulting process's memory:
     </p>
 
     <ol>
@@ -36,7 +40,7 @@
     <h2>ELF format</h2>
 
     <p>
-        The binary format currently in use is
+        The binary format of our time is 
         <a href="https://wiki.osdev.org/ELF">ELF</a>.
         Command-line tools for peeking into such a file
         include:<sup><a href="https://en.wikipedia.org/wiki/Executable_and_Linkable_Format#Tools">[21]</a></sup>
@@ -56,14 +60,14 @@
     <h2> Script </h2>
     <p>
         A script is a text file that is executable.
-        Scripts must begin with the magic characters <em>#!</em> , then the
+        Scripts must begin with the magic characters <em>#!</em>, then the
         complete pathname of the desired interpreter, as in
     </p>
 
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            To execute a file in the current working directory, use
+            To execute <code>file</code> in the current working directory, use
             <br><center><code>./file</code></center><br>
         </p>
     </div>
