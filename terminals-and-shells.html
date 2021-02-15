@@ -10,6 +10,10 @@ To Do:
         Chronological wrt command execution,
         but can be read piecewise.
 
+    Shells:
+    http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf
+ Today, the way in which commands are executed by the shell can be summarized as follows: 1) The shell reads a command line from the terminal. 2) It creates a child process by fork.3) The child process uses exec to call in the command from a file. 4) Meanwhile, the parent shell uses wait to wait for the child (command) process to terminate bycalling exit.5) The parent shell goes back to step 1)
+
     Bash Command Interpretation Cheat Sheet
 
     Standard File Descriptors:
@@ -34,8 +38,28 @@ To Do:
 
 
     Closing Remarks:
-              Next Shell:
-            nushell 
+        Pro tips regarding shell usage:
+            Ctrl-c sends the interrupt signal, SIGINT, which most programs respond
+            to by terminating immediately.  Handy for killing an unresponsive
+            foreground process.
+
+            Ctrl-c is handled by the shell in a different manner: It stops what
+            it's doing and returns control to the main loop, presenting the
+            user with a new prompt (Kerrisk, p389)
+            Some people use this rather than backspacing an erroeous line
+
+            The desktop's familiar copy/paste is overruled on the terminal 
+            emulator (ctrl-v is interpretted as an escape sequence); 
+            use either ctrl-shift-v or middle-click to paste.
+
+            Most full-screen utilities use <code>vi</code> controls, so learn them!
+            (In fact, even Firefox lets you 'Quick Search' a web page with 
+            <code>/</code>.)
+            Once you are (well) familiar with these controls, you can set Bash to 
+            vi-mode with <code>set -o vi</code>.
+
+            https://vim-adventures.com/
+
 
 
     Explanation of sudo:
@@ -69,10 +93,10 @@ To Do:
 		<li><a href="#physical-terminals"> Physical Terminals </a></li>
 		<li><a href="#terminal-emulators"> Terminal Emulators </a></li>
 		<li><a href="#shells"> Shells </a></li>
-        <li><a href="#word-splitting">Word Splitting</a></li>
+        <li><a href="#simple-commands">Simple Commands</a></li>
         <li><a href="#shell-expansion">Shell Expansion</a></li>
+		<li><a href="#redirection">Redirection</a></li>
         <li><a href="#searching-for-commands">Searching for Commands</a></li>
-		<li><a href="#standard-file-descriptors"> Standard File Descriptors </a></li>
 		
 		<!--
 		<li><a href="#shell-features"> Other Shell Features </a></li>
@@ -217,6 +241,8 @@ To Do:
 		Unix deviates from most operating systems designs by entertaining
 		the shell as an ordinary user-space process:  From
         the operating system's perspective, it is just another running program.
+        This modularity allows a single operating system to support many
+        shells.
 	</p>
 
 	<p>
@@ -224,9 +250,10 @@ To Do:
 	</p>
 
 	<ul style="list-style: none;">
-		<li><a href="https://www.gnu.org/software/bash/">bash</a>&mdash; A GNU Production; pretty much the standard shell</li>
+		<li><a href="https://www.gnu.org/software/bash/">bash</a>&mdash; A GNU Production, pretty much the standard shell</li>
 		<li><a href="http://zsh.sourceforge.net/">zsh</a>&mdash; A shell designed for interactive use</li>
 		<li><a href="https://fishshell.com/">fish</a>&mdash; The Friendly Interactive Shell</li>
+        <li><a href="https://www.nushell.sh/">nushell</a>&mdash; A new type of shell, supporting piplines of structured data in addition to simple text streams.
 	</ul>
 
     <p>
@@ -256,8 +283,8 @@ To Do:
     </p>
 
     <p>
-        Finally, note that we will typically omit the picture of the terminal,
-        so that the above command would be depicted:
+        Finally, we will typically omit the picture of the terminal,
+        so that the above command will normally be depicted:
     </p>
 
     <div class="code">
@@ -268,25 +295,27 @@ To Do:
     </div>
 
     <h3>See Also:</h3>
-    <li><a href="https://www.in-ulm.de/~mascheck/bourne/index.html#origins">Origins of the Bourne Shell</a></li>
-
+    <ul>
+        <li><a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Operation.html">Shell Operation (Bash Reference Manual)</a></li>
+    </ul>
    </div>
 
-<div class="content" id="word-splitting">
-    <h2 style="margin-bottom: 0;">Word Splitting</h2>
-    <h4>and Simple Commands</h4>
+<div class="content" id="simple-commands">
+    <h2 style="margin-bottom: 0;">Simple Commands</h2>
+    <h4>and Word Splitting</h4>
 
     <p>
         A typical line of input given to a shell is as follows:
     </p>
 
     <div class="code">
-        command [arg1] [arg2] [arg3] ...
+        command [arg1, arg2, arg3, ...] [redir1, redir2, redir3, ...]
     </div>
 
     <p>
-        Where <em>command</em> is mandatory, each argument is optional,
-        and each element ("word") is separated by whitespace.
+        Where <em>command</em> is mandatory, arguments and
+        redirections are optional, and each element ("word") is 
+        separated by whitespace.
         In the following example, the <code>shutdown</code> command is given
         with the single argument <code>now</code>:
     </p>
@@ -299,7 +328,6 @@ To Do:
         <h4>Aside:</h4>
         <p>
             In Bash, these are referred to as a <em>simple commands.</em>
-            Here they will be denoted by <code style="font-size: inherit;">[command]</code>.
         </p>
     </div>
 
@@ -324,7 +352,8 @@ To Do:
     </p>
 
     <p>
-        In Bash, this procedure is known as <em>word splitting</em>, 
+        In Bash, breaking a line of input into lesser elements is 
+        known as <em>word splitting</em>, 
         and is the first step of command interpretation.
     </p>
 </div>
@@ -338,7 +367,6 @@ To Do:
         expansion.</em> 
         Bash searches each word, from left to right, in two consequetive passes.
         If a word is single-quoted, then it is exempt from expansion.
-        After expansion, quotes are removed.
     </p>
 
     <p>
@@ -396,7 +424,7 @@ To Do:
 
     <p>
         The second expansion pass is <em>filename expansion,</em> sometimes 
-        crudely referred to as <em>globbing.</em>
+        referred to as <em>globbing.</em>
         These expansions let you manipulate multiple files quickly.
         If any word contains an asterisk <code>*</code>, question mark 
         <code>?</code>, or brackets <code>[]</code>, then it is regarded as a 
@@ -430,7 +458,7 @@ To Do:
     <div class="aside-right">
         <h4>Note:</h4>
         <p>
-            <a href="https://www.gnu.org/software/bash/manual/html_node/Filename-Expansion.html">By default</a>, hidden files must be matched explicitly. 
+            By default, hidden files must be matched explicitly. 
         </p>
     </div>
   
@@ -469,126 +497,52 @@ To Do:
   </ul>
 </div>
 
-<div class="content" id="searching-for-commands">
-    <h2>Searching for Commands</h2>
+<div id="redirection" class="content">
+	<h2 style="margin-bottom: 0;">Redirection</h2>
+    <h4> and Standard File Descriptors</h4>
+
+	<p>
+        In interactive use, the shell is connected to its terminal
+        by three open files.  
+        The first file is the keyboard. When <code>bash</code> is waiting
+        for you to enter a new command, it's actually asked the kernel to 
+        read a line from this file, and the kernel has paused execution of
+        <code>bash</code> until a line is given (you hit enter).
+        The second and third files are the terminal
+        screen: Whenever <code>bash</code> wants to print something out, 
+        it writes characters to one of these files. 
+    </p>
 
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            The <code>type</code> command can be used to check if a command
-            is a builtin.
-        </p>
-    </div>
-   
-     <h3>Commands and Builtin's</h3>
-
-    <p>
-        Most commands that users enter into <code>bash</code> are separate programs.
-        For instance, <code>ls</code> is a separate program. When a user enters,
-    </p>
-
-    <div class="code">
-        $ ls
-    </div>
-
-    <p>
-        the shell finds the <code>ls(1)</code> executable, 
-        <a href="processes.html#process-creation">forks</a> itself, and
-        instructs the child process to execute that binary. 
-        The <code>ls</code> program then reads its current directory's
-        entries and prints them out.
-        The shell 
-        <a href="https://man7.org/linux/man-pages/man2/wait.2.html">waits</a>
-        for <code>ls</code> to terminate, then returns with a prompt.
-        This happens very quickly.
-    </p>
-
-     <div class="aside-right">
-        <h4>Alternative:</h4>
-        <p>
-            <code><a href="https://the.exa.website"</a>exa</a></code>
-            is a modern replacement for <code>ls</code>.
+            Standard error (<code>STDERR</code>) is the same
+            terminal screen as <code>STDOUT</code>, but is reserved for
+            errors, logs and other red-letter messages.
+            In a moment, we'll see why this is useful.
         </p>
     </div>
 
-    <p>
-        For a few reasons, this strategy is preferrable; however, 
-        there are times where it will not work.
-        For instance, changing the current directory must be carried out 
-        by <code>bash</code> itself, since it is a per-process attribute.
-        Therefore, <code>cd</code> is carried out by <code>bash</code>.
-    </p>
 
     <p>
-        Commands such as these are called <em>builtins</em>, and can be
-        listed by,
-    </p>
-
-    <div class="code">
-        $ help
-    </div>
-
-    <p>
-        Where <code>help</code> is, itself, a builtin.
-    </p>
-
-    <p>
-        Within Bash, builtins <a href="https://www.gnu.org/software/bash/manual/html_node/Command-Search-and-Execution.html#Command-Search-and-Execution">take precedence</a> over external commands.
-    </p>
-
-
-</div>
-
-
-<div id="standard-file-descriptors" class="content">
-	<h2 style="margin-bottom: 0;"> The Standard File Descriptors </h2>
-    <h4> and Redirection</h4>
-	<p>
-        In interactive use, <code>bash</code> is connected to its terminal
-        by open files.  
-        The first file, represented within <code>bash</code> as 
-        <a href="processes.html#file-descriptors">file descriptor <em>0</em></a>,
-        is the keyboard:
-        Writing to it is not permitted, and reading from it amounts to
-        waiting for the next line of input.
-        The second file, file descriptor <em>1</em>, is the terminal
-        screen: Reading from it is not permitted, and anything written to it
-        is printed on screen.
-    </p>
-
-    <p>
-	    Recall that each process created by the <code>fork(2)</code> system
+	    Recall that each process created by the <code>fork</code> system
         call <a href="processes.html#process-creation">inherits</a> 
         its parent's attributes, and that these attributes
         include file descriptors.
-        This implies that each fork of <code>bash</code> will have a 
-        keyboard present at file descriptor zero, and a terminal screen
-        at file descriptor one.
+        This means that each child process of <code>bash</code> can reasonably
+        expect to have a keyboard present at file descriptor zero, 
+        and a terminal screen at file descriptors one and two.
 	</p>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Can you do it?
-            Yes you can!
-        </p>
-    </div>
 
     <p>
         This spawned the convention of <em>Standard file descriptors</em>:
-        Descriptors 0, 1 and 2 are referred to as 
-        <code>STDIN</code>,
-        <code>STDOUT</code>,
-        and <code>STDERR</code>, respectively.
-        By this convention, writing an <code>ls</code> clone becomes simple:
-        For each <a href="https://www.man7.org/linux/man-pages/man3/readdir.3.html">entry</a> in the current directory, <a href="https://man7.org/linux/man-pages/man3/printf.3.html">print</a> it out!
+        File descriptor 0 is <code>STDIN</code>, 1 is 
+        <code>STDOUT</code>, and 2 is <code>STDERR</code>.
     </p>
 
     <p>
-        Standard error (<code>STDERR</code>) is the same
-        terminal screen as <code>STDOUT</code>, but is reserved for
-        errors, logs and other red-letter messages.
-        In a moment, we'll see why this is useful.
+        By this convention, writing an <code>ls</code> clone becomes simple:
+        For each <a href="https://www.man7.org/linux/man-pages/man3/readdir.3.html">entry</a> in the current directory, <a href="https://man7.org/linux/man-pages/man3/printf.3.html">print</a> it out!
     </p>
 
     <h3> Redirection </h3>
@@ -687,6 +641,68 @@ To Do:
     </ul>
 
 </div>
+
+
+
+<div class="content" id="searching-for-commands">
+    <h2>Searching for Commands</h2>
+
+    <h3>Commands and Builtin's</h3>
+
+    <p>
+        Most commands that users enter into <code>bash</code> are separate programs.
+        For instance, <code>ls</code> is a separate program. When a user enters,
+    </p>
+
+    <div class="code">
+        $ ls
+    </div>
+
+    <p>
+        the shell finds the <code>ls</code> executable, 
+        <a href="processes.html#process-creation">forks</a> itself, and
+        instructs the child process to execute the appropriate program. 
+        That child program gets its working 
+        directory's entries from the kernel and prints them out.
+        The shell, meanwhile, 
+        <a href="https://man7.org/linux/man-pages/man2/wait.2.html">waits</a>
+        in the background for the child process to terminate, then returns with a prompt.
+    </p>
+
+    <p>
+        For a few reasons, this strategy is preferrable. 
+        However, there are times where it will not work.
+        For example, changing the current directory must be carried out 
+        by <code>bash</code> directly; 
+        as such, <code>cd</code> is built in to the shell itself.
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            The <code>type</code> command can be used to check if a command
+            is a builtin.
+        </p>
+    </div>
+
+    <p>
+        Commands such as these are called <em>builtins</em>, and can be
+        listed by,
+    </p>
+
+    <div class="code">
+        $ help
+    </div>
+
+
+
+    <p>
+        Within Bash, builtins <a href="https://www.gnu.org/software/bash/manual/html_node/Command-Search-and-Execution.html#Command-Search-and-Execution">take precedence</a> over external commands.
+    </p>
+
+
+</div>
+
 
 <!--
 

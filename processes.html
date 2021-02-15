@@ -12,11 +12,35 @@ TODO
     Process attributes:
         Child processes cannot change parent processes' attributes
 
+    Process Termination:
+        When a process terminates, its PID is freed for reuse, 
+
+
+        Signals to kill processes:
+            From least to greatest:
+            SIGINT: Interrupt
+                Default behavior is to terminate, but can be caught and
+                handled by programs, and is sometimes used for other purposes
+                (see terminal closing remarks)
+                
+            SIGTERM: Terminate
+                Standard behavior is to terminate; affords programs the
+                opportunity to handle their own termination, and thereby
+                exit gracefully
+
+            SIGKILL: Sure Kill
+                Kerrisk calls <code>SIGKILL</code> the "silver bullet" of process
+                termination (page 553)
+                and recommends sending SIGTERM instead
+
+        Signal-terminal of processes: "Abnormal process termination"
+
     IPC:    (as conclusion)
         Primitives:
+            Signals - Software interupts: Interupt the normal flow of
+                execution in a program (Kerrisk, p388)
             Sockets - Shuffle data
-            Signals - Events
-            Shared Memory - Is what it is
+            Shared Memory - Don't do it!
             FIFO Pipes - More later
 
         <div class="aside-right">
@@ -295,6 +319,7 @@ TODO
         unique parent process. 
         As such, the collection of processes on the system forms a tree,
         with <code>init</code> at root.
+        This is viewable with the <a href="https://man7.org/linux/man-pages/man1/pstree.1.html"><code>pstree(1)</code></a> command.
     </p>
 
 </div>

@@ -217,11 +217,11 @@ Other Package Managers:
         The contents of a package may be split into two 
         parts: Metadata and Payload.
         In Slackware's format, metadata is restricted to the <code>./install</code>
-        directory, and consists of the post-copy script <code>doinst.sh</code>, 
+        directory, and consists of the post-copy script <code>doinst.sh</code>
         and a description of the software, <code>slack-desc</code>.
         Other package management schemes incorporate more metadata; here
-        we'll take a look at Debian's, since it is more complete
-        and is also well-organized. 
+        we'll take a look at Debian's, since it is more complete,
+        and well-documented. 
     </p>
 
     <p>
@@ -235,12 +235,15 @@ Other Package Managers:
         $ ar -xf vim_8.1.0875-5_amd64.deb <br>
         <br>
         $ ls <br>
-        control.tar.xz  data.tar.xz  debian-binary  vim_8.1.0875-5_amd64.deb <br>
+        control.tar.xz<br>
+        data.tar.xz<br> 
+        debian-binary<br>  
+        vim_8.1.0875-5_amd64.deb 
     </div>
 
     <p>
         The package's metadata is contained within the <code>control</code>
-        archive, and payload within <code>data</code>. Both can be extracted
+        archive, and the payload is within <code>data</code>. Both can be extracted
         with <code>tar</code>, but for now we'll just take a peek:
     </p>
 
@@ -256,62 +259,44 @@ Other Package Managers:
     </div>
 
     <p>
-        The file <code>./control</code> contains most interesting information,
-        including dependencies and a description.  You might recognize
-        this file format if you've used Debian's <code>apt show</code>
-        utility:
+        The file <code>control</code> describes the package, and includes
+        information such as version number and dependencies; official
+        Debian documentation calls this the "most vital information."<sup><a href="https://www.debian.org/doc/debian-policy/ch-controlfields.html#source-package-control-files-debian-control">[4]</a></sup>  
+    </p>
+
+    <p>
+        The file <code>md5sums</code> is a collection of hash signatures of
+        files within the package.  These allow one to verify the 
+        integrity of those files after they've been downloaded.
+    </p>
+
+    <p>
+        For completeness, here is the <code>data</code> directory:
     </p>
         
-        
     <div class="code">
-        Package: vim <br>
-        Version: 2:8.1.0875-5 <br>
-        Architecture: amd64 <br>
-        Maintainer: Debian Vim Maintainers <team+vim@tracker.debian.org> <br>
-        Installed-Size: 2800 <br>
-        Depends: vim-common (= 2:8.1.0875-5), vim-runtime (= 2:8.1.0875-5), libacl1 (>= 2.2.23), libc6 (>= 2.15), libgpm2 (>= 1.20.7), libselinux1 (>= 1.32), libtinfo6 (>= 6) <br>
-        Suggests: ctags, vim-doc, vim-scripts <br>
-        Provides: editor <br>
-        Section: editors <br>
-        Priority: optional <br>
-        Homepage: https://www.vim.org/ <br>
-        Description: Vi IMproved - enhanced vi editor <br>
-        Vim is an almost compatible version of the UNIX editor Vi. <br>
+        $ tree data<br>
         . <br>
-        Many new features have been added: multi level undo, syntax <br>
-        highlighting, command line history, on-line help, filename <br>
-        completion, block operations, folding, Unicode support, etc. <br>
-        . <br>
-        This package contains a version of vim compiled with a rather <br>
-        standard set of features.  This package does not provide a GUI <br>
-        version of Vim.  See the other vim-* packages if you need more <br>
-        (or less). <br>
-
+        └── usr <br>
+        ├── bin <br>
+        │   └── vim.basic <br>
+        └── share <br>
+        ├── bug <br>
+        │   └── vim <br>
+        │       ├── presubj <br>
+        │       └── script <br>
+        ├── doc <br>
+        │   └── vim <br>
+        │       ├── changelog.Debian.gz <br>
+        │       ├── changelog.gz <br>
+        │       ├── copyright <br>
+        │       └── NEWS.Debian.gz <br>
+        └── lintian <br>
+        └── overrides <br>
+        └── vim <br>
+        <br>
+        9 directories, 9 files <br>
     </div>
-
-
-$ tree
-.
-├── data.tar.xz
-└── usr
-    ├── bin
-    │   └── vim.basic
-    └── share
-        ├── bug
-        │   └── vim
-        │       ├── presubj
-        │       └── script
-        ├── doc
-        │   └── vim
-        │       ├── changelog.Debian.gz
-        │       ├── changelog.gz
-        │       ├── copyright
-        │       └── NEWS.Debian.gz
-        └── lintian
-            └── overrides
-                └── vim
-
-9 directories, 9 files
 
 </div>
 
