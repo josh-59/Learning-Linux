@@ -10,6 +10,9 @@ To Do:
         Chronological wrt command execution,
         but can be read piecewise.
 
+    Terminal Pro:
+        fork'ed == subshell environment
+
     Shells:
     http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf
  Today, the way in which commands are executed by the shell can be summarized as follows: 1) The shell reads a command line from the terminal. 2) It creates a child process by fork.3) The child process uses exec to call in the command from a file. 4) Meanwhile, the parent shell uses wait to wait for the child (command) process to terminate bycalling exit.5) The parent shell goes back to step 1)
@@ -18,6 +21,11 @@ To Do:
 
     Standard File Descriptors:
         Include redirection
+  <p>
+        By this convention, writing an <code>ls</code> clone becomes simple:
+        For each <a href="https://www.man7.org/linux/man-pages/man3/readdir.3.html">entry</a> in the current directory, <a href="https://man7.org/linux/man-pages/man3/printf.3.html">print</a> it out!
+    </p>
+
 
     Pipeline
 
@@ -38,29 +46,13 @@ To Do:
 
 
     Closing Remarks:
-        Pro tips regarding shell usage:
-            Ctrl-c sends the interrupt signal, SIGINT, which most programs respond
-            to by terminating immediately.  Handy for killing an unresponsive
-            foreground process.
-
-            Ctrl-c is handled by the shell in a different manner: It stops what
-            it's doing and returns control to the main loop, presenting the
-            user with a new prompt (Kerrisk, p389)
-            Some people use this rather than backspacing an erroeous line
-
-            The desktop's familiar copy/paste is overruled on the terminal 
-            emulator (ctrl-v is interpretted as an escape sequence); 
-            use either ctrl-shift-v or middle-click to paste.
-
-            Most full-screen utilities use <code>vi</code> controls, so learn them!
-            (In fact, even Firefox lets you 'Quick Search' a web page with 
-            <code>/</code>.)
-            Once you are (well) familiar with these controls, you can set Bash to 
-            vi-mode with <code>set -o vi</code>.
-
-            https://vim-adventures.com/
-
-
+        GNU/Linux faces some tumultuous times ahead:
+            UTF-8 Filenames
+            Next Generation of Shells:
+                Operate on Structured Data
+            Next generation of interactive utilities (e.g. <code>bat</code>) 
+                differentiate between interactive use and scripting use
+            Termios + Don't break userspace
 
     Explanation of sudo:
     https://www.linuxjournal.com/sites/default/files/2018-11/GeekGuide-BeyondTrust-BeyondSudo.pdf
@@ -95,7 +87,7 @@ To Do:
 		<li><a href="#shells"> Shells </a></li>
         <li><a href="#simple-commands">Simple Commands</a></li>
         <li><a href="#shell-expansion">Shell Expansion</a></li>
-		<li><a href="#redirection">Redirection</a></li>
+		<li><a href="#redirection">I/O Redirection</a></li>
         <li><a href="#searching-for-commands">Searching for Commands</a></li>
 		
 		<!--
@@ -130,8 +122,8 @@ To Do:
 		this technology was carried over from the
 		<a href="https://mysite.du.edu/~jcalvert/tel/teletype.htm"<i>teletypewriter</i></a>,
 		a device for sending telegrams.
-		Paper-based terminals persisted well into the 1970's, and later electronic typewriters
-		<a href="https://www.youtube.com/watch?v=z-u4kUeIqDI">sometimes support terminal mode,</a>
+		Paper-based terminals persisted well into the 1970's, and later 
+        electronic typewriters sometimes supported terminal mode,
 		allowing them to interface with computers via serial cable.
 	</p>
 
@@ -156,8 +148,8 @@ To Do:
 		Physical terminals <a href="https://www.vt100.net/dec/vt_history">were used for decades,</a>
 		especially in situations demanding multiple access to large databases, such
 		as airlines and libraries.
-		In such a situation, the computational infrastructure forms a tree,
-		with the system's administrators at the root, end-users at 
+		In such situations, the computational infrastructure forms a tree,
+		with the system's administrators at the root, and end-users at 
         the leaves.
 	</p>
 
@@ -250,10 +242,12 @@ To Do:
 	</p>
 
 	<ul style="list-style: none;">
-		<li><a href="https://www.gnu.org/software/bash/">bash</a>&mdash; A GNU Production, pretty much the standard shell</li>
-		<li><a href="http://zsh.sourceforge.net/">zsh</a>&mdash; A shell designed for interactive use</li>
+		<li><a href="https://www.gnu.org/software/bash/">Bash</a>&mdash; A GNU Production, pretty much the standard shell</li>
+		<li><a href="http://zsh.sourceforge.net/">Zsh</a>&mdash; A shell designed for interactive use; very similar to Bash.</li>
+        <li><a href="https://www.nushell.sh/">Nushell</a>&mdash; An interactive shell, supporting piplines of structured data, in addition to simple text streams.</li>
+        <li><a href="https://elv.sh/">Elvish</a>&mdash; an "expressive programming language and versatile interactive shell." Version 1.0 not yet released</a></li>
+        <li><a href="https://gitlab.redox-os.org/redox-os/ion">ion</a>&mdash; The default shell of <a href="https://www.redox-os.org/">RedoxOS</a>, works on Linux as well</li>
 		<li><a href="https://fishshell.com/">fish</a>&mdash; The Friendly Interactive Shell</li>
-        <li><a href="https://www.nushell.sh/">nushell</a>&mdash; A new type of shell, supporting piplines of structured data in addition to simple text streams.
 	</ul>
 
     <p>
@@ -266,8 +260,8 @@ To Do:
 	</figure>
 
     <p>
-        You can find out which shell is running by purusing the settings of 
-        your terminal, or from within a terminal with the <code>ps</code> command:
+        You can find out which shell is running 
+        from within terminal with the <code>ps</code> command:
     </p>
 
     <figure>
@@ -305,16 +299,16 @@ To Do:
     <h4>and Word Splitting</h4>
 
     <p>
-        A typical line of input given to a shell is as follows:
+        A typical line of input given to the shell is as follows:
     </p>
 
     <div class="code">
-        command [arg1, arg2, arg3, ...] [redir1, redir2, redir3, ...]
+        command [arg1 arg2 ...] 
     </div>
 
     <p>
-        Where <em>command</em> is mandatory, arguments and
-        redirections are optional, and each element ("word") is 
+        Where <em>command</em> is mandatory, arguments are
+        optional, and each element ("word") is 
         separated by whitespace.
         In the following example, the <code>shutdown</code> command is given
         with the single argument <code>now</code>:
@@ -324,13 +318,7 @@ To Do:
         $ shutdown now
     </div>
 
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            In Bash, these are referred to as a <em>simple commands.</em>
-        </p>
-    </div>
-
+   
     <p>
         If, for some reason, we need to include whitespace in
         an argument, we can wrap said argument in single-quotes.
@@ -352,7 +340,7 @@ To Do:
     </p>
 
     <p>
-        In Bash, breaking a line of input into lesser elements is 
+        In Bash, breaking a line of input into its elements is 
         known as <em>word splitting</em>, 
         and is the first step of command interpretation.
     </p>
@@ -498,140 +486,109 @@ To Do:
 </div>
 
 <div id="redirection" class="content">
-	<h2 style="margin-bottom: 0;">Redirection</h2>
+	<h2 style="margin-bottom: 0;">I/O Redirection</h2>
     <h4> and Standard File Descriptors</h4>
 
+    
 	<p>
         In interactive use, the shell is connected to its terminal
-        by three open files.  
-        The first file is the keyboard. When <code>bash</code> is waiting
-        for you to enter a new command, it's actually asked the kernel to 
-        read a line from this file, and the kernel has paused execution of
-        <code>bash</code> until a line is given (you hit enter).
-        The second and third files are the terminal
+        by 
+        <a href="./processes.html#standard-file-descriptors">three open files</a>.  
+        The first file, <code>STDIN</code>, is the keyboard. 
+        When <code>bash</code> is waiting for you to enter a new command, 
+        it's actually asked the kernel to 
+        read a line from this file, and the kernel has 
+        paused execution of <code>bash</code> until a line is 
+        available (a line is available once you hit enter).
+        The second and third open files, 
+        <code>STDOUT</code> and <code>STDERR</code>, are the terminal
         screen: Whenever <code>bash</code> wants to print something out, 
         it writes characters to one of these files. 
     </p>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Standard error (<code>STDERR</code>) is the same
-            terminal screen as <code>STDOUT</code>, but is reserved for
-            errors, logs and other red-letter messages.
-            In a moment, we'll see why this is useful.
-        </p>
-    </div>
-
 
     <p>
 	    Recall that each process created by the <code>fork</code> system
         call <a href="processes.html#process-creation">inherits</a> 
         its parent's attributes, and that these attributes
-        include file descriptors.
-        This means that each child process of <code>bash</code> can reasonably
-        expect to have a keyboard present at file descriptor zero, 
-        and a terminal screen at file descriptors one and two.
-	</p>
-
-    <p>
-        This spawned the convention of <em>Standard file descriptors</em>:
-        File descriptor 0 is <code>STDIN</code>, 1 is 
-        <code>STDOUT</code>, and 2 is <code>STDERR</code>.
+        include file descriptors (open files).
+        This means that we, the users, can reasonably expect each
+        child of <code>bash</code> to have our keyboard present at 
+        <code>STDIN</code> and our terminal screen at both 
+        <code>STDOUT</code> and <code>STDERR</code>.
     </p>
 
     <p>
-        By this convention, writing an <code>ls</code> clone becomes simple:
-        For each <a href="https://www.man7.org/linux/man-pages/man3/readdir.3.html">entry</a> in the current directory, <a href="https://man7.org/linux/man-pages/man3/printf.3.html">print</a> it out!
+        In interactive use, this is typically what we want, and
+        means that our command,
     </p>
 
+    <div class="code">
+        $ ls
+    </div>
+
+    <p>
+        will inherit the terminal as primary I/O, and thereby 
+        print to the terminal screen.
+    </p>
+   
     <h3> Redirection </h3>
 
     <p>
         Redirection is the act of assigning a different file to the standard
         file descriptors before executing a command.
+        Let's start with input.
     </p>
 
     <ul style="list-style-type: none;">
-        <li> <code> [command] &gt; file </code> &emsp; Redirect <code>STDOUT</code> to file, then execute command. Creates or overwrites file. </li>
-        <li> <code> [command] &lt; file </code> &emsp; Redirect <code>STDIN</code>
-            to file, then execute command </li>
+        <li> <code> command &lt; file </code> &emsp; Open <code>file</code>
+            for reading,
+            assign to <code>STDIN</code>, then execute <code>command</code></li>
     </ul>
 
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            "O, that infected moisture of his eye..."
-        </p>
-    </div>
-
     <p>
-        Let's just jump into using them.
-        Suppose we had <a href="https://ocw.mit.edu/ans7870/6/6.006/s08/lecturenotes/files/t8.shakespeare.txt">the complete works of Shakespeare in a single file</a> (5.3MB), and we wanted to copy them.
-        We could use <code>cp</code>, but for poetic reasons, we want the computer
-        <em>to read</em> them, and therefore, we must use <code>cat</code> instead.
-    </p>
-
-    <div class="code">
-        $ cat t8.shakespeare.txt <br>
-        This is the 100th Etext file presented by Project Gutenberg, and <br>
-        is presented in cooperation with World Library, Inc., from their <br>
-        Library of the Future and Shakespeare CDROMS.  Project Gutenberg <br>
-        often releases Etexts that are NOT placed int he Public Domain!! <br>
-        <br>
-        Shakespeare <br>
-        <br>
-        *This Etext has certain copyright implications you should read!* <br>
-        <br>
-        &lt;&lt;THIS ELECTRONIC VERSION OF THE COMPLETE WORKS OF WILLIAM <br>
-        ...  
-    </div>
-
-    <p>
-        Whoops!  That printed to the terminal screen (1.662 seconds)!
-        What we wanted to do was <em>redirect</em> that output to a different file:
-    </p>
-
-    <div class="code">
-        $ cat t8.shakespeare.txt &gt; shakespeare_backup
-    </div>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Since <code>STDERR</code> was not redirected, any errors would 
-            have been printed to our terminal screen.
-        </p>
-    </div>
-
-    <p>
-        Much better.  
-    </p>
-    
-    <p>
-        After word splitting, <code>Bash</code> inspects
-        each word; here, it found the redirection operator <code>&gt;</code>.
-        It took the next word, <code>shakespeare_backup</code>, to be
-        a filename. Since that file did not exist, it created it.
-        (If it had existed, <code>bash</code> would have truncated its length
-        to zero, effectively erasing the file.)
-        Then it assigned the file to <code>STDOUT</code> and
-        executed <code>cat</code> with a single argument, <code>t8.shakespeare.txt</code>.
-        Finally, <code>cat</code> naively printed to <code>STDOUT</code>, and 
-        thereby copied the contents of the file.
+        This removes the keyboard from <code>STDIN</code> and replaces it with
+        <code>file</code>; the command is no longer interactive, but will
+        still print output to the terminal.
+        This can be useful for scripting: Rather than
+        repeatedly entering the same sequence of input multiple times,
+        just save said input to a file and redirect.
     </p>
 
     <p>
-        This was a simplified introduction to redirection.
-        The most important part is the order in which <code>bash</code> takes action.
-        For instance, if <code>cat</code> had failed (it was mispelled, for instance),
-        the redirection still would have taken place.  
-        Therefore, a new file would have been created; or, if the file had existed,
-        its contents would have been deleted.
+        Here, as in all redirections, <code>command</code> is oblivious.
+        Redirection is shell functionality, and <code>bash</code>
+        remaps the appropriate open files before execution takes place.
+        More, <code>command</code> does not recieve <code>&lt; file</code>
+        as arguments; <code>bash</code> removes them after 
+        the changes have been made.  
     </p>
 
     <p>
-        For the full suite of what <code>bash</code> can do, see the links below.
+        To redirect output:
+    </p>
+        
+    <ul style="list-style-type: none;">
+        <li> <code> command &gt; file </code> &emsp; Open <code>file</code> 
+            for writing; set length to zero; assign to <code>STDOUT</code>. 
+            Then search for command.</li>
+        <li> <code> command &gt;&gt; file </code> &emsp; Open <code>file</code> 
+            for writing; seek to end; assign to <code>STDOUT</code>. 
+            Then search for command.</li>
+    </ul>
+
+    <p>
+        Since <code>STDERR</code> has been left unchanged, errors will
+        still be printed to our terminal screen.
+    </p>
+
+    <p>
+        Redirection can become quite involved. 
+        It is possible to redirect <code>STDERR</code>, 
+        to open a file and assign it an arbitrary file descriptor, 
+        to copy the assignment of a file descriptor, 
+        and to close an arbitrary file descriptor.
+        All of this occurs within <code>bash</code>, after shell expansion
+        and forking, and before it begins searching for the command.
     </p>
 
     <h3>See Also:</h3>
