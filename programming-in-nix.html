@@ -5,14 +5,23 @@ last-updated: December, 2020
 ---
 
 <!--
+
+    Fork/Merge
+            How Open Source Works 2:
+                -Nice recap to software freedom
+        Conclusion / Thanks for reading
+            Rewrite: More substantial, somehow
+
     To Do:
-    History:
+    C: This needs to be much *longer*
+
         Main idea: C is "first programmer's language"
 
         Programming projects in Fortran was fun in much the same way
-        three-legged races are fun. <cite!>
+        three-legged races are fun. 
+            - Ken Thompson, in Reflections on Trusting Trust
 
-    C:
+
     https://www.bell-labs.com/usr/dmr/www/chist.html
     """
 BCPL, B, and C all fit firmly in the traditional procedural family typified 
@@ -27,12 +36,51 @@ constructs such as coroutines and procedure closures. At the same time, their
 abstractions lie at a sufficiently high level that, with care, portability 
 between machines can be achieved. 
     """
+    
+    In a variety of ways, we as a community need to usher in the next
+    generation of Unix.
+        - Need to view users' time spent learning as <em>valuable</em>
+        - See a large number of dependencies on command-line tools,
+          such as make, awk, m4, etc..
+        - And, a correspondingly large number of shell scripts
 
-        Fork/Merge
-            How Open Source Works 2:
-                -Nice recap to software freedom
-        Conclusion / Thanks for reading
-            Rewrite: More substantial, somehow
+    "There are perhaps 30 developers worldwide who understand the
+    <code>autoconf</code> tool chain."
+    http://freshmeat.sourceforge.net/articles/stop-the-autoconf-insanity-why-we-need-a-new-build-system
+    In an ironic response, it took one lady four years to learn 
+    what <em>autoconf</em> did.
+
+    https://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.70/html_node/Introduction.html#Introduction
+    "The primary goal of Autoconf is making the <em>user's</em>[sic] life easier;
+    making the <em>maintainer's</em>[sic] life easier is only a secondary goal.
+        |-> But anyone who is building from source is a maintainer or developer; 
+            users install software via packages anyways!
+
+    The same goes for writing manual pages: Why aren't these kept in 
+    Markdown files?
+
+    Rust: The Language of the Future
+        Includes its own build system
+
+        *cough* memory intensive *cough*
+        https://www.youtube.com/watch?v=_hmMR0XooW4
+        Forward-looking?
+        Aside:
+            I've been looking for a reason to buy 96GiB RAM...
+
+        Tightly coupled dependencies:
+            There is, finally, one good <em>regex</em> implementation.
+
+    Build systems:
+        Fundamental Challenges:
+            1) Taking input files (source)
+            2) Building specific files from them (targets)
+            3) Variable Environment (cross-platform -and- cross-architecture)
+
+        The challenge, then, is to 1) query the environment for available
+        features, modify source files as appropriate, and build target
+        files as appropriate.
+
 
 -->
 

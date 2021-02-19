@@ -1,40 +1,125 @@
 ---
 layout: default
 title: Introduction to GNU/Linux
-last-updated: January 2021
+last-updated: February 2021
 ---
 
 <!--
     To Do:
 
-Free as in Freedom:
+    <h2>An Overview of Current Linux Distributions</h2>
+    <p>
+        Distributions suitable to the novice:
+    </p>
+
+    <ul>
+        <li>Ubuntu</li>
+        <li>Linux Mint</li>
+        <li>Elementary OS</li>
+        <li>Mangaro</li>
+        <li>Archiso</li>
+    </ul>
+
+    <p>
+        "General purpose" distributions:
+    <p>
+
+    <ul>
+        <li>Debian</li>
+        <li>Fedora</li>
+    </ul>
     
-Closing Remarks:
-    BSD:
-    GNU/Linux is not the only open-source Unix-like operating system in
-    existence, but it is by far the most popular.
+    <p>
+        It is said that, "If you learn Red Hat, then you'll know Red Hat, but
+        if you learn Slackware, you'll know Linux."
+        Advanced distributions:
+    </p>
 
-    Add subsection: Addendum: Open Source
+    <ul>
+        <li>Slackware</li>
+        <li>Arch</li>
+    </ul>
 
-    In the forty years since Richard Stallman made his announcement, 
-    the free software landscape has seen some changes.
-    I would not call them improvements, because his ideals 
-    represent an absolute yardstick against which to measure one's own work.
+    <h2 style="margin-bottom: 0;">Closing Remarks:</h2>
+        <h4>Open Source</h4>
+    <p>
+        In the forty years since Richard Stallman began GNU 
+        (pronounced <em>Gah-nu,</em>) the free software landscape has seen a 
+        great deal of growth and development.
+        In 19__, Netscape announced that 
+        <strikeout>it lossed the browser wars</strikeout> 
+        it would release its source code publicly, under a license .
+        Seeing an opportunity, 
+        Finally, the term <em>open source</em> was invented as a 
+        less abrasive synonym for <em>free software:</em>  
+    </p>
 
-    Open Source:
-    Is formally synonymous with <em>free software.</em>
+    <blockquote>
+        We realized it was time to dump the confrontational attitude that has been
+        associated with 'free software' in the past and sell the idea strictly on
+        the same pragmatic, business-case grounds that motivated 
+        Netscape<sup><a href="http://web.archive.org/web/19981206185148/http://www.opensource.org/history.html">[x]</a></sup>
+    </blockquote>
 
-    In ____, Netscape announced that it would release the source code
-    of its browser to the public;
+    <p>
+        Both the Free Software Foundation and the Open Source Initiative
+        agree that they are working towards the same larger goal, and that 
+        their respective terms are nearly synonymous.  
+        In this work, and in life, we will use <em>open-source</em> 
+        interchangeably with <em>free software.</em>
+    </p>
 
-    http://web.archive.org/web/19981206185148/http://www.opensource.org/history.html
-    "We realized it was time to dump the confrontational attitude that has been
-    associated with 'free software' in the past and sell the idea strictly on
-    the same pragmatic, business-case grounds that motivated Netscape"
-    (The result was the term 'open-source')
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Not sure which to go with?
+            Be a stand-up guy and go with MIT.
+        </p>
+    </div>
 
-    https://opensource.org/faq#permissive
+    <p>
+        In addition, more developers have taken part, and introduced a 
+        number of licenses to suit their needs.  
+        Open-source licenses can be divided into two classes:
+        Permissive software licenses (e.g., MIT, Apache, BSD license)
+        do not perpetuate the rights they stipulate in the manner of the 
+        GNU GPL, and so (indirectly) permit their software to become proprietary.
+        Nonpermissive licenses <em>do</em> perpetuate user's freedoms.
+        To be honest, a lot of developers have said, <em>To hell with this,</em>
+        and have introduced such novelties as the <a href="">Beer License</a>
+        and <a>Unlicense</a> (quite popular).
+    </p>
 
+    <h3>What is UNIX, Anyways?</h3>
+
+    <p>
+        Well, there's actually a standard 
+        (<a href="https://groups.google.com/g/gnu.announce/c/-RaFFh67FdM/m/ghrbfbUgbmwJ">that no one follows</a>).  
+        It's called the <em>Single Unix Specification,</em> and is intended
+        to allow portability...
+        The UNIX trademark is today held by _____
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside Right:</h4>
+        <p>
+            The Linux Kernel used to have a compilation flag named, 
+            <code>POSIX_ME_HARDER</code>
+        </p>
+    </div>
+
+    <p>
+        Other Unix-like's include FreeBSD, OpenBSD, RedoxOS, 
+        BeOS, and its derivatie, Haiku.
+        Whereas the GNU and Linux projects each produce a piece of the puzzle,
+        these projects build and maintain entire operating systems. 
+        to its "bazaar" organizational style, 
+        it is by far the most popular.
+        Although GNU/Linux is not the only open-source Unix-like operating system in
+        existence, it is by far the most popular, and will remain the central
+        focus of this introduction.
+    </p>
+    
 -->
 
 <div id="nav_bar_2" class="nav">
@@ -626,7 +711,6 @@ Closing Remarks:
         <center>Linux Mint 19.1 "Tessa", Released 2018</center>
     </div>
     
-
     <div class="aside-right" style="margin-top: 25px;">
         <h4>Do it:</h4>
         <p>
@@ -666,8 +750,7 @@ Closing Remarks:
 
     <p>
         Linux usage is becoming more widespread, and hardware vendors are
-        taking note:  Both 
-        Dell and Lenovo
+        taking note:  Both Dell and Lenovo
         ship machines with Ubuntu preinstalled,
         and there is <a href="https://itsfoss.com/get-linux-laptops/">a host of</a>
         botique vendors selling machines with different

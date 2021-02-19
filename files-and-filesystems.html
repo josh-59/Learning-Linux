@@ -7,6 +7,27 @@ last-updated: December, 2020
 <!-- 
 
 To Do:
+    Filesystems:
+    zfs:
+        https://docs.freebsd.org/en/books/handbook/zfs/
+        - Data integrity: a checksum is calculated and stored alongside
+          each file
+            - "self healing"
+        - "more than just a file system"
+        - Incorporates volume management:
+            - Pools are constructed of disks
+        - Pools can be grown dynamically (by assigning new disks to it)
+        - Native filesystem snapshot support
+
+
+    tfs:
+        A very ambitious, next-generation filesystem.
+        Aims to usurp the journaling with so-called "guaranteed atomicity."
+        If they pull off their goals, it will be the first
+        "smart" filesystem.
+        https://gitlab.redox-os.org/redox-os/tfs
+
+       <code>$ df - -print-type</code>
 
     <p>
         Inode numbers can uniquely identify a file only within a single
@@ -77,7 +98,7 @@ Filesystem Heirarchy:
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#files"> Files </a></li>
         <li><a href="#regular-files"> Regular Files</a></li>
-        <li><a href="#pseudo-files"> Pseudo Files </a></li>
+        <li><a href="#synthetic-files"> Synthetic Files </a></li>
         <li><a href="#device-files"> Device Files </a></li>
         <li><a href="#fs-heir"> Filesystem Heirarchy </a></li>
         <li><a href="#mounting-unmounting"> Mounting and Unmounting</a></li>
@@ -110,17 +131,6 @@ Filesystem Heirarchy:
 <div id="files" class="content">
     <h2>Files</h2>
 
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            For each open file on the system, the kernel keeps a few C struct's
-            to track them.  One of their entries is <em>file offset</em>,
-            which is used to preserve order across <code>read</code>'s.
-            See <a href="https://man7.org/tlpi/index.html">The Linux Programming Interface</a>
-            for more detail!
-        </p>
-    </div>
-
     <p>
         In Unix, a file is a sequence of bytes.<sup><a href=#references>[1]</a></sup>
         This definition is sufficiently abstract to allow, for instance, a keyboard
@@ -140,17 +150,44 @@ Filesystem Heirarchy:
         In particular, the <code>read</code> system call fills a given
         buffer with the contents of a file;
         order is preserved across calls to <code>read</code>.
-        When a process requests a read, the kernel suspends the process
+        When a program requests a read, the kernel suspends its execution 
         until data is available.
     </p>
 
+    <h3>File Attributes</h3>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Oddly, this information does not include the file's name.
+            More on this below.
+        </p>
+    </div>
+
     <p>
-        In Unix-like operating systems, each file has an owner.
-        Important files are owned by <code>root</code>, the superuser of the system.
-        The owner of a file is permitted to do anything to it,
-        including delete it. 
-        As such, we typically wish to avoid acting as <code>root</code>, and 
-        instead use <code>sudo(8)</code> wherever possible.
+        Unix-like operating systems store a substantial amount of information
+        about each file on the system.
+        This information, known as <em>file metadata,</em> is stored on-disk, 
+        alongside the file.
+    </p>
+
+    <p>
+        Metadata includes:
+    </li>
+
+    <ul>
+        <li>File Type</li>
+        <li>Owner</li>
+        <li>Group</li>
+        <li>Read/Write/Execute Permissions</li>
+        <li>Size</li>
+        <li>Timestamps</li>
+    </ul>
+
+    <p>
+        This information can be explained in part by the UNIX idiom of
+        making everything available in the form of a file, 
+        and in part by its time-sharing heritage.
     </p>
 
     <p>
@@ -197,9 +234,8 @@ Filesystem Heirarchy:
 
     <p>
         Two other tools useful for peeking
-        into a file are <code>file(1)</code>, which gives a brief description of
-        the file's contents, and <code>stat(1)</code>, which gives a
-        summary of the file's inode contents:
+        into a file are <code><a href="https://www.man7.org/linux/man-pages/man1/file.1.html">file(1)</a></code>, and  
+        <code><a href="https://man7.org/linux/man-pages/man1/stat.1.html">stat(1)</a></code>:
     </p>
 
     <div class="code">
@@ -220,87 +256,38 @@ Filesystem Heirarchy:
     </div>
 
     <p>
-        Outside of these utilities, methods for inspecting an executable file
-        are restricted.  
-        We can:
-    </p>
-
-    <ul>
-        <li style="padding-bottom: 0;">
-            Inspect its source code
-            <ul>
-                <li style="padding-bottom: 0;">
-                    If the file is a script, then it is its source
-                </li>
-            </ul>
-        </li>
-        <li>
-            Reverse engineer it (a formidable task)
-        </li>
-        <li>
-            Pursue documentation
-            <ul>
-                <li><code>man</code> pages</li>
-                <li>Other documentation</li>
-            </ul>
-        </li>
-    </ul>
-            
-    <p>
-        Free software has the property that the first option is
-        always available to us.
-        If we are comfortable with the given program, 
-        we can find out more by querying it: 
-    </p>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            We use an absolute pathname here in order to avoid
-            <a href="terminals-and-shells.html#authomatic-file-location">automatic program location</a> by the shell.
-        </p>
-    </div>
-
-    <div class="code">
-        $ /bin/bash --help
-    </div>
-
-    <p>
-        or
+        To simply view the contents of a file, we can use the <code>less</code>
+        paging utility, which displays one screenful of the file at a time:
     </p>
 
     <div class="code">
-        $ /bin/bash --version
+        $ less hello.c
     </div>
 
     <p>
-        This is typical of command-line programs, but potentially dangerous:
-        We are executing the given program.
-        Finally, we can view the contents of a text file with the 
-        <code>less</code> paging utility.
+        As an exercise, go to the <code>/boot</code> directory and look around!
     </p>
 
     <h3>See Also:</h3>
     <ul>
-        <li><a href="https://www.man7.org/linux/man-pages/man1/chmod.1.html"><code>chmod(1)</code></a></li>
     </ul>
 </div>
 
-<div class="content" id="pseudo-files">
-    <h2>Pseudo Files</h2>
+<div class="content" id="synthetic-files">
+    <h2>Synthetic Files</h2>
 
     <p>
         The GNU/Linux directory tree is used as a general-purpose meeting place.
         In addition to regular files, it also contains
         information about running processes, information about the running kernel,
-        and references to hardware drivers&mdash; each in the form of files.
+        and references to hardware&mdash; each in the form of files.
         This mechanism is general, extensible, and allows both users and programmers
         access to the running machine.
     </p>
 
     <p>
-        For example, the  <code>/proc/meminfo</code> file reports statistics about
-        memory usage on the system:
+        For example, the  <code>/proc/meminfo</code> file reports current
+        memory usage of the system:
     </p>
 
     <div class="code">
@@ -318,9 +305,20 @@ Filesystem Heirarchy:
     </div>
 
     <p>
-        These are known as <em>psuedo</em> or <em>synthetic</em> files:
-        A pseudo or synthetic file is a file that exists only in virtue of the kernel.
+        This is an example of a <em>synthetic</em> or <em>psuedo</em> file.
+        These exist only in virtue of the running kernel. 
         It does not exist on disk, and does not exist on any persistent filesystem.
+        The output printed was the kernel's response to the
+        <code>read(2)</code> system call.
+    </p>
+
+    <p>
+        The <code>/proc</code> and <code>/sys</code> directories are
+        dedicated to pseudo-files.  
+        Of these, we will discuss only <code><a href="https://man7.org/linux/man-pages/man5/proc.5.html">/proc</a></code> in any detail.
+        It contains one directory for each running program on the system,
+        and each directory contains substantial information about its
+        respective process.
     </p>
 
     <!--
@@ -333,32 +331,6 @@ Filesystem Heirarchy:
         </p>
     </div>
     
-    -->
-
-    <p>
-        To explain: A running program is restricted to querying the kernel
-        about files.  To read a file, it must ask the kernel;
-        to get directory entries, it must ask the kernel; etc.
-        As such, the kernel can interject upon these system calls&mdash; 
-        it can make it
-        "look like" a file is in a directory by including it as a directory entry in
-        response to the appropriate query, and can make 
-        "look like" a file has contents by giving information back when 
-        a program requests it.
-    </p>
-
-    <p>
-        As a consequence of this, these files appear to be, and act as, 
-        actual files, when in fact their contents are generated dynamically by the 
-        kernel at runtime, and do not exist statically on any persistent filesystem.
-        GNU/Linux distributions typically use two pseudofilesystems: 
-        <a href="https://man7.org/linux/man-pages/man5/proc.5.html"><code>procfs</code></a>
-        and 
-        <a href="https://man7.org/linux/man-pages/man5/sysfs.5.html"><code>sysfs</code></a>.
-    </p>
-
-    <!--
-
     <h3> The <code>/proc</code> Directory </h3>
 
     <p>
@@ -386,7 +358,7 @@ Filesystem Heirarchy:
     </p>
 
     <p>
-        For instance, when a micro-SD card is inserted into my laptop,
+        For instance, when a USB-stick is inserted into my laptop,
         a new file appears in <code>/dev</code>.
         It is interesting to note that the essential capabilities of this device 
         coincide with those of a file: We can read from it and write to it.
@@ -639,39 +611,37 @@ Filesystem Heirarchy:
         <a href="https://www.man7.org/linux/man-pages/man8/umount.8.html"><code>sudo umount PATH</code></a>,
         where <code>PATH</code> is the location of the mounted filesystem.
     </p>
-
 </div>
-
-
 
 <div id="filesystems" class="content">
     <h2> Filesystems </h2>
-
-    <div class="aside-right">
-        <h4>Remember:</h4>
-        <p>
-            A given disk may entertain more than one partition,
-            but a given partition can only entertain a single filesystem.
-        </p>
-    </div> 
 
     <p>
         A <a href="https://wiki.osdev.org/File_Systems#File_System_Theory">filesystem</a> is a systematic method of organizing data on
         disk.<sup><a href="https://wiki.osdev.org/Filesystem">[3]</a><a href="https://wiki.archlinux.org/index.php/File_systems">[4]</a></sup>
         It is similar to a data structure, in that it defines a convention
-        to be followed in the storage and retrieval of data.<sup><a href="https://wiki.debian.org/Packaging/Intro">[3]</a></sup>
+        to be followed in the storage and retrieval of data.
     </p>
 
     <p>
-        A given disk is 
+        To use a given filesystem, a given disk is first
         <em><a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">partitioned</a></em> into one or more 
         distinct components.
-        Partitions are restricted to a single (logical) disk, and they are
-        contiguous with respect to the disk's address space. 
-        Each partition may entertain at most a single filesystem,
-        and filesystems cannot cross partition boundaries.
+        Partitions are contiguous with respect to the disk's address space. 
         Writing a new and empty filesystem to a partition is known as
         <em><a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">formatting</a>.</em>
+        Filesystems cannot cross partition boundaries.
+    </p>
+
+    <p>
+        Early versions of Unix referred to its own filesystem as, 
+        simply, <code>fs</code>.
+        It was well-documented (by, for instance, Maurice J. Bach in 
+        <em>The Design of the Unix Operating System</em>).
+        The Extended Filesystem (EXT) was an open-source implementation, and 
+        retained many distinctive features of the original.
+        Since then, EXT2, EXT3, and EXT4 have continued to 
+        improve upon the design.
     </p>
 
     <h3>Some Common Filesystems:</h3>
@@ -679,9 +649,8 @@ Filesystem Heirarchy:
     <ul>
         <li>
             <p>
-                <strong>EXT4</strong>:
-                Introduced in 2008,<sup><a href="https://en.wikipedia.org/wiki/Ext4">[5]</a></sup> EXT4 is
-                the current standard Linux filesystem.
+            <a href="https://ext4.wiki.kernel.org/index.php/Main_Page"><strong>EXT4</strong></a>:
+                Introduced in 2008, EXT4 is the current standard Linux filesystem.
                 It is an evolutionary enhancement on EXT3,
                 supporting larger filesizes, deeper subdirectory support,
                 faster handling of large files, along with <a href="https://kernelnewbies.org/Ext4">many other improvements</a>.
@@ -691,41 +660,20 @@ Filesystem Heirarchy:
 
         <li>
             <p>
-                <strong>ZFS</strong>:
-                "Don't use ZFS.  It's that simple." &mdash;<a href="https://www.realworldtech.com/forum/?threadid=189711&curpostid=189841">Linus Torvalds</a>.
-            </p>
-
-            <p>
-                Introduced in 2005,<sup><a href="https://en.wikipedia.org/wiki/ZFS">[6]</a></sup> ZFS incorporates fancier features that are generally
-                out of place on a Linux desktop.
-                It was developed by Sun Microsystems, and became closed-source with Sun's acquisition by
-                Oracle.<sup><a href="https://en.wikipedia.org/wiki/ZFS#OpenZFS_and_ZFS">[6]</a></sup>
-            </p>
-        </li>
-
-        <li>
-            <p>
                 <strong>FAT32</strong>: The "File Allcoation Table 32-bit" is a DOS-era filesystem,<sup><a href="https://en.wikipedia.org/wiki/File_Allocation_Table#FAT32">[7]</a></sup>
                 and is widely supported, though antiquated.
                 In particular, it is not a <a href="https://en.wikipedia.org/wiki/Journaling_file_system">journaling filesystem</a>,
                 so that changes to files are not recorded before being carried out.
-                This increases the likelihood of corruption in the event of, say, power outage.
-                This filesystem is often used to hold the bootloader, since it is virtually guaranteed to be supported by firmware,
+                This increases the likelihood of corruption in the event of, 
+                say, power outage.
+                This filesystem is often used to hold the bootloader, since it 
+                is virtually guaranteed to be supported by firmware,
                 and its contents will not be changed very often.
             </p>
         </li>
     </ul>
 
-
-    <p>
-        Early versions of Unix referred to its own filesystem as, simply, <code>fs</code>.
-        It was well-documented (by, for instance, Maurice J. Bach in <em>The Design of the Unix Operating System</em>).
-        The Extended Filesystem (EXT) was an open-source implementation, and 
-        retained many distinctive features of the original.
-        Since then, EXT2, EXT3, and EXT4 have continued to 
-        improve upon the design.
-    </p>
-
+    
     <h3> inodes </h3>
     
     <div class="aside-right">
