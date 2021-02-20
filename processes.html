@@ -6,7 +6,11 @@ last-updated: November, 2020
 
 <!--
 TODO
+    Sandbox:
+        Remove references to "MMU"
+    
     Process tree:
+        I dunno, "develop"
 
 
     Process attributes:
@@ -81,6 +85,7 @@ TODO
         <li><a href="#process-attributes"> Process Attributes </a></li>
         <li><a href="#standard-file-descriptors">Standard File Descriptors</a></li>
         <li><a href="#termination">Process Termination</a></li>
+        <li><a href="#exec">Executing a Different Program</a></li>
         <li><a href="#sandbox"> Sandbox </a></li>
         <li><a href="#dr-fraser"> Dr. Brian Fraser </a></li>
         <li><a href="#references"> References </a></li>
@@ -233,25 +238,18 @@ TODO
     </p>
 
     <p>
-        From within a process, launching another program is broken into two steps:
-        Duplicate the current process, then instruct the new 
-        process to execute a different program.
-    </p>
-
-    <p>
-        The first step is to copy the current process using the 
+        From within a process, creating a new process is restricted to the 
         <a href="https://www.man7.org/linux/man-pages/man2/fork.2.html"><code>fork(2)</code></a> system call. 
-        This system call instructs the kernel to duplicate the current process; 
+        This instructs the kernel to duplicate the current process; 
         the two resulting processes are nearly identical.<sup><a href="https://www.man7.org/linux/man-pages/man2/fork.2.html">[4]</a></sup>
-        Of note, they both continue execution of the same program at the same spot, 
-        they have identical (but separate) memory spaces, and they 
-        have the same files open.
+        Of note, they have duplicate memory spaces, and
+        continue executing the same program at the same spot.
+        The newly created process is referred to as the <em>child</em> process, 
+        the calling process is referred to as the <em>parent,</em> and we say 
+        that the child process <em>inherits</em> its parent's attributes.
     </p>
 
     <p>
-        The newly created process is referred to as the <em>child</em> process, 
-        the old one is referred to as the <em>parent</em> process, and we say 
-        that the child process <em>inherits</em> its parent's attributes.
         Of the ways that parent and child differ, one is important to us 
         now:
         They each recieve a different return value from <em>fork()</em>.
@@ -268,51 +266,16 @@ TODO
         <pre>
         pid_t rv = fork();
         if(rv == 0) {
-            // I am child
+            // I am child.
 
         } else if (rv &gt; 0) {
             // I am parent
 
         }
         </pre>
-
+    
     <p>
-        The second step is to instruct the child to launch a different program
-        using
-        <a href="https://www.man7.org/linux/man-pages/man2/execve.2.html"><code>execve(2)</code></a> or one of its variants.
-        This instructs the kernel to replace the currently executing
-        program with another;
-        therein, execution begins at <em>main()</em>.
-    </p>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Any process may call <em>execve()</em>.
-        </p>
-    </div>
-
-    <pre>
-        pid_t rv = fork();
-        if( rv == 0 ) {
-            // I am child
-            char *args[] = {"ls", "-l", NULL};
-            execve("/usr/bin/ls", args, NULL);
-
-        } else if ( rv &gt; 0 ) {
-            // I am parent
-            return 0;
-
-        }
-    </pre>
-
-    <p>
-        This sequence is traditionally called <em>fork and exec,</em>
-        and results in one process (the parent) launching another program
-        (the child).
-        It was present in Ken Thompson's original implementation of Unix at Bell 
-        Laboratories, and for reasons we'll see later, is ideal for 
-        programs at the command-line.
+        Their executions thereby diverge, and each is free to act independantly.
     </p>
 
     <p>
@@ -323,7 +286,8 @@ TODO
         This is viewable with the <a href="https://man7.org/linux/man-pages/man1/pstree.1.html"><code>pstree(1)</code></a> command.
     </p>
 
-</div>
+
+  </div>
 
 <div class="content" id="process-attributes">
     <h2> Process Attributes </h2>
@@ -521,61 +485,126 @@ TODO
 
 </div>
 
-<div class="content" id="sandbox">
-    <h2>Sandbox</h2>
-
+<div class="content" id="exec">
+    <h2>Executing a Different Program</h2>
     <p>
-        Processes are one of the big ideas of operating systems.
-        Through it, operating systems can isolate every running program
-        from every other running program, and from the machine itself.
-        Effectively, every program on the machine executes in a 
-        sandboxed environment, composed of restricted access to the CPU
-        and a distinct memory space.
+        The <code>fork(2)</code> system call creates a new process, but
+        since this new process has a memory space duplicated from its parent, 
+        it continues executing the same program.
+        In order to launch a different program, it is necessary to replace this
+        memory image with one obtained from a file.
+        This is what the <a href="https://www.man7.org/linux/man-pages/man2/execve.2.html"><code>exec(2)</code></a> family of system calls do.
     </p>
 
-  <h3> Limited Direct Execution </h3>
-
-  <p>
-    Modern CPU architectures support two
-    distinct modes of operation.
-    <em>Kernel mode,</em> sometimes called "supervisor mode," is the unrestricted mode.
-    Here, all CPU instructions are available, so that code running in this mode
-    has complete access to the machine.
-  </p>
     <p>
-    <em>User mode</em> is a proper subset of kernel mode; code running in user mode
-    does not have access to all instruction.  
-    All processes run in user mode.
-    If a process, running in user mode, attempts to execute a restricted instruction,
-    its execution is halted, and control is given to the kernel.
-    At that point, it is up to the operating system to determine what to do
-    (usually, terminate the offending process).
-  </p>
+        To launch a new program, then, is a two-step process: 
+    </p>
 
-  <p>
-    This technique is known as <em>limited direct execution.</em><sup><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/cpu-mechanisms.pdf">[3]</a></sup>
-    It is <em>limited</em> in the sense that each process has access to
-    only a restricted subset of the CPU's instructions.
-    It is <em>direct</em> in the sense that each process runs directly on hardware.
-    It makes safe and efficient use of available hardware.
-  </p>
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Any process may call <em>exec()</em>.
+        </p>
+    </div>
 
-  <p>
-    For instance, no process can access a hard-drive directly.
-    The proper avenue for a process to access such a device is through the kernel,
-    via system calls.
-    Through limited direct execution, this is
-    <em>the only</em> way that a process can access it.
-    This ensures that the kernel remains in charge of the machine's state.
-  </p>
+    <pre>
+        pid_t rv = fork();
+        if( rv == 0 ) {
+            // I am child
+            char *args[] = {"ls", "-l", NULL};
+            execvp(args[0], args);
 
+        } else if ( rv &gt; 0 ) {
+            // I am parent
+            printf("%s", PROMPT);
+            getline(input);
+            return 0;
+
+        }
+    </pre>
+
+    
+    <p>
+        This sequence is traditionally called <em>fork and exec,</em>
+        and results in one process (the parent) launching another program
+        (its child).
+        It was present in Ken Thompson's original implementation of Unix at Bell 
+        Laboratories, and for reasons I hope to bear out, is ideal for 
+        programs at the command-line.
+    </p>
+
+   </div>
+
+<div class="content" id="sandbox">
+    <h2>Sandbox</h2>
+    <p>
+        What is a process, though?
+        All this talk about memory bears out an important aspect of computers:
+        All the CPU can do is modify memory, and programming, in a nontrivial
+        sense, boils down to using the CPU to modify memory safely and 
+        effectively.
+    </p>
+
+    <p>
+        How can an operating system define <em>safely?</em>
+        Well, within a program, it cannot, since the program's doings are
+        its own business.
+        Rather, modern operating systems create a sandboxed environment within
+        which to execute programs.
+    </p>
+
+    <p>
+        This environment is composed of restricted access to the CPU,
+        and a distinct memory space.
+        Simply put, a process can neither modify another process's memory,
+        nor can it modify system memory, because <em>that memory does not
+        exist within the context of the process.</em>
+    </p>
+
+    <p>
+        The program is thus isolated, and can do anything it likes, within
+        its own environment.
+        Let's take these one at a time.
+    </p>
+
+
+    <h3> Limited Direct Execution </h3>
+
+    <p>
+        Modern CPU architectures support two
+        distinct modes of operation.
+        <em>Kernel mode,</em> sometimes called "supervisor mode," is the unrestricted mode.
+        Here, all CPU instructions are available, and all memory is available, 
+        so that code running in this mode has complete access to the machine.
+    </p>
+
+    <p>
+        <em>User mode</em> is a proper subset of kernel mode; code running 
+        in user mode does not have access to all instructions.  
+        All processes run in user mode, and 
+        if a process, running in user mode, attempts to execute a restricted 
+        instruction, its execution is halted, and control is given to the kernel.
+        At that point, it is up to the operating system to determine what to do
+        (usually, terminate the offending process).
+    </p>
+
+    <p>
+        This technique is known as <em>limited direct execution.</em><sup><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/cpu-mechanisms.pdf">[3]</a></sup>
+        It is <em>limited</em> in the sense that each process has access to
+        only a restricted subset of the CPU's instructions, and 
+        it is <em>direct</em> in the sense that each process runs directly on 
+        hardware.
+        It is intended to make safe and efficient use of available hardware.
+    </p>
+
+    
   <h3> Virtual Memory </h3>
 
   <p>
     Modern operating systems provide each process with its own memory in the
     form of a distinct <em>address space.</em>
     An address space is a collection of memory addresses; on all modern architectures,
-    memory (RAM) is byte-addressable, so that each address refers to exactly one byte.
+    memory is byte-addressable, so that each address refers to exactly one byte.
     Addresses themselves are simply numbers, usually expressed in hexadecimal.
   </p>
 
@@ -588,24 +617,21 @@ TODO
     <a href="https://en.wikipedia.org/wiki/Exec_(Amiga)">Amiga</a>)
     allowed processes direct access to
     the system's main memory; processes effectively shared the same address space.
-    This posed significant issues for system stability and security&mdash;
+    This poses significant issues for system stability and security&mdash;
     namely, one process could read and/or manipulate the memory of another.
   </p>
 
-  <p>
-  <em>Modern operating systems provide each process with a distinct
-      address space.</em>
-    The result has been a profound improvement in system stability.
-    The addresses that any process uses are relative to that process alone;
-    they are called "virtual" because they exist, effectively, for that process alone.
-    These virtual addresses are mapped onto physical addresses by
-    the CPU, without the process ever being aware of it.
-    This scheme is referred to colloquially as "virtual memory."
-  </p>
+    <p>
+        <em>Modern operating systems provide each process with a distinct
+        address space.</em>
+        The addresses that any process uses are implicitly restricted to that 
+        process alone.
+        The result has been a profound improvement in system stability.
+    </p>
 
   <p>
     The virtual memory abstraction requires support from both the kernel
-    and CPU.
+    and CPU:
     For each process, the kernel maintains an address translation table, which maps
     virtual addresses onto physical ones.
     This is loaded onto the CPU's
@@ -632,9 +658,24 @@ TODO
     Other processes are implicitly protected from memory tampering:
     Their memory simply does not exist within the context of the
     currently running process, and therefore cannot be read from, nor written to.
-    As with limited direct execution, virtual memory facilitates
-    the safe and efficient use of a machine resource.
+    As with limited direct execution, virtual memory is intended to 
+    facilitate the safe and efficient use of a machine resource.
   </p>
+
+    <h3>Putting it all together:</h3>
+
+    <p>
+        For processes, access to the CPU is also restricted in a temporal sense: 
+        Each process is allotted some time to run, and when its time is up,
+        the kernel interrupts execution, saves the state of the process (precisely),
+        and loads a different process to run.
+        That one runs for a bit, and then it too is interupted, and a new
+        process allowed to run for a while.
+        This is known as a <em>context switch,</em> and is the root
+        of multiprocessing 
+    </p>
+
+
 
   <h3> See Also: </h3>
   <ul>
