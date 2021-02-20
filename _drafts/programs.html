@@ -1,39 +1,98 @@
 <!--
     Kind of an interesting take on "programming": Start with the
     end-result, rather than the act of creating it.
-    
 -->
 
 <div class="content" id="programs">
     <h2> Programs </h2>
-
     <p>
-        A <em>program</em> is a file containing instructions on how to create
-        a process. In Unix-land, <em>program</em> is synonymous with 
-        <em>executable file.</em>
-        Most programs are in binary format, meaning that they
-        have been compiled to run directly on the machine's CPU, but
-        others are not compiled, and run directly from source code.
+        A <em>program</em> is a file that instructions describing how
+        to construct a process.
+        In GNU/Linux, there is no "executable" file type, and there 
+        is not a single extension denoting executable files (e.g., <em>.exe</em>).
+        Rather, according to POSIX, a program is a regular file with 
+        execute permissions.<sup><a href="https://man7.org/linux/man-pages/man3/execvp.3p.html">[a]</a></sup> 
     </p>
 </div>
 
-<div class="content" id="first-binary-executables">
-    <h2> Unix's first binary executable format</h2>
-    <h4> a.out </h4>
+<div class="content" id="scripts">
+    <h2> Interpreter Scripts </h2>
+    <p>
+        An interpreter script is a text file that is executable.
+        A script's first line must be of the form:
+    </p>
+
+    <div class="code">
+        #!interpreter 
+    </div>
 
     <p>
-        The first Unix binary executable file format was called <em>a.out,</em>
+        where <code>interpreter</code> is an absolute path to an executable file.
+        This line is known as <em>hash-bang.</em> 
+    </p>
+
+    <div class="code">
+        #!/usr/bin/python3
+
+        print("Hello World!")
+    </div>
+
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            To execute <code>file</code> in the current working directory, use
+            <br><center><code>./file</code></center><br>
+        </p>
+    </div>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li>execve(2)</li>
+    </ul>
+
+</div>
+
+<div class="content" id="first-binary-executables">
+    <h2> Binary Executables </h2>
+    <h4> and <code>a.out</code> </h4>
+
+    <p>
+        A binary executable is a program stored in a format that is 
+        natively executable by the host computer.
+        Building one from a high-level language is a multistep process, but
+        performance is effectively maximized.  
+        Preparing a process to execute a binary is known as <em>loading.</em>
+    </p>
+   
+    <ul>
+        <li> Text&mdash; Machine instructions </li>
+        <li> Data&mdash; Initial values for global and static variables</li>
+        <li> BSS&mdash; Uninitialized global and static variable values; 
+            assigned arithmetic zero by the kernel upon loading</li>
+    </ul>
+
+    <p>
+        To execute a program stored in this format, the kernel
+        simply copies its data to the process's virtual memeory and 
+        assigns the CPU's program counter to point to the first instruction 
+        therein.
+    </p>
+
+    <p>
+        The simplicity of this format became its undoing: 
+        It cannot 
+
+    <p>
+        The first Unix binary executable file format was <em>a.out,</em>
         shorthand for
         <em>assembler output.</em><sup><a href="https://en.wikipedia.org/wiki/A.out">[5]</a></sup>
         This was a very simple format, consisting of three distinct data 
-        segments that coincided with the layout of the resulting process's memory:
+        segments that coincided with the major components of the 
+        process's virtual memory:
     </p>
 
-    <ol>
-        <li> Text &mdash; Machine instructions </li>
-        <li> Data &mdash; Initial values for global and static variables</li>
-        <li> BSS &mdash; Uninitialized global and static variable values; assigned arithmetic zero by the kernel upon loading</li>
-    </ol>
+
 </div>
 
 <div class="content" id="elf">
@@ -47,51 +106,13 @@
     </p>
 
     <ul>
-        <li> <code>file</code> &mdash; Provide a brief description of any filetype</li>
         <li> <code>size</code> &mdash; List section sizes above<li>
         <li> <code>readelf</code> &mdash; Display detailed information about ELF files</li>
-        <li> <code>objdump</code> &mdash; "... mostly useful to programmers who are working on compilation tools,
-      as opposed to programmers who just want their program to compile and
-      work."<sup><a href="https://www.man7.org/linux/man-pages/man1/objdump.1.html">[19]</a></sup></li>
-  </ul>
+    </ul>
 </div>
 
-<div class="content" id="scripts">
-    <h2> Script </h2>
-    <p>
-        A script is a text file that is executable.
-        Scripts must begin with the magic characters <em>#!</em>, then the
-        complete pathname of the desired interpreter, as in
-    </p>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            To execute <code>file</code> in the current working directory, use
-            <br><center><code>./file</code></center><br>
-        </p>
-    </div>
-
-  <div class="code">
-    #! /bin/bash
-  </div>
-
-  <p>
-    or
-  </p>
-
-  <div class="code">
-    #! /usr/bin/python.
-  </div>
-
-  <p>
-    This line is often called <em>shebang</em> or <em>hashbang</em>.
-    Note that this feature is implemented by the kernel:  The kernel
-    itself is passed the script via <em>exec</em>, and
-    goes about executing the interpreter given, with the file as an
-    argument to it.<sup><a href="https://en.wikipedia.org/wiki/Shebang_(Unix)#History">[5]</a></sup>
-    Also, Bash will attempt to execute the file within a subshell,
-    if no hashbang line exists.<sup><a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Scripts.html#Shell-Scripts">[22]</a></sup>
-  </p>
+<div class="content" id="toolchains">
 
 </div>
+
+
