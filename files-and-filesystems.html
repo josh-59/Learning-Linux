@@ -7,6 +7,9 @@ last-updated: December, 2020
 <!-- 
 
 To Do:
+    ls listing picture:
+        Simplify b and c to 'device files'
+
     Filesystems:
     zfs:
         https://docs.freebsd.org/en/books/handbook/zfs/
@@ -28,6 +31,12 @@ To Do:
         https://gitlab.redox-os.org/redox-os/tfs
 
        <code>$ df - -print-type</code>
+
+    btrfs:
+        https://btrfs.wiki.kernel.org/index.php/Main_Page
+
+    xfs:
+
 
     <p>
         Inode numbers can uniquely identify a file only within a single
@@ -256,7 +265,7 @@ Filesystem Heirarchy:
     </div>
 
     <p>
-        To simply view the contents of a file, we can use the <code>less</code>
+        To simply view the contents of a file, we can use the <code>less(1)</code>
         paging utility, which displays one screenful of the file at a time:
     </p>
 
@@ -267,6 +276,7 @@ Filesystem Heirarchy:
     <p>
         As an exercise, go to the <code>/boot</code> directory and look around!
     </p>
+
 
     <h3>See Also:</h3>
     <ul>
@@ -623,22 +633,13 @@ Filesystem Heirarchy:
         to be followed in the storage and retrieval of data.
     </p>
 
-    <p>
-        To use a given filesystem, a given disk is first
-        <em><a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">partitioned</a></em> into one or more 
-        distinct components.
-        Partitions are contiguous with respect to the disk's address space. 
-        Writing a new and empty filesystem to a partition is known as
-        <em><a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">formatting</a>.</em>
-        Filesystems cannot cross partition boundaries.
-    </p>
-
+   
     <p>
         Early versions of Unix referred to its own filesystem as, 
         simply, <code>fs</code>.
         It was well-documented (by, for instance, Maurice J. Bach in 
         <em>The Design of the Unix Operating System</em>).
-        The Extended Filesystem (EXT) was an open-source implementation, and 
+        The Extended Filesystem (EXT) was an open-source extension, and 
         retained many distinctive features of the original.
         Since then, EXT2, EXT3, and EXT4 have continued to 
         improve upon the design.
@@ -661,53 +662,52 @@ Filesystem Heirarchy:
         <li>
             <p>
                 <strong>FAT32</strong>: The "File Allcoation Table 32-bit" is a DOS-era filesystem,<sup><a href="https://en.wikipedia.org/wiki/File_Allocation_Table#FAT32">[7]</a></sup>
-                and is widely supported, though antiquated.
+                and is widely supported,<sup><a href="https://wiki.osdev.org/File_Systems#.22Beginners.22_filesystems">[a]</a></sup> though antiquated.
                 In particular, it is not a <a href="https://en.wikipedia.org/wiki/Journaling_file_system">journaling filesystem</a>,
                 so that changes to files are not recorded before being carried out.
                 This increases the likelihood of corruption in the event of, 
                 say, power outage.
                 This filesystem is often used to hold the bootloader, since it 
-                is virtually guaranteed to be supported by firmware,
+                is virtually guaranteed to be supported,
                 and its contents will not be changed very often.
             </p>
         </li>
     </ul>
 
-    
-    <h3> inodes </h3>
-    
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Data about a file is known as its <em>metadata.</em>
-        </p>
-    </div>
-
     <p>
-        A common feature of Unix-like filesystems is the inode:
-        Each file in such a filesystem is described by a single inode.
-        Each inode describes where the data of the file is located, the size 
-        of the file, and contains other data about the file, such as 
-        its access permissions and timestamps.
+        To use a particular filesystem, a given disk is first
+        <a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">partitioned</a> into one or more 
+        distinct components.
+        A new and empty filesystem may then be written to the partition,
+        in an operation known as 
+        <em><a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">formatting</a>.</em>
+        Partitions are contiguous with respect to the disk's address space,
+        and filesystems cannot cross partition boundaries.
+    </p>
+
+    <h3> inodes &amp; inode numbers</h3>
+    
+    <p>
+        A common feature of Unix-like filesystems is the 
+        <a href="https://wiki.osdev.org/File_Systems#Indexing_Methods">inode</a>:
+        Each file is described by a single inode.
+        An inode tells where the file's data is stored on-disk, 
+        and also contains the file's metadata. 
     </p>
 
     <p>
-        The collection of all inodes of a filesystem is organized, conceptually, 
-        into one large array; any inode may be identified by its index 
-        in this array.
-        These indices are called <em>inode numbers.</em>
-    </p>
-
-    <p>
-        An inode number serves as the "hardware name" for a file,
-        since it uniquely identifies the file within its filesystem.
+        The filesystem's collection of inodes is organized  
+        into one large array; any inode, and therefore any file,
+        may be uniquely identified by its index in this array.
+        These indices are called <em>inode numbers,</em>
+        and are the principle (low-level) references to files.
         Under this scheme, all we must do in order to implement filenames
         is associate a string of text with an inode number.
     </p>
 
     <h3> See Also: </h3>
     <ul>
-        <li> <code><a href="https://man7.org/linux/man-pages/man5/filesystems.5.html"> filesystems(5)</a></code> </li>
+        <li> <code><a href="https://man7.org/linux/man-pages/man7/inode.7.html"> inode(7) </a></code></li>
     </ul>
 </div>
 
@@ -719,7 +719,7 @@ Filesystem Heirarchy:
         <a href="finding-files.html#basename">Basename</a> and <a href="https://man7.org/linux/man-pages/man7/inode.7.html">inode number</a>.
         Directories are maintained by the kernel, and are not directly
         readable nor writeable by processes (specific system calls exist
-        to query directories).
+        to interact with directories).
     </p>
 
     <p>
@@ -805,88 +805,13 @@ Filesystem Heirarchy:
         (see above). 
     </p>
 
-    <h3>Directory Structure</h3>
+    <h4> Exercises: </h4>
+    <ol class="big-list">
+        <li> From the command line, create a new and empty directory.  
+            What does it contain? (It is not empty.)
+            To what files do its entries point?</li>
+    </ol>
 
-    <p>
-        Although each file on the system, including directories, is owned by a user,
-        the contents of directories are effectively owned by the kernel.
-        No process is permitted to read or write directly to directories.
-    </p>
-
-    <p>
-        Instead, system calls exist to:
-    </p>
-
-    <ul style="columns: 2; width: 80%; margin-left: 10%; margin-bottom: 20px;">
-        <li><a href="https://www.man7.org/linux/man-pages/man2/open.2.html">Create a new file</a></li>
-        <li><a href="https://man7.org/linux/man-pages/man2/link.2.html">Create a new hardlink</a></li>
-        <li><a href="https://man7.org/linux/man-pages/man2/unlink.2.html">Delete a hardlink</a></li>
-        <li><a href="https://www.man7.org/linux/man-pages/man2/mkdir.2.html">Create a directory</a></li>
-        <li><a href="https://www.man7.org/linux/man-pages/man2/rmdir.2.html">Remove a directory</a></li>
-        <li><a href="https://www.man7.org/linux/man-pages/man2/getdents.2.html">Get directory entries</a></li>
-    </ul>
-
-
-    <p>
-        The layer of indirection offered by this interface affords the kernel
-        the opportunity to restrict the manipulation of directories, and thereby,
-        to impose structure upon the directory tree.
-        We will briefly outline these restrictions, and the resulting structure.
-    </p>
-
-    <div class="aside-right">
-        <h4>Behind the Curtain:</h4>
-        <p>
-            From the printout at the beginning of this section,
-            we see that <code>/home/josh/Public/Learning-Linux</code>
-            has been assigned inode number 645278,
-            and <code>/home/josh/Public</code>
-            has been assigned inode number 384844.
-        </p>
-    </div>
-
-    <p>
-        First, each directory contains a hard link to itself, 
-        <code>.</code> ("dot").
-    </p>
-
-    <p>
-        At the command line, 
-    </p>
-
-    <div class="code">
-        $ ./
-    </div>
-
-    <p>
-        specifies "here," or, "from this directory."
-    </p>
-
-    <p>
-        Second, each directory is hard linked to a single parent directory,
-        <code>..</code> ("dot dot").
-        At the command line, 
-    </p>
-
-    <div class="code">
-        $ cd ..
-    </div>
-
-    <p>
-        means, "go to the parent directory."
-    </p>
-
-    <p>
-        Third, the root directory's parent directory is the root directory itself.
-    </p>
-
-    <p>
-        Finally, directories cannot be arbitrarily hard-linked&mdash;
-        That is, you cannot create new hard links to existing directories.
-        This prevents cycles from forming within the directory structure,
-        and ensures that the directories form a tree.
-    </p>
-    
     <h3> See Also: </h3>
     <ul>
         <li><a href="http://linfo.org/hard_link.html">What is a hard link?</a> -- definition by The Linux Information Project (LINFO)</li>
@@ -941,7 +866,7 @@ Filesystem Heirarchy:
 
     <h3>See Also:</h3>
     <ul>
-        <li> <code><a href="https://man7.org/linux/man-pages/man7/inode.7.html"> inode(7) </a></code></li>
+        <li> <code><a href="https://man7.org/linux/man-pages/man5/filesystems.5.html"> filesystems(5)</a></code> </li>
     </ul>
 
 </div>
