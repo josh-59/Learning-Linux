@@ -8,6 +8,7 @@ last-updated: February 2021
     To Do:
 
     <h2>An Overview of Current Linux Distributions</h2>
+
     <p>
         Distributions suitable to the novice:
     </p>
@@ -17,7 +18,6 @@ last-updated: February 2021
         <li>Linux Mint</li>
         <li>Elementary OS</li>
         <li>Mangaro</li>
-        <li>Archiso</li>
     </ul>
 
     <p>
@@ -27,6 +27,8 @@ last-updated: February 2021
     <ul>
         <li>Debian</li>
         <li>Fedora</li>
+        <li>openSUSE</li>
+        <li>CentOS (soon to be <a href="https://en.wikipedia.org/wiki/Rocky_Linux">Rocky Linux</a>)</li>
     </ul>
     
     <p>
@@ -44,13 +46,9 @@ last-updated: February 2021
         <h4>Open Source</h4>
     <p>
         In the forty years since Richard Stallman began GNU 
-        (pronounced <em>Gah-nu,</em>) the free software landscape has seen a 
-        great deal of growth and development.
-        In 19__, Netscape announced that 
-        <strikeout>it lossed the browser wars</strikeout> 
-        it would release its source code publicly, under a license .
-        Seeing an opportunity, 
-        Finally, the term <em>open source</em> was invented as a 
+        (pronounced <em>Guh-nu,</em>) the free software landscape has seen a 
+        great deal of growth, development and mainstream acceptance.
+        In 1998, the term <em>open source</em> was invented as a 
         less abrasive synonym for <em>free software:</em>  
     </p>
 
@@ -58,13 +56,14 @@ last-updated: February 2021
         We realized it was time to dump the confrontational attitude that has been
         associated with 'free software' in the past and sell the idea strictly on
         the same pragmatic, business-case grounds that motivated 
-        Netscape<sup><a href="http://web.archive.org/web/19981206185148/http://www.opensource.org/history.html">[x]</a></sup>
+        Netscape.<sup><a href="http://web.archive.org/web/19981206185148/http://www.opensource.org/history.html">[x]</a></sup>
     </blockquote>
 
     <p>
-        Both the Free Software Foundation and the Open Source Initiative
-        agree that they are working towards the same larger goal, and that 
-        their respective terms are nearly synonymous.  
+        The result was a wealth of media attention and the 
+        <a href="https://opensource.org/">Open Source Initiative</a>.
+        Both the FSF and the OSI agree that their respective terms are 
+        nearly synonymous.<sup><a href="https://opensource.org/faq#free-software">[b]</a><a href="https://www.gnu.org/philosophy/free-open-overlap.html">[c]</a></sup>
         In this work, and in life, we will use <em>open-source</em> 
         interchangeably with <em>free software.</em>
     </p>
@@ -73,7 +72,7 @@ last-updated: February 2021
         <h4>Aside:</h4>
         <p>
             Not sure which to go with?
-            Be a stand-up guy and go with MIT.
+            Be a stand-up guy and release under the MIT License.
         </p>
     </div>
 
@@ -83,41 +82,44 @@ last-updated: February 2021
         Open-source licenses can be divided into two classes:
         Permissive software licenses (e.g., MIT, Apache, BSD license)
         do not perpetuate the rights they stipulate in the manner of the 
-        GNU GPL, and so (indirectly) permit their software to become proprietary.
-        Nonpermissive licenses <em>do</em> perpetuate user's freedoms.
+        GNU GPL, and so (indirectly) permit their software to become proprietary;
+        nonpermissive licenses <em>do</em> perpetuate users' freedoms.
         To be honest, a lot of developers have said, <em>To hell with this,</em>
-        and have introduced such novelties as the <a href="">Beer License</a>
-        and <a>Unlicense</a> (quite popular).
+        and introduced such novelties as the 
+        <a href="https://people.freebsd.org/~phk/">Beerware License</a>
+        and the <a href="https://unlicense.org/">Unlicense</a> (quite popular).
     </p>
 
     <h3>What is UNIX, Anyways?</h3>
 
     <p>
-        Well, there's actually a standard 
-        (<a href="https://groups.google.com/g/gnu.announce/c/-RaFFh67FdM/m/ghrbfbUgbmwJ">that no one follows</a>).  
-        It's called the <em>Single Unix Specification,</em> and is intended
-        to allow portability...
+        Well, there's actually a standard.
+        It's called the <em>Single Unix Specification</em> (and/or POSIX), 
+        and is intended to allow portability of source across...
         The UNIX trademark is today held by _____
     </p>
 
     <div class="aside-right">
         <h4>Aside Right:</h4>
         <p>
-            The Linux Kernel used to have a compilation flag named, 
+            The Linux Kernel used to have an environment variable named, 
             <code>POSIX_ME_HARDER</code>
         </p>
     </div>
 
     <p>
+        The basic idea is that application authors should reference this
+        standard, and are then guaranteed that their software will work
+        across many platforms.
+        More, if a standard-following application doesn't work on some
+        Unix-wannabe, this <em>is not</em> the application's fault.
+    </p>
+
+    <p>
         Other Unix-like's include FreeBSD, OpenBSD, RedoxOS, 
-        BeOS, and its derivatie, Haiku.
-        Whereas the GNU and Linux projects each produce a piece of the puzzle,
+        BeOS, and its derivatie, Haiku;
+        whereas the GNU and Linux projects each produce pieces to a puzzle,
         these projects build and maintain entire operating systems. 
-        to its "bazaar" organizational style, 
-        it is by far the most popular.
-        Although GNU/Linux is not the only open-source Unix-like operating system in
-        existence, it is by far the most popular, and will remain the central
-        focus of this introduction.
     </p>
     
 -->
