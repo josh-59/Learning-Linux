@@ -10,15 +10,16 @@ TODO
         Remove references to "MMU"
     
     Process tree:
+        Child processes cannot change parent processes' attributes
         I dunno, "develop"
 
-
     Process attributes:
-        Child processes cannot change parent processes' attributes
+        File Descriptors:
+            Open a new file, not "read"
+            "The file is now available for writing."
 
     Process Termination:
         When a process terminates, its PID is freed for reuse, 
-
 
         Signals to kill processes:
             From least to greatest:
@@ -74,6 +75,8 @@ TODO
         See Also:
             https://magcius.github.io/xplain/article/x-basics.html
 
+        Closing Remarks:
+            System Calls vs. Library Functions
 
 -->
 
@@ -83,9 +86,9 @@ TODO
         <li><a href="#actors"> Actors </a></li>
         <li><a href="#process-creation"> Process Creation and System Startup </a></li>
         <li><a href="#process-attributes"> Process Attributes </a></li>
-        <li><a href="#standard-file-descriptors">Standard File Descriptors</a></li>
-        <li><a href="#termination">Process Termination</a></li>
+        <li><a href="#file-descriptors"> File Descriptors </a></li>
         <li><a href="#exec">Executing a Different Program</a></li>
+        <li><a href="#termination">Process Termination</a></li>
         <li><a href="#sandbox"> Sandbox </a></li>
         <li><a href="#dr-fraser"> Dr. Brian Fraser </a></li>
         <li><a href="#references"> References </a></li>
@@ -304,23 +307,15 @@ TODO
         maintains a great deal of information, including:
     </p>
 
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            For detailed information about processes in the Linux environment, see
-            <a href="https://www.man7.org/tlpi/"> The Linux Programming Interface</a>.
-        </p>
-    </div>
-
-
+    
     <ul>
-        <li>Location of executable file</li>
+        <li>Name and location of executable file</li>
         <ul>
             <li>Location of next instruction within</li>
         </ul>
         <li>Files currently open by the process</li>
         <ul>
-            <li>Access Mode (read, write, read and write)</li>
+            <li>Access mode (read, write)</li>
             <li>Location wihin file</li>
         </ul>
         <li>Current working directory</li>
@@ -330,103 +325,154 @@ TODO
 
     <p>
         Most of this information is available for perusal in the 
-        <code>/proc/</code> directory, which contains one subdirectory
-        for each process on the system.  
-        In order to give some idea of how the kernel manages processes,
-        and how processes interact with the kernel,
-        we will consider one of these attributes: Files opened by processes.
+        <code>/proc/</code> directory.
+        Moreover, most of this information can be changed 
+        from within the process through the use of system calls.  
     </p>
 
-    <h3 id="file-descriptors">File Descriptors</h3>
+    <p>
+        In order to give some idea of how 
+        processes interact with the kernel,
+        we will consider one of their attributes: Files currently open.
+    </p>
+</div>
+
+<div id="file-descriptors" class="content">
+    <h2> File Descriptors</h2>
     <p>
         Each file that a process has open is assigned a number
         by the kernel (specifically, a small integer).
-        This number is called a <em>file descriptor</em>.
-        These integers are used by the process whenever the process
-        requests an operation on a file. 
-        In the following call to 
-        <code><a href="https://man7.org/linux/man-pages/man2/read.2.html">read(2)</a></code>,
-        the calling program is instructing
-        the kernel to read from the file associated with
-        the number <em>0:</em>
+        This number is called a <em>file descriptor</em>, 
+        and is returned by the kernel in response to a request to open a file.
+        The process, thereafter, uses this integer to refer to that 
+        file whenever it wishes to operate on it.
     </p>
 
-    <div class="code">
-        num_bytes_read = read(0, buff, buff_size);
-    </div>
+    <p>
+        In the following line, a process is opening the file 
+        <em>rubber_ducky</em> for reading, then
+        storing the kernel's response as <em>fd</em>:
+    </p>
 
-    <div class="aside-left">
-        <h4>Note:</h4>
-        <p>
-            You are not expected to memorize these interfaces.
-            The 
-            <a href="https://man7.org/linux/man-pages/man2/read.2.html">manual page</a>
-            for <code>read(2)</code> describes each field, and the kernel's 
-            response, in detail.
-        </p>
-    </div>
+    <pre>
+        int fd = open("./rubber_ducky", O_RDONLY);
+    </pre>
+
+    <p>
+        If this call failed (which it would if <code>rubber_ducky</code> did not
+        exist), then <code>fd</code> would be assigned -1, an invalid file
+        descriptor.
+        If the call succeeded, <code>fd</code> will be nonnegative.
+        We can therefore check with:
+    </p>
+
+    <pre>
+        if (fd &lt; 0) {
+                perror("open"); 
+                exit(1);
+        }
+    </pre>
+
+    <p>
+        and then continue as though <em>open</em> had succeeded.
+    </p>
+
+    <p>
+        Thereafter, the process uses <code>fd</code> whenever it wishes 
+        to refer to <em>rubber_ducky</em>, 
+        as in the following call to 
+        <code><a href="https://man7.org/linux/man-pages/man2/read.2.html">read(2)</a></code>:
+    </p>
+
+    <pre>
+        int num_bytes_read = read(fd, buff, buff_size);
+    </pre>
 
     <p>
         The kernel will read at-most <code>buff_size</code>
-        bytes from the file associated with file descriptor <code>0</code>, 
-        and store the data into <code>buff</code>.
+        bytes, and store the data into the buffer <code>buff</code>.
         If all goes well, the system call will return with a nonnegative value;
         if the kernel encountered an error, it will return with a 
         negative value.
-        In either case, this <em>return value</em> will be assigned to 
+        In either case, this value will be assigned to 
         <code>num_bytes_read</code>.
     </p>
 
     <p>
         <a href="https://man7.org/linux/man-pages/man2/write.2.html"><code>Write(2)</code></a> 
-        is handled analogously. 
-        Every system call has a well-defined and stable interface, and an entry in
-        the man pages.
+        is handled analogously; every system call has a well-defined and 
+        stable interface, and an entry in the man pages.
     </p>
 
-
-    <h3> See Also: </h3>
-    <ul>
-        <li><a href="https://man7.org/linux/man-pages/man2/open.2.html"><code>open(2)</code></a> </li>
-        <li><a href="https://man7.org/linux/man-pages/man2/close.2.html"><code>close(2)</code></a> </li>
-        <li><code><a href="https://man7.org/linux/man-pages/man5/proc.5.html"> proc(5)</a></code></li>
-    </ul>
-</div>
-
-<div class="content" id="standard-file-descriptors">
-    <h2>Standard File Descriptors</h2>
-
-    <!--
-        "primary I/O":
-        At the command line, the standard file descriptors are the process's
-        primary source of input and output.
-    -->
-
+    <h3 id="standard-file-descriptors">Standard File Descriptors</h3>
     <p>
-        <em>Standard file descriptors</em>:
+        File descriptors <em>0, 1,</em> and <em>2</em> are somewhat special:
+        By both long-standing convention and the POSIX standard, 
+        these are guaranteed to be open and available for use at program startup:
     </p>
 
      <ul style="margin-left: 5%; list-style-type: none;">
-        <li><code>STDIN</code> is located at file descriptor 0</li>
-        <li><code>STDOUT</code> is located at file descriptor 1</li>
-        <li><code>STDERR</code> is located at file descriptor 2</li>
+        <li><code>STDIN</code> is located at file descriptor 0; open for reading</li>
+        <li><code>STDOUT</code> is located at file descriptor 1; open for writing</li>
+        <li><code>STDERR</code> is located at file descriptor 2; open for writing</li>
     </ul>
 
     <p>
-        This convention is rooted in Bell Lab's <em>UNIX</em>,
-        is followed throughout the standard C library,
-        and is stipulated formally within POSIX/SUS-v2 
-        specification:<sup><a href="">[n]</a></sup>
+        They are referred to as the <em>Standard File Descriptors,</em>
+        and at the command line, they are the primary source of input and output.
     </p>
 
-   <blockquote>
-        At program start-up, three streams shall be predefined and need not be
-        opened explicitly: <u>standard input</u> (for reading conventional
-        input), <u>standard output</u> (for writing conventional output)
-        and <u>standard error</u> (for writing diagnostic output).
-    </blockquote>
 </div>
 
+
+<div class="content" id="exec">
+    <h2>Executing a Different Program</h2>
+    <p>
+        The <code>fork(2)</code> system call creates a new process, but
+        since this new process has a memory space duplicated from its parent, 
+        it continues executing the same program.
+        In order to launch a different program, it is necessary to replace this
+        memory image with one obtained from a file.
+        This is what the <a href="https://www.man7.org/linux/man-pages/man2/execve.2.html"><code>exec(2)</code></a> family of system calls do.
+    </p>
+
+    <p>
+        To launch a new program, then, is a two-step process: 
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Any process may call <em>exec()</em>.
+        </p>
+    </div>
+
+    <pre>
+        pid_t rv = fork();
+        if( rv == 0 ) {
+            // I am child
+            char *args[] = {"ls", "-l", NULL};
+            execvp(args[0], args);
+
+        } else if ( rv &gt; 0 ) {
+            // I am parent
+            printf("%s", PROMPT);
+            getline(input);
+            return 0;
+
+        }
+    </pre>
+
+    <p>
+        This sequence is traditionally called <em>fork and exec,</em>
+        and results in one process (the parent) launching another program
+        (its child).
+        It was present in Ken Thompson's original implementation of Unix at Bell 
+        Laboratories, and for reasons I hope to bear out, is ideal for 
+        programs at the command-line.
+    </p>
+
+</div>
 
 <div class="content" id="termination">
     <h2> Process Termination </h2>
@@ -485,55 +531,7 @@ TODO
 
 </div>
 
-<div class="content" id="exec">
-    <h2>Executing a Different Program</h2>
-    <p>
-        The <code>fork(2)</code> system call creates a new process, but
-        since this new process has a memory space duplicated from its parent, 
-        it continues executing the same program.
-        In order to launch a different program, it is necessary to replace this
-        memory image with one obtained from a file.
-        This is what the <a href="https://www.man7.org/linux/man-pages/man2/execve.2.html"><code>exec(2)</code></a> family of system calls do.
-    </p>
 
-    <p>
-        To launch a new program, then, is a two-step process: 
-    </p>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Any process may call <em>exec()</em>.
-        </p>
-    </div>
-
-    <pre>
-        pid_t rv = fork();
-        if( rv == 0 ) {
-            // I am child
-            char *args[] = {"ls", "-l", NULL};
-            execvp(args[0], args);
-
-        } else if ( rv &gt; 0 ) {
-            // I am parent
-            printf("%s", PROMPT);
-            getline(input);
-            return 0;
-
-        }
-    </pre>
-
-    
-    <p>
-        This sequence is traditionally called <em>fork and exec,</em>
-        and results in one process (the parent) launching another program
-        (its child).
-        It was present in Ken Thompson's original implementation of Unix at Bell 
-        Laboratories, and for reasons I hope to bear out, is ideal for 
-        programs at the command-line.
-    </p>
-
-   </div>
 
 <div class="content" id="sandbox">
     <h2>Sandbox</h2>
