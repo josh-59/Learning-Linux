@@ -1,34 +1,61 @@
 systemd
-<h4>What We Have and Why We Don't Like It</h4>
+
 
 Bit of History:
+    IN THE BEGGINING, 
+    the shell operated as an obtuse loop, involving an <em>exec</em>
+    call to itself.<sup><a href="">[1]</a></sup>
+
     /sbin/init was, for many years, a network of shell scripts.
+
+    Extensive argument resulted in a fork from Debian, Devuan
+
+What systemd did:
+    Poettering pulled a great idea from Apple's <em>launchd,</em>
+    which was to buffer interprocess communication, and thereby
+    subvert process dependencies, so that all processes can 
+    be launched in parallel.
+
+Current Issue:
+    The systemd ecosystem is so vast that it arguably constitutes a metadistribution.
+    It includes a bootloader, 
+    Moreover, if we take the logic of "unifying pointless differences" to its limit,
+    we all might as well quit doing what we want and use Fedora instead, since
+    there's no point in meaningless differences.
+
+
+I propose <code>fbootd</code>, a modern init system with intentionally limited
+and restricted scope: Get the system running, and act as a service manager only
+insofar as single-user/desktop users require.
+    First philosophy is concurrency
+    Second philosophy is simplicity
+        - Simplicity especially with respect to configuration architecture:
+          A scheme users are intended to understand:
+            + No meta-units called "targets"
+, for the desktop/single-user environment.  
+
+
 
 https://access.redhat.com/videos/403833
     "More than just a classic init system"
 
     So, provides system services similar to d-bus
 
-    https://www.youtube.com/watch?v=_2aa34Uzr3c
-    "covers a lot of ground" 
-    "high level OS objects" --
-        services users, sessions, containers, apps, ...
-        vs. kernel "primitives", e.g., files, processes, sockets...
-        sorta like "dynamic libraries"
-    transparent, so that one can always figure out what's going on
-    config files are human-readable
-    the software will still boot (into defaults) if no config files are present
+
+https://www.youtube.com/watch?v=_2aa34Uzr3c
+"covers a lot of ground" 
+"high level OS objects" --
+    services users, sessions, containers, apps, ...
+    vs. kernel "primitives", e.g., files, processes, sockets...
+    sorta like "dynamic libraries"
+transparent, so that one can always figure out what's going on
+config files are human-readable
+the software will still boot (into defaults) if no config files are present
 
     https://en.wikipedia.org/wiki/File:Systemd_components.svg
 
 
-Extensive argument resulted in a fork from Debian, Devuan
-
 arch linux wiki on systemd + "see this blog post"
-
-Threatens to become an inalienable component of GNU/Linux platforms.
-
-
 
 
 Lennart Poettering:
@@ -51,4 +78,8 @@ Lennart Poettering:
     The nonmodularity of the result reduces the ability of individuals and
     organizations to iterate on the implementation.
 
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://www.youtube.com/watch?v=_2aa34Uzr3c">Leonnart Poettering - systemd as the Core OS</a> (Youtube video, needs audio corrected)</li>
+    </ul>
 
