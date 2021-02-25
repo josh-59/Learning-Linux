@@ -1,4 +1,5 @@
 ---
+
 layout: default
 title: Introduction to GNU/Linux
 last-updated: February 2021
@@ -7,15 +8,12 @@ last-updated: February 2021
 <!--
     To Do:
 
-    Somewhere:
-        See Also:
-
-
     Replace Linux Mint:
 <div class="content" id="current-linux-distributions">
     <h2>An Overview of Current Linux Distributions</h2>
 
     <p>
+        
         Distributions suitable to the novice:
     </p>
 
@@ -24,7 +22,6 @@ last-updated: February 2021
         <li>Linux Mint</li>
         <li>Elementary OS</li>
         <li>Mangaro</li>
-        <li>Solus?</li>
     </ul>
 
     <p>
@@ -36,6 +33,7 @@ last-updated: February 2021
         <li>Fedora</li>
         <li>openSUSE</li>
         <li>CentOS (soon to be <a href="https://en.wikipedia.org/wiki/Rocky_Linux">Rocky Linux</a>)</li>
+        <li>Solus?</li>
     </ul>
     
     <p>
@@ -52,44 +50,6 @@ last-updated: February 2021
 
     Closing Remarks:
 
-<div class="content" id="closing-remarks">
-    <h2 style="margin-bottom: 0;">Closing Remarks:</h2>
-        <h4>Open Source</h4>
-    <p>
-        In the forty years since Richard Stallman began GNU 
-        (pronounced <em>Guh-nu,</em>) the free software landscape has seen a 
-        great deal of growth, development and mainstream acceptance.
-        In 1998, the term <em>open source</em> was invented as a 
-        less abrasive synonym for <em>free software:</em>  
-    </p>
-
-    <blockquote>
-        We realized it was time to dump the confrontational attitude that has been
-        associated with 'free software' in the past and sell the idea strictly on
-        the same pragmatic, business-case grounds that motivated 
-        Netscape.<sup><a href="http://web.archive.org/web/19981206185148/http://www.opensource.org/history.html">[x]</a></sup>
-    </blockquote>
-
-    <p>
-        The result was a wealth of media attention and the 
-        <a href="https://opensource.org/">Open Source Initiative</a>.
-        Both the FSF and the OSI agree that their respective terms are 
-        nearly synonymous.<sup><a href="https://opensource.org/faq#free-software">[b]</a><a href="https://www.gnu.org/philosophy/free-open-overlap.html">[c]</a></sup>
-        In this work, and in life, we will use <em>open-source</em> 
-        interchangeably with <em>free software.</em>
-    </p>
-
-    <p>
-        More recently, open-source contributors have been eschewing 
-        copyright altogether, and simply putting works in the public domain.
-
-    <p>
-        It's called the <em>Single Unix Specification</em> (and/or POSIX), 
-        and is intended to allow portability of source across...
-        The UNIX trademark is today held by _____
-    </p>
-</div>
-
 -->
 
 <div id="nav_bar_2" class="nav">
@@ -101,6 +61,7 @@ last-updated: February 2021
         <li><a href="#linux"> The Linux Kernel </a></li>
         <li><a href="#distributions"> Linux Distributions: A Brief History</a></li>
         <li><a href="#mint"> Linux Mint </a></li>
+        <li><a href="#closing-remarks">Closing Remarks: Open Source</a></li>
         <li><a href="#video">Greg Kroah-Hartman </a></li>
         <li><a href="#references"> References </a></li>
     </ul>
@@ -307,15 +268,18 @@ last-updated: February 2021
 
     <p>
         The first attempt at producing a deliberately free and open-source 
-        UNIX nix clone was
+        UNIX clone was
         <a href="https://www.gnu.org/gnu/initial-announcement.en.html#f1">announced</a> by Richard Stallman in 1983.
         Stallman had been working at MIT's AI Laboratory for over a decade,
         and had grown accustomed to its culture of sharing source code:
+    </p>
+
+    <blockquote style="width: 55%;">
         "If you saw someone using an unfamiliar and interesting program, you
         could always ask to see the source code, so that you could read it, change
         it, or cannibalize parts of it to make a new 
         program."<sup><a href="https://www.gnu.org/gnu/thegnuproject.html">[6]</a></sup>
-    </p>
+    </blockquote>
 
     <p>
         In 1981, that culture collapsed as 
@@ -337,11 +301,11 @@ last-updated: February 2021
         nondisclosure agreements be signed to get an 
         executable.<sup><a href="https://www.gnu.org/gnu/thegnuproject.html">[6]</a></sup>
         On September 27, 1983, Stallman announced his resolution:
-        To produce a "complete UNIX nix-compatible software system," and to 
+        To produce a "complete UNIX-compatible software system," and to 
         "give it away free."<a href="https://www.gnu.org/gnu/initial-announcement.en.html#f1"><sup>[10]</sup></a>
         He called the project <a href="https://gnu.org">GNU</a>, a recursive 
         acronym for 
-        <em>GNU's Not UNIX nix.</em><sup><a href="https://www.gnu.org/gnu/gnu-history.html">[11]</a></sup>
+        <em>GNU's Not UNIX.</em><sup><a href="https://www.gnu.org/gnu/gnu-history.html">[11]</a></sup>
     </p>
 
     <div class="aside-right">
@@ -356,7 +320,7 @@ last-updated: February 2021
         own intentions behind the word <em>free.</em>
         Certainly, "a free copy" did not embody the 
         culture of code-sharing MIT was once home to.
-        More, he could not put the code in the public domain because 
+        More, he did not wsih to put the code in the public domain because 
         modified versions of it it could become proprietary.<sup><a href="https://en.wikipedia.org/wiki/Copyleft#History">[12]</a></sup>
         By 1985, Stallman had sorted these issues out: 
     </p>
@@ -370,11 +334,11 @@ last-updated: February 2021
     </blockquote>
 
     <p>
-        Thus, software freedom became <em>users'</em> freedoms: 
+        Thus, software freedom became quantified: 
         Users can run, study, modify, copy and distribute the software;
         but, if they distribute, then those freedoms must be preserved.  
-        Software freedom was implemented in different forms in the various 
-        licenses of early GNU products; in 1989, parts of these licenses were taken 
+        These freedoms were implemented in the various 
+        licenses of early GNU products, and their parts were taken 
         together to form the GNU 
         <a href="https://en.wikipedia.org/wiki/GNU_General_Public_License#History">General Public License</a>, 
         version 1.<sup><a href="https://en.wikipedia.org/wiki/GNU_General_Public_License#History">[14]</a></sup>
@@ -428,7 +392,7 @@ last-updated: February 2021
     <p>
         On August 25, 1991, a Finnish graduate student by the name of Linus Torvalds
         announced his own free operating system project.
-        Again following the architecture of the UNIX nix operating system,
+        Again following the architecture of the UNIX operating system,
         his project was intended to be "...just a hobby, won't be big and
         professional like GNU."<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[16]</a></sup>
     </p>
@@ -441,7 +405,7 @@ last-updated: February 2021
     </div>
 
     <p>
-        While the GNU Project sought to
+        Whereas the GNU Project sought to
         produce an entire operating system, Linus restricted his
         attention to creating a kernel.
         By October of 1991, GNU's Bash, GCC, Make and other
@@ -477,11 +441,11 @@ last-updated: February 2021
         This development model&mdash; "release early and often, delegate everything you can,
         be open to the point of promiscuity"<sup><a href="#references">[17]</a></sup>&mdash; <a href="http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/index.html#catbmain">raised eyebrows</a> at the time,
         but has proven sound in virtue of its overwhelming success:
-        The Linux kernel has become the most-used UNIX nix-like kernel of all time.
+        The Linux kernel has become the most-used UNIX-like kernel of all time.
     </p>
 
     <p>
-        The <a href="https://www.kernel.org/doc/html/latest/process/2.Process.html?highlight=merge window">kernel development process</a>
+        The <a href="https://www.kernel.org/doc/html/latest/process/2.Process.html">kernel development process</a>
         has become more structured since 1991, and today uses a
         <a href="http://127.0.0.1:4000/programming-in-nix.html#train-schedules">train-schedule</a> approach.
         Linus Torvalds remains the maintainer of the Development branch,
@@ -498,7 +462,7 @@ last-updated: February 2021
         A major figure of today's Linux development effort is Greg Kroah-Hartman 
         (pronounced "<em>Crow</em>-Hartman"), who maintains the Stable branch, 
         in addition to various subsystems.<sup><a href="https://en.wikipedia.org/wiki/Greg_Kroah-Hartman">[18]</a></sup>
-        According to Mr. Kroah-Hartman, interest in the kernel continues to
+        According to Kroah-Hartman, interest in the kernel continues to
         grow, with 1200 new developers contributing each
         year.<sup><a href="https://www.theregister.com/2020/10/26/linux_kernel_intel/">[19]</a></sup>
         Their main development bottlenecks are code review and
@@ -744,6 +708,72 @@ last-updated: February 2021
     </ul>
 </div>
 
+<div class="content" id="closing-remarks">
+    <h2 style="margin-bottom: 0;">Closing Remarks:</h2>
+        <h4>Open Source</h4>
+    <p>
+        In the forty years since Richard Stallman began GNU 
+        (pronounced <em>guh-nu</em>), the free software landscape has seen a 
+        great deal of growth.
+        In 1998, the term <em>open source</em> was invented as 
+        <a href="http://www.catb.org/~esr/open-source.html">a less abrasive synonym</a> 
+        for <em>free software:</em>  
+    </p>
+
+    <blockquote>
+        We realized it was time to dump the confrontational attitude that has been
+        associated with 'free software' in the past and sell the idea strictly on
+        the same pragmatic, business-case grounds that motivated 
+        Netscape.<sup><a href="http://web.archive.org/web/19981206185148/http://www.opensource.org/history.html">[32]</a></sup>
+    </blockquote>
+
+    <p>
+        The result was a wealth of media attention and the 
+        <a href="https://opensource.org/">Open Source Initiative</a>.
+        Both GNU and the OSI agree that their respective terms are 
+        nearly synonymous.<sup><a href="https://opensource.org/faq#free-software">[33]</a><a href="https://www.gnu.org/philosophy/free-open-overlap.html">[34]</a></sup>
+        In this work, and in life, we will use "open-source"
+        interchangeably with "free software".
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Today, the most popular open-source license is MIT's, by far.<sup><a href="https://github.blog/2015-03-09-open-source-license-usage-on-github-com/">[35]</a></sup>
+        </p>
+    </div>
+
+    <p>
+        Concurrently, more developers have taken part, and introduced a number of
+        licenses to suit their needs.  
+        These licenses can be divided into two classes:
+        Permissive software licenses (e.g., MIT, Apache, BSD) do not perpeturate 
+        themselves, and so allow derivate works to become proprietary; 
+        nonpermissive/copyleft licenses (e.g., GPL, <a href="https://en.wikipedia.org/wiki/Mozilla_Public_License">MPL</a>), on the other hand, <em>do</em> 
+        perpeturate themselves.<sup><a href="https://opensource.org/faq#permissive">[36]</a><a href="https://opensource.org/faq#copyleft">[37]</a></sup>
+    </p>
+
+    <p>
+        To be honest, a lot of developers have said, <em>To hell with this,</em>
+        and introduced such novelties as the 
+        <a href="https://people.freebsd.org/~phk/">Beerware License</a>,
+        the <a href="https://en.wikipedia.org/wiki/WTFPL">Do What The Fuck You Want License</a>, 
+        and the <a href="https://unlicense.org/">Unlicense</a> (quite popular).
+        These each, with varying degrees of professionality, place code in the 
+        public domain;
+        from there, anyone can claim it as their own, and can put it in any other work,
+        under any other license.
+        Put another way, their "strategem" for fighting the corporate/proprietary
+        sect is to dump it in their (our) laps and walk away.
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://ar.to/2010/01/dissecting-the-unlicense"> Dissecting the Unlicense: Software Freedom in Four Clauses and a link</a></li>
+    </ul>
+
+</div>
+
 <div id="video" class="content">
     <h2 style="margin-bottom: 2pt;"> Greg Kroah-Hartman </h2>
     <h4 style="margin-bottom: 18pt;"> Linux Kernel Development </h4>
@@ -898,6 +928,39 @@ last-updated: February 2021
         <li>
             Our philosophy: Why we do it and how we do it. (2021, January 8). Retrieved January 20, 2021, from <a href="https://www.debian.org/intro/philosophy">https://www.debian.org/intro/philosophy</a>
         </li>
+
+        <!-- 
+            Begin Closing Remarks
+        -->
+
+        <li>
+            Raymond, E. S. (n.d.). History of the open source effort. Retrieved February 25, 2021, from <a href="http://web.archive.org/web/19981206185148/http://www.opensource.org/history.html">http://web.archive.org/web/19981206185148/http://www.opensource.org/history.html</a>
+        </li>
+
+        <li>
+            Frequently answered questions. (n.d.). Retrieved February 25, 2021, from <a href="https://opensource.org/faq#free-software">https://opensource.org/faq#free-software</a>
+        </li>
+
+        <li>
+            How free software and open source relate as categories of programs - gnu project - free software foundation. (2015, January 8). Retrieved February 25, 2021, from <a href="https://www.gnu.org/philosophy/free-open-overlap.html">https://www.gnu.org/philosophy/free-open-overlap.html</a>
+        </li>
+
+        <li>
+            Balter, B. (2015, March 09). Open source license usage on github.com. Retrieved February 25, 2021, from <a href="https://github.blog/2015-03-09-open-source-license-usage-on-github-com/">https://github.blog/2015-03-09-open-source-license-usage-on-github-com/</a>
+        </li>
+
+        <li>
+            Frequently answered questions. (n.d.). Retrieved February 25, 2021, from <a href="https://opensource.org/faq#permissive">https://opensource.org/faq#permissive</a>
+        </li>
+
+        <li>
+            Frequently answered questions. (n.d.). Retrieved February 25, 2021, from <a href="https://opensource.org/faq#copyleft">https://opensource.org/faq#copyleft</a>
+        </li>
+
+
+
+
+
 
     </ol>
 </div>
