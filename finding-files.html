@@ -6,450 +6,128 @@ last-updated: July, 2020
 
 <!--
     To Do:
-        Change to (strictly) "Absolute Pathnames" and "Relative Pathnames",  
-        in keeping with <u>The Linux Command Line</u>.
+    Finding Files with fd:
+        
 
-        Remove references to 'find'
-            Recommend fd: https://github.com/sharkdp/fd
-        Recommend ripgrep (rg)
 
 -->
 
 <div id="nav_bar_2" class="nav">
     <ul>
-        <li><a href="#introduction"> Introduction </a></li>
-        <li><a href="#basename"> Pathnames and Basenames </a></li>
-        <li><a href="#locate"> Locate </a></li>
-        <li><a href="#find"> Find </a></li>
-        <li><a href="#grep"> Grep </a></li>
+        <li><a href="#finding-files">Finding Files with fd</a></li>
         <li><a href="#engineer-man"> Engineer Man</a></li>
-        <li><a href="#references"> References </a></li>
     </ul>
 </div>
 
-<div id="introduction" class="content">
-    <h1>Finding Files</h1>
-    <div class="quote-text">
-        "...though the advantages are obvious in hindsight, <br>
-        heirarchical file systems were not widely available <br>
-        before Multics and then Unix."
-    </div>
-
-    <div class="quote-ref">
-        &mdash;Brian Kernighan,<br>
-        <u>UNIX: A History and a Memoir</u>
-    </div>
+<div class="content" id="finding-files">
+    <h1>Finding Files with <code>fd</code></h1>
 
     <p>
-        Finding files is a very common operation in Linux, and the tools
-        available are powerful, but not new-user friendly.
-        This paper will introduce the subject and some file-finding utilities.
-    </p>
-</div>
-
-<div id="basename" class="content">
-    <h2> Pathnames and Basenames</h2>
-    <p>
-        To start, we must make a clear distinction between a file's
-        <em>pathname</em> and its <em>basename</em>, because
-        our search tools will often make a distinction between these two.
-    </p>
-
-    <center>
-        <img style="width: 70%;" src="./assets/img/pathname-basename.png">
-    </center>
-
-    <p>
-        Every file in the system has a <em>basename,</em>
-        which is, informally, just its name.
-        The command <code>basename</code> isolates this name for us:
+        The <a href="https://github.com/sharkdp/fd">fd</a> 
+        utility is a simple, fast and user-friendly alternative to 
+        <a href="http://www.gnu.org/software/findutils/">find</a>.
+        Usage:
     </p>
 
     <div class="code">
-        $ basename /home/josh/bin<br>
-        bin
+        $ fd [PATTERN] [PATH]
     </div>
 
     <p>
-        A <em>pathname</em> prepends a file's basename with its
-        parent directories, separating elements with forward slashes,
-        <code>/</code>.
-        Each of the following are pathnames of the above file:
+        Where <em>pattern</em> is a regular expression, and
+        <em>path</em> is the directory you'd like to start looking in.
+        It searches there, and then it searches recursively downward through 
+        the directory tree which started there.
+        For each file, it attempts to match its basename against <em>pattern.</em>
+        If it matches, it then prints the name of the file.
+    </p>
+
+    <p>
+        By default, <code>fd</code> checks filenames, but it can check any other 
+        file characteristic, as well.
+        For instance, to restrict results to directories, we could use
     </p>
 
     <div class="code">
-        /home/josh/bin <br>
-        home/josh/bin <br>
-        josh/bin
+        $ fd --type d [PATTERN] [PATH]
     </div>
 
     <p>
-        Pathnames are usually used in a relative context.
-        For example, if our current working directory is <code>/home</code>,
-        then the relative pathname to the above file is,
+        For a few reasons, I recommend <code>fd</code> over the classic 
+        GNU Findutils:
+    </p>
+
+    <ol style="margin-left: 5%; padding-right: 10%;">
+        <li>
+            <p>
+                Only one utility to learn.
+                In practice, <code>fd</code> replaces both <code>find</code> 
+                and <code>locate</code>.
+                Specifically, it's fast and friendly enough that there's no longer
+                a need for <em>locate</em>.
+            </p>
+        </li>
+        <li>
+            <p>
+                Ameniable defaults.
+                <code>fd</code> matches only basenames, and thereby avoids printing
+                pages of results.
+                More, it does not require a flag to search for filenames.
+            </p>
+        </li>
+        <li>
+            <p>
+                Regex by default.
+                Regex is a more powerful and expressive string-matching language
+                than shell globbing.
+            </p>
+        </li>
+        <li>
+            <p>
+                Simpler in Construction.
+                No database to worry about.
+            </p>
+        </li>
+    </ol>
+
+    <h3>Searching Files with <code>rg</code></h3>
+    <p>
+        The <a href="https://github.com/BurntSushi/ripgrep"><code>rg</code></a> 
+        utility recursively descends through a directory tree, 
+        opens each file, reads its contents and attempts to
+        match each line against a given regex pattern.
+        If a line matches, it then prints the filename and those lines;
+        effectively, it searches files for a particular pattern.
+        Its simplest usage is:
     </p>
 
     <div class="code">
-        josh/bin
+        $ rg PATTERN [PATH...]
     </div>
 
     <p>
-        or equally,
-    </p>
-
-    <div class="code">
-        ./josh/bin
-    </div>
-
-    <p>
-        where the leading <code>./</code> explicitly specifies
-        the current working directory.
+        This, again, is a reimagining of a classic UNIX utility&mdash; 
+        in this case, the venerable 
+        <em><a href="https://en.wikipedia.org/wiki/Grep">grep</a></em>.
+        It's mostly just easier to use.
     </p>
 
     <p>
-        An <em>absolute pathname</em> is a pathname that begins with root,
-        <code>/</code>.
-        While each absolute pathname denotes a unique point in the directory tree,
-        it is not the case that an absolute pathname of a file is unique, because
-        the basename
-        <a href="files-and-filesystems.html#directories">may be one of many names of the same file.</a>
-        The command <code>readlink</code> can report to us the absolute
-        pathname of an arbitrary basename:
-    </p>
-
-    <div class="code">
-        $ cd /home/josh<br>
-        $ readlink -f bin<br>
-        /home/josh/bin
-    </div>
-
-
-    <p>
-        Now, on to finding files!
+        Your primary documentation for regex is <a href="https://docs.rs/regex/1.4.3/regex/#syntax">here</a>. Trust me on this.
     </p>
 
     <h3>See Also:</h3>
     <ul>
-        <li><code><a href="https://man7.org/linux/man-pages/man7/path_resolution.7.html">path_resolution(7)</a></code>&ndash; How the kernel resolves pathnames</li>
+        <li><a href="https://github.com/sharkdp/fd">fd</a></li>
+        <li><a href="https://github.com/BurntSushi/ripgrep">ripgrep</a></li>
+        <li><a href="https://docs.rs/regex/1.4.3/regex/#syntax">Regex - Rust</a></li>
     </ul>
 </div>
 
-<div id="locate" class="content">
-    <h2> Locate </h2>
-    <p>
-        For quick searches, your best bet is the <code>locate</code> command:
-	</p>
+<div id="engineer-man" class="content">
+    <h2> Engineer Man </h2>
 
-	<div class="code">
-		$ locate <em>pattern</em>
-	</div>
-
-    <p>
-        By default, <code>locate</code> matches <em>*pattern*</em> against the 
-        pathname of each known file,
-        using <a href="terminals-and-shells.html#globbing">shell globbing</a> 
-        to interpret the asterisks.
-        Filenames which match are printed to <code>stdout</code>, with
-        a newline separating matches.
-        In addition, <code>locate</code> searches, matches and prints hidden 
-        files and files in hidden directories, as well.
-    </p>
-
-    <p>
-        For example,
-    </p>
-
-    <div class="code">
-        $ locate bin
-    </div>
-
-    <p>
-        says, "Print out all absolute filenames containing the string <em>bin</em>,"
-        so that
-	</p>
-
-
-    <div class="code">
-        /var/lib/gems/2.5.0/<mark>bin</mark>
-    </div>
-
-    <p>
-        will be printed, as will
-    </p>
-
-    <div class="code">
-        /var/lib/gems/2.5.0/<mark>bin</mark>/rdoc
-    </div>
-
-    <p>
-        in addition to,
-    </p>
-
-    <div class="code">
-        /var/lib/dpkg/info/texlive-<mark>bin</mark>aries.postinst.
-    </div>
-
-   
-    <div class="aside-right">
-        <h4>Behind the Curtain:</h4>
-        <p>
-            This "database" is 
-            <a href="https://jvns.ca/blog/2015/03/05/how-the-locate-command-works-and-lets-rewrite-it-in-one-minute/">literally just a text file</a>
-            containing filenames.
-        </p>
-    </div>
-
-	<p>
-  	    A minor detail:
-  	    <code>locate</code> references a database of information
-        about files on the system, and not the directories themselves.
-        This makes it much faster, but if you're looking for new files, 
-        then you must update said database with:
-    </p>
-
-    <div class="code">
-        $ sudo updatedb
-    </div>
-
-    <p>
-        If <code>locate</code> is installed on your machine, 
-        then this command is executed for you daily.
-    </p>
-
+    <iframe class="video" src="https://www.youtube.com/embed/bgBWp9EIlMM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-<div id="find" class="content">
 
-    <h2> Find </h2>
-    <p>
-        The <code>locate</code> series of commands restricts itself to finding
-        files based upon (absolute) pathname.
-        To search with greater precision, we turn to programs which
-        inspect files directly.
-    </p>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-
-        <p>
-            <code>find</code> dates to the first edition of Unix.<sup><a href="http://man.cat-v.org/unix-1st/1/find">[1]</a></sup>
-            The 1970's were <a href="http://man.cat-v.org/unix-1st/1/">simpler times</a>.
-        </p>
-    </div>
-
-    <p>
-        The most popular such utility is GNU's <code>find</code>, which is
-        commonly included in Linux distributions.
-        By recursively traversing the directory tree, find programs
-        can query the system about each file on a case-by-case basis.
-        They can ask about basename, pathname, inode number, file size, type, etc..
-    </p>
-
-    <p>
-        The essential format of a call to <code>find</code> is,
-    </p>
-
-    <div class="code">
-        $ find [starting points...] [expression]
-    </div>
-
-    <p>
-        If no starting points are given, then <code>.</code> is assumed.
-        <em>Expression</em> is a sequence of tests to be performed on files
-        and/or actions to be carried out.
-        If no action is stipulated, the default action is <code>-print</code>.
-        Every element in <em>expression</em> resolves to either true or false;
-        <code>-print</code> resolves to true.
-        For each file, <em>expression</em> is evaluated left-to-right, with
-        the default <code>-print</code> occurring, conceptually, as the rightmost element.
-        Finally, GNU <code>find</code> supports logical operators between subexpressions.
-        If an operator is missing between two subexpressions, <code>-and</code>
-        is substituted.
-        Note the single hyphens.
-    </p>
-
-    <p>
-        Clearly, <code>find</code> is a powerful utility, but is best reserved for scripts, I think.
-        It's included here mostly for its ubiquity.
-        We'll take only two examples of usage, then move on to a similar, more user-centric utility.
-    </p>
-
-    <p>
-        To print the names of all executable files smaller than
-        4k, we can use,
-    </p>
-
-    <div class="code">
-        $ find / -size -4k -executable<br>
-    </div>
-
-    <p>
-        To print the names of all files in our home directory ending in <code>.py</code>, we could,
-    </p>
-
-    <div class="code">
-        $ cd <br>
-        $ find -name '*.py'
-    </div>
-
-    <h3><b>fd</b></h3>
-
-    <p>
-        A more modern variant of GNU's <code>find</code> is <code><a href="https://github.com/sharkdp/fd">fd</a></code>.
-        It is intended to be fast and user-friendly.
-        For day-to-day use, I recommend it.
-    </p>
-
-    <div class="aside-right">
-        <h4>Pro Tip:</h4>
-        <p>
-            For concise help, avoid the man pages.  Instead use,
-
-            <br>
-        <code>
-            $ find --help
-        </code>
-        <br>
-        &emsp;&emsp;--or--
-        <br>
-        <code>
-            $ fd -h
-        </code>
-                </p>
-    </div>
-
-    <p>
-        On Debian-based systems, we can install it with,
-    </p>
-
-    <div class="code">
-        $ sudo apt install fd-find
-    </div>
-
-    <p>
-        On Debian distributions, the executable is named <code>fdfind</code>.
-        The essential format of a call to <code>fd</code> is
-    </p>
-
-    <div class="code">
-        $ fd [FLAGS/OPTIONS] [&lt;pattern&gt;] [&lt;path&gt;...]
-    </div>
-
-    <p>
-        For a concise tutorial introduction to <code>fd</code>,
-        have a look at <a href="https://github.com/sharkdp/fd#tutorial">its creator's own documentation</a>.
-        P.S. I also like his <a href="https://github.com/sharkdp/bat"><code>bat</code></a> project.
-    </p>
-    </div>
-
-    <div id="grep" class="content">
-        <h2>Grep</h2>
-        <p>
-            The next collection of file-finding tools will look into files
-            themselves.
-            The first version of this utility was <code>grep</code>, which
-            was
-            Several modern variants exist:
-        </p>
-
-        <ul>
-            <li><code>grep</code>&mdash; Included in most distributions</li>
-            <li><code>egrep</code>&mdash; Included in most distributions</li>
-            <li><code>ag</code>&mdash; The Silver Searcher: Faster.</li>
-            <li><code>ripgrep</code>&mdash; Fastest</li>
-        </ul>
-
-        <div class="code">
-            egrep [OPTION...] PATTERNS [FILE...]
-        </div>
-
-        <p>
-            By default, <code>egrep</code> is simple enough:  It reads each <code>FILE</code>,
-            and if a line matches one of <code>PATTERNS</code>, it prints the line.<sup><a href="http://www.man7.org/linux/man-pages/man1/grep.1.html">[3]</a></sup>
-			If there's more than one <code>FILE</code>, <code>grep</code> will
-			tell you that as well.
-			If no <code>FILE</code> is given, then <code>grep</code> filters standard-in.
-		</p>
-
-        <p>
-            Of note, each <code>PATTERN</code> is regex by default, and
-            must either terminate with a newline, or else be explicitly specified by
-            using the <code>-e</code> option, as in,
-        </p>
-
-        <div class="code">
-            $ grep -e hello -e world file1.c file2.c
-        </div>
-
-        <p>
-            This will print each line in files <code>file1.c</code> or <code>file2.c</code>
-            which match either <em>hello</em> or <em>world</em> or both.
-        </p>
-
-        <p>
-            Of <code>grep's</code> options, we are particularly interested in
-            <code>-l</code> "list", <code>-C</code> "context", and <code>-r</code> "recurse".
-            The <code>-r</code> option specifies that, if a file is a directory,
-            recursively descend into it, and search all files in it.
-            So,
-        </p>
-
-        <div class="code">
-            $ grep . -r -e hello -e world
-        </div>
-
-        <p>
-            will print all lines matching either <em>hello</em> or <em>world</em>
-            found in any of the files of the current directory, downwards.
-			This can be handy for, for instance, locating all C source files that
-			make use of some macro:
-		</p>
-
-		<div class="code">
-			$ grep . -r -e "MACRO"
-		</div>
-
-		<p>
-			We can also print the context within which a matched line occurs:
-        </p>
-
-        <div class="code">
-            $ grep . -r -C 3 -e "MACRO"
-        </div>
-
-        <p>
-            This will print three lines before, as well as five lines after, each match.
-            Finally, to print out just the name of the file, we specify that
-            <code>grep</code> list the match, with <code>-l</code>.  This
-			could be used to locate the file that defines the macro:
-        </p>
-
-        <div class="code">
-            $ grep . -rl -e "#define +MACRO"
-        </div>
-
-	<h3>See Also:</h3>
-		<ul>
-			<li><a href="https://github.com/ziishaned/learn-regex">Learn Regex The Easy Way</a></li>
-            <li><code><a href="http://man7.org/linux/man-pages/man7/regex.7.html"> regex(7) </a></code></li>
-		</ul>
-
-	</div>
-
-    <div id="engineer-man" class="content">
-        <h2> Engineer Man </h2>
-
-        <iframe class="video" src="https://www.youtube.com/embed/bgBWp9EIlMM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-
-    </div>
-
-    <div id="references" class="content">
-        <h2> References </h2>
-        <ol>
-            <li>
-                Ritchie, D. (1971, November 3). Find(1) - Unix First Edition Manual Page. Retrieved September 01, 2020, from <a href="http://man.cat-v.org/unix-1st/1/find">http://man.cat-v.org/unix-1st/1/find</a>
-            </li>
-        </ol>
-
-    </div>
