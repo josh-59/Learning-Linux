@@ -10,108 +10,6 @@ To Do:
     ls listing picture:
         Simplify b and c to 'device files'
 
-    Filesystems:
-        Rewrite:
-
-    <p>
-        A <em><a href="https://wiki.osdev.org/File_Systems#File_System_Theory">filesystem</a></em> 
-        is a systematic method of storing and retrieving data on
-        disk.<sup><a href="https://wiki.osdev.org/Filesystem">[3]</a><a href="https://wiki.archlinux.org/index.php/File_systems">[4]</a></sup>
-        The first versions of UNIX referred to its own filesystem as, simply,
-        <code>fs</code>.  
-        It was well-documented (by, for instance, Maurice J. Bach in 
-        <a href="https://archive.org/details/DesignUNIXOperatingSystem/page/n7/mode/2up"><em>The Design of the Unix Operating System</em></a>), and became the basis of
-        a sequence of filesystems, including Minix's, then <code>ext</code> 
-        and <code>ext2</code>.
-    </p>
-
-    <p>
-        These first-generation filesystems were relatively simple and naive:
-        they expected machines to always shutdown cleanly, and
-        that hard-drives would work flawlessly.
-        In particular, a system crash mid-write could leave the filesystem in 
-        an inconsistent state; 
-        such a shutdown required a walk of the entire structure to reaffirm
-        its consistency.<sup><a href="https://en.wikipedia.org/wiki/Journaling_file_system">[5]</a></sup>
-        Such filesystems (especially, <code>VFAT</code> and <code>FAT32</code>)
-        are used today to hold the bootloader, since they are widely supported and
-        their contents are not expected to change very often.
-    </p>
-    
-    <p>
-        The issue of non-clean shutdowns was solved with the introduction of 
-        <em><a href="https://en.wikipedia.org/wiki/Journaling_file_system">journaling</a>:</em>
-        Before a change is made to the filesystem's contents, it is first written
-        to an on-disk journal.  
-        Should the system crash after the journal has been updated, the write
-        can simply be resumed; should the system crash before the journal entry has been
-        completed, the write is discarded.
-        In either case, the consistency of the filesystem is guaranteed.<sup><a href="https://en.wikipedia.org/wiki/Journaling_file_system">[5]</a></sup>
-        Journaling filesystems are in wide use, and include Linux's excellent 
-        <code><a href="https://ext4.wiki.kernel.org/index.php/Main_Page">ext4</a></code>
-        and Microsoft's <code>NTFS</code>.
-    </p>
-
-    <p>
-        Next-generation filesystems are introducing a myriad of features to
-        cope with hard-drive failures, especially, in enterprise settings.  
-        The most fundamental change is <em>copy on write,</em>
-        a minor change in semantics which allows filesystem-wide snapshots to be 
-        created very efficiently, while reducing the need for journaling.
-        Other features include native logical volume management/RAID support and 
-        internal checksumming.
-    </p>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Pronounced <em>B-Tree fs,</em> as its core data structure is 
-            a copy-on-write B-Tree,<sup><a href="https://web.archive.org/web/20180428201038/https://docs.oracle.com/cd/E52668_01/E54669/html/ol7-about-btrfs.html">[nine]</a></sup>
-            it is intended to be simple and maintainable,<sup><a href="https://btrfs.wiki.kernel.org/index.php/Btrfs_design">[m]</a></sup>
-            but is not yet rock-solid.<sup><a href="https://lwn.net/Articles/824855/">[n]</a></sup>
-        </p>
-    </div>
-
-    <p>
-        Copy-on-write filesystems include <code>btrfs</code> and <code>zfs</code>.  
-        <code>zfs</code> has been described as a "non-starter" by Linus Torvalds, principally
-        over licensing issues.<sup><a href="https://www.realworldtech.com/forum/?threadid=189711&curpostid=189841">[c]</a></sup>
-        GPL-licensed <code>btrfs</code>, on the other hand, is alive and well, and has
-        made inroads to becoming Linux's next major filesystem.
-        It is now <a href="https://fedoramagazine.org/choose-between-btrfs-and-lvm-ext4/">the default filesystem</a> of Fedora's <em>Workstation</em> distro.<sup><a href="https://en.wikipedia.org/wiki/Fedora_version_history">[o]</a></sup>
-        They are the first major distribution to do so.
-    </p>
-
-    <p>
-        Owing in part to a vast collection of open-source drivers, 
-        Linux can make use of <a href="https://man7.org/linux/man-pages/man5/filesystems.5.html">many filesystems</a>.
-        The filesystems the (running) kernel supports are listed at <code>/proc/filesystems</code>;
-        formatting tools are generally of the form <code>mkfs.&lt;filesystem&gt;</code>;
-        <code>man</code> pages contain most relevant information.
-    </p>
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">Disk Partitions</a></li>
-    </ul>
-
-</div>
-
-Inodes:
-    Rewrite to make *theoretically correct* wrt Linux Kernel;
-        note inodes were implemented literally in UNIX and early Linux filesystems
-
-
-
-    <p>
-        Inode numbers can uniquely identify a file only within a single
-        filesystem.
-        Consequently, <em>Hard links may not cross filesystem boundaries.</em>
-        Another way of saying this is, "Every file belongs to the same filesystem
-        as the directories which hard link it."
-    </p>
-
-
 Introduction:
     Everything is a file
     Unix-like operating systems are typified by a single directory tree.
@@ -678,9 +576,9 @@ Filesystem Heirarchy:
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            Pronounced <em>B-Tree fs,</em> as its core data structure is 
-            a copy-on-write B-Tree,<sup><a href="https://web.archive.org/web/20180428201038/https://docs.oracle.com/cd/E52668_01/E54669/html/ol7-about-btrfs.html">[9]</a></sup>
-            it is intended to be simple and maintainable,<sup><a href="https://btrfs.wiki.kernel.org/index.php/Btrfs_design">[10]</a></sup>
+            I prefer to read it as <em>B-Tree fs,</em> as its core data structure is 
+            a copy-on-write B-Tree.<sup><a href="https://web.archive.org/web/20180428201038/https://docs.oracle.com/cd/E52668_01/E54669/html/ol7-about-btrfs.html">[9]</a></sup>
+            It is intended to be simple and maintainable,<sup><a href="https://btrfs.wiki.kernel.org/index.php/Btrfs_design">[10]</a></sup>
             but is not yet rock-solid.<sup><a href="https://lwn.net/Articles/824855/">[11]</a></sup>
         </p>
     </div>
