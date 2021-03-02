@@ -11,31 +11,96 @@ To Do:
         Simplify b and c to 'device files'
 
     Filesystems:
-    zfs:
-        https://docs.freebsd.org/en/books/handbook/zfs/
-        - Data integrity: a checksum is calculated and stored alongside
-          each file
-            - "self healing"
-        - "more than just a file system"
-        - Incorporates volume management:
-            - Pools are constructed of disks
-        - Pools can be grown dynamically (by assigning new disks to it)
-        - Native filesystem snapshot support
+        Rewrite:
 
+    <p>
+        A <em><a href="https://wiki.osdev.org/File_Systems#File_System_Theory">filesystem</a></em> 
+        is a systematic method of storing and retrieving data on
+        disk.<sup><a href="https://wiki.osdev.org/Filesystem">[3]</a><a href="https://wiki.archlinux.org/index.php/File_systems">[4]</a></sup>
+        The first versions of UNIX referred to its own filesystem as, simply,
+        <code>fs</code>.  
+        It was well-documented (by, for instance, Maurice J. Bach in 
+        <a href="https://archive.org/details/DesignUNIXOperatingSystem/page/n7/mode/2up"><em>The Design of the Unix Operating System</em></a>), and became the basis of
+        a sequence of filesystems, including Minix's, then <code>ext</code> 
+        and <code>ext2</code>.
+    </p>
 
-    tfs:
-        A very ambitious, next-generation filesystem.
-        Aims to usurp the journaling with so-called "guaranteed atomicity."
-        If they pull off their goals, it will be the first
-        "smart" filesystem.
-        https://gitlab.redox-os.org/redox-os/tfs
+    <p>
+        These first-generation filesystems were relatively simple and naive:
+        they expected machines to always shutdown cleanly, and
+        that hard-drives would work flawlessly.
+        In particular, a system crash mid-write could leave the filesystem in 
+        an inconsistent state; 
+        such a shutdown required a walk of the entire structure to reaffirm
+        its consistency.<sup><a href="https://en.wikipedia.org/wiki/Journaling_file_system">[5]</a></sup>
+        Such filesystems (especially, <code>VFAT</code> and <code>FAT32</code>)
+        are used today to hold the bootloader, since they are widely supported and
+        their contents are not expected to change very often.
+    </p>
+    
+    <p>
+        The issue of non-clean shutdowns was solved with the introduction of 
+        <em><a href="https://en.wikipedia.org/wiki/Journaling_file_system">journaling</a>:</em>
+        Before a change is made to the filesystem's contents, it is first written
+        to an on-disk journal.  
+        Should the system crash after the journal has been updated, the write
+        can simply be resumed; should the system crash before the journal entry has been
+        completed, the write is discarded.
+        In either case, the consistency of the filesystem is guaranteed.<sup><a href="https://en.wikipedia.org/wiki/Journaling_file_system">[5]</a></sup>
+        Journaling filesystems are in wide use, and include Linux's excellent 
+        <code><a href="https://ext4.wiki.kernel.org/index.php/Main_Page">ext4</a></code>
+        and Microsoft's <code>NTFS</code>.
+    </p>
 
-       <code>$ df - -print-type</code>
+    <p>
+        Next-generation filesystems are introducing a myriad of features to
+        cope with hard-drive failures, especially, in enterprise settings.  
+        The most fundamental change is <em>copy on write,</em>
+        a minor change in semantics which allows filesystem-wide snapshots to be 
+        created very efficiently, while reducing the need for journaling.
+        Other features include native logical volume management/RAID support and 
+        internal checksumming.
+    </p>
 
-    btrfs:
-        https://btrfs.wiki.kernel.org/index.php/Main_Page
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Pronounced <em>B-Tree fs,</em> as its core data structure is 
+            a copy-on-write B-Tree,<sup><a href="https://web.archive.org/web/20180428201038/https://docs.oracle.com/cd/E52668_01/E54669/html/ol7-about-btrfs.html">[nine]</a></sup>
+            it is intended to be simple and maintainable,<sup><a href="https://btrfs.wiki.kernel.org/index.php/Btrfs_design">[m]</a></sup>
+            but is not yet rock-solid.<sup><a href="https://lwn.net/Articles/824855/">[n]</a></sup>
+        </p>
+    </div>
 
-    xfs:
+    <p>
+        Copy-on-write filesystems include <code>btrfs</code> and <code>zfs</code>.  
+        <code>zfs</code> has been described as a "non-starter" by Linus Torvalds, principally
+        over licensing issues.<sup><a href="https://www.realworldtech.com/forum/?threadid=189711&curpostid=189841">[c]</a></sup>
+        GPL-licensed <code>btrfs</code>, on the other hand, is alive and well, and has
+        made inroads to becoming Linux's next major filesystem.
+        It is now <a href="https://fedoramagazine.org/choose-between-btrfs-and-lvm-ext4/">the default filesystem</a> of Fedora's <em>Workstation</em> distro.<sup><a href="https://en.wikipedia.org/wiki/Fedora_version_history">[o]</a></sup>
+        They are the first major distribution to do so.
+    </p>
+
+    <p>
+        Owing in part to a vast collection of open-source drivers, 
+        Linux can make use of <a href="https://man7.org/linux/man-pages/man5/filesystems.5.html">many filesystems</a>.
+        The filesystems the (running) kernel supports are listed at <code>/proc/filesystems</code>;
+        formatting tools are generally of the form <code>mkfs.&lt;filesystem&gt;</code>;
+        <code>man</code> pages contain most relevant information.
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">Disk Partitions</a></li>
+    </ul>
+
+</div>
+
+Inodes:
+    Rewrite to make *theoretically correct* wrt Linux Kernel;
+        note inodes were implemented literally in UNIX and early Linux filesystems
+
 
 
     <p>
@@ -119,8 +184,8 @@ Filesystem Heirarchy:
         <li><a href="#synthetic-files"> Synthetic Files </a></li>
         <li><a href="#device-files"> Device Files </a></li>
         <li><a href="#fs-heir"> Filesystem Heirarchy </a></li>
-        <li><a href="#mounting-unmounting"> Mounting and Unmounting</a></li>
         <li><a href="#filesystems"> Filesystems </a></li>
+        <li><a href="#mounting-unmounting"> Mounting and Unmounting</a></li>
         <li><a href="#directories"> Directories </a></li>
         <li><a href="#closing-remarks"> Closing Remarks </a></li>
         <li><a href="#udacity"> Udacity </a></li>
@@ -185,12 +250,13 @@ Filesystem Heirarchy:
     <p>
         Unix-like operating systems store a substantial amount of information
         about each file on the system.
-        This information, known as <em>file metadata,</em> is stored on-disk, 
-        alongside the file.
+        This information, known as <em>file attributes</em> or 
+        <em><a href="https://en.wikipedia.org/wiki/Metadata">metadata</a>,</em> 
+        is stored on-disk, alongside the file.
     </p>
 
     <p>
-        Metadata includes:
+        UNIX file metadata includes:
     </li>
 
     <ul>
@@ -371,7 +437,7 @@ Filesystem Heirarchy:
 
     <p>
         A <em>device file</em> represents a device connected to the system; 
-        they reside in the <code>/dev</code> directory.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[10]</a></sup>
+        they reside in the <code>/dev</code> directory.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[3]</a></sup>
         Each of these files serves as the principle reference to its
         respective device.
     </p>
@@ -558,6 +624,115 @@ Filesystem Heirarchy:
     </ul>
 </div>
 
+<div id="filesystems" class="content">
+    <h2> Filesystems </h2>
+
+    <p>
+        A <em><a href="https://wiki.osdev.org/File_Systems#File_System_Theory">filesystem</a></em> 
+        is a systematic method of storing and retrieving data on
+        disk.<sup><a href="https://wiki.osdev.org/Filesystem">[4]</a><a href="https://wiki.archlinux.org/index.php/File_systems">[5]</a></sup>
+        The first versions of UNIX referred to its own filesystem as, simply,
+        <code>fs</code>.  
+        It was well-documented (by, for instance, Maurice J. Bach in 
+        <a href="https://archive.org/details/DesignUNIXOperatingSystem/page/n7/mode/2up"><em>The Design of the Unix Operating System</em></a>), and became the basis of
+        a sequence of filesystems, including Linux's <code>ext</code> 
+        and <code>ext2</code>.
+    </p>
+
+    <p>
+        These first-generation filesystems were relatively simple and naive:
+        They expected that machines would always shutdown cleanly, and
+        that hard-drives worked flawlessly.
+        In particular, a system crash mid-write could leave the filesystem in 
+        an inconsistent state.<sup><a href="https://en.wikipedia.org/wiki/Journaling_file_system">[6]</a></sup> 
+        Such a shutdown required a check of the entire structure.<sup><a href="https://en.wikipedia.org/wiki/Journaling_file_system">[6]</a></sup>
+        Filesystems like these (e.g., <code>VFAT</code> and <code>FAT32</code>)
+        are today used to hold the bootloader, since they are widely supported and
+        their contents are not expected to change often.
+    </p>
+    
+    <p>
+        The issue of non-clean shutdowns was solved with the introduction of 
+        <em><a href="https://en.wikipedia.org/wiki/Journaling_file_system">journaling</a>:</em>
+        Before a change is made to the filesystem's contents, it is first written
+        to an on-disk journal.  
+        Should the system crash after the journal has been updated, the write
+        can simply be resumed; should the system crash before the journal entry has been
+        completed, the write is discarded.
+        In either case, the consistency of the filesystem is preserved.
+        Journaling filesystems are in wide use, and include Linux's excellent 
+        <a href="https://ext4.wiki.kernel.org/index.php/Main_Page"><code>ext4</code></a>
+        and Microsoft's <code>NTFS</code>.
+    </p>
+
+    <p>
+        Next-generation filesystems are introducing a myriad of features to
+        cope with hard-drive failures, especially, in enterprise settings.  
+        The most fundamental change is <em>copy on write,</em>
+        a minor change in semantics which allows filesystem-wide snapshots to be 
+        created very efficiently, while reducing the need for journaling.
+        Other features include native logical volume management/RAID support and 
+        internal checksumming.<sup><a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">[7]</a><a href="https://wiki.archlinux.org/index.php/ZFS">[8]</a></sup>
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Pronounced <em>B-Tree fs,</em> as its core data structure is 
+            a copy-on-write B-Tree,<sup><a href="https://web.archive.org/web/20180428201038/https://docs.oracle.com/cd/E52668_01/E54669/html/ol7-about-btrfs.html">[9]</a></sup>
+            it is intended to be simple and maintainable,<sup><a href="https://btrfs.wiki.kernel.org/index.php/Btrfs_design">[10]</a></sup>
+            but is not yet rock-solid.<sup><a href="https://lwn.net/Articles/824855/">[11]</a></sup>
+        </p>
+    </div>
+
+    <p>
+        <code>btrfs</code> and <code>zfs</code> are both next-generation, copy-on-write
+        filesystems.
+        <code>zfs</code> has been described as a "non-starter" by Linus 
+        Torvalds, principally over licensing issues.<sup><a href="https://www.realworldtech.com/forum/?threadid=189711&curpostid=189841">[9]</a></sup>
+        GPL-licensed <code>btrfs</code>, on the other hand, is alive and well, and has
+        made inroads to becoming Linux's next major filesystem:
+        It is in wide use by Facebook, and 
+        is now <a href="https://fedoramagazine.org/choose-between-btrfs-and-lvm-ext4/">the default filesystem</a> of Fedora's <em>Workstation</em> distribution.
+        They are the first major vendors to adopt it.
+    </p>
+
+    <p>
+        Owing in part to a vast collection of open-source drivers, 
+        Linux can make use of <a href="https://man7.org/linux/man-pages/man5/filesystems.5.html">many filesystems</a>.
+        The filesystems that the (running) kernel supports are listed at <code>/proc/filesystems</code>;
+        formatting tools are generally of the form <code>mkfs.&lt;filesystem&gt;</code>;
+        and, <code>man</code> pages contain most relevant information.
+    </p>
+
+
+    <h3> inodes &amp; inode numbers</h3>
+    
+    <p>
+        A common feature of Unix-like filesystems is the 
+        <a href="https://wiki.osdev.org/File_Systems#Indexing_Methods">inode</a>:
+        Each file is described by a single inode.
+        An inode tells where the file's data is stored on-disk, 
+        and also contains the file's metadata. 
+    </p>
+
+    <p>
+        The filesystem's collection of inodes is organized  
+        into one large array; any inode, and therefore any file,
+        may be uniquely identified by its index in this array.
+        These indices are called <em>inode numbers,</em>
+        and are the principle (low-level) references to files.
+        Under this scheme, all we must do in order to implement filenames
+        is associate a string of text with an inode number.
+    </p>
+
+    <h3> See Also: </h3>
+    <ul>
+        <li><a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">Disk Partitions</a></li>
+        <li> <code><a href="https://man7.org/linux/man-pages/man7/inode.7.html"> inode(7) </a></code></li>
+    </ul>
+</div>
+
 <div class="content" id="mounting-unmounting">
 
     <h2>Mounting and Unmounting</h2>
@@ -630,94 +805,6 @@ Filesystem Heirarchy:
         <a href="https://www.man7.org/linux/man-pages/man8/umount.8.html"><code>sudo umount PATH</code></a>,
         where <code>PATH</code> is the location of the mounted filesystem.
     </p>
-</div>
-
-<div id="filesystems" class="content">
-    <h2> Filesystems </h2>
-
-    <p>
-        A <a href="https://wiki.osdev.org/File_Systems#File_System_Theory">filesystem</a> is a systematic method of organizing data on
-        disk.<sup><a href="https://wiki.osdev.org/Filesystem">[3]</a><a href="https://wiki.archlinux.org/index.php/File_systems">[4]</a></sup>
-        It is similar to a data structure, in that it defines a convention
-        to be followed in the storage and retrieval of data.
-    </p>
-
-   
-    <p>
-        Early versions of Unix referred to its own filesystem as, 
-        simply, <code>fs</code>.
-        It was well-documented (by, for instance, Maurice J. Bach in 
-        <em>The Design of the Unix Operating System</em>).
-        The Extended Filesystem (EXT) was an open-source extension, and 
-        retained many distinctive features of the original.
-        Since then, EXT2, EXT3, and EXT4 have continued to 
-        improve upon the design.
-    </p>
-
-    <h3>Some Common Filesystems:</h3>
-
-    <ul>
-        <li>
-            <p>
-            <a href="https://ext4.wiki.kernel.org/index.php/Main_Page"><strong>EXT4</strong></a>:
-                Introduced in 2008, EXT4 is the current standard Linux filesystem.
-                It is an evolutionary enhancement on EXT3,
-                supporting larger filesizes, deeper subdirectory support,
-                faster handling of large files, along with <a href="https://kernelnewbies.org/Ext4">many other improvements</a>.
-                It is mature, fast, and stable.
-            </p>
-        </li>
-
-        <li>
-            <p>
-                <strong>FAT32</strong>: The "File Allcoation Table 32-bit" is a DOS-era filesystem,<sup><a href="https://en.wikipedia.org/wiki/File_Allocation_Table#FAT32">[7]</a></sup>
-                and is widely supported,<sup><a href="https://wiki.osdev.org/File_Systems#.22Beginners.22_filesystems">[a]</a></sup> though antiquated.
-                In particular, it is not a <a href="https://en.wikipedia.org/wiki/Journaling_file_system">journaling filesystem</a>,
-                so that changes to files are not recorded before being carried out.
-                This increases the likelihood of corruption in the event of, 
-                say, power outage.
-                This filesystem is often used to hold the bootloader, since it 
-                is virtually guaranteed to be supported,
-                and its contents will not be changed very often.
-            </p>
-        </li>
-    </ul>
-
-    <p>
-        To use a particular filesystem, a given disk is first
-        <a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">partitioned</a> into one or more 
-        distinct components.
-        A new and empty filesystem may then be written to the partition,
-        in an operation known as 
-        <em><a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">formatting</a>.</em>
-        Partitions are contiguous with respect to the disk's address space,
-        and filesystems cannot cross partition boundaries.
-    </p>
-
-    <h3> inodes &amp; inode numbers</h3>
-    
-    <p>
-        A common feature of Unix-like filesystems is the 
-        <a href="https://wiki.osdev.org/File_Systems#Indexing_Methods">inode</a>:
-        Each file is described by a single inode.
-        An inode tells where the file's data is stored on-disk, 
-        and also contains the file's metadata. 
-    </p>
-
-    <p>
-        The filesystem's collection of inodes is organized  
-        into one large array; any inode, and therefore any file,
-        may be uniquely identified by its index in this array.
-        These indices are called <em>inode numbers,</em>
-        and are the principle (low-level) references to files.
-        Under this scheme, all we must do in order to implement filenames
-        is associate a string of text with an inode number.
-    </p>
-
-    <h3> See Also: </h3>
-    <ul>
-        <li> <code><a href="https://man7.org/linux/man-pages/man7/inode.7.html"> inode(7) </a></code></li>
-    </ul>
 </div>
 
 <div id="directories" class="content">
@@ -890,13 +977,32 @@ Filesystem Heirarchy:
     <h2> References </h2>
     <ol>
         <li> Kernighan, Brian. <i>Unix: A History and a Memoir.</i>  Published 2020, by Brian W. Kernighan via Kindle Direct Publishing. </li>
+
         <li>Ritchie, D. M. (1984). The Evolution of the Unix Time-sharing System. <em>AT&amp;T Bell Laboratories Technical Journal,</em> 63(6), 2nd ser., 1577-1593.</li>
+
+        <li> LSB Workgroup, The Linux Foundation. (2015, March 9). 3.6 /dev: Device Files. Retrieved July 17, 2020, from <a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03.html</a> </li>
+
         <li> File Systems. (n.d.). Retrieved July 17, 2020, from <a href="https://wiki.osdev.org/Filesystem">https://wiki.osdev.org/Filesystem</a> </li>
+
         <li> File systems - ArchWiki. (n.d.). Retrieved July 17, 2020, from <a href="https://wiki.archlinux.org/index.php/File_systems">https://wiki.archlinux.org/index.php/File_systems</a> </li>
-        <li> Ext4 - Wikipedia. (2020, June 14). Retrieved July 17, 2020, from <a href="https://en.wikipedia.org/wiki/Ext4">https://en.wikipedia.org/wiki/Ext4</a> </li>
-        <li> ZFS - Wikipedia. (2020, July 15). Retrieved July 17, 2020, from <a href="https://en.wikipedia.org/wiki/ZFS">https://en.wikipedia.org/wiki/ZFS</a></li>
-        <li> File Allocation Table - Wikipedia. (2020, July 12). Retrieved July 17, 2020, from <a href="https://en.wikipedia.org/wiki/File_Allocation_Table">https://en.wikipedia.org/wiki/File_Allocation_Table</a></li>
-        <li> LSB Workgroup, The Linux Foundation. (2015, March 9). The Root Filesystem. Retrieved July 17, 2020, from <a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03.html">https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03.html</a> </li>
+
+        <li>Journaling file system - Wikipedia. (2021, January 06). Retrieved March 02, 2021, from <a href="https://en.wikipedia.org/wiki/Journaling_file_system">https://en.wikipedia.org/wiki/Journaling_file_system</a></li> 
+
+
+        <li>btrfs Wiki (2021, February 24). Retrieved March 02, 2021, from <a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">https://btrfs.wiki.kernel.org/index.php/Main_Page</a></li>
+        
+        <li>ZFS - ArchWiki. (2021, February 22). Retrieved March 02, 2021, from <a href="https://wiki.archlinux.org/index.php/ZFS">https://wiki.archlinux.org/index.php/ZFS</a></li>
+
+        <li>22.2 about the Btrfs file system. (2018, April 16). Retrieved March 02, 2021, from <a href="https://web.archive.org/web/20180428201038/https://docs.oracle.com/cd/E52668_01/E54669/html/ol7-about-btrfs.html">https://web.archive.org/web/20180428201038/https://docs.oracle.com/cd/E52668_01/E54669/html/ol7-about-btrfs.html</a></li>
+
+
+        <li>Btrfs design - btrfs Wiki. (2016, October 16). Retrieved March 02, 2021, from <a href="https://btrfs.wiki.kernel.org/index.php/Btrfs_design">https://btrfs.wiki.kernel.org/index.php/Btrfs_design</a></li>
+
+        <li>Btrfs at Facebook [LWN.net]. (2020, July 2). Retrieved March 02, 2021, from <a href="https://lwn.net/Articles/824855/">https://lwn.net/Articles/824855/</a></li>
+
+        <li>Torvalds, L. (2020, January 06). Nuances related to Spinlock implementation and the Linux Scheduler. Retrieved March 02, 2021, from <a href="https://www.realworldtech.com/forum/?threadid=189711&amp;curpostid=189841">https://www.realworldtech.com/forum/?threadid=189711&amp;curpostid=189841</a></li>
+
+
         <li> Wirzenius, L. (2004). Chapter 3: Overview of the Directory Tree. In <em>Linux System Administrator's Guide.</em> <a href="https://www.tldp.org/LDP/sag/html/fs-background.html">https://www.tldp.org/LDP/sag/html/fs-background.html</a></li>
         <li> LSB Workgroup, The Linux Foundation. (2015, March 9). The Root Filesystem. Retrieved July 17, 2020, from <a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html</a></li>
         <li> Overview of the Linux Virtual File System - The Linux Kernel Documentation. (n.d.). Retrieved July 17, 2020, from <a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">https://www.kernel.org/doc/html/latest/filesystems/vfs.html</a> </li>
