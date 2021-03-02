@@ -30,8 +30,8 @@ Files and Filesystems:
     - [x] Synthetic Files
     - [x] Device Files
     - [x] Filesystem Heirarchy
-    - [x] Mounting and Unmounting
     - [x] Filesystems
+    - [x] Mounting and Unmounting
     - [x] Directories
     - [x] Closing Remarks: VFS and Directory Tree
 
@@ -84,8 +84,9 @@ The Bazaar Development Model:
     - [ ] Fork/merge
     - [ ] Modularity
     - [x] Train Schedules
-    - [ ] Organizations
-        - Internally, NOT a bazaar
+    - [ ] Open-Source Organizations
+            Internally, NOT a bazaar
+    - [ ] Closed-Source Organizations
     - [ ] Why it Works
 
 Packages:
@@ -101,5 +102,3 @@ Packages:
                 Install Ubuntu 
                 The Linux Command Line
                 Arch Linux or Linux From Scratch
-
-
