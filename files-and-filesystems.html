@@ -570,28 +570,26 @@ Filesystem Heirarchy:
         a minor change in semantics which allows filesystem-wide snapshots to be 
         created very efficiently, while reducing the need for journaling.
         Other features include native logical volume management/RAID support and 
-        internal checksumming.<sup><a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">[7]</a><a href="https://wiki.archlinux.org/index.php/ZFS">[8]</a></sup>
+        internal checksumming.
     </p>
 
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            I prefer to read it as <em>B-Tree fs,</em> as its core data structure is 
-            a copy-on-write B-Tree.<sup><a href="https://web.archive.org/web/20180428201038/https://docs.oracle.com/cd/E52668_01/E54669/html/ol7-about-btrfs.html">[9]</a></sup>
-            It is intended to be simple and maintainable,<sup><a href="https://btrfs.wiki.kernel.org/index.php/Btrfs_design">[10]</a></sup>
-            but is not yet rock-solid.<sup><a href="https://lwn.net/Articles/824855/">[11]</a></sup>
+            <code>ZFS</code> has been described by Linus Torvalds as a "non-starter,"
+            principally over licensing issues.<sup><a href="https://www.realworldtech.com/forum/?threadid=189711&curpostid=189841">[11]</a></sup>
         </p>
     </div>
 
     <p>
-        <code>btrfs</code> and <code>zfs</code> are both next-generation, copy-on-write
-        filesystems.
-        <code>zfs</code> has been described as a "non-starter" by Linus 
-        Torvalds, principally over licensing issues.<sup><a href="https://www.realworldtech.com/forum/?threadid=189711&curpostid=189841">[9]</a></sup>
-        GPL-licensed <code>btrfs</code>, on the other hand, is alive and well, and has
-        made inroads to becoming Linux's next major filesystem:
-        It is in wide use by Facebook, and 
-        is now <a href="https://fedoramagazine.org/choose-between-btrfs-and-lvm-ext4/">the default filesystem</a> of Fedora's <em>Workstation</em> distribution.
+        Both <code><a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">btrfs</a></code> 
+        and <code><a href="https://en.wikipedia.org/wiki/ZFS">ZFS</a></code> 
+        are such next-generation, copy-on-write filesystems.<sup><a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">[7]</a><a href="https://wiki.archlinux.org/index.php/ZFS">[8]</a></sup>
+        Of the two, <code>btrfs</code> has made inroads to becoming Linux's next 
+        major filesystem:
+        It is in wide use by Facebook,<sup><a href="https://lwn.net/Articles/824855/">[9]</a></sup> and has recently become  
+        the default filesystem of Fedora's <em>Workstation</em> 
+        distribution.<sup><a href="https://fedoramagazine.org/announcing-fedora-33/">[10]</a></sup>
         They are the first major vendors to adopt it.
     </p>
 
@@ -602,7 +600,6 @@ Filesystem Heirarchy:
         formatting tools are generally of the form <code>mkfs.&lt;filesystem&gt;</code>;
         and, <code>man</code> pages contain most relevant information.
     </p>
-
 
     <h3> inodes &amp; inode numbers</h3>
     
@@ -891,15 +888,13 @@ Filesystem Heirarchy:
         
         <li>ZFS - ArchWiki. (2021, February 22). Retrieved March 02, 2021, from <a href="https://wiki.archlinux.org/index.php/ZFS">https://wiki.archlinux.org/index.php/ZFS</a></li>
 
-        <li>22.2 about the Btrfs file system. (2018, April 16). Retrieved March 02, 2021, from <a href="https://web.archive.org/web/20180428201038/https://docs.oracle.com/cd/E52668_01/E54669/html/ol7-about-btrfs.html">https://web.archive.org/web/20180428201038/https://docs.oracle.com/cd/E52668_01/E54669/html/ol7-about-btrfs.html</a></li>
-
-
-        <li>Btrfs design - btrfs Wiki. (2016, October 16). Retrieved March 02, 2021, from <a href="https://btrfs.wiki.kernel.org/index.php/Btrfs_design">https://btrfs.wiki.kernel.org/index.php/Btrfs_design</a></li>
+        <!-- 8  9-->
 
         <li>Btrfs at Facebook [LWN.net]. (2020, July 2). Retrieved March 02, 2021, from <a href="https://lwn.net/Articles/824855/">https://lwn.net/Articles/824855/</a></li>
+        
+        <li>Fedora 33 is officially here! - Fedora Magazine. (2020, October 27). Retrieved March 2, 2021, from <a href="https://fedoramagazine.org/announcing-fedora-33/">https://fedoramagazine.org/announcing-fedora-33/</a></li>
 
         <li>Torvalds, L. (2020, January 06). Nuances related to Spinlock implementation and the Linux Scheduler. Retrieved March 02, 2021, from <a href="https://www.realworldtech.com/forum/?threadid=189711&amp;curpostid=189841">https://www.realworldtech.com/forum/?threadid=189711&amp;curpostid=189841</a></li>
-
 
         <li> Wirzenius, L. (2004). Chapter 3: Overview of the Directory Tree. In <em>Linux System Administrator's Guide.</em> <a href="https://www.tldp.org/LDP/sag/html/fs-background.html">https://www.tldp.org/LDP/sag/html/fs-background.html</a></li>
         <li> LSB Workgroup, The Linux Foundation. (2015, March 9). The Root Filesystem. Retrieved July 17, 2020, from <a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html</a></li>
