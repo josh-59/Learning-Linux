@@ -55,17 +55,6 @@ Terminals and Shells:
 - [ ] Command Execution
 - [ ] Closing Remarks: Text Editor
 
-Terminal Pro:
-- [ ] History: Commands not programs
-- [ ] Terminal Pro Tips (copy/paste)
-- [ ] Man Pages
-- [ ] Advanced Redirections
-- [ ] Small Composable Utilities
-- [ ] Finding Files 
-- [ ] Shell Constructs (Loops, If/then)
-- [ ] Closing Remarks: Awk Programming Language
-
-
 C Programming Language:
 - [ ] History
 - [ ] Hello World
@@ -92,3 +81,13 @@ Packages:
 - [ ] Package Managers
 - [ ] Building Packages
 - [ ] Closing Remarks:
+
+Terminal Pro:
+- [ ] History: Commands not programs
+- [ ] Terminal Pro Tips (copy/paste)
+- [ ] Man Pages
+- [ ] Advanced Redirections
+- [ ] Small Composable Utilities
+- [ ] Finding Files 
+- [ ] Shell Constructs (Loops, If/then)
+- [ ] Closing Remarks: Awk Programming Language
