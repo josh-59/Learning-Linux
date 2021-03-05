@@ -33,24 +33,55 @@ Device Special Files:
 Logical Volume Management:
     https://wiki.ubuntu.com/Lvm
 
+Inodes:
+<div class="content" id="inodes">
+<h1> inodes </h1>
+
+<p>
+        An <em>inode</em> represents an object within the filesystem.<sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html#id1">[11]</a></sup>
+        An inode could represent a regular file, a directory, a psuedofile, etc&mdash;
+        everything within the directory tree has a corresponding inode.
+        They contain their file's metadata, and additionally describe where
+        the file's contents may be obtained.
+</p>
+
+<p>
+        For example, consider the <code>stat</code> of a directory <em>Public:</em>
+</p>
+
+<div class="code>
+        $ stat Public <br>
+        File: Public/ <br>
+        Size: 4096      	Blocks: 8          IO Block: 4096   directory <br>
+        Device: b302h/45826d	Inode: 384844      Links: 7 <br>
+        Access: (0755/drwxr-xr-x)  Uid: ( 1000/    josh)   Gid: ( 1000/    josh) <br>
+        Access: 2021-03-04 11:54:47.191418850 -0600 <br>
+        Modify: 2021-03-03 11:17:42.906440413 -0600 <br>
+        Change: 2021-03-03 11:17:42.906440413 -0600 <br>
+        Birth: 2020-04-03 07:28:40.950000009 -0500
+</div>
+
+<p>
+        Inodes are arranged, conceptually, in arrays, and are referred to by 
+        <em>inode numbers,</em> which is simply an index into this array.
+        Each filesystem maintains its own inode array.
+        To refer to a file, the kernel must therefore know the filesystem 
+        the file is on (given by device major/minor number), and the 
+        and the inode number of the file.
+        Above, the <code>Public/</code> directory has major device number 
+        <code>b302h</code>, minor device
+        number <code>45826d</code>, and inode number <code>382844</code>.
+</p>
+
+<p>
+        A study of inodes is necessary to understand the semantics of file
+        operations within GNU/Linux.
+</p>
 
 
 Filesystems:
-    inode as indexing method:
-        https://wiki.osdev.org/File_Systems#Indexing_Methods
     
-    Move following quote to Introduction to GNU/Linux:
-        "Unix was well-documented (by, for instance, Maurice J. Bach in 
-        <em>The Design of the Unix Operating System</em>)."
-
-    In more detail:
-        ext2:
-        http://cs.smith.edu/~nhowe/262/oldlabs/ext2.html#itable
-
-        ext4 Data Structures and Algorithms:
-        https://www.kernel.org/doc/html/latest/filesystems/ext4/index.html
-
-Regular Files:
+        Regular Files:
     Citation needed: heirarchical filestructure taken from Multics
 
 Filesystem Heirarchy:
@@ -63,12 +94,20 @@ Filesystem Heirarchy:
             /var contains logs, transient and temporary files
             Not shareable across systems
 
+Kerrisk calls File I/O "The Universal I/O Model"
+
 
  <h4> Exercises: </h4>
     <ol class="big-list">
         <li> From the command line, create a new and empty directory.  
             What does it contain? (It is not empty.)
             To what files do its entries point?</li>
+ext2:
+        http://cs.smith.edu/~nhowe/262/oldlabs/ext2.html#itable
+
+        ext4 Data Structures and Algorithms:
+        https://www.kernel.org/doc/html/latest/filesystems/ext4/index.html
+
     </ol>
 
 
@@ -83,8 +122,8 @@ Filesystem Heirarchy:
         <li><a href="#device-files"> Device Files </a></li>
         <li><a href="#fs-heir"> Filesystem Heirarchy </a></li>
         <li><a href="#filesystems"> Filesystems </a></li>
-        <li><a href="#mounting-unmounting"> Mounting and Unmounting</a></li>
         <li><a href="#directories"> Directories </a></li>
+        <li><a href="#mounting-unmounting"> Mounting and Unmounting</a></li>
         <li><a href="#closing-remarks"> Closing Remarks </a></li>
         <li><a href="#udacity"> Udacity </a></li>
         <li><a href="#references"> References </a></li>
