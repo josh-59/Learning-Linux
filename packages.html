@@ -14,8 +14,11 @@ last-updated: December 2020
         That's it. There's nothing more to it.
     </p>
 
-    Expressing the Operating System as a Package:
+    Expressing the Operating System:
         Arch: base
+
+    The system may be viewed as a collection of installed packages.  
+
     The relationship between packages and distributions:
         Package management and Linux distributions are uniquely intertwined:
         The software that composes a system defines the distribution.
@@ -30,14 +33,8 @@ last-updated: December 2020
         the future of Linux distributions
         <sup><a href="https://frontpagelinux.com/news/centos-crosses-streams-with-the-community/">[1]</a></sup>
 
-
-
-
     Arch User's Repository, AUR
 
-
-
-        
     Dependencies
         <em>Where the magic happens</em>
     <p>
@@ -49,12 +46,13 @@ last-updated: December 2020
         and offers to install them all for you.
     </p>
 
-    <h3>Metapackages</h3>
-    <p>
-        A package that contains nothing but dependencies.
-    </p>
-
     https://wiki.archlinux.org/index.php/Meta_package_and_package_group
+
+<h2>Package Groups and Metapackages</h2>
+<p>
+        A package that contains nothing but dependencies.
+</p>
+
 
 
 A section from the Linux Mint User Guide (old)
@@ -65,22 +63,26 @@ https://www.debian.org/doc/debian-policy/ch-relationships.html
 
 Other Package Managers:
     PIP:
-
     Cargo:
 
+Other packaging solutions:
+
+        Cross-platform packages:
+                Great in theory, horrific in practice (See Torvald's quote).
     Snap
     Zero Install
-
     https://blog.linuxmint.com/?p=3766 (Critique of Snap)
     https://blog.linuxmint.com/?p=3906 (Chromium empty package) "In Linux Mint 20, APT will forbid snapd from getting installed.""
-
     From https://linuxmint-user-guide.readthedocs.io/en/latest/snap.html
            "The Snap Store, also known as the Ubuntu Store, is a commercial centralized software store operated by Canonical."
 
-
-Closing Remarks:
     The UNIX Way:
         Distribute source! a la Free BSD's <em>ports</em>
+        Also, gentoo does takes this approach as-well.
+
+        But I don't want to take away their jobs!
+
+Closing Remarks:
 
     https://docs.freebsd.org/en/books/handbook/ports/#ports-using
     Package Benefits
@@ -92,9 +94,7 @@ Closing Remarks:
     Packages do not require any understanding of the process involved in compiling software on FreeBSD.
 
 
-
-
-            Thanks for reading
+            Thanks for reading!
                 Ecosystem
             Where to go from here? 
                 Install Ubuntu 

@@ -52,7 +52,7 @@ Terminals and Shells:
 - [x] Simple Commands
 - [x] Shell Expansion
 - [x] I/O Redirection
-- [x] Searching for Commands
+- [ ] Searching for Commands
 - [ ] Command Execution
 - [ ] Closing Remarks: Text Editor
 
@@ -70,20 +70,20 @@ The Bazaar Development Model:
 - [ ] Cathedral vs. Bazaar
 - [ ] Fork/merge
 - [ ] Modularity
-- [x] Train Schedules
+- [X] Train Schedules
 - [ ] Open-Source Organizations
 - [ ] Closed-Source Organizations
 - [ ] Why it Works
 
 Packages:
-- [ ] Introduction to Packages
+- [X] Introduction to Packages
 - [ ] Package Contents
 - [ ] Repositories
 - [ ] Package Managers
-- [ ] Building Packages
+- [ ] Other Packaging Solutions 
 - [ ] Closing Remarks:
 
-Terminal Pro:
+Appendix: Terminal Pro:
 - [ ] History: Commands not programs
 - [ ] Terminal Pro Tips (copy/paste)
 - [ ] Man Pages
