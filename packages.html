@@ -1,10 +1,86 @@
 ---
 layout: default
 title: Packages and Package Management
-last-updated: December 2020
+last-updated: March 2021
 ---
 
 <!--
+
+
+        Ports / Gentoo's Portage
+                |
+                |
+                |
+               \ /
+      Slackware's bare tarball 
+                |
+                |
+                |
+               \ /
+          Arch's pacman
+                |
+                |
+                |
+               \ /
+     Debian / Fedora / openSUSE
+
+
+Package Contents: Metadata and Payload
+        Rewrite to use Arch Linux's packaging as example
+
+    The contents of a package may be split into two 
+        parts: Metadata and Payload.
+        In Slackware's format, metadata is restricted to the <code>./install</code>
+        directory, and consists of the post-copy script <code>doinst.sh</code>
+        and a description of the software, <code>slack-desc</code>.
+        Other package management schemes incorporate more metadata; here
+        we'll take a look at Arch's, since it is more complete.
+    </p>
+
+    <p>
+        First, we obtain a package and extract it:
+    </p>
+
+<div class="code">o.
+        $ ls
+        vim-8.2.2489-1-aarch64.pkg.tar.xz
+        $ tar xf vim-8.2.2489-1-aarch64.pkg.tar.xz &amp;&amp; rm vim-8.2.2489-1-aarch64.pkg.tar.xz
+        $ ls -A
+        .BUILDINFO  .MTREE  .PKGINFO  usr/ 
+</div>
+
+        
+<p>
+        The package's metadata are the hidden files in this directory:
+        <code>.BUILDINFO</code>, <code>.MTREE</code>, <code>.PKGINFO</code>.
+        The package's payload consists of the non-hidden files 
+        (in this case, that is only <code>usr/</code>).
+        Not present in this package is the <code>.INSTALL</code> file,
+        an optional script which would be executed by the package manager.
+</p>
+
+
+
+History: Distributing Source
+        At the time that UNIX became mature, the dominant 
+        
+        
+Package Managers:
+        In layman's terms, a <em>package</em> is a program sans installation
+        facilities.  
+        Installation is handled by some other program (a utility).  
+        Further, a package may contain some universal or shared facilities:
+        It may be a library, for instance, or the kernel.
+
+        There are numerous reasons to prefer the <em>package</em> abstraction.
+        Most notably, the system may be viewed as a collection of installed packages,
+        with the package manager being be viewed as its manager. 
+
+
+        and the centralization of 
+
+
+
     Package managers:
     <div class="code">
         sudo apt install ./atom-amd64.deb
@@ -17,43 +93,44 @@ last-updated: December 2020
     Expressing the Operating System:
         Arch: base
 
-    The system may be viewed as a collection of installed packages.  
+        The system may be viewed as a collection of installed packages,
+        and, the package manager could be viewed as a manager of the 
+        operating system.
 
-    The relationship between packages and distributions:
-        Package management and Linux distributions are uniquely intertwined:
-        The software that composes a system defines the distribution.
-        More, package management is the purview of the distribution's creator.
+
+        This is how the Arch guys view packages: The system is viewed
+        as a repository, and when new software is released, the local
+        repository becomes out of sync with the upstream repository.
+        "Upgrading" becomes a matter of synchronizing these repositories.  
+
+        Thus, the software that composes a system defines the 
+        operating system, and, 
         
     Repositories:
         Subsection?
 
-    Rolling Releases:
-        
+
         Some people think that rolling releases are 
         the future of Linux distributions
         <sup><a href="https://frontpagelinux.com/news/centos-crosses-streams-with-the-community/">[1]</a></sup>
 
-    Arch User's Repository, AUR
+        Debian Personal Package Archive
+        https://itsfoss.com/ppa-guide/
+        Arch User's Repository, AUR
 
-    Dependencies
-        <em>Where the magic happens</em>
-    <p>
-        The more sophisticated package distribution solutions of other
-        distributions allows greater automation:
-        You ask the package manager to install <code>X</code>, it
-        informs you that <code>X</code> also needs <code>Y</code> and 
-        <code>Z</code>, 
-        and offers to install them all for you.
-    </p>
+
+    Rolling Releases:
 
     https://wiki.archlinux.org/index.php/Meta_package_and_package_group
 
 <h2>Package Groups and Metapackages</h2>
 <p>
         A package that contains nothing but dependencies.
+        When "installed", the effect is to install a group of packages.
 </p>
 
-
+Debian-specific virtual package: A faux target, only realized by other,
+actual packages.  
 
 A section from the Linux Mint User Guide (old)
 https://www.linuxmint.com/documentation/user-guide/Cinnamon/english_18.0.pdf
@@ -65,8 +142,6 @@ Other Package Managers:
     PIP:
     Cargo:
 
-Other packaging solutions:
-
         Cross-platform packages:
                 Great in theory, horrific in practice (See Torvald's quote).
     Snap
@@ -75,14 +150,27 @@ Other packaging solutions:
     https://blog.linuxmint.com/?p=3906 (Chromium empty package) "In Linux Mint 20, APT will forbid snapd from getting installed.""
     From https://linuxmint-user-guide.readthedocs.io/en/latest/snap.html
            "The Snap Store, also known as the Ubuntu Store, is a commercial centralized software store operated by Canonical."
+           Snap is unique in that it solves a problem that didn't actually exist:
+
+
 
     The UNIX Way:
-        Distribute source! a la Free BSD's <em>ports</em>
+        The <em>really</em> old guys, with <em>really</em> long beards
+        just distribute source. a la Free BSD's <em>ports</em>
         Also, gentoo does takes this approach as-well.
 
-        But I don't want to take away their jobs!
 
 Closing Remarks:
+        In layman's terms, a <em>package</em> is a program sans installation
+        facilities.  
+        Installation is handled by some other program (a utility).  
+        Further, a package may contain some universal or shared facilities:
+        It may be a library, for instance, or the kernel.
+
+        Not mentioned here are the myriad of reasons to prefer the 
+        abstract <em>package</em> and
+        centralized management over per-program installation.
+
 
     https://docs.freebsd.org/en/books/handbook/ports/#ports-using
     Package Benefits
@@ -107,6 +195,7 @@ Closing Remarks:
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#packages-intro"> Introduction to Packages </a></li>
         <li><a href="#metadata-and-payload"> Package Contents </a></li>
+        <li><a href="#package-managers">Package Managers</a></li>
         <li><a href="#repositories"> Repositories </a></li>
         <li><a href="#references"> References </a></li>
     </ul>
@@ -272,9 +361,11 @@ Closing Remarks:
     </div>
 
     <p>
-        The package's metadata is contained within the <code>control</code>
-        archive, and the payload is within <code>data</code>. Both can be extracted
-        with <code>tar</code>, but for now we'll just take a peek:
+        The package's metadata is found in the <code>control</code>
+        archive, and the <code>debian-binary</code> file. 
+        The payload is here referred to as <code>data</code>. 
+        Both can be extracted with <code>tar</code>, but for now we'll just 
+        take a peek:
     </p>
 
     <div class="code">
@@ -288,17 +379,37 @@ Closing Remarks:
         <a href="./pre/prerm.html">./prerm</a> <br>
     </div>
 
-    <p>
-        The file <code>control</code> describes the package, and includes
-        information such as version number and dependencies; official
-        Debian documentation calls this the "most vital information."<sup><a href="https://www.debian.org/doc/debian-policy/ch-controlfields.html#source-package-control-files-debian-control">[4]</a></sup>  
-    </p>
+<p>
+According to <a href="https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html">Debian</a>:
+</p>
 
-    <p>
+<ul>
+        <li>
+        The file <code>control</code> describes the package, giving its
+        version number, a description of it, and other information about it.
+        </li>
+
+        <li>
         The file <code>md5sums</code> is a collection of hash signatures of
         files within the package.  These allow one to verify the 
         integrity of those files after they've been downloaded.
-    </p>
+        </li>
+
+        <li>
+        The remaining files are scripts, called when installing or removing
+        the package.
+        For instance, when one uses <code>apt remove vim</code>, or
+        <code>apt purge vim</code>, the
+        <code>postrm</code> script is called with argument <em>remove</em>,
+        or <em>purge</em>, as appropriate.
+
+        Note that the <em>install</em> phase is the copying of files
+        into the system directory tree, and that 
+        <code>preinst</code> and <code>postinst</code>
+        are called relative to that step.
+        </li>
+</ul>
+</p>
 
     <p>
         For completeness, here is the <code>data</code> directory:
@@ -327,8 +438,76 @@ Closing Remarks:
         <br>
         9 directories, 9 files <br>
     </div>
+</div>
+
+<div class="content" id="package-managers">
+        <h2> Package Managers </h2>
+
+        <p>
+        In layman's terms, a <em>package</em> is a program sans installation
+        facilities.  
+        Installation is instead handled by the <em>package manager.</em> 
+        Further, a package may contain some universal or shared facilities:
+        It may be a library, for instance.
+        </p>
+
+        <p>
+        There are numerous reasons to prefer the package abstraction.
+        Most notably, the system may be viewed as a collection of installed packages.
+        Other reasons include refactoring of code, centrality of administration,
+        and ease of software location and installation.
+        </p>
+
+        <p>
+        To update a machine running on Debian's packaging facilities, for example,
+        we must simply run,
+        </p>
+
+        <div class="aside-right">
+        <h4>Aside:</h4>
+                <p>
+                        See <code>$ apt --help</code>
+                        and <code><a href="https://manpages.debian.org/buster/apt/apt.8.en.html">apt(8)</a></code> for more information
+                </p>
+        </div>
+
+        <div class="code">
+        $ sudo apt update <br>
+        $ sudp apt upgrade 
+        </div>
+
+        <p>
+        The first command, <code>update</code>, synchronizes <code>apt</code>'s 
+        local package list with those of the configured repositories.  
+        The second command downloads and installs any revised packages.
+        This two-command sequence would install a new kernel 
+        (via <a href="https://packages.debian.org/search?keywords=kernel-image&searchon=names&suite=stable&section=all">kernel-image</a>), for instance,
+        and it would be used on the next reboot.
+        </p>
+
+        <h3>Repositories</h3>
+
+        <p>
+        </p>
+
+        <div class="code">
+        </div>
+
+        <p>
+        </p>
+
+        <div class="code">
+        </div>
+
+        <p>
+        The above command will also work with 
+
+        Repositories are listed locally at <code>/etc/apt/sources.list.d/</code>
+
+
 
 </div>
+
 
 <div class="content" id="dependencies">
     <h2>Dependencies</h2>
@@ -362,27 +541,3 @@ https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html
     </ol>
 </div>
 
-
-
-$ tree
-.
-├── data.tar.xz
-└── usr
-    ├── bin
-    │   └── vim.basic
-    └── share
-        ├── bug
-        │   └── vim
-        │       ├── presubj
-        │       └── script
-        ├── doc
-        │   └── vim
-        │       ├── changelog.Debian.gz
-        │       ├── changelog.gz
-        │       ├── copyright
-        │       └── NEWS.Debian.gz
-        └── lintian
-            └── overrides
-                └── vim
-
-9 directories, 9 files
