@@ -4,12 +4,33 @@ title: C Programming Language
 last-updated: February 2020
 ---
 
+<h1>The C Programming Language:</h1>
+<h4>A Primer</h4>
+Outline:
+- [ ] History
+- [ ] Hello World
+- [ ] Memory!
+- [ ] Derived Types
+- [ ] Control Statements
+- [ ] Functions
+- [ ] Shit Happens (Bugs)
+- [ ] Closing Remarks
+
+The following books are recommended by Linux Kernel official documentation,
+at https://www.kernel.org/doc/html/latest/process/howto.html
+        “The C Programming Language” by Kernighan and Ritchie [Prentice Hall]
+        “Practical C Programming” by Steve Oualline [O’Reilly]
+        “C: A Reference Manual” by Harbison and Steele [Prentice Hall]
+
 Introduction:
+
+We now briefly digress to introduce the C Programming Language.
+The centrality of memory is expressed, along with a high-level
+view of programming languages in large.
+
     
 History:
     Bell Labs(!)
-    See Also: K&amp;R
-
 
         Main idea: C is "first programmer's language"
 
@@ -20,6 +41,7 @@ History:
 
     https://www.bell-labs.com/usr/dmr/www/chist.html
     """
+        <blockquote>
 BCPL, B, and C all fit firmly in the traditional procedural family typified 
 by Fortran and Algol 60. They are particularly oriented towards system 
 programming, are small and compactly described, and are amenable to translation 
@@ -31,42 +53,142 @@ success, they also use library procedures to specify interesting control
 constructs such as coroutines and procedure closures. At the same time, their 
 abstractions lie at a sufficiently high level that, with care, portability 
 between machines can be achieved. 
+        </blockquote>
     """
-    
-    "There are perhaps 30 developers worldwide who understand the
-    <code>autoconf</code> tool chain."
-    http://freshmeat.sourceforge.net/articles/stop-the-autoconf-insanity-why-we-need-a-new-build-system
-    In an ironic response, it took one lady four years to learn 
-    what <em>autoconf</em> did.
 
-    https://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.70/html_node/Introduction.html#Introduction
-    "The primary goal of Autoconf is making the <em>user's</em>[sic] life easier;
-    making the <em>maintainer's</em>[sic] life easier is only a secondary goal.
+The importance of K&amp;R:
+        Has been <a href="http://s3-us-west-2.amazonaws.com/belllabs-microsite-dritchie/cbook/index.html">translated many times</a>,
+        and has been imitated several times:
+            The Go Programming language, by so-and-so
+            The Rust Programming Language, by such-and-such
 
-
-    Rust: The Language of the Future
-        Includes its own build system
-
-        *cough* memory intensive *cough*
-        https://www.youtube.com/watch?v=_hmMR0XooW4
-        Forward-looking?
-        Aside:
-            I've been looking for a reason to buy 96GiB RAM...
-
-        Tightly coupled dependencies:
-            There is, finally, one good <em>regex</em> implementation.
+As for the language, many have tried to improve it by augmenting its spartan
+nature, and none have succeeded.
 
 
+<h3>See Also:</h3>
+<ul>
+        <li><a href="https://archive.org/details/the-c-programming-language/mode/2up">The C Programming Language, 2nd Edition</a></li>
+</ul>
 
+<div class="content" id="hello-world">
+
+  
 Hello World:
     The first step in programming is setting up your compilation tools,
     and making sure they work.
+
+
+
     SA: https://tfetimes.com/wp-content/uploads/2015/09/An_Introduction_to_GCC-Brian_Gough.pdf
+</div>
     
 Memory!:
-    Bytes, Zero, Nonzeros
-    Interpretting memory
-        Integers, Floating Points, Characters
+
+<div class="aside-right">
+        <h4>Fun Fact:</h4>
+        <p>
+                One Russian machine was designed around a 'bit' that had three
+                possible states.
+        </p>
+</div>
+
+<p>
+        Modern hardware (uniformly) addresses memory in the unit of the byte:
+        A memory location is referred to by a number, called its <em>memory address,</em>
+        and this number refers to exactly one byte of memory.
+        A byte is composed of 8 bits, with each bit having a state of either 
+        <code>1</code> or <code>0</code> 
+        (or <em>on</em> or <em>off;</em> 
+        or <em>true</em> or <em>false;</em>
+        etc., depending on your mindset). 
+        This wasn't always the case: some early machines had 
+        6-bit addressable memory; 
+        these were referred to as <em>words,</em>
+        but since c. 1970's, the 8-bit word has been universally adopted as standard.
+</p>
+
+<div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+                The reason ASCII is antiquated is that 256 (2^8) 
+                characters is insufficient for international use.
+        </p>
+</div>
+
+<p>
+        No metadata is stored alongside this unit of memory, and, each byte may be
+        interpretted in a variety of ways. For instance, ASCII is a widely used,
+        though antiquated, scheme for mapping letters to possible byte values.
+        Most interpretations reflect numbers, which, without getting into
+        specifics, allow bytes to hold large positive integers,
+        negative integers, or decimal approximations of rational numbers.
+        For the purposes of lightening your wallet, these interpretation, 
+        and elementary operations on them, are uniformly supported by hardware natively.
+</p>
+
+<p>
+        Since the interpretation of a byte is not stored by the machine natively, 
+        it is either the programmer's job, when working in assembly, to keep their 
+        interpretations consistent, or it is the language's role to do so.
+        While the first versions of UNIX were written in assembly, we prefer
+        to use a <em>high level</em> language to express computation.
+        All high-level languages present the programmer with
+        so-called <em>primitive</em> types, reflective of these basic interpretations.
+</p>
+
+<p>
+        The attentive reader might have noticed that the byte has 2^8 = 256 possible
+        states.  
+        256 is not a very large number; and, if a machine had more than 
+        256 bytes of memory, it would not even be able to address its own memory!
+        So bytes are grouped together, typically in powers of two:
+        1 byte, 2 bytes, 4 bytes, 8 bytes, ect.  
+        4 bytes leaves us with 32 bits, or, 2^32 = 4,292,967,296 possible states,
+        a much more satisfying number.  
+        More, if the machine addresses its own memory with a 32-bit number, then
+        it is capable of addressing 2^32 unique bytes (a little over
+        4 gigabytes).
+</p>
+
+<div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+                Early Cray Supercomputers used 24-bit memory addresses.
+        </p>
+</div>
+
+<h3> Pointers </h3>
+
+<p>
+        A <em>pointer</em> is a memory location holding the address of another
+        memory location.
+        In C, a pointer may point to an integer, a character, or any other
+        <em>typed</em> memory location.
+        Accessing that memory is called <em>dereferencing</em> the pointer;
+        naturally, many pointers may refer to the same piece of memory.
+</p>
+
+<p>
+        Pointers, and in turn memory, are the central features of the
+        C programming language.
+        They are extremely error-prone:
+        In practice, it takes <em>at least</em> six months to learn them well,
+        and most modern programming languages hide them behind
+        additional layers of abstraction.
+        Even within C, they are often hidden. 
+</p>
+
+<p>
+        However, maniuplating memory is at the very core of what programming
+        is, and even in other languages, it is usually necessary to
+        understand how it's doing what it's doing.
+        C has a long legacy, and for its literal interpretation of 
+        memory, has been called "Portable Assembly." 
+</p>
+
+
+Linus's take: C or GTFO
 
 Derived Types:
     Arrays, Structs
@@ -75,19 +197,33 @@ Control Statements:
     Conditionals
     Loops
 
+
 Functions:
     Do_something
 
     SA: https://www.kernel.org/doc/Documentation/process/coding-style.rst
     
+
 Shit Happens:
     - Bugs happen (even at the hardware level)
     - Some statistics on bugs
 
 Closing Remarks:
-    The importance of K&amp;R:
-        I struggled even to <em>outline</em> this chapter.
-        All C documentation exists in the shadow of that work
-        And it has been imitated several times:
-            The Go Programming language, by so-and-so
-            The Rust Programming Language, by such-and-such
+        Though a great language, C is not the "last word" on systems programming.
+
+        Criticisms of C
+                Build Chain
+                Memory Unsafe
+                Difficult to Program Concurrently
+
+        make config && make install 
+
+https://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.70/html_node/Introduction.html#Introduction
+    "The primary goal of Autoconf is making the <em>user's</em>[sic] life easier;
+    making the <em>maintainer's</em>[sic] life easier is only a secondary goal.
+
+    "There are perhaps 30 developers worldwide who understand the
+    <code>autoconf</code> tool chain."
+    http://freshmeat.sourceforge.net/articles/stop-the-autoconf-insanity-why-we-need-a-new-build-system
+    In an ironic response, it took one lady four years to learn 
+    how <em>autoconf</em> worked.
