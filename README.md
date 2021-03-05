@@ -31,8 +31,9 @@ Files and Filesystems:
 - [x] Device Files
 - [x] Filesystem Heirarchy
 - [x] Filesystems
-- [x] Mounting and Unmounting
+- [ ] inodes
 - [x] Directories
+- [x] Mounting and Unmounting
 - [x] Closing Remarks: VFS and Directory Tree
 
 Processes:
