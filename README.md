@@ -16,8 +16,8 @@ Landing:
 - [x] Conventions
 
 Intro:
-- [x] UNIX
-- [x] The Unix Architecture
+- [x] UNIX: A Brief History
+- [x] The UNIX Architecture
 - [x] Free as in Freedom
 - [x] The Linux Kernel
 - [x] A Brief History of Linux Distributions
@@ -46,7 +46,7 @@ Processes:
 - [ ] Closing Remarks: systemd
 
 Terminals and Shells:
-- [x] Physical Terminals
+- [x] History: Physical Terminals
 - [x] Terminal Emulators
 - [x] Shells
 - [x] Simple Commands
@@ -67,7 +67,7 @@ C Programming Language:
 - [ ] Closing Remarks: An Overview of General Computer Science
 
 The Bazaar Development Model:
-- [ ] Cathedral vs. Bazaar
+- [ ] History: Cathedrals 
 - [ ] Fork/merge
 - [ ] Modularity
 - [X] Train Schedules
@@ -76,6 +76,7 @@ The Bazaar Development Model:
 - [ ] Why it Works
 
 Packages:
+- [ ] History: Distributing Source
 - [X] Introduction to Packages
 - [ ] Package Contents
 - [ ] Repositories
