@@ -6,7 +6,13 @@ last-updated: March 2021
 
 <!--
 
+Rewrite as "Obtaining Free Software"
 
+        Building From Source
+                |
+                |
+                |
+               \ /
         Ports / Gentoo's Portage
                 |
                 |
@@ -23,6 +29,68 @@ last-updated: March 2021
                 |
                \ /
      Debian / Fedora / openSUSE
+                |
+                |
+                |
+               \ /
+    Pip / Gems / Cargo / SNAP
+
+
+<div class="content" id="building-from-source">
+<h2>Building From Source</h2>
+
+<p>
+Free software is typically intended to be distributed, and its developer
+usually offers instructions for end-users to install it (typically, in a README file).
+In particular, GNU produces a lot of software, and
+their <a href="https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html#Autotools-Introduction">build system</a> is fairly widely-used.
+It <em>is intended for simplicity for the end user,</em> 
+and not for simplicity for developers or maintainers.
+
+To install GNU products from source, one enters its directory and issues:
+
+$ ./configure && make && make install
+
+<h3><code>make mirage</code></h3>
+
+<div class="aside-left">
+<h4>Aside:</h4>
+
+<p>
+An introduction to UNIX or UNIX-likes would not be complete without
+a digression to <code>make</code>.
+</p>
+
+One expresses a program to be compiled in "recipes" of the form,
+
+hello: hello.c
+    gcc -o hello hello.c 
+
+
+and stores them in a file named <code>Makefile</code>.
+Now, whenever a source file changes (in this example, <code>hello.c</code>), 
+the command <code>make hello</code> will recompile the program, 
+via <code>gcc -o hello hello.c</code>.
+
+
+Quite a novel little utility, and it is general in the sense that the files in question
+need not be source/binary.
+However, 
+
+
+Kernighan:  p96
+Invented 1976, 7th ed UNIX
+"an instant success"
+
+"This approach replaces code with data, and that's almost always a win."
+
+
+https://en.wikipedia.org/wiki/Make_(software)
+Original Make was written over a weekend
+    [It's rediculous to funnel such quantities of software through such a tool]
+    <a href="https://en.wikipedia.org/wiki/GNU_Autotools#Components">obtuse to say the least</a>
+
+
 
 
 Package Contents: Metadata and Payload
@@ -60,28 +128,7 @@ Package Contents: Metadata and Payload
 </p>
 
 
-
-History: Distributing Source
-        At the time that UNIX became mature, the dominant 
-        
-        
-Package Managers:
-        In layman's terms, a <em>package</em> is a program sans installation
-        facilities.  
-        Installation is handled by some other program (a utility).  
-        Further, a package may contain some universal or shared facilities:
-        It may be a library, for instance, or the kernel.
-
-        There are numerous reasons to prefer the <em>package</em> abstraction.
-        Most notably, the system may be viewed as a collection of installed packages,
-        with the package manager being be viewed as its manager. 
-
-
-        and the centralization of 
-
-
-
-    Package managers:
+Package managers:
     <div class="code">
         sudo apt install ./atom-amd64.deb
     </div>
