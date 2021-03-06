@@ -75,13 +75,14 @@ The Bazaar Development Model:
 - [ ] Closed-Source Organizations
 - [ ] Why it Works
 
-Packages:
-- [ ] History: Distributing Source
+Obtaining Free Software
+- [ ] Building From Source
+- [ ] Ports and Portage
 - [X] Introduction to Packages
 - [ ] Package Contents
 - [ ] Repositories
 - [ ] Package Managers
-- [ ] Other Packaging Solutions 
+- [ ] Other Packaging Schemes
 - [ ] Closing Remarks:
 
 Appendix: Terminal Pro:
