@@ -883,9 +883,9 @@ Mount:
         The terms <em>filesystem</em> and <em>directory tree</em> were developed 
         precisely, in order to make a clear distinction between the two.
         However, the terms overlap, somewhat:
-        In Linux, each filesystem must entertain exactly one directory tree
+        Any filesystem must entertain exactly one directory tree
         (specifically, it must contain exactly one root directory).
-        Because of this, each filesystem implies exactly one directory tree.
+        Because of this, each filesystem logically implies exactly one directory tree.
         This is the sense in which it is valid to say, "We are going to mount
         the filesystem at <code>/home</code>," when in fact we mean,
         "We are going to mount the filesystem's root directory at <code>/home</code>."
