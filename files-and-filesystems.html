@@ -114,6 +114,10 @@ Mount:
     </ol>
 
 
+        <li> Wirzenius, L. (2004). Chapter 3: Overview of the Directory Tree. In <em>Linux System Administrator's Guide.</em> <a href="https://www.tldp.org/LDP/sag/html/fs-background.html">https://www.tldp.org/LDP/sag/html/fs-background.html</a></li>
+        <li> LSB Workgroup, The Linux Foundation. (2015, March 9). The Root Filesystem. Retrieved July 17, 2020, from <a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html</a></li>
+
+
 -->
 
 <div id="nav_bar_2" class="nav">
@@ -121,8 +125,8 @@ Mount:
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#files"> Files </a></li>
         <li><a href="#regular-files"> Regular Files</a></li>
-        <li><a href="#synthetic-files"> Synthetic Files </a></li>
         <li><a href="#device-files"> Device Files </a></li>
+        <li><a href="#pseudo-files"> Psuedo Files </a></li>
         <li><a href="#fs-heir"> Filesystem Heirarchy </a></li>
         <li><a href="#filesystems"> Filesystems </a></li>
         <li><a href="#directories"> Directories </a></li>
@@ -155,10 +159,10 @@ Mount:
     <h2>Files</h2>
 
     <p>
-        In Unix, a file is a sequence of bytes.<sup><a href=#references>[1]</a></sup>
+        In UNIX, a file is a sequence of bytes.<sup><a href=#references>[1]</a></sup>
         This definition is sufficiently abstract to allow, for instance, a keyboard
         to appear as a file.
-        Unix-like kernels facilitate interaction with files via four classic 
+        Unix-like kernels facilitate interaction with files via four essential
         system calls:
     </p>
 
@@ -172,52 +176,57 @@ Mount:
     <p>
         In particular, the <code>read</code> system call fills a given
         buffer with the contents of a file;
-        order is preserved across calls to <code>read</code>.
+        order is preserved across sequential calls to <code>read</code>.
         When a program requests a read, the kernel suspends its execution 
-        until data is available.
+        until data is available. 
+        At the command-line, data from the keyboard is made available when
+        the user presses <em>return.</em><sup><a href="https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios/">[3]</a></sup>
     </p>
 
     <h3>File Attributes</h3>
 
+    <p>
+        UNIX-like operating systems characteristically store a substantial 
+        amount of information about each file on the system.
+        This information, known as 
+        <em><a href="https://en.wikipedia.org/wiki/Metadata">metadata</a>,</em> 
+        is stored alongside the file, typically on-disk.
+    </p>
+
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            Oddly, this information does not include the file's name.
+            Oddly, it does not include the file's name, for in UNIX,
+            a file may have many names.
             More on this below.
         </p>
     </div>
 
     <p>
-        Unix-like operating systems store a substantial amount of information
-        about each file on the system.
-        This information, known as <em>file attributes</em> or 
-        <em><a href="https://en.wikipedia.org/wiki/Metadata">metadata</a>,</em> 
-        is stored on-disk, alongside the file.
+        UNIX file metadata includes:
     </p>
 
-    <p>
-        UNIX file metadata includes:
-    </li>
 
     <ul>
         <li>File Type</li>
+        <li>Read/Write/Execute Permissions</li>
         <li>Owner</li>
         <li>Group</li>
-        <li>Read/Write/Execute Permissions</li>
         <li>Size</li>
         <li>Timestamps</li>
     </ul>
 
     <p>
-        This information can be explained in part by the UNIX idiom of
-        making everything available in the form of a file, 
-        and in part by its time-sharing heritage.
+        This information is stored for every file on the machine,
+        and can be explained in part by the operating system's time-sharing heritage.
+        It is used today in single-user desktops to compartmentalize the machine.
     </p>
 
     <p>
-        Ken Thompson's <em>Unix</em> kernel facilitated reading and writing of 
+        Ken Thompson's <em>UNIX</em> kernel facilitated reading and writing of 
         files, but otherwise refrained from interjecting upon their use.
-        This approach was quite novel for its time: Earlier
+        This approach preserves the generality of file operations, and
+        was quite novel for its time: Earlier
         operating systems interposed upon the handling of files, so that
         some files could only be read by some programs, and not by others.<sup><a href=#references>[1]</a></sup>
     </p>
@@ -240,12 +249,19 @@ Mount:
         Here we have a typical <code>ls(1)</code> listing:
     </p>
 
-    <a href="assets/img/ls-long.pdf" target="_blank"><img src="assets/img/ls-long.png" style="width: 100%" title="Click for printable" ></a>
-    <center style="font-size:12pt;">Click for printable PDF</center>
+    <!--
+        To do:
+        - Change "wholename" to "name" (its being a wholename is coincidental to ls's
+        invocation here)
+        - Change character special and block special to device: special
+    -->
+
+    <a href="assets/img/ls-long.pdf" target="_blank"><img src="assets/img/ls-long.png" style="width: 100%" title="Click for PDF" ></a>
+    <center style="font-size:12pt;">Click for PDF</center>
 
     <p>
         The first character, a hyphen (<code>-</code>), tells us that 
-        <code>/bin/bash</code> is a regular file. 
+        <code>/bin/bash</code> refers to a regular file. 
         The next nine characters are the file's 
         <a href="http://linfo.org/permissions.html">permission bits</a>;
         the <code>r</code> and <code>x</code> present in each set indicates 
@@ -258,8 +274,8 @@ Mount:
 
     <p>
         Two other tools useful for peeking
-        into a file are <code><a href="https://www.man7.org/linux/man-pages/man1/file.1.html">file(1)</a></code>, and  
-        <code><a href="https://man7.org/linux/man-pages/man1/stat.1.html">stat(1)</a></code>:
+        into a file are <code><a href="https://www.man7.org/linux/man-pages/man1/file.1.html">file(1)</a></code>, which prints a summary of the file, and  
+        <code><a href="https://man7.org/linux/man-pages/man1/stat.1.html">stat(1)</a></code>, which prints the file's complete metadata:
     </p>
 
     <div class="code">
@@ -281,95 +297,15 @@ Mount:
 
     <p>
         To simply view the contents of a file, we can use the <code>less(1)</code>
-        paging utility, which displays one screenful of the file at a time:
+        utility, which displays one screenful of the file at a time:
     </p>
 
     <div class="code">
         $ less hello.c
     </div>
 
-    <p>
-        As an exercise, go to the <code>/boot</code> directory and look around!
-    </p>
+    (press <code>q</code> to quit).
 
-
-    <h3>See Also:</h3>
-    <ul>
-    </ul>
-</div>
-
-<div class="content" id="synthetic-files">
-    <h2>Synthetic Files</h2>
-
-    <p>
-        The GNU/Linux directory tree is used as a general-purpose meeting place.
-        In addition to regular files, it also contains
-        information about running processes, information about the running kernel,
-        and references to hardware&mdash; each in the form of files.
-        This mechanism is general, extensible, and allows both users and programmers
-        access to the running machine.
-    </p>
-
-    <p>
-        For example, the  <code>/proc/meminfo</code> file reports current
-        memory usage of the system:
-    </p>
-
-    <div class="code">
-        $ head /proc/meminfo<br>
-        MemTotal:        3887988 kB<br>
-        MemFree:         1619568 kB<br>
-        MemAvailable:    2450268 kB<br>
-        Buffers:          120152 kB<br>
-        Cached:           984208 kB<br>
-        SwapCached:            0 kB<br>
-        Active:           324532 kB<br>
-        Inactive:        1528196 kB<br>
-        Active(anon):       9476 kB<br>
-        Inactive(anon):  1061224 kB
-    </div>
-
-    <p>
-        This is an example of a <em>synthetic</em> or <em>psuedo</em> file.
-        These exist only in virtue of the running kernel. 
-        It does not exist on disk, and does not exist on any persistent filesystem.
-        The output printed was the kernel's response to the
-        <code>read(2)</code> system call.
-    </p>
-
-    <p>
-        The <code>/proc</code> and <code>/sys</code> directories are
-        dedicated to pseudo-files.  
-        Of these, we will discuss only <code><a href="https://man7.org/linux/man-pages/man5/proc.5.html">/proc</a></code> in any detail.
-        It contains one directory for each running program on the system,
-        and each directory contains substantial information about its
-        respective process.
-    </p>
-
-    <!--
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            The intent of this website is to show that 
-            the Linux kernel can do anything it damn well pleases.
-        </p>
-    </div>
-    
-    <h3> The <code>/proc</code> Directory </h3>
-
-    <p>
-        The <code>/proc</code> directory contains one directory for each 
-        process on the system;
-        these directories are organized by process ID number.
-    </p>
-
-    -->
-
-    <h3>See Also:</h3>
-    <ul>
-        <li> <a href="https://www.kernel.org/doc/html/latest/filesystems/proc.html">The /proc Filesystem &ndash; The Linux Kernel documentation </a></li>
-    </ul>
 </div>
 
 <div id="device-files" class="content">
@@ -377,16 +313,16 @@ Mount:
 
     <p>
         A <em>device file</em> represents a device connected to the system; 
-        they reside in the <code>/dev</code> directory.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[3]</a></sup>
+        they reside in the <code>/dev</code> directory.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[4]</a></sup>
         Each of these files serves as the principle reference to its
         respective device.
     </p>
 
     <p>
-        For instance, when a USB-stick is inserted into my laptop,
+        For instance, when a USB-stick is inserted into the machine,
         a new file appears in <code>/dev</code>.
         It is interesting to note that the essential capabilities of this device 
-        coincide with those of a file: We can read from it and write to it.
+        coincide with those of a file.
     </p>
 
     <p>
@@ -429,6 +365,82 @@ Mount:
     <h3>See Also:</h3>
     <ul>
         <li><a href="https://wiki.archlinux.org/index.php/Device_file">Device File - ArchWiki</a></li>
+    </ul>
+</div>
+
+
+
+<div class="content" id="pseudo-files">
+    <h2>Pseudo Files</h2>
+
+    <p>
+        The GNU/Linux directory tree is used as a general-purpose meeting place.
+        In addition to regular files, it also contains
+        information about running processes, information about the running kernel,
+        and references to hardware&mdash; each in the form of files.
+        This mechanism is general, extensible, and allows both users and programmers
+        access to the running machine.
+    </p>
+
+    <p>
+        For example, the  <code>/proc/meminfo</code> file reports current
+        memory usage of the system:
+    </p>
+
+    <div class="code">
+        $ head /proc/meminfo<br>
+        MemTotal:        3887988 kB<br>
+        MemFree:         1619568 kB<br>
+        MemAvailable:    2450268 kB<br>
+        Buffers:          120152 kB<br>
+        Cached:           984208 kB<br>
+        SwapCached:            0 kB<br>
+        Active:           324532 kB<br>
+        Inactive:        1528196 kB<br>
+        Active(anon):       9476 kB<br>
+        Inactive(anon):  1061224 kB
+    </div>
+
+    <p>
+        This is an example of a <em>synthetic</em> or <em>psuedo</em> file.
+        It does not exist on disk, and does not exist on any persistent filesystem.
+        The output printed was the kernel's response to the
+        <code>read(2)</code> system call.
+        These exist only in virtue of the running kernel.
+    </p>
+
+    <p>
+        The <code>/proc</code> and <code>/sys</code> directories are
+        dedicated to pseudo-files.  
+        Of these, we will discuss only <code><a href="https://man7.org/linux/man-pages/man5/proc.5.html">/proc</a></code> in any detail.
+        It contains one directory for each running program on the system,
+        and each directory contains substantial information about its
+        respective process.
+    </p>
+
+    <!--
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            The intent of this website is to show that 
+            the Linux kernel can do anything it damn well pleases.
+        </p>
+    </div>
+    
+    <h3> The <code>/proc</code> Directory </h3>
+
+    <p>
+        The <code>/proc</code> directory contains one directory for each 
+        process on the system;
+        these directories are organized by process ID number.
+    </p>
+
+    -->
+
+    <h3>See Also:</h3>
+    <ul>
+        <li> <a href="https://www.kernel.org/doc/html/latest/filesystems/proc.html">The /proc Filesystem &ndash; The Linux Kernel documentation </a></li>
     </ul>
 </div>
 
@@ -570,7 +582,7 @@ Mount:
     <p>
         A <em><a href="https://wiki.osdev.org/File_Systems#File_System_Theory">filesystem</a></em> 
         is a systematic method of storing and retrieving data on
-        disk.<sup><a href="https://wiki.osdev.org/Filesystem">[4]</a><a href="https://wiki.archlinux.org/index.php/File_systems">[5]</a></sup>
+        disk.<sup><a href="https://wiki.osdev.org/Filesystem">[5]</a><a href="https://wiki.archlinux.org/index.php/File_systems">[6]</a></sup>
         The first versions of UNIX referred to its own filesystem as, simply,
         <code>fs</code>.  
         It was well-documented (by, for instance, Maurice J. Bach in 
@@ -584,8 +596,8 @@ Mount:
         They expected that machines would always shutdown cleanly, and
         that hard-drives worked flawlessly.
         In particular, a system crash mid-write could leave the filesystem in 
-        an inconsistent state.<sup><a href="https://en.wikipedia.org/wiki/Journaling_file_system">[6]</a></sup> 
-        Such a shutdown required a check of the entire structure.<sup><a href="https://en.wikipedia.org/wiki/Journaling_file_system">[6]</a></sup>
+        an inconsistent state.<sup><a href="https://en.wikipedia.org/wiki/Journaling_file_system">[7]</a></sup> 
+        Such a shutdown required a check of the entire structure.<sup><a href="https://en.wikipedia.org/wiki/Journaling_file_system">[7]</a></sup>
         Filesystems like these (e.g., <code>VFAT</code> and <code>FAT32</code>)
         are today used to hold the bootloader, since they are widely supported and
         their contents are not expected to change often.
@@ -619,19 +631,19 @@ Mount:
         <h4>Aside:</h4>
         <p>
             <code>ZFS</code> has been described by Linus Torvalds as a "non-starter,"
-            principally over licensing issues.<sup><a href="https://www.realworldtech.com/forum/?threadid=189711&curpostid=189841">[11]</a></sup>
+            principally over licensing issues.<sup><a href="https://www.realworldtech.com/forum/?threadid=189711&curpostid=189841">[12]</a></sup>
         </p>
     </div>
 
     <p>
         Both <code><a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">btrfs</a></code> 
         and <code><a href="https://en.wikipedia.org/wiki/ZFS">ZFS</a></code> 
-        are such next-generation, copy-on-write filesystems.<sup><a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">[7]</a><a href="https://wiki.archlinux.org/index.php/ZFS">[8]</a></sup>
+        are such next-generation, copy-on-write filesystems.<sup><a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">[8]</a><a href="https://wiki.archlinux.org/index.php/ZFS">[9]</a></sup>
         Of the two, <code>btrfs</code> has made inroads to becoming Linux's next 
         major filesystem:
-        It is in wide use by Facebook,<sup><a href="https://lwn.net/Articles/824855/">[9]</a></sup> and has recently become  
+        It is in wide use by Facebook,<sup><a href="https://lwn.net/Articles/824855/">[10]</a></sup> and has recently become  
         the default filesystem of Fedora's <em>Workstation</em> 
-        distribution.<sup><a href="https://fedoramagazine.org/announcing-fedora-33/">[10]</a></sup>
+        distribution.<sup><a href="https://fedoramagazine.org/announcing-fedora-33/">[11]</a></sup>
         They are the first major vendors to adopt it.
     </p>
 
@@ -668,80 +680,6 @@ Mount:
         <li><a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">Disk Partitions</a></li>
         <li> <code><a href="https://man7.org/linux/man-pages/man7/inode.7.html"> inode(7) </a></code></li>
     </ul>
-</div>
-
-<div class="content" id="mounting-unmounting">
-
-    <h2>Mounting and Unmounting</h2>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            On modern distributions, mounting is often carried out automatically.
-        </p>
-    </div>
-
-    <p>
-        Unlike Windows systems, which create a new, distinct directory tree
-        for each storage device on the system (e.g., <code>C:\, D:\</code>, etc.),
-        Unix-like operating systems maintain a single, unique directory tree.
-        When a new device is introduced to the machine, its files are made 
-        available by placing the new filesystem's root directory 
-        in the existing directory tree,
-        in an operation is called <a href="https://unix.stackexchange.com/questions/3192/what-is-meant-by-mounting-a-device-in-linux"><em>mounting</em></a>.
-    </p>
-
-    <p>
-        Let's take a look at this, for it is new.
-    </p>
-
-    <p>
-        Suppose we have a usb stick with some music on it, and we'd
-        like to access its contents.
-        When we plug it in, the hardware, then the kernel,
-        recognize it, but it may not be accessible:
-    </p>
-
-    <img style="width:80%" src="assets/img/mounting.png">
-
-    <p>
-        The Linux Filesystem Heirarchy Standard provides two places to mount 
-        temporary filesystems: <code>/mnt</code> and <code>/media/[user]</code>.
-        When mounting new devices manually, the usual method is to identify the 
-        device to be mounted with 
-        <a href="https://man7.org/linux/man-pages/man8/lsblk.8.html"><code>lsblk(8)</code></a>, 
-        then mount it via
-    </p>
-
-    <div class="code">
-        $ sudo mount [DEVICE] [MOUNTPOINT]
-    </div>
-
-    <p>
-        Superuser priveledges allow us to mount a filesystem anywhere.  
-        When a new filesystem is mounted in a directory that is not empty,
-        its contents become "hidden" by the new filesystem, and are 
-        inaccessible while the filesystem is mounted.  
-        They will not be damaged or destroyed, and will "reappear" when 
-        the filesystem is unmounted.
-        This could be handy to, say, keep your <code>home</code> directory
-        on a thumb-drive.
-    </p>
-            
-    <p>
-        The device to be mounted should be a partition, and can usually be 
-        determined by its size and its mountpoint (which should be none).
-    </p>
-
-    <p>
-        Devices should be unmounted before being removed; this operation is
-        encapsulated in the "eject" operation.
-        To unmount a device manually, we again assert the correct device 
-        with <code>lsblk</code>,
-        then unmount it with 
-        <a href="https://www.man7.org/linux/man-pages/man8/umount.8.html"><code>sudo umount PATH</code></a>,
-        where <code>PATH</code> is the location of the mounted filesystem.
-    </p>
 </div>
 
 <div id="directories" class="content">
@@ -846,6 +784,82 @@ Mount:
     </ul>
 </div>
 
+<div class="content" id="mounting-unmounting">
+
+    <h2>Mounting and Unmounting</h2>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            On modern distributions, mounting is often carried out automatically.
+        </p>
+    </div>
+
+    <p>
+        Unlike Windows systems, which create a new, distinct directory tree
+        for each storage device on the system (e.g., <code>C:\, D:\</code>, etc.),
+        Unix-like operating systems maintain a single, unique directory tree.
+        When a new device is introduced to the machine, its files are made 
+        available by placing the new filesystem's root directory 
+        in the existing directory tree,
+        in an operation is called <a href="https://unix.stackexchange.com/questions/3192/what-is-meant-by-mounting-a-device-in-linux"><em>mounting</em></a>.
+    </p>
+
+    <p>
+        Let's take a look at this, for it is new.
+    </p>
+
+    <p>
+        Suppose we have a usb stick with some music on it, and we'd
+        like to access its contents.
+        When we plug it in, the hardware, then the kernel,
+        recognize it, but it may not be accessible:
+    </p>
+
+    <img style="width:80%" src="assets/img/mounting.png">
+
+    <p>
+        The Linux Filesystem Heirarchy Standard provides two places to mount 
+        temporary filesystems: <code>/mnt</code> and <code>/media/[user]</code>.
+        When mounting new devices manually, the usual method is to identify the 
+        device to be mounted with 
+        <a href="https://man7.org/linux/man-pages/man8/lsblk.8.html"><code>lsblk(8)</code></a>, 
+        then mount it via
+    </p>
+
+    <div class="code">
+        $ sudo mount [DEVICE] [MOUNTPOINT]
+    </div>
+
+    <p>
+        Superuser priveledges allow us to mount a filesystem anywhere.  
+        When a new filesystem is mounted in a directory that is not empty,
+        its contents become "hidden" by the new filesystem, and are 
+        inaccessible while the filesystem is mounted.  
+        They will not be damaged or destroyed, and will "reappear" when 
+        the filesystem is unmounted.
+        This could be handy to, say, keep your <code>home</code> directory
+        on a thumb-drive.
+    </p>
+            
+    <p>
+        The device to be mounted should be a partition, and can usually be 
+        determined by its size and its mountpoint (which should be none).
+    </p>
+
+    <p>
+        Devices should be unmounted before being removed; this operation is
+        encapsulated in the "eject" operation.
+        To unmount a device manually, we again assert the correct device 
+        with <code>lsblk</code>,
+        then unmount it with 
+        <a href="https://www.man7.org/linux/man-pages/man8/umount.8.html"><code>sudo umount PATH</code></a>,
+        where <code>PATH</code> is the location of the mounted filesystem.
+    </p>
+</div>
+
+
+
 <div class="content" id="closing-remarks">
     <h2>Closing Remarks</h2>
     <h3> Virtual File System (Kernel Subsystem)</h3>
@@ -866,12 +880,12 @@ Mount:
         While each filesystem may implement its own functionality,
         most functionality is common;
         the Virtual File System provides a uniform interface by
-        implementing filesystem-related system calls, such as <code>open</code>, <code>read</code>, etc..<sup> <a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">[11]</a></sup>
+        implementing filesystem-related system calls, such as <code>open</code>, <code>read</code>, etc..<sup> <a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">[13]</a></sup>
     </p>
 
     <p>
         As for inodes, a more formal definition is given by kernel.org:
-        "An inode object represents an object within the filesystem."<sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">[11]</a></sup>
+        "An inode object represents an object within the filesystem."<sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">[13]</a></sup>
         That is, on filesystems that do not use inodes, they are imposed virtually by
         the VFS, as a means of representing files.
         As a consequence, the discussion about inodes given here remains
@@ -917,6 +931,8 @@ Mount:
 
         <li>Ritchie, D. M. (1984). The Evolution of the Unix Time-sharing System. <em>AT&amp;T Bell Laboratories Technical Journal,</em> 63(6), 2nd ser., 1577-1593.</li>
 
+        <li>Elhage, N. (2009, December 22). A Brief Introduction to Termios. Retrieved March 07, 2021, from <a href="https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios/">https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios/</a></li>
+
         <li> LSB Workgroup, The Linux Foundation. (2015, March 9). 3.6 /dev: Device Files. Retrieved July 17, 2020, from <a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03.html</a> </li>
 
         <li> File Systems. (n.d.). Retrieved July 17, 2020, from <a href="https://wiki.osdev.org/Filesystem">https://wiki.osdev.org/Filesystem</a> </li>
@@ -930,17 +946,15 @@ Mount:
         
         <li>ZFS - ArchWiki. (2021, February 22). Retrieved March 02, 2021, from <a href="https://wiki.archlinux.org/index.php/ZFS">https://wiki.archlinux.org/index.php/ZFS</a></li>
 
-        <!-- 8  9-->
-
         <li>Btrfs at Facebook [LWN.net]. (2020, July 2). Retrieved March 02, 2021, from <a href="https://lwn.net/Articles/824855/">https://lwn.net/Articles/824855/</a></li>
         
         <li>Fedora 33 is officially here! - Fedora Magazine. (2020, October 27). Retrieved March 2, 2021, from <a href="https://fedoramagazine.org/announcing-fedora-33/">https://fedoramagazine.org/announcing-fedora-33/</a></li>
 
         <li>Torvalds, L. (2020, January 06). Nuances related to Spinlock implementation and the Linux Scheduler. Retrieved March 02, 2021, from <a href="https://www.realworldtech.com/forum/?threadid=189711&amp;curpostid=189841">https://www.realworldtech.com/forum/?threadid=189711&amp;curpostid=189841</a></li>
 
-        <li> Wirzenius, L. (2004). Chapter 3: Overview of the Directory Tree. In <em>Linux System Administrator's Guide.</em> <a href="https://www.tldp.org/LDP/sag/html/fs-background.html">https://www.tldp.org/LDP/sag/html/fs-background.html</a></li>
-        <li> LSB Workgroup, The Linux Foundation. (2015, March 9). The Root Filesystem. Retrieved July 17, 2020, from <a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html</a></li>
+
         <li> Overview of the Linux Virtual File System - The Linux Kernel Documentation. (n.d.). Retrieved July 17, 2020, from <a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">https://www.kernel.org/doc/html/latest/filesystems/vfs.html</a> </li>
+
     </ol>
 
 </div>
