@@ -27,8 +27,8 @@ Intro:
 Files and Filesystems:
 - [x] Files
 - [x] Regular Files
-- [x] Synthetic Files
 - [x] Device Files
+- [x] Synthetic Files
 - [x] Filesystem Heirarchy
 - [x] Filesystems
 - [ ] inodes
@@ -56,7 +56,7 @@ Terminals and Shells:
 - [ ] Command Execution
 - [ ] Closing Remarks: Text Editor
 
-C Programming Language:
+A C Primer:
 - [ ] History
 - [ ] Hello World
 - [ ] Memory!
@@ -94,3 +94,5 @@ Appendix: Terminal Pro:
 - [ ] Finding Files 
 - [ ] Shell Constructs (Loops, If/then)
 - [ ] Closing Remarks: Awk Programming Language
+
+Appendix: A Rust Primer
