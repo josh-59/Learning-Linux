@@ -25,8 +25,10 @@ TODO
             From least to greatest:
             SIGINT: Interrupt
                 Default behavior is to terminate, but can be caught and
-                handled by programs, and is sometimes used for other purposes
-                (see terminal closing remarks)
+                handled by programs, and is sometimes used for other purposes.
+                For instance, <code>bash</code> catches this signal and does
+                not terminate; rather, it passes the signal along to the foreground
+                process (if it exists), and then jumps back to its main loop.
                 
             SIGTERM: Terminate
                 Standard behavior is to terminate; affords programs the
@@ -34,13 +36,14 @@ TODO
                 exit gracefully
 
             SIGKILL: Sure Kill
+                Terminates process immediately.  Cannot be caught nor handled.
                 Kerrisk calls <code>SIGKILL</code> the "silver bullet" of process
                 termination (page 553)
                 and recommends sending SIGTERM instead
 
         Signal-terminal of processes: "Abnormal process termination"
 
-    IPC:    (as conclusion)
+    IPC:    (as conclusion?)
         Primitives:
             Signals - Software interupts: Interupt the normal flow of
                 execution in a program (Kerrisk, p388)
@@ -77,9 +80,11 @@ TODO
 
 
         Closing Remarks:
-            System Calls vs. Library Functions
-
             Tools to introspect processes: top, /proc, etc
+
+            Introduce programs, rather than programming. 
+            The Linux kernel actually supports four executable file formats:
+            a.out, ELF, interpretter scripts and 
 
 -->
 

@@ -7,31 +7,9 @@ last-updated: December, 2020
 <!-- 
 
 To Do:
-    ls listing picture:
-        Simplify b and c to 'device files'
-
-Introduction:
-    Everything is a file
-    Unix-like operating systems are typified by a single directory tree.
-
-Pseudofiles:
-   Write subsection:
-   <h3> The <code>/proc</code> Filesystem </h3>
-
-Device Special Files:
-    Kerrisk 14.1
-
-    Find better source to discuss "integrity" of a file/message/piece of information
-
-    Round out iso-files by mounting a regular file
-    
-    Neat use of 'file' command:
-
-    $pinebookpro-debian-desktop-mrfixit191226.img
-    pinebookpro-debian-desktop-mrfixit191226.img: DOS/MBR boot sector; partition 1 : ID=0xc, active, start-CHS (0x2,10,9), end-CHS (0xa,50,40), startsector 32768, 131072 sectors; partition 2 : ID=0x83, active, start-CHS (0x10,81,2), end-CHS (0x28d,185,44), startsector 262144, 10240000 sectors
-
-Logical Volume Management:
-    https://wiki.ubuntu.com/Lvm
+    VFS and Inodes (after Filesystems)
+    Proc filesystem (in pseudofiles)
+    Add reference to findmnt (in mounting and unmounting)
 
 Inodes:
 <div class="content" id="inodes">
@@ -43,10 +21,6 @@ Inodes:
         everything within the directory tree has a corresponding inode.
         They contain their file's metadata, and additionally describe where
         the file's contents may be obtained.
-</p>
-
-<p>
-        For example, consider the <code>stat</code> of a directory <em>Public:</em>
 </p>
 
 <div class="code>
@@ -61,10 +35,12 @@ Inodes:
         Birth: 2020-04-03 07:28:40.950000009 -0500
 </div>
 
+Perhaps: inode numbers alone are abiguous when dealing with multiple filesystems?
+
 <p>
-        Inodes are arranged, conceptually, in arrays, and are referred to by 
+        Inodes are referred to by 
         <em>inode numbers,</em> which is simply an index into this array.
-        Each filesystem maintains its own inode array.
+        Each filesystem maintains its own collection of inode.
         To refer to a file, the kernel must therefore know the filesystem 
         the file is on (given by device major/minor number), and the 
         and the inode number of the file.
@@ -80,40 +56,36 @@ Inodes:
 
 
 Filesystems:
-    
-        Regular Files:
-    Citation needed: heirarchical filestructure taken from Multics
 
 Filesystem Heirarchy:
-    XDG Directory Specification
-        ~/.config is defined as part of the XDG specification
     /var: 
         (Double check:) Per-runtime variable files
-
         https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch05.html:
             /var contains logs, transient and temporary files
             Not shareable across systems
 
 Kerrisk calls File I/O "The Universal I/O Model"
+Closing Remarks:
 
+Not mentioned here is Linux's "Logical Volume Manager", a software layer that 
+(when used) sits between disks and the filesystem and offers 
+to abstract away pesky facts like, "There are six discs in a RAID array." 
+The ext4/lvm software stack has proven difficult to scale, and has been a major
+impetus for moving towards filesystems which include LVM capabilities.  
 
- <h4> Exercises: </h4>
-    <ol class="big-list">
-        <li> From the command line, create a new and empty directory.  
-            What does it contain? (It is not empty.)
-            To what files do its entries point?</li>
-ext2:
-        http://cs.smith.edu/~nhowe/262/oldlabs/ext2.html#itable
+XDG Directory Specification
+    ~/.config is defined as part of the XDG specification
 
-        ext4 Data Structures and Algorithms:
-        https://www.kernel.org/doc/html/latest/filesystems/ext4/index.html
+Another convention: 
+    Each program is typically allowed one file in important system directories 
+    (e.g., <code>/etc</code>)
+    If they have a single file to store, it may be stored plainly; if they
+    have more than one file to store, they should make a subdirectory and
+    store them within.
 
-Mount:
-        Add reference to findmnt
+https://wiki.ubuntu.com/Lvm
 
     </ol>
-
-
         <li> Wirzenius, L. (2004). Chapter 3: Overview of the Directory Tree. In <em>Linux System Administrator's Guide.</em> <a href="https://www.tldp.org/LDP/sag/html/fs-background.html">https://www.tldp.org/LDP/sag/html/fs-background.html</a></li>
         <li> LSB Workgroup, The Linux Foundation. (2015, March 9). The Root Filesystem. Retrieved July 17, 2020, from <a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html</a></li>
 
@@ -129,6 +101,7 @@ Mount:
         <li><a href="#pseudo-files"> Psuedo Files </a></li>
         <li><a href="#fs-heir"> Filesystem Heirarchy </a></li>
         <li><a href="#filesystems"> Filesystems </a></li>
+        <!-- <li><a href="#vfs-and-inodes">VFS and Inodes</a></li> -->
         <li><a href="#directories"> Directories </a></li>
         <li><a href="#mounting-unmounting"> Mounting and Unmounting</a></li>
         <li><a href="#closing-remarks"> Closing Remarks </a></li>
@@ -334,18 +307,18 @@ Mount:
         I download a new installation image, and compare the resulting file
         against the original by comparing its official checksum value against
         the results of <code>sha256sum(1)</code>.
-        They are identical; this means that the <a href="cacr.uwaterloo.ca/hac/about/chap1.pdf">integrity</a> of the file has been
-        preserved.
+        They are identical; this means that the <a href="cacr.uwaterloo.ca/hac/about/chap1.pdf">integrity</a> of the file has been preserved through the operation of
+        copying.
     </p>
 
     <p>
-        Next, I insert the micro-SD and locate it with <code>lsblk</code>.
+        Next, I insert a micro-SD card and locate it with <code>lsblk</code>.
         It has appeared as <code>/dev/mmcblk1</code>, and its partitions
         have not been mounted, so we are ready to write the file:
     </p>
 
     <div class="code">
-        # cat archlinux-2020.07.02-pbp.img &gt; /dev/mmcblk1
+        $ sudo dd if='archlinux-2020.07.02-pbp.img' of='/dev/mmcblk1' bs=4K
     </div>
 
     <p>
@@ -358,17 +331,11 @@ Mount:
         and is bootable.
     </p>
 
-    <p>
-        Granted, <code>sudo dd</code> would have been faster and safer.
-    </p>
-
     <h3>See Also:</h3>
     <ul>
         <li><a href="https://wiki.archlinux.org/index.php/Device_file">Device File - ArchWiki</a></li>
     </ul>
 </div>
-
-
 
 <div class="content" id="pseudo-files">
     <h2>Pseudo Files</h2>
@@ -411,7 +378,7 @@ Mount:
 
     <p>
         The <code>/proc</code> and <code>/sys</code> directories are
-        dedicated to pseudo-files.  
+        pseudo-filessystems.  
         Of these, we will discuss only <code><a href="https://man7.org/linux/man-pages/man5/proc.5.html">/proc</a></code> in any detail.
         It contains one directory for each running program on the system,
         and each directory contains substantial information about its
@@ -785,6 +752,10 @@ Mount:
 </div>
 
 <div class="content" id="mounting-unmounting">
+    <!-- 
+        To Do:
+        Introduce the <code>findmnt</code> utility
+    -->
 
     <h2>Mounting and Unmounting</h2>
 
@@ -913,6 +884,23 @@ Mount:
 </div>
 
 <div id="udacity" class="content">
+    <!--
+        To Do:
+        <b>Exercises:</b>
+
+        <ol>
+        <li> Using <code>watch(1)</code>, fashion an ad-hoc terminal utility to
+        <li> Create a boot media using <code>cat</code> and redirection.</li>
+        monitor the system's memory</li>
+        <li> An <code>iso</code> disk image contains partitions and filesystems.
+        Mount one of them.</li>
+        <li>
+        http://cs.smith.edu/~nhowe/262/oldlabs/ext2.html#itable
+        https://www.kernel.org/doc/html/latest/filesystems/ext4/index.html
+        </li>
+        </ol>
+
+    -->
     <h2 style="margin-bottom: 2pt;">Udacity:</h2>
     <h4 style="margin-bottom: 18pt;"> Inode Structure</h4>
     <iframe class="video" src="https://www.youtube.com/embed/tMVj22EWg6A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
