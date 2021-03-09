@@ -240,15 +240,16 @@ sup, sub {
     font-family: var(--monospace-font);
 }
 
+.content h2 code {
+    font-size: 25pt;
+}
+
 .content .code{
     width: inherit;
     padding-top: 20px;
     padding-bottom: 20px;
     padding-left: 10%;
     margin: auto;
-}
-
-.content .code {
     font-size: 15pt;
 }
 
