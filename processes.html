@@ -303,7 +303,7 @@ TODO
 <div class="content" id="process-attributes">
     <h2> Process Attributes </h2>
     <p>
-        Upon birth, each process is given its own process id (PID) number by the 
+        Upon birth, each process is given its own process id (<code>PID</code>) number by the 
         kernel.
         This is guaranteed to be unique to the process, and remains constant 
         throughout the process's life; it serves as the system's handle
@@ -323,7 +323,7 @@ TODO
         </ul>
         <li>Files currently open by the process</li>
         <ul>
-            <li>Access mode (read, write)</li>
+            <li>Their access modes (read, write)</li>
             <li>Location wihin file</li>
         </ul>
         <li>Current working directory</li>
@@ -332,16 +332,18 @@ TODO
     </ul>
 
     <p>
+        With the exception of <code>PID</code>, all attributes are inherited from 
+        the process's parent.
         Most of this information is available for perusal in the 
         <code>/proc/</code> directory.
-        Moreover, most of this information can be changed 
-        from within the process through the use of system calls.  
+        Finally, the kernel offers <a href="https://man7.org/linux/man-pages/man2/intro.2.html">system calls</a> 
+        to allow a process to change these attributes.
     </p>
 
     <p>
         In order to give some idea of how 
         processes interact with the kernel,
-        we will consider one of their attributes: Files currently open.
+        we will consider one of them: Files currently open.
     </p>
 </div>
 
