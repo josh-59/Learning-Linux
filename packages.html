@@ -42,23 +42,26 @@ Rewrite as "Obtaining Free Software"
 <p>
 Free software is typically intended to be distributed, and its developer
 usually offers instructions for end-users to install it (typically, in a README file).
-In particular, GNU produces a lot of software, and
+Each project will use its preferred language and toolchain; 
+each of <em>Rust</em>, <em>Python</em>, <em>
+in particular, GNU produces a lot of software, and
 their <a href="https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html#Autotools-Introduction">build system</a> is fairly widely-used.
 It <em>is intended for simplicity for the end user,</em> 
 and not for simplicity for developers or maintainers.
+</p>
 
 To install GNU products from source, one enters its directory and issues:
 
 $ ./configure && make && make install
 
-<h3><code>make mirage</code></h3>
+<h3><code>make</code></h3>
 
 <div class="aside-left">
 <h4>Aside:</h4>
 
 <p>
-An introduction to UNIX or UNIX-likes would not be complete without
-a digression to <code>make</code>.
+    An introduction to UNIX or UNIX-likes would not be complete without
+    a digression to <code>make</code>!
 </p>
 
 One expresses a program to be compiled in "recipes" of the form,
@@ -78,6 +81,8 @@ need not be source/binary.
 However, 
 
 
+
+
 Kernighan:  p96
 Invented 1976, 7th ed UNIX
 "an instant success"
@@ -90,6 +95,11 @@ Original Make was written over a weekend
     [It's rediculous to funnel such quantities of software through such a tool]
     <a href="https://en.wikipedia.org/wiki/GNU_Autotools#Components">obtuse to say the least</a>
 
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="http://linuxfromscratch.org/blfs/view/stable/introduction/notes-on-building.html">Notes on Building Software</a> - Beyond Linux From Scratch</a></li>
+    </ul>
+</div>
 
 
 
