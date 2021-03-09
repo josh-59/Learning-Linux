@@ -10,7 +10,7 @@ To Do:
         call to itself.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[1]</a></sup>
         This is explained by a lack of multiprogramming support and goto statements.
         SINCE THE BEGINNING, times have been good, and bearded UNIX hackers 
-        have been productive,
+        have been productive.
     </p>
 
     <p>
@@ -19,11 +19,6 @@ To Do:
         It explains shell behavior chronologically with respect to command execution,
         but can be read piecewise.
     </p>
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://ubuntu.com/tutorials/command-line-for-beginners#1-overview">The Linux Command Line for Beginners</a> (Ubuntu Official Tutorial)</li>
-    </ul>
 
     Terminal Pro:
         fork'ed == subshell environment
@@ -91,6 +86,9 @@ To Do:
         </p>
     </div>
 
+
+    Closing Remarks:
+
     Terminal screensavers
     https://gitlab.com/jallbrit/cbonsai/-/tree/master
 
@@ -103,14 +101,7 @@ To Do:
 		<li><a href="#terminal-emulators"> Terminal Emulators </a></li>
 		<li><a href="#shells"> Shells </a></li>
         <li><a href="#simple-commands">Simple Commands</a></li>
-        <li><a href="#shell-expansion">Shell Expansion</a></li>
-		<li><a href="#redirection">I/O Redirection</a></li>
-        <li><a href="#searching-for-commands">Searching for Commands</a></li>
-		
-		<!--
-		<li><a href="#shell-features"> Other Shell Features </a></li>
-        <li><a href="#special-characters">Terminal Special Characters</a></li>
-        -->
+        <li><a href="#pwd">Process Working Directory</a></li>
 		<li><a href="#missing-semester"> Missing Semester </a></li>
 		<li><a href="#references"> References </a></li>
 	</ul>
@@ -119,8 +110,11 @@ To Do:
 <div id="introduction" class="content">
 	<h1> Terminals and Shells</h1>
 	<h4>Under Construction! </h4>
-	<p>
-	</p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://ubuntu.com/tutorials/command-line-for-beginners#1-overview">The Linux Command Line for Beginners</a> (Ubuntu Official Tutorial)</li>
+    </ul>
 </div>
 
 <div id="physical-terminals" class="content">
@@ -353,265 +347,15 @@ To Do:
 
 </div>
 
-<div class="content" id="shell-expansion">
-    <h2 style="margin-bottom: 0;">Shell Expansion</h2>
-    <h4>and Quote Removal</h4>
+<div class="content" id="pwd">
+    <h2>Process Working Directory</h2>
+
+    <!--
+        Justification: https://qmacro.org/2020/11/08/the-meaning-of-pwd-in-unix-systems/
+    -->
 
     <p>
-        The next step on the journey of command execution is <em>shell
-        expansion.</em> 
-        Bash searches each word, from left to right, in two consequetive passes.
-        If a word is single-quoted, then it is exempt from expansion.
-    </p>
-
-    <p>
-        The first pass searches for:
-    </p>
-
-    <ol>
-        <li>
-            <a href="https://www.gnu.org/software/bash/manual/html_node/Brace-Expansion.html">Braces</a>&emsp; <code>{}</code>
-            <br>
-            <code>a{1,2,3}b</code> becomes <code>a1b a2b a3b</code>
-        </li>
-        <li>
-            <a href="https://www.gnu.org/software/bash/manual/html_node/Tilde-Expansion.html">Tilde</a>&emsp;  <code>~</code>
-            <br>
-            Expands to the absolute pathname of your home directory, or 
-            <code>HOME</code> parameter, if it is set.
-        </li>
-        <li>
-            <a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html">Parameter</a> &emsp;  <code>$</code>
-            <br>
-            <code>$NAME</code> is replaced by the value of <code>NAME</code> 
-            parameter, if it exists, and null string otherwise. 
-        </li>
-        <li>
-            <a href="https://www.gnu.org/software/bash/manual/html_node/Command-Substitution.html">Command</a> &emsp;  <code>$( </code><em>command</em><code> )</code>
-            <br>
-            Executes <em>command</em> in a subshell environment, captures output
-            and replaces <br> <code>$(</code><em>command</em><code>)</code>
-            with said output
-        </li>
-        <li>
-            <a href="https://www.gnu.org/software/bash/manual/html_node/Arithmetic-Expansion.html">Arithmetic</a>&emsp;  <code>$(( </code><em>expression</em><code>  ))</code>
-            <br>
-            Evaluates <em>expression</em> and replaces <code>$((</code><em>expression</em><code>))</code> with result
-
-        </li>
-    </ol>
-
-    <p>
-        Expansions can be understood through prodigious use of the
-        <code>echo</code> command, which simply prints out whatever arguments
-        it recieves.
-        For instance, in the following example, the <code>echo</code> command
-        recieves exactly two arguments, <code>12</code> and <code>13</code>,
-        and it is the shell that has done the work:
-    </p>
-
-    <div class="code">
-        $ echo 1{2,3}<br>
-        12 13
-    </div>
-
-    <h3 id="globbing"> Filename Expansion </h3>
-
-    <p>
-        The second expansion pass is <em>filename expansion,</em> sometimes 
-        referred to as <em>globbing.</em>
-        These expansions let you manipulate multiple files quickly.
-        If any word contains an asterisk <code>*</code>, question mark 
-        <code>?</code>, or brackets <code>[]</code>, then it is regarded as a 
-        <em>pattern,</em> and is replaced by an alphabetical list of all
-        filenames in the current directory matching that pattern.
-    </p>
-
-    <p>
-        The meanings of these metacharacters are as follows:
-    </p>
-
-    <ul style="list-style-type: none;">
-        <li>
-            <code>*</code>&emsp; Asterisk.  Matches zero-or-more of any character.
-        </li>
-
-        <li>
-            <code>?</code>&emsp; Question Mark.  Matches zero-or-one of any character.
-        </li>
-
-        <li>
-            <code>[ ]</code>&emsp; Brackets.  Matches exactly one of any of the characters contained.
-        </li>
-    </ul>
-
-    <p>
-        In patterns, all other characters are treated literally.
-        For example,
-    </p>
-
-    <div class="aside-right">
-        <h4>Note:</h4>
-        <p>
-            By default, hidden files must be matched explicitly. 
-        </p>
-    </div>
-  
-    <div class="code">
-        *
-    </div>
-
-    <p>
-        expands to all files in the current directory.
-    </p>
-
-    <div class="code">
-        *.pdf
-    </div>
-
-    <p>
-        expands to all files ending in <code>.pdf</code>; and,
-    </p>
-
-    <div class="code">
-        *.[gx]z
-    </div>
-
-    <p>
-        expands to all files ending in either <code>.xz</code> or <code>.gz</code>.
-    </p>
-
-    <p>
-        After these steps have been completed, Bash removes unquoted
-        quotes, and prepares to execute the command.
-    </p>
-   
-  <h3> See Also: </h3>
-  <ul>
-    <li><a href="http://mywiki.wooledge.org/glob"> glob - Greg's Wiki </a></li>
-  </ul>
-</div>
-
-<div id="redirection" class="content">
-	<h2 style="margin-bottom: 0;">I/O Redirection</h2>
-    <h4> and Standard File Descriptors</h4>
-
-    
-	<p>
-        In interactive use, the shell is connected to its terminal
-        by 
-        <a href="./processes.html#standard-file-descriptors">three open files</a>.  
-        The first file, <code>STDIN</code>, is the keyboard. 
-        When <code>bash</code> is waiting for you to enter a new command, 
-        it's actually asked the kernel to 
-        read a line from this file, and the kernel has 
-        paused execution of <code>bash</code> until a line is 
-        available (a line is available once you hit enter).
-        The second and third open files, 
-        <code>STDOUT</code> and <code>STDERR</code>, are the terminal
-        screen: Whenever <code>bash</code> wants to print something out, 
-        it writes characters to one of these files. 
-    </p>
-
-    <p>
-	    Recall that each process created by the <code>fork</code> system
-        call <a href="processes.html#process-creation">inherits</a> 
-        its parent's attributes, and that these attributes
-        include file descriptors (open files).
-        This means that we, the users, can reasonably expect each
-        child of <code>bash</code> to have our keyboard present at 
-        <code>STDIN</code> and our terminal screen at both 
-        <code>STDOUT</code> and <code>STDERR</code>.
-    </p>
-
-    <p>
-        In interactive use, this is typically what we want, and
-        means that our command,
-    </p>
-
-    <div class="code">
-        $ ls
-    </div>
-
-    <p>
-        will inherit the terminal as primary I/O, and thereby 
-        print to the terminal screen.
-    </p>
-   
-    <h3> Redirection </h3>
-
-    <p>
-        Redirection is the act of assigning a different file to the standard
-        file descriptors before executing a command.
-        Let's start with input.
-    </p>
-
-    <ul style="list-style-type: none;">
-        <li> <code> command &lt; file </code> &emsp; Open <code>file</code>
-            for reading,
-            assign to <code>STDIN</code>, then execute <code>command</code></li>
-    </ul>
-
-    <p>
-        This removes the keyboard from <code>STDIN</code> and replaces it with
-        <code>file</code>; the command is no longer interactive, but will
-        still print output to the terminal.
-        This can be useful for scripting: Rather than
-        repeatedly entering the same sequence of input multiple times,
-        just save said input to a file and redirect.
-    </p>
-
-    <p>
-        Here, as in all redirections, <code>command</code> is oblivious.
-        Redirection is shell functionality, and <code>bash</code>
-        remaps the appropriate open files before execution takes place.
-        More, <code>command</code> does not recieve <code>&lt; file</code>
-        as arguments; <code>bash</code> removes them after 
-        the changes have been made.  
-    </p>
-
-    <p>
-        To redirect output:
-    </p>
         
-    <ul style="list-style-type: none;">
-        <li> <code> command &gt; file </code> &emsp; Open <code>file</code> 
-            for writing; set length to zero; assign to <code>STDOUT</code>. 
-            Then search for command.</li>
-        <li> <code> command &gt;&gt; file </code> &emsp; Open <code>file</code> 
-            for writing; seek to end; assign to <code>STDOUT</code>. 
-            Then search for command.</li>
-    </ul>
-
-    <p>
-        Since <code>STDERR</code> has been left unchanged, errors will
-        still be printed to our terminal screen.
-    </p>
-
-    <p>
-        Redirection can become quite involved. 
-        It is possible to redirect <code>STDERR</code>, 
-        to open a file and assign it an arbitrary file descriptor, 
-        to copy the assignment of a file descriptor, 
-        and to close an arbitrary file descriptor.
-        All of this occurs within <code>bash</code>, after shell expansion
-        and forking, and before it begins searching for the command.
-    </p>
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://wiki.bash-hackers.org/syntax/redirection">Redirection - Bash Hackers Wiki</a></li>
-        <li><a href="https://www.gnu.org/software/bash/manual/html_node/Redirections.html"> Redirections - Bash Reference Manual</a></li>
-    </ul>
-
-</div>
-
-
-
-<div class="content" id="searching-for-commands">
-    <h2>Searching for Commands</h2>
-
-    <h3>Commands and Builtin's</h3>
 
     <p>
         Most commands that users enter into <code>bash</code> are separate programs.
@@ -662,34 +406,6 @@ To Do:
         Within Bash, builtins <a href="https://www.gnu.org/software/bash/manual/html_node/Command-Search-and-Execution.html#Command-Search-and-Execution">take precedence</a> over external commands.
     </p>
 </div>
-
-
-<!--
-
-<div id="special-characters" class="content">
-	<h2>Terminal Special Characters</h2>
-
-	<p>
-		Terminal special characters are key combinations 
-        which are interpreted <em>by the terminal driver</em> 
-        and mapped to special actions.
-		There are sixteen commonly mapped terminal special characters,<sup><a href="#references">[15]</a></sup>
-		but only a few are used daily:
-	</p>
-
-	<ul>
-        <li>CTRL-C&mdash; Send <code><a href="https://en.wikipedia.org/wiki/Signal_(IPC)">SIGINT</a></code>, the interrupt signal, 
-            to the foreground process. This is one means 
-			of terminating a process.
-        </li>
-		<li>CTRL-D&mdash; Write <code>EOF</code>, the End-of-File character. 
-            This indicates the end of input, and 
-            will terminate a Bash session, or an interactive Python session.
-        </li>
-    </ul>
-</div>
-
--->
 
 <div class="content" id="missing-semester">
 	<h2 style="margin-bottom: 2pt;">Missing Semester</h2>
