@@ -1,6 +1,7 @@
 :root {
 	--nav-color: #4CAF50;
 	--shaded-background: #f1f1f1;
+    --monospace-font: 'Ubuntu Mono', monospace; // To be used on code; embed required in ../_layouts/default.html
 }
 
 body {
@@ -236,7 +237,7 @@ sup, sub {
 }
 
 .content .code, code {
-    font-family: 'Ubuntu Mono', monospace;
+    font-family: var(--monospace-font);
 }
 
 .content .code{
