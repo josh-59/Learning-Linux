@@ -1,4 +1,4 @@
-# Learning Linux
+#Learning Linux
 
 A Minor Source and Curated Directory for All Things Linux
 
@@ -50,10 +50,8 @@ Terminals and Shells:
 - [x] Terminal Emulators
 - [x] Shells
 - [x] Simple Commands
-- [x] Shell Expansion
-- [x] I/O Redirection
-- [ ] Searching for Commands
-- [ ] Command Execution
+- [ ] Process Working Directory
+- [ ] PATH Environment Variable
 - [ ] Closing Remarks: Text Editor
 
 A C Primer:
@@ -87,6 +85,10 @@ Obtaining Free Software
 
 Appendix: Terminal Pro:
 - [ ] History: Commands not programs
+- [x] Shell Expansion
+- [x] I/O Redirection
+- [ ] Searching for Commands
+- [ ] Command Execution
 - [ ] Terminal Pro Tips (copy/paste)
 - [ ] Man Pages
 - [ ] Advanced Redirections
