@@ -241,11 +241,9 @@ To Do:
 	</p>
 
     <p>
-		Unix deviates from most operating systems designs by entertaining
-		the shell as an ordinary user-space process:  From
-        the operating system's perspective, it is just another running program.
-        This modularity allows a single operating system to support many
-        shells.
+		The UNIX architecture entertains the shell as an ordinary user-space process:  
+        From the operating system's perspective, it is just another running program.
+        This allows a single operating system to support many shells.
 	</p>
 
 	<p>
@@ -318,27 +316,29 @@ To Do:
     </div>
 
     <p>
-        Where <em>command</em> is mandatory, arguments are
-        optional, and each element ("word") is 
-        separated by whitespace.
-        In the following example, the <code>shutdown</code> command is given
-        with the single argument <code>now</code>:
+        Where <em>command</em> is mandatory, and arguments are
+        optional.
+        In the following example, the <code>ls</code> command is given
+        with the single argument <code>-l</code>:
     </p>
 
     <div class="code">
-        $ shutdown now
+        $ ls -l
     </div>
 
-   
     <p>
+        Elements (referred to as "words") are separated by <a href="https://en.wikipedia.org/wiki/Whitespace_character">whitespace</a>.
         If, for some reason, we need to include whitespace in
         an argument, we can wrap said argument in single-quotes.
-        These tell Bash to preserve the text exactly as-is; Bash
-        discards quoting characters.
+        There are a few ways to go about this, but 
+        single quotes are most-used: 
+        They tell Bash to preserve the text exactly as-is.
     </p>
 
     <p>
         For example, in the following command, 
+        the <code>cd</code> command recieves a single argument,
+        <code>Random Acccess Memories</code>: 
     </p>
 
     <div class="code">
@@ -346,15 +346,11 @@ To Do:
     </div>
 
     <p>
-        the <code>cd</code> command recieves a single argument,
-        <code>Random Acccess Memories</code>.
-    </p>
-
-    <p>
         In Bash, breaking a line of input into its elements is 
         known as <em>word splitting</em>, 
         and is the first step of command interpretation.
     </p>
+
 </div>
 
 <div class="content" id="shell-expansion">
@@ -662,13 +658,9 @@ To Do:
         $ help
     </div>
 
-
-
     <p>
         Within Bash, builtins <a href="https://www.gnu.org/software/bash/manual/html_node/Command-Search-and-Execution.html#Command-Search-and-Execution">take precedence</a> over external commands.
     </p>
-
-
 </div>
 
 
