@@ -277,7 +277,7 @@ https://wiki.ubuntu.com/Lvm
         $ less hello.c
     </div>
 
-    (press <code>q</code> to quit).
+    (Press <code>q</code> to quit).
 
 </div>
 
@@ -285,21 +285,34 @@ https://wiki.ubuntu.com/Lvm
     <h2>Device Files</h2>
 
     <p>
-        A <em>device file</em> represents a device connected to the system; 
-        they reside in the <code>/dev</code> directory.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[4]</a></sup>
+        The GNU/Linux directory tree is used as a general-purpose meeting place.
+        In addition to regular files, it also contains
+        information about running processes, information about the running kernel,
+        and references to hardware&mdash; each in the form of files.
+        This mechanism is general, extensible, and allows both users and programmers
+        access to the running machine.
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside</h4>
+        <p>
+            It is interesting to note that the essential capabilities of these device 
+            coincide with those of a file.
+        </p>
+    </div>
+
+    <p>
+        A <em>device file</em> represents a device connected to the system. 
+        Device files reside in the <code>/dev</code> directory.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[4]</a></sup>
         Each of these files serves as the principle reference to its
         respective device.
-    </p>
-
-    <p>
         For instance, when a USB-stick is inserted into the machine,
         a new file appears in <code>/dev</code>.
-        It is interesting to note that the essential capabilities of this device 
-        coincide with those of a file.
     </p>
 
     <p>
-        Let's consider the task of creating a boot media using this interface.
+        Let's consider the task of creating a boot media 
+        by writing to a device file directly.
     </p>
 
     <p>
@@ -322,13 +335,25 @@ https://wiki.ubuntu.com/Lvm
     </div>
 
     <p>
-        And, success! 
-        The file <code>archlinux-2020.07.02-pbp.img</code> has been 
+        After this command has completed, 
+        the file <code>archlinux-2020.07.02-pbp.img</code> has been 
         copied (byte-wise perfectly) onto the first <em>n</em> bytes of the 
-        card, 
-        where <em>n</em> is the length of said file.
+        card, where <em>n</em> is the length of said file.
         That file, a disk image, includes a few filesystems, a kernel,
         and is bootable.
+    </p>
+
+    <h3> Block vs. Character </h3>
+
+    <p>
+        Within <code>/dev</code>, there are two kinds of device files: 
+        Block device files, which read and write in arbitrarily-sized blocks of bytes;
+        and, Character device files, which are capable of reading and
+        writing single bytes.
+        A storage medium will present as a block device (owing to the underlying
+        semantics of reading and writing to them);
+        terminals present as character device files.
+        For most purposes, the difference isn't meaningful.
     </p>
 
     <h3>See Also:</h3>
@@ -341,17 +366,11 @@ https://wiki.ubuntu.com/Lvm
     <h2>Pseudo Files</h2>
 
     <p>
-        The GNU/Linux directory tree is used as a general-purpose meeting place.
-        In addition to regular files, it also contains
-        information about running processes, information about the running kernel,
-        and references to hardware&mdash; each in the form of files.
-        This mechanism is general, extensible, and allows both users and programmers
-        access to the running machine.
-    </p>
-
-    <p>
-        For example, the  <code>/proc/meminfo</code> file reports current
-        memory usage of the system:
+        The <code>/proc</code> directory offers file-level access to underlying
+        kernel 
+        structures.<sup><a href="https://man7.org/tlpi/" title="Kerrisk, p.42">[5]</a></sup>
+        For example, reading and printing <code>/proc/meminfo</code> effectively 
+        reports the system's current memory usage:
     </p>
 
     <div class="code">
@@ -370,15 +389,16 @@ https://wiki.ubuntu.com/Lvm
 
     <p>
         This is an example of a <em>synthetic</em> or <em>psuedo</em> file.
-        It does not exist on disk, and does not exist on any persistent filesystem.
-        The output printed was the kernel's response to the
-        <code>read(2)</code> system call.
-        These exist only in virtue of the running kernel.
+        These files do not exist on disk, but are instead synthesized by
+        the kernel as processes read them (and the directories they
+        are in).
+        That is, the output printed above was the kernel's response to the
+        <code>read(2)</code> system call, and nothing more.
     </p>
 
     <p>
         The <code>/proc</code> and <code>/sys</code> directories are
-        pseudo-filessystems.  
+        reserved for pseudo files.
         Of these, we will discuss only <code><a href="https://man7.org/linux/man-pages/man5/proc.5.html">/proc</a></code> in any detail.
         It contains one directory for each running program on the system,
         and each directory contains substantial information about its
@@ -414,6 +434,17 @@ https://wiki.ubuntu.com/Lvm
 
 <div id="fs-heir" class="content">
     <h2>Filesystem Heirarchy</h2>
+
+    <div class="aside-left">
+        <h4>Aside:</h4>
+        <p>
+            The <code>which</code> utility reports the location of executable files:<br>
+            <div class="code">
+                $ which ls<br>
+                /bin/ls
+            </div>
+        </p>
+    </div>
 
     <p>
         Within any GNU/Linux distribution, some common themes will be found.
@@ -463,17 +494,18 @@ https://wiki.ubuntu.com/Lvm
 
     <p>
         The directory <code>/etc</code> contains
-        system-specific configuration files; you can expect to fiddle
-        with the contents of this directory when configuring the system for the 
-        first time (or otherwise).
+        system-specific configuration files. 
+        You can expect to fiddle with the contents of this directory when 
+        manually configuring the system.
         It contains, for instance, files describing the configuration of 
         the system's package manager, X11 window system configuration, 
         and, well, etcetera.
     </p>
 
     <p>
-        <code>/run</code>, <code>/tmp</code>, and <code>/var</code> each hold
+        <code>/tmp</code>, <code>/run</code>,  and <code>/var</code> each hold
         transient files of running programs.  
+        <code>/tmp</code> is 
         <code>/boot</code> holds everything required for the boot sequence,
         including my very own Linux kernel:
     </p>
@@ -487,7 +519,7 @@ https://wiki.ubuntu.com/Lvm
         Software libraries are kind of boring, but essential to modern systems.
         The basic idea is to factor out repeated code (for instance, 
         C's <code>printf</code> function) not just from the source code, but
-        from the <em>executable</em> file as well.  
+        from <em>executable</em> files as well.  
         This means that, when a bug or security vulnerability is found in 
         <code>printf</code>, any program that uses the function will not
         have to be recompiled; rather, the appropriate library can be adjusted,
@@ -506,7 +538,8 @@ https://wiki.ubuntu.com/Lvm
         These files are used by all system users, and the 
         Linux Filesystem Heirarchy Standard mentioned
         above intends to guarantee that this  
-        directory can be read-only and shared across systems via network.
+        directory can shared across systems via network, by making its contents
+        read-only.
     </p>
 
     <!--
@@ -549,7 +582,7 @@ https://wiki.ubuntu.com/Lvm
     <p>
         A <em><a href="https://wiki.osdev.org/File_Systems#File_System_Theory">filesystem</a></em> 
         is a systematic method of storing and retrieving data on
-        disk.<sup><a href="https://wiki.osdev.org/Filesystem">[5]</a><a href="https://wiki.archlinux.org/index.php/File_systems">[6]</a></sup>
+        disk.<sup><a href="https://wiki.osdev.org/Filesystem">[6]</a><a href="https://wiki.archlinux.org/index.php/File_systems">[7]</a></sup>
         The first versions of UNIX referred to its own filesystem as, simply,
         <code>fs</code>.  
         It was well-documented (by, for instance, Maurice J. Bach in 
@@ -563,8 +596,8 @@ https://wiki.ubuntu.com/Lvm
         They expected that machines would always shutdown cleanly, and
         that hard-drives worked flawlessly.
         In particular, a system crash mid-write could leave the filesystem in 
-        an inconsistent state.<sup><a href="https://en.wikipedia.org/wiki/Journaling_file_system">[7]</a></sup> 
-        Such a shutdown required a check of the entire structure.<sup><a href="https://en.wikipedia.org/wiki/Journaling_file_system">[7]</a></sup>
+        an inconsistent state.<sup><a href="https://en.wikipedia.org/wiki/Journaling_file_system">[8]</a></sup> 
+        Such a shutdown required a check of the entire structure.<sup><a href="https://en.wikipedia.org/wiki/Journaling_file_system">[8]</a></sup>
         Filesystems like these (e.g., <code>VFAT</code> and <code>FAT32</code>)
         are today used to hold the bootloader, since they are widely supported and
         their contents are not expected to change often.
@@ -598,19 +631,19 @@ https://wiki.ubuntu.com/Lvm
         <h4>Aside:</h4>
         <p>
             <code>ZFS</code> has been described by Linus Torvalds as a "non-starter,"
-            principally over licensing issues.<sup><a href="https://www.realworldtech.com/forum/?threadid=189711&curpostid=189841">[12]</a></sup>
+            principally over licensing issues.<sup><a href="https://www.realworldtech.com/forum/?threadid=189711&curpostid=189841">[13]</a></sup>
         </p>
     </div>
 
     <p>
         Both <code><a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">btrfs</a></code> 
         and <code><a href="https://en.wikipedia.org/wiki/ZFS">ZFS</a></code> 
-        are such next-generation, copy-on-write filesystems.<sup><a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">[8]</a><a href="https://wiki.archlinux.org/index.php/ZFS">[9]</a></sup>
+        are such next-generation, copy-on-write filesystems.<sup><a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">[9]</a><a href="https://wiki.archlinux.org/index.php/ZFS">[10]</a></sup>
         Of the two, <code>btrfs</code> has made inroads to becoming Linux's next 
         major filesystem:
-        It is in wide use by Facebook,<sup><a href="https://lwn.net/Articles/824855/">[10]</a></sup> and has recently become  
+        It is in wide use by Facebook,<sup><a href="https://lwn.net/Articles/824855/">[11]</a></sup> and has recently become  
         the default filesystem of Fedora's <em>Workstation</em> 
-        distribution.<sup><a href="https://fedoramagazine.org/announcing-fedora-33/">[11]</a></sup>
+        distribution.<sup><a href="https://fedoramagazine.org/announcing-fedora-33/">[12]</a></sup>
         They are the first major vendors to adopt it.
     </p>
 
@@ -648,6 +681,15 @@ https://wiki.ubuntu.com/Lvm
         <li> <code><a href="https://man7.org/linux/man-pages/man7/inode.7.html"> inode(7) </a></code></li>
     </ul>
 </div>
+
+<!--
+<div class="content" id="vfs-and-inodes">
+
+The kernel implements <code>/proc</code> through <code>procfs</code> and <code>/sys</code> through <code>sysfs</code>.
+The kernel can also create a temporary filesystem stored solely on RAM, via <code>tmpfs</code>.
+
+</div>
+-->
 
 <div id="directories" class="content">
     <h2>Directories</h2>
@@ -851,12 +893,12 @@ https://wiki.ubuntu.com/Lvm
         While each filesystem may implement its own functionality,
         most functionality is common;
         the Virtual File System provides a uniform interface by
-        implementing filesystem-related system calls, such as <code>open</code>, <code>read</code>, etc..<sup> <a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">[13]</a></sup>
+        implementing filesystem-related system calls, such as <code>open</code>, <code>read</code>, etc..<sup> <a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">[14]</a></sup>
     </p>
 
     <p>
         As for inodes, a more formal definition is given by kernel.org:
-        "An inode object represents an object within the filesystem."<sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">[13]</a></sup>
+        "An inode object represents an object within the filesystem."<sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">[14]</a></sup>
         That is, on filesystems that do not use inodes, they are imposed virtually by
         the VFS, as a means of representing files.
         As a consequence, the discussion about inodes given here remains
@@ -922,6 +964,8 @@ https://wiki.ubuntu.com/Lvm
         <li>Elhage, N. (2009, December 22). A Brief Introduction to Termios. Retrieved March 07, 2021, from <a href="https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios/">https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios/</a></li>
 
         <li> LSB Workgroup, The Linux Foundation. (2015, March 9). 3.6 /dev: Device Files. Retrieved July 17, 2020, from <a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03.html</a> </li>
+
+		<li> Kerrisk, Michael.  <em>The Linux Programming Interface</em>. San Francisco, CA, No Starch Press, 2010.</li>
 
         <li> File Systems. (n.d.). Retrieved July 17, 2020, from <a href="https://wiki.osdev.org/Filesystem">https://wiki.osdev.org/Filesystem</a> </li>
 
