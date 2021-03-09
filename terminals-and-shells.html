@@ -6,14 +6,7 @@ last-updated: November, 2020
 
 <!--
 To Do:
-        IN THE BEGINNING, the shell operated in a simple loop involving an <em>exec</em>
-        call to itself.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[1]</a></sup>
-        This is explained by a lack of multiprogramming support and goto statements.
-        SINCE THE BEGINNING, times have been good, and bearded UNIX hackers 
-        have been productive.
-    </p>
-
-    <p>
+        <p>
         This article introduces the command line, and is intended to serve as
         down-the-road documentation.
         It explains shell behavior chronologically with respect to command execution,
@@ -101,7 +94,7 @@ To Do:
 		<li><a href="#terminal-emulators"> Terminal Emulators </a></li>
 		<li><a href="#shells"> Shells </a></li>
         <li><a href="#simple-commands">Simple Commands</a></li>
-        <li><a href="#pwd">Process Working Directory</a></li>
+        <li><a href="#pwd">Working Directory</a></li>
 		<li><a href="#missing-semester"> Missing Semester </a></li>
 		<li><a href="#references"> References </a></li>
 	</ul>
@@ -111,6 +104,13 @@ To Do:
 	<h1> Terminals and Shells</h1>
 	<h4>Under Construction! </h4>
 
+    <p>
+        IN THE BEGINNING, the shell operated in a simple loop involving an <em>exec</em>
+        call to itself.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[1]</a></sup>
+        SINCE THE BEGINNING, times have been good, and bearded UNIX hackers 
+        have been productive.
+        In particular, per-user multiprocessing, and the <code>fork()</code> system call, have been introduced.
+    </p>
 </div>
 
 <div id="physical-terminals" class="content">
@@ -345,62 +345,85 @@ To Do:
 </div>
 
 <div class="content" id="pwd">
-    <h2>Process Working Directory</h2>
+    <h2>Working Directory</h2>
+
+    <p>
+        Recall that each process has a <a href="/processes.html#process-attributes">current working directory</a>.
+        Since the shell is a process, it naturally follows that it too has a current working directory.
+        At the command line, this attribute is of particular importance:
+        It reflects <em>where you are</em> in the system's directory tree.
+    </p>
+
+    <p>
+        The shell's current working directory may be printed with the command <code>pwd</code>:
+    </p>
+
+    <div class="code">
+        $ pwd<br>
+        /home/josh
+    </div>
+
+    <p>
+        Its value may be changed with the <code>cd</code> command:
+    </p>
+
+    <div class="code">
+        $ cd Public/Learning-Linux<br>
+        $ pwd<br>
+        /home/josh/Public/Learning-Linux
+    </div>
+
+    <p>
+        When UNIX was still a baby, <em>change directories</em> was implemented
+        as a separate command.
+        When invoked, it inherited the shell's current working directory,
+        changed it, and then the shell would inherit <em>that</em> working directory.
+        With the inclusion of the <em>fork()</em> system call, though, the <code>chdir</code>
+        command broke:
+    </p>
+
 
     <!--
         Justification: https://qmacro.org/2020/11/08/the-meaning-of-pwd-in-unix-systems/
     -->
 
     <p>
-        
+
+    <blockquote>
+        "There was much reading of code and anxious introspection about how the addition of fork could 
+        have broken the chdir call. Finally the truth dawned: in the old system chdir was an 
+        ordinary command; it adjusted the current directory of the (unique) process attached to 
+        the terminal. Under the new system, the chdir command correctly changed the current 
+        directory of the process created to execute it, but this process promptly terminated and had 
+        no effect whatsoever on its parent shell! It was necessary to make chdir a special command, 
+        executed internally within the shell. It turns out that several command-like functions have 
+        the same property, for example login."
+    </blockquote>
+
+    <div class="quote-ref">
+        &mdash;Dennis M. Ritchie<br>
+        <a href="https://www.bell-labs.com/usr/dmr/www/hist.html">The Evolution of the Unix Timesharing System</a><br>
+    </div>
 
     <p>
-        Most commands that users enter into <code>bash</code> are separate programs.
-        For instance, <code>ls</code> is a separate program. When a user enters,
+        The <code>cd</code> command is also, necessarily, built in to the shell.
+        Commands such as these are today called <em>builtins</em>, and can be investigated by:
     </p>
 
     <div class="code">
-        $ ls
+        $ help [command]
     </div>
 
+</div>
+
+<div class="content" id="path">
+    <h2><code>PATH</code> Environment Variable</h2> 
     <p>
-        the shell finds the <code>ls</code> executable, 
-        <a href="processes.html#process-creation">forks</a> itself, and
-        instructs the child process to execute the appropriate program. 
-        That child program gets its working 
-        directory's entries from the kernel and prints them out.
-        The shell, meanwhile, 
-        <a href="https://man7.org/linux/man-pages/man2/wait.2.html">waits</a>
-        in the background for the child process to terminate, then returns with a prompt.
-    </p>
-
-    <p>
-        For a few reasons, this strategy is preferrable. 
-        However, there are times where it will not work.
-        For example, changing the current directory must be carried out 
-        by <code>bash</code> directly; 
-        as such, <code>cd</code> is built in to the shell itself.
-    </p>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            The <code>type</code> command can be used to check if a command
-            is a builtin.
-        </p>
-    </div>
-
-    <p>
-        Commands such as these are called <em>builtins</em>, and can be
-        listed by,
-    </p>
-
-    <div class="code">
-        $ help
-    </div>
-
-    <p>
-        Within Bash, builtins <a href="https://www.gnu.org/software/bash/manual/html_node/Command-Search-and-Execution.html#Command-Search-and-Execution">take precedence</a> over external commands.
+        In the author's glorious opinion, <code>bash</code> has too many builtins.  
+        Since builtins <a href="https://www.gnu.org/software/bash/manual/html_node/Command-Search-and-Execution.html#Command-Search-and-Execution">take precedence</a> over external commands, 
+        the effect is that the <code>which</code> command can, effectively, lie to the user.
+        Combined with the fact that there is no builtin that serves the purpose of <code>which</code>, we arrive at a rare
+        GNU/Linux snafu.
     </p>
 </div>
 
@@ -409,6 +432,9 @@ To Do:
 	<h4 style="margin-bottom: 18pt;">Lecture 1: Course Overview + The Shell (2020)</h4>
 	<iframe class="video" src="https://www.youtube.com/embed/Z56Jmr9Z34Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
+
+-->
+
 
 <!--
     Exercises:
