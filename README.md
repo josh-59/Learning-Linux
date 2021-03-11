@@ -11,8 +11,9 @@ available [on Github](https://github.com/josh-59/Book-Like).
 #### 
 
 Landing:
-- [x] Introduction to work
+- [x] Introduction 
 - [x] Directory
+- [ ] How to
 - [x] Conventions
 
 Intro:
