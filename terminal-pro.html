@@ -53,7 +53,61 @@ last-updated: February 2020
 
 
     Conception:
-    -->
+
+
+Command-Line Signals:
+    Ctrl-c sends the interrupt signal, SIGINT, which most programs respond
+    to by terminating immediately.  Handy for killing an unresponsive
+    foreground process.
+
+    Ctrl-c is handled by the shell in a different manner: It stops what
+    it's doing and returns control to the main loop, presenting the
+    user with a new prompt (Kerrisk, p389)
+    Some people use this rather than backspacing an erroeous line
+
+    The desktop's familiar copy/paste is overruled on the terminal 
+    emulator (ctrl-v is interpretted as an escape sequence); 
+    use either ctrl-shift-v or middle-click to paste.
+
+Advanced Redirection:
+        "Here documents"
+
+        Pipes
+
+Startup:
+    .bash_profile vs .bashrc (see Linux from scratch section 4.4
+
+Closing Remarks:
+    AWK
+    Awk handles strings of characters as conveniently as most languages handle numbers.
+
+Exercises:
+    <ol>
+        <li>
+            Explain the behavior of:
+            $ PATH="" printenv
+        </li>
+        <li>
+            The shell is a process, like any other.
+            For your current shell:
+            <ol>
+                <li>What was its command-line arguments</li>    
+                <li>
+            </ol>
+        </li>
+        <li>
+            Let <code>script</code> be an executable file containing
+            #!/bin/sh
+            echo hello world
+            There are three ways to execute this command:
+            1) In the current shell context
+            2) In a forked subshell context
+            3) In an <code>exec</code>-induced sh context
+            Produce each, and verify with <code>strace</code>
+        </li>
+    </ol>
+-->
+
 </div>
 
 
@@ -603,30 +657,3 @@ last-updated: February 2020
     </ul>
 </div>
 
-
-
-Command-Line Signals:
-    Ctrl-c sends the interrupt signal, SIGINT, which most programs respond
-    to by terminating immediately.  Handy for killing an unresponsive
-    foreground process.
-
-    Ctrl-c is handled by the shell in a different manner: It stops what
-    it's doing and returns control to the main loop, presenting the
-    user with a new prompt (Kerrisk, p389)
-    Some people use this rather than backspacing an erroeous line
-
-    The desktop's familiar copy/paste is overruled on the terminal 
-    emulator (ctrl-v is interpretted as an escape sequence); 
-    use either ctrl-shift-v or middle-click to paste.
-
-Advanced Redirection:
-        "Here documents"
-
-        Pipes
-
-Startup:
-    .bash_profile vs .bashrc (see Linux from scratch section 4.4
-
-Closing Remarks:
-    AWK
-    Awk handles strings of characters as conveniently as most languages handle numbers.
