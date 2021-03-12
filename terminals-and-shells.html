@@ -1,23 +1,11 @@
 ---
 layout: default
 title: Terminals and Shells
-last-updated: November, 2020
+last-updated: March, 2021
 ---
 
 <!--
 To Do:
-        <p>
-        This article introduces the command line, and is intended to serve as
-        down-the-road documentation.
-        It explains shell behavior chronologically with respect to command execution,
-        but can be read piecewise.
-    </p>
-
-    Terminal Pro:
-        fork'ed == subshell environment
-        $ type bash
-        $ which bash
-        $ file $(which bash)
 
     Shells:
     http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf
@@ -30,13 +18,10 @@ To Do:
 
     Standard File Descriptors:
         Include redirection
-  <p>
+    <p>
         By this convention, writing an <code>ls</code> clone becomes simple:
         For each <a href="https://www.man7.org/linux/man-pages/man3/readdir.3.html">entry</a> in the current directory, <a href="https://man7.org/linux/man-pages/man3/printf.3.html">print</a> it out!
     </p>
-
-
-    Single quotes: Allow newlines to be passed
 
     Basic Bash Grammar:
         Pipeline and Lists
@@ -53,25 +38,6 @@ To Do:
             command substitution, arithmetic expansion, and quote removal; 
             does not undergo filename expansion
 
-
-    Closing Remarks:
-    Text Editor: vim
-
-    These controls have made their way into many other programs: man, git, less.
-    In fact, even Firefox lets you 'Quick Search' a web page with <code>/</code>.
-    Once you are (well) familiar with them, you can set Bash to vi-mode with
-    <code>set -o vi</code>.
-
-    Explanation of sudo:
-    https://www.linuxjournal.com/sites/default/files/2018-11/GeekGuide-BeyondTrust-BeyondSudo.pdf
-
-
-     Other Nice Features:
-        Filename completion via tab 
-            - Filename list via tab
-        Command completion via tab
-            - Command list via tab
-
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
@@ -82,11 +48,91 @@ To Do:
         </p>
     </div>
 
+    <div class="code">
+        $ <i>command</i> [arg] ... [redirection] ...
+    </div>
 
-    Closing Remarks:
+    <p>
+        The above is the definition of a <em>simple command</em>
+        in GNU <code>bash</code>.
+        It effectively forms a unit in our command-line language.
+    </p>
+
+<div class="content" id="closing-remarks">
+    <h2>Closing Remarks</h2>
+
+    <p>
+        Different operating systems have their own idioms for the command line.
+        Being a UNIX-like operating system, GNU/Linux has inheritted 
+        those of UNIX.
+    </p>
+
+    <p>
+        A simple command has the form,
+    </p>
+
+    <div class="code">
+        $ <i>command</i> [arg] ...
+    </div>
+
+    <p>
+        I draw your attention to the <em>arguments</em> list:
+        An argument may either be a sub-command, or an option.
+        An option is prefixed with either <code>-</code> (short option) 
+        or <code>- -</code> (long option).
+        A sub-command is not prefixed with either.
+    </p>
+
+    <p>
+        For example, 
+    </p>
+
+    <div class="code">
+        $ git clone https://
+    </div>
+
+    <p>
+        and
+    </p>
+
+    <div class="code">
+        $ cargo build
+    </div>
+
+    <p>
+        both contain subcommands, whereas
+    </p>
+
+    <div class="code">
+        $ ls -F
+    </div>
+
+    <p>
+        contains an option.
+    </p>
+
+    <p>
+        This convention is not strictly adhered to, but is worthwhile.
+        Formally:
+    </p>
+
+    <div class="code">
+         $ <i>command</i> [subcommand] [[option] ... [file] ...] [redirection] ...
+    </div>
+</div>
+
+<div class="content" id="path">
+    <h2><code>PATH</code> Environment Variable</h2> 
+    <p>
+         
+    </p>
+</div>
+
 
     Terminal screensavers
     https://gitlab.com/jallbrit/cbonsai/-/tree/master
+
+
 
 -->
 
@@ -98,7 +144,7 @@ To Do:
 		<li><a href="#shells"> Shells </a></li>
         <li><a href="#simple-commands">Simple Commands</a></li>
         <li><a href="#pwd">Working Directory</a></li>
-        <li><a href="#path">PATH </a></li>
+        <!--<li><a href="#path">PATH </a></li>-->
 		<li><a href="#missing-semester"> Missing Semester </a></li>
 		<li><a href="#references"> References </a></li>
 	</ul>
@@ -106,6 +152,17 @@ To Do:
 
 <div id="introduction" class="content">
 	<h1> Terminals and Shells</h1>
+
+    <div class="quote-text">
+        "In effect, tools are verbs in a language, and files are the
+        nouns that the verbs apply to." 
+    </div>
+
+    <div class="quote-ref">
+        Dr. Brian Kernighan<br>
+        UNIX: A History and a Memoir
+    </div>
+
 	<h4>Under Construction! </h4>
 
     <p>
@@ -173,7 +230,6 @@ To Do:
 		Specifically, it is a program that runs within the context of a desktop environment,
 		and emulates the functionality of a physical terminal.
 	</p>
-
 
 	<figure>
 		<img src="assets/img/gnome-terminal.png">
@@ -356,8 +412,8 @@ To Do:
 
     <p>
         Recall that each process has a <a href="/processes.html#process-attributes">current working directory</a>.
-        Since the shell is a process, it naturally follows that it, too, has a current working directory.
-        At the command line, this attribute is of particular importance:
+        Since the shell is a process, naturally, it too has a current working directory.
+        At the command line, this is of particular importance:
         It reflects <em>where you are</em> in the system's directory tree.
     </p>
 
@@ -423,10 +479,6 @@ To Do:
 
 </div>
 
-<div class="content" id="path">
-    <h2><code>PATH</code> Environment Variable</h2> 
-</div>
-
 <div class="content" id="missing-semester">
 	<h2 style="margin-bottom: 2pt;">Missing Semester</h2>
 	<h4 style="margin-bottom: 18pt;">Lecture 1: Course Overview + The Shell (2020)</h4>
@@ -434,10 +486,23 @@ To Do:
 </div>
 
 <!--
-    Exercises:
-    1) Terminal emulators are also processes.  From the command line, find
-    your emulator's working directory
-    2) Is <code>pwd</code> a builtin?  If not, how does it work?
+<div class="content" id="exercises">
+    <h2>Exercises:</h2>
+
+    <ol style="margin-left: 0;">
+        <li>
+            <p>
+                Terminal emulators are also processes.  From the command line, find
+                your emulator's working directory.
+            </p>
+        </li>
+        <li>
+            <p>
+                What is the difference between <code>type</code> and <code>which</code>?
+            </p>
+        </li>
+    </ol>
+</div>
 -->
 
 <div id="references" class="content">

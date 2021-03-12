@@ -7,11 +7,46 @@ last-updated: December, 2020
 <!-- 
 
 To Do:
-    VFS and Inodes (after Filesystems)
+    VFS (Subsection in Filesystems)
+    Inodes (after Filesystems)
     Proc filesystem (in pseudofiles)
     Add reference to findmnt (in mounting and unmounting)
+    Sudo/Superuser priveledges
 
 Inodes:
+        -Linux represents each file through a unique inode object:
+            - Every file has a unique inode, which represents it
+            - Every path on the directory tree refers to an inode.
+        -The inode of a file contains all metadata of the file
+        -Was implemented literally in the original UNIX filesystem,
+            -Is one of two major strategies for organizing filesystems
+                (other is a table)
+        -Design was carried forth through MINIX to ext, ext2, ext3, and most
+        recently, ext4
+
+        -The original design simply and cleanly separated data and metadata; 
+            - inode contained metadata and pointers to data blocks
+            - Data blocks were of fixed size
+            - double- and triple- indirection
+        -With mechanical hard drives, this proves inefficient: 
+            - To access a single file can require numerous seeks
+        -Extent-based variants keep data in non-fixed-size (though contiguous) chunks;
+            - Often, in the inode itself
+            - Thereby reducing seeks and improving performance
+                - Especially on small files 
+
+        -Inodes are arranged, conceptually, in arrays, with one array per filesystem
+        -Are accessed by an index into this array.
+        -This index is referred to as the inode's <em>number,</em>
+            - Coloquially, <em>inode numbers</em>.
+
+
+        -The semantics of file operations became dependant upon inodes,
+            - For instance, to implement directories, all we must do is 
+            create a file that associates string names with inode numbers
+            - To create a new file is to 
+        -Is imposed virtually by the kernel when non-UNIX-like filesystems are employed
+
 <div class="content" id="inodes">
 <h1> inodes </h1>
 
@@ -53,6 +88,72 @@ Perhaps: inode numbers alone are abiguous when dealing with multiple filesystems
         A study of inodes is necessary to understand the semantics of file
         operations within GNU/Linux.
 </p>
+
+<div class="content" id="vfs-and-inodes">
+
+    <p>
+        The above discussion gives rise to a few questions:
+    </p>
+
+
+       https://en.wikipedia.org/wiki/Inode#POSIX_inode_description 
+
+       """
+       The POSIX standard mandates file-system behavior that is strongly 
+       influenced by traditional UNIX file systems. An inode is denoted 
+       by the phrase "file serial number", defined as a per-file system 
+       unique identifier for a file.[9] That file serial number, together 
+       with the device ID of the device containing the file, 
+       uniquely identify the file within the whole system.[10]
+       """
+
+    <ol>
+        <li> How can the kernel support multiple filesystems? </li>
+        <li> How can it do so simultaneously?  </li>
+    </ol>
+
+    <p>
+        The answer to these is the Virtual File System (VFS), a kernel subsystem 
+        that acts, as an intermediary for filesystem drivers.
+        While each filesystem implements its own functionality,
+        most functionality is common;
+        the Virtual File System provides a uniform interface by
+        implementing filesystem-related system calls
+        <code>read</code>, etc..<sup> <a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">[14]</a></sup>
+    </p>
+
+    <p>
+        Moreover, the VHS implements a naming scheme to identify each 
+        file on the system with its appropriate filesystem.  The scheme is,
+    </p>
+
+    <div class="code">
+        device_major:device_minor:inode
+    </div>
+
+    <p>
+        Where <em>device_major</em> identifies a device (for example, a disk),
+        <em>device_minor</em> identifies a 
+
+        partition on it
+        and <em>inode</em> identifies a file.
+        
+    </p>
+
+    <p>
+        As for inodes, a more formal definition is given by kernel.org:
+        "An inode object represents an object within the filesystem."<sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">[14]</a></sup>
+        That is, on filesystems that do not use inodes, they are imposed virtually by
+        the VFS, as a means of representing files.
+        As a consequence, the discussion about inodes given here remains
+        conceptually correct even when non-Unix-like filesystems are being employed.
+    </p>
+
+
+The kernel implements <code>/proc</code> through <code>procfs</code> and <code>/sys</code> through <code>sysfs</code>.
+The kernel can also create a temporary filesystem stored solely on RAM, via <code>tmpfs</code>.
+
+</div>
 
 
 Filesystems:
@@ -100,10 +201,10 @@ https://wiki.ubuntu.com/Lvm
         <li><a href="#device-files"> Device Files </a></li>
         <li><a href="#pseudo-files"> Psuedo Files </a></li>
         <li><a href="#fs-heir"> Filesystem Heirarchy </a></li>
+        <li><a href="#mounting-unmounting"> Mounting and Unmounting</a></li>
         <li><a href="#filesystems"> Filesystems </a></li>
         <!-- <li><a href="#vfs-and-inodes">VFS and Inodes</a></li> -->
         <li><a href="#directories"> Directories </a></li>
-        <li><a href="#mounting-unmounting"> Mounting and Unmounting</a></li>
         <li><a href="#closing-remarks"> Closing Remarks </a></li>
         <li><a href="#udacity"> Udacity </a></li>
         <li><a href="#references"> References </a></li>
@@ -190,7 +291,7 @@ https://wiki.ubuntu.com/Lvm
     </ul>
 
     <p>
-        This information is stored for every file on the machine,
+        This information is kept for every file on the machine,
         and can be explained in part by the operating system's time-sharing heritage.
         It is used today in single-user desktops to compartmentalize the machine.
     </p>
@@ -405,26 +506,6 @@ https://wiki.ubuntu.com/Lvm
         respective process.
     </p>
 
-    <!--
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            The intent of this website is to show that 
-            the Linux kernel can do anything it damn well pleases.
-        </p>
-    </div>
-    
-    <h3> The <code>/proc</code> Directory </h3>
-
-    <p>
-        The <code>/proc</code> directory contains one directory for each 
-        process on the system;
-        these directories are organized by process ID number.
-    </p>
-
-    -->
-
     <h3>See Also:</h3>
     <ul>
         <li> <a href="https://www.kernel.org/doc/html/latest/filesystems/proc.html">The /proc Filesystem &ndash; The Linux Kernel documentation </a></li>
@@ -542,39 +623,86 @@ https://wiki.ubuntu.com/Lvm
         read-only.
     </p>
 
-    <!--
-
-    <h3>The Birds and the Bees</h3>
-
-    <div class="aside-left">
-        <h4>Aside:</h4>
-        <p>
-            It's all fun and games until someone deletes <em>initramfs</em>
-        </p>
-    </div>
-
-    <p>
-        The Unix architecture is designed with the experienced
-        user in mind.
-        the architecture is well-suited to advanced configuration by
-        experienced users.
-        Thereby, the root user <em>transcends</em> the access permission
-        scheme of the Unix environment.
-    </p>
-
-    <p>
-        <em>Some</em> users are granted administrative <em>priveledges</em> 
-        over the system, and can use them <em>safely</em> through 
-        <code>sudo</code> (superuser do).
-    </p>
-
-    -->
-
+  
     <h3>See Also:</h3>
     <ul>
         <li><a href="http://linfo.org/root.html">What is root?</a> -- definition by the Linux Information Project (LINFO)</li>
     </ul>
 </div>
+
+<div class="content" id="mounting-unmounting">
+    <h2>Mounting and Unmounting</h2>
+
+    
+    <p>
+        Unlike Windows systems, which create a new, distinct directory tree
+        for each storage device on the system (e.g., <code>C:\, D:\</code>, etc.),
+        UNIX-like operating systems 
+        maintain a single, unique directory tree for the entire system.
+        When a new device is introduced to the machine, its files are made 
+        available by placing the new filesystem's root directory 
+        in the existing directory tree,
+        in an operation is called <a href="https://unix.stackexchange.com/questions/3192/what-is-meant-by-mounting-a-device-in-linux"><em>mounting</em></a>.
+    </p>
+
+    <p>
+        Let's take a look at this, for it is new.
+    </p>
+
+    <p>
+        Suppose we have a usb stick with some music on it, and we'd
+        like to access its contents.
+        When we plug it in, the hardware, then the kernel,
+        recognize it, but it may not be accessible:
+    </p>
+
+    <img style="width:80%" src="assets/img/mounting.png">
+
+    <p>
+        The Linux Filesystem Heirarchy Standard provides two places to mount 
+        temporary filesystems: <code>/mnt</code> and <code>/media/[user]</code>.
+        When mounting new devices manually, the usual method is to identify the 
+        device to be mounted with 
+        <a href="https://man7.org/linux/man-pages/man8/lsblk.8.html"><code>lsblk(8)</code></a>, 
+        then mount it with
+    </p>
+
+    <div class="code">
+        $ sudo mount [DEVICE] [MOUNTPOINT]
+    </div>
+
+    <p>
+        Superuser priveledges allow us to mount a filesystem anywhere.  
+        When a filesystem's is mounted to a directory that is not empty,
+        those directory's contents become "hidden" by those of the new filesystem, 
+        and are inaccessible while the filesystem is mounted.  
+        Therefore, we typically locate an empty directory in the existing
+        directory tree, to serve as the to-be-mounted filesystem's root
+        directory.
+    </p>
+            
+    <h3> Unmounting </h3>
+
+    <p>
+        Devices should be unmounted before being removed; this operation is
+        encapsulated in "eject." 
+        To unmount a device manually, we again assert the correct device 
+        with <code>lsblk</code>, then unmount it with,
+    <p>
+
+    <div class="code">
+        $ sudo umount &lt;PATH&gt;
+    </div>
+
+    <p>
+        where <code>PATH</code> is the location of the mounted filesystem's
+        root directory.
+    </p>
+</div>
+
+
+
+
 
 <div id="filesystems" class="content">
     <h2> Filesystems </h2>
@@ -644,7 +772,7 @@ https://wiki.ubuntu.com/Lvm
         It is in wide use by Facebook,<sup><a href="https://lwn.net/Articles/824855/">[11]</a></sup> and has recently become  
         the default filesystem of Fedora's <em>Workstation</em> 
         distribution.<sup><a href="https://fedoramagazine.org/announcing-fedora-33/">[12]</a></sup>
-        They are the first major vendors to adopt it.
+        They are among the first to adopt it.
     </p>
 
     <p>
@@ -652,10 +780,13 @@ https://wiki.ubuntu.com/Lvm
         Linux can make use of <a href="https://man7.org/linux/man-pages/man5/filesystems.5.html">many filesystems</a>.
         The filesystems that the (running) kernel supports are listed at <code>/proc/filesystems</code>;
         formatting tools are generally of the form <code>mkfs.&lt;filesystem&gt;</code>;
-        and, <code>man</code> pages contain most relevant information.
+        finallly, <code>man</code> pages contain most relevant information.
     </p>
+</div>
 
-    <h3> inodes &amp; inode numbers</h3>
+<div class="content" id="inodes">
+    <h2> inodes </h2>
+
     
     <p>
         A common feature of Unix-like filesystems is the 
@@ -666,7 +797,7 @@ https://wiki.ubuntu.com/Lvm
     </p>
 
     <p>
-        The filesystem's collection of inodes is organized  
+        Each filesystem's inodes is organized  
         into one large array; any inode, and therefore any file,
         may be uniquely identified by its index in this array.
         These indices are called <em>inode numbers,</em>
@@ -683,12 +814,6 @@ https://wiki.ubuntu.com/Lvm
 </div>
 
 <!--
-<div class="content" id="vfs-and-inodes">
-
-The kernel implements <code>/proc</code> through <code>procfs</code> and <code>/sys</code> through <code>sysfs</code>.
-The kernel can also create a temporary filesystem stored solely on RAM, via <code>tmpfs</code>.
-
-</div>
 -->
 
 <div id="directories" class="content">
@@ -744,11 +869,20 @@ The kernel can also create a temporary filesystem stored solely on RAM, via <cod
         641291 terminals-and-shells.html<br>
     </div>
 
+    <div class="aside-right">
+        <h4>Deletion:</h4>
+        <p>
+            The kernel must also wait for every process to close said file.
+            Only then can it make the file's inode and data blocks available for 
+            reuse.
+        </p>
+    </div>
+
     <p>
         Each entry in a directory is called a <em>hard link.</em>
         A file may have more than one hard link, but when it has zero,
         it is no longer accessible through the directory structure, and
-        the kernel will prepare to delete it.
+        the kernel prepares to delete it.
     </p>
    
     <p>
@@ -793,118 +927,19 @@ The kernel can also create a temporary filesystem stored solely on RAM, via <cod
     </ul>
 </div>
 
-<div class="content" id="mounting-unmounting">
-    <!-- 
-        To Do:
-        Introduce the <code>findmnt</code> utility
-    -->
-
-    <h2>Mounting and Unmounting</h2>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            On modern distributions, mounting is often carried out automatically.
-        </p>
-    </div>
-
-    <p>
-        Unlike Windows systems, which create a new, distinct directory tree
-        for each storage device on the system (e.g., <code>C:\, D:\</code>, etc.),
-        Unix-like operating systems maintain a single, unique directory tree.
-        When a new device is introduced to the machine, its files are made 
-        available by placing the new filesystem's root directory 
-        in the existing directory tree,
-        in an operation is called <a href="https://unix.stackexchange.com/questions/3192/what-is-meant-by-mounting-a-device-in-linux"><em>mounting</em></a>.
-    </p>
-
-    <p>
-        Let's take a look at this, for it is new.
-    </p>
-
-    <p>
-        Suppose we have a usb stick with some music on it, and we'd
-        like to access its contents.
-        When we plug it in, the hardware, then the kernel,
-        recognize it, but it may not be accessible:
-    </p>
-
-    <img style="width:80%" src="assets/img/mounting.png">
-
-    <p>
-        The Linux Filesystem Heirarchy Standard provides two places to mount 
-        temporary filesystems: <code>/mnt</code> and <code>/media/[user]</code>.
-        When mounting new devices manually, the usual method is to identify the 
-        device to be mounted with 
-        <a href="https://man7.org/linux/man-pages/man8/lsblk.8.html"><code>lsblk(8)</code></a>, 
-        then mount it via
-    </p>
-
-    <div class="code">
-        $ sudo mount [DEVICE] [MOUNTPOINT]
-    </div>
-
-    <p>
-        Superuser priveledges allow us to mount a filesystem anywhere.  
-        When a new filesystem is mounted in a directory that is not empty,
-        its contents become "hidden" by the new filesystem, and are 
-        inaccessible while the filesystem is mounted.  
-        They will not be damaged or destroyed, and will "reappear" when 
-        the filesystem is unmounted.
-        This could be handy to, say, keep your <code>home</code> directory
-        on a thumb-drive.
-    </p>
-            
-    <p>
-        The device to be mounted should be a partition, and can usually be 
-        determined by its size and its mountpoint (which should be none).
-    </p>
-
-    <p>
-        Devices should be unmounted before being removed; this operation is
-        encapsulated in the "eject" operation.
-        To unmount a device manually, we again assert the correct device 
-        with <code>lsblk</code>,
-        then unmount it with 
-        <a href="https://www.man7.org/linux/man-pages/man8/umount.8.html"><code>sudo umount PATH</code></a>,
-        where <code>PATH</code> is the location of the mounted filesystem.
-    </p>
-</div>
-
-
-
 <div class="content" id="closing-remarks">
     <h2>Closing Remarks</h2>
+    <!--
+        It being the case that every process on the system has a current
+        working directory, and therefore has a location on the system's directory
+        tree, and there are easily thousands of processes, it follows that
+        the directory tree is of particular importance to UNIX-like systems.
+
+        <Insert comments about root priveledges here>
+
+    -->
     <h3> Virtual File System (Kernel Subsystem)</h3>
-    <p>
-        The above discussion gives rise to a few questions:
-    </p>
-
-    <ol>
-        <li> How can the Linux kernel support multiple filesystems? </li>
-        <li> How can it do so simultaneously?  </li>
-        <li> How does it handle filesystems that <em>do not</em> use inodes?</li>
-    </ol>
-
-    <p>
-        The answer to each of these is the
-        Virtual File System (VFS), a kernel subsystem that acts,
-        essentially, as a driver for filesystems.
-        While each filesystem may implement its own functionality,
-        most functionality is common;
-        the Virtual File System provides a uniform interface by
-        implementing filesystem-related system calls, such as <code>open</code>, <code>read</code>, etc..<sup> <a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">[14]</a></sup>
-    </p>
-
-    <p>
-        As for inodes, a more formal definition is given by kernel.org:
-        "An inode object represents an object within the filesystem."<sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">[14]</a></sup>
-        That is, on filesystems that do not use inodes, they are imposed virtually by
-        the VFS, as a means of representing files.
-        As a consequence, the discussion about inodes given here remains
-        conceptually correct even when non-Unix-like filesystems are being employed.
-    </p>
-
+    
     <h3> Filesystem vs. Directory Tree</h3>
     <p>
         The terms <em>filesystem</em> and <em>directory tree</em> were developed 
@@ -941,6 +976,11 @@ The kernel can also create a temporary filesystem stored solely on RAM, via <cod
         https://www.kernel.org/doc/html/latest/filesystems/ext4/index.html
         </li>
         </ol>
+
+        <h3>Further Reading:</h3>
+        <ul>
+            <li><a href="http://kroah.com/linux/talks/ols_2003_udev_paper/Reprint-Kroah-Hartman-OLS2003.pdf"><code>udev</code> - A Userspace Implementation of devfs</a> by Greg Kroah-Hartman</a></li>
+        </ul>
 
     -->
     <h2 style="margin-bottom: 2pt;">Udacity:</h2>
