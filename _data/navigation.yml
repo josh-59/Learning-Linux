@@ -10,7 +10,5 @@
   link: /terminals-and-shells.html
 - name: Packages 
   link: /packages.html
-- name: Documentation
-  link: /documentation.html
 - name: Terminal Pro
   link: /terminal-pro.html

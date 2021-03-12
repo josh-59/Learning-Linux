@@ -2,7 +2,7 @@
 layout: default
 home: true
 title: 'Learning Linux: A Minor Source and Handy Directory for All Things Linux'
-last-updated: January 2021
+last-updated: March 2021
 ---
 
 <!-- 
@@ -62,7 +62,10 @@ last-updated: January 2021
     <ul>
         <li><a href="#welcome"> Welcome </a></li>
         <li><a href="#landing-directory"> Directory </a></li>
+        <li><a href="#how-to">How-To</a></li>
+        <li><a href="#man-pages">Man Pages</a></li>
         <li><a href="#conventions"> Conventions </a></li>
+        <li><a href="#about">About</a></li>
     </ul>
 </div>
 
@@ -216,12 +219,152 @@ last-updated: January 2021
     <ul>
         <li><a href="https://magcius.github.io/xplain/article/x-basics.html">Explanations - X Window System Basics</a></li>
     </ul>
+</div>
 
 
+<div id="how-to" class="content">
+	<h2>How-to</h2>
+
+	<p>
+		It's worthwhile, from time to time, to take a step back and reconsider 
+        the process of learning Linux itself.
+	</p>
+
+	<ol class="big-list" style="padding-bottom: 10px;">
+		<li>
+			<i>What, exactly, is your question?</i>
+			<p>
+                Often, the hardest part is just figuring out what your question is.
+				Try to be specific:
+				In computers, things are <em>very</em> precisely defined.
+			</p>
+		</li>
+
+        <li>
+            <i>Be Patient.</i>
+			<p>
+                Skill accrues.
+                Answer one question at a time.
+			</p>
+		</li>
+
+		<li>
+			<i>Reconsider your sources.</i>
+            <p>
+                Does it make sense that this person would write about the
+                subject at hand?
+                What relationship do they have to the project?
+                How authoritative are they?
+            </p>
+		</li>
+	</ol>
+
+    <p>
+        While many books have been intended to introduce GNU/Linux, few are 
+        very good, and fewer still are free.
+        It is a large subject, and also, it moves quickly.
+        The good ones focus on a specific facet:
+    </p>
+
+    <ul>
+        <li>
+			<a href="http://www.kroah.com/lkn/"> Linux Kernel in a Nutshell</a>&mdash;
+			A free book by Greg Kroah-Hartman.
+			He says, "I want this book to help
+			bring more people into the Linux kernel development fold.
+			The act of building a customized kernel for your machine is one
+			of the basic tasks needed to become a Linux kernel developer.
+			The more people that try this out, and realize that there is
+			not any real magic behind the whole Linux kernel process, the
+			more people will be willing to jump in and help out in making
+			the kernel the best that it can be."<sup><a href="http://www.kroah.com/lkn/">[2]</a></sup>
+		</li>
+
+        <li>
+			<a href="https://debian-handbook.info/"> Debian Administrator's Handbook</a>&mdash;
+			A free book written by Raphaël Hertzog and Roland Mas, two Debian developers.
+			It was originally written in French, and has been translated into
+			four other languages, with twenty(!) more translations in-progress.
+		</li>
+
+	    <li> 
+            <a href="https://www.man7.org/tlpi/index.html">The Linux Programming Interface</a>&mdash;
+            The definitive text of the programming interface
+			of the Linux kernel.
+			Michael Kerrisk is the maintainer of the
+			Linux Man Page project (below), and his work is simply terrific.
+			If you want all the details of the system-call interface offered
+			by the kernel, as well as sound explanations of its
+			internals, this is your book.
+		</li>
+    </ol>
+
+	<h3> See Also: </h3>
+	<ul>
+		<li><a href="https://www.gnu.org/philosophy/free-doc.html"> Why Free Software needs Free Documentation</a></li>
+	</ul>
+</div>
+
+<div id="man-pages" class="content">
+	<h2> Man Pages </h2>
+	<p>
+		The most useful asset in the Linux documentation pool is the
+		manual ("man") pages.
+		Man pages provide a concise overview of commands and 
+        features, with further documentation existing elsewhere.
+		Learn to use them early, for they are a way of life.
+	</p>
+
+	<p>
+		Man pages are accessed at the command line:
+	</p>
+
+	<div class="code">
+		$ man cat
+	</div>
+
+	<p>
+	    This fires up the <code>man</code> paging utility, which lets you
+        view and search a page through a read-only interface.
+		Within the <code>man</code> utility, you can search the content
+		by typing a single forward slash, then your search term:
+	</p>
+
+	<div class="code">
+        /<i>search-term</i>
+	</div>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Incidentally, these controls have become standard for
+            paging utilites.
+        </p>
+    </div>
+
+	<p>
+		Then, <em>enter</em>.  Jump to the next result by typing a single
+        <code>n</code>.
+		To quit, type <code>q</code>.
+	</p>
+
+	<p>
+        The controls of the <code>man</code> paging utility are simple enough:
+		To move down one line, type <code>j</code>;
+		to move up one line, use <code>k</code>.
+		To move down a screenful, press the spacebar.
+	</p>
+
+	<h3>See Also:</h3>
+	<ul>
+		<li><code><a href="https://www.man7.org/linux/man-pages/man1/man.1.html">man(1)</a></code></li>
+		<li><code><a href="https://www.man7.org/linux/man-pages/man1/apropos.1.html">apropos(1)</a></code></li>
+	</ul>
 </div>
 
 <div id="conventions" class="content">
-    <h2> Link Convention: </h2>
+    <h2> Conventions: </h2>
+    <h3> Links </h3>
 
     <p>
         Links are restricted to those that are both useful and non-obvious.
@@ -229,24 +372,101 @@ last-updated: January 2021
     <ul>
         <li>
             <a href="#conventions">Inline links</a> point out immediately relevant sources
-            <ul>
-                <li>Are worth looking into</li>
-            </ul>
         </li>
         <li>
             Superscript<sup><a href="#conventions">[1]</a></sup> references denote authoritative resources which aren't necessarily of interest
-            <ul>
-                <li>Don't read them, unless you must</li>
-            </ul>
         </li>
     </ul>
 
     <p>
         Wikipedia will be considered authoritative (and often, its documentation proves quite good)
     </p>
+
+    <h3> Man Pages</h3>
+
+    <p>
+		Here we will use the standard convention for specifying man pages:
+        The name of the page is followed by its section number, which is placed in
+        parenthesis.
+        For example, <code>cat(1)</code> refers to the manual page in Section 1,
+		while <code>printf(3)</code> refers to the manual page in Section 3.
+	</p>
+
+    <h3> Command Line </h3>
+
+    <p>
+        Again, we will use the standard
+        convention to denote the command-line.
+        Commands are presented on a distinct line, and are
+        prefaced by either <code>$</code> or <code>#</code>:
+    </p>
+
+    <div class="code">
+        $ echo hello world
+    </div>
+
+    <ul>
+        <li><code>$</code> denotes ordinary-user permissions</li>
+        <li><code>#</code> denotes superuser permissions</li>
+    </ul>
+
+    <p>
+        Expressions framed in square-brackets (<code>[]</code>) are optional:
+    </p>
+
+    <div class="code">
+        $ echo [arg1] [arg2]
+    </div>
+
+    <p>
+        Repeatable expressions are denoted with ellipses (<code>...</code>):
+    </p>
+
+    <div class="code">
+        $ echo [arg] ...
+    </div>
+
+    <p>
+        Italic text may be replaced as appropriate:
+    </p>
+
+    <div class="code">
+        $ <i>command</i> [arg] ...
+    </div>
+
+    <h3> Code </h3>
+
+    <p>
+        On occaision, code snippets will be presented.  
+        In this work, they will be restricted to the 
+        <a href="https://en.wikipedia.org/wiki/C_%28programming_language%29">
+            C Programming Language</a>
+        and formatted so:
+    </p>
+
+    <pre>
+    #include &lt;stdio.h&gt;
+
+    int main() {
+        printf("Hello world;");
+        return 0;
+    }
+    </pre>
+
+</div>
+
+<div class="content" id="about">
+    <h2>About</h2>
+
+    <p>
+        This work is intended to orient the reader to GNU/Linux. 
+        It is intended to be concise, yet accurate, and was written
+        because no such work existed.  
+    </p>
 </div>
 
 <!--
+    (Jokes)
     Get Used To It
     For The Last Time
     It's Not Like It's a Secret
