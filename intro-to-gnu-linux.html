@@ -29,37 +29,37 @@ At the pioneering MIT Artificial Intelligence Lab in the early 1980s, a company 
 Replace Linux Mint:
         Outline:
         1) A collection of known-good recommendations
-        2) 
-        The Linux Desktop is sufficiently mature that I can 
+        2)
+        The Linux Desktop is sufficiently mature that I can
         recommend it for use by people uninterested in software;
-        it being an open-source work, 
-        the rest of this book will be concerned with developing the 
-        underlying concepts of it (for instance, the semantics of 
-        opening a file), and is intended to be an introduction 
+        it being an open-source work,
+        the rest of this book will be concerned with developing the
+        underlying concepts of it (for instance, the semantics of
+        opening a file), and is intended to be an introduction
         for the "power user."
-        Linux should never be work.  
-        
+        Linux should never be work.
+
 
 <div class="content" id="current-linux-distributions">
     <h2>Linux Desktops: A Question of Experience</h2>
 
     <p>
-        <em>Distro Hop</em>: verb.  
+        <em>Distro Hop</em>: verb.
         1. The act of switching from one linux distro to another.<br>
         <em>"I just Distro Hopped from Arch KDE to Gentoo i3"</em>
     </p>
 
     <p>
         Newcomers to Linux are often befuddled by the sheer number of options
-        available to them.  
+        available to them.
         Which one do you want?
-        Which one is best for your purposes?  
+        Which one is best for your purposes?
         Which one is best, period?
     </p>
 
     <p>
         Let's back up a little:
-        Each includes some version of the Linux kernel, GNU core utilities, 
+        Each includes some version of the Linux kernel, GNU core utilities,
         and a desktop environment.
         As we'll see, distributions are characterized by their package managment,
         and in practice, the differences between them are suffiently superficial that the
@@ -119,7 +119,7 @@ Replace Linux Mint:
 </a> </li>
     </ul>
 
-    
+
 </div>
 
 -->
@@ -142,9 +142,7 @@ Replace Linux Mint:
 <div id="introduction" class="content">
     <h1>Introduction to GNU/Linux</h1>
     <div class="quote-text">
-        "Those who do not understand UNIX
-        <span style="display:inline-block; width: 50pt;"></span><br>
-        <span style="display:inline-block; width: 50pt;"></span>
+        "Those who do not understand UNIX<br>
         are condemned to reinvent it, poorly."
     </div>
     <div class="quote-ref">
@@ -160,7 +158,7 @@ Replace Linux Mint:
         In addition, operating systems ease the task of creating
         useful programs by offering programmers a logical architecture
         and predictable environment.
-        Free and open source GNU/Linux has evolved to offer the single best 
+        Free and open source GNU/Linux has evolved to offer the single best
         programming environment available today.
     </p>
 
@@ -171,7 +169,7 @@ Replace Linux Mint:
     <h2>UNIX: A Brief History</h2>
 
     <p>
-        The UNIX operating system was born in late 1969 at AT&amp;T's 
+        The UNIX operating system was born in late 1969 at AT&amp;T's
         <em>Bell Laboratories,</em> in the shadow
         of Multics.
         Multics was an operating system intended to
@@ -189,16 +187,16 @@ Replace Linux Mint:
         equipment.<sup><a href="#references">[2]</a></sup><sup><a href="#references">[3]</a></sup>
         After finding a disused <a href="https://www.soemtron.org/pdp7.html">PDP-7</a>,
         Kenneth Thompson and Dennis Ritchie rewrote <em><a href="https://en.wikipedia.org/wiki/Space_Travel_(video_game)">Space Travel</a></em> for it;
-        after, Thompson continued to work with the PDP-7, implementing a 
-        filesystem he and others at Bell Laboratories had been 
+        after, Thompson continued to work with the PDP-7, implementing a
+        filesystem he and others at Bell Laboratories had been
         devising on paper.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[3]</a></sup>
     </p>
 
     <p>
-        At some point in 1969, while working on this filesystem, 
-        Thompson realized that he was very close to 
+        At some point in 1969, while working on this filesystem,
+        Thompson realized that he was very close to
         an operating system:  All he needed was an
-        assembler, a text editor, a shell and an <em>exec</em> system call.<sup><a href="#references">[2]</a></sup> 
+        assembler, a text editor, a shell and an <em>exec</em> system call.<sup><a href="#references">[2]</a></sup>
         The <em>exec</em> call was "trivial", and the other three components were
         done in one week each.<sup><a href="#references">[2]</a></sup>
     </p>
@@ -208,17 +206,17 @@ Replace Linux Mint:
     </p>
 
     <blockquote>
-        Thompson wanted to create a comfortable computing environment 
-        constructed according to his own design, using whatever means were 
-        available. His plans, it is evident in retrospect, incorporated many 
-        of the innovative aspects of Multics, including an explicit notion of 
-        a process as a locus of control, a tree-structured file system, a 
-        command interpreter as user-level program, simple representation of 
+        Thompson wanted to create a comfortable computing environment
+        constructed according to his own design, using whatever means were
+        available. His plans, it is evident in retrospect, incorporated many
+        of the innovative aspects of Multics, including an explicit notion of
+        a process as a locus of control, a tree-structured file system, a
+        command interpreter as user-level program, simple representation of
         text files, and generalized access to devices.<sup><a href="https://www.bell-labs.com/usr/dmr/www/chist.html">[4]</a></sup>
     </blockquote>
 
     <p>
-        The new operating system soon became a communal affair, and 
+        The new operating system soon became a communal affair, and
         in 1970 was christened <em>UNIX,</em>
         as a "somewhat treacherous pun on
         MULTICS."<sup><a href="#references">[2]</a><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[3]</a></sup>
@@ -262,9 +260,9 @@ Replace Linux Mint:
     <p>
         <strong>Drivers:</strong>
         Drivers interact with hardware, and simplify the interface between
-        kernel and hardware.  
+        kernel and hardware.
         This software represents the deepest and most remote element
-        of any operating system, and 
+        of any operating system, and
         the abstraction layer it offers allows a single kernel
         to run on a variety of machines.
     </p>
@@ -274,7 +272,7 @@ Replace Linux Mint:
         The heart of any UNIX-like operating system is its kernel.
         The kernel is responsible for
         supporting running programs,
-        scheduling the CPU, 
+        scheduling the CPU,
         allotting memory, and
         maintaining file integrity, in addition to many other tasks.
         It is a large and involved piece of software, and can be likened
@@ -283,17 +281,17 @@ Replace Linux Mint:
 
     <p>
         <strong>System Calls:</strong>
-        The set of operations that the kernel can undertake is 
+        The set of operations that the kernel can undertake is
         defined by the system calls it supports.
         UNIX-like operating systems have six essential system calls:
         <em>fork, exec, open, close, read,</em> and
         <em>write.</em><sup><a href="#references">[5]</a></sup>
         Both <em>fork</em> and <em>exec</em> are concerned with launching
-        programs, while <em>open, close, read,</em> and <em>write</em> 
+        programs, while <em>open, close, read,</em> and <em>write</em>
         constitute the essential interactions a process can have with files.
         Processes cannot dictate how the kernel carries these operations out,
-        and in fact, the kernel may deny one if, for instance, 
-        a file does not exist, or the calling process does not have 
+        and in fact, the kernel may deny one if, for instance,
+        a file does not exist, or the calling process does not have
         appropriate authority.
     </p>
 
@@ -308,7 +306,7 @@ Replace Linux Mint:
 
     <p>
         These layers constitute the "minimium viable" for an operating system
-        which is 
+        which is
     </p>
 
     <ul style="margin-left: 15%;">
@@ -318,7 +316,7 @@ Replace Linux Mint:
     </ul>
 
     <p>
-        Moreover, owing to its heritage, it is also <em>time-sharing</em> or 
+        Moreover, owing to its heritage, it is also <em>time-sharing</em> or
         <em>multi-user</em>&mdash;
         that is, capable of supporting more than one interactive session at a time.
         Although foriegn to us now, the idea is not thematically different
@@ -341,7 +339,7 @@ Replace Linux Mint:
     </div>
 
     <p>
-        The first attempt at producing a deliberately free and open-source 
+        The first attempt at producing a deliberately free and open-source
         UNIX clone was
         <a href="https://www.gnu.org/gnu/initial-announcement.en.html#f1">announced</a> by Richard Stallman in 1983.
         Stallman had been working at MIT's AI Laboratory for over a decade,
@@ -351,18 +349,18 @@ Replace Linux Mint:
     <blockquote style="width: 55%;">
         "If you saw someone using an unfamiliar and interesting program, you
         could always ask to see the source code, so that you could read it, change
-        it, or cannibalize parts of it to make a new 
+        it, or cannibalize parts of it to make a new
         program."<sup><a href="https://www.gnu.org/gnu/thegnuproject.html">[6]</a></sup>
     </blockquote>
 
     <p>
-        In 1981, that culture collapsed as 
+        In 1981, that culture collapsed as
         commercial ventures hired away most of the
         lab.<sup><a href="https://www.gnu.org/gnu/thegnuproject.html">[6]</a><a href="https://www.oreilly.com/openbook/freedom/ch07.html">[7]</a></sup>
-        In 1982, when administrators purchased a new PDP-10, they opted for a 
+        In 1982, when administrators purchased a new PDP-10, they opted for a
         closed-source, proprietary operating system, and indirectly threatened
         to seal the fate of software freedom.
-        Stallman began to consider the merits of sharing software in 
+        Stallman began to consider the merits of sharing software in
         itself,
         in the process deriving an analogy to scientific cooperation, a pillar of
         the University's  morals.<sup><a href="https://www.gnu.org/gnu/why-programs-should-be-shared.html">[8]</a><a href="https://www.gnu.org/gnu/yes-give-it-away.html">[9]</a></sup>
@@ -371,14 +369,14 @@ Replace Linux Mint:
     <p>
         Yet, proprietary software was becoming the norm, with students working
         on projects intended for profit<sup><a href="https://www.gnu.org/gnu/why-programs-should-be-shared.html">[8]</a></sup>
-        and companies going so far as to require  
-        nondisclosure agreements be signed to get an 
+        and companies going so far as to require
+        nondisclosure agreements be signed to get an
         executable.<sup><a href="https://www.gnu.org/gnu/thegnuproject.html">[6]</a></sup>
         On September 27, 1983, Stallman announced his resolution:
-        To produce a "complete UNIX-compatible software system," and to 
+        To produce a "complete UNIX-compatible software system," and to
         "give it away free."<a href="https://www.gnu.org/gnu/initial-announcement.en.html#f1"><sup>[10]</sup></a>
-        He called the project <a href="https://gnu.org">GNU</a>, a recursive 
-        acronym for 
+        He called the project <a href="https://gnu.org">GNU</a>, a recursive
+        acronym for
         <em>GNU's Not UNIX.</em><sup><a href="https://www.gnu.org/gnu/gnu-history.html">[11]</a></sup>
     </p>
 
@@ -390,31 +388,31 @@ Replace Linux Mint:
     </div>
 
     <p>
-        At the time of announcement, Stallman had not yet quantified his 
+        At the time of announcement, Stallman had not yet quantified his
         own intentions behind the word <em>free.</em>
-        Certainly, "a free copy" did not embody the 
+        Certainly, "a free copy" did not embody the
         culture of code-sharing MIT was once home to.
-        More, he did not wsih to put the code in the public domain because 
+        More, he did not wsih to put the code in the public domain because
         modified versions of it it could become proprietary.<sup><a href="https://en.wikipedia.org/wiki/Copyleft#History">[12]</a></sup>
-        By 1985, Stallman had sorted these issues out: 
+        By 1985, Stallman had sorted these issues out:
     </p>
-    
+
     <blockquote>
-            GNU is not in the public domain. Everyone will be permitted to 
-            modify and redistribute GNU, but no distributor will be allowed to 
-            restrict its further redistribution. That is to say, proprietary 
-            modifications will not be allowed. I want to make sure that all 
+            GNU is not in the public domain. Everyone will be permitted to
+            modify and redistribute GNU, but no distributor will be allowed to
+            restrict its further redistribution. That is to say, proprietary
+            modifications will not be allowed. I want to make sure that all
             versions of GNU remain free.<sup><a href="https://www.gnu.org/gnu/manifesto.html">[13]</a></sup>
     </blockquote>
 
     <p>
-        Thus, software freedom became quantified: 
+        Thus, software freedom became quantified:
         Users can run, study, modify, copy and distribute the software;
-        but, if they distribute, then those freedoms must be preserved.  
-        These freedoms were implemented in the various 
-        licenses of early GNU products, and their parts were taken 
-        together to form the GNU 
-        <a href="https://en.wikipedia.org/wiki/GNU_General_Public_License#History">General Public License</a>, 
+        but, if they distribute, then those freedoms must be preserved.
+        These freedoms were implemented in the various
+        licenses of early GNU products, and their parts were taken
+        together to form the GNU
+        <a href="https://en.wikipedia.org/wiki/GNU_General_Public_License#History">General Public License</a>,
         version 1.<sup><a href="https://en.wikipedia.org/wiki/GNU_General_Public_License#History">[14]</a></sup>
     </p>
 
@@ -425,9 +423,9 @@ Replace Linux Mint:
     <blockquote>
         "Under the terms of the GPL, money is not the issue.
         You can charge a million bucks if someone is willing to pay
-        for it, but you have to make sources available.  
+        for it, but you have to make sources available.
         And the person you give or sell the source to has to have
-        all the rights you have. 
+        all the rights you have.
         It's a brilliant device."<sup><a href="#references">[5]</a></sup>
     </blockquote>
 
@@ -447,11 +445,11 @@ Replace Linux Mint:
         for producing high-quality, well-documented free software;
         they are as "official" as the open-source community gets.
         They remain
-        <a href="https://www.gnu.org/keepingup.html">active and prominent</a> 
-        among the free software community, fighting the good fight with the 
-        help of the 
-        <a href="https://www.fsf.org">Free Software Foundation</a>.<sup><a href="https://www.gnu.org/gnu/gnu-structure.html">[15]</a></sup> 
-        Richard Stallman remains Chief GNUisance.<sup><a href="https://www.gnu.org/gnu/gnu-structure.html">[15]</a></sup> 
+        <a href="https://www.gnu.org/keepingup.html">active and prominent</a>
+        among the free software community, fighting the good fight with the
+        help of the
+        <a href="https://www.fsf.org">Free Software Foundation</a>.<sup><a href="https://www.gnu.org/gnu/gnu-structure.html">[15]</a></sup>
+        Richard Stallman remains Chief GNUisance.<sup><a href="https://www.gnu.org/gnu/gnu-structure.html">[15]</a></sup>
     </p>
 
     <h3> See Also: </h3>
@@ -487,7 +485,7 @@ Replace Linux Mint:
         He soon released it under the GNU General Public License, Version 2.
         Later, he would write:
     </p>
-    
+
     <blockquote>
         "The fact is, to make Linux usable, I had relied on a lot of tools that had
         been distributed freely over the Internet&mdash;I had hoisted myself up
@@ -533,8 +531,8 @@ Replace Linux Mint:
     </div>
 
     <p>
-        A major figure of today's Linux development effort is Greg Kroah-Hartman 
-        (pronounced "<em>Crow</em>-Hartman"), who maintains the Stable branch, 
+        A major figure of today's Linux development effort is Greg Kroah-Hartman
+        (pronounced "<em>Crow</em>-Hartman"), who maintains the Stable branch,
         in addition to various subsystems.<sup><a href="https://en.wikipedia.org/wiki/Greg_Kroah-Hartman">[18]</a></sup>
         According to Kroah-Hartman, interest in the kernel continues to
         grow, with 1200 new developers contributing each
@@ -567,11 +565,11 @@ Replace Linux Mint:
     <h2> Linux Distributions: A Brief History </h2>
 
     <p>
-        The first versions of the Linux kernel were available 
-        only in source-code form, and required compilation on a 
-        host machine.<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[16]</a></sup> 
-        More, no other software was included, so that the 
-        creation of a functional Linux-based machine required 
+        The first versions of the Linux kernel were available
+        only in source-code form, and required compilation on a
+        host machine.<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[16]</a></sup>
+        More, no other software was included, so that the
+        creation of a functional Linux-based machine required
         the user to obtain, configure, compile and
         assemble a number of disparate software components.
     </p>
@@ -593,7 +591,7 @@ Replace Linux Mint:
     </p>
 
     <p>
-        Linux's first widely recognized and used distribution was, ironically, 
+        Linux's first widely recognized and used distribution was, ironically,
         a commercial venture: Soft Landing System.<sup><a href="https://lwn.net/Articles/91371/">[24]</a></sup>
         Released in late 1992, SLS was sold under the slogan "Gentle Touchdowns for DOS Bailouts",<sup><a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">[25]</a></sup>
         but users complained that the software was buggy,<sup><a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">[25]</a><a href="https://www.linuxjournal.com/article/2750">[26]</a></sup> and when its developers
@@ -604,7 +602,7 @@ Replace Linux Mint:
 
     <p>
         In late 1992, Patrick Volkerding needed a LISP interpreter for a project
-        at school, and, having heard that <code>clisp</code> ran on SLS Linux, 
+        at school, and, having heard that <code>clisp</code> ran on SLS Linux,
         downloaded them both.<sup><a href="https://www.linuxjournal.com/article/2750">[26]</a></sup>
         His professor got wind, and asked Patrick to help him install the software
         on school computers.<sup><a href="https://www.linuxjournal.com/article/2750">[26]</a></sup>
@@ -618,7 +616,7 @@ Replace Linux Mint:
         So Volkerding began improving SLS, and internally named his project
         <em>Slackware;</em> he didn't want the project taken too seriously.<sup><a href="https://www.linuxjournal.com/article/2750">[26]</a></sup>
         By May, though, the improvements were becoming substantial, and when
-        first released on the internet in June, proved so popular that the 
+        first released on the internet in June, proved so popular that the
         number of download requests crashed the system hosting it.<sup><a href="https://www.linuxjournal.com/article/2750">[26]</a></sup>
         Volkerding hadn't intended to produce a distribution,<sup><a href="https://www.linuxjournal.com/article/2750">[26]</a></sup> but still
         maintains <a href="http://www.slackware.com/">Slackware</a> today.<sup><a href="http://www.slackware.com/about">[27]</a></sup>
@@ -637,9 +635,9 @@ Replace Linux Mint:
 
     <p>
         In 1993, Ian Murdock also grew frustrated with SLS Linux,<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[29]</a></sup>
-        and, more, sought a better solution to distribution creation than 
+        and, more, sought a better solution to distribution creation than
         single-person or closed-room schemes.<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[29]</a></sup>
-        Ian wanted an operating system that lived up to the Linux name, 
+        Ian wanted an operating system that lived up to the Linux name,
         was carefully and conscientiously assembled, and which was maintained
         with equal diligence.<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[29]</a></sup>
         In particular, he wanted a free operating system that could
@@ -648,11 +646,11 @@ Replace Linux Mint:
 
     <p>
         Murdock decided to make the process open, in the spirit of GNU and Linux,
-        thereby ensuring satisfaction of user's requirements while also 
+        thereby ensuring satisfaction of user's requirements while also
         unloading the burden of creation and maintainership.<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[29]</a></sup>
-        He named it <a href="https://www.debian.org">Debian</a>, 
+        He named it <a href="https://www.debian.org">Debian</a>,
         a portmanteau of <em>Debra,</em> his wife, and <em>Ian,</em> himself.<sup><a href="https://www.debian.org/doc/manuals/project-history/intro.en.html">[30]</a></sup>
-        The project attracted developers, and today around 
+        The project attracted developers, and today around
         a thousand people volunteer their spare time.<sup><a href="https://www.debian.org/intro/philosophy">[31]</a></sup>
         Debian is one of the most respected distributions of our time,
         and is oft-used as an upstream source for other distributions.
@@ -664,7 +662,7 @@ Replace Linux Mint:
     </div>
 
     <p>
-        With the internet came 
+        With the internet came
         <a href="https://distrowatch.com/images/other/distro-family-tree.png">many</a>
         Linux distributions.
         I think of them as flavors of the same thing, rather than
@@ -687,9 +685,9 @@ Replace Linux Mint:
         <h4>Aside:</h4>
         <p>
             For the new user, many Linux flavors are appropriate, including
-            <a href="https://www.linuxmint.com/">Mint</a>, 
-            <a href="https://ubuntu.com/">Ubuntu</a>, 
-            <a href="https://manjaro.org/">Manjaro</a>, and 
+            <a href="https://www.linuxmint.com/">Mint</a>,
+            <a href="https://ubuntu.com/">Ubuntu</a>,
+            <a href="https://manjaro.org/">Manjaro</a>, and
             <a href="https://elementary.io/">Elementary OS</a>.
         </p>
     </div>
@@ -708,7 +706,7 @@ Replace Linux Mint:
     <p>
         Mint offers the Cinnamon desktop environment;
         Windows users will feel right at home.
-        I find it to be an attractive desktop, but it's only moderately 
+        I find it to be an attractive desktop, but it's only moderately
         customizable.
         Like many users, I want a desktop environment that stays out of my way,
         and Cinnamon does exactly that.
@@ -718,14 +716,14 @@ Replace Linux Mint:
 <a title="Linux Mint team, GPLv2 &lt;https://www.gnu.org/licenses/old-licenses/gpl-2.0.html&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Linux_Mint_19.1_%22Tessa%22_(Cinnamon).png"><img width="1024" alt="Linux Mint 19.1 &quot;Tessa&quot; (Cinnamon)" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Linux_Mint_19.1_%22Tessa%22_%28Cinnamon%29.png/512px-Linux_Mint_19.1_%22Tessa%22_%28Cinnamon%29.png"></a>
         <center>Linux Mint 19.1 "Tessa", Released 2018</center>
     </div>
-    
+
     <div class="aside-right" style="margin-top: 25px;">
         <h4>Do it:</h4>
         <p>
             Try it out on an old computer!
         </p>
     </div>
-    
+
     <p>
         New for Mint 19 is <em>Timeshift.</em> From <a href="https://github.com/linuxmint/timeshift">their github:</a>
         "Timeshift protects your system by taking incremental
@@ -735,7 +733,7 @@ Replace Linux Mint:
 
     <p>
         Mint isn't perfect:  It tends to be boring.
-        Changes from release to release are minor, and the software available 
+        Changes from release to release are minor, and the software available
         from Debian's repositories (which Mint is downstream of)
         tends to be mature and stable, as opposed to new and unproven.
     </p>
@@ -767,12 +765,12 @@ Replace Linux Mint:
     </p>
 
     <p>
-        Gaming on Linux is 
-        <a href="https://store.steampowered.com/linux">developing rapidly</a>, 
+        Gaming on Linux is
+        <a href="https://store.steampowered.com/linux">developing rapidly</a>,
         but is still immature.
-        If you have a gaming desktop and want to try Linux, I recommend 
-        dual-booting on a separate hard drive: They're cheap, and you will 
-        avoid messing around with partitions.  
+        If you have a gaming desktop and want to try Linux, I recommend
+        dual-booting on a separate hard drive: They're cheap, and you will
+        avoid messing around with partitions.
         But, back up any important data anyhow.
     </p>
 
@@ -786,25 +784,25 @@ Replace Linux Mint:
     <h2 style="margin-bottom: 0;">Closing Remarks:</h2>
         <h4>Open Source</h4>
     <p>
-        In the forty years since Richard Stallman began GNU 
-        (pronounced <em>guh-nu</em>), the free software landscape has seen a 
+        In the forty years since Richard Stallman began GNU
+        (pronounced <em>guh-nu</em>), the free software landscape has seen a
         great deal of growth.
-        In 1998, the term <em>open source</em> was invented as 
-        <a href="http://www.catb.org/~esr/open-source.html">a less abrasive synonym</a> 
-        for <em>free software:</em>  
+        In 1998, the term <em>open source</em> was invented as
+        <a href="http://www.catb.org/~esr/open-source.html">a less abrasive synonym</a>
+        for <em>free software:</em>
     </p>
 
     <blockquote>
         We realized it was time to dump the confrontational attitude that has been
         associated with 'free software' in the past and sell the idea strictly on
-        the same pragmatic, business-case grounds that motivated 
+        the same pragmatic, business-case grounds that motivated
         Netscape.<sup><a href="http://web.archive.org/web/19981206185148/http://www.opensource.org/history.html">[32]</a></sup>
     </blockquote>
 
     <p>
-        The result was a wealth of media attention and the 
+        The result was a wealth of media attention and the
         <a href="https://opensource.org/">Open Source Initiative</a>.
-        Both GNU and the OSI agree that their respective terms are 
+        Both GNU and the OSI agree that their respective terms are
         nearly synonymous.<sup><a href="https://opensource.org/faq#free-software">[33]</a><a href="https://www.gnu.org/philosophy/free-open-overlap.html">[34]</a></sup>
         In this work, and in life, we will use "open-source"
         interchangeably with "free software".
@@ -819,21 +817,21 @@ Replace Linux Mint:
 
     <p>
         In addition, more developers have taken part, and introduced a number of
-        licenses to suit their needs.  
+        licenses to suit their needs.
         These licenses can be divided into two classes:
-        Permissive software licenses (e.g., MIT, Apache, BSD) do not perpeturate 
-        themselves, and so indirectly allow derivate works to become proprietary; 
-        nonpermissive/copyleft licenses (e.g., GPL, <a href="https://en.wikipedia.org/wiki/Mozilla_Public_License">MPL</a>), on the other hand, <em>do</em> 
+        Permissive software licenses (e.g., MIT, Apache, BSD) do not perpeturate
+        themselves, and so indirectly allow derivate works to become proprietary;
+        nonpermissive/copyleft licenses (e.g., GPL, <a href="https://en.wikipedia.org/wiki/Mozilla_Public_License">MPL</a>), on the other hand, <em>do</em>
         perpeturate themselves.<sup><a href="https://opensource.org/faq#permissive">[36]</a><a href="https://opensource.org/faq#copyleft">[37]</a></sup>
     </p>
 
     <p>
         To be honest, a lot of developers have said, <em>To hell with this,</em>
-        and introduced such novelties as the 
+        and introduced such novelties as the
         <a href="https://people.freebsd.org/~phk/">Beerware License</a>,
-        the <a href="https://en.wikipedia.org/wiki/WTFPL">Do What The Fuck You Want License</a>, 
+        the <a href="https://en.wikipedia.org/wiki/WTFPL">Do What The Fuck You Want License</a>,
         and the <a href="https://unlicense.org/">Unlicense</a> (quite popular).
-        These each, with varying degrees of professionality, place code in the 
+        These each, with varying degrees of professionality, place code in the
         public domain;
         from there, anyone can claim it as their own, and can put it in any other work,
         under any other license.
@@ -863,7 +861,7 @@ Replace Linux Mint:
 <div id="references" class="content">
     <h2> References </h2>
     <ol style="margin-left: 0">
-        <li> 
+        <li>
             Multics History. (2020, September 20). Retrieved September 23, 2020, from <a href="https://multicians.org/history.html">https://multicians.org/history.html</a>
         </li>
 
@@ -965,7 +963,7 @@ Replace Linux Mint:
 
             Begin Linux Distributions-->
 
-            
+
 
 
 
@@ -1009,7 +1007,7 @@ Replace Linux Mint:
             Our philosophy: Why we do it and how we do it. (2021, January 8). Retrieved January 20, 2021, from <a href="https://www.debian.org/intro/philosophy">https://www.debian.org/intro/philosophy</a>
         </li>
 
-        <!-- 
+        <!--
             Begin Closing Remarks
         -->
 
@@ -1044,4 +1042,3 @@ Replace Linux Mint:
 
     </ol>
 </div>
-
