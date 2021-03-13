@@ -1,4 +1,4 @@
---- 
+---
 layout: default
 title: Terminal Pro
 last-updated: February 2020
@@ -7,15 +7,15 @@ last-updated: February 2020
 <div id="nav_bar_2" class="nav">
 	<ul>
 		<li><a href="#introduction"> Introduction </a></li>
-        <li><a href="#finding-files">Finding Files</a></li>
+		<li><a href="#model"> Shell Execution Model </a></li>
         <li><a href="#shell-expansion">Shell Expansion</a></li>
 		<li><a href="#redirection">I/O Redirection</a></li>
         <li><a href="#searching-for-commands">Searching for Commands</a></li>
-		
 		<!--
 		<li><a href="#shell-features"> Other Shell Features </a></li>
         <li><a href="#special-characters">Terminal Special Characters</a></li>
         -->
+        <li><a href="#finding-files">Finding Files</a></li>
 		<li><a href="#missing-semester"> Missing Semester </a></li>
 		<li><a href="#references"> References </a></li>
 	</ul>
@@ -24,22 +24,24 @@ last-updated: February 2020
 <div class="content" id="introduction">
     <h1>Terminal Pro</h1>
 
+</div>
+
+<div class="content" id="model">
+	<h2>Shell Execution Model</h2>
+
+	<a href="assets/img/shell-model.pdf" title="Click for PDF">
+		<img src="assets/img/shell-model-pic.png" style="height: 400pt;">
+	</a>
+
+
+    <p>
+        All shell behavior may be understood within the context of this
+        model, though it is not complete.
+    </p>
+
+</div>
+
     <!--
-        Model of Shell Behavior:
-
-        Prompt
-        Getline
-        Parse
-        Fork?
-        Exec
-        Join
-        Prompt
-
-        <p>
-            All shell behavior may be understood within the context of this
-            model.
-        </p>
-
 
     Terminal Pro:
         fork'ed == subshell environment
@@ -51,7 +53,7 @@ last-updated: February 2020
 
 
 
-   
+
 Command-Line Signals:
     Ctrl-c sends the interrupt signal, SIGINT, which most programs respond
     to by terminating immediately.  Handy for killing an unresponsive
@@ -62,8 +64,8 @@ Command-Line Signals:
     user with a new prompt (Kerrisk, p389)
     Some people use this rather than backspacing an erroeous line
 
-    The desktop's familiar copy/paste is overruled on the terminal 
-    emulator (ctrl-v is interpretted as an escape sequence); 
+    The desktop's familiar copy/paste is overruled on the terminal
+    emulator (ctrl-v is interpretted as an escape sequence);
     use either ctrl-shift-v or middle-click to paste.
 
 Text Editor: vim
@@ -103,7 +105,7 @@ Exercises:
             The shell is a process, like any other.
             For your current shell:
             <ol>
-                <li>What was its command-line arguments</li>    
+                <li>What was its command-line arguments</li>
                 <li>
             </ol>
         </li>
@@ -125,119 +127,6 @@ Exercises:
 
 </div>
 
-<div class="content" id="finding-files">
-    <h2>Finding Files</h2>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Remember: <br>
-            <code> fd what where </code>
-        </p>
-    </div>
-
-    <p>
-        The <a href="https://github.com/sharkdp/fd">fd</a> 
-        utility is a simple, user-friendly alternative to 
-        <a href="http://www.gnu.org/software/findutils/">find</a>.
-        Usage:
-    </p>
-
-    <div class="code">
-        $ fd [PATTERN] [PATH]
-    </div>
-
-    <p>
-        Where <em>pattern</em> is a regular expression, and
-        <em>path</em> is the directory you'd like to start looking in.
-        It searches there, and then it searches recursively downward through 
-        the directory tree which started there.
-        For each file, it attempts to match its basename against <em>pattern.</em>
-        If it matches, it then prints the name of the file.
-    </p>
-
-    <p>
-        By default, <code>fd</code> checks filenames, but it can check any other 
-        file characteristic, as well.
-        For instance, to restrict results to directories, we could use
-    </p>
-
-    <div class="code">
-        $ fd --type d [PATTERN] [PATH]
-    </div>
-
-    <p>
-        For a few reasons, I recommend <code>fd</code> over the classic 
-        GNU Findutils:
-    </p>
-
-    <ol style="margin-left: 5%; padding-right: 10%;">
-        <li>
-            <p>
-                Only one utility to learn.
-                In practice, <code>fd</code> replaces both <code>find</code> 
-                and <code>locate</code>.
-                Specifically, it's fast and friendly enough that there's no longer
-                a need for <em>locate</em>.
-            </p>
-        </li>
-        <li>
-            <p>
-                Ameniable defaults.
-                <code>fd</code> matches only basenames, and thereby avoids printing
-                pages of results.
-                More, it does not require a flag to search for filenames.
-            </p>
-        </li>
-        <li>
-            <p>
-                Regex by default.
-                Regex is a more powerful and expressive string-matching language
-                than shell globbing.
-            </p>
-        </li>
-        <li>
-            <p>
-                Simpler in Construction.
-                No database to worry about.
-            </p>
-        </li>
-    </ol>
-
-    <h3>Searching Files with <code>rg</code></h3>
-    <p>
-        The <a href="https://github.com/BurntSushi/ripgrep"><code>rg</code></a> 
-        utility recursively descends through a directory tree, 
-        opens each file, reads its contents and attempts to
-        match each line against a given regex pattern.
-        If a line contains a match, then it prints the filename and those lines;
-        effectively, it searches files for a particular pattern.
-        Its simplest usage is:
-    </p>
-
-    <div class="code">
-        $ rg PATTERN [PATH...]
-    </div>
-
-    <p>
-        This, again, is a reimagining of a classic UNIX utility&mdash; 
-        in this case, the venerable 
-        <em><a href="https://en.wikipedia.org/wiki/Grep">grep</a></em>.
-        It's mostly just easier to use.
-    </p>
-
-    <p>
-        Your primary documentation for regex is <a href="https://docs.rs/regex/1.4.3/regex/#syntax">here</a>. Trust me on this.
-    </p>
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://github.com/sharkdp/fd">fd</a></li>
-        <li><a href="https://github.com/BurntSushi/ripgrep">ripgrep</a></li>
-        <li><a href="https://docs.rs/regex/1.4.3/regex/#syntax">Regex - Rust</a></li>
-    </ul>
-</div>
-
 
 
 
@@ -250,7 +139,7 @@ Exercises:
     <p>
         After <a href="terminals-and-shells.html#simple-commands">word splitting</a>
         the next step on the journey of command execution is <em>shell
-        expansion.</em> 
+        expansion.</em>
         Bash searches each word, from left to right, in two consequetive passes.
         If a word is single-quoted, then it is exempt from expansion.
     </p>
@@ -268,14 +157,14 @@ Exercises:
         <li>
             <a href="https://www.gnu.org/software/bash/manual/html_node/Tilde-Expansion.html">Tilde</a>&emsp;  <code>~</code>
             <br>
-            Expands to the absolute pathname of your home directory, or 
+            Expands to the absolute pathname of your home directory, or
             <code>HOME</code> parameter, if it is set.
         </li>
         <li>
             <a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html">Parameter</a> &emsp;  <code>$</code>
             <br>
-            <code>$NAME</code> is replaced by the value of <code>NAME</code> 
-            parameter, if it exists, and null string otherwise. 
+            <code>$NAME</code> is replaced by the value of <code>NAME</code>
+            parameter, if it exists, and null string otherwise.
         </li>
         <li>
             <a href="https://www.gnu.org/software/bash/manual/html_node/Command-Substitution.html">Command</a> &emsp;  <code>$( </code><em>command</em><code> )</code>
@@ -309,11 +198,11 @@ Exercises:
     <h3 id="globbing"> Filename Expansion </h3>
 
     <p>
-        The second expansion pass is <em>filename expansion,</em> sometimes 
+        The second expansion pass is <em>filename expansion,</em> sometimes
         referred to as <em>globbing.</em>
         These expansions let you manipulate multiple files quickly.
-        If any word contains an asterisk <code>*</code>, question mark 
-        <code>?</code>, or brackets <code>[]</code>, then it is regarded as a 
+        If any word contains an asterisk <code>*</code>, question mark
+        <code>?</code>, or brackets <code>[]</code>, then it is regarded as a
         <em>pattern,</em> and is replaced by an alphabetical list of all
         filenames in the current directory matching that pattern.
     </p>
@@ -344,10 +233,10 @@ Exercises:
     <div class="aside-right">
         <h4>Note:</h4>
         <p>
-            By default, hidden files must be matched explicitly. 
+            By default, hidden files must be matched explicitly.
         </p>
     </div>
-  
+
     <div class="code">
         *
     </div>
@@ -376,7 +265,7 @@ Exercises:
         After these steps have been completed, Bash removes unquoted
         quotes, and prepares to execute the command.
     </p>
-   
+
   <h3> See Also: </h3>
   <ul>
     <li><a href="http://mywiki.wooledge.org/glob"> glob - Greg's Wiki </a></li>
@@ -387,31 +276,31 @@ Exercises:
 	<h2 style="margin-bottom: 0;">I/O Redirection</h2>
     <h4> and Standard File Descriptors</h4>
 
-    
+
 	<p>
         In interactive use, the shell is connected to its terminal
-        by 
-        <a href="./processes.html#standard-file-descriptors">three open files</a>.  
-        The first file, <code>STDIN</code>, is the keyboard. 
-        When <code>bash</code> is waiting for you to enter a new command, 
-        it's actually asked the kernel to 
-        read a line from this file, and the kernel has 
-        paused execution of <code>bash</code> until a line is 
+        by
+        <a href="./processes.html#standard-file-descriptors">three open files</a>.
+        The first file, <code>STDIN</code>, is the keyboard.
+        When <code>bash</code> is waiting for you to enter a new command,
+        it's actually asked the kernel to
+        read a line from this file, and the kernel has
+        paused execution of <code>bash</code> until a line is
         available (a line is available once you hit enter).
-        The second and third open files, 
+        The second and third open files,
         <code>STDOUT</code> and <code>STDERR</code>, are the terminal
-        screen: Whenever <code>bash</code> wants to print something out, 
-        it writes characters to one of these files. 
+        screen: Whenever <code>bash</code> wants to print something out,
+        it writes characters to one of these files.
     </p>
 
     <p>
 	    Recall that each process created by the <code>fork</code> system
-        call <a href="processes.html#process-creation">inherits</a> 
+        call <a href="processes.html#process-creation">inherits</a>
         its parent's attributes, and that these attributes
         include file descriptors (open files).
         This means that we, the users, can reasonably expect each
-        child of <code>bash</code> to have our keyboard present at 
-        <code>STDIN</code> and our terminal screen at both 
+        child of <code>bash</code> to have our keyboard present at
+        <code>STDIN</code> and our terminal screen at both
         <code>STDOUT</code> and <code>STDERR</code>.
     </p>
 
@@ -425,10 +314,10 @@ Exercises:
     </div>
 
     <p>
-        will inherit the terminal as primary I/O, and thereby 
+        will inherit the terminal as primary I/O, and thereby
         print to the terminal screen.
     </p>
-   
+
     <h3> Redirection </h3>
 
     <p>
@@ -457,20 +346,20 @@ Exercises:
         Redirection is shell functionality, and <code>bash</code>
         remaps the appropriate open files before execution takes place.
         More, <code>command</code> does not recieve <code>&lt; file</code>
-        as arguments; <code>bash</code> removes them after 
-        the changes have been made.  
+        as arguments; <code>bash</code> removes them after
+        the changes have been made.
     </p>
 
     <p>
         To redirect output:
     </p>
-        
+
     <ul style="list-style-type: none;">
-        <li> <code> command &gt; file </code> &emsp; Open <code>file</code> 
-            for writing; set length to zero; assign to <code>STDOUT</code>. 
+        <li> <code> command &gt; file </code> &emsp; Open <code>file</code>
+            for writing; set length to zero; assign to <code>STDOUT</code>.
             Then search for command.</li>
-        <li> <code> command &gt;&gt; file </code> &emsp; Open <code>file</code> 
-            for writing; seek to end; assign to <code>STDOUT</code>. 
+        <li> <code> command &gt;&gt; file </code> &emsp; Open <code>file</code>
+            for writing; seek to end; assign to <code>STDOUT</code>.
             Then search for command.</li>
     </ul>
 
@@ -480,10 +369,10 @@ Exercises:
     </p>
 
     <p>
-        Redirection can become quite involved. 
-        It is possible to redirect <code>STDERR</code>, 
-        to open a file and assign it an arbitrary file descriptor, 
-        to copy the assignment of a file descriptor, 
+        Redirection can become quite involved.
+        It is possible to redirect <code>STDERR</code>,
+        to open a file and assign it an arbitrary file descriptor,
+        to copy the assignment of a file descriptor,
         and to close an arbitrary file descriptor.
         All of this occurs within <code>bash</code>, after shell expansion
         and forking, and before it begins searching for the command.
@@ -514,21 +403,21 @@ Exercises:
     </div>
 
     <p>
-        the shell finds the <code>ls</code> executable, 
+        the shell finds the <code>ls</code> executable,
         <a href="processes.html#process-creation">forks</a> itself, and
-        instructs the child process to execute the appropriate program. 
-        That child program gets its working 
+        instructs the child process to execute the appropriate program.
+        That child program gets its working
         directory's entries from the kernel and prints them out.
-        The shell, meanwhile, 
+        The shell, meanwhile,
         <a href="https://man7.org/linux/man-pages/man2/wait.2.html">waits</a>
         in the background for the child process to terminate, then returns with a prompt.
     </p>
 
     <p>
-        For a few reasons, this strategy is preferrable. 
+        For a few reasons, this strategy is preferrable.
         However, there are times where it will not work.
-        For example, changing the current directory must be carried out 
-        by <code>bash</code> directly; 
+        For example, changing the current directory must be carried out
+        by <code>bash</code> directly;
         as such, <code>cd</code> is built in to the shell itself.
     </p>
 
@@ -556,103 +445,106 @@ Exercises:
 
 
 
-<div class="content" id="small-composable-utilities">
-    <h2>Small Composable Utilities</h2>
-
-
-    Example: Bzip2 from $ bzip2 --help
-
-     If invoked as `bzip2', default action is to compress.
-              as `bunzip2',  default action is to decompress.
-              as `bzcat', default action is to decompress to stdout.
-
-    If no file names are given, bzip2 compresses or decompresses
-    from standard input to standard output.  You can combine
-    short flags, so `-v -4' means the same as -v4 or -4v, &c.
-
-</div>
-
 <div class="content" id="finding-files">
-    <h2>Finding Files with <code>fd</code></h2>
+    <h2>Finding Files</h2>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Remember: <br>
+            <code> fd what where </code>
+        </p>
+    </div>
 
     <p>
-        <a href="https://github.com/sharkdp/fd">fd</a> is a simple, fast
-        and user-friendly alternative to <a href="http://www.gnu.org/software/findutils/">find</a>.
-        Its simplest usage searches for basenames:
+        The <a href="https://github.com/sharkdp/fd">fd</a>
+        utility is a simple, user-friendly alternative to
+        <a href="http://www.gnu.org/software/findutils/">find</a>.
+        Usage:
     </p>
 
     <div class="code">
-        $ fd [PATTERN] [PATH]
+        $ fd [pattern] [path ...]
     </div>
 
     <p>
         Where <em>pattern</em> is a regular expression, and
         <em>path</em> is the directory you'd like to start looking in.
-        It searches there, and then it searches recursively downward through 
+        It searches there, and then it searches recursively downward through
         the directory tree which started there.
-        By default it checks filenames, but can check any other file characteristic;
-        for instance, to restrict results to directories, we could use
+        For each file, it attempts to match its basename against <em>pattern.</em>
+        If it matches, it then prints the name of the file.
+    </p>
+
+    <p>
+        By default, <code>fd</code> checks filenames, but it can check any other
+        file characteristic, as well.
+        For instance, to restrict results to directories, we could use
     </p>
 
     <div class="code">
-        $ fd --type d [pattern] [path]
+        $ fd --type d [pattern] [path ...]
     </div>
 
     <p>
-        For a few reasons, I recommend <code>fd</code> over the classic 
+        For a few reasons, I recommend <code>fd</code> over the classic
         GNU Findutils:
     </p>
 
-    <ol>
+    <ol style="margin-left: 5%; padding-right: 10%;">
         <li>
-            Only one utility to learn
             <p>
-                In practice, <code>fd</code> replaces both <code>find</code> 
+                Only one utility to learn.
+                In practice, <code>fd</code> replaces both <code>find</code>
                 and <code>locate</code>.
                 Specifically, it's fast and friendly enough that there's no longer
                 a need for <em>locate</em>.
             </p>
         </li>
         <li>
-            Ameniable defaults
             <p>
+                Ameniable defaults.
                 <code>fd</code> matches only basenames, and thereby avoids printing
-                pages of results
+                pages of results.
+                More, it does not require a flag to search for filenames.
             </p>
         </li>
         <li>
-            Regex by default
             <p>
+                Regex by default.
                 Regex is a more powerful and expressive string-matching language
-                than shell globbing
+                than shell globbing.
             </p>
         </li>
         <li>
-            Simpler in Construction
             <p>
-                No database to worry about
+                Simpler in Construction.
+                No database to worry about.
             </p>
         </li>
     </ol>
 
     <h3>Searching Files with <code>rg</code></h3>
     <p>
-        The <a href="https://github.com/BurntSushi/ripgrep"><code>rg</code></a> 
-        utility recursively descends through a directory tree, 
-        opening each file, reading its contents and attempting to
-        match each line against a regex pattern.
-        If a line matches, it then prints the filename and those lines;
+        The <a href="https://github.com/BurntSushi/ripgrep"><code>rg</code></a>
+        utility recursively descends through a directory tree,
+        opens each file, reads its contents and attempts to
+        match each line against a given regex pattern.
+        If a line contains a match, then it prints the filename and those lines;
         effectively, it searches files for a particular pattern.
+	</p>
+
+	<p>
         Its simplest usage is:
     </p>
 
     <div class="code">
-        $ rg PATTERN [PATH...]
+        $ rg <i>pattern</i> [path ...]
     </div>
 
     <p>
-        This, again, is a reimagining of a classic UNIX utility&mdash; 
-        in this case, the venerable 
+        This, again, is a reimagining of a classic UNIX utility&mdash;
+        in this case, the venerable
         <em><a href="https://en.wikipedia.org/wiki/Grep">grep</a></em>.
         It's mostly just easier to use.
     </p>
@@ -668,4 +560,3 @@ Exercises:
         <li><a href="https://docs.rs/regex/1.4.3/regex/#syntax">Regex - Rust</a></li>
     </ul>
 </div>
-
