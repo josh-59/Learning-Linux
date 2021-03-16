@@ -234,8 +234,50 @@ nature, and none have succeeded.
 
 </div>
 
-Linus's take: C or GTFO
 
+<div class="content" id="functions">
+    <h2>Functions</h2>
+
+    <pre>
+
+          Main
+            |   fn
+            |   /|
+            |  / |
+            | /  |
+            |/   |
+            |
+            |\   |
+            | \  |
+            |  \ |
+            |   \|
+            |
+    </pre>
+
+    <p>
+        The first reason to create a function is that the code in the function
+        is very common, and it would be silly to repeat it.
+        This is the case with the standard library functions, like
+        <code>printf</code> and malloc.
+        Doing so saves programmer time, reduces mistakes, and reduces the burdern
+        of maintainership.
+    </p>
+
+    <p>
+        The second reason is more subtle: <em>main</em> became too
+        complicated. 
+        To reduce a function's apparent complexity, 
+        we introduce so-called <em>helper functions</em>.
+        These functions might do something as minor as assert if a
+        condition is true, and their use is highly recommended.
+    </p>
+
+    <p>
+        In either case, the programmer is presented with an abstraction of
+        some computer behavior.
+    </p>
+
+</div>
 
 Control Statements:
     Conditionals
@@ -260,3 +302,4 @@ Closing Remarks:
     http://freshmeat.sourceforge.net/articles/stop-the-autoconf-insanity-why-we-need-a-new-build-system
     In an ironic response, it took one lady four years to learn 
     how <em>autoconf</em> worked.
+

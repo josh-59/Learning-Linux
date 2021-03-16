@@ -53,68 +53,43 @@ Rewrite as "Obtaining Free Software"
     Pip / Gems / Cargo / (JavaScript) NPM / SNAP
 
 
+
 <div class="content" id="building-from-source">
-<h2>Building From Source</h2>
+    <h2>Building From Source</h2>
 
-<p>
-Free software is typically intended to be distributed, and its developer
-usually offers instructions for end-users to install it (typically, in a README file).
-Each project will use its preferred language and toolchain; 
-each of <em>Rust</em>, <em>Python</em>, <em>
-in particular, GNU produces a lot of software, and
-their <a href="https://www.gnu.org/software/automake/manual/html_node/Autotools-Introduction.html#Autotools-Introduction">build system</a> is fairly widely-used.
-It <em>is intended for simplicity for the end user,</em> 
-and not for simplicity for developers or maintainers.
-</p>
+    <p>
+        Free software is typically intended to be distributed, and its developers
+        usually offer instructions for end-users to install it 
+        (see their README file).
+        Each project will use its preferred language and toolchain; 
+        C has several, and GNU maintains their own. 
+        It is fairly widely-used, so we will focus on it here.
+    </p>
 
-To install GNU products from source, one enters its directory and issues:
+    <p>
+        "The primary goal of Autoconf is making the <em>user's</em>[sic] life easier;
+        making the <em>maintainer's</em>[sic] life easier is only a secondary goal.<sup><a href="https://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.70/html_node/Introduction.html#Introduction">[a]</a></sup>
+        Installation of packages from source has been reduced to three commands:
+    </p>
 
-$ ./configure && make && make install
+    <ol>
+        <li>
+            <code>./configure</code>&mdash; A script that queries the host machine
+            and adjusts the Makefile appropriately, in preparation for compilation
+        </li>
+        <li>
+            <code>make</code>&mdash; Compiles the package
+        </li>
+        <li>
+            <code>make install</code>&mdash; Installs the finished files into
+            their final locations.
+        </li>
+    </ol>
 
-<h3><code>make</code></h3>
-
-<div class="aside-left">
-<h4>Aside:</h4>
-
-<p>
-    An introduction to UNIX or UNIX-likes would not be complete without
-    a digression to <code>make</code>!
-</p>
-
-One expresses a program to be compiled in "recipes" of the form,
-
-hello: hello.c
-    gcc -o hello hello.c 
-
-
-and stores them in a file named <code>Makefile</code>.
-Now, whenever a source file changes (in this example, <code>hello.c</code>), 
-the command <code>make hello</code> will recompile the program, 
-via <code>gcc -o hello hello.c</code>.
-
-
-Quite a novel little utility, and it is general in the sense that the files in question
-need not be source/binary.
-However, 
-
-
-https://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.70/html_node/Introduction.html#Introduction
-    "The primary goal of Autoconf is making the <em>user's</em>[sic] life easier;
-    making the <em>maintainer's</em>[sic] life easier is only a secondary goal.
-
-
-
-Kernighan:  p96
-Invented 1976, 7th ed UNIX
-"an instant success"
-
-"This approach replaces code with data, and that's almost always a win."
-
-
-https://en.wikipedia.org/wiki/Make_(software)
-Original Make was written over a weekend
-    [It's rediculous to funnel such quantities of software through such a tool]
-    <a href="https://en.wikipedia.org/wiki/GNU_Autotools#Components">obtuse to say the least</a>
+    <p>
+        evolved organically
+        arguably not the best approach to such a task
+    </p>
 
     <h3>See Also:</h3>
     <ul>
@@ -123,6 +98,7 @@ Original Make was written over a weekend
 </div>
 
 
+<div class="content" id="binary-packages">
 
 Package Contents: Metadata and Payload
         Rewrite to use Arch Linux's packaging as example
@@ -312,7 +288,7 @@ Closing Remarks:
         oldest, and possibly simplest, packaging scheme.
         By modern standards, it may be considered crude, 
         because it leaves dependency resolution to the user.<sup><a href="https://www.slackbook.org/html/package-management.html">[2]</a></sup>
-        For us, it represents a nice jumping-off point.
+        It is easily dissected, though, and so represents a nice jumping-off point.
     </p>
 
     <p>
@@ -610,6 +586,52 @@ https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html
         is often mirrored by other organizations.
     </p>
 </div>
+
+<div class="content" id="make">
+    <h2>Closing Remarks:</h2>
+    <h4><code>make</code></h4>
+
+    <div class="aside-left">
+    <h4>Aside:</h4>
+    
+        <p>
+            An introduction to UNIX or UNIX-likes would not be complete without
+            <code>make</code>!
+        </p>
+    </div>
+
+    One expresses a program to be compiled in "recipes" of the form,
+
+    hello: hello.c
+        gcc -o hello hello.c 
+
+
+    and stores them in a file named <code>Makefile</code>.
+    Now, whenever a source file changes (in this example, <code>hello.c</code>), 
+    the command <code>make hello</code> will recompile the program, 
+    via <code>gcc -o hello hello.c</code>.
+    
+
+    Quite a novel little utility, and it is general in the sense that the files 
+    in question need not be source/binary.
+    However, 
+
+
+    Kernighan:  p96
+    Invented 1976, 7th ed UNIX
+    "an instant success"
+
+    "This approach replaces code with data, and that's almost always a win."
+
+
+    https://en.wikipedia.org/wiki/Make_(software)
+    Original Make was conceived and written over a weekend
+    [It's rediculous to funnel such quantities of software through such a tool]
+    <a href="https://en.wikipedia.org/wiki/GNU_Autotools#Components">obtuse to say the least</a>
+
+</div>
+
+
 
 <div id="references" class="content">
     <h2> References </h2>

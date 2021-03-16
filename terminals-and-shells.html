@@ -8,9 +8,6 @@ last-updated: March, 2021
 To Do:
 
     Shells:
-    http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf
- Today, the way in which commands are executed by the shell can be summarized as follows: 1) The shell reads a command line from the terminal. 2) It creates a child process by fork.3) The child process uses exec to call in the command from a file. 4) Meanwhile, the parent shell uses wait to wait for the child (command) process to terminate bycalling exit.5) The parent shell goes back to step 1)
-
     Bash Command Interpretation Cheat Sheet
 
     Simple Commands Definition:
@@ -18,37 +15,8 @@ To Do:
 
     Standard File Descriptors:
         Include redirection
-    <p>
-        By this convention, writing an <code>ls</code> clone becomes simple:
-        For each <a href="https://www.man7.org/linux/man-pages/man3/readdir.3.html">entry</a> in the current directory, <a href="https://man7.org/linux/man-pages/man3/printf.3.html">print</a> it out!
-    </p>
 
-    Basic Bash Grammar:
-        Pipeline and Lists
-
-    Shell scripting:
-        https://medium.com/better-programming/the-ultimate-programmers-guide-to-bash-scripting-2d11d4e6e978
-        help for
-        help if
-        help [[
-
-        https://www.gnu.org/software/bash/manual/html_node/Shell-Parameters.html#index-parameters
-        variable=[value]
-            [value] undergoes tilde expansion, parameter and variable expansion,
-            command substitution, arithmetic expansion, and quote removal;
-            does not undergo filename expansion
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-
-            Most shells support <em>tab completion:</em>
-            If you've typed enough of a command-name or filename to
-            uniquely identify it, you can press "tab," and it will complete it for you.
-        </p>
-    </div>
-
-    <div class="code">
+        <div class="code">
         $ <i>command</i> [arg] ... [redirection] ...
     </div>
 
@@ -57,6 +25,9 @@ To Do:
         in GNU <code>bash</code>.
         It effectively forms a unit in our command-line language.
     </p>
+
+    Closing Remarks:
+        Text Editors
 
 <div class="content" id="closing-remarks">
     <h2>Closing Remarks</h2>
@@ -129,10 +100,6 @@ To Do:
 </div>
 
 
-    Terminal screensavers
-    https://gitlab.com/jallbrit/cbonsai/-/tree/master
-
-
 
 -->
 
@@ -152,10 +119,8 @@ To Do:
 
 <div id="introduction" class="content">
 	<h1> Terminals and Shells</h1>
-	<h4>Under Construction!</h4>
 
-
-    <div class="quote-text" style="margin-top: 15px;">
+    <div class="quote-text">
         "In effect, tools are verbs in a language, <br>
 		and files are the nouns that the verbs apply to."
     </div>

@@ -4,30 +4,97 @@ title: Terminal Pro
 last-updated: February 2020
 ---
 
+<!--
+
+    Shell Execution Model:
+
+    Also, program <code>explain</code>, implementing this in a how-it-works sorta way
+
+
+Basic Bash Grammar:
+        Pipeline and Lists
+    Shell scripting:
+        https://medium.com/better-programming/the-ultimate-programmers-guide-to-bash-scripting-2d11d4e6e978
+        help for
+        help if
+        help [[
+
+        https://www.gnu.org/software/bash/manual/html_node/Shell-Parameters.html#index-parameters
+        variable=[value]
+            [value] undergoes tilde expansion, parameter and variable expansion,
+            command substitution, arithmetic expansion, and quote removal;
+            does not undergo filename expansion
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+
+            Most shells support <em>tab completion:</em>
+            If you've typed enough of a command-name or filename to
+            uniquely identify it, you can press "tab," and it will complete it for you.
+        </p>
+    </div>
+
+
+
+
+
+-->
+
 <div id="nav_bar_2" class="nav">
 	<ul>
 		<li><a href="#introduction"> Introduction </a></li>
 		<li><a href="#model"> Shell Execution Model </a></li>
         <li><a href="#shell-expansion">Shell Expansion</a></li>
 		<li><a href="#redirection">I/O Redirection</a></li>
-        <li><a href="#searching-for-commands">Searching for Commands</a></li>
 		<!--
 		<li><a href="#shell-features"> Other Shell Features </a></li>
         <li><a href="#special-characters">Terminal Special Characters</a></li>
         -->
         <li><a href="#finding-files">Finding Files</a></li>
-		<li><a href="#missing-semester"> Missing Semester </a></li>
-		<li><a href="#references"> References </a></li>
+        <!--<li><a href="#references"> References </a></li>-->
 	</ul>
 </div>
 
 <div class="content" id="introduction">
     <h1>Terminal Pro</h1>
 
+    <p>
+        The command-line interface persists because it is a 
+        powerful means of interacting with the machine. 
+        Here we will discuss some particulars of shell behavior, and
+        introduce useful tools.
+    </p>
+
 </div>
 
 <div class="content" id="model">
 	<h2>Shell Execution Model</h2>
+
+    <p>
+        In <em>The Evolution of the Unix Time-Sharing System,</em>
+        Dennis Ritchie summarizes shell behavior:<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[1]</a></sup>
+    </p>
+
+
+    <blockquote style="background-color: #f9f9f9;
+                    border: 2px solid #ddd;
+                    padding: 5px;">
+ Today, the way in which commands are executed by the shell can be summarized as follows:
+        <ol> 
+            <li> The shell reads a command line from the terminal. </li>
+            <li> It creates a child process by fork.</li>
+            <li> The child process uses exec to call in the command from a file. </li>
+            <li> Meanwhile, the parent shell uses wait to wait for the child (command) process to terminate by calling exit. </li>
+            <li> The parent shell goes back to step </li>
+        </ol>
+    </blockquote>
+
+    <p>
+
+    </p>
+
+
 
 	<a href="assets/img/shell-model.pdf" title="Click for PDF">
 		<img src="assets/img/shell-model-pic.png" style="height: 400pt;">
@@ -385,65 +452,6 @@ Exercises:
     </ul>
 
 </div>
-
-
-
-<div class="content" id="searching-for-commands">
-    <h2>Searching for Commands</h2>
-
-    <h3>Commands and Builtin's</h3>
-
-    <p>
-        Most commands that users enter into <code>bash</code> are separate programs.
-        For instance, <code>ls</code> is a separate program. When a user enters,
-    </p>
-
-    <div class="code">
-        $ ls
-    </div>
-
-    <p>
-        the shell finds the <code>ls</code> executable,
-        <a href="processes.html#process-creation">forks</a> itself, and
-        instructs the child process to execute the appropriate program.
-        That child program gets its working
-        directory's entries from the kernel and prints them out.
-        The shell, meanwhile,
-        <a href="https://man7.org/linux/man-pages/man2/wait.2.html">waits</a>
-        in the background for the child process to terminate, then returns with a prompt.
-    </p>
-
-    <p>
-        For a few reasons, this strategy is preferrable.
-        However, there are times where it will not work.
-        For example, changing the current directory must be carried out
-        by <code>bash</code> directly;
-        as such, <code>cd</code> is built in to the shell itself.
-    </p>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            The <code>type</code> command can be used to check if a command
-            is a builtin.
-        </p>
-    </div>
-
-    <p>
-        Commands such as these are called <em>builtins</em>, and can be
-        listed by,
-    </p>
-
-    <div class="code">
-        $ help
-    </div>
-
-    <p>
-        Within Bash, builtins <a href="https://www.gnu.org/software/bash/manual/html_node/Command-Search-and-Execution.html#Command-Search-and-Execution">take precedence</a> over external commands.
-    </p>
-</div>
-
-
 
 <div class="content" id="finding-files">
     <h2>Finding Files</h2>
