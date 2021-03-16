@@ -15,15 +15,14 @@ last-updated: February 2021
         <a href="https://www.dedoimedo.com/computers/grub.html">GRUB bootlader - Full tutorial</a>
 
 UNIX: A Brief History:
-        Make plain the relevance of such history
-        Stress Dennis Ritchie's first work on MULTIX
-        Note documentation about UNIX: 
-            From Tanenbaum's OS Design and Implementation:
-            Thompson 19878
-            Bach (1987)
-            Lions (1996)
-            Vahalia (1996)
-
+    Make plain the relevance of such history
+    Stress Dennis Ritchie's first work on MULTIX
+    Note documentation about UNIX: 
+        From Tanenbaum's OS Design and Implementation:
+        Thompson 19878
+        Bach (1987)
+        Lions (1996)
+        Vahalia (1996)
 
 Free as in Freedom:
 See Also:
@@ -35,17 +34,69 @@ At the pioneering MIT Artificial Intelligence Lab in the early 1980s, a company 
 """
 
 Replace Linux Mint:
-        Outline:
-        1) A collection of known-good recommendations
-        2)
-        The Linux Desktop is sufficiently mature that I can
-        recommend it for use by people uninterested in software;
-        it being an open-source work,
-        the rest of this book will be concerned with developing the
-        underlying concepts of it (for instance, the semantics of
-        opening a file), and is intended to be an introduction
-        for the "power user."
-        Linux should never be work.
+
+Linux Mint:
+    <h3>Other Debian-based Distributions</h3>
+    
+    <p>
+        When an example operating system is required in this book, 
+        Linux Mint will be used, but similar remarks apply to 
+        any Debian-based distribution (including Debian itself).
+        Other popular Debian-based distributions include:
+    </p>
+
+    <ul>
+        <li><a href="">Elementary OS</a></li>
+        <li><a href="">Pop!_OS</a></li>
+        <li><a href="https://zorinos.com/">ZorinOS</a></li>
+        <li><a href="">Ubuntu</a> (Large Community)</li>
+        <li><a href=""MX Linux</a></li>
+        <li><a href="https://pureos.net/">PureOS</a> (FSF-Certified "Free")</li>
+    </ul>
+
+    <p>
+        Slackware and Debian are not the only non-derivate distributions 
+        of our time.
+        There is also <a href="">Fedora</a>, <a href="">Gentoo</a>,
+        <a href="">openSUSE</a>, <a href="">Arch</a>, and <a href="">Red Hat
+        Enterprise Linux</a>, just to name a few.
+    </p>
+
+    <p>
+        I recommend Linux Mint as newcomers' first distribution, because
+        everything <em>simply works.</em>
+        No configuration is required. 
+        Upon installation, the user is presented
+        with a complete desktop, including backup schemes, audio/video codecs, 
+        proprietary drivers, and a development environment.
+        I use it because one can "get in it and go."
+    </p>
+
+    <p>
+        In my opinion, Linux Mint has not taken its beginner-centricism far enough:
+        It should be the zero-maintenance desktop.  
+        It should, for example:
+    </p>
+
+    <ol>
+        <li>
+            Choose the appropriate driver for the user upon installation
+            (Hint: If you have a nvidia GPU, you want the nvidia driver)
+        </li>
+        <li>
+            Automatically update (by default)
+        </li>
+        <li>
+            Restart once a week (by default)
+        </li>
+    </ol>
+
+    <p>
+        Linux Mint should be the desktop that no-one cares about, and it should be 
+        <em>really good</em> at it&mdash; emminently appropriate for workstations,
+        schools, etc..
+        But that's just, like, my opinion.
+    </p>
 
 
 <div class="content" id="current-linux-distributions">
@@ -81,8 +132,6 @@ Replace Linux Mint:
 
     <p>
         Do you want a tastefully chic desktop, 
-        <a href="https://zorinos.com/">more Windows than Mac</a>? 
-        Or perhaps, <a href="https://elementary.io/">more Mac than Windows</a>?
     </p>
 
     <p>
@@ -96,24 +145,12 @@ Replace Linux Mint:
     </p>
 
     <p>
-        <a href="https://pureos.net/">PureOS</a> FSF-Certified "Free"
-    </p>
-
-    <p>
         Do you want <a href="">a massive community</a> and 
         <a href="https://ubuntu.com/tutorials?topic=desktop">tons of helpful tutorials</a>?
         then <a href="https://ubuntu.com">Ubuntu</a> is awesome.
     </p>
 
-    <ul>
-        <li>Linux Mint</li>
-        <li>Elementary OS</li>
-        <li>Pop! OS</li>
-        <li>MX Linux</li>
-        <li><a href="https://pureos.net/">PureOS</a> FSF-Certified "Free"</li>
-    </ul>
-
-    <ul>
+        <ul>
         <li><a href="https://www.opensuse.org/">openSUSE</a> for makers</li>
         <li><a href="https://getfedora.org/">Fedora</a></li>
         <li>CentOS (soon to be <a href="https://en.wikipedia.org/wiki/Rocky_Linux">Rocky Linux</a>)</li>
@@ -622,6 +659,14 @@ Replace Linux Mint:
     <center>Slackware 1.01, released 1993</center>
     </div>
 
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Debian is one of the most respected distributions of our time,
+            and is oft-used as an upstream source for other distributions.
+        </p>
+    </div>
+
     <p>
         In 1993, Ian Murdock also grew frustrated with SLS Linux,<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[29]</a></sup>
         and, more, sought a better solution to distribution creation than
@@ -635,24 +680,22 @@ Replace Linux Mint:
 
     <p>
         Murdock decided to make the process open, in the spirit of GNU and Linux,
-        thereby ensuring satisfaction of user's requirements while also
-        unloading the burden of creation and maintainership.<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[29]</a></sup>
+        thereby ensuring satisfaction of user's requirements.<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[29]</a></sup>
         He named it <a href="https://www.debian.org">Debian</a>,
         a portmanteau of <em>Debra,</em> his wife, and <em>Ian,</em> himself.<sup><a href="https://www.debian.org/doc/manuals/project-history/intro.en.html">[30]</a></sup>
         The project attracted developers, and today around
         a thousand people volunteer their spare time.<sup><a href="https://www.debian.org/intro/philosophy">[31]</a></sup>
-        Debian is one of the most respected distributions of our time,
-        and is oft-used as an upstream source for other distributions.
     </p>
 
+    
     <div class="img-center">
         <a title="The Debian Project (GPL &lt;http://www.gnu.org/licenses/gpl.html&gt; or Copyrighted free use), via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Debian_Etch-ja.png"><img width="1024" alt="Debian Etch-ja" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Debian_Etch-ja.png/1024px-Debian_Etch-ja.png"></a>
         <center>Debian 4 "Etch", released 2007</center>
     </div>
 
+
     <p>
-        With the internet came
-        <a href="https://distrowatch.com/images/other/distro-family-tree.png">many</a>
+        With the internet came many
         Linux distributions.
         I think of them as flavors of the same thing, rather than
         necessarily different.
@@ -674,11 +717,7 @@ Replace Linux Mint:
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            For the new user, many Linux flavors are appropriate, including
-            <a href="https://www.linuxmint.com/">Mint</a>,
-            <a href="https://ubuntu.com/">Ubuntu</a>,
-            <a href="https://manjaro.org/">Manjaro</a>, and
-            <a href="https://elementary.io/">Elementary OS</a>.
+            Mint is one of several Debian derivatives.
         </p>
     </div>
 
@@ -687,10 +726,18 @@ Replace Linux Mint:
         <a href="https://linuxmint.com/">Linux Mint,</a>
         but then, I'm a simple guy.
         Mint is a characteristically professional operating system,
+        and <strike>I used to wear polos to school</strike>
         and focuses on productivity&mdash; that means you'll be up and
         running before you know it.
         It is extremely new-user friendly, yet maintains the performance
         of any other UNIX-like operating system.
+    </p>
+
+    <p>
+        For example, Mint 19 introduced <em>Timeshift.</em> From <a href="https://github.com/linuxmint/timeshift">their github:</a>
+        "Timeshift protects your system by taking incremental
+        snapshots of the file system at regular intervals. These snapshots
+        can be restored at a later date to undo all changes to the system."
     </p>
 
     <p>
@@ -703,73 +750,48 @@ Replace Linux Mint:
     </p>
 
     <div class="img-center">
-<a title="Linux Mint team, GPLv2 &lt;https://www.gnu.org/licenses/old-licenses/gpl-2.0.html&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Linux_Mint_19.1_%22Tessa%22_(Cinnamon).png"><img width="1024" alt="Linux Mint 19.1 &quot;Tessa&quot; (Cinnamon)" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Linux_Mint_19.1_%22Tessa%22_%28Cinnamon%29.png/512px-Linux_Mint_19.1_%22Tessa%22_%28Cinnamon%29.png"></a>
-        <center>Linux Mint 19.1 "Tessa", Released 2018</center>
-    </div>
-
-    <div class="aside-right" style="margin-top: 25px;">
-        <h4>Do it:</h4>
-        <p>
-            Try it out on an old computer!
-        </p>
+        <a title="Zoodino, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Linux_Mint_20.1_%22Ulyssa%22_Cinnamon.png"><img width="1024" alt="Linux Mint 20.1 &quot;Ulyssa&quot; Cinnamon" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Linux_Mint_20.1_%22Ulyssa%22_Cinnamon.png/1024px-Linux_Mint_20.1_%22Ulyssa%22_Cinnamon.png"></a>
+        <center>Linux Mint 20.1 "Ulyssa", Released 2021</center>
     </div>
 
     <p>
-        New for Mint 19 is <em>Timeshift.</em> From <a href="https://github.com/linuxmint/timeshift">their github:</a>
-        "Timeshift protects your system by taking incremental
-        snapshots of the file system at regular intervals. These snapshots
-        can be restored at a later date to undo all changes to the system."
+        When an example operating system is required in this book, 
+        Linux Mint will be used, but similar remarks apply to 
+        virtually any distribution, with a little perusing.
     </p>
+
+    <h3>Other Popular Distributions</h3>
+    
+    <p>
+        Popular Debian-based distributions (list is not complete):
+    </p>
+
+
+    <ul>
+        <li><a href="https://elementary.io/">elementary OS</a></li>
+        <li><a href="https://pop.system76.com/">Pop!_OS</a></li>
+        <li><a href="https://zorinos.com/">ZorinOS</a></li>
+        <li><a href="https://ubuntu.com/">Ubuntu</a> (Large Community)</li>
+        <li><a href="https://mxlinux.org/">MX Linux</a></li>
+        <li><a href="https://pureos.net/">PureOS</a> (FSF-Certified "Free")</li>
+    </ul>
 
     <p>
-        Mint isn't perfect:  It tends to be boring.
-        Changes from release to release are minor, and the software available
-        from Debian's repositories (which Mint is downstream of)
-        tends to be mature and stable, as opposed to new and unproven.
+        Slackware and Debian are not the only independant distributions 
+        of our time.
+        There is also <a href="https://getfedora.org/">Fedora</a>, 
+        <a href="https://www.opensuse.org/">openSUSE</a>, and 
+        <a href="https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux">Red Hat Enterprise Linux</a>, just to name a few.
     </p>
 
-    <h3> Trying it Out </h3>
-
-       <div class="aside-right" style="margin-top: 20px;">
-        <h4>Pro Tip:</h4>
-        <p>
-            Make sure Wi-Fi works
-        </p>
-    </div>
-
-    <p>
-        Most distributions, including Mint, provide <a href="https://linuxmint-installation-guide.readthedocs.io/en/latest/install.html">"try before you buy"</a>
-        functionality:  They let you boot into the working operating system from
-        the installation media alone. By this route, you can see and use
-        the operating system without making permanent changes to the machine.
-    </p>
-
-    <p>
-        Linux usage is becoming more widespread, and hardware vendors are
-        taking note:  Both Dell and Lenovo
-        ship machines with Ubuntu preinstalled,
-        and there is <a href="https://itsfoss.com/get-linux-laptops/">a host of</a>
-        botique vendors selling machines with different
-        varieties preinstalled&mdash;
-        I have my eye on System76's <em>Pangolin.</em>
-    </p>
-
-    <p>
-        Gaming on Linux is
-        <a href="https://store.steampowered.com/linux">developing rapidly</a>,
-        but still immature.
-        If you have a gaming desktop and want to try Linux, I recommend
-        dual-booting on a separate hard drive: They're cheap, and you will
-        avoid messing around with partitions.
-        But, back up any important data anyhow.
-    </p>
-
+    
     <h3>See Also:</h3>
     <ul>
-        <li><a href="https://linuxmint-installation-guide.readthedocs.io/en/latest/index.html"> Linux Mint Installation Guide</a> (Official)</li>
-        <li><a href="https://www.balena.io/etcher/"> balenaEtcher - Flash OS images to SD cards & USB drives</a> (Free, cross-platform) </li>
-</div>
+        <li><a href="https://linuxmint-installation-guide.readthedocs.io/en/latest/index.html"> Linux Mint Installation Guide</a></li>
+        <li><a href="https://www.balena.io/etcher/"> balenaEtcher - Flash OS images to SD cards & USB drives</a> </li>
     </ul>
+
+</div>
 
 <div class="content" id="closing-remarks">
     <h2 style="margin-bottom: 0;">Closing Remarks:</h2>
@@ -791,8 +813,9 @@ Replace Linux Mint:
     </blockquote>
 
     <p>
-        The result was a wealth of media attention and the
-        <a href="https://opensource.org/">Open Source Initiative</a>.
+        The result was a wealth of media attention, the
+        <a href="https://opensource.org/">Open Source Initiative</a> and 
+        <a href="https://www.mozilla.org/en-US/about/history/">Mozilla</a>.
         Both GNU and the OSI agree that their respective terms are
         nearly synonymous.<sup><a href="https://opensource.org/faq#free-software">[33]</a><a href="https://www.gnu.org/philosophy/free-open-overlap.html">[34]</a></sup>
         In this work, and in life, we will use "open-source"
@@ -810,10 +833,10 @@ Replace Linux Mint:
         In addition, more developers have taken part, and introduced a number of
         licenses to suit their needs.
         These licenses can be divided into two classes:
-        Permissive software licenses (e.g., MIT, Apache, BSD) do not perpeturate
+        Permissive licenses (e.g., MIT, Apache, BSD) do not perpetuate
         themselves, and so indirectly allow derivate works to become proprietary;
         nonpermissive/copyleft licenses (e.g., GPL, <a href="https://en.wikipedia.org/wiki/Mozilla_Public_License">MPL</a>), on the other hand, <em>do</em>
-        perpeturate themselves.<sup><a href="https://opensource.org/faq#permissive">[36]</a><a href="https://opensource.org/faq#copyleft">[37]</a></sup>
+        perpetuate themselves.<sup><a href="https://opensource.org/faq#permissive">[36]</a><a href="https://opensource.org/faq#copyleft">[37]</a></sup>
     </p>
 
     <p>
@@ -822,12 +845,10 @@ Replace Linux Mint:
         <a href="https://people.freebsd.org/~phk/">Beerware License</a>,
         the <a href="https://en.wikipedia.org/wiki/WTFPL">Do What The Fuck You Want License</a>,
         and the <a href="https://unlicense.org/">Unlicense</a> (quite popular).
-        These each, with varying degrees of professionality, place code in the
+        These each, with varying degrees of professionalism, place code in the
         public domain;
         from there, anyone can claim it as their own, and can put it in any other work,
         under any other license.
-        Put another way, their "strategem" for fighting the corporate/proprietary
-        sect is to dump it in their (our) laps and walk away.
     </p>
 
     <h3>See Also:</h3>
@@ -835,18 +856,20 @@ Replace Linux Mint:
         <li><a href="https://ar.to/2010/01/dissecting-the-unlicense"> Dissecting the Unlicense: Software Freedom in Four Clauses and a link</a></li>
     </ul>
 
-    <h3>An Article Similar to This One</h3>
-    <ul>
-        <li><a href="http://www.opensuse-guide.org/history.php">History and Background - Unofficial Guide to OpenSUSE Leap 15.2</a> </li>
-    </ul>
-
-
 </div>
 
 <div id="video" class="content">
     <h2 style="margin-bottom: 2pt;"> Greg Kroah-Hartman </h2>
     <h4 style="margin-bottom: 18pt;"> Linux Kernel Development </h4>
     <iframe class="video" src="https://www.youtube.com/embed/vyenmLqJQjs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+
+<div class="content">
+    <h3>An Article Similar to This One</h3>
+    <ul>
+        <li><a href="http://www.opensuse-guide.org/history.php">History and Background - Unofficial Guide to OpenSUSE Leap 15.2</a> </li>
+    </ul>
 </div>
 
 <div id="references" class="content">
