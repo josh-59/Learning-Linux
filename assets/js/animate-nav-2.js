@@ -3,11 +3,13 @@
 //      - Eliminate nav-bar 'flicker' when navigating across pages in 
 //          narrow-window mode
 
-$(document).ready(highlight_nav);
-$(document).on("scroll", highlight_nav);
 
 $(document).ready(check_navbars);
 $(window).resize(check_navbars);
+
+$(document).ready(highlight_nav);
+$(document).on("scroll", highlight_nav);
+
 
 function highlight_nav() {
     const screenTop = $(document).scrollTop();
@@ -49,7 +51,6 @@ function hide_nav() {
     $(".content").each(function() {
         $(this).addClass("content-wide");
     });
-    $("#nav_home").css('width', '120pt');
 }
 
 
@@ -59,7 +60,6 @@ function show_nav() {
     $(".content").each(function() {
         $(this).removeClass("content-wide");
     });
-    $("#nav_home").css('width', '240pt');
 }
 
 function check_navbars() {
@@ -69,3 +69,4 @@ function check_navbars() {
         show_nav();
     }
 }
+
