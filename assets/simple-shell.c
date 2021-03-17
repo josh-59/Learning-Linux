@@ -42,7 +42,7 @@ size_t get_arg_len(char *line);
 size_t count_leading_spaces(char *line);
 void get_args(char *line, char **args);
 int is_cd(char *command);
-int change_directory(char **args);
+void change_directory(char **args);
 
 int main(int argc, char *argv[]) 
 {
@@ -50,7 +50,6 @@ int main(int argc, char *argv[])
     char *command = NULL;
     char *line = NULL;
     size_t line_len = 0;
-
 
     while(1) {
         print_prompt();
@@ -69,7 +68,7 @@ int main(int argc, char *argv[])
             continue;
         }
 
-        pid_t rv = fork();
+        pid_t rv = fork(); 
         if (rv == 0) {
             // I am child
             // beep boop subshell environment
@@ -84,6 +83,7 @@ int main(int argc, char *argv[])
             wait(NULL); // Wait for child process to terminate
         } else {
             perror("fork");
+            exit(1);
         }
     }
 }
@@ -145,9 +145,9 @@ int is_cd(char *word)
     return strcmp(word, "cd") == 0 ? 1 : 0;
 }
 
-int change_directory(char **args )
+void change_directory(char **args )
 {
-    int rv = 0;
+    int rv;
 
     if (args[1] == NULL) {
         rv = chdir(getenv("HOME"));
@@ -155,5 +155,9 @@ int change_directory(char **args )
         rv = chdir(args[1]);
     }
 
-    return rv;
+    if (rv != 0) {
+        perror("cd");
+    }
+
+    return;
 }
