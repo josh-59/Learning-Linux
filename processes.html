@@ -88,6 +88,27 @@ TODO
             The Linux kernel actually supports four executable file formats:
             a.out, ELF, interpretter scripts and 
 
+
+
+    <h3 id="standard-file-descriptors">Standard File Descriptors</h3>
+    <p>
+        File descriptors <em>0, 1,</em> and <em>2</em> are somewhat special:
+        By both long-standing convention and the POSIX standard, 
+        they are guaranteed to be open and available for use at program startup.
+        They are:
+    </p>
+
+     <ul style="margin-left: 5%; list-style-type: none;">
+        <li><code>STDIN</code> is located at file descriptor 0; open for reading</li>
+        <li><code>STDOUT</code> is located at file descriptor 1; open for writing</li>
+        <li><code>STDERR</code> is located at file descriptor 2; open for writing</li>
+    </ul>
+
+    <p>
+        They are referred to as the <em>Standard File Descriptors,</em>
+        and at the command line, they are the primary source of input and output.
+    </p>
+
 -->
 
 <div id="nav_bar_2" class="nav">
@@ -299,8 +320,7 @@ TODO
     </p>
 
     <p>
-        For each process on the system, the kernel 
-        maintains a great deal of information, including:
+        Associated with each <code>PID</code> is the following attributes:
     </p>
 
     
@@ -324,7 +344,7 @@ TODO
         and most of this information is available for perusal in the 
         <code>/proc/</code> directory.
         In addition, the kernel offers <a href="https://man7.org/linux/man-pages/man2/intro.2.html">system calls</a> 
-        to allow a process to change these attributes.
+        to allow a process to change its attributes.
     </p>
 
     <p>
@@ -342,7 +362,7 @@ TODO
         This number is called a <em>file descriptor</em>, 
         and is returned by the kernel in response to a request to open a file.
         The process, thereafter, uses this integer to refer to that 
-        file whenever it wishes to operate on it.
+        file whenever it wishes to act on it.
     </p>
 
     <p>
@@ -356,7 +376,7 @@ TODO
     </pre>
 
     <p>
-        If this call failed (which it would if <code>rubber_ducky</code> did not
+        If this call failed (which it would if <code>./rubber_ducky</code> did not
         exist), then <code>fd</code> would be assigned -1, an invalid file
         descriptor.
         If the call succeeded, <code>fd</code> will be nonnegative.
@@ -375,10 +395,8 @@ TODO
     </p>
 
     <p>
-        Thereafter, the process uses <code>fd</code> whenever it wishes 
-        to refer to <em>rubber_ducky</em>, 
-        as in the following call to 
-        <code><a href="https://man7.org/linux/man-pages/man2/read.2.html">read(2)</a></code>:
+        In the following call to 
+        <code><a href="https://man7.org/linux/man-pages/man2/read.2.html">read(2)</a></code>,
     </p>
 
     <pre>
@@ -386,42 +404,33 @@ TODO
     </pre>
 
     <p>
-        The kernel will read at-most <code>buff_size</code>
-        bytes, and store the data into the buffer <code>buff</code>.
+        the kernel will read at-most <code>buff_size</code>
+        bytes from file <code>fd</code>, 
+        and copy the data into the process's memory space, 
+        here denoted by the variable <code>buff</code>.
         If all goes well, the system call will return with a nonnegative value;
         if the kernel encountered an error, it will return with a 
         negative value.
-        In either case, this value will be assigned to 
-        <code>num_bytes_read</code>.
+        In either case, the value will be assigned to <code>num_bytes_read</code>.
     </p>
 
     <p>
-        <a href="https://man7.org/linux/man-pages/man2/write.2.html"><code>Write(2)</code></a> 
-        is handled analogously; every system call has a well-defined and 
-        stable interface, and an entry in the man pages.
+        <a href="https://man7.org/linux/man-pages/man2/write.2.html"><code>write(2)</code></a> 
+        is handled analogously, as is creating a new file.  
+        Every system call has an entry in the man pages.
     </p>
 
-    <h3 id="standard-file-descriptors">Standard File Descriptors</h3>
-    <p>
-        File descriptors <em>0, 1,</em> and <em>2</em> are somewhat special:
-        By both long-standing convention and the POSIX standard, 
-        they are guaranteed to be open and available for use at program startup.
-        They are:
-    </p>
-
-     <ul style="margin-left: 5%; list-style-type: none;">
-        <li><code>STDIN</code> is located at file descriptor 0; open for reading</li>
-        <li><code>STDOUT</code> is located at file descriptor 1; open for writing</li>
-        <li><code>STDERR</code> is located at file descriptor 2; open for writing</li>
-    </ul>
+    <h3> A Bit More </h3>
 
     <p>
-        They are referred to as the <em>Standard File Descriptors,</em>
-        and at the command line, they are the primary source of input and output.
+        Ken Thompson's <em>UNIX</em> kernel facilitated reading and writing of 
+        files, but otherwise refrained from interjecting upon their use.
+        This approach preserves the generality of file operations, and
+        was quite novel for its time: Earlier
+        operating systems interposed upon the handling of files, so that
+        some files could only be read by some programs, and not by others.<sup><a href=#references>[A]</a></sup>
     </p>
-
 </div>
-
 
 <div class="content" id="exec">
     <h2>Executing a Different Program</h2>
