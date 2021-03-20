@@ -9,9 +9,19 @@ To Do:
 
     Shells:
     You can think of them as a view into the machine.
+
+    <p>
+        Learning to use a shell amounts to learning how it handles
+        commands given to it, so buddy up to your favorite shell's
+        reference manual!
+    </p>
+
+    Command Execution: (Need rather badly, before cwd)
+
     Bash Command Interpretation Cheat Sheet
 
     Simple Commands Definition:
+
     https://www.gnu.org/software/bash/manual/html_node/Simple-Commands.html#Simple-Commands
 
     Standard File Descriptors:
@@ -93,13 +103,19 @@ To Do:
     </div>
 </div>
 
-<div class="content" id="path">
-    <h2><code>PATH</code> Environment Variable</h2>
-    <p>
 
-    </p>
+<div class="content" id="setup-files">
+    <h2>Bash Configuration Scripts</h2>
+
 </div>
 
+<p>
+        IN THE BEGINNING, the shell operated in a simple loop involving an <em>exec</em>
+        call to itself.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[1]</a></sup>
+        SINCE THE BEGINNING, times have been good, and bearded UNIX hackers
+        have been productive.
+        In particular, per-user multiprocessing, and the <code>fork()</code> system call, have been introduced.
+    </p>
 
 
 -->
@@ -127,18 +143,11 @@ To Do:
     </div>
 
     <div class="quote-ref">
-        Dr. Brian Kernighan<br>
+        Brian Kernighan<br>
         UNIX: A History and a Memoir
     </div>
 
-    <p>
-        IN THE BEGINNING, the shell operated in a simple loop involving an <em>exec</em>
-        call to itself.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[1]</a></sup>
-        SINCE THE BEGINNING, times have been good, and bearded UNIX hackers
-        have been productive.
-        In particular, per-user multiprocessing, and the <code>fork()</code> system call, have been introduced.
-    </p>
-</div>
+    </div>
 
 <div id="physical-terminals" class="content">
 	<h2 style="margin-bottom: 2pt;">Physical Terminals</h2>
@@ -185,7 +194,6 @@ To Do:
 	<ul>
 		<li><a href="https://youtu.be/RuZUPpmXfT0">DEC VT320: The Classic 1987 Library Computer Terminal</a> by LGR (Youtube Video)</li>
 	</ul>
-
 </div>
 
 <div id="terminal-emulators" class="content">
@@ -251,14 +259,14 @@ To Do:
 	</div>
 
 	<p>
-		A shell is a program which interprets and executes our (arbitrary) commands.
+		A shell is a program which interprets and executes our commands.
 		It is a <em>shell</em> in the sense that it is the outermost layer of the
 		operating system, and the one which the user has direct contact.
 	</p>
 
     <p>
 		The UNIX architecture entertains the shell as an ordinary user-space process:
-        From the operating system's perspective, it is just another running program.
+        From its perspective, it is just another running program.
         This allows a single operating system to support many shells.
 	</p>
 
@@ -268,10 +276,11 @@ To Do:
 
 	<ul style="list-style: none;">
 		<li><a href="https://www.gnu.org/software/bash/">Bash</a>&mdash; A GNU Production, pretty much the standard shell</li>
-		<li><a href="http://zsh.sourceforge.net/">Zsh</a>&mdash; A shell designed for interactive use; very similar to Bash.</li>
+		<li><a href="http://zsh.sourceforge.net/">Zsh</a>&mdash; A shell "designed for interactive use; very similar to Bash.</li>
         <li><a href="https://www.nushell.sh/">Nushell</a>&mdash; An interactive shell, supporting piplines of structured data, in addition to simple text streams.</li>
         <li><a href="https://elv.sh/">Elvish</a>&mdash; an "expressive programming language and versatile interactive shell." Version 1.0 not yet released</a></li>
-        <li><a href="https://gitlab.redox-os.org/redox-os/ion">ion</a>&mdash; The default shell of <a href="https://www.redox-os.org/">RedoxOS</a>, works on Linux as well</li>
+        <li><a href="https://xonsh">Xonsh</a>&mdash; A Pythonic shell, written
+            in Python.</li>
 		<li><a href="https://fishshell.com/">fish</a>&mdash; The Friendly Interactive Shell</li>
 	</ul>
 
@@ -286,7 +295,7 @@ To Do:
 
     <p>
         You can find out which shell is running
-        from within terminal with the <code>ps</code> command:
+        by executing the <code>ps</code> command:
     </p>
 
     <figure>
@@ -294,16 +303,9 @@ To Do:
 		<figcaption><center><code>ps</code> command, by default listing processes owned by this user, connected to this terminal </center></figcaption>
 	</figure>
 
-    <p>
-        Learning to use a shell amounts to learning how it handles
-        commands given to it.
-        Here we'll study <code>bash</code>, but other shells
-        in Linux operate similarly.
-    </p>
-
-    <p>
-        Finally, we will typically omit the picture of the terminal,
-        so that the above command will normally be depicted:
+        <p>
+        Finally, note that we will typically omit the picture of the terminal,
+        so that the above command will be depicted:
     </p>
 
     <div class="code">
@@ -315,66 +317,54 @@ To Do:
 
     <h3>See Also:</h3>
     <ul>
-        <li><a href="https://ubuntu.com/tutorials/command-line-for-beginners#1-overview">The Linux Command Line for Beginners</a> (Ubuntu Official Tutorial)</li>
-        <li><a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Operation.html">Shell Operation (Bash Reference Manual)</a></li>
+        <li><a href="https://ubuntu.com/tutorials/command-line-for-beginners#1-overview">The Linux Command Line for Beginners</a> - Ubuntu </li>
     </ul>
-   </div>
+</div>
 
 <div class="content" id="simple-commands">
-    <h2 style="margin-bottom: 0;">Simple Commands</h2>
-    <h4>and Word Splitting</h4>
+    <h2>Simple Commands</h2>
 
     <p>
-        A typical line of input given to the shell is as follows:
+        A <em>simple command</em> is a command of the form:
     </p>
 
     <div class="code">
-        command [arg1 arg2 ...]
+        $ <i>command</i> [arg ...]
     </div>
 
     <p>
-        Where <em>command</em> is mandatory, and arguments are
-        optional.
-        In the following example, the <code>ls</code> command is given
-        with the single argument <code>-l</code>:
+        Where <code>command</code> is mandatory and arguments are optional.
     </p>
-
-    <div class="code">
-        $ ls -l
-    </div>
 
     <p>
-        Elements (referred to as "words") are separated by <a href="https://en.wikipedia.org/wiki/Whitespace_character">whitespace</a>.
-        If, for some reason, we need to include whitespace in
-        an argument, we can wrap said argument in single-quotes.
+        Commands given to shells are almost always separate programs;
+        in fact, it is unusual for a command to be built in to the shell.
     </p>
+</div>
 
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Single quotes denote a <em>string literal</em>, and here tell Bash to preserve enclosed text exactly as-is,
-        </p>
-    </div>
+<div class="content" id="execution">
+	<h2>Command Execution</h2>
 
     <p>
-        For example, in the following command,
-        the <code>cd</code> command recieves a single argument,
-        <code>Random Acccess Memories</code>:
+        Most, but not all, commands given to the shell exist as separate
+        programs.
     </p>
+        
+	<a href="assets/img/shell-model.pdf" title="Click for PDF">
+		<img src="assets/img/shell-model-pic.png" style="height: 400pt;">
+	</a>
 
-    <div class="code">
-        $ cd 'Random Access Memories'
-    </div>
 
-    <p>
-        In Bash, breaking a line of input into its elements is
-        known as <em>word splitting</em>,
-        and is the first step of command interpretation.
-    </p>
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Operation.html">Shell Operation (Bash Reference Manual)</a></li>
+    </ul>
 </div>
 
 <div class="content" id="pwd">
     <h2>Working Directory</h2>
+
+
 
     <p>
         Recall that each process has a <a href="/processes.html#process-attributes">current working directory</a>.
@@ -384,7 +374,8 @@ To Do:
     </p>
 
     <p>
-        The shell's current working directory may be printed with the command <code>pwd</code>:
+        The shell's current working directory may be printed with the 
+        command <code>pwd</code>:
     </p>
 
     <div class="code">
@@ -403,14 +394,13 @@ To Do:
     </div>
 
     <p>
-        When UNIX was still a baby, <em>change directories</em> was implemented
+        In Ancient UNIX, <em>change directories</em> was implemented
         as a separate command.
         When invoked, it inherited the shell's current working directory,
         changed it, and then the shell would inherit <em>that</em> working directory.
-        With the inclusion of the <em>fork()</em> system call, though, the <code>chdir</code>
-        command broke:
+        With the inclusion of the <em>fork()</em> system call, though, 
+        the <code>chdir</code> command broke:
     </p>
-
 
     <!--
         Justification: https://qmacro.org/2020/11/08/the-meaning-of-pwd-in-unix-systems/
@@ -419,14 +409,16 @@ To Do:
     <p>
 
     <blockquote>
-        "There was much reading of code and anxious introspection about how the addition of fork could
-        have broken the chdir call. Finally the truth dawned: in the old system chdir was an
-        ordinary command; it adjusted the current directory of the (unique) process attached to
-        the terminal. Under the new system, the chdir command correctly changed the current
-        directory of the process created to execute it, but this process promptly terminated and had
-        no effect whatsoever on its parent shell! It was necessary to make chdir a special command,
-        executed internally within the shell. It turns out that several command-like functions have
-        the same property, for example login."
+        "There was much reading of code and anxious introspection about how 
+        the addition of fork could have broken the chdir call. Finally the 
+        truth dawned: in the old system chdir was an ordinary command; it 
+        adjusted the current directory of the (unique) process attached to
+        the terminal. Under the new system, the chdir command correctly 
+        changed the current directory of the process created to execute it, 
+        but this process promptly terminated and had no effect whatsoever on 
+        its parent shell! It was necessary to make chdir a special command,
+        executed internally within the shell. It turns out that several 
+        command-like functions have the same property, for example login."
     </blockquote>
 
     <div class="quote-ref">
@@ -442,6 +434,65 @@ To Do:
     <div class="code">
         $ help
     </div>
+
+</div>
+
+<div class="content" id="path">
+    <h2><code>PATH</code> Environment Variable</h2>
+
+    <p>
+        Bash, being a process, has environment variables.  
+        Of these variables, <code>PATH</code> is the most important:
+        It contains a list of directories to be searched when looking for
+        a command.
+        This list is colon (<code>:</code>) -separated, and may look like,
+    </p>
+
+    <div class="code">
+        $ echo $PATH<br>
+        /usr/bin:/bin:/home/josh/.local/bin
+    </div>
+
+    <p>
+        Bash searches each directory in this list from left to right, 
+        for a file whose name matches the command given. 
+        It executes the first found, and then abandons its search.
+    </p>
+
+    <p>
+        Some caveats apply:
+        If the command is a builtin, Bash will execute the builtin, and ignore
+        <code>PATH</code>.
+        More, Bash does <em>not</em> search the current working directory for a command.
+    </p>
+
+    <p>
+        We can overrule both of these behaviors by including a 
+        forward-slash <code>/</code> in our command, typically:
+    </p>
+
+    <div class="code">
+        $ ./<i>command</i>
+    </div>
+
+    <p>
+        Appending locations to <code>PATH</code> is an important step of 
+        setting up a development environment.
+        This is typically done in <code>~/.bashrc</code>.
+        The correct construct appends the directory
+        only if it is not already present:
+    </p>
+
+    <div class="code">
+        if [[ ! $PATH =~ $HOME/.local/bin ]]; then<br>
+        &emsp;&emsp;&emsp;&emsp;PATH=$PATH:$HOME/.local/bin<br>
+        fi
+    </div>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Environment_variable#True_environment_variables"> Environment Variables </a> - Wikipedia</li>
+    </ul>
 
 </div>
 
@@ -465,6 +516,18 @@ To Do:
         <li>
             <p>
                 What is the difference between <code>type</code> and <code>which</code>?
+            </p>
+        </li>
+        <li>
+            <p>
+                Why <em>shouldn't</em> you append <code>.</code> to PATH?
+            </p>
+        </li>
+        <li>
+            <p>
+                Scripting exercise:
+                Use constructs other than <code>if</code> to append a location
+                to path.
             </p>
         </li>
     </ol>
