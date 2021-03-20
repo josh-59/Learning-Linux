@@ -12,3 +12,5 @@
   link: /packages.html
 - name: Terminal Pro
   link: /terminal-pro.html
+- name: 'Appendix: Bash in Gory Detail'
+  link: /bash-gory-detail.html
