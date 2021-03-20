@@ -10,7 +10,7 @@ TODO
         https://pages.cs.wisc.edu/~remzi/OSTEP/vm-intro.pdf
     Sandbox:
         Remove references to "MMU"
-    
+
     Executing a Different Program:
         Rewrite, removing references to "parent process memory space"
 
@@ -19,7 +19,7 @@ TODO
             Relative paths are evaluated wrt this value.
 
     Process Termination:
-        When a process terminates, its PID is freed for reuse, 
+        When a process terminates, its PID is freed for reuse,
 
         Signals to kill processes:
             From least to greatest:
@@ -29,7 +29,7 @@ TODO
                 For instance, <code>bash</code> catches this signal and does
                 not terminate; rather, it passes the signal along to the foreground
                 process (if it exists), and then jumps back to its main loop.
-                
+
             SIGTERM: Terminate
                 Standard behavior is to terminate; affords programs the
                 opportunity to handle their own termination, and thereby
@@ -43,6 +43,9 @@ TODO
 
         Signal-terminal of processes: "Abnormal process termination"
 
+        Writing signal handlers is <a href="http://lazarenko.me/signal-handler/">not easy</a>,
+        especially in multi-threaded environments.
+
     IPC:    (as conclusion?)
         Primitives:
             Signals - Software interupts: Interupt the normal flow of
@@ -54,8 +57,8 @@ TODO
         <div class="aside-right">
             <h4>Aside</h4>
             <p>
-                D-Bus is an excellent example of what a process 
-                is capable of, but 
+                D-Bus is an excellent example of what a process
+                is capable of, but
                 has been effectively depricated by <code>kdbus</code>,
                 which is easier to use, more efficient, and more secure, among
                 other things.
@@ -82,13 +85,13 @@ TODO
         Closing Remarks:
             Tools to introspect processes: top, /proc, etc
 
-            Introduce programs, rather than programming. 
+            Introduce programs, rather than programming.
             The Linux kernel actually supports four executable file formats:
-            a.out, ELF, interpretter scripts and 
+            a.out, ELF, interpretter scripts and
 
     <h3 id="standard-file-descriptors">Standard File Descriptors</h3>
     <p>
-        Over the years, file descriptors <em>0, 1,</em> and <em>2</em> 
+        Over the years, file descriptors <em>0, 1,</em> and <em>2</em>
         have become somewhat special:
         They are guaranteed to be open and available for use at program startup.
         They are:
@@ -161,7 +164,7 @@ TODO
         All Unix-like operating systems depend upon processes to direct the kernel,
         and through the kernel, processes direct the machine.
         The result is a low-level demarcation between
-        <em>what</em> to do (dictated by processes), and 
+        <em>what</em> to do (dictated by processes), and
         <em>how</em> to do it (dictated by the kernel).
     </p>
 
@@ -169,18 +172,18 @@ TODO
         There is a process for every function on the system.
         There's one for the network manager,
         another for the desktop environment,
-        another acting as a printer spooler, 
+        another acting as a printer spooler,
         another acting as a web browser, etc..
     </p>
 
     <p>
         Under the Unix philosophy, each process has a narrowly defined role,
-        and is expected to do it well.  
+        and is expected to do it well.
         It might copy a file, list the
-        contents of a directory, provide audio services, 
+        contents of a directory, provide audio services,
         or intepret and execute our commands.
         These many small programs are used together to accomplish
-        a given task, thereby increasing the modularity of the whole, 
+        a given task, thereby increasing the modularity of the whole,
         and, consequently, simplifying programming and maintenance.
     </p>
 
@@ -209,9 +212,9 @@ TODO
         Different runlevels offered different services, and therefore
         were intended to be used in different situations.
         For instance, <a href="http://www.linfo.org/single_user_mode.html">single-user mode</a> (runlevel 1)
-        was analogous to <em>safe boot,</em> 
+        was analogous to <em>safe boot,</em>
         runlevel 5 corresponded to multi-user/GUI mode,
-        and runlevel 0 told <em>init</em> to kill all processes and shut down the 
+        and runlevel 0 told <em>init</em> to kill all processes and shut down the
         system.<sup><a href="http://www.linfo.org/runlevel_def.html">[3]</a></sup>
     </p>
 
@@ -229,12 +232,12 @@ TODO
         At the end of the boot sequence, the kernel launches a single program,
         <code>/sbin/init</code>,<sup><a href="http://tldp.org/LDP/intro-linux/intro-linux.pdf">[4]</a></sup>
         and in so doing creates the system's first process.
-        After <code>/sbin/init</code> begins execution, 
+        After <code>/sbin/init</code> begins execution,
         process creation is delegated to processes themselves.
-        While init schemes 
-        <a href="https://arxiv.org/abs/0706.2748">have evolved</a> 
-        over the years, its purpose has not changed:  
-        It is a process with root-level permissions that acts as a 
+        While init schemes
+        <a href="https://arxiv.org/abs/0706.2748">have evolved</a>
+        over the years, its purpose has not changed:
+        It is a process with root-level permissions that acts as a
         manager of the system and trustee among processes.
     </p>
 
@@ -254,38 +257,38 @@ TODO
     </div>
 
     <p>
-        <code>init</code>'s first responsibility is to bring up userspace. 
+        <code>init</code>'s first responsibility is to bring up userspace.
         It does this by launching a sequence of programs, most of which
         are daemons, some of which the user interacts with directly.
         After this, it operates in the background, managing these services,
         restarting them if they falter, and logging events for administrative
         purposes.
-        Its final responsibility is to shut the system down cleanly. 
+        Its final responsibility is to shut the system down cleanly.
     </p>
 
     <p>
-        From within a process, creating a new process starts with the 
-        <a href="https://www.man7.org/linux/man-pages/man2/fork.2.html"><code>fork(2)</code></a> system call. 
-        This instructs the kernel to duplicate the current process, 
+        From within a process, creating a new process starts with the
+        <a href="https://www.man7.org/linux/man-pages/man2/fork.2.html"><code>fork(2)</code></a> system call.
+        This instructs the kernel to duplicate the current process,
         and the two resulting processes are very nearly identical.<sup><a href="https://www.man7.org/linux/man-pages/man2/fork.2.html">[4]</a></sup>
         Of note, they have duplicate memory spaces, the same open files, and
         continue executing the same program at the same spot.
-        The newly created process is referred to as the <em>child</em> process, 
-        the original is called the <em>parent,</em> and we say 
+        The newly created process is referred to as the <em>child</em> process,
+        the original is called the <em>parent,</em> and we say
         that the child process <em>inherits</em> its parent's attributes.
     </p>
 
     <p>
-        Of the few ways that parent and child differ, one is important to us 
+        Of the few ways that parent and child differ, one is important to us
         now:
         They each recieve a different return value from <em>fork()</em>.
         This allows them to act differently within the same program:
     </p>
 
-    
+
     <pre>
         pid_t rv = fork();      // One process executes this line
-        if(rv == 0) {           // Two processes execute this line 
+        if(rv == 0) {           // Two processes execute this line
             // I am child
 
         } else if (rv &gt; 0) {
@@ -293,7 +296,7 @@ TODO
 
         }
     </pre>
-    
+
     <p>
         Their executions thereby diverge, and each is free to act independantly.
     </p>
@@ -308,7 +311,7 @@ TODO
     <h2> Process Attributes </h2>
     <p>
         Upon birth, each process is given its own <code>PID</code> number by the kernel.
-        This is guaranteed to be unique to the process, and remains constant 
+        This is guaranteed to be unique to the process, and remains constant
         throughout the process's life. It serves as the system's handle
         to the process.
     </p>
@@ -317,7 +320,7 @@ TODO
         Associated with each <code>PID</code> is the following attributes:
     </p>
 
-    
+
     <ul>
         <li>Name and location of executable file</li>
         <ul>
@@ -335,14 +338,14 @@ TODO
 
     <p>
         All of these attributes are inherited from the process's parent,
-        and most of this information is available for perusal in the 
+        and most of this information is available for perusal in the
         <code>/proc/</code> directory.
-        In addition, the kernel offers <a href="https://man7.org/linux/man-pages/man2/intro.2.html">system calls</a> 
+        In addition, the kernel offers <a href="https://man7.org/linux/man-pages/man2/intro.2.html">system calls</a>
         to allow a process to change its attributes.
     </p>
 
     <p>
-        In order to give some idea of how 
+        In order to give some idea of how
         processes interact with the kernel,
         we will consider one of them: Files currently open.
     </p>
@@ -353,14 +356,14 @@ TODO
     <p>
         Each file that a process has open is assigned a number
         by the kernel (specifically, a small integer).
-        This number is called a <em>file descriptor</em>, 
+        This number is called a <em>file descriptor</em>,
         and is returned by the kernel in response to a request to open a file.
-        The process, thereafter, uses this integer to refer to that 
+        The process, thereafter, uses this integer to refer to that
         file whenever it wishes to act on it.
     </p>
 
     <p>
-        In the following line, a process is opening the file 
+        In the following line, a process is opening the file
         <em>rubber_ducky</em> for reading, then
         storing the kernel's response as <em>fd</em>:
     </p>
@@ -379,7 +382,7 @@ TODO
 
     <pre>
         if (fd &lt; 0) {
-                perror("open"); 
+                perror("open");
                 exit(1);
         }
     </pre>
@@ -389,7 +392,7 @@ TODO
     </p>
 
     <p>
-        In the following call to 
+        In the following call to
         <code><a href="https://man7.org/linux/man-pages/man2/read.2.html">read(2)</a></code>,
     </p>
 
@@ -399,25 +402,25 @@ TODO
 
     <p>
         the kernel will read at-most <code>buff_size</code>
-        bytes from file <code>fd</code>, 
-        and copy the data into the process's memory space, 
+        bytes from file <code>fd</code>,
+        and copy the data into the process's memory space,
         here denoted by the variable <code>buff</code>.
         If all goes well, the system call will return with a nonnegative value;
-        if the kernel encountered an error, it will return with a 
+        if the kernel encountered an error, it will return with a
         negative value.
         In either case, the value will be assigned to <code>num_bytes_read</code>.
     </p>
 
     <p>
-        <a href="https://man7.org/linux/man-pages/man2/write.2.html"><code>write(2)</code></a> 
-        is handled analogously, as is creating a new file.  
+        <a href="https://man7.org/linux/man-pages/man2/write.2.html"><code>write(2)</code></a>
+        is handled analogously, as is creating a new file.
         Every system call has an entry in the man pages.
     </p>
 
     <h3>A Bit More</h3>
 
     <p>
-        Ken Thompson's <em>UNIX</em> kernel facilitated reading and writing of 
+        Ken Thompson's <em>UNIX</em> kernel facilitated reading and writing of
         files, but otherwise refrained from interjecting upon their use.
         This approach preserves the generality of file operations, and
         was quite novel for its time: Earlier
@@ -430,7 +433,7 @@ TODO
     <h2>Executing a Different Program</h2>
     <p>
         The <code>fork(2)</code> system call creates a new process, but
-        since this new process has a memory space duplicated from its parent, 
+        since this new process has a memory space duplicated from its parent,
         it continues executing the same program.
         In order to launch a different program, it is necessary to replace this
         memory image with one obtained from a file.
@@ -438,7 +441,7 @@ TODO
     </p>
 
     <p>
-        To launch a new program, then, is a two-step process: 
+        To launch a new program, then, is a two-step process:
     </p>
 
     <div class="aside-right">
@@ -468,8 +471,8 @@ TODO
         This sequence is traditionally called <em>fork and exec,</em>
         and results in one process (the parent) launching another program
         (its child).
-        It was present in Ken Thompson's original implementation of Unix at Bell 
-        Laboratories, and for reasons I hope to bear out, is ideal for 
+        It was present in Ken Thompson's original implementation of Unix at Bell
+        Laboratories, and for reasons I hope to bear out, is ideal for
         programs at the command-line.
     </p>
 
@@ -482,16 +485,16 @@ TODO
     </p>
 
     <ul class="big-list">
-        <li> 
-            Return from <em>main()</em> 
+        <li>
+            Return from <em>main()</em>
             <p>
                 This is the usual and preferred route to terminate a process:
                 It finishes its job, and explicitly requests to return.
             </p>
 
             <p>
-                When this occurs on the command line, the process's return value (and it must offer one) is available 
-                for inspection.  
+                When this occurs on the command line, the process's return value (and it must offer one) is available
+                for inspection.
                 By convention, a return value of zero indicates success, while nonzero return
                 values indicate error or fault.
             </p>
@@ -501,7 +504,7 @@ TODO
             <p>
                 A process may be told to terminate by any other process with
                 the same owner.
-                A process owned by root (that is, a process with superuser priveledges) 
+                A process owned by root (that is, a process with superuser priveledges)
                 can instruct any process to terminate.
             </p>
 
@@ -511,7 +514,7 @@ TODO
                 <code><a href="https://www.man7.org/linux/man-pages/man1/killall.1.html">killall(1)</a></code>,
                 which kills processes by name.
             </p>
-        </li> 
+        </li>
         <li>
             It does something wrong
             <p>
@@ -521,7 +524,7 @@ TODO
             </p>
 
             <p>
-                Note that when this occurs, it is not the case that the process is 
+                Note that when this occurs, it is not the case that the process is
                 trying to read or write some other process's memory.
                 Rather, every process is given its own virtual memory address space (see below);
                 the kernel kills it because the memory in question is not associated
@@ -552,17 +555,17 @@ TODO
 
     <p>
         Modern CPU architectures support two distinct modes of operation.
-        <em>Kernel mode,</em> sometimes called "supervisor mode," is 
+        <em>Kernel mode,</em> sometimes called "supervisor mode," is
         the unrestricted mode.
-        Here, all CPU instructions are available, and all memory is available, 
+        Here, all CPU instructions are available, and all memory is available,
         so that code running in this mode has complete access to the machine.
     </p>
 
     <p>
-        <em>User mode</em> is a proper subset of kernel mode; code running 
-        in user mode does not have access to all instructions.  
-        All processes run in user mode, and 
-        if a process, running in user mode, attempts to execute a restricted 
+        <em>User mode</em> is a proper subset of kernel mode; code running
+        in user mode does not have access to all instructions.
+        All processes run in user mode, and
+        if a process, running in user mode, attempts to execute a restricted
         instruction, its execution is halted, and control is given to the kernel.
         At that point, it is up to the operating system to determine what to do
         (usually, terminate the offending process).
@@ -571,13 +574,13 @@ TODO
     <p>
         This technique is known as <em>limited direct execution.</em><sup><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/cpu-mechanisms.pdf">[3]</a></sup>
         It is <em>limited</em> in the sense that each process has access to
-        only a restricted subset of the CPU's instructions, and 
-        it is <em>direct</em> in the sense that each process runs directly on 
+        only a restricted subset of the CPU's instructions, and
+        it is <em>direct</em> in the sense that each process runs directly on
         hardware.
         It is intended to make safe and efficient use of available hardware.
     </p>
 
-    
+
   <h3> Virtual Memory </h3>
 
   <p>
@@ -604,7 +607,7 @@ TODO
     <p>
         <em>Modern operating systems provide each process with a distinct
         address space.</em>
-        The addresses that any process uses are implicitly restricted to that 
+        The addresses that any process uses are implicitly restricted to that
         process alone.
         The result has been a profound improvement in system stability.
     </p>
@@ -638,27 +641,27 @@ TODO
     Other processes are implicitly protected from memory tampering:
     Their memory simply does not exist within the context of the
     currently running process, and therefore cannot be read from, nor written to.
-    As with limited direct execution, virtual memory is intended to 
+    As with limited direct execution, virtual memory is intended to
     facilitate the safe and efficient use of a machine resource.
   </p>
 
     <h3>Putting it all together:</h3>
 
     <p>
-        For processes, access to the CPU is also restricted in a temporal sense: 
+        For processes, access to the CPU is also restricted in a temporal sense:
         Each process is allotted some time to run, and when its time is up,
         the kernel interrupts execution, saves the state of the process (precisely),
         and loads a different process to run.
         That one runs for a bit, and then it too is interupted, and a new
         process allowed to run for a while.
         This is known as a <em>context switch,</em> and is the root
-        of multiprocessing 
+        of multiprocessing
     </p>
 
 
 
   <h3> See Also: </h3>
-        
+
   <ul>
         <li><a href="https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-intro.pdf">Processes</a> - Operating Systems, Three Easy Pieces (Chapter 4)</li>
         <li><a href="http://www.csapp.cs.cmu.edu/"> Computer Systems: A Programmer's Perspective, 3<sup>rd</sup> Ed.</a>, Chapter 9: Virtual Memory (Not free)</li>
@@ -703,4 +706,3 @@ TODO
 </div>
 -
 -
-
