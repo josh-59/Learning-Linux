@@ -6,17 +6,15 @@ last-updated: November, 2020
 
 <!--
 TODO
+    Include: OSTEP "Address Spaces":
+        https://pages.cs.wisc.edu/~remzi/OSTEP/vm-intro.pdf
     Sandbox:
         Remove references to "MMU"
     
-    Process tree:
-        Child processes cannot change parent processes' attributes
-        I dunno, "develop"
+    Executing a Different Program:
+        Rewrite, removing references to "parent process memory space"
 
     Process attributes:
-        File Descriptors:
-            Open a new file, not "read"
-            "The file is now available for writing."
         Current working directory:
             Relative paths are evaluated wrt this value.
 
@@ -88,13 +86,11 @@ TODO
             The Linux kernel actually supports four executable file formats:
             a.out, ELF, interpretter scripts and 
 
-
-
     <h3 id="standard-file-descriptors">Standard File Descriptors</h3>
     <p>
-        File descriptors <em>0, 1,</em> and <em>2</em> are somewhat special:
-        By both long-standing convention and the POSIX standard, 
-        they are guaranteed to be open and available for use at program startup.
+        Over the years, file descriptors <em>0, 1,</em> and <em>2</em> 
+        have become somewhat special:
+        They are guaranteed to be open and available for use at program startup.
         They are:
     </p>
 
@@ -105,8 +101,7 @@ TODO
     </ul>
 
     <p>
-        They are referred to as the <em>Standard File Descriptors,</em>
-        and at the command line, they are the primary source of input and output.
+        These are referred to as the <em>Standard File Descriptors.</em>
     </p>
 
 -->
@@ -223,7 +218,6 @@ TODO
     <h3> See Also: </h3>
     <ul>
         <li><a href="https://www.man7.org/linux/man-pages/man7/daemon.7.html"> daemon(7)</a> (Background Process)</li>
-        <li><a href="https://www.brianstorti.com/an_introduction_to_unix_processes/"> An introduction to UNIX processes</a> (An article similar to this one)</li>
     </ul>
 </div>
 
@@ -420,7 +414,7 @@ TODO
         Every system call has an entry in the man pages.
     </p>
 
-    <h3> A Bit More </h3>
+    <h3>A Bit More</h3>
 
     <p>
         Ken Thompson's <em>UNIX</em> kernel facilitated reading and writing of 
