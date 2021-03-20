@@ -4,7 +4,7 @@ title: Files and Filesystems
 last-updated: March, 2021
 ---
 
-<!-- 
+<!--
 
 To Do:
     VFS (Subsection in Filesystems)
@@ -32,7 +32,7 @@ http://www.internetnews.com/dev-news/article.php/3781676/A+Better+File+System+fo
     "The main goal is to let it {Linux} scale for the storage that will be available," Chris Mason Director of Linux Kernel Engineering at Oracle told InternetNews.com. "Scaling is not just about addressing the storage but also means being able to administer and to manage it with a clean interface that lets people see what's being used and makes it more reliable."
 
 Filesystem Heirarchy:
-    /var: 
+    /var:
         (Double check:) Per-runtime variable files
         https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch05.html:
             /var contains logs, transient and temporary files
@@ -42,17 +42,17 @@ Kerrisk calls File I/O "The Universal I/O Model"
 
 Closing Remarks:
 
-Not mentioned here is Linux's "Logical Volume Manager", a software layer that 
-(when used) sits between disks and the filesystem and offers 
-to abstract away pesky facts like, "There are six discs in a RAID array." 
+Not mentioned here is Linux's "Logical Volume Manager", a software layer that
+(when used) sits between disks and the filesystem and offers
+to abstract away pesky facts like, "There are six discs in a RAID array."
 The ext4/lvm software stack has proven difficult to scale, and has been a major
-impetus for moving towards filesystems which include LVM capabilities.  
+impetus for moving towards filesystems which include LVM capabilities.
 
 XDG Directory Specification
     ~/.config is defined as part of the XDG specification
 
-Another convention: 
-    Each program is typically allowed one file in important system directories 
+Another convention:
+    Each program is typically allowed one file in important system directories
     (e.g., <code>/etc</code>)
     If they have a single file to store, it may be stored plainly; if they
     have more than one file to store, they should make a subdirectory and
@@ -127,8 +127,8 @@ https://wiki.ubuntu.com/Lvm
         In particular, the <code>read</code> system call fills a given
         buffer with the contents of a file;
         order is preserved across sequential calls to <code>read</code>.
-        When a program requests a read, the kernel suspends its execution 
-        until data is available. 
+        When a program requests a read, the kernel suspends its execution
+        until data is available.
         At the command-line, data from the keyboard is made available when
         the user presses <em>return.</em><sup><a href="https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios/">[3]</a></sup>
     </p>
@@ -136,10 +136,10 @@ https://wiki.ubuntu.com/Lvm
     <h3>File Attributes</h3>
 
     <p>
-        UNIX-like operating systems characteristically store a substantial 
+        UNIX-like operating systems characteristically store a substantial
         amount of information about each file on the system.
-        This information, known as 
-        <em><a href="https://en.wikipedia.org/wiki/Metadata">metadata</a>,</em> 
+        This information, known as
+        <em><a href="https://en.wikipedia.org/wiki/Metadata">metadata</a>,</em>
         is stored alongside the file, typically on-disk.
     </p>
 
@@ -171,7 +171,7 @@ https://wiki.ubuntu.com/Lvm
         and can be explained in part by the operating system's multi-user heritage.
         It is used today in single-user desktops to compartmentalize the machine.
     </p>
-   
+
     <h3>See Also:</h3>
     <ul>
         <li><a href="http://www.linfo.org/unix_philosophy.html">Unix Philosophy Description</a> by The Linux Information Project (LINFO)</li>
@@ -183,7 +183,7 @@ https://wiki.ubuntu.com/Lvm
 
     <p>
         A regular file contains data which is stored on disk.
-        Most files are regular files. 
+        Most files are regular files.
     </p>
 
     <p>
@@ -201,21 +201,21 @@ https://wiki.ubuntu.com/Lvm
     <center style="font-size:12pt;">Click for PDF</center>
 
     <p>
-        The first character, a hyphen (<code>-</code>), tells us that 
-        <code>/bin/bash</code> refers to a regular file. 
-        The next nine characters are the file's 
+        The first character, a hyphen (<code>-</code>), tells us that
+        <code>/bin/bash</code> refers to a regular file.
+        The next nine characters are the file's
         <a href="http://linfo.org/permissions.html">permission bits</a>;
-        the <code>r</code> and <code>x</code> present in each set indicates 
-        that this file is readable and executable (respectively) by any user on 
+        the <code>r</code> and <code>x</code> present in each set indicates
+        that this file is readable and executable (respectively) by any user on
         the system.
         The <code>w</code> present only in the owner set indicates that the
-        file may only be written to by its owner, who in this case 
+        file may only be written to by its owner, who in this case
         is <code>root</code>.
     </p>
 
     <p>
         Two other tools useful for peeking
-        into a file are <code><a href="https://www.man7.org/linux/man-pages/man1/file.1.html">file(1)</a></code>, which prints a summary of the file, and  
+        into a file are <code><a href="https://www.man7.org/linux/man-pages/man1/file.1.html">file(1)</a></code>, which prints a summary of the file, and
         <code><a href="https://man7.org/linux/man-pages/man1/stat.1.html">stat(1)</a></code>, which prints the file's complete metadata:
     </p>
 
@@ -264,13 +264,13 @@ https://wiki.ubuntu.com/Lvm
     <div class="aside-right">
         <h4>Aside</h4>
         <p>
-            It is interesting to note that the essential capabilities of these device 
+            It is interesting to note that the essential capabilities of these device
             coincide with those of a file.
         </p>
     </div>
 
     <p>
-        A <em>device file</em> represents a device connected to the system. 
+        A <em>device file</em> represents a device connected to the system.
         Device files reside in the <code>/dev</code> directory.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[4]</a></sup>
         Each of these files serves as the principle reference to its
         respective device.
@@ -279,7 +279,7 @@ https://wiki.ubuntu.com/Lvm
     </p>
 
     <p>
-        Let's consider the task of creating a boot media 
+        Let's consider the task of creating a boot media
         by writing to a device file directly.
     </p>
 
@@ -303,9 +303,9 @@ https://wiki.ubuntu.com/Lvm
     </div>
 
     <p>
-        After this command has completed, 
-        the file <code>archlinux-2020.07.02-pbp.img</code> has been 
-        copied (byte-wise perfectly) onto the first <em>n</em> bytes of the 
+        After this command has completed,
+        the file <code>archlinux-2020.07.02-pbp.img</code> has been
+        copied (byte-wise perfectly) onto the first <em>n</em> bytes of the
         card, where <em>n</em> is the length of said file.
         That file, a disk image, includes a few filesystems, a kernel,
         and is bootable.
@@ -314,7 +314,7 @@ https://wiki.ubuntu.com/Lvm
     <h3> Block vs. Character </h3>
 
     <p>
-        Within <code>/dev</code>, there are two kinds of device files: 
+        Within <code>/dev</code>, there are two kinds of device files:
         Block device files, which read and write in arbitrarily-sized blocks of bytes;
         and, Character device files, which are capable of reading and
         writing single bytes.
@@ -335,9 +335,9 @@ https://wiki.ubuntu.com/Lvm
 
     <p>
         The <code>/proc</code> directory offers file-level access to underlying
-        kernel 
+        kernel
         structures.<sup><a href="https://man7.org/tlpi/" title="Kerrisk, p.42">[5]</a></sup>
-        For example, reading and printing <code>/proc/meminfo</code> effectively 
+        For example, reading and printing <code>/proc/meminfo</code> effectively
         reports the system's current memory usage:
     </p>
 
@@ -376,6 +376,7 @@ https://wiki.ubuntu.com/Lvm
     <h3>See Also:</h3>
     <ul>
         <li> <a href="https://www.kernel.org/doc/html/latest/filesystems/proc.html">The /proc Filesystem &ndash; The Linux Kernel documentation </a></li>
+        <li> <a href="https://mirrors.edge.kernel.org/pub/linux/kernel/people/mochel/doc/papers/ols-2005/mochel.pdf">The <code>sysfs</code> Filesystem</a> by Patrick Mochel</li>
     </ul>
 </div>
 
@@ -398,8 +399,8 @@ https://wiki.ubuntu.com/Lvm
         For instance, <code>bin</code> directories are found in several places, such as
         <code>/bin</code>, <code>/sbin</code>, along with <code>/usr/bin</code>
         and often <code>/home/[user]/bin</code> as well.
-        These contain binary executable files&ndash; programs&ndash; such as 
-        <code>bash</code> and <code>ls</code>. 
+        These contain binary executable files&ndash; programs&ndash; such as
+        <code>bash</code> and <code>ls</code>.
         Other standard directories include <code>/root</code>, the root user's home
         directory, and <code>/proc</code>, and <code>/dev</code> as
         mentioned above.
@@ -413,7 +414,7 @@ https://wiki.ubuntu.com/Lvm
             The <a href="https://refspecs.linuxfoundation.org/fhs.shtml">Filesystem Heirarchy Standard</a>
             describes the GNU/Linux directory structure, and is maintained
             by the Linux Foundation.
-            It is intended to promote inter- operability 
+            It is intended to promote inter- operability
             among UNIX-like operating systems,<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html">[6]</a></sup>
             and was developed with help from the BSD development community.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch07s02.html">[7]</a></sup>
         </p>
@@ -423,36 +424,36 @@ https://wiki.ubuntu.com/Lvm
         Let's begin at the top.
         Each Unix-like operating system has a single directory, <code>/</code>,
         which is the root of the system's directory tree.
-        This is referred to as the <em>root directory</em> (not to be 
-        confused with <em>root user's home directory</em>). 
+        This is referred to as the <em>root directory</em> (not to be
+        confused with <em>root user's home directory</em>).
         Every file in a Unix-like operating system may be addressed in absolute
         terms by giving its location relative to the root directory.
     </p>
 
     <p>
-        <code>/home</code> contains users' home directories. 
+        <code>/home</code> contains users' home directories.
         As user <em>josh</em>, my home directory is <code>/home/josh</code>.
         This path is commonly abbreviated to <code>~</code>.
-        By default, it contains the usual "Music", "Movies", "Pictures" and 
-        "Downloads", but of course you are the owner.  
+        By default, it contains the usual "Music", "Movies", "Pictures" and
+        "Downloads", but of course you are the owner.
         Per-user configuration files are also stored here, either as
         hidden files or in the directory <code>~/.config</code>.
     </p>
 
     <p>
         The directory <code>/etc</code> contains
-        system-specific configuration files. 
-        You can expect to fiddle with the contents of this directory when 
+        system-specific configuration files.
+        You can expect to fiddle with the contents of this directory when
         manually configuring the system.
-        It contains, for instance, files describing the configuration of 
-        the system's package manager, X11 window system configuration, 
+        It contains, for instance, files describing the configuration of
+        the system's package manager, X11 window system configuration,
         and, well, etcetera.
     </p>
 
     <p>
         <code>/tmp</code>, <code>/run</code>,  and <code>/var</code> each hold
-        transient files of running programs.  
-        <code>/tmp</code> is 
+        transient files of running programs.
+        <code>/tmp</code> is
         <code>/boot</code> holds everything required for the boot sequence,
         including my very own Linux kernel:
     </p>
@@ -464,32 +465,32 @@ https://wiki.ubuntu.com/Lvm
 
     <p>
         Software libraries are kind of boring, but essential to modern systems.
-        The basic idea is to factor out repeated code (for instance, 
+        The basic idea is to factor out repeated code (for instance,
         C's <code>printf</code> function) not just from the source code, but
-        from <em>executable</em> files as well.  
-        This means that, when a bug or security vulnerability is found in 
+        from <em>executable</em> files as well.
+        This means that, when a bug or security vulnerability is found in
         <code>printf</code>, any program that uses the function will not
         have to be recompiled; rather, the appropriate library can be adjusted,
         and all dependant programs can continue operation in blissful ignorance
-        of the change. 
-        Such executable files are said to be <em>dynamically linked,</em> 
+        of the change.
+        Such executable files are said to be <em>dynamically linked,</em>
         and cannot be expected to run properly without their dependencies.
-        <code>/lib</code> holds libraries. 
+        <code>/lib</code> holds libraries.
     </p>
 
     <p>
-        The last directory we will look at is <code>/usr</code>, which 
-        is more interesting. It contains user-shared files, such as 
+        The last directory we will look at is <code>/usr</code>, which
+        is more interesting. It contains user-shared files, such as
         man pages (in <code>/usr/share/man</code>) and most of the system's
         programs (in <code>/usr/bin</code>).
-        These files are used by all system users, and the 
+        These files are used by all system users, and the
         Linux Filesystem Heirarchy Standard mentioned
-        above intends to guarantee that this  
+        above intends to guarantee that this
         directory can shared across systems via network, by making its contents
         read-only.
     </p>
 
-  
+
     <h3>See Also:</h3>
     <ul>
         <li><a href="https://wiki.archlinux.org/index.php/XDG_Base_Directory">XDG Base Directory</a> - Arch Linux (A newer, super-specification)</li>
@@ -500,14 +501,14 @@ https://wiki.ubuntu.com/Lvm
 <div class="content" id="mounting-unmounting">
     <h2>Mounting and Unmounting</h2>
 
-    
+
     <p>
         Unlike Windows systems, which create a new, distinct directory tree
         for each storage device on the system (e.g., <code>C:\, D:\</code>, etc.),
-        UNIX-like operating systems 
+        UNIX-like operating systems
         maintain a single, unique directory tree for the entire system.
-        When a new device is introduced to the machine, its files are made 
-        available by placing the new filesystem's root directory 
+        When a new device is introduced to the machine, its files are made
+        available by placing the new filesystem's root directory
         in the existing directory tree,
         in an operation is called <a href="https://unix.stackexchange.com/questions/3192/what-is-meant-by-mounting-a-device-in-linux"><em>mounting</em></a>.
     </p>
@@ -526,11 +527,11 @@ https://wiki.ubuntu.com/Lvm
     <img style="width:80%" src="assets/img/mounting.png">
 
     <p>
-        The Linux Filesystem Heirarchy Standard provides two places to mount 
+        The Linux Filesystem Heirarchy Standard provides two places to mount
         temporary filesystems: <code>/mnt</code> and <code>/media/[user]</code>.
-        When mounting new devices manually, the usual method is to identify the 
-        device to be mounted with 
-        <a href="https://man7.org/linux/man-pages/man8/lsblk.8.html"><code>lsblk(8)</code></a>, 
+        When mounting new devices manually, the usual method is to identify the
+        device to be mounted with
+        <a href="https://man7.org/linux/man-pages/man8/lsblk.8.html"><code>lsblk(8)</code></a>,
         then mount it with
     </p>
 
@@ -539,21 +540,21 @@ https://wiki.ubuntu.com/Lvm
     </div>
 
     <p>
-        Superuser priveledges allow us to mount a filesystem anywhere.  
+        Superuser priveledges allow us to mount a filesystem anywhere.
         When a filesystem's is mounted to a directory that is not empty,
-        those directory's contents become "hidden" by those of the new filesystem, 
-        and are inaccessible while the filesystem is mounted.  
+        those directory's contents become "hidden" by those of the new filesystem,
+        and are inaccessible while the filesystem is mounted.
         Therefore, we typically locate an empty directory in the existing
         directory tree, to serve as the to-be-mounted filesystem's root
         directory.
     </p>
-            
+
     <h3> Unmounting </h3>
 
     <p>
         Devices should be unmounted before being removed; this operation is
-        encapsulated in "eject." 
-        To unmount a device manually, we again assert the correct device 
+        encapsulated in "eject."
+        To unmount a device manually, we again assert the correct device
         with <code>lsblk</code>, then unmount it with,
     <p>
 
@@ -571,14 +572,14 @@ https://wiki.ubuntu.com/Lvm
     <h2> Filesystems </h2>
 
     <p>
-        A <em><a href="https://wiki.osdev.org/File_Systems#File_System_Theory">filesystem</a></em> 
+        A <em><a href="https://wiki.osdev.org/File_Systems#File_System_Theory">filesystem</a></em>
         is a systematic method of storing and retrieving data on
         disk.<sup><a href="https://wiki.osdev.org/Filesystem">[8]</a><a href="https://wiki.archlinux.org/index.php/File_systems">[9]</a></sup>
         The first versions of UNIX referred to its own filesystem as, simply,
-        <code>fs</code>.  
-        It was well-documented (by, for instance, Maurice J. Bach in 
+        <code>fs</code>.
+        It was well-documented (by, for instance, Maurice J. Bach in
         <a href="https://archive.org/details/DesignUNIXOperatingSystem/mode/2up"><em>The Design of the Unix Operating System</em></a>), and became the basis of
-        a sequence of filesystems, including Linux's <code>ext</code> 
+        a sequence of filesystems, including Linux's <code>ext</code>
         and <code>ext2</code>.
     </p>
 
@@ -586,35 +587,35 @@ https://wiki.ubuntu.com/Lvm
         These filesystems were relatively simple and naive:
         They expected that machines would always shutdown cleanly, and
         that hard-drives worked flawlessly.
-        In particular, a system crash mid-write could leave the filesystem in 
-        an inconsistent state.<sup><a href="https://en.wikipedia.org/wiki/Journaling_file_system">[10]</a></sup> 
+        In particular, a system crash mid-write could leave the filesystem in
+        an inconsistent state.<sup><a href="https://en.wikipedia.org/wiki/Journaling_file_system">[10]</a></sup>
         Such a shutdown required a check of the entire structure.<sup><a href="https://en.wikipedia.org/wiki/Journaling_file_system">[10]</a></sup>
-        Filesystems like these 
+        Filesystems like these
         are today used to hold the bootloader, since they are widely supported and
         their contents are not expected to change often.
     </p>
-    
+
     <p>
-        The issue of non-clean shutdowns was solved with the introduction of 
+        The issue of non-clean shutdowns was solved with the introduction of
         <em><a href="https://en.wikipedia.org/wiki/Journaling_file_system">journaling</a>:</em>
         Before a change is made to the filesystem's contents, it is first written
-        to an on-disk journal.  
+        to an on-disk journal.
         Should the system crash after the journal has been updated, the write
         can simply be resumed; should the system crash before the journal entry has been
         completed, the write is discarded.
         In either case, the consistency of the filesystem is preserved.
-        Journaling filesystems are in wide use, and include Linux's excellent 
+        Journaling filesystems are in wide use, and include Linux's excellent
         <a href="https://ext4.wiki.kernel.org/index.php/Main_Page"><code>ext4</code></a>
         and Microsoft's <code>NTFS</code>.
     </p>
 
     <p>
         Next-generation filesystems are introducing a myriad of features to
-        cope with hard-drive failures, especially, in enterprise settings.  
+        cope with hard-drive failures, especially, in enterprise settings.
         The most fundamental change is <em>copy on write,</em>
-        a minor change in semantics which allows filesystem-wide snapshots to be 
+        a minor change in semantics which allows filesystem-wide snapshots to be
         created very efficiently, while reducing the need for journaling.
-        Other features include native logical volume management/RAID support and 
+        Other features include native logical volume management/RAID support and
         internal checksumming.
     </p>
 
@@ -627,26 +628,26 @@ https://wiki.ubuntu.com/Lvm
     </div>
 
     <p>
-        Both <code><a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">btrfs</a></code> 
-        and <code><a href="https://en.wikipedia.org/wiki/ZFS">ZFS</a></code> 
+        Both <code><a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">btrfs</a></code>
+        and <code><a href="https://en.wikipedia.org/wiki/ZFS">ZFS</a></code>
         are such next-generation, copy-on-write filesystems.<sup><a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">[11]</a><a href="https://wiki.archlinux.org/index.php/ZFS">[12]</a></sup>
-        Of the two, <code>btrfs</code> has made inroads to becoming Linux's next 
+        Of the two, <code>btrfs</code> has made inroads to becoming Linux's next
         major filesystem:
-        It is in wide use by Facebook,<sup><a href="https://lwn.net/Articles/824855/">[13]</a></sup> and has recently become  
-        the default filesystem of Fedora's <em>Workstation</em> 
+        It is in wide use by Facebook,<sup><a href="https://lwn.net/Articles/824855/">[13]</a></sup> and has recently become
+        the default filesystem of Fedora's <em>Workstation</em>
         distribution.<sup><a href="https://fedoramagazine.org/announcing-fedora-33/">[14]</a></sup>
         They are among the first to adopt it.
     </p>
 
     <p>
-        Owing in part to a vast collection of open-source drivers, 
+        Owing in part to a vast collection of open-source drivers,
         Linux can make use of many filesystems.
-        The filesystems that the (running) kernel supports are listed at 
+        The filesystems that the (running) kernel supports are listed at
         <code>/proc/filesystems</code>;
         formatting tools are generally of the form <code>mkfs.&lt;filesystem&gt;</code>;
         finally, <code>man</code> pages contain most relevant information.
     </p>
-   
+
     <h3> See Also: </h3>
     <ul>
         <li><a href="https://man7.org/linux/man-pages/man5/filesystems.5.html"><code>filesystems(5)</code></a></li>
@@ -667,15 +668,15 @@ https://wiki.ubuntu.com/Lvm
     <h3> inodes </h3>
 
     <p>
-        An inode object represents an object within the 
+        An inode object represents an object within the
         filesystem.<sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html#id1">[16]</a></sup>
         Every path on the directory tree refers to an inode, and
         every file has a unique inode.
     </p>
 
     <p>
-        Inodes are the responsibility of their respective filesystem, 
-        and, in keeping with traditional UNIX filesystems, 
+        Inodes are the responsibility of their respective filesystem,
+        and, in keeping with traditional UNIX filesystems,
         each is given a number, referred to as an <em>inode number.</em>
         Within a given filesystem, an inode number uniquely identifies an
         inode, and thereby uniquely identifies a file.
@@ -684,15 +685,15 @@ https://wiki.ubuntu.com/Lvm
     <h3>Directories</h3>
 
     <p>
-        A directory is a file containing a table with two columns: 
+        A directory is a file containing a table with two columns:
         File name and Inode number:
     </p>
 
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            By convention alone, filenames which begin with a 
-            period <code>.</code> are considered hidden, 
+            By convention alone, filenames which begin with a
+            period <code>.</code> are considered hidden,
             including <code>.</code> and <code>..</code>.
             We list them here with the <code>--all</code> option.
         </p>
@@ -733,7 +734,7 @@ https://wiki.ubuntu.com/Lvm
         it is no longer accessible through the directory tree, and
         the kernel prepares to delete it.<sup><a href="#references">[17]</a></sup>
     </p>
-   
+
     <p>
         A hard link is created upon file creation;
         we can also create new hard links with the <code>ln</code> "link" command,
@@ -764,8 +765,8 @@ https://wiki.ubuntu.com/Lvm
     </div>
 
     <p>
-        Directories are somewhat special: They are managed by the kernel, 
-        and are not directly readable nor writeable by 
+        Directories are somewhat special: They are managed by the kernel,
+        and are not directly readable nor writeable by
         processes.<sup><a href="#references">[17]</a></sup>
     </p>
 
@@ -790,39 +791,39 @@ https://wiki.ubuntu.com/Lvm
 
     <p>
         In the design, data blocks are of fixed size, and either free or
-        wholly consumed by a file.<sup><a href="#references">[18]</a></sup> 
+        wholly consumed by a file.<sup><a href="#references">[18]</a></sup>
         The filesystem's <em>index nodes</em> represent one file each,
-        contain their file's metadata, and contain pointers to data blocks.<sup><a href="#references">[18]</a></sup> 
+        contain their file's metadata, and contain pointers to data blocks.<sup><a href="#references">[18]</a></sup>
         These nodes are arranged in an array, and can be uniquely identified
         by an index into this array.
     </p>
 
     <p>
         This design allows a file to grow or shrink without rearranging
-        other files.<sup><a href="#references">[18]</a></sup> 
-        In addition, the inclusion of single-, double- and triple- 
-        indirection blocks allow the inode to remain of fixed, 
-        reasonable size, while supporting large 
+        other files.<sup><a href="#references">[18]</a></sup>
+        In addition, the inclusion of single-, double- and triple-
+        indirection blocks allow the inode to remain of fixed,
+        reasonable size, while supporting large
         files.<sup><a href="#references">[18]</a></sup>
     </p>
 
     <p>
-        It was the most advanced filesystem of its time, 
-        and, as UNIX grew in popularity, was propogated and revised. 
+        It was the most advanced filesystem of its time,
+        and, as UNIX grew in popularity, was propogated and revised.
         <em>Index node</em> became contracted to <em>inode</em>,
-        and the semantics of file operations in UNIX-like operating systems 
+        and the semantics of file operations in UNIX-like operating systems
         became dependant upon them.
     </p>
 
     <p>
-        The design was demonstrated in the 
+        The design was demonstrated in the
         <a href="https://en.wikipedia.org/wiki/Minix">MINIX</a> filesystem,
         which in turn served as Linux's pre-1.0 filesystem.
-        The <em>extended</em> filesystem, <code>ext</code>, extended 
+        The <em>extended</em> filesystem, <code>ext</code>, extended
         those filesystem's capabilities.
         With <code>ext</code>'s inclusion in kernel 0.96c, Linux began to use
-        its new <a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">Virtual File System</a>, 
-        a kernel subsystem that provides userspace with a 
+        its new <a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">Virtual File System</a>,
+        a kernel subsystem that provides userspace with a
         uniform filesystem interface.
     </p>
 
@@ -831,8 +832,8 @@ https://wiki.ubuntu.com/Lvm
         most functionality is common;
         the Virtual File System provides a uniform interface to user-space by
         mapping filesystem-related system calls to filesystem-driver functions.
-        In addition, the VFS imposes inodes on filesystems that do not 
-        natively employ them, 
+        In addition, the VFS imposes inodes on filesystems that do not
+        natively employ them,
         thereby preserving traditional UNIX file semantics across all
         supported filesystems.
     </p>
@@ -896,15 +897,15 @@ https://wiki.ubuntu.com/Lvm
 
         <li> File systems - ArchWiki. (n.d.). Retrieved July 17, 2020, from <a href="https://wiki.archlinux.org/index.php/File_systems">https://wiki.archlinux.org/index.php/File_systems</a> </li>
 
-        <li>Journaling file system - Wikipedia. (2021, January 06). Retrieved March 02, 2021, from <a href="https://en.wikipedia.org/wiki/Journaling_file_system">https://en.wikipedia.org/wiki/Journaling_file_system</a></li> 
+        <li>Journaling file system - Wikipedia. (2021, January 06). Retrieved March 02, 2021, from <a href="https://en.wikipedia.org/wiki/Journaling_file_system">https://en.wikipedia.org/wiki/Journaling_file_system</a></li>
 
 
         <li>btrfs Wiki (2021, February 24). Retrieved March 02, 2021, from <a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">https://btrfs.wiki.kernel.org/index.php/Main_Page</a></li>
-        
+
         <li>ZFS - ArchWiki. (2021, February 22). Retrieved March 02, 2021, from <a href="https://wiki.archlinux.org/index.php/ZFS">https://wiki.archlinux.org/index.php/ZFS</a></li>
 
         <li>Btrfs at Facebook [LWN.net]. (2020, July 2). Retrieved March 02, 2021, from <a href="https://lwn.net/Articles/824855/">https://lwn.net/Articles/824855/</a></li>
-        
+
         <li>Fedora 33 is officially here! - Fedora Magazine. (2020, October 27). Retrieved March 2, 2021, from <a href="https://fedoramagazine.org/announcing-fedora-33/">https://fedoramagazine.org/announcing-fedora-33/</a></li>
 
         <li>Torvalds, L. (2020, January 06). Nuances related to Spinlock implementation and the Linux Scheduler. Retrieved March 02, 2021, from <a href="https://www.realworldtech.com/forum/?threadid=189711&amp;curpostid=189841">https://www.realworldtech.com/forum/?threadid=189711&amp;curpostid=189841</a></li>
@@ -919,4 +920,3 @@ https://wiki.ubuntu.com/Lvm
     </ol>
 
 </div>
-
