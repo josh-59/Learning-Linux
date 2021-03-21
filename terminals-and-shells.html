@@ -9,6 +9,8 @@ To Do:
 
     Shells:
     You can think of them as a view into the machine.
+    This article will present the theoretics of shells in UNIX-like's, 
+    and develop "canonical" shell behavior.
 
     <p>
         Learning to use a shell amounts to learning how it handles
@@ -27,26 +29,28 @@ To Do:
     Standard File Descriptors:
         Include redirection
 
-        <div class="code">
-        $ <i>command</i> [arg] ... [redirection] ...
-    </div>
-
     <p>
-        The above is the definition of a <em>simple command</em>
-        in GNU <code>bash</code>.
-        It effectively forms a unit in our command-line language.
+        The shell does little else.  
+        It may provide some means to store variables, and offer to expand them, 
+        but by and large, shells are as "dumb" as terminals, and, this is intentional.
     </p>
 
-    Closing Remarks:
-        Text Editors
+<div class="content" id="setup-files">
+    <h2>Bash Configuration Scripts</h2>
 
-<div class="content" id="closing-remarks">
-    <h2>Closing Remarks</h2>
+</div>
+
+    <p>
+        IN THE BEGINNING, the shell operated in a simple loop involving an <em>exec</em>
+        call to itself.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[1]</a></sup>
+        SINCE THE BEGINNING, times have been good, and bearded UNIX hackers
+        have been productive.
+        In particular, per-user multiprocessing, and the <code>fork()</code> system call, have been introduced.
+    </p>
 
     <p>
         Different operating systems have their own idioms for the command line.
-        Being a UNIX-like operating system, GNU/Linux has inheritted
-        those of UNIX.
+        The UNIX way 
     </p>
 
     <p>
@@ -98,27 +102,12 @@ To Do:
         Formally:
     </p>
 
-    <div class="code">
-         $ <i>command</i> [subcommand] [[option] ... [file] ...] [redirection] ...
-    </div>
-</div>
-
-
-<div class="content" id="setup-files">
-    <h2>Bash Configuration Scripts</h2>
-
-</div>
-
-<p>
-        IN THE BEGINNING, the shell operated in a simple loop involving an <em>exec</em>
-        call to itself.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[1]</a></sup>
-        SINCE THE BEGINNING, times have been good, and bearded UNIX hackers
-        have been productive.
-        In particular, per-user multiprocessing, and the <code>fork()</code> system call, have been introduced.
+        
+    <p>
+        Where <code>command</code> is mandatory and arguments are optional.
     </p>
 
-
--->
+    -->
 
 <div id="nav_bar_2" class="nav">
 	<ul>
@@ -126,9 +115,10 @@ To Do:
 		<li><a href="#physical-terminals"> Physical Terminals </a></li>
 		<li><a href="#terminal-emulators"> Terminal Emulators </a></li>
 		<li><a href="#shells"> Shells </a></li>
-        <li><a href="#simple-commands">Simple Commands</a></li>
+        <li><a href="#commands">Commands</a></li>
+        <li><a href="#path">PATH </a></li>
         <li><a href="#pwd">Working Directory</a></li>
-        <!--<li><a href="#path">PATH </a></li>-->
+        <li><a href="#closing-remarks">Closing Remarks</a></li>
 		<li><a href="#missing-semester"> Missing Semester </a></li>
 		<li><a href="#references"> References </a></li>
 	</ul>
@@ -321,11 +311,11 @@ To Do:
     </ul>
 </div>
 
-<div class="content" id="simple-commands">
-    <h2>Simple Commands</h2>
+<div class="content" id="commands">
+    <h2>Commands</h2>
 
     <p>
-        A <em>simple command</em> is a command of the form:
+        A typical line of input to a shell has the following form: 
     </p>
 
     <div class="code">
@@ -333,38 +323,132 @@ To Do:
     </div>
 
     <p>
-        Where <code>command</code> is mandatory and arguments are optional.
+        This corresponds directly to <em>execute another program</em> named
+        <code>command</code>, and pass it the arguments in <code>[arg ...]</code>.
     </p>
 
     <p>
-        Commands given to shells are almost always separate programs;
-        in fact, it is unusual for a command to be built in to the shell.
+        The shell, for its part, finds the program (by name),
+        forks itself and executes that command.
+        This is canonical shell behavior, and all programs that can be implemented 
+        in this manner are.
     </p>
-</div>
-
-<div class="content" id="execution">
-	<h2>Command Execution</h2>
 
     <p>
-        Most, but not all, commands given to the shell exist as separate
-        programs.
+        For example, one might expect the highly shell-centric command <code>ls</code>
+        to be built in to the shell, and in lesser constructs, that would
+        be the case.
+        In fact, <code>ls</code> exists as <code>/usr/bin/ls</code>, and the
+        shell dutifully locates and executes it each time we ask to 
+        see a directory's contents.
+        Similar remarks apply to any command that does something, be it
+        <em>move a file,</em> <em>delete a directory,</em> or <em>view the
+        system's processes.</em>
     </p>
-        
-	<a href="assets/img/shell-model.pdf" title="Click for PDF">
-		<img src="assets/img/shell-model-pic.png" style="height: 400pt;">
-	</a>
 
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            If you're not interested in our command-line, don't worry: 
+            <a href="intro-to-gnu-linux.html#mint">Distributions exist</a> 
+            that don't require its use.
+        </p>
+    </div>
 
-    <h3>See Also:</h3>
+    <p>
+        The result is a highly programmer-centric paradigm.
+        To create a new command just became very simple: Put your 
+        program in a location that the shell will look, and then you may
+        execute it natively, as though it had been there all
+        along&mdash;
+        No need to rebuild the shell.
+    </p>
+
+    <h3 style="width: 50%; margin: auto;">See Also:</h3>
     <ul>
         <li><a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Operation.html">Shell Operation (Bash Reference Manual)</a></li>
     </ul>
 </div>
 
+<div class="content" id="path">
+    <h2><code>PATH</code> Environment Variable</h2>
+
+    <!--
+        Kernighan page 132:
+            Invented by John Mashey and introduced in the 6th edition shell,
+            it was a workaround so that non-expert users could
+            share their own sets of commands by lab, department and group.
+    -->
+
+    <p>
+        The <code>PATH</code> environment variable 
+        contains a list of directories to be searched 
+        when looking for a command.
+        This list is colon (<code>:</code>)&ndash;separated, and may look like,
+    </p>
+
+    <div class="code">
+        $ echo $PATH<br>
+        /usr/bin:/bin:/home/josh/.local/bin
+    </div>
+
+    <p>
+        The shell searches each directory in this list from left to right
+        for a file whose name matches the command given. 
+        It executes the first found, and then abandons its search.
+    </p>
+
+    <!--
+    <p>
+        The PATH environment variable was invented by John Mashey and 
+        introduced in the 6th edition shell.
+        It was a workaround so that non-expert users could
+        share their own sets of commands by lab, department and group.
+    </p>
+    -->
+
+
+    <p>
+        Some caveats apply:
+        If the command is a builtin, Bash will execute the builtin, and ignore
+        <code>PATH</code>.
+        More, Bash does <em>not</em> search the current working directory for a command.
+    </p>
+
+    <p>
+        We can overrule both of these behaviors by including a 
+        forward-slash <code>/</code> in our command, typically:
+    </p>
+
+    <div class="code">
+        $ ./<i>command</i>
+    </div>
+
+    <p>
+        Appending locations to <code>PATH</code> is an important step of 
+        setting up a development environment.
+        This is typically done in <code>~/.bashrc</code>.
+        The correct construct appends the directory
+        only if it is not already present:
+    </p>
+
+    <div class="code">
+        if [[ ! $PATH =~ $HOME/.local/bin ]]; then<br>
+        &emsp;&emsp;&emsp;&emsp;PATH=$PATH:$HOME/.local/bin<br>
+        fi
+    </div>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Environment_variable#True_environment_variables"> Environment Variables </a> - Wikipedia</li>
+    </ul>
+
+</div>
+
+
+
 <div class="content" id="pwd">
     <h2>Working Directory</h2>
-
-
 
     <p>
         Recall that each process has a <a href="/processes.html#process-attributes">current working directory</a>.
@@ -437,71 +521,15 @@ To Do:
 
 </div>
 
-<div class="content" id="path">
-    <h2><code>PATH</code> Environment Variable</h2>
+<div class="content" id="closing-remarks">
+    <h2 style="margin-bottom: 5px;">Closing Remarks</h2>
+    <h4>Passing Arguments</h4>
 
-    <!--
-        Kernighan page 132:
-            Invented by John Mashey and introduced in the 6th edition shell,
-            it was a workaround so that non-expert users could
-            share their own sets of commands by lab, department and group.
-    -->
 
-    <p>
-        Bash, being a process, has environment variables.  
-        Of these variables, <code>PATH</code> is the most important:
-        It contains a list of directories to be searched when looking for
-        a command.
-        This list is colon (<code>:</code>) -separated, and may look like,
-    </p>
-
-    <div class="code">
-        $ echo $PATH<br>
-        /usr/bin:/bin:/home/josh/.local/bin
-    </div>
-
-    <p>
-        Bash searches each directory in this list from left to right, 
-        for a file whose name matches the command given. 
-        It executes the first found, and then abandons its search.
-    </p>
-
-    <p>
-        Some caveats apply:
-        If the command is a builtin, Bash will execute the builtin, and ignore
-        <code>PATH</code>.
-        More, Bash does <em>not</em> search the current working directory for a command.
-    </p>
-
-    <p>
-        We can overrule both of these behaviors by including a 
-        forward-slash <code>/</code> in our command, typically:
-    </p>
-
-    <div class="code">
-        $ ./<i>command</i>
-    </div>
-
-    <p>
-        Appending locations to <code>PATH</code> is an important step of 
-        setting up a development environment.
-        This is typically done in <code>~/.bashrc</code>.
-        The correct construct appends the directory
-        only if it is not already present:
-    </p>
-
-    <div class="code">
-        if [[ ! $PATH =~ $HOME/.local/bin ]]; then<br>
-        &emsp;&emsp;&emsp;&emsp;PATH=$PATH:$HOME/.local/bin<br>
-        fi
-    </div>
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://en.wikipedia.org/wiki/Environment_variable#True_environment_variables"> Environment Variables </a> - Wikipedia</li>
-    </ul>
-
+   </div>
 </div>
+
+
 
 <div class="content" id="missing-semester">
 	<h2 style="margin-bottom: 2pt;">Missing Semester</h2>
