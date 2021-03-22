@@ -4,20 +4,11 @@ title: Documentation
 last-updated: January 2021
 ---
 
-<!--
-TODO
-    Rewrite Manual Pages
-        Include reference to <code>apropos</code>
--->
-
 <div id="nav_bar_2" class="nav">
 	<ul>
 		<li><a href="#introduction"> Introduction </a></li>
 		<li><a href="#official-documentation"> Official Documen-<br>tation</a></li>
 		<li><a href="#unofficial-documentation"> Unofficial Documen-<br>tation</a></li>
-		<li><a href="#man-pages"> Manual Pages </a></li>
-		<li><a href="#nf-books"> Nonfree Books </a></li>
-		<li><a href="#how-to"> How-To </a></li>
 		<li><a href="#references"> References </a></li>
 	</ul>
 </div>
@@ -95,9 +86,7 @@ TODO
 			However, owing to their technical precision, this collection can be difficult to read.
 		</li>
 	</ul>
-
 </div>
-
 
 
 <div id="unofficial-documentation" class="content">
@@ -152,121 +141,6 @@ TODO
     </ul>
 </div>
 
-<div id="man-pages" class="content">
-	<h2> Manual Pages </h2>
-	<p>
-		The most useful asset in the Linux documentation pool is the
-		manual ("man") pages.
-		Man pages provide a concise overview of commands and features, with further documentation
-		existing elsewhere.
-		Learn to use them early, for they are a way of life.
-	</p>
-
-	<p>
-		Man pages are accessed at the command line:
-	</p>
-
-	<div class="code">
-		$ man cat
-	</div>
-
-	<p>
-	    This fires up the <code>man</code> paging utility, which lets you
-        view and search the pages through a read-only interface.
-		Once within the <code>man</code> utility, you can search the content
-		by typing a single forward slash, then your search term:
-	</p>
-
-	<div class="code">
-		/&lt;search-term&gt;
-	</div>
-
-	<p>
-		Then, <em>enter</em>.  Jump to the next result by typing a single
-        <code>n</code>.
-		To quit the <code>man</code> paging utility, type <code>q</code>.
-	</p>
-
-	<p>
-        The controls of the <code>man</code> paging utility are simple enough:
-		To move down one line, type <code>j</code>;
-		to move up one line, use <code>k</code>.
-		To move down a screenful, press the spacebar.
-	</p>
-
-	<h3>Sections</h3>
-
-	<p>
-		The manual is divided into seven different sections, as shown below.
-		Here we will use the standard convention for specifying specific man pages:
-        The name of the page is followed by its section number, which is placed in
-        parenthesis.
-        For example,
-		<code>cat(1)</code> refers to the manual page for the command-line utility,
-		while <code>printf(3)</code> refers to the manual page of the C library function.
-	</p>
-
-    <div class="aside-right">
-		<h4>Manual Sections:</h4>
-        <ol>
-			<li> Shell Commands </li>
-			<li> Systems Calls </li>
-			<li> C Library Functions </li>
-			<li> Special Files </li>
-			<li> File Formats and Conventions </li>
-			<li> Games </li>
-			<li> Miscellaneous</li>
-		</ol>
-	</div>
-
-	<p>
-		The <code>man</code> utility searches the sections in order, and so
-		defaults to the page with the lowest section number.
-		Hence,
-	</p>
-
-	<div class="code">
-		$ man printf
-	</div>
-
-	<p>
-		displays <code>printf(1)</code>, if it exists.
-		To restrict <code>man</code>'s search to section three, we can use either
-	</p>
-
-	<div class="code">
-		$ man 3 printf
-	</div>
-
-	<p>
-		or
-	</p>
-
-	<div class="code">
-		$ man printf.3
-	</div>
-
-
-    <p>
-		Man pages date all the way to Bell Laboratories,<sup><a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html">[4]</a></sup>
-		where they were users' primary source for information about the new operating system.
-		Moreover, early versions of the Unix operating system were numbered by
-        the version of the man pages included.
-	</p>
-
-	<h3>See Also:</h3>
-	<ul>
-		<li><code><a href="https://www.man7.org/linux/man-pages/man1/man.1.html">man(1)</a></code></li>
-		<li><code><a href="https://www.man7.org/linux/man-pages/man1/apropos.1.html">apropos(1)</a></code></li>
-		<li><a href="https://www.bell-labs.com/usr/dmr/www/pdfs/manintro.pdf">1<sup>st</sup> Edition Unix Programmer's Manual Title Page and Introduction</a></li>
-	</ul>
-
-</div>
-
-
-
-
-
 <div class="content" id="nf-books">
 	<h2>Nonfree Books</h2>
 	<p>
@@ -307,7 +181,7 @@ TODO
 
 	<ul class="big-list">
 		<li> <a href="https://www.man7.org/tlpi/index.html">The Linux Programming Interface</a>&mdash;
-			For me, this is the definitive text on the programming interface
+			This is the definitive text on the programming interface
 			of the Linux kernel.
 			Its writer, Michael Kerrisk, is the maintainer of the
 			Linux Man Page project (above),
@@ -324,95 +198,6 @@ TODO
         are usually nonfree.
     </p>
 
-</div>
-<div id="how-to" class="content">
-	<h2>How-to</h2>
-
-	<p>
-		It's worthwhile to take a step back and consider the process
-		of learning Linux itself.
-		In my experience, the best method of learning Linux is to focus on the
-		underlying concepts:
-		When the concept is understood, the problem becomes specific and the 
-        solution obvious. 
-		Let's take an example.
-	</p>
-
-	<p>
-		Suppose you are working at the command-line, and you have a question about
-		copying files.
-		Knowing that the command <code>cp</code> copies a file,
-		you type <code>man cp</code>, and the manual page appears.
-		When you type <code>apropos copy</code>, looking for other
-		commands that can copy a file, it shows no results.
-		You know this to be an error, because <code>apropos</code>
-		is supposed to search manual pages and list all that
-		match "copy," which would certainly include <code>cp</code>.
-	</p>
-
-	<ol class="big-list" style="padding-bottom: 10px;">
-		<li>
-			<i>Figure out what your question is.</i>
-			<p>
-				Initially, your question might be <em>Why doesn't this work?</em>&mdash;
-				and that's totally fine.
-				Figuring out your question can be more difficult than you'd guess,
-				because you might not know how to phrase it.
-				Try to be specific:
-				When dealing with computers, things are <em>very</em> precisely defined.
-			</p>
-
-			<p>
-				Here, the question is, <em>Why isn't <code>apropos</code> returning
-				any results?</em>
-		</li>
-
-		<li>
-			<i>What would answer your question?</i>
-			<p>
-				This strikes you as such an obvious error
-				that any reasonable documentation should answer your question&mdash;
-				and you would be right.
-				So, you look first into the man pages, with
-				<code>man apropos</code>.
-				There, you discover that <code>apropos</code> doesn't search the man
-				pages <em>directly,</em> but instead searches a database of information
-				about them. (It does this because it's much faster.)
-			</p>
-
-			<p>
-				Reasonably, you suspect that there might be an error with this database,
-				such as, <em>It doesn't exist</em>.
-				A little further down the page, you read,
-				"The database searched by <code>apropos</code> is updated by <code>mandb</code>.
-				You try <code>mandb</code>, and voila! <code>apropos</code> works as it should.
-			</p>
-		</li>
-
-		<li>
-			<i>Be Patient.</i>
-
-			<p>
-				Databases like this pop up in other
-				contexts, as well.  For instance, in package management, a common
-				practice is to maintain a local database about available packages, so that
-				the user can search for packages without bothering public servers.
-				As such, updating these databases (on Debian/Ubuntu/Mint, with <code>apt update</code>)
-				is a precursive step to obtaining the latest packages.
-			</p>
-
-			<p>
-				The point here is that you should take the time to try to
-				learn underlying concepts, because it usually pays off in the long run.
-                <em>Skill accrues.</em> Answer one question at a time.
-			</p>
-		</li>
-	</ol>
-
-	<h3> See Also: </h3>
-	<ul>
-		<li><a href="https://www.gnu.org/philosophy/free-doc.html"> Why Free Software needs Free Documentation</a></li>
-	</ul>
 </div>
 
 <div id="references" class="content">
