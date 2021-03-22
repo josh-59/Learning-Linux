@@ -11,10 +11,12 @@ available [on Github](https://github.com/josh-59/Book-Like).
 #### 
 
 Landing:
-- [x] Introduction 
-- [x] Directory
-- [ ] How to
-- [x] Conventions
+- [X] Introduction 
+- [X] Directory
+- [X] How to
+- [X] Man Pages
+- [X] Conventions
+- [ ] About
 
 Intro:
 - [x] UNIX: A Brief History
@@ -22,7 +24,7 @@ Intro:
 - [x] Free as in Freedom
 - [x] The Linux Kernel
 - [x] A Brief History of Linux Distributions
-- [ ] Overview of Current Distributions
+- [ ] Linux Mint
 - [x] Closing Remarks: Open Source
 
 Files and Filesystems:
@@ -30,32 +32,37 @@ Files and Filesystems:
 - [x] Regular Files
 - [x] Device Files
 - [x] Synthetic Files
+- [ ] Named Pipes
+- [ ] Sockets
 - [x] Filesystem Heirarchy
+- [x] Mounting and Unmounting
 - [x] Filesystems
 - [ ] inodes
-- [x] Directories
-- [x] Mounting and Unmounting
-- [x] Closing Remarks: VFS and Directory Tree
+- [ ] Directories
+- [x] Closing Remarks: Inodes
 
 Processes:
 - [x] Actors
 - [x] Process Creation and System Startup
 - [x] Process Attributes
-- [x] Standard File Descriptors
-- [x] Executing a Different Program
+- [ ] File Descriptors
+- [ ] Executing a Different Program
+- [ ] Process Termination
 - [ ] Sandbox
 - [ ] Closing Remarks: systemd
 
 Terminals and Shells:
-- [x] History: Physical Terminals
+- [x] Physical Terminals
 - [x] Terminal Emulators
 - [x] Shells
-- [x] Simple Commands
-- [ ] Process Working Directory
+- [x] Commands
 - [ ] PATH Environment Variable
-- [ ] Closing Remarks: Text Editor
+- [ ] Working Directory
+- [ ] Standard File Descriptors
+- [ ] Shell Scripts
+- [ ] Closing Remarks: Arguments
 
-A C Primer:
+An Introduction to C:
 - [ ] History
 - [ ] Hello World
 - [ ] Memory!
@@ -74,7 +81,7 @@ The Bazaar Development Model:
 - [ ] Closed-Source Organizations
 - [ ] Why it Works
 
-Obtaining Free Software
+Packages
 - [ ] Building From Source
 - [ ] Ports and Portage
 - [X] Introduction to Packages
