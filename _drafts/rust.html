@@ -1,61 +1,76 @@
-Rust represents a major advancement in production programming languages because of its success in bridgingthe gap betweenhigh-levelapplication programming andlow-levelsystems programming.
+Rust represents a major advancement in production programming languages 
+because of its success in bridgingthe gap betweenhigh-levelapplication 
+programming and low-level systems programming.
 http://www.ccs.neu.edu/home/amal/papers/rustdistilled.pdf
 
+<div class="content" id="history">
+
+    <h2> History and Justification </h2>
+    <p>
+        There are <a href="https://en.wikipedia.org/wiki/List_of_programming_languages">many</a> programming languages.
+        Why a new one?  And, why this one?
+    </p>
+
+    <p>
+        C++, C# and Objective C
+        Having written 100,000 lines of C++, called it, 
+        "...an age-appropriate mistake."
+    </p>
+
+    <p>
+        
+    </p>
+</div>
+
+<div class="content" id="expressive">
 <h2> Expressive </h2>
-<p>
-    Rust is an expressive language.  That means:
-</p>
+    <p>
+        Rust is an expressive language.  That means:
+    </p>
 
     <ol>
         <li>It's enormous</li>
         <li>(Optionally) Everything is an expression</li>
     </ol>
 
-<p>
-    Everything in Rust really is an expression, and evaluates to some
-    value.  
-    The none value is <code>()</code>, the unit tuple; this is the 
-    return type of a function which returns nothing, for instance,
-    or, the value a <code>let<code> statement resolves to.
-</p>
+    <p>
+        Everything in Rust really is an expression, and evaluates to some
+        value.  
+        The none value is <code>()</code>, the unit tuple; this is the 
+        return type of a function which returns nothing, for instance,
+        or, the value a <code>let<code> statement resolves to.
+    </p>
 
-<p>
-    "<code>()<code> is a value of the type <code>()</code> and its purpose is
-    to be useless," says A.B. the Wise.
-    Being an object with zero size, it stands to reason that
-    its existence would have no effect on machine state.
-</p>
+    <p>
+        "<code>()<code> is a value of the type <code>()</code> and its purpose is
+        to be useless," says A.B. the Wise.
+        Being an object with zero size, it stands to reason that
+        its existence would have no effect on machine state.
+    </p>
 
-<p>
-    We can map an expression's value to <code>()</code>) by
-    appending a semicolon <code>;</code>. 
-    We will say that the value is <em>discarded.</em>
-    Semicolons on empty lines have no effect, and
-    discarding <code>()</code> has no effect.
-</p>
+    <p>
+        We can map an expression's value to <code>()</code>) by
+        appending a semicolon <code>;</code>. 
+        We will say that the value is <em>discarded.</em>
+        Semicolons on empty lines have no effect, and
+        discarding <code>()</code> has no effect.
+    </p>
 
-<h3>Result</h3>
+    <h3>Result</h3>
 
-<p>
-    One type is special, and that is the <em>Result</em> type:
-    It is an error to discard a Result.  
-    This caveat forms the bread and butter of Rust's error propogation,
-    and any function which can fail returns a Result.
-</p>
+    <p>
+        One type is special, and that is the <em>Result</em> type:
+        It is an error to discard a Result.  
+        This caveat forms the bread and butter of Rust's error propogation:
+        Any function which can fail returns a <em>Result</em>, and 
+        any function which calls a fallable function is expected to
+        handle the resulting Result.
+    </p>
 
-<p>
-    Formally, a Result is an <code>enum</code> containing either
-    <code>OK(s)</code> for some success value <code>s</code>,
-    or <code>Err(e)</code> for an error <code>e</code>.
-    Any function which calls a fallable function is expected to
-    handle the resulting Result.
-</p>
-
-<p>
-    The available means of dealing with Results are many and beautiful,
-    but too many to introduce here.
-</p>
-
+    <p>
+        The available means of dealing with Results are many and beautiful,
+        but too many to introduce here.
+    </p>
 </div>
 
 <div class="content" id="types">
