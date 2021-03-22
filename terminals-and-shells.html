@@ -8,14 +8,10 @@ last-updated: March, 2021
 To Do:
 
     Shells:
-    You can think of them as a view into the machine.
-    This article will present the theoretics of shells in UNIX-like's, 
-    and develop "canonical" shell behavior.
 
     <p>
         Learning to use a shell amounts to learning how it handles
-        commands given to it, so buddy up to your favorite shell's
-        reference manual!
+        commands given to it.
     </p>
 
     Command Execution: (Need rather badly, before cwd)
@@ -26,8 +22,6 @@ To Do:
 
     https://www.gnu.org/software/bash/manual/html_node/Simple-Commands.html#Simple-Commands
 
-    Standard File Descriptors:
-        Include redirection
 
     <p>
         The shell does little else.  
@@ -40,33 +34,13 @@ To Do:
 
 </div>
 
-    <p>
-        IN THE BEGINNING, the shell operated in a simple loop involving an <em>exec</em>
-        call to itself.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[1]</a></sup>
-        SINCE THE BEGINNING, times have been good, and bearded UNIX hackers
-        have been productive.
-        In particular, per-user multiprocessing, and the <code>fork()</code> system call, have been introduced.
-    </p>
-
-    <p>
+        <p>
         Different operating systems have their own idioms for the command line.
         The UNIX way 
     </p>
 
-    <p>
-        A simple command has the form,
-    </p>
-
-    <div class="code">
-        $ <i>command</i> [arg] ...
-    </div>
 
     <p>
-        I draw your attention to the <em>arguments</em> list:
-        An argument may either be a sub-command, or an option.
-        An option is prefixed with either <code>-</code> (short option)
-        or <code>- -</code> (long option).
-        A sub-command is not prefixed with either.
     </p>
 
     <p>
@@ -118,7 +92,9 @@ To Do:
         <li><a href="#commands">Commands</a></li>
         <li><a href="#path">PATH </a></li>
         <li><a href="#pwd">Working Directory</a></li>
-        <li><a href="#closing-remarks">Closing Remarks</a></li>
+        <li><a href="#standard-file-descriptors">Standard File Descriptors</a></li>
+        <li><a href="#shell-scripts">Shell Scripts</a></li>
+        <li><a href="#closing-remarks">Closing Remarks: Arguments</a></li>
 		<li><a href="#missing-semester"> Missing Semester </a></li>
 		<li><a href="#references"> References </a></li>
 	</ul>
@@ -137,7 +113,16 @@ To Do:
         UNIX: A History and a Memoir
     </div>
 
-    </div>
+    <p>
+        Though foreign to most users, the text-terminal is the original
+        interface for "interactive computing." 
+        This article will examine the fascinating theory of terminals and shells in 
+        GNU/Linux, and, in so doing, indirectly justify their persistence on
+        modern hardware.  
+        For a tutorial introduction, see Ubuntu's
+        <a href="https://ubuntu.com/tutorials/command-line-for-beginners#1-overview">The Linux Command Line for Beginners</a>.
+    </p>
+</div>
 
 <div id="physical-terminals" class="content">
 	<h2 style="margin-bottom: 2pt;">Physical Terminals</h2>
@@ -149,14 +134,14 @@ To Do:
 		this technology was carried over from the
 		<a href="https://mysite.du.edu/~jcalvert/tel/teletype.htm"<i>teletypewriter</i></a>,
 		a device for sending telegrams.
-		Paper-based terminals persisted well into the 1970's, and later
+		Paper-based terminals persisted well into the 1970's; later
         electronic typewriters sometimes supported terminal mode,
 		allowing them to interface with computers via serial cable.
 	</p>
 
 	<center>
 		<a title="Peter Hamer, CC BY-SA 2.0 &lt;https://creativecommons.org/licenses/by-sa/2.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Ken_Thompson_(sitting)_and_Dennis_Ritchie_at_PDP-11_(2876612463).jpg"><img width="1024" alt="Ken Thompson (sitting) and Dennis Ritchie at PDP-11 (2876612463)" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Ken_Thompson_%28sitting%29_and_Dennis_Ritchie_at_PDP-11_%282876612463%29.jpg/1024px-Ken_Thompson_%28sitting%29_and_Dennis_Ritchie_at_PDP-11_%282876612463%29.jpg"></a>
-		Ken Thompson (sitting) and Dennis Ritchie at PDP-11 in the "UNIX Room" of Bell Labs
+		Ken Thompson (sitting) and Dennis Ritchie at PDP-11 
 	</center>
 
 	<p>
@@ -191,8 +176,8 @@ To Do:
 	<p>
 		Terminals persist on modern hardware in the form of <i>terminal emulators</i>.
 		These are user-space processes that, well, emulate an old terminal!
-		Specifically, it is a program that runs within the context of a desktop environment,
-		and emulates the functionality of a physical terminal.
+		Specifically, it is a program that runs within the context of a desktop 
+        environment, and emulates the functionality of a physical terminal.
 	</p>
 
 	<figure>
@@ -217,7 +202,7 @@ To Do:
 	<div class="aside-right">
 		<h4>Aside:</h4>
 		<p>
-			The files we are interested in are <code>/dev/pts/*</code>
+            A terminal emulator is present on every Linux distribution.
 		</p>
 	</div>
 
@@ -249,7 +234,7 @@ To Do:
 	</div>
 
 	<p>
-		A shell is a program which interprets and executes our commands.
+		A shell is a program which interprets and executes our (arbitrary) commands.
 		It is a <em>shell</em> in the sense that it is the outermost layer of the
 		operating system, and the one which the user has direct contact.
 	</p>
@@ -293,7 +278,9 @@ To Do:
 		<figcaption><center><code>ps</code> command, by default listing processes owned by this user, connected to this terminal </center></figcaption>
 	</figure>
 
-        <p>
+    <p>
+        Bash is the standard shell of our time, and I recommend learning it over
+        other shells, friendlier though they may be.
         Finally, note that we will typically omit the picture of the terminal,
         so that the above command will be depicted:
     </p>
@@ -305,10 +292,7 @@ To Do:
         3148 pts/1   00:00:00 ps
     </div>
 
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://ubuntu.com/tutorials/command-line-for-beginners#1-overview">The Linux Command Line for Beginners</a> - Ubuntu </li>
-    </ul>
+
 </div>
 
 <div class="content" id="commands">
@@ -328,7 +312,7 @@ To Do:
     </p>
 
     <p>
-        The shell, for its part, finds the program (by name),
+        The shell, for its part, finds the program,
         forks itself and executes that command.
         This is canonical shell behavior, and all programs that can be implemented 
         in this manner are.
@@ -364,7 +348,22 @@ To Do:
         No need to rebuild the shell.
     </p>
 
-    <h3 style="width: 50%; margin: auto;">See Also:</h3>
+    <h3 style="width: 30%; margin: auto;">In the Beginning</h3>
+
+    <p>
+        The first working versions on UNIX entertained exactly two processes, 
+        one for each of two terminals connected to the machine.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[1]</a></sup>
+        The shell, 
+        <a href="https://en.wikipedia.org/wiki/Thompson_shell"><code>sh</code></a>, 
+        existed as a user-space process, but <em>fork()</em> had not been introduced.
+        To execute a different program, the shell simply replaced itself with 
+        the requested program; 
+        the program, on calling <em>exit</em>, replaced itself with the 
+        shell once again.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[1]</a></sup>
+
+    </p>
+
+    <h3 style="width: 30%; margin: auto;">See Also:</h3>
     <ul>
         <li><a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Operation.html">Shell Operation (Bash Reference Manual)</a></li>
     </ul>
@@ -416,8 +415,8 @@ To Do:
     </p>
 
     <p>
-        We can overrule both of these behaviors by including a 
-        forward-slash <code>/</code> in our command, typically:
+        We can overrule both builtins and the shell's search of PATH 
+        including a forward-slash <code>/</code> in our command, typically:
     </p>
 
     <div class="code">
@@ -442,16 +441,14 @@ To Do:
     <ul>
         <li><a href="https://en.wikipedia.org/wiki/Environment_variable#True_environment_variables"> Environment Variables </a> - Wikipedia</li>
     </ul>
-
 </div>
-
-
 
 <div class="content" id="pwd">
     <h2>Working Directory</h2>
 
     <p>
-        Recall that each process has a <a href="/processes.html#process-attributes">current working directory</a>.
+        Recall that each process has a 
+        <a href="/processes.html#process-attributes">current working directory</a>.
         Since the shell is a process, naturally, it too has a current working directory.
         At the command line, this is of particular importance:
         It reflects <em>where you are</em> in the directory tree.
@@ -476,6 +473,8 @@ To Do:
         $ pwd<br>
         /home/josh/Public
     </div>
+
+    <h3><code>cd</code> is a builtin</h3>
 
     <p>
         In Ancient UNIX, <em>change directories</em> was implemented
@@ -521,15 +520,36 @@ To Do:
 
 </div>
 
-<div class="content" id="closing-remarks">
-    <h2 style="margin-bottom: 5px;">Closing Remarks</h2>
-    <h4>Passing Arguments</h4>
+<div class="content" id="standard-file-descriptors">
+    <h2>Standard File Descriptors</h2>
+    
+    <p>
+        As mentioned, the shell is connected to the terminal by three open files.
+        By convention, then standard, they are:
+    </p>
 
+    <ul>
+        <li> <code>STDIN</code>, File descriptor 0</li>
+        <li> <code>STDOUT</code>, File descriptor 1</li>
+        <li> <code>STDERR</code>, File descriptor 2</li>
+    </ul>
 
-   </div>
+    <p>
+
+    </p>
 </div>
 
+<div class="content" id="shell-scripts">
+    <h2>Shell Scripts</h2>
 
+</div>
+
+<div class="content" id="closing-remarks">
+    <h2 style="margin-bottom: 5px;">Closing Remarks</h2>
+    <h4>Arguments</h4>
+
+
+</div>
 
 <div class="content" id="missing-semester">
 	<h2 style="margin-bottom: 2pt;">Missing Semester</h2>
