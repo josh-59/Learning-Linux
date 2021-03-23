@@ -81,6 +81,35 @@ To Do:
         Where <code>command</code> is mandatory and arguments are optional.
     </p>
 
+    ================>Closing Remarks<=================
+
+    <h2>Closing Remarks</h2>
+    <p>
+        Arguments from the command line are passed to each program as it 
+        begins execution, and each language has facilities to inspect them.
+        In C, they are presented as arguments to the <em>main</em> function:
+    </p>
+
+    <pre>
+        int main(char** argv, int argc) 
+                        ^^^^
+    </pre>
+
+    <p>
+        where <code>argv</code> denotes a vector of strings, and <code>argc</code>
+        is a count of them.
+        <code>argv[1]</code> denotes the first argument, 
+        <code>argv[2]</code> denotes the second, etc.
+        Effectively, arguments are the glue between the shell interface
+        and preferential program execution.
+    </p>
+
+    <p>
+        A parent can pass information to its child in other ways,
+        such as environment variables, but 
+        ...and tend to remain constant over a session.
+    </p>
+
     -->
 
 <div id="nav_bar_2" class="nav">
@@ -545,7 +574,7 @@ To Do:
 </div>
 
 <div class="content" id="closing-remarks">
-    <h2 style="margin-bottom: 5px;">Closing Remarks</h2>
+    <h2 style="margin-bottom: 5px;">Closing Remarks:</h2>
     <h4>Arguments</h4>
 
 
