@@ -680,7 +680,7 @@ https://wiki.ubuntu.com/Lvm
         The table is kept in the first blocks (sectors) of the device,
         and segments the rest of the device's address space into distinct, 
         non-overlapping, but contiguous, <em>partitions.</em>
-        This table will be read by the kernel and, for each partition created, 
+        This table will be read by the kernel and, for each partition stipulated, 
         a new block special device file will appear in <code>/dev</code>.
     </p>
 
@@ -705,7 +705,7 @@ https://wiki.ubuntu.com/Lvm
     </p>
 
     <div class="code">
-        sudo mkfs.ext4 /dev/mmcblk1p1
+        $ sudo mkfs.ext4 /dev/mmcblk1p1
     </div>
 
     <p>
