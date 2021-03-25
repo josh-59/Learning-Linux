@@ -5,14 +5,6 @@ last-updated: March 2021
 ---
 
 <!--
-    Why not, <em>a group of tracked files</em>?
-    You know what, don't tell me why not...
-
-    Formally, a software repository <em>may contain</em> a package, but
-    a package itself is a collection of software that may be installed,
-    and provides some service.
-
-
 
     <div class="quote-text"
         "The key to learning what makes a Linux system work is to know what each package is used for and why you (or the system) may need it."
@@ -22,16 +14,15 @@ last-updated: March 2021
         <a href="http://linuxfromscratch.org/lfs/view/stable/chapter08/introduction.html">Linux From Scratch</a>
     </div>
 
-    Introduction:
-    <p>
-        In Linux, the idea of <em>installation</em> maps cleanly to 
-        "copy files to appropriate directories."
-    </p>
+        
 
-    
+Rewrite as "Distributing Open-Source"
 
-Rewrite as "Obtaining Free Software"
-
+     Repositories and Packages
+                |
+                |
+                |
+               \ /
         Building From Source
                 |
                 |
@@ -57,53 +48,8 @@ Rewrite as "Obtaining Free Software"
                 |
                 |
                \ /
-    Pip / Gems / Cargo / (JavaScript) NPM / SNAP
+Pip / Gems / Cargo / (JavaScript) NPM / SNAP / APM (Atom)
 
-
-
-<div class="content" id="building-from-source">
-    <h2>Building From Source</h2>
-
-    <p>
-        Free software is typically intended to be distributed, and its developers
-        usually offer instructions for end-users to install it 
-        (see their README file).
-        Each project will use its preferred language and toolchain; 
-        C has several, and GNU maintains their own. 
-        It is fairly widely-used, so we will focus on it here.
-    </p>
-
-    <p>
-        "The primary goal of Autoconf is making the <em>user's</em>[sic] life easier;
-        making the <em>maintainer's</em>[sic] life easier is only a secondary goal.<sup><a href="https://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.70/html_node/Introduction.html#Introduction">[a]</a></sup>
-        Installation of packages from source has been reduced to three commands:
-    </p>
-
-    <ol>
-        <li>
-            <code>./configure</code>&mdash; A script that queries the host machine
-            and adjusts the Makefile appropriately, in preparation for compilation
-        </li>
-        <li>
-            <code>make</code>&mdash; Compiles the package
-        </li>
-        <li>
-            <code>make install</code>&mdash; Installs the finished files into
-            their final locations.
-        </li>
-    </ol>
-
-    <p>
-        To recompile software to a different machine is to <em>port</em> it.
-        The entire Debian repository has been ported to eight different 
-        architectures.<sup><a href="https://www.debian.org/ports/">[a]</a></sup>
-    </p>
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="http://linuxfromscratch.org/blfs/view/stable/introduction/notes-on-building.html">Notes on Building Software</a> - Beyond Linux From Scratch</a></li>
-    </ul>
-</div>
 
 
 <div class="content" id="binary-packages">
@@ -223,25 +169,16 @@ Other Package Managers:
 
 
 Closing Remarks:
-        In layman's terms, a <em>package</em> is a program sans installation
-        facilities.  
-        Installation is handled by some other program (a utility).  
-        Further, a package may contain some universal or shared facilities:
-        It may be a library, for instance, or the kernel.
-
-        Not mentioned here are the myriad of reasons to prefer the 
-        abstract <em>package</em> and
-        centralized management over per-program installation.
-
 
     https://docs.freebsd.org/en/books/handbook/ports/#ports-using
     Package Benefits
 
-    A compressed package tarball is typically smaller than the compressed tarball containing the source code for the application.
-
-    Packages do not require compilation time. For large applications, such as Mozilla, KDE, or GNOME, this can be important on a slow system.
-
-    Packages do not require any understanding of the process involved in compiling software on FreeBSD.
+    A compressed package tarball is typically smaller than the compressed 
+    tarball containing the source code for the application.
+    Packages do not require compilation time. For large applications, such as 
+    Mozilla, KDE, or GNOME, this can be important on a slow system.
+    Packages do not require any understanding of the process involved in 
+    compiling software on FreeBSD.
 
 
             Thanks for reading!
@@ -255,38 +192,101 @@ Closing Remarks:
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
+        <li><a href="#repositories-and-packages">Repositories and Packages</a></li>
         <li><a href="#packages-intro"> Introduction to Packages </a></li>
         <li><a href="#metadata-and-payload"> Package Contents </a></li>
         <li><a href="#package-managers">Package Managers</a></li>
-        <li><a href="#repositories"> Repositories </a></li>
         <li><a href="#references"> References </a></li>
     </ul>
 </div>
 
 <div id="introduction" class="content">
-    <h1>Packages </h1>
-    <h4>and Package Management</h4>
+    <h1>Distributing Open Source</h1>
+    <p>
+        In Linux, the idea of <em>installation</em> maps cleanly to 
+        "copy files to appropriate directories."
+        The practice behind distributing open-source.
+        To simply install new software on your GNU/Linux machine,
+        search your desktop for "Software Manager."
+    </p>
+</div>
 
-    <div class="aside-right">
-        <h4>Note:</h4>
-        <p>
-            Throughout this chapter, we will restrict our attention to binary 
-            packages (programs).
-        </p>
-    </div>
+<div class="content" id="repositories-and-packages">
+    <h2>Repositories and Packages</h2>
+    <p>
+        A <em>repository</em> is a tracked collection of files. 
+        A repository may be remote (the usual case), or it may be local
+        (e.g., on a thumb-drive).
+    </p>
+
+    <p>
+        A repository belonging to a large project, such as Debian's,
+        is often mirrored by other organizations.
+    </p>
+
+    <p>
+        By and large, we are not interested in random collections of miscellaneous
+        files.  
+    </p>
 
     <p>
         A package is a file that contains the things 
         required to implement a program, a set of related programs,
         or a set of related features.<sup><a href="https://wiki.debian.org/Packaging/Intro">[1]</a></sup>
-        They obviate the need to obtain
-        source code, configure it, compile it and install the results by hand,
+        They obviate the need to obtain source code, configure it, compile it 
+        and install the results by hand,
         and simplify software management greatly.<sup><a href="https://www.slackbook.org/html/package-management.html">[2]</a></sup>
         They are well-suited to automation by utility programs,
         and aid the distribution of software.
         Each Linux distribution handles packages in their own way.
     </p>
 </div>
+
+
+<div class="content" id="building-from-source">
+    <h2>Building From Source</h2>
+    <p>
+        Free software is typically intended to be distributed, and its developers
+        usually offer instructions for end-users to install it 
+        (see their README file).
+        Each project will use its preferred language and toolchain; 
+        C has several, and GNU maintains their own. 
+        It is fairly widely-used, so we will focus on it here.
+    </p>
+
+    <p>
+        "The primary goal of Autoconf is making the <em>user's</em>[sic] life easier;
+        making the <em>maintainer's</em>[sic] life easier is only a secondary goal.<sup><a href="https://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.70/html_node/Introduction.html#Introduction">[a]</a></sup>
+        Installation of packages from source has been reduced to three commands:
+    </p>
+
+    <ol>
+        <li>
+            <code>./configure</code>&mdash; A script that queries the host machine
+            and adjusts the Makefile appropriately, in preparation for compilation
+        </li>
+        <li>
+            <code>make</code>&mdash; Compiles the package
+        </li>
+        <li>
+            <code>make install</code>&mdash; Installs the finished files into
+            their final locations.
+        </li>
+    </ol>
+
+    <p>
+        To recompile software to a different machine is to <em>port</em> it.
+        The entire Debian repository has been ported to eight different 
+        architectures.<sup><a href="https://www.debian.org/ports/">[a]</a></sup>
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="http://linuxfromscratch.org/blfs/view/stable/introduction/notes-on-building.html">Notes on Building Software</a> - Beyond Linux From Scratch</a></li>
+    </ul>
+</div>
+
+
 
 <div id="packages-intro" class="content">
     <h2> Introduction to Packages</h2>
@@ -571,6 +571,7 @@ According to <a href="https://www.debian.org/doc/manuals/debian-faq/pkg-basics.e
 </div>
 
 
+
 <div class="content" id="dependencies">
     <h2>Dependencies</h2>
     <p>
@@ -580,20 +581,6 @@ https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html
 </div>
 
 
-<div class="content" id="repositories">
-    <h2>Repositories</h2>
-    <p>
-        Collections of packages are called <em>repositories,</em> or
-        sometimes, <em>archives.</em>
-        A repository may be remote (the usual case), or it may be local
-        (e.g., on a thumb-drive).
-    </p>
-
-    <p>
-        A repository belonging to a large project, such as Debian's,
-        is often mirrored by other organizations.
-    </p>
-</div>
 
 <div class="content" id="make">
     <h2>Closing Remarks:</h2>
