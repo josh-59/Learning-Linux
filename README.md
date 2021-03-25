@@ -72,6 +72,17 @@ An Introduction to C:
 - [ ] Shit Happens (Bugs)
 - [ ] Closing Remarks: An Overview of General Computer Science
 
+Packages
+- [ ] Repositories and Packages
+- [ ] Building From Source
+- [ ] Ports
+- [ ] Source Repositories
+- [X] Introduction to Packages
+- [ ] Package Contents
+- [ ] Package Managers
+- [ ] Other Packaging Schemes
+- [ ] Closing Remarks:
+
 The Bazaar Development Model:
 - [ ] History: Cathedrals 
 - [ ] Fork/merge
@@ -80,16 +91,6 @@ The Bazaar Development Model:
 - [ ] Open-Source Organizations
 - [ ] Closed-Source Organizations
 - [ ] Why it Works
-
-Packages
-- [ ] Building From Source
-- [ ] Ports and Portage
-- [X] Introduction to Packages
-- [ ] Package Contents
-- [ ] Repositories
-- [ ] Package Managers
-- [ ] Other Packaging Schemes
-- [ ] Closing Remarks:
 
 Appendix: Terminal Pro:
 - [ ] History: Commands not programs
