@@ -7,16 +7,7 @@ last-updated: December, 2020
 
 <div id="nav_bar_2" class="nav">
     <ul>
-        <li><a href="#introduction"> Introduction </a></li>
-        <li><a href="#c"> C </a></li>
-        <li><a href="#rust"> Rust </a></li>
-        <li><a href="#scripting-languages">Scripting Languages</a></li>
-        <li><a href="#general-cs"> General Computer Science </a></li>
-        <li><a href="#train-schedules"> Train Schedules </a></li>
-        <li><a href="#thanks">Thanks for Reading!</a></li>
-        <li><a href="#bryan-cantrill"> Bryan Cantrill </a></li>
-        <li><a href="#references"> References </a></li>
-    </ul>
+   </ul>
 </div>
 
 <div id="introduction" class="content">
@@ -112,88 +103,6 @@ last-updated: December, 2020
     <ul>
         <li><a href="http://s3-us-west-2.amazonaws.com/belllabs-microsite-dritchie/cbook/index.html">The C Programming Language</a> (2<sup>nd</sup> Edition)</li>
         <li><a href="https://www.linuxlinks.com/wp-content/uploads/2019/07/An_Introduction_to_GCC-Brian_Gough.pdf"> An Introduction to GCC </a></li>
-    </ul>
-</div>
-
-<div id="rust" class="content">
-    <h2> Rust </h2>
-
-    <p>
-        Rust is the up-and-coming systems programming language, and in my opinion,
-        the bee's knees.
-        Rust, like C, is a compiled systems-programming language.
-        However, it mitigates C's memory management risks by introducing a rigorous type
-        system and new ownership rules.
-        Together, these allow the Rust compiler to guarantee (prove) the aforementioned
-        "correctness" of code.
-    </p>
-
-    <p>
-        In addition to guarding against many errors, bugs and exploits, this also
-        increases the composability of code.
-        Of the source code present and available in Rust's package-management repository (<a href="https://crates.io/">crates.io</a>),
-        you, the developer, are guaranteed that the code you choose is memory- and
-        concurrency-safe (or you will be warned).
-    </p>
-
-    <p>
-        Two <em>more</em> things to love are its command-line utility, <a href="https://doc.rust-lang.org/cargo/">cargo</a>, and its
-        <a href="https://doc.rust-lang.org/std/">official documentation</a>.
-        Both are super-modern, and developer-centric.
-        The command-line utility additionally serves as the language's 
-        package manager,
-        and the documentation is well-organized and easy to navigate.
-    </p>
-
-    <p>
-        Just check out some of these projects:
-    </p>
-
-    <ul>
-        <li><a href="https://github.com/sharkdp/bat">bat</a>&mdash; A drop-in replacement
-            for <em>cat</em> that does syntax highlighting and paging (when connected
-            to an interactive terminal)
-        </li>
-        <li><a href="https://github.com/alacritty/alacritty">Alacritty</a>&mdash;
-            A cross-platform, GPU-accelerated terminal emulator
-        </li>
-        <li><a href="https://github.com/rust-unofficial/awesome-rust#audio-and-music">Awesome Rust</a>&mdash;
-            A big-ass list of such projects
-        </li>
-    </ul>
-
-
-    <p>
-        Rust is not an easy language to learn, though, so expect to do some studying.
-        As with C and C++, it helps to understand
-        where and how data is stored on the machine at runtime.
-        (This contrasts greatly with interpreted languages like Python or Ruby.)
-    </p>
-
-    <p>
-        Of the nonprimary resources available to learn Rust, I found these helpful:
-    </p>
-
-    <ul>
-        <li><a href="https://www.oreilly.com/library/view/programming-rust/9781491927274/">Programming Rust</a>&mdash;
-            Informative and entertaining, this book is written by two experienced
-            C++ developers.  Great book.  Not free; second edition expected in 2021.
-        </li>
-        <li><a href="https://github.com/rust-lang/rustlings">Rustlings</a>&mdash;
-            A command-line game that teaches you Rust expressions. You open a text editor
-            in a second window, and edit the files so that they compile.
-        </li>
-        <li><a href="https://github.com/josh-59/cargo-watch">cargo-watch</a>&mdash;
-            A simple command-line utility that keeps a Cargo package compiled in real-time.
-            Inspired by <em>Rustlings</em>
-        </li>
-    </ul>
-
-    <img style='width: 90%;' src="assets/img/100rust.png">
-
-    <h3>See Also:</h3>
-    <ul>
-        <li> <a href="https://rustup.rs/"> Rustup - The Rust Toolchain Installer </a></li>
     </ul>
 </div>
 
@@ -525,45 +434,6 @@ last-updated: December, 2020
 </div>
 
 -->
-
-<div class="content" id="thanks">
-    <h2>Thanks for Reading!</h2>
-    <p>
-        I'd like to say <em>"Thanks"</em> to a few other people, as well.
-    </p>
-
-    <ul>
-        <li>
-            <a href="https://www.youtube.com/channel/UCrUL8K81R4VBzm-KOYwrcxQ">Engineer Man</a>&mdash;
-            Who got me started with Linux and programming
-        </li>
-
-        <li>
-            Brian Kernigham, Ken Thompson, and all the other geniuses of Bell Labs&mdash; Who
-            laid the foundation of <em>Unix</em>
-        </li>
-
-        <li>
-            Linus Torvalds and all kernel developers&mdash; Who made Linux!
-        </li>
-
-    </ul>
-
-    <p>
-        Thanks!
-    </p>
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="http://www.linuxcommand.org/tlcl.php">The Linux Command Line</a> by William Shotts</li>
-    </ul>
-</div>
-
-<div class="content" id="bryan-cantrill">
-    <h2>Bryan Cantrill: Rust and Other Interesting Things</h2>
-    <iframe class="video" src="https://www.youtube.com/embed/2wZ1pCpJUIM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
 
 <div id="references" class="content">
     <h2> References </h2>

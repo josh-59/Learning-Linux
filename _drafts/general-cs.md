@@ -7,11 +7,6 @@
     C
     Rust
 
-Initial courses in Java and C++ are pretty typical, but neither language has any 
-business in the open-source ecosystem. Advanced studies in programming languages 
-become abstract, discussing and developing language theory rather than practice.
-This can be useful in language development and compiler design, for instance.
-
 ## Data Structures
 After learning a programming language or two,
 data structures are the next thing to learn in becoming 
