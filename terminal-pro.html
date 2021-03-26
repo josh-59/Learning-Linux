@@ -6,44 +6,101 @@ last-updated: February 2020
 
 <!--
 
-    Shell Execution Model:
-
-    Also, program <code>explain</code>, implementing this in a how-it-works sorta way
-
-
-Basic Bash Grammar:
-        Pipeline and Lists
-    Shell scripting:
-        https://medium.com/better-programming/the-ultimate-programmers-guide-to-bash-scripting-2d11d4e6e978
-        help for
-        help if
-        help [[
-
-        https://www.gnu.org/software/bash/manual/html_node/Shell-Parameters.html#index-parameters
-        variable=[value]
-            [value] undergoes tilde expansion, parameter and variable expansion,
-            command substitution, arithmetic expansion, and quote removal;
-            does not undergo filename expansion
 
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-
-            Most shells support <em>tab completion:</em>
-            If you've typed enough of a command-name or filename to
+            Most shells support "tab completion:"
+            If you've typed enough of a command or filename to
             uniquely identify it, you can press "tab," and it will complete it for you.
         </p>
     </div>
 
-    Utilities to figure things out:
-    man
-    whatis
-    apropos manpath
+
+    Variants of "which"
+        $ type bash
+        $ which bash
+        $ file $(which bash)
 
 
+    <div class="content" id="advanced-man">
+        <h2>Advanced <code>man</code> Usage</h2>
+        Utilities to figure things out:
+            man
+            whatis
+            apropos manpath
 
+        Random Useful Man Pages:
+            <ul>
+                <li> heir </li>
+                <li> ascii </li>
+                <li> elf </li>
+            </ul>
+    </div>
 
+    <div class="content" id="redirection">
+        <h2>Redirection</h2>
 
+        <p>
+            "Here documents"
+            Pipes
+        </p>
+    </div>
+
+    Command-Line Signals:
+        Ctrl-c sends the interrupt signal, SIGINT, which most programs respond
+        to by terminating immediately.  Handy for killing an unresponsive
+        foreground process.
+
+        Ctrl-c is handled by the shell in a different manner: It stops what
+        it's doing and returns control to the main loop, presenting the
+        user with a new prompt (Kerrisk, p389)
+        Some people use this rather than backspacing an erroeous line
+    
+    Copying and Pasting
+        The desktop's familiar copy/paste is overruled on the terminal 
+        emulator (ctrl-v is interpretted as an escape sequence); 
+        use either ctrl-shift-v or middle-click to paste.
+    
+Closing Remarks:
+    Further Advanced Tools
+    AWK
+    Awk handles strings of characters as conveniently as most languages handle numbers.
+
+Text Editor: vim
+    These controls have made their way into many other programs: man, git, less.
+    In fact, even Firefox lets you 'Quick Search' a web page with <code>/</code>.
+    Once you are (well) familiar with them, you can set Bash to vi-mode with
+    <code>set -o vi</code>.
+
+    Explanation of sudo:
+    https://www.linuxjournal.com/sites/default/files/2018-11/GeekGuide-BeyondTrust-BeyondSudo.pdf
+
+Exercises:
+    <ol>
+        <li>
+            Explain the behavior of:
+            $ PATH="" printenv
+        </li>
+        <li>
+            The shell is a process, like any other.
+            For your current shell:
+            <ol>
+                <li>What was its command-line arguments</li>
+                <li>
+            </ol>
+        </li>
+        <li>
+            Let <code>script</code> be an executable file containing
+            #!/bin/sh
+            echo hello world
+            There are three ways to execute this command:
+            1) In the current shell context
+            2) In a forked subshell context
+            3) In an <code>exec</code>-induced sh context
+            Produce each, and verify with <code>strace</code>
+        </li>
+    </ol>
 -->
 
 <div id="nav_bar_2" class="nav">
@@ -63,12 +120,11 @@ Basic Bash Grammar:
 
 <div class="content" id="introduction">
     <h1>Terminal Pro</h1>
+    <!-- Advanced Terminalistics-->
 
     <p>
-        The command-line interface persists because it is a 
-        powerful means of interacting with the machine. 
-        Here we will discuss some particulars of shell behavior, and
-        introduce useful tools.
+        This
+        
     </p>
 
 </div>
@@ -117,93 +173,6 @@ Basic Bash Grammar:
     </ul>
 
 </div>
-
-    <!--
-
-    Terminal Pro:
-        fork'ed == subshell environment
-        $ type bash
-        $ which bash
-
-
-        $ file $(which bash)
-
-
-
-
-Command-Line Signals:
-    Ctrl-c sends the interrupt signal, SIGINT, which most programs respond
-    to by terminating immediately.  Handy for killing an unresponsive
-    foreground process.
-
-    Ctrl-c is handled by the shell in a different manner: It stops what
-    it's doing and returns control to the main loop, presenting the
-    user with a new prompt (Kerrisk, p389)
-    Some people use this rather than backspacing an erroeous line
-
-    The desktop's familiar copy/paste is overruled on the terminal
-    emulator (ctrl-v is interpretted as an escape sequence);
-    use either ctrl-shift-v or middle-click to paste.
-
-Text Editor: vim
-
-    These controls have made their way into many other programs: man, git, less.
-    In fact, even Firefox lets you 'Quick Search' a web page with <code>/</code>.
-    Once you are (well) familiar with them, you can set Bash to vi-mode with
-    <code>set -o vi</code>.
-
-    Explanation of sudo:
-    https://www.linuxjournal.com/sites/default/files/2018-11/GeekGuide-BeyondTrust-BeyondSudo.pdf
-
-
-
-Advanced Redirection:
-        "Here documents"
-
-        Pipes
-
-
-
-
-Startup:
-    .bash_profile vs .bashrc (see Linux from scratch section 4.4)
-
-Closing Remarks:
-    AWK
-    "Awk handles strings of characters as conveniently as most languages handle numbers."
-
-Exercises:
-    <ol>
-        <li>
-            Explain the behavior of:
-            $ PATH="" printenv
-        </li>
-        <li>
-            The shell is a process, like any other.
-            For your current shell:
-            <ol>
-                <li>What was its command-line arguments</li>
-                <li>
-            </ol>
-        </li>
-        <li>
-            Let <code>script</code> be an executable file containing
-            #!/bin/sh
-            echo hello world
-            There are three ways to execute this command:
-            1) In the current shell context
-            2) In a forked subshell context
-            3) In an <code>exec</code>-induced sh context
-            Produce each, and verify with <code>strace</code>
-        </li>
-    </ol>
--->
-
-</div>
-
-
-</div>
-
 
 <div class="content" id="finding-files">
     <h2>Finding Files</h2>
