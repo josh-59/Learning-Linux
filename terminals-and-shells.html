@@ -81,6 +81,11 @@ To Do:
         Where <code>command</code> is mandatory and arguments are optional.
     </p>
 
+
+		In such situations, the computational infrastructure forms a tree,
+		with the system's administrators at the root, and end-users at
+        the leaves.
+
     ================>Closing Remarks<=================
 
     <h2>Closing Remarks</h2>
@@ -132,24 +137,27 @@ To Do:
 <div id="introduction" class="content">
 	<h1> Terminals and Shells</h1>
 
+
     <div class="quote-text">
-        "In effect, tools are verbs in a language, <br>
-		and files are the nouns that the verbs apply to."
+    "When you type to UNIX, a gnome deep in the system<br>
+    is gathering your characters and saving them in a secret place. <br>
+    The characters will not be given to a program until you <br>
+    type return (or new-line), as described above in <em>Logging in.</em>"
     </div>
 
     <div class="quote-ref">
-        Brian Kernighan<br>
-        UNIX: A History and a Memoir
+        Ken Thompson and Dennis Ritchie<br>
+        <a href="https://ia800600.us.archive.org/19/items/v6-manual/v6-manual.pdf">UNIX Programming Manual, Sixth Edition</a>
     </div>
 
     <p>
         Though foreign to most users, the text-terminal is the original
         interface for "interactive computing." 
-        This article will examine the fascinating theory of terminals and shells in 
-        GNU/Linux, and, in so doing, indirectly justify their persistence on
-        modern hardware.  
-        For a tutorial introduction, see Ubuntu's
-        <a href="https://ubuntu.com/tutorials/command-line-for-beginners#1-overview">The Linux Command Line for Beginners</a>.
+        This article will examine the fascinating theory of 
+        terminals and shells in 
+        GNU/Linux.
+        For a tutorial introduction, see the Ubuntu
+        <a href="https://ubuntu.com/tutorials/command-line-for-beginners#1-overview">Linux Command Line for Beginners</a>.
     </p>
 </div>
 
@@ -163,7 +171,7 @@ To Do:
 		this technology was carried over from the
 		<a href="https://mysite.du.edu/~jcalvert/tel/teletype.htm"<i>teletypewriter</i></a>,
 		a device for sending telegrams.
-		Paper-based terminals persisted well into the 1970's; later
+		Paper-based terminals persisted well into the 1970's, and later
         electronic typewriters sometimes supported terminal mode,
 		allowing them to interface with computers via serial cable.
 	</p>
@@ -189,9 +197,6 @@ To Do:
 		Physical terminals <a href="https://www.vt100.net/dec/vt_history">were used for decades,</a>
 		especially in situations demanding multiple access to large databases, such
 		as airlines and libraries.
-		In such situations, the computational infrastructure forms a tree,
-		with the system's administrators at the root, and end-users at
-        the leaves.
 	</p>
 
 	<h3>See Also:</h3>
@@ -223,18 +228,11 @@ To Do:
 			<li> <a href="https://wiki.gnome.org/Apps/Terminal">GNOME Terminal</a>&mdash; A terminal emulator for GNOME. Common</li>
 			<li> <a href="https://invisible-island.net/xterm/xterm.faq.html">xterm</a>&mdash; A terminal emulator for the X Window System.  Common, old, stable</li>
 			<li> <a href="https://github.com/alacritty/alacritty "> alacritty</a>&mdash; A GPU-accelerated terminal emulator, written in Rust </li>
-			<li> <a href="https://github.com/GitSquared/edex-ui#screenshots">edex-ui</a>&mdash; A terminal emulator designed to make you look <i>insanely badass</i> </li>
+			<li> <a href="https://github.com/GitSquared/edex-ui">edex-ui</a>&mdash; A terminal emulator designed to make you look <i>insanely badass</i> </li>
             <li> <a href="https://hyper.is/">Hyper</a>&mdash; An <a href="https://www.electronjs.org/">Electron</a>-based terminal</li>
             <li> <a href="https://github.com/Swordfish90/cool-retro-term">Cool Retro Term</a>&mdash; 'nuff said</li>
 		</ul>
 	</p>
-
-	<div class="aside-right">
-		<h4>Aside:</h4>
-		<p>
-            A terminal emulator is present on every Linux distribution.
-		</p>
-	</div>
 
 	<p>
 		These emulators are "dumb" in the sense that they do nothing except
@@ -264,9 +262,10 @@ To Do:
 	</div>
 
 	<p>
-		A shell is a program which interprets and executes our (arbitrary) commands.
+		A shell is a program which interprets and executes commands.
 		It is a <em>shell</em> in the sense that it is the outermost layer of the
-		operating system, and the one which the user has direct contact.
+		operating system, and the one which the user has direct 
+        contact.<sup><a href="http://www.linfo.org/kernel.html">[a]</a></sup>
 	</p>
 
     <p>
@@ -282,11 +281,10 @@ To Do:
 	<ul style="list-style: none;">
 		<li><a href="https://www.gnu.org/software/bash/">Bash</a>&mdash; A GNU Production, pretty much the standard shell</li>
 		<li><a href="http://zsh.sourceforge.net/">Zsh</a>&mdash; A shell "designed for interactive use; very similar to Bash.</li>
+        <li><a href="https://xon.sh">Xonsh</a>&mdash; A Pythonic shell, written in Python</li>
+		<li><a href="https://fishshell.com/">fish</a>&mdash; The Friendly Interactive Shell</li>
         <li><a href="https://www.nushell.sh/">Nushell</a>&mdash; An interactive shell, supporting piplines of structured data, in addition to simple text streams.</li>
         <li><a href="https://elv.sh/">Elvish</a>&mdash; an "expressive programming language and versatile interactive shell." Version 1.0 not yet released</a></li>
-        <li><a href="https://xon.sh">Xonsh</a>&mdash; A Pythonic shell, written
-            in Python.</li>
-		<li><a href="https://fishshell.com/">fish</a>&mdash; The Friendly Interactive Shell</li>
 	</ul>
 
     <p>
@@ -346,9 +344,9 @@ To Do:
     </p>
 
     <p>
-        For example, one might expect the highly shell-centric command <code>ls</code>
+        For example, one might expect the well-used command <code>ls</code>
         to be built in to the shell, and in lesser constructs, that would
-        be the case.
+        be the case!
         In fact, <code>ls</code> exists as <code>/usr/bin/ls</code>, and the
         shell dutifully locates and executes it each time we ask to 
         see a directory's contents.
