@@ -1,0 +1,36 @@
+(Sometime) 1969:    Ancient UNIX filesystem on PDP-7
+
+(Sometime) 1970:    Move to PDP-11
+(Sometime) 1970:    Second PDP-11
+
+Late 1970:          Version 1
+                        cat
+                        cp
+                        sort
+                        grep
+                        su
+
+June 1972:          10 installations (The Unix Programmer's Manual, 2nd Edition)
+
+                    Version 2
+                        echo
+            
+                    Version 3 Released: Included pipes
+
+(Sometime) 1974:    Version 4 Released; rewritten in C
+(Sometime) 1974:    Version 4:
+                        grep
+                        printf
+
+                    Version 5 Released:
+                        dd
+
+June 1974:          More than 50 installations (The Unix Programmer's Manual, 5th Edition)
+                    wc, cat, uniq
+                    
+
+1975:               Version 6 Released
+
+                    Version 7: Portable
+                        "Proliferation of includes files"
+                        sh, the Bourne Shell
