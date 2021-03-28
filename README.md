@@ -62,17 +62,15 @@ Terminals and Shells:
 - [ ] Shell Scripts
 - [ ] Closing Remarks: Arguments
 
-An Introduction to C:
-- [ ] History
-- [ ] Hello World
-- [ ] Memory!
-- [ ] Derived Types
-- [ ] Control Statements
-- [ ] Functions
-- [ ] Shit Happens (Bugs)
-- [ ] Closing Remarks: An Overview of General Computer Science
+The Bazaar Development Model:
+- [ ] Fork/merge
+- [X] Train Schedules
+- [ ] Bazaar Development Model
+- [ ] Modularity
+- [ ] Successful Business Models
+- [ ] Why it Works
 
-Packages
+Distributing Free Software
 - [ ] Repositories and Packages
 - [ ] Building From Source
 - [ ] Ports
@@ -82,15 +80,6 @@ Packages
 - [ ] Package Managers
 - [ ] Other Packaging Schemes
 - [ ] Closing Remarks:
-
-The Bazaar Development Model:
-- [ ] History: Cathedrals 
-- [ ] Fork/merge
-- [ ] Modularity
-- [X] Train Schedules
-- [ ] Open-Source Organizations
-- [ ] Closed-Source Organizations
-- [ ] Why it Works
 
 Appendix: Terminal Pro:
 - [ ] History: Commands not programs
@@ -106,4 +95,9 @@ Appendix: Terminal Pro:
 - [ ] Shell Constructs (Loops, If/then)
 - [ ] Closing Remarks: Awk Programming Language
 
-Appendix: A Rust Primer
+Appendix: Programming in Linux:
+- [ ] Programming Languages
+- [ ] Outline of Computer Science
+- [ ] Game Development
+- [ ] Application Development
+- [ ] Kernel Development
