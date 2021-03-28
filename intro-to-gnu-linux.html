@@ -7,28 +7,29 @@ last-updated: March, 2021
 <!--
     To Do:
 
-    UNIX History:
-        Create my own 'map'/timeline of UNIX history, a la some 
-        DND/Multiplayer sketch/map thing.
+    Linux Distributions:    Rewrite Slackware...
+    Ian Murdoch called it "a work of art".
 
-        PDP-7 -> Ancient UNIX -> Version 1 -> Dungeon of Management -> Version 6
 
-<<<<<<< HEAD
-=======
     Somewhere:
-        See Also:
-        
         <a href="https://www.dedoimedo.com/computers/grub.html">GRUB bootlader - Full tutorial</a>
 
 UNIX: A Brief History:
-    Make plain the relevance of such history
-    Stress Dennis Ritchie's first work on MULTIX
-    Note documentation about UNIX: 
-        From Tanenbaum's OS Design and Implementation:
-        Thompson 19878
-        Bach (1987)
-        Lions (1996)
-        Vahalia (1996)
+    <p>
+        About his colleague's early work, Dennis Ritchie would later remark,
+    </p>
+
+    <blockquote>
+        Thompson wanted to create a comfortable computing environment
+        constructed according to his own design, using whatever means were
+        available. His plans, it is evident in retrospect, incorporated many
+        of the innovative aspects of Multics, including an explicit notion of
+        a process as a locus of control, a tree-structured file system, a
+        command interpreter as user-level program, simple representation of
+        text files, and generalized access to devices.<sup><a href="https://www.bell-labs.com/usr/dmr/www/chist.html">[4]</a></sup>
+    </blockquote>
+
+
 
 Free as in Freedom:
 Hackers: Heroes of the Computer Revolution, chapter 2 Hacker ethic, page 29
@@ -48,40 +49,6 @@ At the pioneering MIT Artificial Intelligence Lab in the early 1980s, a company 
 """
 
     
-    <p>
-        When an example operating system is required in this book, 
-        Linux Mint will be used, but similar remarks apply to 
-        any Debian-based distribution (including Debian itself).
-        Other popular Debian-based distributions include:
-    </p>
-
-    <ul>
-        <li><a href="">Elementary OS</a></li>
-        <li><a href="">Pop!_OS</a></li>
-        <li><a href="https://zorinos.com/">ZorinOS</a></li>
-        <li><a href="">Ubuntu</a> (Large Community)</li>
-        <li><a href=""MX Linux</a></li>
-        <li><a href="https://pureos.net/">PureOS</a> (FSF-Certified "Free")</li>
-    </ul>
-
-    <p>
-        Slackware and Debian are not the only non-derivate distributions 
-        of our time.
-        There is also <a href="">Fedora</a>, <a href="">Gentoo</a>,
-        <a href="">openSUSE</a>, <a href="">Arch</a>, and <a href="">Red Hat
-        Enterprise Linux</a>, just to name a few.
-    </p>
-
-    <p>
-        I recommend Linux Mint as newcomers' first distribution, because
-        everything <em>simply works.</em>
-        No configuration is required. 
-        Upon installation, the user is presented
-        with a complete desktop, including backup schemes, audio/video codecs, 
-        proprietary drivers, and a development environment.
-        I use it because one can "get in it and go."
-    </p>
-
 -->
 
 <div id="nav_bar_2" class="nav">
@@ -113,17 +80,13 @@ At the pioneering MIT Artificial Intelligence Lab in the early 1980s, a company 
         An operating system is a collection of software which facilitates
         the use of a computer.
         To this end, its two main responsibilities are to support running
-        programs, called processes, and to maintain persistent
-        data, in the form of files.
-        In addition, operating systems ease the task of creating
-        useful programs by offering programmers a logical architecture
-        and predictable environment.
-        Free and open source GNU/Linux has evolved to offer the single best
-        programming environment available today.
+        programs and to maintain persistent data.
+        GNU/Linux belongs to a large class of operating systems known as
+        <em>UNIX-like</em>, having an architecture, design philosophy, and
+        system-call interface similar to that of the 
+        70's-era operating system.
     </p>
-
 </div>
-
 
 <div id="unix" class="content">
     <h2>UNIX: A Brief History</h2>
@@ -132,67 +95,52 @@ At the pioneering MIT Artificial Intelligence Lab in the early 1980s, a company 
         The UNIX operating system was born in late 1969 at AT&amp;T's
         <em>Bell Laboratories,</em> in the shadow
         of Multics.
-        Multics was an operating system intended to
-        commercialize computing by offering it as a service, similar to telephone or
-        electricity.<sup><a href="https://multicians.org/history.html">[1]</a></sup>
-        The intent was for users to connect <a href="terminals-and-shells.html">terminals</a>
-        to a central mainframe, then pay for computation on an as-used basis.
-        For a variety of reasons, the project never realized its dream, and in 1969
-        AT&amp;T abandoned it.
+        Multics was an operating system project intended to enable the
+        commercialization of computing as a service, in a business model 
+        similar to telephone or electricity:
+        Customers would connect to a central mainframe, then pay for 
+        computation on an as-used basis.<sup><a href="https://multicians.org/history.html">[1]</a></sup>
+        Multics was a large, and in many ways, <a href="https://multicians.org/features.html">novel</a> project. 
+        Developed at MIT, in collaboration with General Electric and AT&amp;T, 
+        the project never realized its dream, and in 1969 AT&amp;T withdrew its support.
     </p>
 
     <p>
-        Within Bell Labs, management put operating systems research on
-        the backburner, and refused to purchase new computing
-        equipment.<sup><a href="#references">[2]</a></sup><sup><a href="#references">[3]</a></sup>
+        Within Bell Labs, management became wary of operating systems research,
+        and hesitated to purchase new computing
+        equipment.<sup><a href="#references" title="Kernighan p32">[2]</a></sup><sup><a href="#references">[3]</a></sup>
         After finding a disused <a href="https://www.soemtron.org/pdp7.html">PDP-7</a>,
-        Kenneth Thompson and Dennis Ritchie rewrote <em><a href="https://en.wikipedia.org/wiki/Space_Travel_(video_game)">Space Travel</a></em> for it;
-        after, Thompson continued to work with the PDP-7, implementing a
-        filesystem he and others at Bell Laboratories had been
+        Kenneth Thompson and Dennis Ritchie first rewrote 
+        <em><a href="https://en.wikipedia.org/wiki/Space_Travel_(video_game)">Space Travel</a></em> 
+        for it.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[3]</a></sup>
+        Thompson then continued to work with the machine, implementing a
+        filesystem he and others had been
         devising on paper.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[3]</a></sup>
     </p>
 
     <p>
-        At some point in 1969, while working on this filesystem,
-        Thompson realized that he was very close to
-        an operating system:  All he needed was an
-        assembler, a text editor, a shell and an <em>exec</em> system call.<sup><a href="#references">[2]</a></sup>
+        At some point in 1969, Thompson realized that he was close to
+        an operating system:  All it needed was an
+        assembler, a text editor, a shell and an <em>exec</em> system 
+        call.<sup><a href="#references" title="Kernighan, p34">[2]</a></sup>
         The <em>exec</em> call was "trivial", and the other three components were
-        done in one week each.<sup><a href="#references">[2]</a></sup>
+        done in one week 
+        each.<sup><a href="#references" title="Kernighan, p34">[2]</a></sup>
+        The software continued to be developed into a feasible, multi-user, time-sharing
+        operating system:
     </p>
 
     <p>
-        About his colleague's work, Dennis Ritchie said,
+        The novel system 
+        <a href="https://www.cs.dartmouth.edu/~doug/dmr.pdf">well outperformed for its size</a>, 
+        and the explosion of its popularity was due in part to its
+        ability to run on relatively inexpensive hardware.
     </p>
 
-    <blockquote>
-        Thompson wanted to create a comfortable computing environment
-        constructed according to his own design, using whatever means were
-        available. His plans, it is evident in retrospect, incorporated many
-        of the innovative aspects of Multics, including an explicit notion of
-        a process as a locus of control, a tree-structured file system, a
-        command interpreter as user-level program, simple representation of
-        text files, and generalized access to devices.<sup><a href="https://www.bell-labs.com/usr/dmr/www/chist.html">[4]</a></sup>
-    </blockquote>
-
-    <p>
-        The new operating system soon became a communal affair, and
-        in 1970 was christened <em>UNIX,</em>
-        as a "somewhat treacherous pun on
-        MULTICS."<sup><a href="#references">[2]</a><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[3]</a></sup>
-        The earliest versions were put to use
-        internally by Bell Labs to assist in word processing and patent
-        applications.<sup><a href="#references">[2]</a><a href="#references">[3]</a></sup>
-        The software then moved away from its nest under obtuse licenses to
-        universities, where its source code, though not free, was studied and documented.<sup><a href="#references">[2]</a></sup>
-        Finally, UNIX became commercially available, to principally
-        corporate clients.<sup><a href="#references">[2]</a></sup>
-    </p>
-
-    <h3>See Also:</h3>
+        <h3>See Also:</h3>
     <ul>
         <li><a href="https://www.cs.princeton.edu/~bwk/">UNIX: A History and Memoir</a> by Brian Kernighan</a></li>
-        <li><a href="https://frontpagelinux.com/articles/guide-through-history-of-unix-linux-everything-you-need-to-know/">A Guide Through The History of Linux: Everything You Need To Know</a></li>
+        <li><a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html">Unix Manual, First Edition</a></li>
         <li><a href="http://cs.bell-labs.co/who/ken/mig.html">That Time Ken Thompson Flew a MiG-29</a></li>
     </ul>
 </div>
@@ -200,12 +148,11 @@ At the pioneering MIT Artificial Intelligence Lab in the early 1980s, a company 
 <div id="unix-architecture" class="content">
     <h2>The UNIX Architecture</h2>
     <p>
-        UNIX had a clear, simple, and well-documented architecture
-        that
-        <a href="https://upload.wikimedia.org/wikipedia/commons/7/77/Unix_history-simple.svg">inspired many operating systems</a>, including GNU/Linux.
-        It is organized as a heirarchy of layers;
-        each layer builds upon the one beneathe it, and supports
-        the layer immediately above it.
+        UNIX had a clear, simple, well-documented architecture that
+        <a href="https://upload.wikimedia.org/wikipedia/commons/7/77/Unix_history-simple.svg">inspired many operating systems</a>, 
+        including GNU/Linux. It is organized as a hierarchy of layers,
+        with each layer building upon the ones beneath it, and supporting
+        the layers above it.
     </p>
 
     <img src="assets/img/linux-architecture.png" style="height: 400px;">
@@ -227,13 +174,12 @@ At the pioneering MIT Artificial Intelligence Lab in the early 1980s, a company 
 
     <p>
         <strong>Kernel:</strong>
-        The heart of any UNIX-like operating system is its kernel.
+        The heart of any UNIX-like operating system is its 
+        <a href="http://linffo.org/kernel.html">kernel</a>.
         The kernel is responsible for
-        supporting running programs,
-        scheduling the CPU,
-        allotting memory, and
-        maintaining file integrity, in addition to many other tasks.
-        It is a large and involved piece of software; it is, 
+        scheduling the CPU, allotting memory, 
+        maintaining file integrity, and many other tasks.
+        It is an involved piece of software,
         effectively, the "brains" of the operation.
     </p>
 
@@ -250,25 +196,18 @@ At the pioneering MIT Artificial Intelligence Lab in the early 1980s, a company 
     </p>
 
     <p>
-        Processes cannot dictate how the kernel carries these operations out,
-        and in fact, the kernel may deny one if, for instance,
-        a file does not exist, or the calling process does not have
-        appropriate authority.
-    </p>
-
-    <p>
         <strong>Processes:</strong>
         A <em>process</em> is an executing program.
-        Within UNIX and like operating systems, processes run the show:
+        Within the UNIX architecture, processes run the show:
         The kernel is entirely dependant upon processes to tell it what to do.
         Effectively, the kernel has no "mind" of its own.
     </p>
 
     <h3>See Also:</h3>
     <ul>
-        <li><a href="http://linffo.org/kernel.html">Kernel Definition</a> by the Linux Information Project (LINFO)</li>
+        <li><a href="https://archive.org/details/reNldBveowaW">The Design of the UNIX Operating System</a> by Maurice J. Bach</li>
+        <li><a href="http://www.lemis.com/grog/Documentation/Lions">A Commentary on the Sixth Edition UNIX Operating System</a> by John Lions</li>
     </ul>
-
 </div>
 
 <div class="content" id="free-as-in-freedom">
@@ -280,9 +219,9 @@ At the pioneering MIT Artificial Intelligence Lab in the early 1980s, a company 
     </div>
 
     <p>
-        The first attempt at producing a deliberately free and open-source
-        UNIX clone was
-        <a href="https://www.gnu.org/gnu/initial-announcement.en.html#f1">announced</a> by Richard Stallman in 1983.
+        The first attempt at producing a deliberately free and open-source UNIX clone 
+        <a href="https://www.gnu.org/gnu/initial-announcement.en.html#f1">was announced</a> 
+        by Richard Stallman in 1983.
         Stallman had been working at MIT's AI Laboratory for over a decade,
         and had grown accustomed to its culture of sharing source code:
     </p>
@@ -298,18 +237,17 @@ At the pioneering MIT Artificial Intelligence Lab in the early 1980s, a company 
         In 1981, that culture collapsed as
         commercial ventures hired away most of the
         lab.<sup><a href="https://www.gnu.org/gnu/thegnuproject.html">[6]</a><a href="https://www.oreilly.com/openbook/freedom/ch07.html">[7]</a></sup>
-        In 1982, when administrators purchased a new PDP-10, they opted for a
+        In 1982, when administrators purchased a PDP-10, they opted for a
         closed-source, proprietary operating system, and indirectly threatened
         to seal the fate of software freedom.
         Stallman began to consider the merits of sharing software in
-        itself,
-        in the process deriving an analogy to scientific cooperation, a pillar of
+        itself, at one point deriving an analogy to scientific cooperation, a pillar of
         the University's  morals.<sup><a href="https://www.gnu.org/gnu/why-programs-should-be-shared.html">[8]</a><a href="https://www.gnu.org/gnu/yes-give-it-away.html">[9]</a></sup>
     </p>
 
     <p>
         Yet, proprietary software was becoming the norm, with students working
-        on projects intended for profit<sup><a href="https://www.gnu.org/gnu/why-programs-should-be-shared.html">[8]</a></sup>
+        on projects intended for profit,<sup><a href="https://www.gnu.org/gnu/why-programs-should-be-shared.html">[8]</a></sup>
         and companies going so far as to require
         nondisclosure agreements be signed to get an
         executable.<sup><a href="https://www.gnu.org/gnu/thegnuproject.html">[6]</a></sup>
@@ -324,7 +262,8 @@ At the pioneering MIT Artificial Intelligence Lab in the early 1980s, a company 
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-        These ideas are expressed formally and generally through <em><a href="https://www.gnu.org/copyleft/">copyleft</a></em>.
+            These ideas are expressed formally and generally through 
+            <em><a href="https://www.gnu.org/copyleft/">copyleft</a></em>.
         </p>
     </div>
 
@@ -333,7 +272,7 @@ At the pioneering MIT Artificial Intelligence Lab in the early 1980s, a company 
         own intentions behind the word <em>free.</em>
         Certainly, "a free copy" did not embody the
         culture of code-sharing MIT was once home to.
-        More, he did not wsih to put the code in the public domain because
+        More, he did not wish to put the code in the public domain because
         modified versions of it it could become proprietary.<sup><a href="https://en.wikipedia.org/wiki/Copyleft#History">[12]</a></sup>
         By 1985, Stallman had sorted these issues out:
     </p>
@@ -347,18 +286,15 @@ At the pioneering MIT Artificial Intelligence Lab in the early 1980s, a company 
     </blockquote>
 
     <p>
-        Thus, software freedom became quantified:
-        Users can run, study, modify, copy and distribute the software;
+        Thus, software freedom became, for him, quantified:
+        Users can run, study, modify, copy and distribute his work;
         but, if they distribute, then those freedoms must be preserved.
-        These freedoms were implemented in the various
-        licenses of early GNU products, and their parts were taken
-        together to form the GNU
-        <a href="https://en.wikipedia.org/wiki/GNU_General_Public_License#History">General Public License</a>,
-        version 1.<sup><a href="https://en.wikipedia.org/wiki/GNU_General_Public_License#History">[14]</a></sup>
+        These stipulations were formalized in the GNU
+        <a href="https://en.wikipedia.org/wiki/GNU_General_Public_License#History">General Public License</a>.
     </p>
 
     <p>
-        About it, Linus Torvalds writes:
+        About it, Linus Torvalds later remarked:
     </p>
 
     <blockquote>
@@ -381,7 +317,7 @@ At the pioneering MIT Artificial Intelligence Lab in the early 1980s, a company 
     <p>
         To create an entire operating system is an enormous task, but
         by 1990, the GNU Project had
-        either found or written all major components except one&mdash; the kernel.<sup><a href="https://www.gnu.org/gnu/gnu-history.html">[11]</a></sup>
+        found or written all major components except one, the kernel.<sup><a href="https://www.gnu.org/gnu/gnu-history.html">[11]</a></sup>
         Today, the <a href="https://www.gnu.org/">GNU Project</a> is renowned
         for producing high-quality, well-documented free software;
         they are as "official" as the open-source community gets.
@@ -420,7 +356,7 @@ At the pioneering MIT Artificial Intelligence Lab in the early 1980s, a company 
     <p>
         Whereas the GNU Project sought to
         produce an entire operating system, Linus restricted his
-        attention to creating a kernel.
+        attention to the kernel.
         By October of 1991, GNU's Bash, GCC, Make and other
         programs were running on his creation.<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[16]</a></sup>
         He soon released it under the GNU General Public License, Version 2.
@@ -460,7 +396,7 @@ At the pioneering MIT Artificial Intelligence Lab in the early 1980s, a company 
     <p>
         The <a href="https://www.kernel.org/doc/html/latest/process/2.Process.html">kernel development process</a>
         has become more structured since 1991, and today uses a
-        <a href="http://127.0.0.1:4000/programming-in-nix.html#train-schedules">train-schedule</a> approach.
+        "train-schedule" approach.
         Linus Torvalds remains the maintainer of the Development branch,
         and often remarks upon the kernel's latest releases.
     </p>
@@ -483,20 +419,17 @@ At the pioneering MIT Artificial Intelligence Lab in the early 1980s, a company 
     </p>
 
     <p>
-        Although the Linux kernel began as a hobby, it is an occupation
-        for some, and serious affair for many.
-        In particular, the kernel development team
-        takes great care not to break
-        user-space,<sup><a href="https://lkml.org/lkml/2012/12/23/75">[20]</a></sup>
-        meaning that programs that <em>did</em> work will continue to
-        work.
-        In this way, they ensure the long-term stability of Linux-based
-        systems.<sup><a href="https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space">[21]</a></sup>
+        Clocking in today at over 25 million lines of code, and sporting
+        <a href="https://unix.stackexchange.com/questions/235335/why-is-there-a-linux-kernel-policy-to-never-break-user-space">a staunch policy to preserve user-space</a>,
+        the Linux kernel became exactly "big and professional."
+        Case in point: The 
+        <a href="http://www.slackware.com/about/">Slackware webserver</a> 
+        routinely runs for over a year without a reboot!
     </p>
 
-        <h3>See Also:</h3>
+    <h3>See Also:</h3>
     <ul>
-        <li><a href="https://destinationlinux.network/">Destination Linux Network</a></li>
+        <li><a href="https://kernel.org">Kernel.org</a></li>
         <li><a href="http://itsfoss.com/">It's FOSS</a></li>
     </ul>
 </div>
@@ -507,12 +440,12 @@ At the pioneering MIT Artificial Intelligence Lab in the early 1980s, a company 
 
     <p>
         The first versions of the Linux kernel were available
-        only in source-code form, and required compilation on a
+        only in source-code form, and required compilation on a separate
         host machine.<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[16]</a></sup>
         More, no other software was included, so that the
-        creation of a functional Linux-based machine required
-        the user to obtain, configure, compile and
-        assemble a number of disparate software components.
+        creation of a functional Linux-based machine required the user to 
+        <a href="http://linuxfromscratch.org/">obtain, compile and assemble</a> 
+        a number of disparate software components.
     </p>
 
     <div class="img-right">
@@ -523,20 +456,17 @@ At the pioneering MIT Artificial Intelligence Lab in the early 1980s, a company 
     <p>
         In 1992, <a href="https://en.wikipedia.org/wiki/HJ_Lu">HJ Lu</a>
         began packaging utilities alongside the kernel and distributing the
-        collection together on a pair of 5.25" disks.<sup><a href="https://www.maketecheasier.com/history-of-early-linux-distros/">[22]</a><a href="https://itsfoss.com/earliest-linux-distros/">[23]</a></sup>
-        Known as <em>boot/root</em> floppies, they are
-        the first known Linux distribution,<sup><a href="https://itsfoss.com/earliest-linux-distros/">[23]</a></sup>
-        and worked similarly to a live CD:
-        You booted from one disk, then replaced it when prompted.
-        "After a while," says Joe Klemmer, "you got a command prompt."<sup><a href="https://lwn.net/Articles/91371/">[24]</a></sup>
+        collection on a pair of 5.25" disks.<sup><a href="https://www.maketecheasier.com/history-of-early-linux-distros/">[22]</a><a href="https://itsfoss.com/earliest-linux-distros/">[23]</a></sup>
+        Known as the <em>boot/root</em> floppies, they are
+        the first known Linux distribution.<sup><a href="https://itsfoss.com/earliest-linux-distros/">[23]</a></sup>
     </p>
 
     <p>
         Linux's first widely recognized and used distribution was, ironically,
-        a commercial venture: Soft Landing System.<sup><a href="https://lwn.net/Articles/91371/">[24]</a></sup>
+        a commercial venture, Soft Landing System.<sup><a href="https://lwn.net/Articles/91371/">[24]</a></sup>
         Released in late 1992, SLS was sold under the slogan "Gentle Touchdowns for DOS Bailouts",<sup><a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">[25]</a></sup>
         but users complained that the software was buggy,<sup><a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">[25]</a><a href="https://www.linuxjournal.com/article/2750">[26]</a></sup> and when its developers
-        decided to change the executable file format, began to leave.<sup><a href="https://lwn.net/Articles/91371/">[14]</a></sup>
+        decided to change the executable file format, began to leave.<sup><a href="https://lwn.net/Articles/91371/">[24]</a></sup>
     </p>
 
     <h3> Two Approaches </h3>
@@ -547,7 +477,6 @@ At the pioneering MIT Artificial Intelligence Lab in the early 1980s, a company 
         downloaded them both.<sup><a href="https://www.linuxjournal.com/article/2750">[26]</a></sup>
         His professor got wind, and asked Patrick to help him install the software
         on school computers.<sup><a href="https://www.linuxjournal.com/article/2750">[26]</a></sup>
-
         Volkerding walked him through installing, fixing and patching SLS, and
         afterward, his professor asked, "Is there some way we can fix the install disks so
         that the new machines will have these fixes right away?"<sup><a href="https://www.linuxjournal.com/article/2750">[26]</a></sup>
@@ -555,8 +484,9 @@ At the pioneering MIT Artificial Intelligence Lab in the early 1980s, a company 
 
     <p>
         So Volkerding began improving SLS, and internally named his project
-        <em>Slackware;</em> he didn't want the project taken too seriously.<sup><a href="https://www.linuxjournal.com/article/2750">[26]</a></sup>
-        By May, though, the improvements were becoming substantial, and when
+        <em>Slackware;</em> he didn't want it taken too 
+        seriously.<sup><a href="https://www.linuxjournal.com/article/2750">[26]</a></sup>
+        By May, though, the improvements were substantial, and when
         first released on the internet in June, proved so popular that the
         number of download requests crashed the system hosting it.<sup><a href="https://www.linuxjournal.com/article/2750">[26]</a></sup>
         Volkerding hadn't intended to produce a distribution,<sup><a href="https://www.linuxjournal.com/article/2750">[26]</a></sup> but still
@@ -600,14 +530,14 @@ At the pioneering MIT Artificial Intelligence Lab in the early 1980s, a company 
         a portmanteau of <em>Debra,</em> his wife, and <em>Ian,</em> himself.<sup><a href="https://www.debian.org/doc/manuals/project-history/intro.en.html">[30]</a></sup>
         The project attracted developers, and today around
         a thousand people volunteer their spare time.<sup><a href="https://www.debian.org/intro/philosophy">[31]</a></sup>
+        Debian is one of the most respected distributions of our time, and is oft-used
+        as an upstream source for derivate distributions.
     </p>
-
     
     <div class="img-center">
         <a title="The Debian Project (GPL &lt;http://www.gnu.org/licenses/gpl.html&gt; or Copyrighted free use), via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Debian_Etch-ja.png"><img width="1024" alt="Debian Etch-ja" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Debian_Etch-ja.png/1024px-Debian_Etch-ja.png"></a>
         <center>Debian 4 "Etch", released 2007</center>
     </div>
-
 
     <p>
         With the internet came many
@@ -649,7 +579,7 @@ At the pioneering MIT Artificial Intelligence Lab in the early 1980s, a company 
     </p>
 
     <p>
-    For example, Mint 19 introduced <em><a href="https://github.com/linuxmint/timeshift">Timeshift:</a></em>
+        Recently, Mint 19 introduced <em><a href="https://github.com/linuxmint/timeshift">Timeshift:</a></em>
     </p>
 
     <blockquote>
@@ -696,7 +626,6 @@ At the pioneering MIT Artificial Intelligence Lab in the early 1980s, a company 
         <a href="https://www.opensuse.org/">openSUSE</a>, and 
         <a href="https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux">Red Hat Enterprise Linux</a>, just to name a few.
     </p>
-
     
     <h3>See Also:</h3>
     <ul>
@@ -748,7 +677,8 @@ At the pioneering MIT Artificial Intelligence Lab in the early 1980s, a company 
         These licenses can be divided into two classes:
         Permissive licenses (e.g., MIT, Apache, BSD) do not perpetuate
         themselves, and so indirectly allow derivate works to become proprietary;
-        nonpermissive/copyleft licenses (e.g., GPL, <a href="https://en.wikipedia.org/wiki/Mozilla_Public_License">MPL</a>), on the other hand, <em>do</em>
+        nonpermissive/copyleft licenses (e.g., GPL, <a href="https://en.wikipedia.org/wiki/Mozilla_Public_License">MPL</a>), 
+        on the other hand, <em>do</em>
         perpetuate themselves.<sup><a href="https://opensource.org/faq#permissive">[36]</a><a href="https://opensource.org/faq#copyleft">[37]</a></sup>
     </p>
 
@@ -756,7 +686,7 @@ At the pioneering MIT Artificial Intelligence Lab in the early 1980s, a company 
         To be honest, a lot of developers have said, <em>To hell with this,</em>
         and introduced such novelties as the
         <a href="https://people.freebsd.org/~phk/">Beerware License</a>,
-        the <a href="https://en.wikipedia.org/wiki/WTFPL">Do What The Fuck You Want License</a>,
+        the <a href="https://en.wikipedia.org/wiki/WTFPL">Do What The **** You Want License</a>,
         and the <a href="https://unlicense.org/">Unlicense</a> (quite popular).
         These each, with varying degrees of professionalism, place code in the
         public domain;
