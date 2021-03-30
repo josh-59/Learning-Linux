@@ -33,13 +33,6 @@ sysfs:
     A view of the kernel, not intended for inspection by system's administrators.
     http://linuxfromscratch.org/lfs/view/stable/chapter09/udev.html
 
-Filesystems:
-btrfs:
-http://www.internetnews.com/dev-news/article.php/3781676/A+Better+File+System+for+Linux.htm
-
-    "The main goal is to let it {Linux} scale for the storage that will be available," Chris Mason Director of Linux Kernel Engineering at Oracle told InternetNews.com. "Scaling is not just about addressing the storage but also means being able to administer and to manage it with a clean interface that lets people see what's being used and makes it more reliable."
-
-    Add openSUSE to list of first BTRFS users
 
 Filesystem Heirarchy:
     /var:
@@ -49,14 +42,6 @@ Filesystem Heirarchy:
             Not shareable across systems
 
 Kerrisk calls File I/O "The Universal I/O Model"
-
-Closing Remarks:
-
-Not mentioned here is Linux's "Logical Volume Manager", a software layer that
-(when used) sits between disks and the filesystem and offers
-to abstract away pesky facts like, "There are six discs in a RAID array."
-The ext4/lvm software stack has proven difficult to scale, and has been a major
-impetus for moving towards filesystems which include LVM capabilities.
 
 XDG Directory Specification
     ~/.config is defined as part of the XDG specification
@@ -644,7 +629,7 @@ https://wiki.ubuntu.com/Lvm
         <h4>Aside:</h4>
         <p>
             <code>ZFS</code> has been described by Linus Torvalds as a "non-starter,"
-            due to licensing issues.<sup><a href="https://www.realworldtech.com/forum/?threadid=189711&curpostid=189841">[16]</a></sup>
+            due to licensing issues.<sup><a href="https://www.realworldtech.com/forum/?threadid=189711&curpostid=189841">[17]</a></sup>
         </p>
     </div>
 
@@ -654,9 +639,9 @@ https://wiki.ubuntu.com/Lvm
         are such next-generation filesystems.<sup><a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">[12]</a><a href="https://wiki.archlinux.org/index.php/ZFS">[13]</a></sup>
         Of the two, <code>btrfs</code> has made inroads to becoming Linux's next
         major filesystem:
-        It is in wide use by Facebook,<sup><a href="https://lwn.net/Articles/824855/">[14]</a></sup> and has recently become
-        the default filesystem of Fedora's <em>Workstation</em>
-        distribution.<sup><a href="https://fedoramagazine.org/announcing-fedora-33/">[15]</a></sup>
+        It is in wide use by Facebook,<sup><a href="https://lwn.net/Articles/824855/">[14]</a></sup> and is the 
+        the default filesystem for openSUSE and 
+        Fedora.<sup><a href="https://en.opensuse.org/Portal:13.2/Features">[15]</a><a href="https://fedoramagazine.org/announcing-fedora-33/">[16]</a></sup>
         They are among the first to adopt it.
     </p>
 
@@ -672,7 +657,8 @@ https://wiki.ubuntu.com/Lvm
     <h3>Using a Filesystem</h3>
 
     <p>
-        Creating a partitioning table and formatting the resulting partitions 
+        Creating a partitioning table and formatting the resulting 
+        partitions 
         are the first steps to using a block device.  
         This amounts to writing persistent data structures to the device,
         and is carried out in the Linux installation process before copying
@@ -730,7 +716,7 @@ https://wiki.ubuntu.com/Lvm
     <h2> Internal Representation of Files </h2>
 
     <p>
-        Files are represented internally by <em>inodes.</em><sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html#id1">[17]</a></sup>
+        Files are represented internally by <em>inodes.</em><sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html#id1">[18]</a></sup>
         Every path on the directory tree refers to an inode, and
         every filename refers to a a unique inode.
     </p>
@@ -797,7 +783,7 @@ https://wiki.ubuntu.com/Lvm
         Each entry in a directory is called a <em>hard link.</em>
         A file may have more than one hard link, but when it has zero,
         it is no longer accessible through the directory tree, and
-        the kernel prepares to delete it.<sup><a href="#references">[18]</a></sup>
+        the kernel prepares to delete it.<sup><a href="#references">[19]</a></sup>
     </p>
 
     <p>
@@ -832,7 +818,7 @@ https://wiki.ubuntu.com/Lvm
     <p>
         Directories are somewhat special: They are managed by the kernel,
         and are not directly readable nor writeable by
-        processes.<sup><a href="#references">[19]</a></sup>
+        processes.<sup><a href="#references">[20]</a></sup>
     </p>
 
     <h3> See Also: </h3>
@@ -856,23 +842,23 @@ https://wiki.ubuntu.com/Lvm
 
     <p>
         In the design, data blocks are of fixed size, and either free or
-        wholly consumed by a file.<sup><a href="#references">[19]</a></sup>
+        wholly consumed by a file.<sup><a href="#references">[20]</a></sup>
         The filesystem's <em>index nodes</em> represent one file each,
-        contain their file's metadata, and contain pointers to data blocks.<sup><a href="#references">[19]</a></sup>
+        contain their file's metadata, and contain pointers to data blocks.<sup><a href="#references">[20]</a></sup>
         These nodes are arranged in an array, and can be uniquely identified
         by an index into this array.
     </p>
 
     <p>
         This design allows a file to grow or shrink without rearranging
-        other files.<sup><a href="#references">[19]</a></sup>
+        other files.<sup><a href="#references">[20]</a></sup>
         In addition, the inclusion of single-, double- and triple-
         indirection blocks allow the inode to remain of fixed,
         reasonable size, while supporting large
-        files.<sup><a href="#references">[19]</a></sup>
+        files.<sup><a href="#references">[20]</a></sup>
         Finally, by using direct pointers for the first bytes of a file,
         the design fostered the speedy retrieval of data in small 
-        files.<sup><a href="#references">[19]</a></sup>
+        files.<sup><a href="#references">[20]</a></sup>
     </p>
 
     <p>
@@ -983,6 +969,8 @@ https://wiki.ubuntu.com/Lvm
         <li>ZFS - ArchWiki. (2021, February 22). Retrieved March 02, 2021, from <a href="https://wiki.archlinux.org/index.php/ZFS">https://wiki.archlinux.org/index.php/ZFS</a></li>
 
         <li>Btrfs at Facebook [LWN.net]. (2020, July 2). Retrieved March 02, 2021, from <a href="https://lwn.net/Articles/824855/">https://lwn.net/Articles/824855/</a></li>
+
+        <li>Portal:13.2/Features (2016, October 21). Retrieved March 29, 2021, from <a href="https://en.opensuse.org/Portal:13.2/Features">https://en.opensuse.org/Portal:13.2/Features</a></li>
 
         <li>Fedora 33 is officially here! - Fedora Magazine. (2020, October 27). Retrieved March 2, 2021, from <a href="https://fedoramagazine.org/announcing-fedora-33/">https://fedoramagazine.org/announcing-fedora-33/</a></li>
 
