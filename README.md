@@ -49,7 +49,7 @@ Processes:
 - [ ] Executing a Different Program
 - [ ] Process Termination
 - [ ] Sandbox
-- [ ] Closing Remarks: systemd
+- [ ] Closing Remarks: Concurrency
 
 Terminals and Shells:
 - [x] Physical Terminals
@@ -68,7 +68,7 @@ The Bazaar Development Model:
 - [ ] Bazaar Development Model
 - [ ] Modularity
 - [ ] Successful Business Models
-- [ ] Why it Works
+- [ ] Closing Remarks: Why it Works
 
 Distributing Free Software
 - [ ] Repositories and Packages
