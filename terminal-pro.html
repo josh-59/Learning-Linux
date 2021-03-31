@@ -56,6 +56,28 @@ last-updated: February 2020
         it's doing and returns control to the main loop, presenting the
         user with a new prompt (Kerrisk, p389)
         Some people use this rather than backspacing an erroeous line
+
+
+    Signals to kill processes:
+            From least to greatest:
+            SIGINT: Interrupt
+                Default behavior is to terminate, but can be caught and
+                handled by programs, and is sometimes used for other purposes.
+                For instance, <code>bash</code> catches this signal and does
+                not terminate; rather, it passes the signal along to the foreground
+                process (if it exists), and then jumps back to its main loop.
+
+            SIGTERM: Terminate
+                Standard behavior is to terminate; affords programs the
+                opportunity to handle their own termination, and thereby
+                exit gracefully
+
+            SIGKILL: Sure Kill
+                Terminates process immediately.  Cannot be caught nor handled.
+                Kerrisk calls <code>SIGKILL</code> the "silver bullet" of process
+                termination (page 553)
+                and recommends sending SIGTERM instead
+
     
     Copying and Pasting
         The desktop's familiar copy/paste is overruled on the terminal 
