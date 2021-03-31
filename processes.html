@@ -169,10 +169,10 @@ TODO
 
     <p>
         Each process has a narrowly defined role,
-        and is expected to do it well.
+        which it is expected to do well.
         It might copy a file, list the
         contents of a directory, provide audio services,
-        or intepret and execute our commands.
+        or intepret and execute commands.
         These many small programs are used together to accomplish
         a given task, thereby increasing the modularity of the whole,
         and simplifying programming and maintenance.
@@ -187,10 +187,13 @@ TODO
             Facilitating new process creation
         </li>
         <li>
-            Dividing hardware resources among processes
+            Allocating hardware resources to processes
         </li>
         <li>
             Maintaining information about processes
+        </li>
+        <li>
+            Preserving each process's privacy
         </li>
     </ol>
 
@@ -206,7 +209,7 @@ TODO
 
     <p>
         At the end of the boot sequence, the kernel launches a single program,
-        <code>/sbin/init</code>,<sup><a href="http://tldp.org/LDP/intro-linux/intro-linux.pdf">[4]</a></sup>
+        <code>/sbin/init</code>,<sup><a href="https://en.wikipedia.org/wiki/Init">[3]</a></sup>
         and in so doing creates the system's first process.
         While init schemes
         <a href="https://arxiv.org/abs/0706.2748">have evolved</a>
@@ -234,19 +237,23 @@ TODO
         <code>init</code>'s first responsibility is to bring up userspace.
         It does this by launching a sequence of programs, most of which
         are daemons, some of which the user interacts with directly.
-        After this, it operates in the background, managing these services,
+        After this, it operates in the background, managing services,
         restarting them if they falter, and logging events for administrative
         purposes.
         Its final responsibility is to shut the system down cleanly.
     </p>
 
     <p>
-        From within a process, creating a new process starts with the
+        After execution of <code>init</code> begins, process creation is delegated
+        to processes themselves, and is carried out through the 
         <a href="https://www.man7.org/linux/man-pages/man2/fork.2.html"><code>fork(2)</code></a> system call.
-        This instructs the kernel to duplicate the current process,
+    </p>
+
+    <p>
+        A call to <em>fork()</em> instructs the kernel to duplicate the current process,
         and the two resulting processes are very nearly identical.<sup><a href="https://www.man7.org/linux/man-pages/man2/fork.2.html">[4]</a></sup>
         Of note, they continue executing the same program at the same spot, 
-        have the same open file, and have duplicate memory spaces.
+        have the same open files, and have duplicate memory spaces.
         The newly created process is referred to as the <em>child</em> process,
         the original is called the <em>parent,</em> and we say
         that the child process <em>inherits</em> its parent's attributes.
@@ -275,11 +282,7 @@ TODO
         Their executions thereby diverge, and each is free to act independantly.
     </p>
 
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href=""><code>bootup(7)</code></a></li>
-    </ul>
-  </div>
+</div>
 
 <div class="content" id="process-attributes">
     <h2> Process Attributes </h2>
@@ -317,12 +320,12 @@ TODO
         to allow a process to change its attributes.
     </p>
 
-
     <p>
         In order to give some idea of how
         processes interact with the kernel,
         we will consider one of them: Files currently open.
     </p>
+
     <h3> See Also: </h3>
     <ul>
         <li><a href=""><code>credentials(7)</code></a></li>
@@ -385,13 +388,13 @@ TODO
         If all goes well, the system call will return with a nonnegative value;
         if the kernel encountered an error, it will return with a
         negative value.
-        In either case, the value will be assigned to <code>num_bytes_read</code>.
+        In either case, this value will be assigned to <code>num_bytes_read</code>.
     </p>
 
     <p>
         <a href="https://man7.org/linux/man-pages/man2/write.2.html"><code>write(2)</code></a>
         is handled analogously, as is closing a file.
-        Every system call has an entry in section 2 of the manual.
+        Every system call has an entry in Section 2 of the manual.
     </p>
 
     <h3>A Bit More</h3>
@@ -488,9 +491,9 @@ TODO
         <li>
             It does something wrong
             <p>
-                Almost always, this happens when the offending process tries to read or write
-                a memory location not assigned to it, a condition known in Linux
-                as <em>segmentation fault</em>.
+                Almost always, this happens when the offending process tries 
+                to read or write a memory location not assigned to it, 
+                a condition known in Linux as <em>segmentation fault</em>.
                 The kernel steps in, halts program execution and immediately 
                 terminates the process.
             </p>
@@ -510,26 +513,26 @@ TODO
         A deep study of it, while worthwhile, is outside the
         scope of this work.  
         Rather, we will conclude this discussion by describing how a computer
-        runs more than one process at a time&mdash; That is, how processes
+        runs more than one process at a time&mdash; That is, how programs
         are executed <em>concurrently.</em>
     </p>
 
     <p>
-        The fundamental insight is that <em>a program's instructions are obvlivious to 
+        The fundamental insight is that <em>a program's instructions are oblivious to 
         time.</em>
-        That is, a program's only stipulation about its execution 
+        That is, a program's only assumption about its execution 
         is that each instruction follow the previous one.
         It is therefore possible to halt its execution
         and save its state; and later, to reintroduce its state, and continue
-        execution.
-        When carried out correctly, the program is oblivious to this minor 
-        implementation detail.
+        execution, without violating this assumption.
+        When carried out correctly, the program is oblivious to any such
+        interruptions.
     <p>
 
     <p>
         The operating system's kernel, working in conjunction with hardware, 
         is responsible for presenting each process with the illusion that
-        it ran without interuption,
+        it ran without interruption,
         and "concurrency" is achieved by interweaving process execution
         with respect to time:
     </p>
@@ -540,12 +543,13 @@ TODO
 
   <h3> See Also: </h3>
 
-  <ul>
+    <ul>
         <li><a href="https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-intro.pdf">Operating Systems: Three Easy Pieces</a> Chapter 4: Processes</li>
+        <li><a href="http://www.man7.org/tlpi/index.html">The Linux Programming Interface</a> (Not Free)</li>
         <li><a href="http://www.csapp.cs.cmu.edu/"> Computer Systems: A Programmer's Perspective, 3<sup>rd</sup> Ed.</a>, Chapter 9: Virtual Memory (Not free)</li>
         <li><a href="https://www.man7.org/linux/man-pages/man1/top.1.html"><code>top(1)</code></a></li>
         <li><a href="./assets/check.c">check.c</a> - Double-check of the above snippets</li>
-  </ul>
+    </ul>
 </div>
 
 <div class="content" id="dr-fraser">
@@ -565,22 +569,12 @@ TODO
         Bryant, R. E., & O'Hallaron, D. R. (2016).  Processes. In <em>Computer Systems: A Programmer's Perspective</em> (3rd ed., p. 732).  Upper Saddle River, New Jersey: Pearson.
     </li>
     <li>
-        Runlevel Definition. (2007, September 6). Retrieved February 09, 2021, from <a href="http://www.linfo.org/runlevel_def.html">http://www.linfo.org/runlevel_def.html</a>
-
+        init - Wikipedia (3 Match 2021). Retrieved March 30, 2021, from <a href="https://en.wikipedia.org/wiki/Init">https://en.wikipedia.org/wiki/Init</a>
     </li>
+
     <li>
         Kerrisk, M. (2020, December 21). Fork(2) - Linux manual page. Retrieved February 09, 2021, from <a href="https://www.man7.org/linux/man-pages/man2/fork.2.html">https://www.man7.org/linux/man-pages/man2/fork.2.html</a>
     </li>
-    <li>
-        Garrels, M. (2008). <em>Introduction to Linux: A Hands on Guide.</em>
-    </li>
-    <li>
-        Royon, Y., &amp; Frenot, S. (2007). A Survey of Unix Init Schemes (Doctoral dissertation, Inria Rhone-Alpes) (p. 0-39). Mountbonnot Saint Ismier: Unite de recherche Inra Rhone-Alpes.
-    </li>
-    <li>
-        Poettering, L. (2010, April 30). Rethinking PID 1. Retrieved September 01, 2020, from <a href="http://0pointer.de/blog/projects/systemd.html">http://0pointer.de/blog/projects/systemd.html</a>
-    </li>
 
   </ol>
-
 </div>
