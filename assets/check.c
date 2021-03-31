@@ -25,7 +25,7 @@ processes.html#file-descriptors
 
 int main() {
     int fd = open("./rubber_ducky", O_RDONLY);
-    printf("fd = %zu\n", (unsigned long) fd);
+    printf("fd = %d\n", fd);
 
     if( fd == -1 ) {
         perror("open");
