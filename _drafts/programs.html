@@ -16,6 +16,140 @@
     </p>
 </div>
 
+<div class="content" id="process-environment">
+    <h2>Process Environment</h2>
+
+    <h3> Limited Direct Execution </h3>
+
+    <p>
+        Modern CPU architectures support two distinct modes of operation.
+        <em>Kernel mode,</em> sometimes called "supervisor mode," is
+        the unrestricted mode.
+        Here, all CPU instructions are available, and all memory is available,
+        so that code running in this mode has complete access to the machine.
+    </p>
+
+    <p>
+        <em>User mode</em> is a proper subset of kernel mode; code running
+        in user mode does not have access to all instructions, and does not
+        have access to all memory of the machine.
+        All processes run in user mode, and
+        if a process, running in user mode, attempts to execute a restricted
+        instruction (or address memory not given to it), 
+        its execution is halted, and control is given to the kernel.
+        At that point, it is up to the operating system to determine what to do
+        (usually, terminate the offending process).
+    </p>
+
+    <p>
+        By restricting user-mode instructions to those that cannot effect system
+        stability, processes 
+    </p>
+
+    <p>
+        This technique is known as <em>limited direct execution.</em><sup><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/cpu-mechanisms.pdf">[3]</a></sup>
+        It is <em>limited</em> in the sense that each process has access to
+        only a restricted subset of the CPU's instructions, and
+        it is <em>direct</em> in the sense that each process runs directly on
+        hardware.
+        It is intended to make safe and efficient use of available hardware.
+    </p>
+
+
+  <h3> Virtual Memory </h3>
+
+  <p>
+    Modern operating systems provide each process with its own memory in the
+    form of a distinct <em>address space.</em>
+    An address space is a collection of memory addresses; on all modern architectures,
+    memory is byte-addressable, so that each address refers to exactly one byte.
+    Addresses themselves are simply numbers, usually expressed in hexadecimal.
+  </p>
+
+  <div class="img-right" style="background: #f1f1f1;">
+<a style="outline: solid black 2px; " title="Traced by User:Stannered, original by en:User:Dysprosia / BSD (http://opensource.org/licenses/bsd-license.php)" href="https://commons.wikimedia.org/wiki/File:Virtual_address_space_and_physical_address_space_relationship.svg"><img width="512" alt="Virtual address space and physical address space relationship" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Virtual_address_space_and_physical_address_space_relationship.svg/512px-Virtual_address_space_and_physical_address_space_relationship.svg.png"></a>
+  </div>
+
+  <p>
+    Some archaic operating systems (such as the
+    <a href="https://en.wikipedia.org/wiki/Exec_(Amiga)">Amiga</a>)
+    allowed processes direct access to
+    the system's main memory; processes effectively shared the same address space.
+    This poses significant issues for system stability and security&mdash;
+    namely, one process could read and/or manipulate the memory of another.
+  </p>
+
+    <p>
+        <em>Modern operating systems provide each process with a distinct
+        address space.</em>
+        The addresses that any process uses are implicitly restricted to that
+        process alone.
+        The result has been a profound improvement in system stability.
+    </p>
+
+  <p>
+    The virtual memory abstraction requires support from both the kernel
+    and CPU:
+    For each process, the kernel maintains an address translation table, which maps
+    virtual addresses onto physical ones.
+    This is loaded onto the CPU's
+    <a href="https://en.wikipedia.org/wiki/Memory_management_unit">Memory Management Unit</a>
+    whenever the process runs,
+    and the MMU carries out address translation automatically whenever in user mode.
+  </p>
+
+  <p>
+    Crucially, not every virtual address needs to be mapped to a physical address.
+    Rather, when a process references a virtual address that is not mapped,
+    the MMU instructs the CPU to interrupt execution of the process; the CPU
+    defers control to the kernel.
+    If the memory address should be mapped, the kernel loads that data into memory,
+    modifies the translation table and returns control to the process.
+    If the memory should not be mapped (i.e., it is an undefined address), the
+    kernel aborts execution of the program.
+  </p>
+
+  <p>
+    Through the mechanism of virtual memory, each process is presented with
+    the illusion that it has the entirety of the machine's memory to
+    itself.
+    Other processes are implicitly protected from memory tampering:
+    Their memory simply does not exist within the context of the
+    currently running process, and therefore cannot be read from, nor written to.
+    As with limited direct execution, virtual memory is intended to
+    facilitate the safe and efficient use of a machine resource.
+  </p>
+
+    <h3>Concurrency:</h3>
+
+    <p>
+        For processes, access to the CPU is also restricted in a temporal sense:
+        Each process is allotted some time to run, and when its time is up,
+        the kernel interrupts execution, saves the state of the process (precisely),
+        and loads a different process to run.
+        That one runs for a bit, and then it too is interupted, and a new
+        process allowed to run for a while.
+        This is known as a <em>context switch,</em> and is the root
+        of multiprocessing
+    </p>
+
+
+    <p>
+        This environment is composed of restricted access to the CPU,
+        and a distinct memory space.
+        Simply put, a process can neither modify another process's memory,
+        nor can it modify the kernel's memory, because <em>that memory does not
+        exist within the context of the process.</em>
+    </p>
+
+    <p>
+        The program is thus isolated, and can do anything it likes, within
+        its own "sandbox" environment.
+    </p>
+</div>
+
+
+
 <div class="content" id="scripts">
     <h2> Interpreter Scripts </h2>
     <p>

@@ -5,20 +5,7 @@ last-updated: March 2021
 ---
 
 <!--
-
-    Community-Driven vs. ...?
-
-    Classic Business Model:
-        Red Hat Enterprise Linux
-        Cannonical
-
-    Offset-with-Open-Source Model:
-        PINE-64, 
-
-    Radio Station Model:
-        Like a radio station, they accept donations from users and sponsors,  
-        and generate revenue from search-engine 
-        traffic<sup><a href="http://web.archive.org/web/20150409023855/http://www.techworld.com.au/article/529572/q_clement_lefebvre_man_behind_linux_mint/">[a]</a></sup>
+    From a spectator's point of view...
 -->
 
 <div id="nav_bar_2" class="nav">
@@ -27,9 +14,8 @@ last-updated: March 2021
         <li><a href="#fork-merge">Fork/Merge</a></li>
         <li><a href="#train-schedules">Train Schedules</a></li>
         <li><a href="#bazaar">Bazaar Development Model</a></li>
-        <li><a href="#unix-philosophy">The UNIX Philosophy</a></li>
         <li><a href="#successful-business-models">Successful Business Models</a></li>
-        <li><a href="#bizare-organization">Organization</a></li>
+        <li><a href="#unix-philosophy">The UNIX Philosophy</a></li>
         <li><a href="#closing-remarks">Closing Remarks</a></li>
         <li><a href="#bryan-cantrill"> Bryan Cantrill </a></li>
         <li><a href="#references"> References </a></li>
@@ -38,6 +24,15 @@ last-updated: March 2021
 
 
 <div id="introduction" class="content">
+
+    <div class="quote-text">
+        "Given enough eyeballs, all bugs are shallow."
+    </div>
+
+    <div class="quote-ref">
+        <a href="https://en.wikipedia.org/wiki/Linus%27s_law">Linus's Law</a>
+    </div>
+
     <h1>How Open Source Works</h1>
 
     <p>
@@ -51,6 +46,7 @@ last-updated: March 2021
 
 <div id="fork-merge" class="content">
     <h2>Fork/Merge</h2>
+    <h4>How-to Contribute</h4>
 
     <p>
         Recall that a repository is tracked collection of files,
@@ -64,8 +60,8 @@ last-updated: March 2021
         Having created a fork, the software is now *yours*.
         You can modify it, inspect it, install it, 
         discard it&mdash; whatever you want.
-        If you want to contribute to the project, though, you would naturally
-        edit some of the files within your copy.  
+        To contribute to the project, though, you 
+        would naturally edit some of the files within your copy.  
     </p>
 
     <p>
@@ -91,6 +87,11 @@ last-updated: March 2021
         into GNU's main trunk. https://en.wikipedia.org/wiki/GNU_Compiler_Collection#EGCS_fork
     </p>
 
+    <p>
+        Github offers services for creating your own repository, 
+        and forking those of others.
+    </p>
+
     <h3>See Also:</h3>
     <ul>
         <li><a href="https://opensource.guide/"> Open Source Guide</a></li>
@@ -106,7 +107,7 @@ https://en.wikibooks.org/wiki/FOSS_A_General_Introduction/Introduction
         Open-source software development is fundamentally reiterative:
         You build something, publish it, improve it, then re-release it.
         "Train scheduling" is a method commonly adopted to add structure 
-        to this: They put the cycle on a schedule.
+        to this: They put releases on a schedule.
         It is used to enormous effect by Mozilla, to provide
         "stability without stagnation."<sup><a href="https://blog.rust-lang.org/2014/10/30/Stability.html">[6]</a></sup>
     </p>
@@ -151,10 +152,10 @@ https://en.wikibooks.org/wiki/FOSS_A_General_Introduction/Introduction
     </figure>
 
     <p>
-        The train schedule is often adopted by larger projects to help cope with,
-        potentially, thousands of merges each month.
-        For instance, it is a common (though fading) practice for distributions
-        to offer a new official release every six months.
+        The train schedule is often adopted by larger projects to 
+        help cope with, potentially, thousands of merges each month.
+        For instance, it is a common (though fading) practice for 
+        distributions to offer a new official release every six months.
     </p>
 
     <h3>See Also:</h3>
@@ -166,7 +167,6 @@ https://en.wikibooks.org/wiki/FOSS_A_General_Introduction/Introduction
 
 <div class="content" id="bazaar">
     <h2>The Bazaar Development Model</h2>
-
     <p>
         <strike>A collection of open-source projects is 
         called a <em>bazaar.</em></strike>
@@ -176,47 +176,26 @@ https://en.wikibooks.org/wiki/FOSS_A_General_Introduction/Introduction
         which he contrasted with the "cathedral"-style development model of the time. 
     </p>
 
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            The FreeBSD project's primary goal is security.
+        </p>
+    </div>
+
     <p>
-        In the cathedral development model, software is openly available,
+        In a cathedral, software is openly available,
         sure, but is developed principally in-house; the above
         remarks on forking and merging effectively don't apply.
         The cathedral has its proponents (namely, all of BSD's);
         they argue that a traditional model affords greater opportunity for
-        design and craftsmanship, important considerations when considering
-        the magnitude of these endeavors.
-        <!-- Mention OpenBSD's focus on security-->
+        design, conception, and craftsmanship, and that these are 
+        critical considerations given their projects' goals.
     </p>
 
     <p>
-        It is rightfully GNU/Linux, and I can't help but agree that each
-        significant open-source project requires some central authority.
-        The question is, how do <em>we</em> do it?
-    </p>
-
-    <h3> Benevolent Dictator for Life </h3>
-
-    <p>
-        In the case of Linux, it is Linus Torvalds, original proprieter.
-        For example, Linus Torvalds is the <em>BDFL</em> of Linux.
-
-    </p>
-
-    <p>
-    Conveniently, a who's-who of the open-source community:
-https://en.wikipedia.org/wiki/Benevolent_dictator_for_life#Referent_candidates
-    </p>
-
-
-    "Open source democracy doesn't work."&mdash; Brian Camprill
-
-        
-<!--
-    <p>
-        If a solution to this situation exists, then it rests in developing 
-        open-source programming tools, and collections of free assets,
-        which significantly reduce the time
-        required to yield a playable game&mdash; e.g.
-        <a href="https://godotengine.org">Godot Game Engine</a>.
+        The bazaar model, by contast, welcomes strangers to contribute
+        to the project, and more, to take responsibility within it.
     </p>
 
     <p>
@@ -230,7 +209,53 @@ https://en.wikipedia.org/wiki/Benevolent_dictator_for_life#Referent_candidates
          fitting them all together.
     </p>
 
-</div>
+
+    "Open source democracy doesn't work."&mdash; Brian Camprill
+
+        
+<div class="content" id="successful-business-models">
+    <h2>Successful Business Models</h2>
+
+    <p>
+        Community-Driven vs. ...?
+        Like Debian is 'community-driven'
+            Ensures users are satisfied
+        Generalization of the Bazaar?
+    </p>
+
+    <p>
+        <strong>Classic Business Model:</strong>:
+        Offer service upon free software, 
+        Red Hat Enterprise Linux
+        Cannonical
+        Kubernetes
+    </p>
+
+    <p>
+        <strong>Offset-cost-with-community-contribution:</strong>
+        PINE-64, 
+        Raspberry Pi
+    </p>
+
+    <p>
+        <strong>Radio Station Model:</strong>
+        Like a radio station, they accept donations from users and sponsors,  
+        and generate revenue from search-engine 
+        traffic<sup><a href="http://web.archive.org/web/20150409023855/http://www.techworld.com.au/article/529572/q_clement_lefebvre_man_behind_linux_mint/">[a]</a></sup>
+    </p>
+
+    <p> 
+        For-profit companies contributing to open-source
+        Facebook -> btrfs
+    </p>
+
+<!--
+
+    Inapplicable domains:
+    Pretty much anything that needs to be cutting-edge.
+    AAA Games, for instance
+
+    </div>
 
 
 <div class="content" id="unix-philosophy">
@@ -258,6 +283,7 @@ Modularity:
     as is xfce https://www.xfce.org/about
 
 
+
 In Proprietary Land: CClang
 https://en.wikipedia.org/wiki/Clang
 Its contributors include Apple, Microsoft, Google, ARM, Sony, 
@@ -267,13 +293,17 @@ License, a permissive free software licence. Since v9.0.0, it was relicensed to
 the Apache License 2.0 with LLVM Exceptions.[4]
 o
 
-
-
-
-
-
 <div class="content" id="closing-remakrs">
     <h2>Closing Remarks:</h2>
+
+    <p>
+        The modern Linux desktop is of such quality that one
+        does not need to know how it operates to make use of it.
+        Its use is, however, facilitated by a rudimentary understanding 
+        of it.
+        More, you are not expected to contribute to it: it's
+        open and available and that's that.
+    </p>
     
     <p>
         The crux of open-source is <em>sharing,</em> not gifting.
@@ -282,22 +312,13 @@ o
     </p>
 
     <p>
-        Free software persists.
-        It is cheap to store, present, and offer.
-        For this reason alone, I found it worth studying.
+        The crux of open-source <em>development</em> is 
+        reiterative improvement.  
+        The principal investment is time, and when a non-profit 
+        organization endeavors to build free software, their 
+        principle concern is paying their employees, not making money.
     </p>
 
-    <p>
-        The principal investment is time, and when a non-profit organization
-        endeavors to build free software, their principle concern is paying
-        their employees, not making money.
-    </p>
-
-    <p>
-        The skills required are nontrivial.
-        The brilliant minds of Bell Labs were, prinicipally, mathematicians;
-        each held a Ph.D. in their respective field.
-    </p>
 
     <h3>See Also:</h3>
     <ul>
