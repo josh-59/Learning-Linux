@@ -62,15 +62,7 @@ Terminals and Shells:
 - [ ] Shell Scripts
 - [ ] Closing Remarks: Arguments
 
-The Bazaar Development Model:
-- [ ] Fork/merge
-- [X] Train Schedules
-- [ ] Bazaar Development Model
-- [ ] Modularity
-- [ ] Successful Business Models
-- [ ] Closing Remarks: Why it Works
-
-Distributing Free Software
+Packages:
 - [ ] Repositories and Packages
 - [ ] Building From Source
 - [ ] Ports
@@ -80,6 +72,14 @@ Distributing Free Software
 - [ ] Package Managers
 - [ ] Other Packaging Schemes
 - [ ] Closing Remarks:
+
+How it Works:
+- [ ] Fork/merge
+- [X] Train Schedules
+- [ ] Bazaar Development Model
+- [ ] Modularity
+- [ ] Successful Business Models
+- [ ] Closing Remarks: Why it Works
 
 Appendix: Terminal Pro:
 - [ ] History: Commands not programs
