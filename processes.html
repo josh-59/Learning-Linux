@@ -6,6 +6,8 @@ last-updated: March, 2021
 
 <!--
 
+    One subsection per major attribute?
+
     A simple shell:
 
             printf("%s", prompt);
@@ -14,28 +16,11 @@ last-updated: March, 2021
 TODO
     Include: OSTEP "Address Spaces":
         https://pages.cs.wisc.edu/~remzi/OSTEP/vm-intro.pdf
-    Sandbox:
-        Remove references to "MMU"
-
-    Executing a Different Program:
-        Rewrite, removing references to "parent process memory space"
-        The system call to exec is <code>execve</code>; all variants
-        are library functions.
-
-    Process attributes:
-        Current working directory:
-            Relative paths are evaluated wrt this value.
-        Tour /proc/self
-        Associated user / credentials
-
-        One subsection per major attribute?
-
-
 
         Writing signal handlers is <a href="http://lazarenko.me/signal-handler/">not easy</a>,
         especially in multi-threaded environments.
 
-    IPC:    (as conclusion?)
+    IPC: ??????
         Primitives:
             Signals - Software interupts: Interupt the normal flow of
                 execution in a program (Kerrisk, p388)
@@ -72,11 +57,6 @@ TODO
 
 
 
-    Closing Remarks:
-        Concurrency: specifically, a single thread of 
-        execution being oblivious to a pause and a restart of its execution.
-
-        Tools to introspect processes: top, /proc, etc
 
         Introduce programs, rather than programming.
         The Linux kernel actually supports four executable file formats:
@@ -454,7 +434,7 @@ TODO
         if( rv == 0 ) {
             // I am child
             char *args[] = {"ls", "-l", NULL};
-            execvp(args[0], args); // Child process 'falls out' of program execution here
+            execv("/bin/ls", args);
 
         } else if ( rv &gt; 0 ) {
             // I am parent
@@ -563,6 +543,8 @@ TODO
   <ul>
         <li><a href="https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-intro.pdf">Operating Systems: Three Easy Pieces</a> Chapter 4: Processes</li>
         <li><a href="http://www.csapp.cs.cmu.edu/"> Computer Systems: A Programmer's Perspective, 3<sup>rd</sup> Ed.</a>, Chapter 9: Virtual Memory (Not free)</li>
+        <li><a href="https://www.man7.org/linux/man-pages/man1/top.1.html"><code>top(1)</code></a></li>
+        <li><a href="./assets/check.c">check.c</a> - Double-check of the above snippets</li>
   </ul>
 </div>
 
@@ -602,5 +584,3 @@ TODO
   </ol>
 
 </div>
--
--
