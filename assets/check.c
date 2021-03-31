@@ -1,3 +1,31 @@
+/*
+ * This is free and unencumbered software released into the public domain.
+ *
+ * Anyone is free to copy, modify, publish, use, compile, sell, or
+ * distribute this software, either in source code form or as a compiled
+ * binary, for any purpose, commercial or non-commercial, and by any
+ * means.
+ *
+ * In jurisdictions that recognize copyright laws, the author or authors
+ * of this software dedicate any and all copyright interest in the
+ * software to the public domain. We make this dedication for the benefit
+ * of the public at large and to the detriment of our heirs and
+ * successors. We intend this dedication to be an overt act of
+ * relinquishment in perpetuity of all present and future rights to this
+ * software under copyright law.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+ * OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ * 
+ * For more information, please refer to <http://unlicense.org/>
+ */
+
+
 #include <unistd.h>
 #include <stdio.h>
 #include <sys/types.h>
@@ -6,24 +34,29 @@
 #include <fcntl.h>
 #include <stdlib.h>
 
-/*
-processes.html#process-creation
- */
-int main() {
-        pid_t rv = fork();      // One process executes this line
-        if(rv == 0) {           // Two processes execute this line
-            printf("Child proc PID = %zu\n", getpid());
-        } else if (rv > 0) {
-            printf("Parent proc PID = %zu\n", getpid());
-        }
+void check_1();
+void check_2();
+void check_3();
 
-        return 0;
+int main() {
+    //check_1();
+    //check_2();
+    check_3();
+
+    return 0;
 }
 
-/*
-processes.html#file-descriptors
+void check_1() {
+    pid_t rv = fork();      // One process executes this line
+    if(rv == 0) {           // Two processes execute this line
+        printf("Child proc PID = %zu\n", getpid());
+    } else if (rv > 0) {
+        printf("Parent proc PID = %zu\n", getpid());
+    }
+}
 
-int main() {
+
+void check_2() {
     int fd = open("./rubber_ducky", O_RDONLY);
     printf("fd = %d\n", fd);
 
@@ -41,16 +74,9 @@ int main() {
 
     int num_bytes_read = read(fd, buff, buff_size);
     printf("num_bytes_read = %zu\n", num_bytes_read);
-
-    return 0;
 }
-*/
 
-
-/*
-processes.html#executing-a-different-program
-
-int main() {
+void check_3() {
     pid_t rv = fork();
     if( rv == 0 ) {
         char *args[] = {"ls", "-l", NULL};
@@ -63,4 +89,3 @@ int main() {
         printf("Child process %zu exited!\n", (unsigned long) rv);
     } 
 }
-*/
