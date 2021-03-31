@@ -40,7 +40,6 @@ int main() {
     }
 
     int num_bytes_read = read(fd, buff, buff_size);
-
     printf("num_bytes_read = %zu\n", num_bytes_read);
 
     return 0;
@@ -57,7 +56,7 @@ int main() {
         char *args[] = {"ls", "-l", NULL};
         execv("/bin/ls", args);
         
-        perror("execv"); // These lines are executed if execv failed
+        perror("execv"); // These lines are only executed if execv failed
         exit(1);
     } else if ( rv > 0 ) {
         wait(NULL);
