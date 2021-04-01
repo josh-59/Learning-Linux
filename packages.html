@@ -201,87 +201,63 @@ Closing Remarks:
 </div>
 
 <div id="introduction" class="content">
-    <h1>Distributing Open Source</h1>
+    <h1>Packages</h1>
     <p>
-        In Linux, the idea of <em>installation</em> maps cleanly to 
-        "copy files to appropriate directories."
-        The practice behind distributing open-source.
-        To simply install new software on your GNU/Linux machine,
-        search your desktop for "Software Manager."
+        How-to get free stuff.... Well, you could beg, or you could borrow...
+        You could steal, or you could <em>share...</em>
+        Software is convenient to share because it is very cheap to copy.
+        Also, it's fun to produce.
     </p>
 </div>
 
-<div class="content" id="repositories-and-packages">
-    <h2>Repositories and Packages</h2>
+<div class="content" id="packages">
+    <h2>Package Introduction</h2>
     <p>
-        A <em>repository</em> is a tracked collection of files. 
+        A <em>package</em> is a logical unit of software.
+        The obvious example is a program, but libraries are packages, too.  
+        Typically, packages are presented to the end user in precompiled form;
+        more, they are installed by a utility program.
+    </p>
+
+    <p>
+        The GNU GPL stipulates that every package be available in source-code
+        form. The GNU-way of installing their stuff is:
     </p>
 
     <div class="code">
-        $ git init
+        $ ./configure &amp;&amp; make &amp;&amp; make install
     </div>
 
     <p>
-        A repository may be remote (the usual case), or it may be local
-        (e.g., on a thumb-drive).
-        Further, a repository belonging to a large project, such as Debian's,
-        is often mirrored by other organizations.
+        Each project uses its own language and build system; the above
+        presupposes C/C++ source built via GNU's Autoconf.
+        The traditional UNIX package format is a compressed tarball, a file 
+        ending in <code>.tar.xz</code>, or <code>.tar.gzip</code>.
+        One extracts such an archive with:
+    </p>
+
+    <div class="code">
+        $ tar xf kernel-5.10.tar.xz
+    </div>
+
+    <p>
+        yielding a directory reflective of its original packager's.
     </p>
 
     <p>
-        A package is a collection of files that implements a
-        software component.
+        Naturally, the system may be viewed as a collection of installed packages.
+        More, intalling compiled software becomes a matter of copying files into
+        appropriate directories.
     </p>
 
     <p>
-        A package is a file that contains the things 
-        required to implement a program, a set of related programs,
-        or a set of related features.<sup><a href="https://wiki.debian.org/Packaging/Intro">[1]</a></sup>
-        They obviate the need to obtain source code, configure it, compile it 
-        and install the results by hand,
-        and simplify software management greatly.<sup><a href="https://www.slackbook.org/html/package-management.html">[2]</a></sup>
-        They are well-suited to automation by utility programs,
-        and aid the distribution of software.
-        Each Linux distribution handles packages in their own way.
-    </p>
-</div>
-
-
-<div class="content" id="building-from-source">
-    <h2>Building From Source</h2>
-    <p>
-        Free software is typically intended to be distributed, and its developers
-        usually offer instructions for end-users to install it 
-        (see their README file).
-        Each project will use its preferred language and toolchain; 
-        C has several, and GNU maintains their own. 
-        It is fairly widely-used, so we will focus on it here.
-    </p>
-
-    <p>
-        "The primary goal of Autoconf is making the <em>user's</em>[sic] life easier;
-        making the <em>maintainer's</em>[sic] life easier is only a secondary goal.<sup><a href="https://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.70/html_node/Introduction.html#Introduction">[a]</a></sup>
-        Installation of packages from source has been reduced to three commands:
-    </p>
-
-    <ol>
-        <li>
-            <code>./configure</code>&mdash; A script that queries the host machine
-            and adjusts the Makefile appropriately, in preparation for compilation
-        </li>
-        <li>
-            <code>make</code>&mdash; Compiles the package
-        </li>
-        <li>
-            <code>make install</code>&mdash; Installs the finished files into
-            their final locations.
-        </li>
-    </ol>
-
-    <p>
-        To recompile software to a different machine is to <em>port</em> it.
-        The entire Debian repository has been ported to eight different 
-        architectures.<sup><a href="https://www.debian.org/ports/">[a]</a></sup>
+        Packages are typically distributed in configured and compiled form.
+        This yields a smaller archive, saves users from the
+        time-consuming step of compilation, and allows complete automation of
+        installation.
+        The implication, however, is that each package is preconfigured 
+        for a particular operating system.  
+        See your distribution's package management facilities for further information.
     </p>
 
     <h3>See Also:</h3>
@@ -290,10 +266,8 @@ Closing Remarks:
     </ul>
 </div>
 
-
-
 <div id="packages-intro" class="content">
-    <h2> Introduction to Packages</h2>
+    <h2> Simple Package Manager </h2>
 
     <p>
         Among major distributions, the Slackware Project entertains the 
