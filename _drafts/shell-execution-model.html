@@ -1,0 +1,48 @@
+
+<!--
+
+<div class="content" id="model">
+	<h2>Shell Execution Model</h2>
+
+    <p>
+        In <em>The Evolution of the Unix Time-Sharing System,</em>
+        Dennis Ritchie summarizes shell behavior:<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[1]</a></sup>
+    </p>
+
+
+    <blockquote style="background-color: #f9f9f9;
+                    border: 2px solid #ddd;
+                    padding: 5px;">
+ Today, the way in which commands are executed by the shell can be summarized as follows:
+        <ol> 
+            <li> The shell reads a command line from the terminal. </li>
+            <li> It creates a child process by fork.</li>
+            <li> The child process uses exec to call in the command from a file. </li>
+            <li> Meanwhile, the parent shell uses wait to wait for the child (command) process to terminate by calling exit. </li>
+            <li> The parent shell goes back to step </li>
+        </ol>
+    </blockquote>
+
+    <p>
+
+    </p>
+
+	<a href="assets/img/shell-model.pdf" title="Click for PDF">
+		<img src="assets/img/shell-model-pic.png" style="height: 400pt;">
+	</a>
+
+    <p>
+        All shell behavior may be understood within the context of this
+        model, though it is not complete.
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Operation.html">Shell Operation (Bash Reference Manual)</a></li>
+    </ul>
+
+</div>
+
+-->
+
+
