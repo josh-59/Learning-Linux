@@ -7,84 +7,20 @@ last-updated: March, 2021
 <!--
 To Do:
 
-    Shells:
+    Simple Commands:
+        Recall that 
+        Each command therefore inherits the shell's attributes, including
+        - Place in the filesystem
+        - Open files
+            - Terminal
 
-    <p>
-        Learning to use a shell amounts to learning how it handles
-        commands given to it.
-    </p>
-
-    Command Execution: (Need rather badly, before cwd)
-
-    Bash Command Interpretation Cheat Sheet
-
-    Simple Commands Definition:
-
-    https://www.gnu.org/software/bash/manual/html_node/Simple-Commands.html#Simple-Commands
-
+    
 
     <p>
         The shell does little else.  
         It may provide some means to store variables, and offer to expand them, 
         but by and large, shells are as "dumb" as terminals, and, this is intentional.
     </p>
-
-<div class="content" id="setup-files">
-    <h2>Bash Configuration Scripts</h2>
-
-</div>
-
-        <p>
-        Different operating systems have their own idioms for the command line.
-        The UNIX way 
-    </p>
-
-
-    <p>
-    </p>
-
-    <p>
-        For example,
-    </p>
-
-    <div class="code">
-        $ git clone https://
-    </div>
-
-    <p>
-        and
-    </p>
-
-    <div class="code">
-        $ cargo build
-    </div>
-
-    <p>
-        both contain subcommands, whereas
-    </p>
-
-    <div class="code">
-        $ ls -F
-    </div>
-
-    <p>
-        contains an option.
-    </p>
-
-    <p>
-        This convention is not strictly adhered to, but is worthwhile.
-        Formally:
-    </p>
-
-        
-    <p>
-        Where <code>command</code> is mandatory and arguments are optional.
-    </p>
-
-
-		In such situations, the computational infrastructure forms a tree,
-		with the system's administrators at the root, and end-users at
-        the leaves.
 
     ================>Closing Remarks<=================
 
@@ -543,25 +479,6 @@ To Do:
         $ help
     </div>
 
-</div>
-
-<div class="content" id="standard-file-descriptors">
-    <h2>Standard File Descriptors</h2>
-    
-    <p>
-        As mentioned, the shell is connected to the terminal by three open files.
-        By convention, then standard, they are:
-    </p>
-
-    <ul>
-        <li> <code>STDIN</code>, File descriptor 0</li>
-        <li> <code>STDOUT</code>, File descriptor 1</li>
-        <li> <code>STDERR</code>, File descriptor 2</li>
-    </ul>
-
-    <p>
-
-    </p>
 </div>
 
 <div class="content" id="shell-scripts">
