@@ -1,0 +1,578 @@
+---
+layout: default
+title: 'Bash (and stuff)'
+last-updated: April, 2020
+---
+
+<!--
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Most shells support "tab completion:"
+            If you've typed enough of a command or filename to
+            uniquely identify it, you can press "tab," and it will complete it for you.
+        </p>
+    </div>
+
+
+    Variants of "which"
+        $ type bash
+        $ which bash
+        $ file $(which bash)
+
+
+    <div class="content" id="advanced-man">
+        <h2>Advanced <code>man</code> Usage</h2>
+        Random Useful Man Pages:
+            <ul>
+                <li> heir </li>
+                <li> ascii </li>
+                <li> elf </li>
+            </ul>
+    </div>
+
+    Closing Remarks:
+    Further Advanced Tools
+    AWK
+    Awk handles strings of characters as conveniently as most languages handle numbers.
+
+    Explanation of sudo:
+    https://www.linuxjournal.com/sites/default/files/2018-11/GeekGuide-BeyondTrust-BeyondSudo.pdf
+
+Exercises:
+
+    <ol>
+        <li>
+            Explain the behavior of:
+            $ PATH="" printenv
+        </li>
+        <li>
+            The shell is a process, like any other.
+            For your current shell:
+            <ol>
+                <li>What was its command-line arguments</li>
+                <li>
+            </ol>
+        </li>
+        <li>
+            Let <code>script</code> be an executable file containing
+            #!/bin/sh
+            echo hello world
+            There are three ways to execute this command:
+            1) In the current shell context
+            2) In a forked subshell context
+            3) In an <code>exec</code>-induced sh context
+            Produce each, and verify with <code>strace</code>
+        </li>
+    </ol>
+
+
+    Simple-commands + Arguments
+    <p>
+        In the following example, the <code>ls</code> command is given
+        with the single argument <code>-l</code>:
+    </p>
+
+    <div class="code">
+        $ ls -l
+    </div>
+
+    <p>
+        Elements, referred to as "words", are separated by blanks (spaces or tabs).
+        If, for some reason, we need to include blanks in
+        an argument, we can wrap said argument in single-quotes.
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Single quotes denote a <em>string literal</em>, and here tell Bash 
+            to preserve enclosed text exactly as-is.
+        </p>
+    </div>
+
+    <p>
+        In the following command,
+        <code>cd</code> recieves a single argument,
+        <code>Random Acccess Memories</code>:
+    </p>
+
+    <div class="code">
+        $ cd 'Random Access Memories'
+    </div>
+
+    <p>
+        Upon pressing <em>return,</em> the line of text is 
+        sent to the shell: we say that input is <em>line-buffered.</em>
+        Thereupon, Bash begins to parse it.
+        Its first action is to break the line into words and operators 
+        (not yet covered); 
+        it does so while obeying its 
+        <a href="https://www.gnu.org/software/bash/manual/html_node/Quoting.html">quoting rules</a>, of which we have only introduced the single-quote, <code>'</code>.
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Commands.html">Shell Commands</a> (Bash Reference Manual)</li>
+    </ul>
+</div>
+
+
+    <p>
+        After shell expansion, Bash scans each word for 
+        ‘|’, ‘&amp;’, ‘;’, ‘(’, ‘)’, ‘<’, or ‘>'; 
+        a word containing one of these characters is called an <em>operator.</em>
+    </p>
+
+
+
+-->
+
+<div id="nav_bar_2" class="nav">
+	<ul>
+		<li><a href="#introduction"> Introduction </a></li>
+		<li><a href="#redirection">I/O Redirection</a></li>
+        <li><a href="#shell-expansion">Shell Expansion</a></li>
+        <!-- <li><a href="#model"> Shell Execution Model </a></li> -->
+		<li><a href="#terminal-conveniences"> Terminal Conveniences</a></li>
+        <li><a href="#finding-files">Finding Files</a></li>
+        <li><a href="#startup-files">Startup Files</a></li>
+        <!-- <li><a href="#references"> References </a></li> -->
+	</ul>
+</div>
+
+<div class="content" id="introduction">
+    <h1>Bash (and stuff)</h1>
+
+    <p>
+        The standard shell of our time is the Bourne-Again shell, <a href="https://www.gnu.org/software/bash/">Bash</a>.
+    </p>
+
+</div>
+
+<div id="redirection" class="content">
+	<h2 style="margin-bottom: 0;">I/O Redirection</h2>
+    <h4> and Standard File Descriptors</h4>
+
+	<p>
+        In interactive use, the shell is connected to its terminal
+        by three open files.
+        The first file, <code>STDIN</code>, is the keyboard.
+        When <code>bash</code> is waiting for you to enter a new command,
+        it's actually asked the kernel to
+        read a line from this file, and the kernel has
+        paused execution of <code>bash</code> until a line is
+        available (a line is available once you hit enter).
+        The second and third open files,
+        <code>STDOUT</code> and <code>STDERR</code>, are the terminal
+        screen: Whenever <code>bash</code> wants to print something out,
+        it writes characters to one of these files.
+    </p>
+
+    <p>
+	    Recall that each process created by the <code>fork</code> system
+        call <a href="processes.html#process-creation">inherits</a>
+        its parent's attributes, and that these attributes
+        include file descriptors (open files).
+        This means that we can reasonably expect each
+        child of <code>bash</code> to have our keyboard present at
+        <code>STDIN</code> and our terminal screen at both
+        <code>STDOUT</code> and <code>STDERR</code>.
+    </p>
+
+    <p>
+        In interactive use, this is typically what we want, and
+        means that our command,
+    </p>
+
+    <div class="code">
+        $ ls
+    </div>
+
+    <p>
+        will inherit the terminal as primary I/O, and thereby
+        print to the terminal screen.
+    </p>
+
+    <h3> Redirection </h3>
+
+    <p>
+        Redirection is the act of assigning a different file to the standard
+        file descriptors before executing a command.
+        Let's start with input.
+    </p>
+
+    <ul style="list-style-type: none;">
+        <li> <code> command &lt; file </code> &emsp; Open <code>file</code>
+            for reading,
+            assign to <code>STDIN</code>, then execute <code>command</code></li>
+    </ul>
+
+    <p>
+        This removes the keyboard from <code>STDIN</code> and replaces it with
+        <code>file</code>; the command is no longer interactive, but will
+        still print output to the terminal.
+        This can be useful for scripting: Rather than
+        repeatedly entering the same sequence of input multiple times,
+        just save said input to a file and redirect.
+    </p>
+
+    <p>
+        Here, as in all redirections, <code>command</code> is oblivious.
+        Redirection is shell functionality, and <code>bash</code>
+        remaps the appropriate open files before execution takes place.
+        More, <code>command</code> does not recieve <code>&lt; file</code>
+        as arguments; <code>bash</code> removes them after
+        the changes have been made.
+    </p>
+
+    <p>
+        To redirect output:
+    </p>
+
+    <ul style="list-style-type: none;">
+        <li> <code> command &gt; file </code> &emsp; Open <code>file</code>
+            for writing; set length to zero; assign to <code>STDOUT</code>.
+            Then search for command.</li>
+        <li> <code> command &gt;&gt; file </code> &emsp; Open <code>file</code>
+            for writing; seek to end; assign to <code>STDOUT</code>.
+            Then search for command.</li>
+    </ul>
+
+    <p>
+        Since <code>STDERR</code> has been left unchanged, errors will
+        still be printed to our terminal screen.
+    </p>
+
+    <p>
+        Redirection can become quite involved.
+        It is possible to redirect <code>STDERR</code>,
+        to open a file and assign it an arbitrary file descriptor,
+        to copy the assignment of a file descriptor,
+        and to close an arbitrary file descriptor.
+        All of this occurs within <code>bash</code>, after shell expansion
+        and forking, and before it begins searching for the command.
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://wiki.bash-hackers.org/syntax/redirection">Redirection - Bash Hackers Wiki</a></li>
+        <li><a href="https://www.gnu.org/software/bash/manual/html_node/Redirections.html"> Redirections - Bash Reference Manual</a></li>
+    </ul>
+</div>
+
+<div class="content" id="shell-expansion">
+    <h2 style="margin-bottom: 0;">Shell Expansion</h2>
+    <h4>and Quote Removal</h4>
+
+    <p>
+        The next step on the journey of command execution is <em>shell
+        expansion.</em>
+        Bash searches each word, from left to right, in two consequetive passes.
+    </p>
+
+    <div class="aside-right">
+        <h4>Note:</h4>
+        <p>
+            If a word is single-quoted, then it is exempt from expansion.
+        </p>
+    </div>
+
+    <p>
+        The first pass searches for:
+    </p>
+
+    <ol>
+        <li>
+            <a href="https://www.gnu.org/software/bash/manual/html_node/Brace-Expansion.html">Braces</a>&emsp; <code>{}</code>
+            <br>
+            <code>a{1,2,3}b</code> becomes <code>a1b a2b a3b</code>
+        </li>
+        <li>
+            <a href="https://www.gnu.org/software/bash/manual/html_node/Tilde-Expansion.html">Tilde</a>&emsp;  <code>~</code>
+            <br>
+            Expands to the absolute pathname of your home directory, or
+            <code>HOME</code> parameter, if it is set.
+        </li>
+        <li>
+            <a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html">Parameter</a> &emsp;  <code>$</code>
+            <br>
+            <code>$NAME</code> is replaced by the value of <code>NAME</code>
+            parameter, if it exists, and null string otherwise.
+        </li>
+        <li>
+            <a href="https://www.gnu.org/software/bash/manual/html_node/Command-Substitution.html">Command</a> &emsp;  <code>$( </code><em>command</em><code> )</code>
+            <br>
+            Executes <em>command</em> in a subshell environment, captures output
+            and replaces <br> <code>$(</code><em>command</em><code>)</code>
+            with said output
+        </li>
+        <li>
+            <a href="https://www.gnu.org/software/bash/manual/html_node/Arithmetic-Expansion.html">Arithmetic</a>&emsp;  <code>$(( </code><em>expression</em><code>  ))</code>
+            <br>
+            Evaluates <em>expression</em> and replaces <code>$((</code><em>expression</em><code>))</code> with result
+
+        </li>
+    </ol>
+
+    <p>
+        Expansions can be understood through prodigious use of the
+        <code>echo</code> command, which simply prints out whatever arguments
+        it recieves.
+        For instance, in the following example, the <code>echo</code> command
+        recieves exactly two arguments, <code>12</code> and <code>13</code>,
+        and it is Bash that has done the work:
+    </p>
+
+    <div class="code">
+        $ echo 1{2,3}<br>
+        12 13
+    </div>
+
+    <h3 id="globbing"> Filename Expansion </h3>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            These expansions let you manipulate multiple files quickly.
+        </p>
+    </div>
+
+    <p>
+        The second expansion pass is <em>filename expansion,</em> sometimes
+        referred to as <em>globbing.</em>
+        If any word contains an asterisk <code>*</code>, question mark
+        <code>?</code>, or brackets <code>[]</code>, then it is regarded as a
+        <em>pattern,</em> and is replaced by an alphabetical list of all
+        filenames in the current directory matching that pattern.<sup><a href="https://www.gnu.org/software/bash/manual/html_node/Filename-Expansion.html#Filename-Expansion">[a]</a></sup>
+    </p>
+
+    <p>
+        The meanings of these metacharacters are as follows:
+    </p>
+
+    <ul style="list-style-type: none;">
+        <li>
+            <code>*</code>&emsp; Asterisk.  Matches zero-or-more of any character.
+        </li>
+
+        <li>
+            <code>?</code>&emsp; Question Mark.  Matches zero-or-one of any character.
+        </li>
+
+        <li>
+            <code>[ ]</code>&emsp; Brackets.  Matches exactly one of any of the characters contained.
+        </li>
+    </ul>
+
+    <p>
+        In patterns, all other characters are treated literally.
+        For example,
+    </p>
+
+    <div class="aside-right">
+        <h4>Note:</h4>
+        <p>
+            By default, hidden files must be matched explicitly.
+        </p>
+    </div>
+
+    <div class="code">
+        *
+    </div>
+
+    <p>
+        expands to all files in the current directory.
+    </p>
+
+    <div class="code">
+        *.pdf
+    </div>
+
+    <p>
+        expands to all files ending in <code>.pdf</code>; and,
+    </p>
+
+    <div class="code">
+        *.[gx]z
+    </div>
+
+    <p>
+        expands to all files ending in either <code>.xz</code> or <code>.gz</code>.
+    </p>
+
+    <p>
+        After these steps have been completed, Bash removes unquoted
+        quotes, and prepares to execute the command.
+    </p>
+
+    <h3> See Also: </h3>
+    <ul>
+        <li><a href="http://mywiki.wooledge.org/glob"> glob - Greg's Wiki </a></li>
+    </ul>
+</div>
+<div class="content" id="terminal-conveniences">
+    <h2>Terminal Conveniences</h2>
+
+    <p>
+        An assortment of odds and ends:
+    </p>
+
+    <p>
+        <strong>SIGINT:</strong>
+        The "interupt" signal is a terminal generated signal, and is 
+        created and passed with CTRL+C.
+        It is the preferred way to kill a foreground process.(Kerrisk, p389) 
+    </p>
+
+    <p>
+        <strong>Copying and Pasting:</strong>
+        The desktop's familiar copy/paste is overruled on the terminal 
+        emulator (ctrl-v is interpretted as an escape sequence). 
+        Use CTRL+SHIFT+c and CTRL+SHIFT-v.  
+        Depending on the distribution, middle-clicking may also copy and paste.
+    </p>
+
+    <p>
+        <strong>Utilities to figure things out:</strong>
+        <ul>
+            <li><code>man(1)</code></li>
+            <li><code>apropos(1)</code></li>
+            <li><code>whatis(1)</code></li>
+        </ul>
+    </p>
+
+    <p>
+        You can restrict your search of the manual pages to a specific section 
+        with the <code>-s</code> switch:
+    </p>
+    
+    <div class="code">
+        $ apropos -s 1
+    </div>
+</div>
+
+<div class="content" id="finding-files">
+    <h2>Finding Files</h2>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Remember: <br>
+            <code> fd what where </code>
+        </p>
+    </div>
+
+    <p>
+        The <a href="https://github.com/sharkdp/fd">fd</a>
+        utility is a simple, user-friendly alternative to
+        <a href="http://www.gnu.org/software/findutils/">find</a>.
+        Usage:
+    </p>
+
+    <div class="code">
+        $ fd [pattern] [path ...]
+    </div>
+
+    <p>
+        Where <em>pattern</em> is a regular expression, and
+        <em>path</em> is the directory you'd like to start looking in.
+        It searches there, and then it searches recursively downward through
+        the directory tree which started there.
+        For each file, it attempts to match its basename against <em>pattern.</em>
+        If it matches, it then prints the name of the file.
+    </p>
+
+    <p>
+        By default, <code>fd</code> checks filenames, but it can check any other
+        file characteristic, as well.
+        For instance, to restrict results to directories, we could use
+    </p>
+
+    <div class="code">
+        $ fd --type d [pattern] [path ...]
+    </div>
+
+    <p>
+        For a few reasons, I recommend <code>fd</code> over the classic
+        GNU Findutils:
+    </p>
+
+    <ol style="margin-left: 5%; padding-right: 10%;">
+        <li>
+            <p>
+                Only one utility to learn.
+                In practice, <code>fd</code> replaces both <code>find</code>
+                and <code>locate</code>.
+                Specifically, it's fast and friendly enough that there's no longer
+                a need for <em>locate</em>.
+            </p>
+        </li>
+        <li>
+            <p>
+                Ameniable defaults.
+                <code>fd</code> matches only basenames, and thereby avoids printing
+                pages of results.
+                More, it does not require a flag to search for filenames.
+            </p>
+        </li>
+        <li>
+            <p>
+                Regex by default.
+                Regex is a more powerful and expressive string-matching language
+                than shell globbing.
+            </p>
+        </li>
+        <li>
+            <p>
+                Simpler in Construction.
+                No database to worry about.
+            </p>
+        </li>
+    </ol>
+
+    <h3>Searching Files with <code>rg</code></h3>
+    <p>
+        The <a href="https://github.com/BurntSushi/ripgrep"><code>rg</code></a>
+        utility recursively descends through a directory tree,
+        opens each file, reads its contents and attempts to
+        match each line against a given regex pattern.
+        If a line contains a match, then it prints the filename and those lines;
+        effectively, it searches files for a particular pattern.
+	</p>
+
+	<p>
+        Its simplest usage is:
+    </p>
+
+    <div class="code">
+        $ rg <i>pattern</i> [path ...]
+    </div>
+
+    <p>
+        This, again, is a reimagining of a classic UNIX utility&mdash;
+        in this case, the venerable
+        <em><a href="https://en.wikipedia.org/wiki/Grep">grep</a></em>.
+        It's mostly just easier to use.
+    </p>
+
+    <p>
+        Your primary documentation for regex is <a href="https://docs.rs/regex/1.4.3/regex/#syntax">here</a>. Trust me on this.
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://github.com/sharkdp/fd">fd</a></li>
+        <li><a href="https://github.com/BurntSushi/ripgrep">ripgrep</a></li>
+        <li><a href="https://docs.rs/regex/1.4.3/regex/#syntax">Regex - Rust</a></li>
+    </ul>
+</div>
+
+<div class="content" id="startup-files">
+    <h2>Startup Files</h2>
+
+    .bash_profile vs .bashrc (see Linux from scratch section 4.4)
+
+    rc might stand for "runcoms", short for "runnable commands", now known as
+    "shell scripts."
+</div>

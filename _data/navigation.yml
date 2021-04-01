@@ -10,7 +10,5 @@
   link: /terminals-and-shells.html
 - name: Packages 
   link: /packages.html
-- name: Terminal Pro
-  link: /terminal-pro.html
-- name: 'Appendix: Bash in Gory Detail'
-  link: /bash-gory-detail.html
+- name: 'Bash (and stuff)'
+  link: /bash.html
