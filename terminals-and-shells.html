@@ -81,8 +81,9 @@ To Do:
     </div>
 
     <div class="quote-ref">
-        Ken Thompson and Dennis Ritchie<br>
-        <a href="https://ia800600.us.archive.org/19/items/v6-manual/v6-manual.pdf">UNIX Programming Manual, Sixth Edition</a>
+        Ken Thompson and <br>Dennis Ritchie<br>
+        <a href="https://ia800600.us.archive.org/19/items/v6-manual/v6-manual.pdf">UNIX Programming Manual, Sixth Edition</a><br>
+		May, 1975
     </div>
 
     <p>
@@ -121,18 +122,22 @@ To Do:
 		hard-copy terminals were phased out in favor of
 		screen-based entities.
 		The resulting devices consisted of a monitor and keyboard.
-		The monitor was unlike a modern monitor in that it contained a buffer
-        (on the order of a few kilobytes<sup><a href="https://tldp.org/HOWTO/Text-Terminal-HOWTO-1.html#ss1.6">[2]</a></sup>)
-		which maintained the text currently on screen.
-		In addition, it contained a font table to be referenced
-		when drawing each character&mdash; that is, it included its own font.
 	</p>
 
 	<p>
-		Physical terminals <a href="https://www.vt100.net/dec/vt_history">were used for decades,</a>
-		especially in situations demanding multiple access to large databases, such
-		as airlines and libraries.
+		The monitor contained a buffer
+        (on the order of a few kilobytes)
+		which maintained the text currently on-screen.<sup><a href="https://tldp.org/HOWTO/Text-Terminal-HOWTO-1.html#ss1.6">[2]</a></sup>
+		Using an onboard font table, it would redraw the text given to it without
+		further instruction by the computer; thus, the computer's only duty was to feed
+		the terminal characters.
 	</p>
+
+	<h3>See Also</h3>
+	<ul>
+		<li><a href="https://www.vt100.net/dec/vt_history">Meet the Family: Digital's Video Terminals</a></li>
+	</ul>
+
 </div>
 
 <div id="terminal-emulators" class="content">
@@ -141,7 +146,7 @@ To Do:
 		Terminals persist on modern hardware in the form of <i>terminal emulators</i>.
 		These are user-space processes that, well, emulate an old terminal!
 		Specifically, it is a program that runs within the context of a desktop
-        environment, and emulates the functionality of a physical terminal.
+        environment, and emulates the functionality of a physical terminal:
 	</p>
 
 	<figure>
@@ -156,8 +161,7 @@ To Do:
 	<p>
 		<ul style="list-style: none;">
 			<li> <a href="https://wiki.gnome.org/Apps/Terminal">GNOME Terminal</a>&mdash; A terminal emulator for GNOME. Common</li>
-			<li> <a href="https://invisible-island.net/xterm/xterm.faq.html">xterm</a>&mdash; A terminal emulator for the X Window System.  Common, old, stable</li>
-			<li> <a href="https://github.com/alacritty/alacritty "> alacritty</a>&mdash; A GPU-accelerated terminal emulator, written in Rust </li>
+			<li> <a href="https://github.com/alacritty/alacritty "> alacritty</a>&mdash; A GPU-accelerated terminal emulator</li>
 			<li> <a href="https://github.com/GitSquared/edex-ui">edex-ui</a>&mdash; A terminal emulator designed to make you look <i>insanely badass</i> </li>
             <li> <a href="https://hyper.is/">Hyper</a>&mdash; An <a href="https://www.electronjs.org/">Electron</a>-based terminal</li>
             <li> <a href="https://github.com/Swordfish90/cool-retro-term">Cool Retro Term</a>&mdash; 'nuff said</li>
@@ -167,9 +171,7 @@ To Do:
 	<p>
 		These emulators are "dumb" in the sense that they do nothing except
 		display text and return text.
-		Per tradition, GNU/Linux presents terminal connections as files.
-		Since they are emulating a device, we can expect to find them in
-		<code>/dev</code>.
+		Per tradition, terminals are represented <a href="https://www.man7.org/linux/man-pages/man1/tty.1.html">as files</a>.
 	</p>
 
 	<p>
@@ -177,6 +179,7 @@ To Do:
         most purposes, it is sufficient to recognize that
 		terminals and shells are distinct, cooperating processes.
 	</p>
+
 </div>
 
 <div id="shells" class="content">
