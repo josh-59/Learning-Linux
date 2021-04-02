@@ -6,34 +6,25 @@ last-updated: March 2021
 
 <!--
 
-    <div class="quote-text"
-        "The key to learning what makes a Linux system work is to know what each package is used for and why you (or the system) may need it."
-    </div>
 
-    <div class="quote-ref">
-        <a href="http://linuxfromscratch.org/lfs/view/stable/chapter08/introduction.html">Linux From Scratch</a>
-    </div>
-
-        
+        Good ideas tend to resurface.  
+        Free software is in no danger of <em>being forgotten</em> because it is
+        one such idea.
+        The UNIX architecture similarly resurfaces.
 
 Rewrite as "Distributing Open-Source"
 
-     Repositories and Packages
+  Packages and Building From Source
                 |
                 |
                 |
                \ /
-        Building From Source
+    Ports / Gentoo's Portage
                 |
                 |
                 |
                \ /
-        Ports / Gentoo's Portage
-                |
-                |
-                |
-               \ /
-      Slackware's bare tarball 
+      Slackware's compiled tarball 
                 |
                 |
                 |
@@ -187,6 +178,9 @@ Closing Remarks:
                 Install Ubuntu 
                 The Linux Command Line
                 Arch Linux or Linux From Scratch
+
+    Like if you looked at computing from outer space:
+    https://tomaka.medium.com/the-future-of-operating-systems-efa31e17d66d
 -->
 
 <div id="nav_bar_2" class="nav">
@@ -203,10 +197,6 @@ Closing Remarks:
 <div id="introduction" class="content">
     <h1>Packages</h1>
     <p>
-        How-to get free stuff.... Well, you could beg, or you could borrow...
-        You could steal, or you could <em>share...</em>
-        Software is convenient to share because it is very cheap to copy.
-        Also, it's fun to produce.
     </p>
 </div>
 
@@ -216,11 +206,11 @@ Closing Remarks:
         A <em>package</em> is a logical unit of software.
         The obvious example is a program, but libraries are packages, too.  
         Typically, packages are presented to the end user in precompiled form;
-        more, they are installed by a utility program.
+        more, they are usually installed by a utility program.
     </p>
 
     <p>
-        The GNU GPL stipulates that every package be available in source-code
+        The GNU GPL stipulates that licensed software be available in source-code
         form. The GNU-way of installing their stuff is:
     </p>
 
@@ -543,9 +533,6 @@ According to <a href="https://www.debian.org/doc/manuals/debian-faq/pkg-basics.e
         The above command will also work with 
 
         Repositories are listed locally at <code>/etc/apt/sources.list.d/</code>
-
-
-
 </div>
 
 
