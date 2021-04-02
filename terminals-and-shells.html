@@ -8,17 +8,17 @@ last-updated: March, 2021
 To Do:
 
     Simple Commands:
-        Recall that 
+        Recall that
         Each command therefore inherits the shell's attributes, including
         - Place in the filesystem
         - Open files
             - Terminal
 
-    
+
 
     <p>
-        The shell does little else.  
-        It may provide some means to store variables, and offer to expand them, 
+        The shell does little else.
+        It may provide some means to store variables, and offer to expand them,
         but by and large, shells are as "dumb" as terminals, and, this is intentional.
     </p>
 
@@ -26,20 +26,20 @@ To Do:
 
     <h2>Closing Remarks</h2>
     <p>
-        Arguments from the command line are passed to each program as it 
+        Arguments from the command line are passed to each program as it
         begins execution, and each language has facilities to inspect them.
         In C, they are presented as arguments to the <em>main</em> function:
     </p>
 
     <pre>
-        int main(char** argv, int argc) 
+        int main(char** argv, int argc)
                         ^^^^
     </pre>
 
     <p>
         where <code>argv</code> denotes a vector of strings, and <code>argc</code>
         is a count of them.
-        <code>argv[1]</code> denotes the first argument, 
+        <code>argv[1]</code> denotes the first argument,
         <code>argv[2]</code> denotes the second, etc.
         Effectively, arguments are the glue between the shell interface
         and preferential program execution.
@@ -47,7 +47,7 @@ To Do:
 
     <p>
         A parent can pass information to its child in other ways,
-        such as environment variables, but 
+        such as environment variables, but
         ...and tend to remain constant over a session.
     </p>
 
@@ -62,10 +62,9 @@ To Do:
         <li><a href="#commands">Commands</a></li>
         <li><a href="#path">PATH </a></li>
         <li><a href="#pwd">Working Directory</a></li>
-        <li><a href="#standard-file-descriptors">Standard File Descriptors</a></li>
-        <li><a href="#shell-scripts">Shell Scripts</a></li>
+        <li><a href="#shell-scripts">Shell Scripting</a></li>
         <li><a href="#closing-remarks">Closing Remarks: Arguments</a></li>
-		<li><a href="#missing-semester"> Missing Semester </a></li>
+		<li><a href="#lgr"> Lazy Game Reviews </a></li>
 		<li><a href="#references"> References </a></li>
 	</ul>
 </div>
@@ -88,9 +87,9 @@ To Do:
 
     <p>
         Though foreign to most users, the text-terminal is the original
-        interface for "interactive computing." 
-        This article will examine the fascinating theory of 
-        terminals and shells in 
+        interface for "interactive computing."
+        This article will examine the fascinating theory of
+        terminals and shells in
         GNU/Linux.
         For a tutorial introduction, see the Ubuntu
         <a href="https://ubuntu.com/tutorials/command-line-for-beginners#1-overview">Linux Command Line for Beginners</a>.
@@ -134,11 +133,6 @@ To Do:
 		especially in situations demanding multiple access to large databases, such
 		as airlines and libraries.
 	</p>
-
-	<h3>See Also:</h3>
-	<ul>
-		<li><a href="https://youtu.be/RuZUPpmXfT0">DEC VT320: The Classic 1987 Library Computer Terminal</a> by LGR (Youtube Video)</li>
-	</ul>
 </div>
 
 <div id="terminal-emulators" class="content">
@@ -146,7 +140,7 @@ To Do:
 	<p>
 		Terminals persist on modern hardware in the form of <i>terminal emulators</i>.
 		These are user-space processes that, well, emulate an old terminal!
-		Specifically, it is a program that runs within the context of a desktop 
+		Specifically, it is a program that runs within the context of a desktop
         environment, and emulates the functionality of a physical terminal.
 	</p>
 
@@ -200,7 +194,7 @@ To Do:
 	<p>
 		A shell is a program which interprets and executes commands.
 		It is a <em>shell</em> in the sense that it is the outermost layer of the
-		operating system, and the one which the user has direct 
+		operating system, and the one which the user has direct
         contact.<sup><a href="http://www.linfo.org/kernel.html">[a]</a></sup>
 	</p>
 
@@ -260,7 +254,7 @@ To Do:
     <h2>Commands</h2>
 
     <p>
-        A typical line of input to a shell has the following form: 
+        A typical line of input to a shell has the following form:
     </p>
 
     <div class="code">
@@ -275,7 +269,7 @@ To Do:
     <p>
         The shell, for its part, finds the program,
         forks itself and executes that command.
-        This is canonical shell behavior, and all programs that can be implemented 
+        This is canonical shell behavior, and all programs that can be implemented
         in this manner are.
     </p>
 
@@ -284,7 +278,7 @@ To Do:
         to be built in to the shell, and in lesser constructs, that would
         be the case!
         In fact, <code>ls</code> exists as <code>/usr/bin/ls</code>, and the
-        shell dutifully locates and executes it each time we ask to 
+        shell dutifully locates and executes it each time we ask to
         see a directory's contents.
         Similar remarks apply to any command that does something, be it
         <em>move a file,</em> <em>delete a directory,</em> or <em>view the
@@ -294,15 +288,15 @@ To Do:
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            If you're not interested in our command-line, don't worry: 
-            <a href="intro-to-gnu-linux.html#mint">Distributions exist</a> 
+            If you're not interested in our command-line, don't worry:
+            <a href="intro-to-gnu-linux.html#mint">Distributions exist</a>
             that don't require its use.
         </p>
     </div>
 
     <p>
         The result is a highly programmer-centric paradigm.
-        To create a new command just became very simple: Put your 
+        To create a new command just became very simple: Put your
         program in a location that the shell will look, and then you may
         execute it natively, as though it had been there all
         along&mdash;
@@ -312,14 +306,14 @@ To Do:
     <h3 style="width: 30%; margin: auto;">In the Beginning</h3>
 
     <p>
-        The first working versions on UNIX entertained exactly two processes, 
-        one for each of two terminals connected to the machine.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[3]</a></sup>
-        The shell, 
-        <a href="https://en.wikipedia.org/wiki/Thompson_shell"><code>sh</code></a>, 
+        The first working versions on UNIX entertained exactly two processes:
+        One for each of two terminals connected to the machine.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[3]</a></sup>
+        The shell,
+        <a href="https://en.wikipedia.org/wiki/Thompson_shell"><code>sh</code></a>,
         existed as a user-space process, but <em>fork()</em> had not been introduced.
-        To execute a different program, the shell simply replaced itself with 
-        the requested program; 
-        the program, on calling <em>exit</em>, replaced itself with the 
+        To execute a different program, the shell simply replaced itself with
+        the requested program;
+        the program, on calling <em>exit</em>, replaced itself with the
         shell once again.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[3]</a></sup>
 
     </p>
@@ -341,8 +335,8 @@ To Do:
     -->
 
     <p>
-        The <code>PATH</code> environment variable 
-        contains a list of directories to be searched 
+        The <code>PATH</code> environment variable
+        contains a list of directories to be searched
         when looking for a command.
         This list is colon (<code>:</code>)&ndash;separated, and may look like,
     </p>
@@ -354,13 +348,13 @@ To Do:
 
     <p>
         The shell searches each directory in this list from left to right
-        for a file whose name matches the command given. 
+        for a file whose name matches the command given.
         It executes the first found, and then abandons its search.
     </p>
 
     <!--
     <p>
-        The PATH environment variable was invented by John Mashey and 
+        The PATH environment variable was invented by John Mashey and
         introduced in the 6th edition shell.
         It was a workaround so that non-expert users could
         share their own sets of commands by lab, department and group.
@@ -376,7 +370,7 @@ To Do:
     </p>
 
     <p>
-        We can overrule both builtins and the shell's search of PATH 
+        We can overrule both builtins and the shell's search of PATH
         including a forward-slash <code>/</code> in our command, typically:
     </p>
 
@@ -385,7 +379,7 @@ To Do:
     </div>
 
     <p>
-        Appending locations to <code>PATH</code> is an important step of 
+        Appending locations to <code>PATH</code> is an important step of
         setting up a development environment.
         This is typically done in <code>~/.bashrc</code>.
         The correct construct appends the directory
@@ -408,7 +402,7 @@ To Do:
     <h2>Working Directory</h2>
 
     <p>
-        Recall that each process has a 
+        Recall that each process has a
         <a href="/processes.html#process-attributes">current working directory</a>.
         Since the shell is a process, naturally, it too has a current working directory.
         At the command line, this is of particular importance:
@@ -416,7 +410,7 @@ To Do:
     </p>
 
     <p>
-        The shell's current working directory may be printed with the 
+        The shell's current working directory may be printed with the
         command <code>pwd</code>:
     </p>
 
@@ -442,7 +436,7 @@ To Do:
         as a separate command.
         When invoked, it inherited the shell's current working directory,
         changed it, and then the shell would inherit <em>that</em> working directory.
-        With the inclusion of the <em>fork()</em> system call, though, 
+        With the inclusion of the <em>fork()</em> system call, though,
         the <code>chdir</code> command broke:
     </p>
 
@@ -453,15 +447,15 @@ To Do:
     <p>
 
     <blockquote>
-        "There was much reading of code and anxious introspection about how 
-        the addition of fork could have broken the chdir call. Finally the 
-        truth dawned: in the old system chdir was an ordinary command; it 
+        "There was much reading of code and anxious introspection about how
+        the addition of fork could have broken the chdir call. Finally the
+        truth dawned: in the old system chdir was an ordinary command; it
         adjusted the current directory of the (unique) process attached to
-        the terminal. Under the new system, the chdir command correctly 
-        changed the current directory of the process created to execute it, 
-        but this process promptly terminated and had no effect whatsoever on 
+        the terminal. Under the new system, the chdir command correctly
+        changed the current directory of the process created to execute it,
+        but this process promptly terminated and had no effect whatsoever on
         its parent shell! It was necessary to make chdir a special command,
-        executed internally within the shell. It turns out that several 
+        executed internally within the shell. It turns out that several
         command-like functions have the same property, for example login."
     </blockquote>
 
@@ -482,7 +476,7 @@ To Do:
 </div>
 
 <div class="content" id="shell-scripts">
-    <h2>Shell Scripts</h2>
+    <h2>Shell Scripting</h2>
 
 </div>
 
@@ -493,11 +487,12 @@ To Do:
 
 </div>
 
-<div class="content" id="missing-semester">
-	<h2 style="margin-bottom: 2pt;">Missing Semester</h2>
-	<h4 style="margin-bottom: 18pt;">Lecture 1: Course Overview + The Shell (2020)</h4>
-	<iframe class="video" src="https://www.youtube.com/embed/Z56Jmr9Z34Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="content" id="lgr">
+    <h2 style="margin-bottom: 2pt;">Lazy Game Reviews</h2>
+    <h4 style="margin-bottom: 18pt;">DEC VT320: The Classic 1987 Library Computer Terminal</h4>
+    <iframe class="video" src="https://www.youtube-nocookie.com/embed/RuZUPpmXfT0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
+
 
 <!--
 <div class="content" id="exercises">
