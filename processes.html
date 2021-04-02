@@ -88,10 +88,10 @@ TODO
         Collections of running programs are traditionally
         called <a href="http://www.linfo.org/runlevel_def.html">runlevels</a>,
         and are managed by the initialization ("init") process.
-        Different runlevels offered different services, and 
+        Different runlevels offered different services, and
         were therefore intended to be used in different situations.
-        For instance, 
-        <a href="http://www.linfo.org/single_user_mode.html">single-user mode</a> 
+        For instance,
+        <a href="http://www.linfo.org/single_user_mode.html">single-user mode</a>
         (runlevel 1) was analogous to <em>safe boot,</em>
         runlevel 5 corresponded to multi-user/GUI mode,
         and runlevel 0 told <em>init</em> to kill all processes and shut down the
@@ -118,14 +118,15 @@ TODO
 
 <div id="introduction" class="content">
     <h1>Processes</h1>
+
     <div class="quote-text">
-        "Theory and practice sometimes clash.  <br>
-        And when that happens, theory loses.
-        Every single time.
+        "Understanding is the key to success with Linux."
     </div>
     <div class="quote-ref">
-        <a href="https://lwn.net/Articles/326505/">Linus Torvalds</a>
+        <a href="https://www.tldp.org/LDP/sag/html/intro.html">Linux System Administrator's Guide</a>
     </div>
+
+
 
     <div class="aside-right">
         <h4>Aside:</h4>
@@ -245,14 +246,14 @@ TODO
 
     <p>
         After execution of <code>init</code> begins, process creation is delegated
-        to processes themselves, and is carried out through the 
+        to processes themselves, and is carried out through the
         <a href="https://www.man7.org/linux/man-pages/man2/fork.2.html"><code>fork(2)</code></a> system call.
     </p>
 
     <p>
         A call to <em>fork()</em> instructs the kernel to duplicate the current process,
         and the two resulting processes are very nearly identical.<sup><a href="https://www.man7.org/linux/man-pages/man2/fork.2.html">[4]</a></sup>
-        Of note, they continue executing the same program at the same spot, 
+        Of note, they continue executing the same program at the same spot,
         have the same open files, and have duplicate memory spaces.
         The newly created process is referred to as the <em>child</em> process,
         the original is called the <em>parent,</em> and we say
@@ -413,7 +414,7 @@ TODO
     <p>
         Launching a different program reduces to changing the program being
         executed by the current process.
-        To do that, 
+        To do that,
     </p>
 
     <ol>
@@ -491,10 +492,10 @@ TODO
         <li>
             It does something wrong
             <p>
-                Almost always, this happens when the offending process tries 
-                to read or write a memory location not assigned to it, 
+                Almost always, this happens when the offending process tries
+                to read or write a memory location not assigned to it,
                 a condition known in Linux as <em>segmentation fault</em>.
-                The kernel steps in, halts program execution and immediately 
+                The kernel steps in, halts program execution and immediately
                 terminates the process.
             </p>
 
@@ -511,16 +512,16 @@ TODO
         Indeed, it is supported at the hardware level, in addition to
         the software level.
         A deep study of it, while worthwhile, is outside the
-        scope of this work.  
+        scope of this work.
         Rather, we will conclude this discussion by describing how a computer
         runs more than one process at a time&mdash; That is, how programs
         are executed <em>concurrently.</em>
     </p>
 
     <p>
-        The fundamental insight is that <em>a program's instructions are oblivious to 
+        The fundamental insight is that <em>a program's instructions are oblivious to
         time.</em>
-        That is, a program's only assumption about its execution 
+        That is, a program's only assumption about its execution
         is that each instruction follow the previous one.
         It is therefore possible to halt its execution
         and save its state; and later, to reintroduce its state, and continue
@@ -530,7 +531,7 @@ TODO
     <p>
 
     <p>
-        The operating system's kernel, working in conjunction with hardware, 
+        The operating system's kernel, working in conjunction with hardware,
         is responsible for presenting each process with the illusion that
         it ran without interruption,
         and "concurrency" is achieved by interweaving process execution

@@ -84,11 +84,14 @@ https://wiki.ubuntu.com/Lvm
 
 <div id="introduction" class="content">
     <h1>Files and Filesystems</h1>
+
     <div class="quote-text">
-        "Understanding is the key to success with Linux."
+        "Theory and practice sometimes clash.  <br>
+        And when that happens, theory loses.
+        Every single time.
     </div>
     <div class="quote-ref">
-        <a href="https://www.tldp.org/LDP/sag/html/intro.html">Linux System Administrator's Guide</a>
+        <a href="https://lwn.net/Articles/326505/">Linus Torvalds</a>
     </div>
 
     <p>
@@ -275,7 +278,7 @@ https://wiki.ubuntu.com/Lvm
         against the original by comparing its official checksum value against
         the results of <code>sha256sum(1)</code>.
         They are identical; this means that the file is whole and complete
-        with respect to its author's original. 
+        with respect to its author's original.
     </p>
 
     <p>
@@ -298,23 +301,23 @@ https://wiki.ubuntu.com/Lvm
     <h3> Block and Character Device Files </h3>
 
     <p>
-        Linux recognizes two kinds of devices: 
+        Linux recognizes two kinds of devices:
         <em>Block</em> and <em>character.</em>
         A character device supports reading and writing only a single
         byte (ASCII character) at a time.
         In times past, these were physical terminals, represented by
         <code>/dev/tty*</code>.
-        Today, those files are used for virtual terminals. 
-        At the desktop, we usualy see terminal emulators, represented by 
-        pseudoterminal device files, in <code>/dev/pts/*</code>.  
+        Today, those files are used for virtual terminals.
+        At the desktop, we usualy see terminal emulators, represented by
+        pseudoterminal device files, in <code>/dev/pts/*</code>.
     </p>
 
     <p>
         Block device files represent hard disks, SSD's, removable mass media
         and removable disk drives.
-        These support reading and writing blocks of bytes 
+        These support reading and writing blocks of bytes
         at a time&mdash; usually, 4096 bytes.
-        In addition, they support seeking and partitioning, whereas character 
+        In addition, they support seeking and partitioning, whereas character
         devices do not.
     </p>
 
@@ -329,11 +332,11 @@ https://wiki.ubuntu.com/Lvm
     <h2>Pseudo Files</h2>
 
     <p>
-        The <code>/proc</code> and <code>/sys</code> directories offer access to 
-        internal kernel 
+        The <code>/proc</code> and <code>/sys</code> directories offer access to
+        internal kernel
         structures.<sup><a href="https://man7.org/tlpi/" title="Kerrisk, p.42">[5]</a>
             <a href="https://mirrors.edge.kernel.org/pub/linux/kernel/people/mochel/doc/papers/ols-2005/mochel.pdf">[6]</a></sup>
-        For example, <code>/proc/meminfo</code> provides access to 
+        For example, <code>/proc/meminfo</code> provides access to
         the system's current memory usage:
     </p>
 
@@ -498,13 +501,13 @@ https://wiki.ubuntu.com/Lvm
     <h2>Mounting and Unmounting</h2>
 
     <p>
-        UNIX-like operating systems maintain a single directory tree for 
+        UNIX-like operating systems maintain a single directory tree for
         the entire system.
         When a new block device is introduced to the machine, it first appears as
         a device file in <code>/dev</code>, and its files may then be made
         available by placing the new filesystem's root directory
         in the existing directory tree.
-        This operation is known as 
+        This operation is known as
         <a href="https://unix.stackexchange.com/questions/3192/what-is-meant-by-mounting-a-device-in-linux"><em>mounting</em></a>.
     </p>
 
@@ -639,8 +642,8 @@ https://wiki.ubuntu.com/Lvm
         are such next-generation filesystems.<sup><a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">[12]</a><a href="https://wiki.archlinux.org/index.php/ZFS">[13]</a></sup>
         Of the two, <code>btrfs</code> has made inroads to becoming Linux's next
         major filesystem:
-        It is in wide use by Facebook,<sup><a href="https://lwn.net/Articles/824855/">[14]</a></sup> and is the 
-        the default filesystem for openSUSE and 
+        It is in wide use by Facebook,<sup><a href="https://lwn.net/Articles/824855/">[14]</a></sup> and is the
+        the default filesystem for openSUSE and
         Fedora.<sup><a href="https://en.opensuse.org/Portal:13.2/Features">[15]</a><a href="https://fedoramagazine.org/announcing-fedora-33/">[16]</a></sup>
         They are among the first to adopt it.
     </p>
@@ -657,21 +660,21 @@ https://wiki.ubuntu.com/Lvm
     <h3>Using a Filesystem</h3>
 
     <p>
-        Creating a partitioning table and formatting the resulting 
-        partitions 
-        are the first steps to using a block device.  
+        Creating a partitioning table and formatting the resulting
+        partitions
+        are the first steps to using a block device.
         This amounts to writing persistent data structures to the device,
         and is carried out in the Linux installation process before copying
-        system files.  
+        system files.
     </p>
 
     <p>
-        The device in question is first partitioned by writing a 
+        The device in question is first partitioned by writing a
         partition table to it.
         The table is kept in the first blocks (sectors) of the device,
-        and segments the rest of the device's address space into distinct, 
+        and segments the rest of the device's address space into distinct,
         non-overlapping, but contiguous, <em>partitions.</em>
-        This table will be read by the kernel and, for each partition stipulated, 
+        This table will be read by the kernel and, for each partition stipulated,
         a new block special device file will appear in <code>/dev</code>.
     </p>
 
@@ -682,7 +685,7 @@ https://wiki.ubuntu.com/Lvm
             There are many options with respect to partitioning a disk.
         </p>
     </div>
-    
+
     <p>
         Partitioning tools include <code>fdisk</code> and <code>parted</code>:
     </p>
@@ -730,7 +733,7 @@ https://wiki.ubuntu.com/Lvm
     </p>
 
 </div>
-    
+
 
 <div id="directories" class="content">
     <h2>Directories</h2>
@@ -857,7 +860,7 @@ https://wiki.ubuntu.com/Lvm
         reasonable size, while supporting large
         files.<sup><a href="#references">[20]</a></sup>
         Finally, by using direct pointers for the first bytes of a file,
-        the design fostered the speedy retrieval of data in small 
+        the design fostered the speedy retrieval of data in small
         files.<sup><a href="#references">[20]</a></sup>
     </p>
 
@@ -887,7 +890,7 @@ https://wiki.ubuntu.com/Lvm
         the Virtual File System provides a uniform interface to user-space by
         mapping filesystem-related system calls to filesystem-driver functions.
         In addition, the VFS imposes inodes on filesystems that do not
-        natively employ them, thereby preserving traditional UNIX file 
+        natively employ them, thereby preserving traditional UNIX file
         semantics across all supported filesystems.
     </p>
 </div>
@@ -898,14 +901,14 @@ https://wiki.ubuntu.com/Lvm
         <b>Exercises:</b>
 
         <ol>
-        <li> 
+        <li>
             Using <code>watch(1)</code>, fashion an ad-hoc terminal utility to
             monitor the system's memory.
         </li>
-        <li> 
+        <li>
             Create a boot media using <code>cat</code>.
         </li>
-        <li> 
+        <li>
             An <code>iso</code> disk image contains partitions and filesystems.
             Mount one of them.
         </li>
