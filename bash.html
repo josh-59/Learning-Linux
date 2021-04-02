@@ -86,7 +86,7 @@ Exercises:
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            Single quotes denote a <em>string literal</em>, and here tell Bash 
+            Single quotes denote a <em>string literal</em>, and here tell Bash
             to preserve enclosed text exactly as-is.
         </p>
     </div>
@@ -102,12 +102,12 @@ Exercises:
     </div>
 
     <p>
-        Upon pressing <em>return,</em> the line of text is 
+        Upon pressing <em>return,</em> the line of text is
         sent to the shell: we say that input is <em>line-buffered.</em>
         Thereupon, Bash begins to parse it.
-        Its first action is to break the line into words and operators 
-        (not yet covered); 
-        it does so while obeying its 
+        Its first action is to break the line into words and operators
+        (not yet covered);
+        it does so while obeying its
         <a href="https://www.gnu.org/software/bash/manual/html_node/Quoting.html">quoting rules</a>, of which we have only introduced the single-quote, <code>'</code>.
     </p>
 
@@ -119,8 +119,8 @@ Exercises:
 
 
     <p>
-        After shell expansion, Bash scans each word for 
-        ‘|’, ‘&amp;’, ‘;’, ‘(’, ‘)’, ‘<’, or ‘>'; 
+        After shell expansion, Bash scans each word for
+        ‘|’, ‘&amp;’, ‘;’, ‘(’, ‘)’, ‘<’, or ‘>';
         a word containing one of these characters is called an <em>operator.</em>
     </p>
 
@@ -137,6 +137,7 @@ Exercises:
 		<li><a href="#terminal-conveniences"> Terminal Conveniences</a></li>
         <li><a href="#finding-files">Finding Files</a></li>
         <li><a href="#startup-files">Startup Files</a></li>
+		<li><a href="#missing-semester">Missing Semester</a></li>
         <!-- <li><a href="#references"> References </a></li> -->
 	</ul>
 </div>
@@ -420,16 +421,16 @@ Exercises:
 
     <p>
         <strong>SIGINT:</strong>
-        The "interupt" signal is a terminal generated signal, and is 
+        The "interupt" signal is a terminal generated signal, and is
         created and passed with CTRL+C.
-        It is the preferred way to kill a foreground process.(Kerrisk, p389) 
+        It is the preferred way to kill a foreground process.(Kerrisk, p389)
     </p>
 
     <p>
         <strong>Copying and Pasting:</strong>
-        The desktop's familiar copy/paste is overruled on the terminal 
-        emulator (ctrl-v is interpretted as an escape sequence). 
-        Use CTRL+SHIFT+c and CTRL+SHIFT-v.  
+        The desktop's familiar copy/paste is overruled on the terminal
+        emulator (ctrl-v is interpretted as an escape sequence).
+        Use CTRL+SHIFT+c and CTRL+SHIFT-v.
         Depending on the distribution, middle-clicking may also copy and paste.
     </p>
 
@@ -443,10 +444,10 @@ Exercises:
     </p>
 
     <p>
-        You can restrict your search of the manual pages to a specific section 
+        You can restrict your search of the manual pages to a specific section
         with the <code>-s</code> switch:
     </p>
-    
+
     <div class="code">
         $ apropos -s 1
     </div>
@@ -575,4 +576,10 @@ Exercises:
 
     rc might stand for "runcoms", short for "runnable commands", now known as
     "shell scripts."
+</div>
+
+<div class="content" id="missing-semester">
+	<h2 style="margin-bottom: 2pt;">Missing Semester</h2>
+	<h4 style="margin-bottom: 18pt;">Lecture 1: Course Overview + The Shell (2020)</h4>
+	<iframe class="video" src="https://www.youtube.com/embed/Z56Jmr9Z34Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
