@@ -38,7 +38,7 @@
 #define ARGS_LEN 4096
 
 void print_prompt();
-size_t get_arg_len(char *line);
+size_t count_arg_len(char *line);
 size_t count_leading_spaces(char *line);
 void get_args(char *line, char **args);
 int is_cd(char *command);
@@ -95,7 +95,7 @@ void print_prompt()
     return;
 }
 
-size_t get_arg_len(char *line) 
+size_t count_arg_len(char *line) 
 {
     size_t i = 0;
     while(line[i] && line[i] != ' ' && line[i] != '\n')
@@ -107,7 +107,7 @@ size_t get_arg_len(char *line)
 size_t count_leading_spaces(char *line)
 {
     int i = 0;
-    while( line[i] == ' ' )
+    while( line[i] == ' ' || line[i] == '\t' )
         ++i;
 
     return i;
@@ -120,7 +120,7 @@ void get_args(char *line, char **args)
 
     line += count_leading_spaces(line);
 
-    while( (arg_len = get_arg_len(line)) > 0 && args_i < ARGS_LEN - 1) {
+    while( (arg_len = count_arg_len(line)) > 0 && args_i < ARGS_LEN - 1) {
 
         args[args_i] = line;
         ++args_i;
