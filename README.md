@@ -56,9 +56,7 @@ Terminals and Shells:
 - [x] Commands
 - [ ] PATH Environment Variable
 - [ ] Working Directory
-- [ ] Standard File Descriptors
-- [ ] Shell Scripts
-- [ ] Closing Remarks: Arguments
+- [ ] Closing Remarks: In the Beginning
 
 Packages:
 - [ ] Repositories and Packages
