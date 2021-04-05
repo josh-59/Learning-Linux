@@ -19,21 +19,20 @@ Landing:
 - [ ] About
 
 Intro:
-- [x] UNIX: A Brief History
-- [x] The UNIX Architecture
-- [x] Free as in Freedom
-- [x] The Linux Kernel
-- [x] A Brief History of Linux Distributions
-- [ ] Linux Mint
-- [x] Closing Remarks: Open Source
+- [X] UNIX: A Brief History
+- [X] The UNIX Architecture
+- [X] Free as in Freedom
+- [X] The Linux Kernel
+- [X] A Brief History of Linux Distributions
+- [X] Linux Mint
+- [X] Closing Remarks: Open Source
 
 Files and Filesystems:
 - [x] Files
 - [x] Regular Files
 - [x] Device Files
 - [x] Synthetic Files
-- [ ] Named Pipes
-- [ ] Sockets
+- [ ] Other Beasts (Named pipes and sockets)
 - [x] Filesystem Heirarchy
 - [x] Mounting and Unmounting
 - [x] Filesystems
@@ -45,10 +44,9 @@ Processes:
 - [x] Actors
 - [x] Process Creation and System Startup
 - [x] Process Attributes
-- [ ] File Descriptors
-- [ ] Executing a Different Program
-- [ ] Process Termination
-- [ ] Sandbox
+- [X] File Descriptors
+- [X] Executing a Different Program
+- [X] Process Termination
 - [ ] Closing Remarks: Concurrency
 
 Terminals and Shells:
@@ -81,19 +79,15 @@ How it Works:
 - [ ] Successful Business Models
 - [ ] Closing Remarks: Why it Works
 
-Appendix: Terminal Pro:
-- [ ] History: Commands not programs
-- [x] Shell Expansion
+Bash (and stuff)
 - [x] I/O Redirection
-- [ ] Searching for Commands
-- [ ] Command Execution
-- [ ] Terminal Pro Tips (copy/paste)
-- [ ] Man Pages
-- [ ] Advanced Redirections
-- [ ] Small Composable Utilities
-- [ ] Finding Files 
+- [x] Shell Expansion
+- [X] Finding Files 
+- [ ] Startup Files
 - [ ] Shell Constructs (Loops, If/then)
-- [ ] Closing Remarks: Awk Programming Language
+- [ ] Terminal Pro Tips (copy/paste)
+- [ ] Awk Programming Language
+- [ ] Closing Remarks: Preserving the Paradigm
 
 Appendix: Programming in Linux:
 - [ ] Programming Languages
