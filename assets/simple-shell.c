@@ -25,7 +25,10 @@
  * For more information, please refer to <http://unlicense.org/>
  */
 
-// A shell, in one file
+// A simple shell.
+// Compile and run with:
+// $ gcc -o simple-shell simple-shell.c
+// $ ./simple-shell
 
 #include <sys/types.h>
 #include <sys/wait.h>
