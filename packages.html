@@ -6,7 +6,6 @@ last-updated: March 2021
 
 <!--
 
-
         Good ideas tend to resurface.  
         Free software is in no danger of <em>being forgotten</em> because it is
         one such idea.
@@ -14,7 +13,7 @@ last-updated: March 2021
 
 Rewrite as "Distributing Open-Source"
 
-  Packages and Building From Source
+    Packages and Distributions
                 |
                 |
                 |
@@ -24,12 +23,7 @@ Rewrite as "Distributing Open-Source"
                 |
                 |
                \ /
-      Slackware's compiled tarball 
-                |
-                |
-                |
-               \ /
-          Arch's pacman
+         Binary Packages
                 |
                 |
                 |
@@ -39,9 +33,12 @@ Rewrite as "Distributing Open-Source"
                 |
                 |
                \ /
+   Rolling Release Arch's pacman
+                |
+                |
+                |
+               \ /
 Pip / Gems / Cargo / (JavaScript) NPM / SNAP / APM (Atom)
-
-
 
 <div class="content" id="binary-packages">
 
@@ -128,6 +125,7 @@ Package managers:
         When "installed", the effect is to install a group of packages.
 </p>
 
+
 Debian-specific virtual package: A faux target, only realized by other,
 actual packages.  
 
@@ -186,10 +184,9 @@ Closing Remarks:
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
-        <li><a href="#repositories-and-packages">Repositories and Packages</a></li>
-        <li><a href="#packages-intro"> Introduction to Packages </a></li>
-        <li><a href="#metadata-and-payload"> Package Contents </a></li>
-        <li><a href="#package-managers">Package Managers</a></li>
+        <li><a href="#packages">Packages</a></li>
+        <li><a href="#building-from-source">Building from Source</a></li>
+        <li><a href="#binary-packages">Binary Packages</a></li>
         <li><a href="#references"> References </a></li>
     </ul>
 </div>
@@ -197,11 +194,13 @@ Closing Remarks:
 <div id="introduction" class="content">
     <h1>Packages</h1>
     <p>
+        In the author's opinion, Free Software works because
+        people want to do it.
     </p>
 </div>
 
 <div class="content" id="packages">
-    <h2>Package Introduction</h2>
+    <h2>Packaging and Distributions </h2>
     <p>
         A <em>package</em> is a logical unit of software.
         The obvious example is a program, but libraries are packages, too.  
@@ -236,7 +235,7 @@ Closing Remarks:
 
     <p>
         Naturally, the system may be viewed as a collection of installed packages.
-        More, intalling compiled software becomes a matter of copying files into
+        More, intalling compiled software is merely a matter of copying files into
         appropriate directories.
     </p>
 
@@ -245,7 +244,7 @@ Closing Remarks:
         This yields a smaller archive, saves users from the
         time-consuming step of compilation, and allows complete automation of
         installation.
-        The implication, however, is that each package is preconfigured 
+        The implication, however, is that each piece of software is preconfigured 
         for a particular operating system.  
         See your distribution's package management facilities for further information.
     </p>
@@ -256,8 +255,53 @@ Closing Remarks:
     </ul>
 </div>
 
-<div id="packages-intro" class="content">
-    <h2> Simple Package Manager </h2>
+<div id="building-from-source" class="content">
+    <h2>Building From Source</h2>
+
+    <p>
+        Linux From Scratch is not a distribution so much as 
+        documentation regarding how to build a working GNU/Linux system entirely
+        from source.
+        One obtains each package in source-code form, configures, compiles and
+        installs it by hand.
+        While certainly not easy to do, it's not difficult, either; 
+        a new version of the documentation is released about every six months.
+    </p>
+
+    <p>
+        Stepping away from manual configuration and compilation,
+        we arrive at the highly UNIX-y notion of 
+        <a href="https://man.openbsd.org/ports.7">ports</a>.  
+        A port is, in essence, a script that installs a package from source:
+    </p>
+
+    <blockquote>
+        Each port contains any patches necessary to make the original application 
+        source code compile and run on OpenBSD. Compiling an application is as simple 
+        as typing <code>make</code> in the port directory! The Makefile automatically 
+        fetches the application source code, either from a local disk or via HTTP, 
+        unpacks it on the local system, applies the patches, and compiles it. 
+        If all goes well, simply type <code>doas make install</code> to install the 
+        application.
+    </blockquote>
+
+    <p>
+        Gentoo Linux uses exactly this approach, and is sometimes referred to
+        as a <em>metadistribution</em> owing to the lack of precompiled binaries and
+        the system's resulting flexibility.
+    </p>
+
+    <h3> See Also:</h3>
+    <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Ports_collection">Ports Collection</a> - Wikipedia</li>
+    </ul>
+</div>
+
+<div id="binary-packages" class="content">
+    <h2> Binary Packages </h2>
+
+    <p>
+        A distribution <em>proper</em>
 
     <p>
         Among major distributions, the Slackware Project entertains the 
@@ -289,7 +333,6 @@ Closing Remarks:
             &ensp;&ensp;&ensp;&ensp;└── man <br>
             &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;└── man1 <br>
             &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;└── vim.1.gz
-    </pre>
     </div>
 
     <p>
@@ -515,24 +558,6 @@ According to <a href="https://www.debian.org/doc/manuals/debian-faq/pkg-basics.e
         and it would be used on the next reboot.
         </p>
 
-        <h3>Repositories</h3>
-
-        <p>
-        </p>
-
-        <div class="code">
-        </div>
-
-        <p>
-        </p>
-
-        <div class="code">
-        </div>
-
-        <p>
-        The above command will also work with 
-
-        Repositories are listed locally at <code>/etc/apt/sources.list.d/</code>
 </div>
 
 
