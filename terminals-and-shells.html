@@ -7,6 +7,9 @@ last-updated: March, 2021
 <!--
 To Do:
 
+    Terminal Emulators:
+        Introduce the Standard File Descriptors?
+
     Simple Commands:
         Recall that
         Each command therefore inherits the shell's attributes, including
@@ -14,17 +17,6 @@ To Do:
         - Open files
             - Terminal
 
-
-
-    <p>
-        The shell does little else.
-        It may provide some means to store variables, and offer to expand them,
-        but by and large, shells are as "dumb" as terminals, and, this is intentional.
-    </p>
-
-    ================>Closing Remarks<=================
-
-    <h2>Closing Remarks</h2>
     <p>
         Arguments from the command line are passed to each program as it
         begins execution, and each language has facilities to inspect them.
@@ -51,7 +43,20 @@ To Do:
         ...and tend to remain constant over a session.
     </p>
 
-    -->
+    ================>Closing Remarks<=================
+
+    <h2>Closing Remarks</h2>
+    <p>
+        The main loop
+    </p>
+
+    <p>
+        The shell does little else.
+        It may provide some means to store variables, and offer to expand them,
+        but by and large, shells are as "dumb" as terminals, and, this is intentional.
+    </p>
+
+-->
 
 <div id="nav_bar_2" class="nav">
 	<ul>
@@ -72,26 +77,18 @@ To Do:
 <div id="introduction" class="content">
 	<h1> Terminals and Shells</h1>
 
-
     <div class="quote-text">
-    "When you type to UNIX, a gnome deep in the system<br>
-    is gathering your characters and saving them in a secret place. <br>
-    The characters will not be given to a program until you <br>
-    type return (or new-line), as described above in <em>Logging in.</em>"
+        "Nontechnical questions sometimes don't have an answer at all."
     </div>
-
     <div class="quote-ref">
-        Ken Thompson and <br>Dennis Ritchie<br>
-        <a href="https://ia800600.us.archive.org/19/items/v6-manual/v6-manual.pdf">UNIX Programming Manual, Sixth Edition</a><br>
-		May, 1975
+        Linus Torvalds
     </div>
 
     <p>
         Though foreign to most users, the text-terminal is the original
         interface for "interactive computing."
-        This article will examine the fascinating theory of
-        terminals and shells in
-        GNU/Linux.
+        This article will examine the fascinating history and theory of
+        this interface in GNU/Linux.
         For a tutorial introduction, see the Ubuntu
         <a href="https://ubuntu.com/tutorials/command-line-for-beginners#1-overview">Linux Command Line for Beginners</a>.
     </p>
@@ -104,11 +101,11 @@ To Do:
 	<p>
 		A <i>physical terminal</i> was a computer peripheral similar to a typewriter.
 		The earliest examples printed output onto paper;
-		this technology was carried over from the
+		the technology was carried over from the
 		<a href="https://mysite.du.edu/~jcalvert/tel/teletype.htm"<i>teletypewriter</i></a>,
 		a device for sending telegrams.
 		Paper-based terminals persisted well into the 1970's, and later
-        electronic typewriters sometimes supported terminal mode,
+        electronic typewriters often supported terminal mode,
 		allowing them to interface with computers via serial cable.
 	</p>
 
@@ -117,12 +114,20 @@ To Do:
         Ken Thompson (sitting) and Dennis Ritchie at PDP-11, in Bell Labs' <em>UNIX Room</em><sup><a href="#references" title="Kernighan, p. 45">[1]</a></sup>
 	</center>
 
-	<p>
+    <p>
 		As technology developed and interactive computing became more popular,
 		hard-copy terminals were phased out in favor of
 		screen-based entities.
 		The resulting devices consisted of a monitor and keyboard.
 	</p>
+
+    <div class="aside-right">
+        <h4>Aside</h4>
+        <p>
+            Terminals are represented by <code>tty</code>
+            device files.  
+        </p>
+    </div>
 
 	<p>
 		The monitor contained a buffer
@@ -131,22 +136,23 @@ To Do:
 		Using an onboard font table, it would redraw the text given to it without
 		further instruction by the computer; thus, the computer's only duties were to feed
 		the terminal characters and to draw characters from it.
-	</p>
+    </p>
 
 	<h3>See Also</h3>
 	<ul>
+        <li><a href="https://www.man7.org/linux/man-pages/man1/tty.1.html"><code>tty(1)</code></a></li>
 		<li><a href="https://www.vt100.net/dec/vt_history">Meet the Family: Digital's Video Terminals</a></li>
-	</ul>
-
+        <li><a href="https://www.youtube.com/watch?v=RuZUPpmXfT0&t=4s">DEC VT320: The Classic 1987 Library Computer Terminal</a> (Youtube Video)</li>
+    </ul>
 </div>
 
 <div id="terminal-emulators" class="content">
 	<h2> Terminal Emulators </h2>
 	<p>
-		Terminals persist on modern hardware in the form of <i>terminal emulators</i>.
-		These are user-space processes that, well, emulate an old terminal!
-		Specifically, it is a program that runs within the context of a desktop
-        environment, and emulates the functionality of a physical terminal:
+		Terminals persist today primarily the form of
+        <i>terminal emulators</i>.
+        A terminal emulator is a program that runs within the context of a desktop
+        environment and provides the functionality of a physical terminal:
 	</p>
 
 	<figure>
@@ -171,7 +177,8 @@ To Do:
 	<p>
 		These emulators are "dumb" in the sense that they do nothing except
 		display text and return text.
-		Per tradition, terminals are represented <a href="https://www.man7.org/linux/man-pages/man1/tty.1.html">as files</a>.
+		Per tradition, their input and output is handled through device files 
+        (see <code>tty(1)</code> below).
 	</p>
 
 	<p>
@@ -179,7 +186,6 @@ To Do:
         most purposes, it is sufficient to recognize that
 		terminals and shells are distinct, cooperating processes.
 	</p>
-
 </div>
 
 <div id="shells" class="content">
@@ -189,7 +195,8 @@ To Do:
 		<h4>Aside:</h4>
 		<p>
 		    <a href="https://itsfoss.com/what-is-desktop-environment/">
-                Desktop environments</a>
+                Desktop environments
+            </a>
             serve a role analogous to shells.
 		<p>
 	</div>
@@ -198,12 +205,8 @@ To Do:
 		A shell is a program which interprets and executes commands.
 		It is a <em>shell</em> in the sense that it is the outermost layer of the
 		operating system, and the one which the user has direct
-        contact.<sup><a href="http://www.linfo.org/kernel.html">[a]</a></sup>
-	</p>
-
-    <p>
-		The UNIX architecture entertains the shell as an ordinary user-space process:
-        From its perspective, it is just another running program.
+        contact with.<sup><a href="http://www.linfo.org/kernel.html">[a]</a></sup>
+		The UNIX architecture entertains the shell as an ordinary user-space process.
 	</p>
 
 	<p>
@@ -211,52 +214,31 @@ To Do:
 	</p>
 
 	<ul style="list-style: none;">
-		<li><a href="https://www.gnu.org/software/bash/">Bash</a>&mdash; A GNU Production, pretty much the standard shell</li>
-		<li><a href="http://zsh.sourceforge.net/">Zsh</a>&mdash; A shell "designed for interactive use; very similar to Bash.</li>
-        <li><a href="https://xon.sh">Xonsh</a>&mdash; A Pythonic shell, written in Python</li>
+        <li><a href="https://www.gnu.org/software/bash/">Bash</a>&mdash; GNU's <em>Bourne Again Shell</em> was among the first programs to run on the Linux kernel, and has been more or less standard since.</li>
+        <li><a href="http://zsh.sourceforge.net/">Zsh</a>&mdash; An extension to <em>Bash</em> focusing on interative features.  
+        <li><a href="https://xon.sh">Xonsh</a>&mdash; A Pythonic shell, written in Python!</li>
 		<li><a href="https://fishshell.com/">Fish</a>&mdash; The Friendly Interactive Shell</li>
         <li><a href="https://www.nushell.sh/">Nushell</a>&mdash; An interactive shell, supporting piplines of structured data, in addition to simple text streams.</li>
         <li><a href="https://elv.sh/">Elvish</a>&mdash; an "expressive programming language and versatile interactive shell." Version 1.0 not yet released</a></li>
 	</ul>
 
     <p>
-        A shell is launched for you when a terminal emulator window is opened:
-    </p>
-
-    <figure>
-		<img src="assets/img/gnome-w-bash.png">
-		<figcaption><center>A Standard Shell Prompt</center></figcaption>
-	</figure>
-
-    <p>
+        A shell is launched for you when a terminal emulator window is opened.
         You can find out which shell is running
         by executing the <code>ps</code> command:
     </p>
 
     <figure>
 		<img src="assets/img/gnome-w-bash-ps.png">
-		<figcaption><center><code>ps</code> command, by default listing processes owned by this user, connected to this terminal </center></figcaption>
+        <figcaption><center><code>ps</code> command, by default listing processes owned by the current user,<br> and connected to the current terminal </center></figcaption>
 	</figure>
-
-    <p>
-        Finally, note that we will typically omit the picture of the terminal,
-        so that the above command will be depicted:
-    </p>
-
-    <div class="code">
-        $ ps <br>
-        PID &ensp;TTY   &emsp;&emsp;&emsp;&emsp;&emsp;TIME CMD <br>
-        3142 pts/1   00:00:00 bash <br>
-        3148 pts/1   00:00:00 ps
-    </div>
-
 </div>
 
 <div class="content" id="commands">
     <h2>Commands</h2>
 
     <p>
-        A typical line of input to a shell has the following form:
+        A typical line of input to the shell has the following form:
     </p>
 
     <div class="code">
@@ -265,59 +247,9 @@ To Do:
 
     <p>
         This corresponds directly to <em>execute another program</em> named
-        <code>command</code>, and pass it the arguments in <code>[arg ...]</code>.
-    </p>
-
-    <p>
-        The shell, for its part, finds the program,
-        forks itself and executes that command.
-        This is canonical shell behavior, and all programs that can be implemented
-        in this manner are.
-    </p>
-
-    <p>
-        For example, one might expect the well-used command <code>ls</code>
-        to be built in to the shell, and in lesser constructs, that would
-        be the case!
-        In fact, <code>ls</code> exists as <code>/usr/bin/ls</code>, and the
-        shell dutifully locates and executes it each time we ask to
-        see a directory's contents.
-        Similar remarks apply to any command that does something, be it
-        <em>move a file,</em> <em>delete a directory,</em> or <em>view the
-        system's processes.</em>
-    </p>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            If you're not interested in our command-line, don't worry:
-            <a href="intro-to-gnu-linux.html#mint">Distributions exist</a>
-            that don't require its use.
-        </p>
-    </div>
-
-    <p>
-        The result is a highly programmer-centric paradigm.
-        To create a new command just became very simple: Put your
-        program in a location that the shell will look, and then you may
-        execute it natively, as though it had been there all
-        along&mdash;
-        No need to rebuild the shell.
-    </p>
-
-    <h3 style="width: 30%; margin: auto;">In the Beginning</h3>
-
-    <p>
-        The first working versions on UNIX entertained exactly two processes:
-        One for each of two terminals connected to the machine.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[3]</a></sup>
-        The shell,
-        <a href="https://en.wikipedia.org/wiki/Thompson_shell"><code>sh</code></a>,
-        existed as a user-space process, but <em>fork()</em> had not been introduced.
-        To execute a different program, the shell simply replaced itself with
-        the requested program;
-        the program, on calling <em>exit</em>, replaced itself with the
-        shell once again.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[3]</a></sup>
-
+        <code>command</code>, and pass it the arguments <code>[arg ...]</code>.
+        The shell, for its part, finds the program with name <em>command,</em> 
+        and executes it.
     </p>
 
     <h3 style="width: 30%; margin: auto;">See Also:</h3>
@@ -328,13 +260,6 @@ To Do:
 
 <div class="content" id="path">
     <h2><code>PATH</code> Environment Variable</h2>
-
-    <!--
-        Kernighan page 132:
-            Invented by John Mashey and introduced in the 6th edition shell,
-            it was a workaround so that non-expert users could
-            share their own sets of commands by lab, department and group.
-    -->
 
     <p>
         The <code>PATH</code> environment variable
@@ -353,16 +278,6 @@ To Do:
         for a file whose name matches the command given.
         It executes the first found, and then abandons its search.
     </p>
-
-    <!--
-    <p>
-        The PATH environment variable was invented by John Mashey and
-        introduced in the 6th edition shell.
-        It was a workaround so that non-expert users could
-        share their own sets of commands by lab, department and group.
-    </p>
-    -->
-
 
     <p>
         Some caveats apply:
@@ -403,6 +318,14 @@ To Do:
 <div class="content" id="pwd">
     <h2>Working Directory</h2>
 
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            In particular, relative path names are resolved with respect to this 
+            location.
+        </p>
+    </div>
+
     <p>
         Recall that each process has a
         <a href="/processes.html#process-attributes">current working directory</a>.
@@ -412,8 +335,8 @@ To Do:
     </p>
 
     <p>
-        The shell's current working directory may be printed with the
-        command <code>pwd</code>:
+        The shell's current working directory may be printed with 
+        <code>pwd</code>:
     </p>
 
     <div class="code">
@@ -430,23 +353,78 @@ To Do:
         $ pwd<br>
         /home/josh/Public
     </div>
+</div>
 
-    <h3><code>cd</code> is a builtin</h3>
+<div class="content" id="shell-features">
+    <h2>Shell Features</h2>
 
     <p>
-        In Ancient UNIX, <em>change directories</em> was implemented
+        At this point, we have covered the essential elements of the 
+        shell.
+        It is <a href="assets/simple-shell.c">not a difficult construct</a>,
+        and consists of a main loop which
+    </p>
+
+    <ol>
+        <li>Prints prompt</li>
+        <li>Gets input</li>
+        <li>Executes command</li>
+    </ol>
+
+    <p>
+        The variety of shells offered above reflects a variety of interpretations
+        of this same thing.
+    </p>
+
+    <h3>Variables</h3>
+    <p>
+        
+
+    </p>
+
+    <h3>Shell Scripting</h3>
+    <p>
+
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">Read-eval-print loop</a> - Wikipedia</li>
+    </ul>
+</div>
+
+<div class="content" id="closing-remarks">
+    <h2 style="margin-bottom: 5px;">Closing Remarks:</h2>
+    <h4 style="width: 30%; margin: auto;">In the Beginning</h4>
+
+    <p>
+        The first versions on UNIX entertained exactly two processes:
+        One for each of two terminals connected to the machine.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[3]</a></sup>
+        The shell,
+        <a href="https://en.wikipedia.org/wiki/Thompson_shell"><code>sh</code></a>,
+        existed as a user-space process, but <em>fork()</em> had not been introduced.
+        To execute a command, the shell simply replaced itself with
+        the requested program;
+        the program, on calling <em>exit</em>, replaced itself with the
+        shell once again.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[3]</a></sup>
+    </p>
+
+    <p>
+        In particular, <em>change directories</em> was implemented
         as a separate command.
         When invoked, it inherited the shell's current working directory,
-        changed it, and then the shell would inherit <em>that</em> working directory.
+        changed it, and then the shell would inherit the resulting working directory.
         With the inclusion of the <em>fork()</em> system call, though,
         the <code>chdir</code> command broke:
     </p>
 
-    <!--
-        Justification: https://qmacro.org/2020/11/08/the-meaning-of-pwd-in-unix-systems/
-    -->
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            The <code>exit</code> command is also, necessarily, built in to the shell.
+        </p>
+    </div>
 
-    <p>
 
     <blockquote>
         "There was much reading of code and anxious introspection about how
@@ -461,11 +439,6 @@ To Do:
         command-like functions have the same property, for example login."
     </blockquote>
 
-    <div class="quote-ref">
-        &mdash;Dennis M. Ritchie<br>
-        <a href="https://www.bell-labs.com/usr/dmr/www/hist.html">The Evolution of the Unix Timesharing System</a><br>
-    </div>
-
     <p>
         The <code>cd</code> command is also, necessarily, built in to the shell.
         Commands such as these are today called <em>builtins</em>, and can be investigated by:
@@ -475,26 +448,25 @@ To Do:
         $ help
     </div>
 
+    <p>
+        Kernighan page 132:
+            Invented by John Mashey and introduced in the 6th edition shell,
+            it was a workaround so that non-expert users could
+            share their own sets of commands by lab, department and group.
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">The Evolution of the Unix Timesharing System</a></li>
+    </ul>
 </div>
 
-<div class="content" id="shell-scripts">
-    <h2>Shell Scripting</h2>
+<div class="content" id="ryan-tomayko">
+    <h2>Ryan Tomayko:</h2>
+    <h4>Shell Hater's Handbook</h4>
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/olH-9b3VJfs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
-
-<div class="content" id="closing-remarks">
-    <h2 style="margin-bottom: 5px;">Closing Remarks:</h2>
-    <h4>Arguments</h4>
-
-
-</div>
-
-<div class="content" id="lgr">
-    <h2 style="margin-bottom: 2pt;">Lazy Game Reviews</h2>
-    <h4 style="margin-bottom: 18pt;">DEC VT320: The Classic 1987 Library Computer Terminal</h4>
-    <iframe class="video" src="https://www.youtube-nocookie.com/embed/RuZUPpmXfT0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
 
 <!--
 <div class="content" id="exercises">
@@ -544,6 +516,9 @@ To Do:
         <li>
             Each section of the manual page has an introduction, <code>intro</code>,
             but no index.  Why not?  Create an index of Section 7 for yourself.
+        </li>
+        <li>
+            Implement 'exit' builtin in simple-shell.c
         </li>
     </ol>
 </div>
