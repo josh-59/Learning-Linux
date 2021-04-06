@@ -158,8 +158,6 @@ Exercises:
 		May, 1975
     </div>
 
-
-
     <p>
         The standard shell of our time is the Bourne-Again shell, <a href="https://www.gnu.org/software/bash/">Bash</a>.
     </p>
@@ -171,8 +169,14 @@ Exercises:
     <h4> and Standard File Descriptors</h4>
 
 	<p>
-        In interactive use, the shell is connected to its terminal
-        by three open files.
+        Recall that the is connected to its terminal by open files, and
+        that each process created by the <code>fork</code> system
+        call <a href="processes.html#process-creation">inherits</a>
+        its parent's attributes.
+        These details form the basis of input and output at the terminal.
+    </p>
+
+    <p>
         The first file, <code>STDIN</code>, is the keyboard.
         When <code>bash</code> is waiting for you to enter a new command,
         it's actually asked the kernel to
@@ -186,10 +190,6 @@ Exercises:
     </p>
 
     <p>
-	    Recall that each process created by the <code>fork</code> system
-        call <a href="processes.html#process-creation">inherits</a>
-        its parent's attributes, and that these attributes
-        include file descriptors (open files).
         This means that we can reasonably expect each
         child of <code>bash</code> to have our keyboard present at
         <code>STDIN</code> and our terminal screen at both

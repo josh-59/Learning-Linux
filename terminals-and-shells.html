@@ -18,26 +18,6 @@ To Do:
             - Terminal
 
     <p>
-        Arguments from the command line are passed to each program as it
-        begins execution, and each language has facilities to inspect them.
-        In C, they are presented as arguments to the <em>main</em> function:
-    </p>
-
-    <pre>
-        int main(char** argv, int argc)
-                        ^^^^
-    </pre>
-
-    <p>
-        where <code>argv</code> denotes a vector of strings, and <code>argc</code>
-        is a count of them.
-        <code>argv[1]</code> denotes the first argument,
-        <code>argv[2]</code> denotes the second, etc.
-        Effectively, arguments are the glue between the shell interface
-        and preferential program execution.
-    </p>
-
-    <p>
         A parent can pass information to its child in other ways,
         such as environment variables, but
         ...and tend to remain constant over a session.
@@ -232,6 +212,9 @@ To Do:
 		<img src="assets/img/gnome-w-bash-ps.png">
         <figcaption><center><code>ps</code> command, by default listing processes owned by the current user,<br> and connected to the current terminal </center></figcaption>
 	</figure>
+
+    <p>
+    </p>
 </div>
 
 <div class="content" id="commands">
@@ -246,10 +229,55 @@ To Do:
     </div>
 
     <p>
-        This corresponds directly to <em>execute another program</em> named
-        <code>command</code>, and pass it the arguments <code>[arg ...]</code>.
-        The shell, for its part, finds the program with name <em>command,</em> 
-        and executes it.
+        This corresponds directly to, <em>Find and execute <code>command</code>, 
+        passing it the arguments <code>[arg ...]</code>.</em>
+        There are a few places the shell can look.
+        In order: 
+    </p>
+
+    <ol>
+        <li>User-defined Function</li>
+        <li>Builtin Command</li>
+        <li>External Command</li>
+    </ol>
+
+    <p>
+        Nearly all commands are external to the shell.
+        The UNIX paradigm 
+        For example, in 
+    </p>
+
+    <div class="code">
+        $ ls -l 
+    </div>
+
+    <p>
+        the <code>ls</code> command is not found as a user-defined function,
+        nor as a builtin.  
+        It is found by the shell in <code>/usr/bin</code>, at which point the
+        shell forks itself and 
+    </p>
+
+    <h3>Arguments</h3>
+
+    <p>
+        Arguments from the command line are passed to each program as it
+        begins execution, and each language has facilities to inspect them.
+        In C, they are presented as arguments to the <em>main</em> function:
+    </p>
+
+    <pre>
+        int main(char** argv, int argc)
+                        ^^^^
+    </pre>
+
+    <p>
+        where <code>argv</code> denotes a vector of strings, and <code>argc</code>
+        is a count of them.
+        <code>argv[1]</code> denotes the first argument,
+        <code>argv[2]</code> denotes the second, etc.
+        Effectively, arguments are the glue between the shell interface
+        and preferential program execution.
     </p>
 
     <h3 style="width: 30%; margin: auto;">See Also:</h3>
@@ -321,7 +349,7 @@ To Do:
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            In particular, relative path names are resolved with respect to this 
+            In particular, relative file names are resolved with respect to this 
             location.
         </p>
     </div>
@@ -376,12 +404,6 @@ To Do:
         of this same thing.
     </p>
 
-    <h3>Variables</h3>
-    <p>
-        
-
-    </p>
-
     <h3>Shell Scripting</h3>
     <p>
 
@@ -389,6 +411,7 @@ To Do:
 
     <h3>See Also:</h3>
     <ul>
+        <li><a href="http://shellhaters.org/">Shell Hater's Handbook</a></li>
         <li><a href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">Read-eval-print loop</a> - Wikipedia</li>
     </ul>
 </div>
