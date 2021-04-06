@@ -146,10 +146,10 @@ Exercises:
     <h1>Bash (and stuff)</h1>
 
     <div class="quote-text">
-    "When you type to UNIX, a gnome deep in the system<br>
-    is gathering your characters and saving them in a secret place. <br>
-    The characters will not be given to a program until you <br>
-    type return (or new-line), as described above in <em>Logging in.</em>"
+        "When you type to UNIX, a gnome deep in the system<br>
+        is gathering your characters and saving them in a secret place. <br>
+        The characters will not be given to a program until you <br>
+        type return (or new-line), as described above in <em>Logging in.</em>"
     </div>
 
     <div class="quote-ref">
@@ -161,20 +161,19 @@ Exercises:
     <p>
         The standard shell of our time is the Bourne-Again shell, <a href="https://www.gnu.org/software/bash/">Bash</a>.
     </p>
-
 </div>
 
 <div id="redirection" class="content">
-	<h2 style="margin-bottom: 0;">I/O Redirection</h2>
-    <h4> and Standard File Descriptors</h4>
+	<h2 style="margin-bottom: 0;">Shell I/O </h2>
+    <h4> and Redirection</h4>
 
 	<p>
-        Recall that the is connected to its terminal by open files, and
-        that each process created by the <code>fork</code> system
-        call <a href="processes.html#process-creation">inherits</a>
-        its parent's attributes.
+        Recall that the shell is connected to its terminal by open files, and
+        that files open by a process are preserved across both <em>fork</em> 
+        and <em>exec</em> system calls. 
         These details form the basis of input and output at the terminal.
     </p>
+
 
     <p>
         The first file, <code>STDIN</code>, is the keyboard.
@@ -191,8 +190,8 @@ Exercises:
 
     <p>
         This means that we can reasonably expect each
-        child of <code>bash</code> to have our keyboard present at
-        <code>STDIN</code> and our terminal screen at both
+        child of <code>bash</code> (that is, each command) to have our keyboard 
+        present at <code>STDIN</code> and our terminal screen at both
         <code>STDOUT</code> and <code>STDERR</code>.
     </p>
 
