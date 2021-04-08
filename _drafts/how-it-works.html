@@ -5,9 +5,7 @@ last-updated: March 2021
 ---
 
 <!--
-    From a spectator's point of view...
-
-    Don't build as root!
+    "Common patterns" [of success]
 -->
 
 <div id="nav_bar_2" class="nav">
@@ -27,7 +25,6 @@ last-updated: March 2021
 
 
 <div id="introduction" class="content">
-
     <div class="quote-text">
         "Given enough eyeballs, all bugs are shallow."
     </div>
@@ -40,9 +37,9 @@ last-updated: March 2021
 
     <p>
         So what makes it all tick?
-        In this dramatic conclusion, we'll pick apart the characteristic
-        features of the open-source ecosystem, from the mechanics
-        of contributing, to the underlying motivations of its members.
+        In this dramatic conclusion, we'll pick apart the 
+        common patterns of the open-source ecosystem, 
+        from the mechanics of contributing, to reiterative development,  
         Hope you enjoyed!
     </p>
 </div>
@@ -97,18 +94,35 @@ last-updated: March 2021
 
     <h3>See Also:</h3>
     <ul>
-        <li><a href="https://opensource.guide/"> Open Source Guide</a></li>
+        <li><a href="https://opensource.guide/">Open Source Guide</a></li>
     </ul>
 </div>
 
 https://en.wikibooks.org/wiki/FOSS_A_General_Introduction/Introduction
 
 <div class="content" id="train-schedules">
-    <h2>  Train Schedules </h2>
+    <h2>  Reiterative Improvement</h2>
+    <h4>  and Train Schedules </h4>
 
     <p>
         Open-source software development is fundamentally reiterative:
-        You build something, publish it, improve it, then re-release it.
+        You build something and publish it, then improve it and re-release it.
+    </p>
+
+    <p>
+        Neither Slackware nor the Linux Kernel are released until they
+        are deemed "fit."
+    </p>
+
+    <h3>Train Schedules</h3>
+    <p>
+        The train schedule is often adopted by larger projects as a means
+        of organizing many contributors.
+        For instance, it is a common (though fading) practice for 
+        distributions to offer a new official release every six months.
+    </p>
+
+    <p>
         "Train scheduling" is a method commonly adopted to add structure 
         to this: They put releases on a schedule.
         It is used to enormous effect by Mozilla, to provide
@@ -154,14 +168,7 @@ https://en.wikibooks.org/wiki/FOSS_A_General_Introduction/Introduction
         <figcaption><center><b><a href="https://wiki.mozilla.org/Release_Management/Calendar">Firefox Release Schedule</a></b></center></figcaption>
     </figure>
 
-    <p>
-        The train schedule is often adopted by larger projects to 
-        help cope with, potentially, thousands of merges each month.
-        For instance, it is a common (though fading) practice for 
-        distributions to offer a new official release every six months.
-    </p>
-
-    <h3>See Also:</h3>
+       <h3>See Also:</h3>
     <ul>
         <li><a href="https://blog.rust-lang.org/2014/10/30/Stability.html"> Stability as a Deliverable | Rust Blog</a></li>
         <li><a href="http://thinking-in-code.blogspot.com/2010/07/train-model-of-software-development.html"> Thinking in Code: Train Model of Software Development</a></li>
@@ -214,11 +221,11 @@ https://en.wikibooks.org/wiki/FOSS_A_General_Introduction/Introduction
          them to rise in popularity, and let someone else worry about
          fitting them all together.
     </p>
-
 </div>
 
 <div class="content" id="organization">
     <h2>Organization</h2>
+    <h4>And why businesses rule the earth</h4>
 
     <p>
         Organization is about having a clear end-state, a well-defined goal.
@@ -259,7 +266,40 @@ https://en.wikibooks.org/wiki/FOSS_A_General_Introduction/Introduction
             2) Open-source projects can always be forked into a sub-project 
     </p>
 </div>
-        
+       
+<div class="content" id="unix-philosophy">
+    <h2>Modularity</h2>
+    <h4>and The Unix Philosophy</h4>
+
+    <p>
+        If we define <em>success</em> to be the number of operating systems
+        shipped, then GNU/Linux is the most successful UNIX-like operating
+        system ever created.
+        More, <em>success</em> follows a very clear pattern:
+        Modular 
+    </p>
+
+    <p>
+        GNU/Linux can be likened to a 1000-piece puzzle with 5000 available pieces: 
+        For any piece of the puzzle (shell, desktop environment,
+        <em>init</em> system, right down to C libraries) there are, around
+        five competent and competing options to choose from.
+    </p>
+
+    <p>
+        Kernel architecture: Modules
+        Arguably, doesn't take <em>modularity</em> far enough:
+        There's no reason (that I can think of) that there couldn't be more
+        than one memory-management module, for instance, or scheduler... 
+    </p>
+
+    <p>
+        Within distinct software components...
+        systemd is a collection of cooperating processes
+        as is xfce https://www.xfce.org/about
+    </p>
+</div>
+ 
 <div class="content" id="successful-business-models">
     <h2>Successful Business Models</h2>
 
@@ -311,62 +351,21 @@ https://en.wikibooks.org/wiki/FOSS_A_General_Introduction/Introduction
         Facebook -> btrfs
     </p>
 
-<!--
-
     Inapplicable domains:
     Pretty much anything that needs to be cutting-edge.
     AAA Games, for instance
 
-    </div>
-
-
-<div class="content" id="unix-philosophy">
-    <h2><strike>Modularity</strike></h2>
-    <h2>The Unix Philosophy</h2>
-
-    <p>
-        GNU/Linux can be likened to a 1000-piece puzzle with 5000 available pieces: 
-        For any piece of the puzzle&mdash; shell, desktop environment,
-        <em>init</em> system, right down to C libraries&mdash; there are, I'd 
-        guess, five competent options to choose from.
-    </p>
-
-
-
-Modularity:
-    Key to good software anyways
-    Open Source Architecture
-    Notepad++ built upon the "scintilla editor component"
-    https://en.wikipedia.org/wiki/Scintilla_(software)
-
-    Kernel drivers
-
-    systemd is a collection of cooperating processes
-    as is xfce https://www.xfce.org/about
-
-
-
-In Proprietary Land: CClang
-https://en.wikipedia.org/wiki/Clang
-Its contributors include Apple, Microsoft, Google, ARM, Sony, 
-Intel and Advanced Micro Devices (AMD). It is open-source 
-software,[10] with source code released under the University of Illinois/NCSA 
-License, a permissive free software licence. Since v9.0.0, it was relicensed to 
-the Apache License 2.0 with LLVM Exceptions.[4]
-o
+</div>
 
 <div class="content" id="closing-remakrs">
     <h2>Closing Remarks:</h2>
 
-    A Proper Movement:
     https://blog.documentfoundation.org/blog/2021/04/02/free-software-becomes-a-standard-in-dortmund-germany/
 
     Open-source hardware
         - Begins with the instruction set
 
     Textbooks and Academia
-
-
 
     <h3>See Also:</h3>
     <ul>
