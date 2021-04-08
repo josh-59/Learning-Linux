@@ -7,9 +7,6 @@ last-updated: March, 2021
 <!--
 To Do:
 
-    Terminal Emulators:
-        Introduce the Standard File Descriptors?
-
     Simple Commands:
         Recall that
         Each command therefore inherits the shell's attributes, including
@@ -25,15 +22,20 @@ To Do:
 
     ================>Closing Remarks<=================
 
-    <h2>Closing Remarks</h2>
-    <p>
-        The main loop
-    </p>
-
     <p>
         The shell does little else.
         It may provide some means to store variables, and offer to expand them,
         but by and large, shells are as "dumb" as terminals, and, this is intentional.
+    </p>
+
+<div class="content" id="shell-features">
+    <h2>Shell Features</h2>
+
+    <p>
+        Kernighan page 132:
+        Invented by John Mashey and introduced in the 6th edition shell,
+        it was a workaround so that non-expert users could
+        share their own sets of commands by lab, department and group.
     </p>
 
 -->
@@ -45,11 +47,10 @@ To Do:
 		<li><a href="#terminal-emulators"> Terminal Emulators </a></li>
 		<li><a href="#shells"> Shells </a></li>
         <li><a href="#commands">Commands</a></li>
-        <li><a href="#path">PATH </a></li>
         <li><a href="#pwd">Working Directory</a></li>
-        <li><a href="#shell-scripts">Shell Scripting</a></li>
+        <li><a href="#path">PATH </a></li>
         <li><a href="#closing-remarks">Closing Remarks: Arguments</a></li>
-		<li><a href="#lgr"> Lazy Game Reviews </a></li>
+        <li><a href="#ryan-tomayko">Ryan Tomayko</a></li>
 		<li><a href="#references"> References </a></li>
 	</ul>
 </div>
@@ -196,7 +197,7 @@ To Do:
 
 	<ul style="list-style: none;">
         <li><a href="https://www.gnu.org/software/bash/">Bash</a>&mdash; GNU's <em>Bourne Again Shell</em> was among the first programs to run on the Linux kernel, and has been more or less standard since.</li>
-        <li><a href="http://zsh.sourceforge.net/">Zsh</a>&mdash; An extension to <em>Bash</em> focusing on interative features.  
+        <li><a href="http://zsh.sourceforge.net/">Zsh</a>&mdash; An extension to <em>Bash</em> focusing on interative features. Default on Mac's</li>h  
         <li><a href="https://xon.sh">Xonsh</a>&mdash; A Pythonic shell, written in Python!</li>
 		<li><a href="https://fishshell.com/">Fish</a>&mdash; The Friendly Interactive Shell</li>
         <li><a href="https://www.nushell.sh/">Nushell</a>&mdash; An interactive shell, supporting piplines of structured data, in addition to simple text streams.</li>
@@ -231,137 +232,88 @@ To Do:
 
     <p>
         This corresponds directly to, <em>Find and execute <code>command</code>, 
-        passing it the arguments <code>[arg ...]</code>.</em>
+        and pass it <code>[arg ...]</code>.</em>
         There are a few places the shell can look.
         In order: 
     </p>
 
+    <div class="aside-right">
+        <h4>Note:</h4>
+        <p>
+            Two tools to identify commands are
+            <code>type</code> and <code>which</code>.
+        </p>
+    </div>
+
     <ol>
         <li>User-defined Function</li>
-        <li>Builtin Command</li>
+        <li>Shell Builtin Command</li>
         <li>External Command</li>
     </ol>
 
     <p>
-        Nearly all commands are external to the shell.
-        The UNIX paradigm 
-        For example, in 
+        Most commands are external to the shell.
+        For example, 
     </p>
 
     <div class="code">
-        $ ls -l 
+        $ ls 
     </div>
 
     <p>
-        the <code>ls</code> command is not found as a user-defined function,
+        The <code>ls</code> command is not found as a user-defined function,
         nor as a builtin.  
-        It is found by the shell in <code>/usr/bin</code>, at which point the
-        shell forks itself and 
+        It is found in <code>/bin</code>.
     </p>
 
     <h3>Arguments</h3>
 
     <p>
-        Arguments from the command line are passed to each program as it
-        begins execution, and each language has facilities to inspect them.
-        In C, they are presented as arguments to the <em>main</em> function:
+        Commands are the first part of a "typical line of input" given to the
+        shell; the other part is arguments.
+        Like commands, arguments are supplied by the user. 
+        They are passed to each function, builtin, or program as it begins 
+        execution, and it is up to that command to interpret them.
     </p>
 
-    <pre>
-        int main(char** argv, int argc)
-                        ^^^^
-    </pre>
-
     <p>
-        where <code>argv</code> denotes a vector of strings, and <code>argc</code>
-        is a count of them.
-        <code>argv[1]</code> denotes the first argument,
-        <code>argv[2]</code> denotes the second, etc.
-        Effectively, arguments are the glue between the shell interface
-        and preferential program execution.
-    </p>
-
-    <h3 style="width: 30%; margin: auto;">See Also:</h3>
-    <ul>
-        <li><a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Operation.html">Shell Operation (Bash Reference Manual)</a></li>
-    </ul>
-</div>
-
-<div class="content" id="path">
-    <h2><code>PATH</code> Environment Variable</h2>
-
-    <p>
-        The <code>PATH</code> environment variable
-        contains a list of directories to be searched
-        when looking for a command.
-        This list is colon (<code>:</code>)&ndash;separated, and may look like,
+        For example, <code>echo</code> responds to arguments 
+        very simply&mdash; It prints them back out:
     </p>
 
     <div class="code">
-        $ echo $PATH<br>
-        /usr/bin:/bin:/home/josh/.local/bin
+        $ echo one two three four<br>
+        one two three four<br>
     </div>
 
     <p>
-        The shell searches each directory in this list from left to right
-        for a file whose name matches the command given.
-        It executes the first found, and then abandons its search.
+        See a command's manual page (or other documentation) for details.
     </p>
-
-    <p>
-        Some caveats apply:
-        If the command is a builtin, Bash will execute the builtin, and ignore
-        <code>PATH</code>.
-        More, Bash does <em>not</em> search the current working directory for a command.
-    </p>
-
-    <p>
-        We can overrule both builtins and the shell's search of PATH
-        including a forward-slash <code>/</code> in our command, typically:
-    </p>
-
-    <div class="code">
-        $ ./<i>command</i>
-    </div>
-
-    <p>
-        Appending locations to <code>PATH</code> is an important step of
-        setting up a development environment.
-        This is typically done in <code>~/.bashrc</code>.
-        The correct construct appends the directory
-        only if it is not already present:
-    </p>
-
-    <div class="code">
-        if [[ ! $PATH =~ $HOME/.local/bin ]]; then<br>
-        &emsp;&emsp;&emsp;&emsp;PATH=$PATH:$HOME/.local/bin<br>
-        fi
-    </div>
 
     <h3>See Also:</h3>
     <ul>
-        <li><a href="https://en.wikipedia.org/wiki/Environment_variable#True_environment_variables"> Environment Variables </a> - Wikipedia</li>
+        <li><a href="https://linuxhandbook.com/linux-commands/">Basic Linux Commands Everyone Should Know</a></li>
     </ul>
 </div>
 
 <div class="content" id="pwd">
     <h2>Working Directory</h2>
 
+    <p>
+        Recall that each process has a
+        <a href="/processes.html#process-attributes">current working directory</a>.
+        Since the shell is a process, it too has a current working directory.
+        At the command line, this is of particular importance:
+        It reflects <em>where you are</em> in the directory tree.
+    </p>
+
     <div class="aside-right">
-        <h4>Aside:</h4>
+        <h4>Aside</h4>
         <p>
             In particular, relative file names are resolved with respect to this 
             location.
         </p>
     </div>
-
-    <p>
-        Recall that each process has a
-        <a href="/processes.html#process-attributes">current working directory</a>.
-        Since the shell is a process, naturally, it too has a current working directory.
-        At the command line, this is of particular importance:
-        It reflects <em>where you are</em> in the directory tree.
-    </p>
 
     <p>
         The shell's current working directory may be printed with 
@@ -382,16 +334,103 @@ To Do:
         $ pwd<br>
         /home/josh/Public
     </div>
-</div>
-
-<div class="content" id="shell-features">
-    <h2>Shell Features</h2>
 
     <p>
-        At this point, we have covered the essential elements of the 
+        Since each directory refers to its parent directory as <code>..</code>,
+        we can always move <em>up</em> the tree with,
+    </p>
+
+    <div class="code">
+        $ cd .. <br>
+        $ pwd<br>
+        /home/josh
+    </div>
+
+</div>
+
+<div class="content" id="path">
+    <h2><code>PATH</code> Environment Variable</h2>
+
+    <div class="aside-right">
+        <h4>Note:</h4>
+        <p>
+            The shell searches the directories in <em>PATH</em> only after
+            looking for a user-defined function and a builtin by the
+            same name.
+        </p>
+    </div>
+
+    <p>
+        So where does the shell look for external commands?
+        The <em>PATH</em> environment variable
+        contains a colon (<code>:</code>)-separated list of directories to be searched
+        when looking for a program.
+        It may look like this:
+    </p>
+
+    <div class="code">
+        $ echo $PATH<br>
+        /usr/bin:/bin:/home/josh/.local/bin
+    </div>
+
+    <p>
+        The shell searches each directory in this list from left to right
+        for a file whose name matches the command given.
+        It executes the first found, then abandons its search.
+        The shell does not search the current working directory
+        for a command.
+    </p>
+    
+    <p>
+        If a command includes a forward-slash <code>/</code>, 
+        then it is interpretted as a program name.
+        For instance, we can execute precisely <code>/usr/bin/echo</code>
+        by issuing,
+    </p>
+
+    <div class="code">
+        $ /usr/bin/echo one two three four <br>
+        one two three four
+    </div>
+
+    <p>
+        This is typically done to execute a program in the current working
+        directory:
+    </p>
+
+    <div class="code">
+        $ ./<i>program</i> 
+    </div>
+
+    <p>
+        Finally, appending locations to <code>PATH</code> is an important step of
+        setting up a development environment.
+        This is typically done in <code>~/.bashrc</code>
+        (but UNIX purists beg to differ).
+        The correct construct appends the directory
+        only if it is not already present:
+    </p>
+
+    <div class="code">
+        if [[ ! $PATH =~ $HOME/.local/bin ]]; then<br>
+        &emsp;&emsp;&emsp;&emsp;PATH=$PATH:$HOME/.local/bin<br>
+        fi
+    </div>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Environment_variable#True_environment_variables"> Environment Variables </a> - Wikipedia</li>
+    </ul>
+</div>
+
+<div class="content" id="closing-remarks">
+    <h2 style="margin-bottom: 5px;">Closing Remarks:</h2>
+
+    <p>
+        At this point, we have covered the most essential elements of the 
         shell.
         It is <a href="assets/simple-shell.c">not a difficult construct</a>,
-        and consists of a main loop which
+        and consists of a main loop which:
     </p>
 
     <ol>
@@ -401,24 +440,26 @@ To Do:
     </ol>
 
     <p>
-        The variety of shells offered above reflects a variety of interpretations
-        of this same thing.
+        The variety of shells offered above reflects a variety of interpretations of,
+        and expansions on, this same thing.
+        For instance, the Pythonic shell <code>xonsh</code> exposes
+        a full, general-purpose programming language to the user.
+        The most common shells of our time are <code>bash</code> and <code>zsh</code>.
     </p>
 
-    <h3>Shell Scripting</h3>
     <p>
-
+        Many details and constructs have not been introduced, but these
+        are mostly implementation-specific, and generally aren't required for
+        day-to-day use.
+        Some of the most important are:
     </p>
 
-    <h3>See Also:</h3>
     <ul>
-        <li><a href="http://shellhaters.org/">Shell Hater's Handbook</a></li>
-        <li><a href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">Read-eval-print loop</a> - Wikipedia</li>
+        <li>I/O and Redirection</li>
+        <li>Variables</li>
+        <li><a href="https://ryanstutorials.net/bash-scripting-tutorial/bash-script.php">Scripting</a></li>
     </ul>
-</div>
 
-<div class="content" id="closing-remarks">
-    <h2 style="margin-bottom: 5px;">Closing Remarks:</h2>
     <h4 style="width: 30%; margin: auto;">In the Beginning</h4>
 
     <p>
@@ -464,8 +505,8 @@ To Do:
     </blockquote>
 
     <p>
-        The <code>cd</code> command is also, necessarily, built in to the shell.
-        Commands such as these are today called <em>builtins</em>, and can be investigated by:
+        And so <em>builtins</em> began.
+        In Bash, builtins can be investigated by:
     </p>
 
     <div class="code">
@@ -473,15 +514,24 @@ To Do:
     </div>
 
     <p>
-        Kernighan page 132:
-            Invented by John Mashey and introduced in the 6th edition shell,
-            it was a workaround so that non-expert users could
-            share their own sets of commands by lab, department and group.
+        And in Zsh, by:
     </p>
 
+    <div class="code">
+        $ man zshbuiltins
+    </div>
+
+    <h3>Startup Files</h3>
+    <p>
+        
+
+    </p>
+    
     <h3>See Also:</h3>
     <ul>
         <li><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">The Evolution of the Unix Timesharing System</a></li>
+        <li><a href="http://shellhaters.org/">Shell Hater's Handbook</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">Read-eval-print loop</a> - Wikipedia</li>
     </ul>
 </div>
 
@@ -489,7 +539,7 @@ To Do:
     <h2>Ryan Tomayko:</h2>
     <h4>Shell Hater's Handbook</h4>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/olH-9b3VJfs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="video" src="https://www.youtube.com/embed/olH-9b3VJfs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 <!--
