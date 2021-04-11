@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Packages and Package Management
+title: Packages and Distributions
 last-updated: March 2021
 ---
 
@@ -179,19 +179,8 @@ Closing Remarks:
 
     Like if you looked at computing from outer space:
     https://tomaka.medium.com/the-future-of-operating-systems-efa31e17d66d
--->
 
-<div id="nav_bar_2" class="nav">
-    <ul>
-        <li><a href="#introduction"> Introduction </a></li>
-        <li><a href="#packages">Packages</a></li>
-        <li><a href="#building-from-source">Building from Source</a></li>
-        <li><a href="#binary-packages">Binary Packages</a></li>
-        <li><a href="#references"> References </a></li>
-    </ul>
-</div>
-
-<div id="introduction" class="content">
+    <div id="introduction" class="content">
     <h1>Packages</h1>
     <p>
         In the author's opinion, Free Software works because
@@ -199,8 +188,20 @@ Closing Remarks:
     </p>
 </div>
 
-<div class="content" id="packages">
-    <h2>Packaging and Distributions </h2>
+
+-->
+
+<div id="nav_bar_2" class="nav">
+    <ul>
+        <li><a href="#introduction"> Introduction </a></li>
+        <li><a href="#building-from-source">Building from Source</a></li>
+        <li><a href="#binary-packages">Binary Packages</a></li>
+        <li><a href="#references"> References </a></li>
+    </ul>
+</div>
+
+<div class="content" id="introduction">
+    <h1>Packages and Distributions </h1>
     <p>
         A <em>package</em> is a logical unit of software.
         The obvious example is a program, but libraries are packages, too.  
@@ -259,41 +260,60 @@ Closing Remarks:
     <h2>Building From Source</h2>
 
     <p>
-        Linux From Scratch is not a distribution so much as 
-        documentation regarding how to build a working GNU/Linux system entirely
-        from source.
-        One obtains each package in source-code form, configures, compiles and
+        Open source software is characteristically available in source-code form.
+        More, a project's maintainer will usually include instructions for building
+        and installing their work.  Typically, these instructions are found in 
+        a <code>README</code> file.
+    </p>
+
+    <p>
+        <a href="http://linuxfromscratch.org/">Linux From Scratch</a> is not a 
+        distribution so much as documentation regarding how to build a working 
+        GNU/Linux system entirely from source.
+        One obtains each package, configures, compiles and
         installs it by hand.
-        While certainly not easy to do, it's not difficult, either; 
-        a new version of the documentation is released about every six months.
+        While certainly not easy to do, it's not difficult, either. 
+        A new version of the documentation is released about every six months.
     </p>
 
     <p>
         Stepping away from manual configuration and compilation,
-        we arrive at the highly UNIX-y notion of 
-        <a href="https://man.openbsd.org/ports.7">ports</a>.  
+        we arrive at the highly UNIX-y notion of <em>ports.</em>
         A port is, in essence, a script that installs a package from source:
     </p>
 
-    <blockquote>
-        Each port contains any patches necessary to make the original application 
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            More generally, a <em>software port</em> is a minor revision of 
+            it allowing it to run on a non-native machine.
+            We will not have reason to differentiate scripts vs. revisions here.
+        </p>
+    </div>
+
+    <blockquote> 
+        "Each port contains any patches necessary to make the original application 
         source code compile and run on OpenBSD. Compiling an application is as simple 
         as typing <code>make</code> in the port directory! The Makefile automatically 
         fetches the application source code, either from a local disk or via HTTP, 
         unpacks it on the local system, applies the patches, and compiles it. 
         If all goes well, simply type <code>doas make install</code> to install the 
-        application.
+        application."<sup><a href="https://man.openbsd.org/ports.7">[a]</a></sup>
     </blockquote>
 
     <p>
-        Gentoo Linux uses exactly this approach, and is sometimes referred to
-        as a <em>metadistribution</em> owing to the lack of precompiled binaries and
-        the system's resulting flexibility.
+        Gentoo Linux uses exactly this approach, and is a 
+        <em>metadistribution</em> owing to its lack of precompiled binaries. 
+        Even in proper distributions, scripts (and automation in general) are 
+        used to ease the burden of project maintenance.
+        For instance, in Arch Linux, 
+        <a href="https://wiki.archlinux.org/index.php/PKGBUILD"><code>PKGBUILD</code></a>
+        is officially specified as the package's principle build mechanism.
     </p>
 
     <h3> See Also:</h3>
     <ul>
-        <li><a href="https://en.wikipedia.org/wiki/Ports_collection">Ports Collection</a> - Wikipedia</li>
+        <li><a href="https://en.wikipedia.org/wiki/Portage_(software)">Portage (software)</a> - Wikipedia</li>
     </ul>
 </div>
 
@@ -301,14 +321,26 @@ Closing Remarks:
     <h2> Binary Packages </h2>
 
     <p>
-        A distribution <em>proper</em>
+        A proper distribution deals in precompiled, binary packages.
+        These are a major convenience on the part of the user, and 
+        introduces significant burden on the part of the distribution&mdash;
+        namely, they are now responsible for maintaining large repositories of
+        large files, and seeing that they get to the user.
+    </p>
+
+    <p>
+        For instance, the Debian project 
+        Nonetheless, when we say <em>distribution,</em> "precompiled" is what
+        we mean.
+    </p>
 
     <p>
         Among major distributions, the Slackware Project entertains the 
         oldest, and possibly simplest, packaging scheme.
         By modern standards, it may be considered crude, 
         because it leaves dependency resolution to the user.<sup><a href="https://www.slackbook.org/html/package-management.html">[2]</a></sup>
-        It is easily dissected, though, and so represents a nice jumping-off point.
+        It is easily dissected, though, and so represents a nice jumping-off point
+        for us.
     </p>
 
     <p>
@@ -337,8 +369,8 @@ Closing Remarks:
 
     <p>
         To install the package, the files are 
-        copied into the appropriate directories of the operating system;
-        if a directory does not exist, it is created; 
+        copied into the appropriate directories of the operating system.
+        If a directory does not exist, it is created; 
         the <code>install</code> directory is ignored.
         After these files are copied, the script 
         <code>./install/doist.sh</code> is executed, if it exists.
@@ -400,6 +432,64 @@ Closing Remarks:
     </ul>
 
 </div>
+
+
+
+<div class="content" id="dependencies">
+    <h2>Dependencies</h2>
+    <p>
+
+https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html
+    </p>
+</div>
+
+<div class="content" id="package-managers">
+        <h2> Package Managers </h2>
+
+        <p>
+        In layman's terms, a <em>package</em> is a program sans installation
+        facilities.  
+        Installation is instead handled by the <em>package manager.</em> 
+        Further, a package may contain some universal or shared facilities:
+        It may be a library, for instance.
+        </p>
+
+        <p>
+        There are numerous reasons to prefer the package abstraction.
+        Most notably, the system may be viewed as a <a href="http://www.slackware.com/releasenotes/packages14.2.php">collection</a> of installed packages.
+        Other reasons include refactoring of code, centrality of administration,
+        and ease of software location and installation.
+        </p>
+
+        <p>
+        To update a machine running on Debian's packaging facilities, for example,
+        we must simply run,
+        </p>
+
+        <div class="aside-right">
+        <h4>Aside:</h4>
+                <p>
+                        See <code>$ apt --help</code>
+                        and <code><a href="https://manpages.debian.org/buster/apt/apt.8.en.html">apt(8)</a></code> for more information
+                </p>
+        </div>
+
+        <div class="code">
+        $ sudo apt update <br>
+        $ sudp apt upgrade 
+        </div>
+
+        <p>
+        The first command, <code>update</code>, synchronizes <code>apt</code>'s 
+        local package list with those of the configured repositories.  
+        The second command downloads and installs any revised packages.
+        This two-command sequence would install a new kernel 
+        (via <a href="https://packages.debian.org/search?keywords=kernel-image&searchon=names&suite=stable&section=all">kernel-image</a>), for instance,
+        and it would be used on the next reboot.
+        </p>
+
+</div>
+
 
 <div class="content" id="metadata-and-payload">
     <h2 style="margin-bottom: 0;">Package Contents:</h2>
@@ -512,65 +602,6 @@ According to <a href="https://www.debian.org/doc/manuals/debian-faq/pkg-basics.e
         9 directories, 9 files <br>
     </div>
 </div>
-
-<div class="content" id="package-managers">
-        <h2> Package Managers </h2>
-
-        <p>
-        In layman's terms, a <em>package</em> is a program sans installation
-        facilities.  
-        Installation is instead handled by the <em>package manager.</em> 
-        Further, a package may contain some universal or shared facilities:
-        It may be a library, for instance.
-        </p>
-
-        <p>
-        There are numerous reasons to prefer the package abstraction.
-        Most notably, the system may be viewed as a <a href="http://www.slackware.com/releasenotes/packages14.2.php">collection</a> of installed packages.
-        Other reasons include refactoring of code, centrality of administration,
-        and ease of software location and installation.
-        </p>
-
-        <p>
-        To update a machine running on Debian's packaging facilities, for example,
-        we must simply run,
-        </p>
-
-        <div class="aside-right">
-        <h4>Aside:</h4>
-                <p>
-                        See <code>$ apt --help</code>
-                        and <code><a href="https://manpages.debian.org/buster/apt/apt.8.en.html">apt(8)</a></code> for more information
-                </p>
-        </div>
-
-        <div class="code">
-        $ sudo apt update <br>
-        $ sudp apt upgrade 
-        </div>
-
-        <p>
-        The first command, <code>update</code>, synchronizes <code>apt</code>'s 
-        local package list with those of the configured repositories.  
-        The second command downloads and installs any revised packages.
-        This two-command sequence would install a new kernel 
-        (via <a href="https://packages.debian.org/search?keywords=kernel-image&searchon=names&suite=stable&section=all">kernel-image</a>), for instance,
-        and it would be used on the next reboot.
-        </p>
-
-</div>
-
-
-
-<div class="content" id="dependencies">
-    <h2>Dependencies</h2>
-    <p>
-
-https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html
-    </p>
-</div>
-
-
 
 <div class="content" id="make">
     <h2>Closing Remarks:</h2>
