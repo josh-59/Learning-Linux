@@ -1,0 +1,405 @@
+---
+layout: default
+title: How Open Source Works
+last-updated: March 2021
+---
+
+<!--
+    "Common patterns" [of success]
+-->
+
+<div id="nav_bar_2" class="nav">
+    <ul>
+        <li><a href="#introduction"> Introduction </a></li>
+        <li><a href="#fork-merge">Fork/Merge</a></li>
+        <li><a href="#reiterative-improvement">Reiterative Improvement</a></li>
+        <li><a href="#modularity">Modularity</a></li>
+        <li><a href="#bazaar">Bazaar Development Model</a></li>
+        <li><a href="#organization">Organization</a></li>
+        <li><a href="#successful-business-models">Successful Business Models</a></li>
+        <li><a href="#closing-remarks">Closing Remarks</a></li>
+        <li><a href="#bryan-cantrill"> Bryan Cantrill </a></li>
+        <li><a href="#references"> References </a></li>
+    </ul>
+</div>
+
+
+<div id="introduction" class="content">
+    <h1>How Open Source Works</h1>
+
+    <div class="quote-text">
+        "Given enough eyeballs, all bugs are shallow."
+    </div>
+
+    <div class="quote-ref">
+        <a href="https://en.wikipedia.org/wiki/Linus%27s_law">Linus's Law</a>
+    </div>
+
+    <p>
+        So what makes it all tick?
+        In this dramatic conclusion, we'll pick apart the 
+        common patterns of the open-source ecosystem, 
+        from the mechanics of contributing, to their organizational structures.
+        Hope you enjoyed!
+    </p>
+</div>
+
+<div id="fork-merge" class="content">
+    <h2 style='margin-bottom: 0px;'>Fork/Merge</h2>
+    <h4>How-to Contribute</h4>
+
+    <p>
+        Recall that a repository is tracked collection of files,
+        usually containing a package.
+        Open-source repositories are made publicly available, and anyone
+        may download or otherwise copy them.
+        Such a copy is called a <em>fork.</em> 
+    </p>
+
+    <p>
+        Having created a fork, the software is now *yours*.
+        You can modify it, inspect it, install it, 
+        discard it&mdash; whatever you want.
+        To contribute to the project, though, you 
+        would naturally edit some of the files within your copy.  
+    </p>
+
+    <p>
+        Having done so, we say that your copy and the source have <em>diverged.</em>
+    </p>
+
+    <p>
+        Having endeavored to contribute to the project, your next step is
+        to request your changes be <em>merged</em> with the original.
+        This is done through a <em>pull request.</em>
+        In practice, a pull request initiates a discussion about
+        the proposed changes; if accepted, the changes are made to the original,
+        and the two repositories are identical again.
+    </p>
+
+    <p>
+        This pattern repeats at various scales. 
+        Using <code>git</code> or <code>subversion</code>, it is 
+        possible to create distinct branches within your local repository,
+        and merge or abandon changes as you see fit.
+        At the macro scale, we saw this pattern repeat with GNU's compiler 
+        collection, when a fork became a concurrent project, and was eventually merged
+        into GNU's main trunk. https://en.wikipedia.org/wiki/GNU_Compiler_Collection#EGCS_fork
+    </p>
+
+    <p>
+        Github offers services for creating your own repository, 
+        and forking those of others.
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://opensource.guide/">Open Source Guide</a></li>
+        <li><a href="https://en.wikibooks.org/wiki/FOSS_A_General_Introduction/Introduction">FOSS: A General Introduction</a></li>
+    </ul>
+</div>
+
+<div class="content" id="reiterative-improvement">
+    <h2 style='margin-bottom: 0px;'>  Reiterative Improvement</h2>
+    <h4>  and Train Schedules </h4>
+
+    <p>
+        Open-source software development is fundamentally reiterative:
+        You build something and publish it, then improve it and re-release it.
+    </p>
+
+    <p>
+        Neither Slackware nor the Linux Kernel are released until they
+        are deemed "fit."
+    </p>
+
+    <h3>Train Schedules</h3>
+    <p>
+        The train schedule is often adopted by larger projects as a means
+        of organizing many contributors.
+        For instance, it is a common (though fading) practice for 
+        distributions to offer a new official release every six months.
+    </p>
+
+    <p>
+        "Train scheduling" is a method commonly adopted to add structure 
+        to this: They put releases on a schedule.
+        It is used to enormous effect by Mozilla, to provide
+        "stability without stagnation."<sup><a href="https://blog.rust-lang.org/2014/10/30/Stability.html">[6]</a></sup>
+    </p>
+
+    <p>
+        A new Firefox version is scheduled for release every four weeks.<sup><a href="https://wiki.mozilla.org/Release_Management/Release_Process">[7]</a></sup>
+    </p>
+
+    <figure>
+        <img src="assets/img/train-schedules.png" style="width: 100%;">
+    </figure>
+
+    <p>
+        That is, each version spends four weeks in the <em>Mature</em> category,
+        being the officially-supported, current version of Firefox.
+        When here, no new features are implemented&mdash; rather, only 
+        security patches and bug-fixes are implemented and pushed to the user.
+        After its four weeks in the spotlight, it is discarded, 
+        for the next version is ready.
+    </p>
+
+    <p>
+        Before it becomes mature, each version of Firefox has been released as a <a href="https://www.mozilla.org/en-US/firefox/80.0beta/releasenotes/">beta</a>;
+        this status corresponds to <em>Initial Release</em> above.
+        When a release enters the <em>Beta</em> stage, only patches aimed at improving
+        stability are accepted.<sup><a href="https://wiki.mozilla.org/Release_Management/Release_Process">[6]</a></sup>
+        Each release spends four weeks there.
+        Finally, there is the <a href="https://www.mozilla.org/en-US/firefox/80.0a1/releasenotes/">Nightly</a> build,
+        which contains the latest (and most untested) features.
+    </p>
+
+    <p>
+        Here we see that <em>Firefox 80</em> will be released as <em>Firefox 81</em>
+        enters Beta and <em>Firefox 82</em> enters Nightly:
+    </p>
+
+    <figure>
+        <a href="https://wiki.mozilla.org/Release_Management/Calendar">
+            <img src="assets/img/firefox-train-schedule.png" style="width: 90%; padding-bottom: 10pt;">
+        </a>
+        <figcaption><center><b><a href="https://wiki.mozilla.org/Release_Management/Calendar">Firefox Release Schedule</a></b></center></figcaption>
+    </figure>
+
+       <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://blog.rust-lang.org/2014/10/30/Stability.html"> Stability as a Deliverable | Rust Blog</a></li>
+        <li><a href="http://thinking-in-code.blogspot.com/2010/07/train-model-of-software-development.html"> Thinking in Code: Train Model of Software Development</a></li>
+    </ul>
+</div>
+
+<div class="content" id="modularity">
+    <h2 style='margin-bottom: 0px;'>Modularity</h2>
+    <h4>and The Unix Philosophy</h4>
+
+    <p>
+        If we define <em>success</em> to be the number of operating systems
+        shipped, then GNU/Linux is the most successful UNIX-like operating
+        system ever created.
+        More, <em>success</em> follows a very clear pattern:
+        Modular 
+    </p>
+
+    <p>
+        GNU/Linux can be likened to a 1000-piece puzzle with 5000 available pieces: 
+        For any piece of the puzzle (shell, desktop environment,
+        <em>init</em> system, right down to C libraries) there are, around
+        five competent and competing options to choose from.
+    </p>
+
+    <p>
+        Kernel architecture: Modules
+        Arguably, doesn't take <em>modularity</em> far enough:
+        There's no reason (that I can think of) that there couldn't be more
+        than one memory-management module, for instance, or scheduler... 
+    </p>
+
+    <p>
+        Within distinct software components...
+        systemd is a collection of cooperating processes
+        as is xfce https://www.xfce.org/about
+    </p>
+</div>
+ 
+
+
+<div class="content" id="bazaar">
+    <h2>The Bazaar Development Model</h2>
+
+    <p>
+        <strike>A collection of open-source projects is 
+        called a <em>bazaar.</em></strike>
+        The term <em>bazaar</em> was first used by Raymond
+        to describe the Linux development model&mdash; "release early and often,
+        be open to the point of promiscuity, delegate everything in sight"&mdash; 
+        which he contrasted with the "cathedral"-style development model of the time. 
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            The FreeBSD project's primary goal is security.
+        </p>
+    </div>
+
+    <p>
+        In a cathedral, software is openly available,
+        sure, but is developed principally in-house; the above
+        remarks on forking and merging effectively don't apply.
+        Contributions are restricted to a small cadre,
+        who charge themselves with both the architecture and the 
+        implementation of the idea.
+        The cathedral has its proponents (GNU, all BSD's).
+        They argue that a traditional model affords greater opportunity for
+        design, conception, and craftsmanship, and that these are 
+        critical considerations given their projects' goals.
+    </p>
+
+    <p>
+        The bazaar model, by contast, welcomes strangers to contribute
+        to the project, and more, to take responsibility within it.
+    </p>
+
+    <p>
+         Whether this development model is best or not is a 
+         <a href="https://queue.acm.org/detail.cfm?id=2349257">subject of
+         debate</a>, but there can be no doubt that it has been successful:
+         GNU/Linux is the most-used Unix-like 
+         operating system in existence today.
+         I view these pieces as "competing", expect the best of
+         them to rise in popularity, and let someone else worry about
+         fitting them all together.
+    </p>
+</div>
+
+<div class="content" id="organization">
+    <h2 style='margin-bottom: 0px;'>Organization</h2>
+    <h4>And why businesses rule the earth</h4>
+
+    <p>
+        Organization is about having a clear end-state, a well-defined goal.
+        For example:
+    </p>
+
+    <ul>
+        <li>"Most UNIX-like GNU/Linux distribution out there"</li>
+        <li>"Most secure UNIX-like operating system"</li>
+        <li>"A distribution by the people, for the people"</li>
+    </ul>
+
+    <p>
+        At the risk of being too philosophical,
+        "success" itself is defined only relative to a goal;
+        every project must be well-organized, or it cannot be successful.
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside</h4>
+        <p>
+            "Open source democracy doesn't work."&mdash; Brian Camprill
+        </p>
+    </div>
+
+    <p>
+        In the author's opinion, the Linux kernel was only successful in virtue 
+        of Torvald's leadership.  
+        The community <em>needed</em> someone to say,
+        "No we're not doing that," on occaision, but firmly,
+        Conversely, I do not see good things for the future of Python.
+        After _____ stepped down, its goal has become "Whatever everyone wants."
+    </p>
+
+    <p>
+        BDFL: 
+            1) No-one is forcing anyone to work on their projects
+            2) Open-source projects can always be forked into a sub-project 
+    </p>
+</div>
+
+
+
+<div class="content" id="successful-business-models">
+    <h2>Successful Business Models</h2>
+
+    <p>
+        Community-Driven vs. ...internally-driven?
+        Like Debian is 'community-driven'
+            Ensures users are satisfied
+        Generalization of the Bazaar?
+    </p>
+
+    <p>
+        <strong>Classic Business Model:</strong>:
+        The classic model is to offer support service upon free software. 
+        Red Hat Enterprise Linux
+        Cannonical
+        Kubernetes
+
+        They market principally towards business and enterprise.
+    </p>
+
+    <p>
+        <strong>Offset-cost-with-community-contribution:</strong>
+        The following produce closed-source hardware, who depend upon
+        the community for software and documentation:
+        PINE-64 
+        Raspberry Pi
+
+        The following produce open-source hardware, and depend upon
+        the community for software and documentation:
+        https://beagleboard.org/about
+    </p>
+
+    <p>
+        <strong>Radio Station Model:</strong>
+        Like a radio station, they accept donations from users and sponsors,  
+        and generate revenue from search-engine 
+        traffic<sup><a href="http://web.archive.org/web/20150409023855/http://www.techworld.com.au/article/529572/q_clement_lefebvre_man_behind_linux_mint/">[a]</a></sup>
+    </p>
+
+    <p>
+        <strong>Foundation:</strong>
+        <a href="https://en.wikipedia.org/wiki/Foundation_(nonprofit)">Foundation</a>
+        FSF, principally serves to "support" GNU.
+    </p>
+
+    <p> 
+        <strong>Contributing:</strong>
+        For-profit companies contributing to open-source
+        Facebook -> btrfs
+    </p>
+
+    Inapplicable domains:
+    Pretty much anything that needs to be cutting-edge.
+    AAA Games, for instance
+
+</div>
+
+
+
+<div class="content" id="closing-remakrs">
+    <h2>Closing Remarks:</h2>
+
+    https://blog.documentfoundation.org/blog/2021/04/02/free-software-becomes-a-standard-in-dortmund-germany/
+
+    Open-source hardware
+        - Begins with the instruction set
+
+    Textbooks and Academia
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://frame.work/">Framework | Introducing the Framework Laptop</a></li>
+        <li><a href="https://www.crowdsupply.com/">Crowd Supply</a> - For the Greater Goods</li>
+        <li><a href="http://www.linuxcommand.org/tlcl.php">The Linux Command Line</a> by William Shotts</li>
+    </ul>
+</div>
+
+<div class="content" id="risc-v">
+    <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Rsyn3_PjRXw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<div class="content" id="bryan-cantrill">
+    <h2>Bryan Cantrill: Rust and Other Interesting Things</h2>
+    <iframe class="video" src="https://www.youtube.com/embed/2wZ1pCpJUIM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<div id="references" class="content">
+    <h2> References </h2>
+    <ol>
+        <li> Required Knowledge - OSDev Wiki. (2020, January 22). Retrieved July 29, 2020, from <a href="https://wiki.osdev.org/Required_Knowledge">https://wiki.osdev.org/Required_Knowledge</a></li>
+        <li> Kernighan, Brian. <i>Unix: A History and a Memoir.</i>  Published 2020, by Brian W. Kernighan via Kindle Direct Publishing. </li>
+        <li> Kernighan, B. W., &amp; Ritchie, D. M. (1988). <i>The C Programming Language</i> (2nd ed.). Englewood Cliffs,, NJ: Prentice Hall.</li>
+        <li> Blandy, J. (n.d.). Rust and Bitter C++ Developers with Jim Blandy [Interview by A. G. Bell]. Corecursive. Retrieved July 29, 2020, from https://corecursive.com/013-rust-and-bitter-c-developers-with-jim-blandy/.</li>
+        <li> Cantrill, B. (2018). <i>Is It Time to Rewrite the Operating System in Rust?</i>. Lecture presented at QCon, San Francisco, 2018.</li>
+        <li>Turon, A., &amp; Matsakis, N. (2014, October 30).  Stability as a Deliverable:  Rust Blog.  Retrieved August 18, 2020, from
+            <a href="https://blog.rust-lang.org/2014/10/30/Stability.html">https://blog.rust-lang.org/2014/10/30/Stability.html</a></li>
+        <li> The Firefox release process. (n.d.). Retrieved August 18, 2020, from <a href="https://wiki.mozilla.org/Release_Management/Release_Process">https://wiki.mozilla.org/Release_Management/Release_Process</a></li>
+    </ol>
+</div>
