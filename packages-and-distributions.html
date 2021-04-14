@@ -6,10 +6,8 @@ last-updated: March 2021
 
 <!--
 
-        Good ideas tend to resurface.  
-        Free software is in no danger of <em>being forgotten</em> because it is
-        one such idea.
-        The UNIX architecture similarly resurfaces.
+    Define 'repository' as a tracked collection of files, and note that they
+    usually contain a package.
 
 
     Packages and Distributions
@@ -185,6 +183,20 @@ Closing Remarks:
         In the author's opinion, Free Software works because
         people want to do it.
     </p>
+
+    <p>
+        Good ideas tend to resurface.  
+        Free software is in no danger of <em>being forgotten</em> because it is
+        one such idea.
+        The UNIX architecture similarly resurfaces.
+    </p>
+
+    <p>
+        Known-good ideas:
+            Dynamic Linking
+        Known-bad ideas:
+            Static Linking!
+    </p>
 </div>
 
 
@@ -195,6 +207,9 @@ Closing Remarks:
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#building-from-source">Building from Source</a></li>
         <li><a href="#binary-packages">Binary Packages</a></li>
+        <li><a href="#dependencies">Dependencies</a></li>
+        <li><a href="#package-managers">Package Managers</a></li>
+        <li><a href="#closing-remarks">Closing Remarks</a></li>
         <li><a href="#references"> References </a></li>
     </ul>
 </div>
@@ -261,8 +276,7 @@ Closing Remarks:
     <p>
         Open source software is characteristically available in source-code form.
         More, a project's maintainer will usually include instructions for building
-        and installing their work.  Typically, these instructions are found in 
-        a <code>README</code> file.
+        and installing their work.  Look for a <code>README</code> file.
     </p>
 
     <p>
@@ -285,7 +299,7 @@ Closing Remarks:
         <h4>Aside:</h4>
         <p>
             More generally, a <em>software port</em> is a minor revision of 
-            software allowing it to run on a non-native machine.
+            software allowing it to run on some non-native machine.
             We will not have reason to differentiate scripts and revisions here.
         </p>
     </div>
@@ -321,7 +335,7 @@ Closing Remarks:
 
     <p>
         A proper distribution deals in precompiled, binary packages.
-        These are a major convenience on the part of the user, and 
+        These are a major convenience on the part of the user, but
         introduces significant burden on the part of the distribution&mdash;
         namely, they are now responsible for maintaining large repositories of
         large files, and seeing that they get to the user.
@@ -429,14 +443,12 @@ Closing Remarks:
     <ul>
         <li><a href="https://en.wikipedia.org/wiki/Tar_(computing)">tar (computing) - Wikipedia </a></li>
     </ul>
-
 </div>
-
-
 
 <div class="content" id="dependencies">
     <h2>Dependencies</h2>
     <p>
+        It's relatively common for a given package to depend upon other packages;
 
 https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html
     </p>
@@ -445,20 +457,6 @@ https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html
 <div class="content" id="package-managers">
         <h2> Package Managers </h2>
 
-        <p>
-        In layman's terms, a <em>package</em> is a program sans installation
-        facilities.  
-        Installation is instead handled by the <em>package manager.</em> 
-        Further, a package may contain some universal or shared facilities:
-        It may be a library, for instance.
-        </p>
-
-        <p>
-        There are numerous reasons to prefer the package abstraction.
-        Most notably, the system may be viewed as a <a href="http://www.slackware.com/releasenotes/packages14.2.php">collection</a> of installed packages.
-        Other reasons include refactoring of code, centrality of administration,
-        and ease of software location and installation.
-        </p>
 
         <p>
         To update a machine running on Debian's packaging facilities, for example,
@@ -486,123 +484,10 @@ https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html
         (via <a href="https://packages.debian.org/search?keywords=kernel-image&searchon=names&suite=stable&section=all">kernel-image</a>), for instance,
         and it would be used on the next reboot.
         </p>
-
 </div>
 
 
-<div class="content" id="metadata-and-payload">
-    <h2 style="margin-bottom: 0;">Package Contents:</h2>
-    <h4>Metadata and Payload</h4>
-
-    <p>
-        The contents of a package may be split into two 
-        parts: Metadata and Payload.
-        In Slackware's format, metadata is restricted to the <code>./install</code>
-        directory, and consists of the post-copy script <code>doinst.sh</code>
-        and a description of the software, <code>slack-desc</code>.
-        Other package management schemes incorporate more metadata; here
-        we'll take a look at Debian's, since it is more complete,
-        and well-documented. 
-    </p>
-
-    <p>
-        First, we obtain a package and extract it:
-    </p>
-
-    <div class="code">
-        $ ls <br>
-        vim_8.1.0875-5_amd64.deb <br>
-        <br>
-        $ ar -xf vim_8.1.0875-5_amd64.deb <br>
-        <br>
-        $ ls <br>
-        control.tar.xz<br>
-        data.tar.xz<br> 
-        debian-binary<br>  
-        vim_8.1.0875-5_amd64.deb 
-    </div>
-
-    <p>
-        The package's metadata is found in the <code>control</code>
-        archive, and the <code>debian-binary</code> file. 
-        The payload is here referred to as <code>data</code>. 
-        Both can be extracted with <code>tar</code>, but for now we'll just 
-        take a peek:
-    </p>
-
-    <div class="code">
-        $ tar --list -f control.tar.xz <br>
-        ./ <br>
-        <a href="./pre/control.html">./control</a> <br>
-        <a href="./pre/md5sums.html">./md5sums </a><br>
-        <a href="./pre/postinst.html">./postinst</a> <br>
-        <a href="./pre/postrm.html">./postrm</a> <br>
-        <a href="./pre/preinst.html">./preinst</a> <br>
-        <a href="./pre/prerm.html">./prerm</a> <br>
-    </div>
-
-<p>
-According to <a href="https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html">Debian</a>:
-</p>
-
-<ul>
-        <li>
-        The file <code>control</code> describes the package, giving its
-        version number, a description of it, and other information about it.
-        </li>
-
-        <li>
-        The file <code>md5sums</code> is a collection of hash signatures of
-        files within the package.  These allow one to verify the 
-        integrity of those files after they've been downloaded.
-        </li>
-
-        <li>
-        The remaining files are scripts, called when installing or removing
-        the package.
-        For instance, when one uses <code>apt remove vim</code>, or
-        <code>apt purge vim</code>, the
-        <code>postrm</code> script is called with argument <em>remove</em>,
-        or <em>purge</em>, as appropriate.
-
-        Note that the <em>install</em> phase is the copying of files
-        into the system directory tree, and that 
-        <code>preinst</code> and <code>postinst</code>
-        are called relative to that step.
-        </li>
-</ul>
-</p>
-
-    <p>
-        For completeness, here is the <code>data</code> directory:
-    </p>
-        
-    <div class="code">
-        $ tree data<br>
-        . <br>
-        └── usr <br>
-        ├── bin <br>
-        │   └── vim.basic <br>
-        └── share <br>
-        ├── bug <br>
-        │   └── vim <br>
-        │       ├── presubj <br>
-        │       └── script <br>
-        ├── doc <br>
-        │   └── vim <br>
-        │       ├── changelog.Debian.gz <br>
-        │       ├── changelog.gz <br>
-        │       ├── copyright <br>
-        │       └── NEWS.Debian.gz <br>
-        └── lintian <br>
-        └── overrides <br>
-        └── vim <br>
-        <br>
-        9 directories, 9 files <br>
-    </div>
-</div>
-
-<div class="content" id="make">
+<div class="content" id="closing-remarks">
     <h2>Closing Remarks:</h2>
     <h4><code>make</code></h4>
 
