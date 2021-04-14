@@ -64,6 +64,34 @@ Exercises:
             3) In an <code>exec</code>-induced sh context
             Produce each, and verify with <code>strace</code>
         </li>
+        <li>
+            Each section of the manual page has an introduction, <code>intro</code>,
+            but no index.  Why not?  Create an index of Section 7 for yourself.
+        </li>
+        <li>
+            <p>
+                Scripting exercise:
+                Use constructs other than <code>if</code> to append a location
+                to path.
+            </p>
+        </li>
+        <li>
+            <p>
+                The command,
+            </p>
+            <div class="code">
+                $ $(echo cd $PWD)
+            </div>
+            <p>
+                is equivalent to which of the following:
+            </p>
+            <ol>
+                <li>$ cd </li>
+                <li>$ cd $HOME</li>
+                <li>$ cd .</li>
+                <li>$ cd ..</li>
+            </ol>
+        </li>
     </ol>
 
 
@@ -143,7 +171,7 @@ Exercises:
 </div>
 
 <div class="content" id="introduction">
-    <h1>Bash (and stuff)</h1>
+    <h1>Bash (and other stuff)</h1>
 
     <div class="quote-text">
         "When you type to UNIX, a gnome deep in the system<br>
@@ -152,8 +180,8 @@ Exercises:
         type return (or new-line), as described above in <em>Logging in.</em>"
     </div>
 
-    <div class="quote-ref">
-        Ken Thompson and <br>Dennis Ritchie<br>
+    <div class="quote-ref" style="width: 50%;">
+        Ken Thompson and Dennis Ritchie<br>
         <a href="https://ia800600.us.archive.org/19/items/v6-manual/v6-manual.pdf">UNIX Programming Manual, Sixth Edition</a><br>
 		May, 1975
     </div>
@@ -173,7 +201,6 @@ Exercises:
         and <em>exec</em> system calls. 
         These details form the basis of input and output at the terminal.
     </p>
-
 
     <p>
         The first file, <code>STDIN</code>, is the keyboard.
