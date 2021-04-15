@@ -6,6 +6,18 @@ last-updated: March 2021
 
 <!--
 
+    Introduction:
+        It's more accurate to view a "distribution" as a collection
+        of precompiled and preconfigured packages, than as an operating system.
+
+        Packages and package management are typically handled by a utility program,
+        and the ordinary user would not have much need to delve into package
+        specifics.
+        Nonetheless, they are an important
+        step in the attainment of a free working operating system.
+
+
+
     Define 'repository' as a tracked collection of files, and note that they
     usually contain a package.
 
@@ -191,6 +203,10 @@ Closing Remarks:
         The UNIX architecture similarly resurfaces.
     </p>
 
+
+        Typically, package are presented to the user in precompiled form,
+        and installed by a utility program.
+
     <p>
         Known-good ideas:
             Dynamic Linking
@@ -205,7 +221,8 @@ Closing Remarks:
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
-        <li><a href="#building-from-source">Building from Source</a></li>
+        <li><a href="#open-source"> Open Source</a></li>
+        <li><a href="#building-from-source">Building an OS from Source</a></li>
         <li><a href="#binary-packages">Binary Packages</a></li>
         <li><a href="#dependencies">Dependencies</a></li>
         <li><a href="#package-managers">Package Managers</a></li>
@@ -219,13 +236,15 @@ Closing Remarks:
     <p>
         A <em>package</em> is a logical unit of software.
         The obvious example is a program, but libraries are packages, too.  
-        Typically, packages are presented to the end user in precompiled form;
-        more, they are usually installed by a utility program.
     </p>
+</div>
+
+<div class="content" id="open-source">
+    <h2>Open Source</h2>
 
     <p>
         The GNU GPL stipulates that licensed software be available in source-code
-        form. The GNU-way of installing their stuff is:
+        form. The GNU-way of building and installing their stuff is:
     </p>
 
     <div class="code">
@@ -233,8 +252,14 @@ Closing Remarks:
     </div>
 
     <p>
-        Each project uses its own language and build system; the above
-        presupposes C/C++ source built via GNU's Autoconf.
+        Each project uses its own language and build system; 
+        the above list of commands presupposes C/C++ source built via
+        GNU's <em>Autoconf.</em>
+        Most packages include a <code>README</code> file that contains 
+        directions to build, install, or tinker.
+    </p>
+
+    <p>
         The traditional UNIX package format is a compressed tarball, a file 
         ending in <code>.tar.xz</code>, or <code>.tar.gzip</code>.
         One extracts such an archive with:
@@ -248,51 +273,34 @@ Closing Remarks:
         yielding a directory reflective of its original packager's.
     </p>
 
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="http://www.slackware.com/releasenotes/packages14.2.php">Slackware 14.2 Package List</a></li>
+        <li><a href="http://linuxfromscratch.org/lfs/view/stable/chapter03/packages.html">Linux From Scratch Package List</a></li>
+    </ul>
+</div>
+
+<div id="building-from-source" class="content">
+    <h2>Building an OS from Source</h2>
+
     <p>
         Naturally, the system may be viewed as a collection of installed packages.
     </p>
 
     <p>
-        Packages are typically distributed in configured and compiled form.
-        This yields a smaller archive, saves users from the
-        time-consuming step of compilation, and allows complete automation of
-        installation.
-        The implication, however, is that each piece of software is preconfigured 
-        for a particular operating system.  
-        See your distribution's package management facilities for further information.
-    </p>
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="http://www.slackware.com/releasenotes/packages14.2.php">Slackware 14.2 Package List</a></li>
-        <li><a href="http://linuxfromscratch.org/lfs/view/stable/chapter03/packages.html">Linux From Scratch Package List</a></li>
-        <li><a href="http://linuxfromscratch.org/blfs/view/stable/introduction/notes-on-building.html">Notes on Building Software</a> - Beyond Linux From Scratch</a></li>
-    </ul>
-</div>
-
-<div id="building-from-source" class="content">
-    <h2>Building From Source</h2>
-
-    <p>
-        Open source software is characteristically available in source-code form.
-        More, a project's maintainer will usually include instructions for building
-        and installing their work.  Look for a <code>README</code> file.
-    </p>
-
-    <p>
-        <a href="http://linuxfromscratch.org/">Linux From Scratch</a> is not a 
-        distribution so much as documentation regarding how to build a working 
+        <a href="http://linuxfromscratch.org/">Linux From Scratch</a> is 
+        documentation regarding how to build a working 
         GNU/Linux system entirely from source.
         One obtains each package, configures, compiles and
         installs it by hand.
-        While certainly not easy to do, it's not difficult, either. 
         A new version of the documentation is released about every six months.
     </p>
 
     <p>
         Stepping away from manual configuration and compilation,
         we arrive at the highly UNIX-y notion of <em>ports.</em>
-        A port is, in essence, a script that installs a package from source:
+        A port is, in essence, a script that installs a package from source.
+        From an OpenBSD manual page:
     </p>
 
     <div class="aside-right">
@@ -327,6 +335,7 @@ Closing Remarks:
     <h3> See Also:</h3>
     <ul>
         <li><a href="https://en.wikipedia.org/wiki/Portage_(software)">Portage (software)</a> - Wikipedia</li>
+        <li><a href="http://linuxfromscratch.org/blfs/view/stable/introduction/notes-on-building.html">Notes on Building Software</a> - Beyond Linux From Scratch</a></li>
     </ul>
 </div>
 
@@ -334,17 +343,12 @@ Closing Remarks:
     <h2> Binary Packages </h2>
 
     <p>
-        A proper distribution deals in precompiled, binary packages.
-        These are a major convenience on the part of the user, but
-        introduces significant burden on the part of the distribution&mdash;
-        namely, they are now responsible for maintaining large repositories of
-        large files, and seeing that they get to the user.
-    </p>
-
-    <p>
-        For instance, the Debian project 
-        Nonetheless, when we say <em>distribution,</em> "precompiled" is what
-        we mean.
+        Packages are typically distributed in preconfigured and precompiled form.
+        This yields a smaller archive, saves users from the
+        time-consuming step of compilation, and allows complete automation of
+        installation.
+        The implication, however, is that each piece of software is preconfigured 
+        for a particular operating system.  
     </p>
 
     <p>
@@ -437,6 +441,7 @@ Closing Remarks:
     <p>
         Whil packages of the same program (e.g., <codde>vim</code>) may 
         be similar across distributions, they are not cross-distribution compatible.
+        See your distribution's package management facilities for further information.
     </p>
 
     <h3>See Also:</h3>
@@ -456,6 +461,11 @@ https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html
 
 <div class="content" id="package-managers">
         <h2> Package Managers </h2>
+
+
+        <!--
+        this is what you turn to a distribution <em>for</em>&mdash; and
+        -->
 
 
         <p>
