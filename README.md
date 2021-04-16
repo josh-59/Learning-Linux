@@ -59,37 +59,28 @@ Terminals and Shells:
 - [ ] Closing Remarks: In the Beginning
 
 Packages:
-- [ ] Repositories and Packages
-- [ ] Building From Source
-- [ ] Ports
-- [ ] Source Repositories
-- [X] Introduction to Packages
-- [ ] Package Contents
-- [ ] Package Managers
-- [ ] Other Packaging Schemes
-- [ ] Closing Remarks:
+- [ ] Open Source
+- [ ] Building an OS from Source
+- [ ] Binary Packages
+- [ ] Dependencies and Package Managers
+- [ ] Rolling Releases, Close to Source
+- [ ] "Minor" Package Managers 
+- [ ] Closing Remarks: Repositories?
 
 How it Works:
 - [ ] Fork/merge
 - [X] Train Schedules
-- [ ] Bazaar Development Model
 - [ ] Modularity
+- [ ] Bazaar Development Model
 - [ ] Successful Business Models
 - [ ] Closing Remarks: Why it Works
 
-Bash (and stuff)
-- [x] I/O Redirection
-- [x] Shell Expansion
+Appendix: Bash (and other stuff)
+- [ ] I/O Redirection
+- [X] Shell Expansion
 - [X] Finding Files 
 - [ ] Startup Files
 - [ ] Shell Constructs (Loops, If/then)
 - [ ] Terminal Pro Tips (copy/paste)
 - [ ] Awk Programming Language
 - [ ] Closing Remarks: Preserving the Paradigm
-
-Appendix: Programming in Linux:
-- [ ] Programming Languages
-- [ ] Outline of Computer Science
-- [ ] Game Development
-- [ ] Application Development
-- [ ] Kernel Development

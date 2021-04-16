@@ -187,7 +187,9 @@ Exercises:
     </div>
 
     <p>
-        The standard shell of our time is the Bourne-Again shell, <a href="https://www.gnu.org/software/bash/">Bash</a>.
+        The standard shell of GNU/Linux is the Bourne-Again shell, <a href="https://www.gnu.org/software/bash/">Bash</a>.
+        Here, some deeper details of its execution will be developed.
+        In addition, some non-GNU command line tools for finding files are suggested.
     </p>
 </div>
 
@@ -518,7 +520,7 @@ Exercises:
 
     <p>
         The <a href="https://github.com/sharkdp/fd">fd</a>
-        utility is a simple, user-friendly alternative to
+        utility is a simple, user-friendly alternative to GNU's
         <a href="http://www.gnu.org/software/findutils/">find</a>.
         Usage:
     </p>
@@ -547,23 +549,23 @@ Exercises:
     </div>
 
     <p>
-        For a few reasons, I recommend <code>fd</code> over the classic
+        For a few reasons, I recommend (and use) <code>fd</code> over the classic
         GNU Findutils:
     </p>
 
     <ol style="margin-left: 5%; padding-right: 10%;">
         <li>
             <p>
-                Only one utility to learn.
+                Only one utility to learn:
                 In practice, <code>fd</code> replaces both <code>find</code>
                 and <code>locate</code>.
-                Specifically, it's fast and friendly enough that there's no longer
+                Specifically, it's fast enough that there's no longer
                 a need for <em>locate</em>.
             </p>
         </li>
         <li>
             <p>
-                Ameniable defaults.
+                Ameniable defaults:
                 <code>fd</code> matches only basenames, and thereby avoids printing
                 pages of results.
                 More, it does not require a flag to search for filenames.
@@ -571,14 +573,14 @@ Exercises:
         </li>
         <li>
             <p>
-                Regex by default.
+                Regex by default:
                 Regex is a more powerful and expressive string-matching language
                 than shell globbing.
             </p>
         </li>
         <li>
             <p>
-                Simpler in Construction.
+                Simpler in construction:
                 No database to worry about.
             </p>
         </li>
@@ -586,11 +588,11 @@ Exercises:
 
     <h3>Searching Files with <code>rg</code></h3>
     <p>
-        The <a href="https://github.com/BurntSushi/ripgrep"><code>rg</code></a>
-        utility recursively descends through a directory tree,
-        opens each file, reads its contents and attempts to
+        <a href="https://github.com/BurntSushi/ripgrep"><code>Ripgrep</code></a>
+        recursively descends through a directory tree,
+        opening each file, reading its contents and attempting to
         match each line against a given regex pattern.
-        If a line contains a match, then it prints the filename and those lines;
+        If a line contains a match, it prints the filename and those lines;
         effectively, it searches files for a particular pattern.
 	</p>
 
@@ -620,6 +622,8 @@ Exercises:
         <li><a href="https://docs.rs/regex/1.4.3/regex/#syntax">Regex - Rust</a></li>
     </ul>
 </div>
+
+
 
 <div class="content" id="startup-files">
     <h2>Startup Files</h2>

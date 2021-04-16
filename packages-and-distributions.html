@@ -8,7 +8,8 @@ last-updated: March 2021
 
     Introduction:
         It's more accurate to view a "distribution" as a collection
-        of precompiled and preconfigured packages, than as an operating system.
+        of precompiled and preconfigured packages, (which depend upon
+        some configuration) than as an operating system.
 
         Packages and package management are typically handled by a utility program,
         and the ordinary user would not have much need to delve into package
@@ -17,37 +18,13 @@ last-updated: March 2021
         step in the attainment of a free working operating system.
 
 
-
     Define 'repository' as a tracked collection of files, and note that they
     usually contain a package.
 
-
-    Packages and Distributions
-                |
-                |
-                |
-               \ /
-    Ports / Gentoo's Portage
-                |
-                |
-                |
-               \ /
-         Binary Packages
-                |
-                |
-                |
-               \ /
-     Debian / Fedora / openSUSE
-                |
-                |
-                |
-               \ /
-   Rolling Release Arch's pacman
-                |
-                |
-                |
-               \ /
-Pip / Gems / Cargo / (JavaScript) NPM / SNAP / APM (Atom)
+    https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation
+    - Choice and openness are primary concerns within Gentoo;
+    - The installation process is markedly similar to Linux From Scratch.
+    - Gentoo scripts are written in Python
 
 <div class="content" id="binary-packages">
 
@@ -170,14 +147,6 @@ Closing Remarks:
 
     https://docs.freebsd.org/en/books/handbook/ports/#ports-using
     Package Benefits
-
-    A compressed package tarball is typically smaller than the compressed 
-    tarball containing the source code for the application.
-    Packages do not require compilation time. For large applications, such as 
-    Mozilla, KDE, or GNOME, this can be important on a slow system.
-    Packages do not require any understanding of the process involved in 
-    compiling software on FreeBSD.
-
 
             Thanks for reading!
                 Ecosystem
@@ -538,10 +507,7 @@ https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html
     Original Make was conceived and written over a weekend
     [It's rediculous to funnel such quantities of software through such a tool]
     <a href="https://en.wikipedia.org/wiki/GNU_Autotools#Components">obtuse to say the least</a>
-
 </div>
-
-
 
 <div id="references" class="content">
     <h2> References </h2>
