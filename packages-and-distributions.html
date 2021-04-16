@@ -31,7 +31,7 @@ last-updated: March 2021
 Package Contents: Metadata and Payload
         Rewrite to use Arch Linux's packaging as example
 
-    The contents of a package may be split into two 
+    The contents of a package may be split into two
         parts: Metadata and Payload.
         In Slackware's format, metadata is restricted to the <code>./install</code>
         directory, and consists of the post-copy script <code>doinst.sh</code>
@@ -49,14 +49,14 @@ Package Contents: Metadata and Payload
         vim-8.2.2489-1-aarch64.pkg.tar.xz
         $ tar xf vim-8.2.2489-1-aarch64.pkg.tar.xz &amp;&amp; rm vim-8.2.2489-1-aarch64.pkg.tar.xz
         $ ls -A
-        .BUILDINFO  .MTREE  .PKGINFO  usr/ 
+        .BUILDINFO  .MTREE  .PKGINFO  usr/
 </div>
 
-        
+
 <p>
         The package's metadata are the hidden files in this directory:
         <code>.BUILDINFO</code>, <code>.MTREE</code>, <code>.PKGINFO</code>.
-        The package's payload consists of the non-hidden files 
+        The package's payload consists of the non-hidden files
         (in this case, that is only <code>usr/</code>).
         Not present in this package is the <code>.INSTALL</code> file,
         an optional script which would be executed by the package manager.
@@ -76,23 +76,23 @@ Package managers:
         Arch: base
 
         The system may be viewed as a collection of installed packages,
-        and, the package manager could be viewed as a manager of the 
+        and, the package manager could be viewed as a manager of the
         operating system.
 
 
         This is how the Arch guys view packages: The system is viewed
         as a repository, and when new software is released, the local
         repository becomes out of sync with the upstream repository.
-        "Upgrading" becomes a matter of synchronizing these repositories.  
+        "Upgrading" becomes a matter of synchronizing these repositories.
 
-        Thus, the software that composes a system defines the 
-        operating system, and, 
-        
+        Thus, the software that composes a system defines the
+        operating system, and,
+
     Repositories:
         Subsection?
 
 
-        Some people think that rolling releases are 
+        Some people think that rolling releases are
         the future of Linux distributions
         <sup><a href="https://frontpagelinux.com/news/centos-crosses-streams-with-the-community/">[1]</a></sup>
 
@@ -113,7 +113,7 @@ Package managers:
 
 
 Debian-specific virtual package: A faux target, only realized by other,
-actual packages.  
+actual packages.
 
 A section from the Linux Mint User Guide (old)
 https://www.linuxmint.com/documentation/user-guide/Cinnamon/english_18.0.pdf
@@ -150,8 +150,8 @@ Closing Remarks:
 
             Thanks for reading!
                 Ecosystem
-            Where to go from here? 
-                Install Ubuntu 
+            Where to go from here?
+                Install Ubuntu
                 The Linux Command Line
                 Arch Linux or Linux From Scratch
 
@@ -166,7 +166,7 @@ Closing Remarks:
     </p>
 
     <p>
-        Good ideas tend to resurface.  
+        Good ideas tend to resurface.
         Free software is in no danger of <em>being forgotten</em> because it is
         one such idea.
         The UNIX architecture similarly resurfaces.
@@ -176,6 +176,11 @@ Closing Remarks:
         Typically, package are presented to the user in precompiled form,
         and installed by a utility program.
 
+        <p>
+            Github offers services for creating your own repository,
+            and forking those of others.
+        </p>
+
     <p>
         Known-good ideas:
             Dynamic Linking
@@ -184,6 +189,10 @@ Closing Remarks:
     </p>
 </div>
 
+<p>
+    For instance, it is common (though fading) practice for
+    distributions to offer a new release every six months.
+</p>
 
 -->
 
@@ -202,9 +211,12 @@ Closing Remarks:
 
 <div class="content" id="introduction">
     <h1>Packages and Distributions </h1>
+
+
+
     <p>
         A <em>package</em> is a logical unit of software.
-        The obvious example is a program, but libraries are packages, too.  
+        The obvious example is a program, but libraries are packages, too.
     </p>
 </div>
 
@@ -221,15 +233,15 @@ Closing Remarks:
     </div>
 
     <p>
-        Each project uses its own language and build system; 
+        Each project uses its own language and build system;
         the above list of commands presupposes C/C++ source built via
         GNU's <em>Autoconf.</em>
-        Most packages include a <code>README</code> file that contains 
+        Most packages include a <code>README</code> file that contains
         directions to build, install, or tinker.
     </p>
 
     <p>
-        The traditional UNIX package format is a compressed tarball, a file 
+        The traditional UNIX package format is a compressed tarball, a file
         ending in <code>.tar.xz</code>, or <code>.tar.gzip</code>.
         One extracts such an archive with:
     </p>
@@ -257,8 +269,8 @@ Closing Remarks:
     </p>
 
     <p>
-        <a href="http://linuxfromscratch.org/">Linux From Scratch</a> is 
-        documentation regarding how to build a working 
+        <a href="http://linuxfromscratch.org/">Linux From Scratch</a> is
+        documentation regarding how to build a working
         GNU/Linux system entirely from source.
         One obtains each package, configures, compiles and
         installs it by hand.
@@ -275,28 +287,28 @@ Closing Remarks:
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            More generally, a <em>software port</em> is a minor revision of 
+            More generally, a <em>software port</em> is a minor revision of
             software allowing it to run on some non-native machine.
             We will not have reason to differentiate scripts and revisions here.
         </p>
     </div>
 
-    <blockquote> 
-        "Each port contains any patches necessary to make the original application 
-        source code compile and run on OpenBSD. Compiling an application is as simple 
-        as typing <code>make</code> in the port directory! The Makefile automatically 
-        fetches the application source code, either from a local disk or via HTTP, 
-        unpacks it on the local system, applies the patches, and compiles it. 
-        If all goes well, simply type <code>doas make install</code> to install the 
+    <blockquote>
+        "Each port contains any patches necessary to make the original application
+        source code compile and run on OpenBSD. Compiling an application is as simple
+        as typing <code>make</code> in the port directory! The Makefile automatically
+        fetches the application source code, either from a local disk or via HTTP,
+        unpacks it on the local system, applies the patches, and compiles it.
+        If all goes well, simply type <code>doas make install</code> to install the
         application."<sup><a href="https://man.openbsd.org/ports.7">[a]</a></sup>
     </blockquote>
 
     <p>
-        Gentoo Linux uses exactly this approach, and is a 
-        <em>metadistribution</em> owing to its lack of precompiled binaries. 
-        Even in proper distributions, scripts (and automation in general) are 
+        Gentoo Linux uses exactly this approach, and is a
+        <em>metadistribution</em> owing to its lack of precompiled binaries.
+        Even in proper distributions, scripts (and automation in general) are
         used to ease the burden of project maintenance.
-        For instance, in Arch Linux, 
+        For instance, in Arch Linux,
         <a href="https://wiki.archlinux.org/index.php/PKGBUILD"><code>PKGBUILD</code></a>
         is officially specified as the package's principle build mechanism.
     </p>
@@ -316,14 +328,14 @@ Closing Remarks:
         This yields a smaller archive, saves users from the
         time-consuming step of compilation, and allows complete automation of
         installation.
-        The implication, however, is that each piece of software is preconfigured 
-        for a particular operating system.  
+        The implication, however, is that each piece of software is preconfigured
+        for a particular operating system.
     </p>
 
     <p>
-        Among major distributions, the Slackware Project entertains the 
-        oldest, and possibly simplest, packaging scheme.
-        By modern standards, it may be considered crude, 
+        Among major distributions, the Slackware Project entertains the
+        oldest, and possibly simplest, binary packaging scheme.
+        By modern standards, it may be considered crude,
         because it leaves dependency resolution to the user.<sup><a href="https://www.slackbook.org/html/package-management.html">[2]</a></sup>
         It is easily dissected, though, and so represents a nice jumping-off point
         for us.
@@ -332,7 +344,7 @@ Closing Remarks:
     <p>
         A Slackware package arrives to the user as a single compressed archive.
         In this file is a directory tree reflective of the Slackware operating
-        system: 
+        system, such as:
     </p>
 
     <div class="code">
@@ -354,25 +366,22 @@ Closing Remarks:
     </div>
 
     <p>
-        To install the package, the files are 
+        To install the package, the archive is extracted, and the files are
         copied into the appropriate directories of the operating system.
-        If a directory does not exist, it is created; 
+        If a directory does not exist, it is created;
         the <code>install</code> directory is ignored.
-        After these files are copied, the script 
+        After these files are copied, the script
         <code>./install/doist.sh</code> is executed, if it exists.
     </p>
 
     <p>
-        ...And that's it! 
+        ...And that's it!
     </p>
 
     <p>
-        Installation is usually handled by a utility&mdash; in this case either
+        Installation is usually handled by a utility&mdash; in this case, either
         <a href="https://www.slackbook.org/html/package-management-package-utilities.html"><code>installpkg</code> or <code>pkgtools</code></a>&mdash;
         which must be granted superuser priveledges.
-        The archive is a <a href="https://en.wikipedia.org/wiki/Tar_(computing)">tarball</a>, courtesy of GNU's <code>tar</code>, 
-        and compression upon the archive is, currently, 
-        <a href="https://tukaani.org/xz/">Tukaani's</a> <code>xz</code>. 
     </p>
 
     <p>
@@ -388,13 +397,13 @@ Closing Remarks:
 
         <li>
             Fedora / Red Hat <code>.rpm</code>:
-            A custom file format which contains four sections: Lead, signature, 
+            A custom file format which contains four sections: Lead, signature,
             header, and payload (<code>zstd</code>-compressed <code>cpio</code>
             archive).<sup><a href="https://en.wikipedia.org/wiki/RPM_Package_Manager#Binary_format">[3]</a></sup>
         </li>
 
         <li>
-            Debian <code>.deb</code>: 
+            Debian <code>.deb</code>:
             An archive containing three files:
             <code>debian-binary</code>, denoting package format version number;
             <code>control.tar.xz</code>, serving a role analogous to <code>install</code> above; and
@@ -403,14 +412,14 @@ Closing Remarks:
 
         <li>
             Arch:
-            <code>zstd</code>-compressed tarball 
+            <code>zstd</code>-compressed tarball
         </li>
     </ul>
 
     <p>
-        Whil packages of the same program (e.g., <codde>vim</code>) may 
-        be similar across distributions, they are not cross-distribution compatible.
-        See your distribution's package management facilities for further information.
+        While packages of the same program (e.g., <code>vim</code>) may
+        be similar across distributions, do not expect them to be
+        cross-distribution compatible.
     </p>
 
     <h3>See Also:</h3>
@@ -452,14 +461,14 @@ https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html
 
         <div class="code">
         $ sudo apt update <br>
-        $ sudp apt upgrade 
+        $ sudp apt upgrade
         </div>
 
         <p>
-        The first command, <code>update</code>, synchronizes <code>apt</code>'s 
-        local package list with those of the configured repositories.  
+        The first command, <code>update</code>, synchronizes <code>apt</code>'s
+        local package list with those of the configured repositories.
         The second command downloads and installs any revised packages.
-        This two-command sequence would install a new kernel 
+        This two-command sequence would install a new kernel
         (via <a href="https://packages.debian.org/search?keywords=kernel-image&searchon=names&suite=stable&section=all">kernel-image</a>), for instance,
         and it would be used on the next reboot.
         </p>
@@ -472,7 +481,7 @@ https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html
 
     <div class="aside-left">
     <h4>Aside:</h4>
-    
+
         <p>
             An introduction to UNIX or UNIX-likes would not be complete without
             <code>make</code>!
@@ -482,18 +491,18 @@ https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html
     One expresses a program to be compiled in "recipes" of the form,
 
     hello: hello.c
-        gcc -o hello hello.c 
+        gcc -o hello hello.c
 
 
     and stores them in a file named <code>Makefile</code>.
-    Now, whenever a source file changes (in this example, <code>hello.c</code>), 
-    the command <code>make hello</code> will recompile the program, 
+    Now, whenever a source file changes (in this example, <code>hello.c</code>),
+    the command <code>make hello</code> will recompile the program,
     via <code>gcc -o hello hello.c</code>.
-    
 
-    Quite a novel little utility, and it is general in the sense that the files 
+
+    Quite a novel little utility, and it is general in the sense that the files
     in question need not be source/binary.
-    However, 
+    However,
 
 
     Kernighan:  p96
@@ -516,4 +525,3 @@ https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html
         <li> WHATWG HTML Living Standard Section 1.6, History. <a href="https://html.spec.whatwg.org/multipage/introduction.html#history-2">https://html.spec.whatwg.org/multipage/introduction.html#history-2</a> </li>
     </ol>
 </div>
-
