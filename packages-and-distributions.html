@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Packages and Distributions
-last-updated: March 2021
+last-updated: April 2021
 ---
 
 <!--
@@ -14,9 +14,8 @@ last-updated: March 2021
         Packages and package management are typically handled by a utility program,
         and the ordinary user would not have much need to delve into package
         specifics.
-        Nonetheless, they are an important
-        step in the attainment of a free working operating system.
-
+        Nonetheless, they are an important conceptual
+        step in the attainment of a free operating system.
 
     Define 'repository' as a tracked collection of files, and note that they
     usually contain a package.
@@ -51,16 +50,6 @@ Package Contents: Metadata and Payload
         $ ls -A
         .BUILDINFO  .MTREE  .PKGINFO  usr/
 </div>
-
-
-<p>
-        The package's metadata are the hidden files in this directory:
-        <code>.BUILDINFO</code>, <code>.MTREE</code>, <code>.PKGINFO</code>.
-        The package's payload consists of the non-hidden files
-        (in this case, that is only <code>usr/</code>).
-        Not present in this package is the <code>.INSTALL</code> file,
-        an optional script which would be executed by the package manager.
-</p>
 
 
 Package managers:
@@ -135,14 +124,6 @@ Other Package Managers:
            "The Snap Store, also known as the Ubuntu Store, is a commercial centralized software store operated by Canonical."
            Snap is unique in that it solves a problem that didn't actually exist:
 
-
-
-    The UNIX Way:
-        The <em>really</em> old guys, with <em>really</em> long beards
-        just distribute source. a la Free BSD's <em>ports</em>
-        Also, gentoo does takes this approach as-well.
-
-
 Closing Remarks:
 
     https://docs.freebsd.org/en/books/handbook/ports/#ports-using
@@ -157,13 +138,6 @@ Closing Remarks:
 
     Like if you looked at computing from outer space:
     https://tomaka.medium.com/the-future-of-operating-systems-efa31e17d66d
-
-    <div id="introduction" class="content">
-    <h1>Packages</h1>
-    <p>
-        In the author's opinion, Free Software works because
-        people want to do it.
-    </p>
 
     <p>
         Good ideas tend to resurface.
@@ -193,6 +167,50 @@ Closing Remarks:
     For instance, it is common (though fading) practice for
     distributions to offer a new release every six months.
 </p>
+
+
+<div class="content" id="closing-remarks">
+   <h2>Closing Remarks:</h2>
+    <h4><code>make</code></h4>
+
+    <div class="aside-left">
+    <h4>Aside:</h4>
+
+        <p>
+            An introduction to UNIX or UNIX-likes would not be complete without
+            <code>make</code>!
+        </p>
+    </div>
+
+    One expresses a program to be compiled in "recipes" of the form,
+
+    hello: hello.c
+        gcc -o hello hello.c
+
+
+    and stores them in a file named <code>Makefile</code>.
+    Now, whenever a source file changes (in this example, <code>hello.c</code>),
+    the command <code>make hello</code> will recompile the program,
+    via <code>gcc -o hello hello.c</code>.
+
+
+    Quite a novel little utility, and it is general in the sense that the files
+    in question need not be source/binary.
+    However,
+
+
+    Kernighan:  p96
+    Invented 1976, 7th ed UNIX
+    "an instant success"
+
+    "This approach replaces code with data, and that's almost always a win."
+
+
+    https://en.wikipedia.org/wiki/Make_(software)
+    Original Make was conceived and written over a weekend
+    [It's rediculous to funnel such quantities of software through such a tool]
+    <a href="https://en.wikipedia.org/wiki/GNU_Autotools#Components">obtuse to say the least</a>
+</div>
 
 -->
 
@@ -475,48 +493,6 @@ https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html
 </div>
 
 
-<div class="content" id="closing-remarks">
-    <h2>Closing Remarks:</h2>
-    <h4><code>make</code></h4>
-
-    <div class="aside-left">
-    <h4>Aside:</h4>
-
-        <p>
-            An introduction to UNIX or UNIX-likes would not be complete without
-            <code>make</code>!
-        </p>
-    </div>
-
-    One expresses a program to be compiled in "recipes" of the form,
-
-    hello: hello.c
-        gcc -o hello hello.c
-
-
-    and stores them in a file named <code>Makefile</code>.
-    Now, whenever a source file changes (in this example, <code>hello.c</code>),
-    the command <code>make hello</code> will recompile the program,
-    via <code>gcc -o hello hello.c</code>.
-
-
-    Quite a novel little utility, and it is general in the sense that the files
-    in question need not be source/binary.
-    However,
-
-
-    Kernighan:  p96
-    Invented 1976, 7th ed UNIX
-    "an instant success"
-
-    "This approach replaces code with data, and that's almost always a win."
-
-
-    https://en.wikipedia.org/wiki/Make_(software)
-    Original Make was conceived and written over a weekend
-    [It's rediculous to funnel such quantities of software through such a tool]
-    <a href="https://en.wikipedia.org/wiki/GNU_Autotools#Components">obtuse to say the least</a>
-</div>
 
 <div id="references" class="content">
     <h2> References </h2>
