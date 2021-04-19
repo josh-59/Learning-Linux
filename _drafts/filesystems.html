@@ -1,0 +1,135 @@
+
+<div id="filesystems" class="content">
+    <h2> Filesystems </h2>
+
+    <p>
+        A <em><a href="https://wiki.osdev.org/File_Systems#File_System_Theory">filesystem</a></em>
+        is a systematic method of storing and retrieving data on
+        disk.<sup><a href="https://wiki.osdev.org/Filesystem">[9]</a><a href="https://wiki.archlinux.org/index.php/File_systems">[10]</a></sup>
+        The first versions of UNIX referred to its own filesystem as, simply,
+        <code>fs</code>.
+        It was well-documented (by, for instance, Maurice J. Bach in
+        <a href="https://archive.org/details/DesignUNIXOperatingSystem/mode/2up"><em>The Design of the Unix Operating System</em></a>), and became the basis of
+        a sequence of filesystems, including Linux's <code>ext</code>
+        and <code>ext2</code>.
+    </p>
+
+    <p>
+        These filesystems were relatively simple and naive:
+        They expected that machines would always shutdown cleanly, and
+        that hard-drives worked flawlessly.
+        In particular, a power loss mid-write could leave the filesystem in
+        an inconsistent state.<sup><a href="https://en.wikipedia.org/wiki/Journaling_file_system">[11]</a></sup>
+        Such a shutdown required a check of the entire structure.<sup><a href="https://en.wikipedia.org/wiki/Journaling_file_system">[11]</a></sup>
+    </p>
+
+    <p>
+        The issue of non-clean shutdowns was solved with the introduction of
+        <em><a href="https://en.wikipedia.org/wiki/Journaling_file_system">journaling</a>:</em>
+        Before a change is made to the filesystem's contents, it is first written
+        to an on-disk journal.
+        Should the system shut down after the journal has been updated, the write
+        can simply be resumed on reboot; should the system shut down before the 
+        journal entry has been completed, the write is discarded.
+        In either case, the consistency of the filesystem is preserved.
+        Journaling filesystems are in wide use, and include Linux's excellent
+        <a href="https://ext4.wiki.kernel.org/index.php/Main_Page"><code>ext4</code></a>
+        and Microsoft's <code>NTFS</code>.
+    </p>
+
+    <p>
+        Next-generation filesystems are introducing myriad features to
+        cope with hard-drive failures, especially, in enterprise settings.
+        The most fundamental change is <em>copy on write,</em>
+        a minor change in semantics which allows filesystem-wide snapshots to be
+        created very efficiently, while reducing the need for journaling.
+        Other features include native logical volume management (RAID support) and
+        internal checksumming.
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            <code>ZFS</code> has been described by Linus Torvalds as a "non-starter,"
+            due to licensing issues.<sup><a href="https://www.realworldtech.com/forum/?threadid=189711&curpostid=189841">[17]</a></sup>
+        </p>
+    </div>
+
+    <p>
+        Both <code><a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">btrfs</a></code>
+        and <code><a href="https://en.wikipedia.org/wiki/ZFS">ZFS</a></code>
+        are such next-generation filesystems.<sup><a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">[12]</a><a href="https://wiki.archlinux.org/index.php/ZFS">[13]</a></sup>
+        Of the two, <code>btrfs</code> has made inroads to becoming Linux's next
+        major filesystem:
+        It is in wide use by Facebook,<sup><a href="https://lwn.net/Articles/824855/">[14]</a></sup> and is the
+        the default filesystem for openSUSE and
+        Fedora.<sup><a href="https://en.opensuse.org/Portal:13.2/Features">[15]</a><a href="https://fedoramagazine.org/announcing-fedora-33/">[16]</a></sup>
+    </p>
+
+    <p>
+        Owing in part to a vast collection of open-source drivers,
+        Linux can make use of many filesystems.
+        The filesystems that the (running) kernel supports are listed at
+        <code>/proc/filesystems</code>;
+        formatting tools are generally of the form <code>mkfs.&lt;filesystem&gt;</code>;
+        finally, <code>man</code> pages contain most relevant information.
+    </p>
+
+    <h3>Using a Filesystem</h3>
+
+    <p>
+        Creating a partitioning table and formatting the resulting
+        partitions
+        are the first steps to using a block device.
+        This amounts to writing persistent data structures to the device,
+        and is carried out in the Linux installation process before copying
+        system files.
+    </p>
+
+    <p>
+        The device in question is first partitioned by writing a
+        partition table to it.
+        The table is kept in the first blocks of the device,
+        and segments the rest of the device's address space into distinct,
+        non-overlapping <em>partitions.</em>
+        This table is read by the kernel and, for each partition present,
+        a new block special device file is presented in <code>/dev</code>.
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            The partition format of our time is <code>GPT</code>.
+            There are many options with respect to partitioning a disk.
+        </p>
+    </div>
+
+    <p>
+        Partitioning tools include <code>fdisk</code> and <code>parted</code>:
+    </p>
+
+    <div class="code">
+        $ sudo fdisk /dev/mmcblk1
+    </div>
+
+    <p>
+        At this point, one may format a partition:
+    </p>
+
+    <div class="code">
+        $ sudo mkfs.ext4 /dev/mmcblk1p1
+    </div>
+
+    <p>
+        Each partition supports a distinct filesystem, and each filesystem has
+        a unique root directory.
+    </p>
+
+    <h3> See Also: </h3>
+    <ul>
+        <li><a href="https://man7.org/linux/man-pages/man5/filesystems.5.html"><code>filesystems(5)</code></a></li>
+        <li><a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">An Introduction to Disk Partitions :: Fedora Docs</a></li>
+    </ul>
+</div>
+
+
