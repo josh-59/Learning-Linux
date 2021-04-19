@@ -12,6 +12,10 @@ last-updated: March, 2021
             printf("%s", prompt);
             getline(input);
 
+    UNIX v6 source code, line 1560:
+        "Hand craft 0th process"
+
+
 TODO
     Include: OSTEP "Address Spaces":
         https://pages.cs.wisc.edu/~remzi/OSTEP/vm-intro.pdf
@@ -19,63 +23,15 @@ TODO
         Writing signal handlers is <a href="http://lazarenko.me/signal-handler/">not easy</a>,
         especially in multi-threaded environments.
 
-    IPC: ??????
-        Primitives:
-            Signals - Software interupts: Interupt the normal flow of
-                execution in a program (Kerrisk, p388)
-            Sockets - Shuffle data
-            Shared Memory - Don't do it!
-            FIFO Pipes - More later
-
-        <div class="aside-right">
-            <h4>Aside</h4>
-            <p>
-                D-Bus is an excellent example of what a process
-                is capable of, but
-                has been effectively depricated by <code>kdbus</code>,
-                which is easier to use, more efficient, and more secure, among
-                other things.
-            </p>
-        </div>
-
-        D-Bus
-            Provide a high-level IPC interface, based principally around
-                Object-Oriented methodologies (methods, attributes, etc),
-                but which runs as a process.
-            Also, a "point-to-point communications library", libdbus
-
-            System daemon!
-                Inefficient!
-            Method Call Transactions: Call a method from another process and
-                get a response
-
         Actors: See Also: Examples?
         mirror.linuux.org.au/pub/linux.conf.au/2014/Friday/104-D-Bus_in_the_kernel_-_Lennart_Poettering.mp4
 
         See Also:
 
-    <h3 id="standard-file-descriptors">Standard File Descriptors</h3>
-    <p>
-        Over the years, file descriptors <em>0, 1,</em> and <em>2</em>
-        have become somewhat special:
-        They are guaranteed to be open and available for use at program startup.
-        They are:
-    </p>
-
-     <ul style="margin-left: 5%; list-style-type: none;">
-        <li><code>STDIN</code> is located at file descriptor 0; open for reading</li>
-        <li><code>STDOUT</code> is located at file descriptor 1; open for writing</li>
-        <li><code>STDERR</code> is located at file descriptor 2; open for writing</li>
-    </ul>
-
-    <p>
-        These are referred to as the <em>Standard File Descriptors.</em>
-    </p>
-
     <h3> Runlevels</h3>
 
     <p>
-        Collections of running programs are traditionally
+        Collections of running programs were traditionally
         called <a href="http://www.linfo.org/runlevel_def.html">runlevels</a>,
         and are managed by the initialization ("init") process.
         Different runlevels offered different services, and
@@ -87,7 +43,6 @@ TODO
         and runlevel 0 told <em>init</em> to kill all processes and shut down the
         system.<sup><a href="http://www.linfo.org/runlevel_def.html">[3]</a></sup>
     </p>
-
 
 -->
 
