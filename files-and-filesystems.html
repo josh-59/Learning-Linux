@@ -126,10 +126,8 @@ https://wiki.ubuntu.com/Lvm
         In particular, the <code>read</code> system call fills a given
         buffer with the contents of a file;
         order is preserved across sequential calls to <code>read</code>.
-        When a program requests a read, the kernel suspends its execution
-        until data is available.
-        At the command-line, data from the keyboard is made available when
-        the user presses <em>return.</em><sup><a href="https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios/">[3]</a></sup>
+        When a program requests a read, the kernel suspends its execution,
+        loads the appropriate data, then resumes execution of the program.
     </p>
 
     <h3>File Attributes</h3>
