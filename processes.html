@@ -278,18 +278,18 @@ TODO
 <div id="file-descriptors" class="content">
     <h2> File Descriptors</h2>
     <p>
-        Each file that a process has open is assigned a number
-        by the kernel (specifically, a small positive integer).
+        Each file that a process has open is associated with a number
+        (specifically, a nonnegative integer).
         This number is called a <em>file descriptor</em>,
         and is returned by the kernel in response to a request to open a file.
-        The process, thereafter, uses this integer to refer to that
-        file whenever it wishes to act on it.
+        The process, thereafter, uses it to refer to that
+        file when it wishes to act on it.
     </p>
 
     <p>
-        In the following line, a process is opening the file
-        <em>rubber_ducky</em> for reading, then
-        storing the kernel's response as <em>fd</em>:
+        In the following line, a process is instructing the kernel to
+        open the file <em>rubber_ducky</em> for reading, and
+        storing the kernel's response in the variable <em>fd</em>:
     </p>
 
     <pre>
@@ -298,15 +298,15 @@ TODO
 
     <p>
         If this call failed (which it would if <code>./rubber_ducky</code> did not
-        exist), then <code>fd</code> would be assigned -1, an invalid file
+        exist, for example), then <code>fd</code> would be assigned -1, an invalid file
         descriptor.
         We can therefore check with:
     </p>
 
     <pre>
         if (fd &lt; 0) {
-                perror("open");
-                exit(1);
+                perror("open");     // Print error message
+                exit(1);            // terminate process 
         }
     </pre>
 
@@ -316,7 +316,11 @@ TODO
 
     <p>
         In the following call to
-        <code><a href="https://man7.org/linux/man-pages/man2/read.2.html">read(2)</a></code>,
+        <code><a href="https://man7.org/linux/man-pages/man2/read.2.html">read</a></code>,
+        the kernel is directed to read at-most <code>buff_size</code>
+        bytes from file <code>fd</code>,
+        and copy the data into the process's memory space,
+        denoted by <code>buff</code>.
     </p>
 
     <pre>
@@ -324,14 +328,12 @@ TODO
     </pre>
 
     <p>
-        the kernel will read at-most <code>buff_size</code>
-        bytes from file <code>fd</code>,
-        and copy the data into the process's memory space,
-        here denoted by the variable <code>buff</code>.
-        If all goes well, the system call will return with a nonnegative value;
+        If all goes well, the system call will return with a nonnegative value,
+        the number of bytes read;
         if the kernel encountered an error, it will return with a
         negative value.
-        In either case, this value will be assigned to <code>num_bytes_read</code>.
+        In either case, this value will be assigned to <code>num_bytes_read</code>,
+        which may be checked similarly to <em>open.</em>
     </p>
 
     <p>
@@ -345,34 +347,34 @@ TODO
     <p>
         Ken Thompson's <em>UNIX</em> kernel facilitated reading and writing of
         files, but otherwise refrained from interjecting upon their use.
-        This approach was new for its time: Earlier
+        This approach was quite new for its time: Earlier
         operating systems interposed upon the handling of files, so that
         some files could only be read by some programs, and not by others.<sup><a href=#references>[A]</a></sup>
     </p>
+
+    <p>
+        Thompson's strategy was to leave file interpretation to the program,
+        and the resulting generality has become a hallmark of the UNIX platform.
+        The four file operations apply to all file types except directories,
+        whose structure (a mathematical tree) is protected by the kernel through 
+        a distinct set of system calls.  
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="http://www.linfo.org/unix_philosophy.html">Unix Philosophy Description</a> by The Linux Information Project (LINFO)</li>
+    </ul>
 </div>
 
 <div class="content" id="exec">
     <h2>Executing a Different Program</h2>
-    <p>
-        Launching a different program reduces to changing the program being
-        executed by the current process.
-        To do that,
-    </p>
-
-    <ol>
-        <li>
-            The designated executable file must be changed
-        </li>
-        <li>
-            Execution must begin at the beginning
-        </li>
-        <li>
-            The memory space of the process must be cleared
-        </li>
-    </ol>
 
     <p>
-        This is what the <a href="https://www.man7.org/linux/man-pages/man2/execve.2.html"><code>execve(2)</code></a> system call does:
+        Since new process creation is already handled through the <em>fork</em>
+        system call, 
+        launching another program reduces to introducing a system call
+        to change the program currently being executed.
+        This is what the <a href="https://www.man7.org/linux/man-pages/man2/execve.2.html"><em>exec</em></a> system call does.
     </p>
 
     <pre>
@@ -389,9 +391,8 @@ TODO
     </pre>
 
     <p>
-        This sequence is traditionally called <em>fork and exec,</em>
-        and results in one process (the parent) launching another program
-        (its child).
+        This sequence is traditionally called <em>fork and exec.</em>
+        and results in one process launching another program.
         Note that there is no need to adjust other process attributes, and indeed,
         they are preserved across <em>exec.</em>
     </p>
@@ -424,7 +425,7 @@ TODO
                 This is a form of abnormal process termination.
                 It is carried out through <em>signals,</em> a primitive
                 form of interprocess communication.
-                Command-line tools for terminating processes are <code><a href="https://www.man7.org/linux/man-pages/man1/kill.1.html">kill(1)</a></code>,
+                Command-line tools for sending these signals are <code><a href="https://www.man7.org/linux/man-pages/man1/kill.1.html">kill(1)</a></code>,
                 which refers to processes by their PID, and
                 <code><a href="https://www.man7.org/linux/man-pages/man1/killall.1.html">killall(1)</a></code>,
                 which kills processes by program name.
@@ -451,7 +452,7 @@ TODO
     <p>
         With more than 50 years of use, the process is a well-studied
         abstraction.
-        Indeed, it is supported at the hardware level, in addition to
+        It is supported at the hardware level, in addition to
         the software level.
         A deep study of it, while worthwhile, is outside the
         scope of this work.
