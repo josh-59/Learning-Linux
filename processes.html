@@ -346,24 +346,6 @@ TODO
         Every system call has an entry in Section 2 of the manual.
     </p>
 
-    <h3>A Bit More</h3>
-
-    <p>
-        Ken Thompson's UNIX kernel facilitated reading and writing 
-        files, but otherwise refrained from interjecting upon their use.
-        This approach was quite new for its time: Earlier
-        operating systems interposed upon the handling of files, so that
-        some files could only be read by some programs, and not by others.<sup><a href=#references>[A]</a></sup>
-    </p>
-
-    <p>
-        Thompson's strategy was to leave file interpretation to the program,
-        and the resulting generality has become a hallmark of the UNIX platform.
-        The four file operations apply to all file types except directories,
-        whose structure (a mathematical tree) is protected by the kernel through 
-        a distinct set of system calls.  
-    </p>
-
     <h3>See Also:</h3>
     <ul>
         <li><code><a href="https://man7.org/linux/man-pages/man2/read.2.html">read(2)</a></code> - Read from a file descriptor</li>

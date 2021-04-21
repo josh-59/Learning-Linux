@@ -8,6 +8,14 @@ last-updated: April, 2021
 
 To Do:
 
+
+    <p>
+        The UNIX file has been called "The Universal I/O Model"
+Kerrisk calls File I/O "The Universal I/O Model"
+
+    Somewhere:
+        EOF, and CTRL+D
+
     Inodes 
     Directories
         Directory structure:
@@ -31,7 +39,6 @@ To Do:
 
 sysfs:
     A view of the kernel, not intended for inspection by system's administrators.
-    http://linuxfromscratch.org/lfs/view/stable/chapter09/udev.html
 
 
 Filesystem Heirarchy:
@@ -41,7 +48,6 @@ Filesystem Heirarchy:
             /var contains logs, transient and temporary files
             Not shareable across systems
 
-Kerrisk calls File I/O "The Universal I/O Model"
 
 XDG Directory Specification
     ~/.config is defined as part of the XDG specification
@@ -61,6 +67,23 @@ https://wiki.ubuntu.com/Lvm
 
 
 
+<div class="content" id="directory-structure">
+    <h2>Directory Structure</h2>
+<div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            By convention alone, filenames which begin with a
+            period <code>.</code> are considered hidden,
+            including <code>.</code> and <code>..</code>.
+            We list them here with the <code>--all</code> option.
+        </p>
+    </div>
+
+</div>
+
+
+
+
 -->
 
 <div id="nav_bar_2" class="nav">
@@ -70,13 +93,9 @@ https://wiki.ubuntu.com/Lvm
         <li><a href="#regular-files"> Regular Files</a></li>
         <li><a href="#device-files"> Device Files </a></li>
         <li><a href="#pseudo-files"> Psuedo Files </a></li>
-        <li><a href="#inodes">inodes</a></li>
-        <!--<li><a href="#fifo"> FIFO </a></li>
-        <li><a href="#socket"> Socket </a></li> -->
+        <li><a href="#inodes-and-directories">inodes and Directories</a></li>
         <li><a href="#fs-heir"> Filesystem Heirarchy </a></li>
         <li><a href="#mounting-unmounting"> Mounting and Unmounting</a></li>
-        <!-- <li><a href="#vfs-and-inodes">VFS and Inodes</a></li> -->
-        <li><a href="#directories"> Directories </a></li>
         <li><a href="#closing-remarks"> Closing Remarks: inodes </a></li>
         <li><a href="#udacity"> Udacity </a></li>
         <li><a href="#references"> References </a></li>
@@ -99,8 +118,9 @@ https://wiki.ubuntu.com/Lvm
         The protogenesis of Unix was a filesystem.<sup><a href=#references>[1]</a><a href="http://read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[2]</a></sup>
         Designed by the researchers of Bell Laboratories and
         implemented primarily by Ken Thompson,
-        this piece of software became an operating system with the
-        introduction of a means of interacting with, and executing, its contents.
+        this piece of software became an operating system 
+        when a means of interacting with, and executing, its contents was
+        introduced.
     </p>
 </div>
 
@@ -168,17 +188,13 @@ https://wiki.ubuntu.com/Lvm
         It is used today to compartmentalize the machine.
     </p>
 
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="http://www.linfo.org/unix_philosophy.html">Unix Philosophy Description</a> by The Linux Information Project (LINFO)</li>
-    </ul>
 </div>
 
 <div class="content" id="regular-files">
     <h2>Regular Files</h2>
 
     <p>
-        A regular file contains data which is stored on disk.
+        A regular file is stored on disk, or some other persistent storage device.
         Most files are regular files.
     </p>
 
@@ -205,21 +221,21 @@ https://wiki.ubuntu.com/Lvm
 
     <p>
         The first character, a hyphen (<code>-</code>), tells us that
-        <code>/bin/bash</code> refers to a regular file.
+        <code>/bin/bash</code> names a regular file.
         The next nine characters are the file's
         <a href="http://linfo.org/permissions.html">permission bits</a>;
         the <code>r</code> and <code>x</code> present in each trio indicates
         that this file is readable and executable (respectively) by any user on
         the system.
         The <code>w</code> present only in the owner trio indicates that the
-        file may only be written to by its owner, who in this case
+        file may be written to only by its owner, who in this case
         is <code>root</code>.
     </p>
 
     <p>
         Two other tools useful for peeking
-        into a file are <code><a href="https://www.man7.org/linux/man-pages/man1/file.1.html">file(1)</a></code>, which prints a summary of the file, and
-        <code><a href="https://man7.org/linux/man-pages/man1/stat.1.html">stat(1)</a></code>, which prints the file's complete metadata:
+        into a file are <code><a href="https://www.man7.org/linux/man-pages/man1/file.1.html">file</a></code>, which attempts to categorize the file, and
+        <code><a href="https://man7.org/linux/man-pages/man1/stat.1.html">stat</a></code>, which prints the file's complete metadata:
     </p>
 
     <div class="code">
@@ -241,15 +257,8 @@ https://wiki.ubuntu.com/Lvm
 
     <p>
         To simply view the contents of a file, we can use the <code>less</code>
-        paging utility, which displays one screenful of the file at a time:
+        paging utility, which displays one screenful of the file at a time.
     </p>
-
-    <div class="code">
-        $ less simple-shell.c
-    </div>
-
-    (Press <code>q</code> to quit).
-
 </div>
 
 <div id="device-files" class="content">
@@ -277,13 +286,13 @@ https://wiki.ubuntu.com/Lvm
         Note that the essential capabilities of the USB-stick are preserved through
         the <em>file</em> interface: We can read from it and write to it.
         If we were to add the capacity to <em>seek</em> (i.e., change location) 
-        within the file, then we be able to use the device in its entirety. 
+        within the file, then we would be able to use the device in its entirety.
     </p>
 
     <h3> Block and Character Device Files </h3>
 
     <p>
-        UNIX recognizes two kinds of devices:
+        UNIX-like operating systems recognize two kinds of devices:
         <em>Block</em> and <em>character.</em>
         A character device supports reading and writing only a single
         byte (ASCII character) at a time; a terminal is one 
@@ -308,12 +317,13 @@ https://wiki.ubuntu.com/Lvm
     <p>
         A <em>psuedo</em> or <em>synthetic</em> file does 
         not exist on disk, and does not exist on any persistent storage.
-        They are instead synthesized by the kernel as processes interact
+        They are synthesized by the kernel as processes interact
         with them (and the directories they are in).
     </p>
 
-        For example, <code>/proc/meminfo</code> provides access to
-        the system's current memory usage:
+    <p>
+        For example, <code>/proc/meminfo</code> is a 
+        description of the the system's current memory usage:
     </p>
 
     <div class="code">
@@ -335,26 +345,47 @@ https://wiki.ubuntu.com/Lvm
         The <code>/proc</code> and <code>/sys</code> directories are
         reserved for such files.
         <code>/proc</code> contains one directory for each 
-        running program on the system; each directory contains substantial 
+        process on the system; each directory contains substantial 
         information about its respective process.
         <code>/sys</code> contains information pertaining to only the
-        lowest-level system daemons.
+        lowest-level system daemons.<sup><a href="http://linuxfromscratch.org/lfs/view/stable/chapter09/udev.html">[c]</a></sup>
     </p>
 
-    <h3>Other File Types:</h3>
+    <p>
+        <strong>Other File Types:</strong>
+    </p>
 
     <ul style="width: 70%; margin-left: 5%;">
         <li><p>
             <strong>FIFO:</strong> Also known as a <em>named pipe,</em> 
             this is a file type that connects one running program to another.
-            It stands for <em>First in, first out</em>.
+            "FIFO" stands for <em>First in, first out</em>.
         </li></p>
 
         <li><p>
-            <strong>Socket:</strong> A file that supports communication across
-            networks.
+            <strong>Socket:</strong> A file that supports interprocess 
+            communication across networks.
         </li></p>
     </ul>
+
+    <h3>A Bit More</h3>
+
+
+    <p>
+        Ken Thompson's UNIX kernel facilitated reading and writing 
+        files, but otherwise refrained from interjecting upon their use.
+        This approach was quite new for its time: Earlier
+        operating systems interposed upon the handling of files, so that
+        some files could only be read by some programs, and not by others.<sup><a href=#references>[1]</a></sup>
+    </p>
+
+    <p>
+        Thompson's strategy was to leave file interpretation to the program,
+        and the resulting generality has become a hallmark of the UNIX platform.
+        The four file operations apply to all file types except directories,
+        whose structure (a mathematical tree) is protected by the kernel through 
+        a distinct set of system calls.  
+    </p>
 
     <h3>See Also:</h3>
     <ul>
@@ -364,26 +395,95 @@ https://wiki.ubuntu.com/Lvm
 </div>
 
 
-<div class="content" id="inodes">
-    <h2> inodes </h2>
+<div class="content" id="inodes-and-directories">
+    <h2>inodes and Directories</h2>
 
     <p>
-        Files are represented within the kernel by <em>inodes:</em><sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html#id1">[18]</a></sup>
-        Every file present on the system is represented by a unique inode, and
-        every path on the directory tree terminates in an inode.
-    </p>
-
-    <p>
+        In keeping with traditional UNIX file semantics, 
+        every file on a GNU/Linux system is represented by an unique <em>inode.</em><sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html#id1">[18]</a></sup>
+        More, every path on the directory tree terminates in an unique inode reference.
         Inodes are the responsibility of their respective filesystem,
-        and, in keeping with traditional UNIX filesystems,
-        each is given a number, called an <em>inode number.</em>
-        Within a given filesystem, an inode number uniquely identifies an
+        wherein each is given a number.
+        Within a filesystem, an inode number uniquely identifies an
         inode, and thereby uniquely identifies a file.
     </p>
 
+    <p>
+        A <em>directory</em> is a file that associates filenames (strings) with 
+        inode numbers. 
+        A directory cannot be <em>read()</em> directly, but may be viewed
+        through <code>ls</code>:
+    </p>
+
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            GNU/Linux machines run many filesystems simultaneously.
+        </p>
+    </div>
+
+
+
+    
+    <div class="code">
+        $ ls -ia ~/Public/Learning-Linux <br>
+        645278 ./<br>
+        384844 ../<br>
+        775487 assets/<br>
+        641473 command-line-1-tutorial-introduction.html<br>
+        645403 _config.yml<br>
+        775449 _data/<br>
+        642188 documentation.html<br>
+        642185 files-and-filesystems.html<br>
+        641460 finding-files.html<br>
+        775463 _future/<br>
+        [...]
+    </div>
+
+    <p>
+        Each such association is called a <em>hard link.</em>
+        A hard link is created upon file creation;
+        we can also create new hard links with the <code>ln</code> command,
+        as the following sequence demonstrates:
+    </p>
+
+    <div class="code">
+        $ echo "Hello " &gt; newfile <br>
+        $ ls -i newfile <br>
+        2112949 newfile <br>
+        $ ln newfile 2file <br>
+        $ ls -i newfile 2file <br>
+        2112949 newfile <br>
+        2112949 2file <br>
+    </div>
+
+    <p>
+        The name <code>2file</code> is equivalent to the name
+        <code>newfile</code>.
+        If we modify the file using one name,
+        then we have modified the file referred to by the other:
+    </p>
+
+    <div class="code">
+        $ echo "world!" &gt;&gt; 2file<br>
+        $ cat newfile<br>
+        Hello world!
+    </div>
+
+    <p>
+        A file may have more than one hard link, but when it has zero,
+        it is no longer accessible through the directory tree, and
+        the kernel prepares to delete it.<sup><a href="#references">[19]</a></sup>
+    </p>
+
+    <h3> See Also: </h3>
+    <ul>
+        <li> <code><a href="https://man7.org/linux/man-pages/man7/inode.7.html"> inode(7) </a></code></li>
+        <li><a href="http://linfo.org/hard_link.html">What is a hard link?</a> -- definition by The Linux Information Project (LINFO)</li>
+        <li><a href="https://en.wikipedia.org/wiki/Symbolic_link#Overview"> Symbolic Link (Overview) - Wikipedia </a> </li>
+    </ul>
 </div>
-
-
 
 <div id="fs-heir" class="content">
     <h2>Filesystem Heirarchy</h2>
@@ -551,109 +651,13 @@ https://wiki.ubuntu.com/Lvm
     </ul>
 </div>
 
-<div id="directories" class="content">
-    <h2>Directories</h2>
-
-    <p>
-        A <em>directory</em> is a file containing a table with two columns:
-        File name and Inode number:
-    </p>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            By convention alone, filenames which begin with a
-            period <code>.</code> are considered hidden,
-            including <code>.</code> and <code>..</code>.
-            We list them here with the <code>--all</code> option.
-        </p>
-    </div>
-
-    <div class="code">
-        $ ls -ia ~/Public/Learning-Linux <br>
-        645278 ./<br>
-        384844 ../<br>
-        775487 assets/<br>
-        641473 command-line-1-tutorial-introduction.html<br>
-        645403 _config.yml<br>
-        775449 _data/<br>
-        642188 documentation.html<br>
-        642185 files-and-filesystems.html<br>
-        641460 finding-files.html<br>
-        775463 _future/<br>
-        645377 .git/<br>
-        645401 .gitignore<br>
-        775479 _includes/<br>
-        641295 index.html<br>
-        642186 intro-to-gnu-linux.html<br>
-        777671 .jekyll-cache/<br>
-        775483 _layouts/<br>
-        641300 package-management.html<br>
-        641293 processes.html<br>
-        642193 programming-in-nix.html<br>
-        641472 README.md<br>
-        775485 _sass/<br>
-        898840 _site/<br>
-        642693 systemd.html<br>
-        641291 terminals-and-shells.html<br>
-    </div>
-
-    <p>
-        Each entry in a directory is called a <em>hard link.</em>
-        A file may have more than one hard link, but when it has zero,
-        it is no longer accessible through the directory tree, and
-        the kernel prepares to delete it.<sup><a href="#references">[19]</a></sup>
-    </p>
-
-    <p>
-        A hard link is created upon file creation;
-        we can also create new hard links with the <code>ln</code> "link" command,
-        as the following sequence demonstrates:
-    </p>
-
-    <div class="code">
-        $ echo "hello world" &gt; newfile <br>
-        $ ls -i newfile <br>
-        2112949 newfile <br>
-        $ ln newfile 2file <br>
-        $ ls -i newfile 2file <br>
-        2112949 newfile <br>
-        2112949 2file <br>
-    </div>
-
-    <p>
-        The name "2file" is equivalent to the name
-        "newfile".
-        If we modify the file using one name,
-        then we have modified the file referred to by the other:
-    </p>
-
-    <div class="code">
-        $ echo "hello from 2file" &gt; 2file<br>
-        $ cat newfile<br>
-        hello from 2file
-    </div>
-
-    <p>
-        Directories are somewhat special: They are managed by the kernel,
-        and are not directly readable nor writeable by
-        processes.<sup><a href="#references">[20]</a></sup>
-    </p>
-
-    <h3> See Also: </h3>
-    <ul>
-        <li> <code><a href="https://man7.org/linux/man-pages/man7/inode.7.html"> inode(7) </a></code></li>
-        <li><a href="http://linfo.org/hard_link.html">What is a hard link?</a> -- definition by The Linux Information Project (LINFO)</li>
-        <li><a href="https://en.wikipedia.org/wiki/Symbolic_link#Overview"> Symbolic Link (Overview) - Wikipedia </a> </li>
-    </ul>
-</div>
 
 <div class="content" id="closing-remarks">
     <h2 style="margin-bottom: 0;">Closing Remarks</h2>
     <h4>inodes: A Historical Perspective</h4>
 
     <p>
-        The inode was implemented literally in the Ancient UNIX filesystem,
+        The inode was implemented literally in the Research UNIX filesystem,
         and formed the basis of its architecture:
     </p>
 
@@ -664,7 +668,7 @@ https://wiki.ubuntu.com/Lvm
         wholly consumed by a file.<sup><a href="#references">[20]</a></sup>
         The filesystem's <em>index nodes</em> represent one file each,
         contain their file's metadata, and contain pointers to data blocks.<sup><a href="#references">[20]</a></sup>
-        These nodes are arranged in an array, and can be uniquely identified
+        These nodes are arranged in an array, and were uniquely identified
         by an index into this array.
     </p>
 
