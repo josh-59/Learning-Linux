@@ -220,7 +220,6 @@ Closing Remarks:
         <li><a href="#open-source"> Open Source</a></li>
         <li><a href="#building-from-source">Building an OS from Source</a></li>
         <li><a href="#binary-packages">Binary Packages</a></li>
-        <li><a href="#dependencies">Dependencies</a></li>
         <li><a href="#package-managers">Package Managers</a></li>
         <li><a href="#closing-remarks">Closing Remarks</a></li>
         <li><a href="#references"> References </a></li>
@@ -255,7 +254,7 @@ Closing Remarks:
         the above list of commands presupposes C/C++ source built via
         GNU's <em>Autoconf.</em>
         Most packages include a <code>README</code> file that contains
-        directions to build, install, or tinker.
+        instructions to build, install, or tinker.
     </p>
 
     <p>
@@ -283,7 +282,8 @@ Closing Remarks:
     <h2>Building an OS from Source</h2>
 
     <p>
-        Naturally, the system may be viewed as a collection of installed packages.
+        Naturally, the system may be viewed as a collection of installed packages,
+        a view that is reiterated by each distribution considered below.
     </p>
 
     <p>
@@ -297,8 +297,8 @@ Closing Remarks:
 
     <p>
         Stepping away from manual configuration and compilation,
-        we arrive at the highly UNIX-y notion of <em>ports.</em>
-        A port is, in essence, a script that installs a package from source.
+        we arrive at the highly UNIX-y notion of "ports."
+        A <em>port</em> is a script that installs a package from source.
         From an OpenBSD manual page:
     </p>
 
@@ -343,10 +343,11 @@ Closing Remarks:
 
     <p>
         Packages are typically distributed in preconfigured and precompiled form.
-        This yields a smaller archive, saves users from the
+        This yields a smaller archive, saves users the
         time-consuming step of compilation, and allows complete automation of
         installation.
-        The implication, however, is that each piece of software is preconfigured
+        And installation of software is fast!  
+        The implication, however, is that each package is preconfigured
         for a particular operating system.
     </p>
 
@@ -360,7 +361,7 @@ Closing Remarks:
     </p>
 
     <p>
-        A Slackware package arrives to the user as a single compressed archive.
+        A Slackware package arrives to the user as a compressed tarball.
         In this file is a directory tree reflective of the Slackware operating
         system, such as:
     </p>
@@ -384,12 +385,12 @@ Closing Remarks:
     </div>
 
     <p>
-        To install the package, the archive is extracted, and the files are
-        copied into the appropriate directories of the operating system.
+        To install the package, the archive is first extracted and the files 
+        copied into the appropriate directories of the host operating system.
         If a directory does not exist, it is created;
         the <code>install</code> directory is ignored.
         After these files are copied, the script
-        <code>./install/doist.sh</code> is executed, if it exists.
+        <code>install/doist.sh</code> is executed, if it exists.
     </p>
 
     <p>
@@ -400,17 +401,19 @@ Closing Remarks:
         Installation is usually handled by a utility&mdash; in this case, either
         <a href="https://www.slackbook.org/html/package-management-package-utilities.html"><code>installpkg</code> or <code>pkgtools</code></a>&mdash;
         which must be granted superuser priveledges.
-    </p>
-
-    <p>
-        All major distributions package software using compressed archives
-        of "reflective directory trees," though each to their own taste:
+        All major distributions deal in binary packages, and use similar 
+        compressed archives of "reflective directory trees": 
     </p>
 
     <ul>
         <li>
             Slackware <code>.txz</code>:
             <code>xz</code>-compressed tarball
+        </li>
+
+        <li>
+            Arch:
+            <code>zstd</code>-compressed tarball
         </li>
 
         <li>
@@ -428,31 +431,12 @@ Closing Remarks:
             <code>data.tar.xz</code>, the actual payload
         </li>
 
-        <li>
-            Arch:
-            <code>zstd</code>-compressed tarball
-        </li>
     </ul>
-
-    <p>
-        While packages of the same program (e.g., <code>vim</code>) may
-        be similar across distributions, do not expect them to be
-        cross-distribution compatible.
-    </p>
 
     <h3>See Also:</h3>
     <ul>
         <li><a href="https://en.wikipedia.org/wiki/Tar_(computing)">tar (computing) - Wikipedia </a></li>
     </ul>
-</div>
-
-<div class="content" id="dependencies">
-    <h2>Dependencies</h2>
-    <p>
-        It's relatively common for a given package to depend upon other packages;
-
-https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html
-    </p>
 </div>
 
 <div class="content" id="package-managers">
@@ -462,6 +446,22 @@ https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html
         <!--
         this is what you turn to a distribution <em>for</em>&mdash; and
         -->
+
+        <p>
+            As mentioned, package installation is fully automated.  
+            The utility that handles packages is referred to as a 
+            <em>package manager.</em>
+        </p>
+
+        <ul>
+            <li>Debian: <code>apt</code></li>
+            <li>Fedora: <code>rpm</code></li>
+            <li>openSUSE: <code>zypper</code></li>
+        </ul>
+
+        <p>
+
+        </p>
 
 
         <p>
@@ -490,8 +490,37 @@ https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html
         (via <a href="https://packages.debian.org/search?keywords=kernel-image&searchon=names&suite=stable&section=all">kernel-image</a>), for instance,
         and it would be used on the next reboot.
         </p>
+
+    <h3>Dependencies</h3>
+    <p>
+        It's relatively common for a given package to depend upon other packages,
+        and most mainstream distributions fully automate dependency resolution.
+        This is done by listing dependencies within its metadata,
+        then recursively satisfying those dependencies.
+    </p>
+
+    <p>
+        For example, the dependencies of 
+        <a href="https://packages.debian.org/buster/vim">Vim</a> on Debian are listed as:
+    </p>
+
+    <div class="code">
+Depends: vim-common (= 2:8.1.0875-5), vim-runtime (= 2:8.1.0875-5), libacl1 (&gt;= 2.2.23), libc6 (&gt;= 2.15), libgpm2 (&gt;= 1.20.7), libselinux1 (&gt;= 1.32), libtinfo6 (&gt;= 6)
+    </div>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://en.opensuse.org/Package_management">Package management - openSUSE</a></li>
+        <li><a href="https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html">Debian Package Basics</a></li>
+    </ul>
 </div>
 
+
+
+<div class="content" id="dependencies">
+
+    </p>
+</div>
 
 
 <div id="references" class="content">
