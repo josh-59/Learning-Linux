@@ -101,6 +101,49 @@ To Do:
         <li><a href="http://man.cat-v.org/unix-1st/1/sh">sh(1)</a> (First Edition)</li>
     </ul>
 
+
+
+    <h3>Arguments</h3>
+
+    <p>
+        Commands are the first part of a "typical line of input" given to the
+        shell; the other part is arguments.
+        Like commands, arguments are supplied by the user. 
+        They are passed to each function, builtin, or program as it begins 
+        execution, and it is up to that command to interpret them.
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Two tools to identify commands are
+            <code>type</code> and <code>which</code>.
+            Use <code>type</code> with argument <code>-a</code> (all),
+            to get the most complete listing.
+        </p>
+    </div>
+
+    <p>
+        For example, <code>echo</code> responds to arguments 
+        very simply&mdash; It prints them back out:
+    </p>
+
+    <div class="code">
+        $ echo one two three four<br>
+        one two three four<br>
+    </div>
+
+    <p>
+        See a command's manual page (or other documentation) for details.
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://www.educative.io/blog/bash-shell-command-cheat-sheet">Bash Cheat Sheet: Top 25 commands and Creating Custom Commands</a></li>
+    </ul>
+</div>
+
+
 -->
 
 <div id="nav_bar_2" class="nav">
@@ -111,8 +154,7 @@ To Do:
 		<li><a href="#shells"> Shells </a></li>
         <li><a href="#commands">Commands</a></li>
         <li><a href="#pwd">Working Directory</a></li>
-        <li><a href="#path">PATH </a></li>
-        <li><a href="#closing-remarks">Closing Remarks: Arguments</a></li>
+        <li><a href="#closing-remarks">Closing Remarks </a></li>
         <li><a href="#ryan-tomayko">Ryan Tomayko</a></li>
 		<li><a href="#references"> References </a></li>
 	</ul>
@@ -191,7 +233,6 @@ To Do:
 
 	<h3>See Also</h3>
 	<ul>
-        <li><a href="https://www.man7.org/linux/man-pages/man1/tty.1.html"><code>tty(1)</code></a></li>
 		<li><a href="https://www.vt100.net/dec/vt_history">Meet the Family: Digital's Video Terminals</a></li>
         <li><a href="https://www.youtube.com/watch?v=RuZUPpmXfT0&t=4s">DEC VT320: The Classic 1987 Library Computer Terminal</a> (Youtube Video)</li>
     </ul>
@@ -228,15 +269,20 @@ To Do:
 	<p>
 		These emulators are "dumb" in the sense that they do nothing except
 		display text and return text.
-		Per tradition, their input and output is handled through device files 
-        (see <code>tty(1)</code> above).
+		Per tradition, their input and output is handled through device files.
 	</p>
 
 	<p>
-		Terminals can become quite involved; for this introduction, and for
+		Terminals can become quite involved. 
+        For this introduction, and for
         most purposes, it is sufficient to recognize that
 		terminals and shells are distinct, cooperating processes.
 	</p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://www.man7.org/linux/man-pages/man1/tty.1.html"><code>tty(1)</code></a> - Print the file name of the terminal connected to standard input</li>
+    </ul>
 </div>
 
 <div id="shells" class="content">
@@ -253,7 +299,7 @@ To Do:
 	</div>
 
 	<p>
-		A shell is a program which interprets and executes commands.
+		A shell is a program which interprets and executes our (arbitrary) commands.
 		It is a <em>shell</em> in the sense that it is the outermost layer of the
 		operating system, with which the user has direct
         contact.<sup><a href="http://www.linfo.org/kernel.html">[3]</a></sup>
@@ -270,7 +316,7 @@ To Do:
 		<li><a href="https://fishshell.com/">Fish</a>&mdash; A Friendly Interactive Shell</li>
         <li><a href="https://xon.sh">Xonsh</a>&mdash; A Pythonic shell, written in Python!</li>
         <li><a href="https://www.nushell.sh/">Nushell</a>&mdash; An interactive shell, supporting piplines of structured data, in addition to simple text streams.</li>
-        <li><a href="https://elv.sh/">Elvish</a>&mdash; an "expressive programming language and versatile interactive shell." Version 1.0 not yet released</a></li>
+        <li><a href="https://elv.sh/">Elvish</a>&mdash; An "expressive programming language and versatile interactive shell." Version 1.0 not yet released</a></li>
 	</ul>
 
     <p>
@@ -301,80 +347,128 @@ To Do:
 
     <p>
         This corresponds directly to, <em>Find and execute <code>command</code>, 
-        and pass it <code>[arg ...]</code>.</em>
-        There are a few places the shell can look.
+        and pass it arguments <code>[arg ...]</code>.</em>
+    </p>
+
+    <p>
+        Since it's kind of a big topic, we'll cover command location 
+        first.  
+        There are a few places the shell looks.
         In order: 
     </p>
 
     <div class="aside-right">
         <h4>Note:</h4>
         <p>
-            Bash supports <em>aliasing</em>&mdash; command expansion&mdash;
+            Bash additionally supports <em>aliasing</em>&mdash; command expansion&mdash;
             ...and officially does not recommend its use.<sup><a href="https://www.gnu.org/software/bash/manual/html_node/Aliases.html">[4]</a></sup>
         </p>
     </div>
 
     <ol>
-        <li>User-defined Function</li>
-        <li>Shell Builtin Command</li>
-        <li>External Program</li>
+        <li>User-defined functions</li>
+        <li>Shell builtin commands</li>
+        <li>External programs</li>
     </ol>
 
     <p>
-        Bash builtins can be investigated through the <code>help</code> command.
-        However, most commands are external to the shell.
-        For example, 
+        User-defined functions are written in the shell language itself.
+        The most common way to define such a function is to include it in
+        one of Bash's startup files.
+    </p>
+
+    <p>
+        Shell builtins are hard coded into the shell.  
+        They are, characteristically, relatively few, and
+        may be listed with,
     </p>
 
     <div class="code">
-        $ ls 
+        $ help
     </div>
 
     <p>
-        The <code>ls</code> command is not found as a user-defined function,
-        nor as a builtin.  
-        It is found in <code>/bin</code>.
+        Most commands fall into the third category, external programs.
+        For example, <code>ls</code> is <em>not</em> a shell builtin.
+        It is found in <code>/usr/bin</code>, and the program <code>/usr/bin/ls</code>
+        is executed whenever the command <code>ls</code> is issued. 
     </p>
 
-    <h3>Arguments</h3>
-
-    <p>
-        Commands are the first part of a "typical line of input" given to the
-        shell; the other part is arguments.
-        Like commands, arguments are supplied by the user. 
-        They are passed to each function, builtin, or program as it begins 
-        execution, and it is up to that command to interpret them.
-    </p>
+    <h3><code>PATH</code> Environment Variable</h3>
 
     <div class="aside-right">
-        <h4>Aside:</h4>
+        <h4>Remember:</h4>
         <p>
-            Two tools to identify commands are
-            <code>type</code> and <code>which</code>.
-            Use <code>type</code> with argument <code>-a</code> (all),
-            to get the most complete listing.
+            The shell searches the directories in <em>PATH</em> only after
+            looking for a user-defined function and a builtin by the
+            same name.
         </p>
     </div>
 
     <p>
-        For example, <code>echo</code> responds to arguments 
-        very simply&mdash; It prints them back out:
+        So where does the shell look for external programs?
+        The <em>PATH</em> environment variable
+        contains a colon (<code>:</code>)-separated list of directories to be searched
+        when looking for a program.
+        It may look like this:
     </p>
 
     <div class="code">
-        $ echo one two three four<br>
-        one two three four<br>
+        $ echo $PATH<br>
+        /usr/bin:/bin:/home/josh/.local/bin
     </div>
 
     <p>
-        See a command's manual page (or other documentation) for details.
+        The shell searches each directory in this list, from left to right,
+        for a file whose name matches the command given.
+        It executes the first found, then abandons its search.
+        The shell does not search the current working directory
+        for a command.
     </p>
+    
+    <p>
+        If <code><i>command</i></code> includes a forward-slash <code>/</code>, 
+        then it is interpretted as a program name.
+        For instance, we can execute precisely <code>/usr/bin/echo</code>
+        by issuing,
+    </p>
+
+    <div class="code">
+        $ /usr/bin/echo one two three four <br>
+        one two three four
+    </div>
+
+    <p>
+        This is typically done to execute a program in the current working
+        directory:
+    </p>
+
+    <div class="code">
+        $ ./<i>program</i> 
+    </div>
+
+    <p>
+        Finally, appending directories to <code>PATH</code> is an important step of
+        setting up a development environment.
+        This is typically done in <code>~/.bashrc</code>
+        (but UNIX purists <a href="https://unix.stackexchange.com/questions/26047/how-to-correctly-add-a-path-to-path">beg to differ</a>).
+        The correct construct appends the directory
+        only if it is not already present:
+    </p>
+
+    <div class="code">
+        if [[ ! $PATH =~ $HOME/.local/bin ]]; then<br>
+        &emsp;&emsp;&emsp;&emsp;PATH=$PATH:$HOME/.local/bin<br>
+        fi
+    </div>
 
     <h3>See Also:</h3>
     <ul>
-        <li><a href="https://www.educative.io/blog/bash-shell-command-cheat-sheet">Bash Cheat Sheet: Top 25 commands and Creating Custom Commands</a></li>
+        <li><a href="https://www.shell-tips.com/bash/functions/"> The Complete Guide to Bash Functions</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Environment_variable#True_environment_variables"> Environment Variables </a> - Wikipedia</li>
     </ul>
 </div>
+
 
 <div class="content" id="pwd">
     <h2>Working Directory</h2>
@@ -436,84 +530,8 @@ To Do:
     </div>
 
 </div>
-
-<div class="content" id="path">
-    <h2><code>PATH</code> Environment Variable</h2>
-
-    <div class="aside-right">
-        <h4>Remember:</h4>
-        <p>
-            The shell searches the directories in <em>PATH</em> only after
-            looking for a user-defined function and a builtin by the
-            same name.
-        </p>
-    </div>
-
-    <p>
-        So where does the shell look for external commands?
-        The <em>PATH</em> environment variable
-        contains a colon (<code>:</code>)-separated list of directories to be searched
-        when looking for a program.
-        It may look like this:
-    </p>
-
-    <div class="code">
-        $ echo $PATH<br>
-        /usr/bin:/bin:/home/josh/.local/bin
-    </div>
-
-    <p>
-        The shell searches each directory in this list from left to right
-        for a file whose name matches the command given.
-        It executes the first found, then abandons its search.
-        The shell does not search the current working directory
-        for a command.
-    </p>
-    
-    <p>
-        If a command includes a forward-slash <code>/</code>, 
-        then it is interpretted as a program name.
-        For instance, we can execute precisely <code>/usr/bin/echo</code>
-        by issuing,
-    </p>
-
-    <div class="code">
-        $ /usr/bin/echo one two three four <br>
-        one two three four
-    </div>
-
-    <p>
-        This is typically done to execute a program in the current working
-        directory:
-    </p>
-
-    <div class="code">
-        $ ./<i>program</i> 
-    </div>
-
-    <p>
-        Finally, appending directories to <code>PATH</code> is an important step of
-        setting up a development environment.
-        This is typically done in <code>~/.bashrc</code>
-        (but UNIX purists beg to differ).
-        The correct construct appends the directory
-        only if it is not already present:
-    </p>
-
-    <div class="code">
-        if [[ ! $PATH =~ $HOME/.local/bin ]]; then<br>
-        &emsp;&emsp;&emsp;&emsp;PATH=$PATH:$HOME/.local/bin<br>
-        fi
-    </div>
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://en.wikipedia.org/wiki/Environment_variable#True_environment_variables"> Environment Variables </a> - Wikipedia</li>
-    </ul>
-</div>
-
 <div class="content" id="closing-remarks">
-    <h2>Closing Remarks:</h2>
+    <h2>Closing Remarks</h2>
 
     <div class="aside-right">
         <h4>Aside:</h4>
@@ -544,15 +562,15 @@ To Do:
     </p>
 
     <p>
-        Many details and constructs have not been introduced. 
+        Many details have not been introduced. 
         Some of the most important are:
     </p>
 
     <ul style="margin-left: 10%;">
-        <li>I/O and Redirection</li>
-        <li>Control characters</li>
-        <li>Variables</li>
+        <li><a href="/bash.html">Variables and Expansions</a></li>
+        <li><a href="/bash.html#standard-file-descriptors">I/O and Redirection</a></li>
         <li><a href="https://ryanstutorials.net/bash-scripting-tutorial/bash-script.php">Scripting</a></li>
+        <li>Control Characters/Sequences</li>
     </ul>
 
     <h3>See Also:</h3>
