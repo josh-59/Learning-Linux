@@ -22,6 +22,8 @@ last-updated: April, 2021
     </div>
 
 
+    <li><a href="https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios/">A Brief Introduction to Termios</a> - Made of Bugs</li>
+
     Explanation of sudo:
     https://www.linuxjournal.com/sites/default/files/2018-11/GeekGuide-BeyondTrust-BeyondSudo.pdf
 
@@ -517,42 +519,39 @@ Exercises:
     </p>
 
     <p>
-        <strong>SIGINT:</strong>
-        The "interupt" signal is a terminal generated signal, and is
-        created and passed with CTRL+C.
-        It is the preferred way to kill a foreground process.(Kerrisk, p389)
-    </p>
-
-    <p>
         <strong>EOF:</strong>
         CTRL+D
     </p>
 
-    <p>
-        <strong>Copying and Pasting:</strong>
-        The desktop's familiar copy/paste is overruled on the terminal
-        emulator (ctrl-v is interpretted as an escape sequence).
-        Use CTRL+SHIFT+c and CTRL+SHIFT-v.
-        Depending on the distribution, middle-clicking may also copy and paste.
-    </p>
+    <h3>Copying and Pasting:</h3>
 
     <p>
-        <strong>Utilities to figure things out:</strong>
-        <ul>
-            <li><code>man(1)</code></li>
-            <li><code>apropos(1)</code></li>
-            <li><code>whatis(1)</code></li>
-        </ul>
+        The desktop's familiar copy/paste is overruled when using terminal
+        emulators.
+        Use CTRL+SHIFT+c and CTRL+SHIFT-v instead.
+        Also, depending on the desktop environment, middle-clicking may 
+        copy and paste.
     </p>
 
+    <h3> Manual Sections:
+
     <p>
-        You can restrict your search of the manual pages to a specific section
-        with the <code>-s</code> switch:
+        When using <code>apropos</code>, you can restrict your search 
+        to a specific section with the <code>-s</code> switch:
     </p>
 
     <div class="code">
         $ apropos -s 1
     </div>
+
+    <p>
+        And you can specify a specific section when using <code>man</code>:
+    </p>
+
+    <div class="code">
+        $ man 7 intro
+    </div>
+
 </div>
 
 <div class="content" id="finding-files">
