@@ -6,73 +6,22 @@ last-updated: April 2021
 
 <!--
 
+    <p>
+        Known-good ideas:
+            Dynamic Linking
+        Known-bad ideas:
+            Static Linking!
+    </p>
 
-    Naturally, the system may be viewed as a collection of installed packages.
 
-    Principle build mechanism:
-    ^^^^^^^^^
-            More like 'custom' or 
+
+    Repositories:
+        Subsection?
 
     Define 'repository' as a tracked collection of files, and note that they
     usually contain a package.
 
-    - The installation process is markedly similar to Linux From Scratch.
-    - Gentoo scripts are written in Python
 
-<div class="content" id="binary-packages">
-
-Package Contents: Metadata and Payload
-        Rewrite to use Arch Linux's packaging as example
-
-    The contents of a package may be split into two
-        parts: Metadata and Payload.
-        In Slackware's format, metadata is restricted to the <code>./install</code>
-        directory, and consists of the post-copy script <code>doinst.sh</code>
-        and a description of the software, <code>slack-desc</code>.
-        Other package management schemes incorporate more metadata; here
-        we'll take a look at Arch's, since it is more complete.
-    </p>
-
-    <p>
-        First, we obtain a package and extract it:
-    </p>
-
-<div class="code">o.
-        $ ls
-        vim-8.2.2489-1-aarch64.pkg.tar.xz
-        $ tar xf vim-8.2.2489-1-aarch64.pkg.tar.xz &amp;&amp; rm vim-8.2.2489-1-aarch64.pkg.tar.xz
-        $ ls -A
-        .BUILDINFO  .MTREE  .PKGINFO  usr/
-</div>
-
-
-Package managers:
-    <div class="code">
-        sudo apt install ./atom-amd64.deb
-    </div>
-
-    <p>
-        That's it. There's nothing more to it.
-    </p>
-
-    Expressing the Operating System:
-        Arch: base
-
-        The system may be viewed as a collection of installed packages,
-        and, the package manager could be viewed as a manager of the
-        operating system.
-
-
-        This is how the Arch guys view packages: The system is viewed
-        as a repository, and when new software is released, the local
-        repository becomes out of sync with the upstream repository.
-        "Upgrading" becomes a matter of synchronizing these repositories.
-
-        Thus, the software that composes a system defines the
-        operating system, and,
-
-    Repositories:
-        Subsection?
 
 
         Some people think that rolling releases are
@@ -141,28 +90,13 @@ Repositories
     </p>
 
     <p>
-        <p>
-            Github offers services for creating your own repository,
-            and forking those of others.
-        </p>
-
-    <p>
-        Known-good ideas:
-            Dynamic Linking
-        Known-bad ideas:
-            Static Linking!
+        Github offers services for creating your own repository,
+        and forking those of others.
     </p>
+
+
+    <li><a href="https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html">Debian Package Basics</a></li>
 </div>
-
-<p>
-    For instance, it is common (though fading) practice for
-    distributions to offer a new release every six months.
-</p>
-
-
-    <p>
-        a view that is reiterated by each distribution considered below.
-    </p>
 
 
 <div class="content" id="closing-remarks">
@@ -208,6 +142,13 @@ Repositories
     <a href="https://en.wikipedia.org/wiki/GNU_Autotools#Components">obtuse to say the least</a>
 </div>
 
+        Moreover, even in traditional distributions, automation is similarly
+        used to ease project maintenance.
+        For example, in Arch Linux,
+        <a href="https://wiki.archlinux.org/index.php/PKGBUILD"><code>PKGBUILD</code></a>
+        is analogous to <code>ebuild</code> above.  
+
+
 -->
 
 <div id="nav_bar_2" class="nav">
@@ -251,7 +192,7 @@ Repositories
         <a href="https://www.gnu.org/software/bash/manual/html_node/Lists.html#Lists">list</a> 
         of commands presupposes C/C++ source built via
         GNU's <em>Autoconf.</em>
-        Most packages include a <code>README</code> file that contains
+        Most packages include a <code>README</code> file of
         instructions to build, install, or tinker.
     </p>
 
@@ -270,6 +211,8 @@ Repositories
     </p>
 
     <p>
+        Naturally, the system may be viewed as a collection of installed
+        packages.
         Finally, to configure and compile source code into usable software 
         is to <em>build</em> it.  
     </p>
@@ -311,29 +254,24 @@ Repositories
         If we're just a little bit more clever, we'll recognize that 
         <strike>programming is all about repitition</strike>
         <em>building</em> is per-package specific, so that we 
-        could maintain a description of how to build software, to
+        could maintain descriptions of how to build software, to
         be interpretted by some utility program.
     </p>
 
     <p>
         Gentoo Linux is an operating system built around this strategy.
         The mechanized instructions to build software are kept in 
-        "<code>ebuild</code>"'s, 
-        which additionally describe where to obtain the original source
-        code.
-        Gentoo is often referred to as a <em>metadistribution</em> because it
-        does not deal in binary packages.
+        "<code>ebuild</code>"'s&mdash; text files which
+        additionally describe where to obtain the original source
+        code, software version number and package dependencies.
+        The scheme is transparent and flexible, and Gentoo is all about 
+        openness and choice.<sup><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/About">[a]</a></sup>
     </p>
 
     <p>
-        Compilation remains a time-consuming step, often taking over a day
-        to build a working system, but nonetheless begins to be approachable
-        by ordinary users.
-        Moreover, even in proper distributions, automation is similarly
-        used to ease the burden of project maintenance.
-        For example, in Arch Linux,
-        <a href="https://wiki.archlinux.org/index.php/PKGBUILD"><code>PKGBUILD</code></a>
-        is officially specified as the package's principle build mechanism.
+        Compilation remains a time-consuming step: It can take over a day
+        to build a working system from source, but nonetheless begins to be 
+        approachable by ordinary users.
     </p>
 
     <h3> See Also:</h3>
@@ -349,8 +287,8 @@ Repositories
     <p>
         Packages are typically distributed in preconfigured and precompiled form.
         This yields a smaller archive, saves users the
-        time-consuming step of compilation, and still allows complete automation of
-        installation.
+        time-consuming step of compilation, and still allows the
+        complete automation of installation.
         And software installation is fast!  
         The implication, however, is that each distributed package is preconfigured
         for a particular operating system, running on a particular computer 
@@ -406,15 +344,15 @@ Repositories
     <p>
         The installation utility is, in this case, either
         <a href="https://www.slackbook.org/html/package-management-package-utilities.html"><code>installpkg</code> or <code>pkgtools</code></a>. 
-        It must be granted root priveledges.
+        It must be granted root privilege.
     </p>
 
     <p>
         All major distributions deal in binary packages, and use similar 
-        compressed archives of "reflective directory trees,"
+        compressed-archives of "reflective directory trees,"
         though each to their own taste.
         By and large, however, the <em>package</em> is intended to be
-        an opaque data format.
+        an opaque data format, and we will not dissect it further.
     </p>
 
     <h3>See Also:</h3>
@@ -427,28 +365,25 @@ Repositories
     <h2> Package Managers </h2>
 
     <p>
-        As mentioned, package installation is fully automated.  
-        The utility that handles packages is referred to as a 
+        A utility that obtains and installs packages is referred to as a 
         <em>package manager.</em>
+        Package managers are highly distribution-specific, and serve
+        as the user's front-end for getting new software:
     </p>
 
     <ul>
         <li>Debian: <code>apt</code></li>
         <li>Fedora: <code>rpm</code></li>
         <li>openSUSE: <code>zypper</code></li>
+        <li>Arch: <code>pacman</code></li>
     </ul>
 
     <p>
-        To update a machine running on Debian's packaging facilities, for example,
-        we must simply run,
+        Modern package managers are among the most powerful pieces of software
+        on GNU/Linux operating systems.
+        To update a machine utilizing Debian's packaging facilities, for example,
+        we simply,
     </p>
-    <div class="aside-right">
-    <h4>Aside:</h4>
-        <p>
-                See <code>$ apt --help</code>
-                and <code><a href="https://manpages.debian.org/buster/apt/apt.8.en.html">apt(8)</a></code> for more information
-        </p>
-    </div>
 
     <div class="code">
         $ sudo apt update <br>
@@ -456,35 +391,39 @@ Repositories
     </div>
 
     <p>
-        The first command, <code>update</code>, synchronizes <code>apt</code>'s
-        local package list with those of the configured repositories.
-        The second command downloads and installs any revised packages.
-        This two-command sequence would install a new kernel
-        (via <a href="https://packages.debian.org/search?keywords=kernel-image&searchon=names&suite=stable&section=all">kernel-image</a>), for instance,
-        and it would be used on the next reboot.
+        Searching for packages does not require superuser privileges:
     </p>
+
+    <div class="code">
+        $ apt search vim
+    </div>
+
+    <p>
+        Each package contains a description of itself:
+    </p>
+
+    <div class="code">
+        $ apt show vim
+    </div>
+
+    <p>
+        And can be installed with:
+    </p>
+
+    <div class="code">
+        $ sudo apt install vim
+    </div>
 
     <h3>Dependencies</h3>
     <p>
         It's relatively common for a given package to depend upon other packages,
-        and most mainstream distributions fully automate dependency resolution.
-        This is done by listing dependencies within its metadata,
-        then recursively satisfying those dependencies.
+        and most distributions, including Debian, automate dependency resolution.
     </p>
-
-    <p>
-        For example, the dependencies of 
-        <a href="https://packages.debian.org/buster/vim">Vim</a> on Debian are listed as:
-    </p>
-
-    <div class="code">
-Depends: vim-common (= 2:8.1.0875-5), vim-runtime (= 2:8.1.0875-5), libacl1 (&gt;= 2.2.23), libc6 (&gt;= 2.15), libgpm2 (&gt;= 1.20.7), libselinux1 (&gt;= 1.32), libtinfo6 (&gt;= 6)
-    </div>
 
     <h3>See Also:</h3>
     <ul>
+        <li><a href="https://wiki.debian.org/AptCLI">Apt CLI - Debian Wiki</a></li>
         <li><a href="https://en.opensuse.org/Package_management">Package management - openSUSE</a></li>
-        <li><a href="https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html">Debian Package Basics</a></li>
     </ul>
 </div>
 
