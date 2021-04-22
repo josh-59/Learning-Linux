@@ -21,12 +21,9 @@ last-updated: March, 2021
     <h2> Rust </h2>
 
     <p>
-        Rust is the up-and-coming systems programming language, 
-        and in my opinion, the bee's knees.
-        Like C, Rust is a compiled programming language, appropriate for both
-        systems and application programming.
-        However, it mitigates memory management risks by introducing a rigorous type
-        system and new ownership rules.
+        Rust is such a <strike>large and disparate</strike>
+        expressive language that it's best viewed as a collection of
+        mini-languages.
     </p>
 </div>
 
@@ -86,12 +83,20 @@ last-updated: March, 2021
     <p>
         We can map an expression's value to <code>()</code>) by
         appending a semicolon <code>;</code>. 
-        We will say that the value is <em>discarded.</em>
+        We say that the value is <em>discarded.</em>
         Semicolons on empty lines have no effect, and
         discarding <code>()</code> has no effect.
     </p>
 
     <h3>Result</h3>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            It's not actually special: It has been assigned the
+            <code>#![MustUse]</code> attribute.
+        </p>
+    </div>
 
     <p>
         One type is special, and that is the <em>Result</em> type:
@@ -131,13 +136,6 @@ last-updated: March, 2021
 
 <div class="content" id="crate">
     <h2>Crate</h2>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            A crate is a Rust package.
-        </p>
-    </div>
 
     <p>
         The <em>crate</em> structure is well-defined.
