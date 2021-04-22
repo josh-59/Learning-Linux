@@ -6,22 +6,16 @@ last-updated: April 2021
 
 <!--
 
-    Introduction:
-        It's more accurate to view a "distribution" as a collection
-        of precompiled and preconfigured packages, (which depend upon
-        some configuration) than as an operating system.
 
-        Packages and package management are typically handled by a utility program,
-        and the ordinary user would not have much need to delve into package
-        specifics.
-        Nonetheless, they are an important conceptual
-        step in the attainment of a free operating system.
+    Naturally, the system may be viewed as a collection of installed packages.
+
+    Principle build mechanism:
+    ^^^^^^^^^
+            More like 'custom' or 
 
     Define 'repository' as a tracked collection of files, and note that they
     usually contain a package.
 
-    https://wiki.gentoo.org/wiki/Handbook:AMD64/Full/Installation
-    - Choice and openness are primary concerns within Gentoo;
     - The installation process is markedly similar to Linux From Scratch.
     - Gentoo scripts are written in Python
 
@@ -124,7 +118,6 @@ Other Package Managers:
            "The Snap Store, also known as the Ubuntu Store, is a commercial centralized software store operated by Canonical."
            Snap is unique in that it solves a problem that didn't actually exist:
 
-Closing Remarks:
 
     https://docs.freebsd.org/en/books/handbook/ports/#ports-using
     Package Benefits
@@ -139,17 +132,15 @@ Closing Remarks:
     Like if you looked at computing from outer space:
     https://tomaka.medium.com/the-future-of-operating-systems-efa31e17d66d
 
+
+Repositories
     <p>
-        Good ideas tend to resurface.
-        Free software is in no danger of <em>being forgotten</em> because it is
-        one such idea.
-        The UNIX architecture similarly resurfaces.
+        A <em>repository</em> is a tracked collection of files.  
+        Maintaining and making available a repository of binary packages
+        is a nontrivial component of distribution.
     </p>
 
-
-        Typically, package are presented to the user in precompiled form,
-        and installed by a utility program.
-
+    <p>
         <p>
             Github offers services for creating your own repository,
             and forking those of others.
@@ -167,6 +158,11 @@ Closing Remarks:
     For instance, it is common (though fading) practice for
     distributions to offer a new release every six months.
 </p>
+
+
+    <p>
+        a view that is reiterated by each distribution considered below.
+    </p>
 
 
 <div class="content" id="closing-remarks">
@@ -229,11 +225,11 @@ Closing Remarks:
 <div class="content" id="introduction">
     <h1>Packages and Distributions </h1>
 
-
-
     <p>
         A <em>package</em> is a logical unit of software.
         The obvious example is a program, but libraries are packages, too.
+        The purpose of this article is to orient the user to the package-centric
+        landscape of pragmatic open-source software.
     </p>
 </div>
 
@@ -251,7 +247,9 @@ Closing Remarks:
 
     <p>
         Each project uses its own language and build system;
-        the above list of commands presupposes C/C++ source built via
+        the above 
+        <a href="https://www.gnu.org/software/bash/manual/html_node/Lists.html#Lists">list</a> 
+        of commands presupposes C/C++ source built via
         GNU's <em>Autoconf.</em>
         Most packages include a <code>README</code> file that contains
         instructions to build, install, or tinker.
@@ -271,6 +269,11 @@ Closing Remarks:
         yielding a directory reflective of its original packager's.
     </p>
 
+    <p>
+        Finally, to configure and compile source code into usable software 
+        is to <em>build</em> it.  
+    </p>
+
     <h3>See Also:</h3>
     <ul>
         <li><a href="http://www.slackware.com/releasenotes/packages14.2.php">Slackware 14.2 Package List</a></li>
@@ -281,52 +284,54 @@ Closing Remarks:
 <div id="building-from-source" class="content">
     <h2>Building an OS from Source</h2>
 
-    <p>
-        Naturally, the system may be viewed as a collection of installed packages,
-        a view that is reiterated by each distribution considered below.
-    </p>
-
-    <p>
-        <a href="http://linuxfromscratch.org/">Linux From Scratch</a> is
-        documentation regarding how to build a working
-        GNU/Linux system entirely from source.
-        One obtains each package, configures, compiles and
-        installs it by hand.
-        A new version of the documentation is released about every six months.
-    </p>
-
-    <p>
-        Stepping away from manual configuration and compilation,
-        we arrive at the highly UNIX-y notion of "ports."
-        A <em>port</em> is a script that installs a package from source.
-        From an OpenBSD manual page:
-    </p>
-
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            More generally, a <em>software port</em> is a minor revision of
-            software allowing it to run on some non-native machine.
-            We will not have reason to differentiate scripts and revisions here.
+            A new version of the documentation is released about every six months.
         </p>
     </div>
 
-    <blockquote>
-        "Each port contains any patches necessary to make the original application
-        source code compile and run on OpenBSD. Compiling an application is as simple
-        as typing <code>make</code> in the port directory! The Makefile automatically
-        fetches the application source code, either from a local disk or via HTTP,
-        unpacks it on the local system, applies the patches, and compiles it.
-        If all goes well, simply type <code>doas make install</code> to install the
-        application."<sup><a href="https://man.openbsd.org/ports.7">[a]</a></sup>
-    </blockquote>
+    <p>
+        <a href="http://linuxfromscratch.org/">Linux From Scratch</a> is
+        documentation describing how to build a working
+        GNU/Linux system entirely from source.
+        One obtains each package, configures, compiles and
+        installs it by hand.
+    </p>
 
     <p>
-        Gentoo Linux uses exactly this approach, and is a
-        <em>metadistribution</em> owing to its lack of precompiled binaries.
-        Even in proper distributions, scripts (and automation in general) are
+        Open-source is all about choice, and for some,
+        Linux from Scratch is the only way to go.
+        However, building anything from source is time-consuming and labor-intensive;
+        in particular, feature and security updates are left entirely to the user.
+        The ordinary user is not expected to build software from source.
+    </p>
+
+    <p>
+        If we're just a little bit more clever, we'll recognize that 
+        <strike>programming is all about repitition</strike>
+        <em>building</em> is per-package specific, so that we 
+        could maintain a description of how to build software, to
+        be interpretted by some utility program.
+    </p>
+
+    <p>
+        Gentoo Linux is an operating system built around this strategy.
+        The mechanized instructions to build software are kept in 
+        "<code>ebuild</code>"'s, 
+        which additionally describe where to obtain the original source
+        code.
+        Gentoo is often referred to as a <em>metadistribution</em> because it
+        does not deal in binary packages.
+    </p>
+
+    <p>
+        Compilation remains a time-consuming step, often taking over a day
+        to build a working system, but nonetheless begins to be approachable
+        by ordinary users.
+        Moreover, even in proper distributions, automation is similarly
         used to ease the burden of project maintenance.
-        For instance, in Arch Linux,
+        For example, in Arch Linux,
         <a href="https://wiki.archlinux.org/index.php/PKGBUILD"><code>PKGBUILD</code></a>
         is officially specified as the package's principle build mechanism.
     </p>
@@ -344,11 +349,12 @@ Closing Remarks:
     <p>
         Packages are typically distributed in preconfigured and precompiled form.
         This yields a smaller archive, saves users the
-        time-consuming step of compilation, and allows complete automation of
+        time-consuming step of compilation, and still allows complete automation of
         installation.
-        And installation of software is fast!  
-        The implication, however, is that each package is preconfigured
-        for a particular operating system.
+        And software installation is fast!  
+        The implication, however, is that each distributed package is preconfigured
+        for a particular operating system, running on a particular computer 
+        architecture.
     </p>
 
     <p>
@@ -385,7 +391,7 @@ Closing Remarks:
     </div>
 
     <p>
-        To install the package, the archive is first extracted and the files 
+        To install the package, the archive is extracted and the files 
         copied into the appropriate directories of the host operating system.
         If a directory does not exist, it is created;
         the <code>install</code> directory is ignored.
@@ -398,40 +404,18 @@ Closing Remarks:
     </p>
 
     <p>
-        Installation is usually handled by a utility&mdash; in this case, either
-        <a href="https://www.slackbook.org/html/package-management-package-utilities.html"><code>installpkg</code> or <code>pkgtools</code></a>&mdash;
-        which must be granted superuser priveledges.
-        All major distributions deal in binary packages, and use similar 
-        compressed archives of "reflective directory trees": 
+        The installation utility is, in this case, either
+        <a href="https://www.slackbook.org/html/package-management-package-utilities.html"><code>installpkg</code> or <code>pkgtools</code></a>. 
+        It must be granted root priveledges.
     </p>
 
-    <ul>
-        <li>
-            Slackware <code>.txz</code>:
-            <code>xz</code>-compressed tarball
-        </li>
-
-        <li>
-            Arch:
-            <code>zstd</code>-compressed tarball
-        </li>
-
-        <li>
-            Fedora / Red Hat <code>.rpm</code>:
-            A custom file format which contains four sections: Lead, signature,
-            header, and payload (<code>zstd</code>-compressed <code>cpio</code>
-            archive).<sup><a href="https://en.wikipedia.org/wiki/RPM_Package_Manager#Binary_format">[3]</a></sup>
-        </li>
-
-        <li>
-            Debian <code>.deb</code>:
-            An archive containing three files:
-            <code>debian-binary</code>, denoting package format version number;
-            <code>control.tar.xz</code>, serving a role analogous to <code>install</code> above; and
-            <code>data.tar.xz</code>, the actual payload
-        </li>
-
-    </ul>
+    <p>
+        All major distributions deal in binary packages, and use similar 
+        compressed archives of "reflective directory trees,"
+        though each to their own taste.
+        By and large, however, the <em>package</em> is intended to be
+        an opaque data format.
+    </p>
 
     <h3>See Also:</h3>
     <ul>
@@ -440,56 +424,45 @@ Closing Remarks:
 </div>
 
 <div class="content" id="package-managers">
-        <h2> Package Managers </h2>
+    <h2> Package Managers </h2>
 
+    <p>
+        As mentioned, package installation is fully automated.  
+        The utility that handles packages is referred to as a 
+        <em>package manager.</em>
+    </p>
 
-        <!--
-        this is what you turn to a distribution <em>for</em>&mdash; and
-        -->
+    <ul>
+        <li>Debian: <code>apt</code></li>
+        <li>Fedora: <code>rpm</code></li>
+        <li>openSUSE: <code>zypper</code></li>
+    </ul>
 
-        <p>
-            As mentioned, package installation is fully automated.  
-            The utility that handles packages is referred to as a 
-            <em>package manager.</em>
-        </p>
-
-        <ul>
-            <li>Debian: <code>apt</code></li>
-            <li>Fedora: <code>rpm</code></li>
-            <li>openSUSE: <code>zypper</code></li>
-        </ul>
-
-        <p>
-
-        </p>
-
-
-        <p>
+    <p>
         To update a machine running on Debian's packaging facilities, for example,
         we must simply run,
+    </p>
+    <div class="aside-right">
+    <h4>Aside:</h4>
+        <p>
+                See <code>$ apt --help</code>
+                and <code><a href="https://manpages.debian.org/buster/apt/apt.8.en.html">apt(8)</a></code> for more information
         </p>
+    </div>
 
-        <div class="aside-right">
-        <h4>Aside:</h4>
-                <p>
-                        See <code>$ apt --help</code>
-                        and <code><a href="https://manpages.debian.org/buster/apt/apt.8.en.html">apt(8)</a></code> for more information
-                </p>
-        </div>
-
-        <div class="code">
+    <div class="code">
         $ sudo apt update <br>
         $ sudp apt upgrade
-        </div>
+    </div>
 
-        <p>
+    <p>
         The first command, <code>update</code>, synchronizes <code>apt</code>'s
         local package list with those of the configured repositories.
         The second command downloads and installs any revised packages.
         This two-command sequence would install a new kernel
         (via <a href="https://packages.debian.org/search?keywords=kernel-image&searchon=names&suite=stable&section=all">kernel-image</a>), for instance,
         and it would be used on the next reboot.
-        </p>
+    </p>
 
     <h3>Dependencies</h3>
     <p>
@@ -513,13 +486,6 @@ Depends: vim-common (= 2:8.1.0875-5), vim-runtime (= 2:8.1.0875-5), libacl1 (&gt
         <li><a href="https://en.opensuse.org/Package_management">Package management - openSUSE</a></li>
         <li><a href="https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html">Debian Package Basics</a></li>
     </ul>
-</div>
-
-
-
-<div class="content" id="dependencies">
-
-    </p>
 </div>
 
 
