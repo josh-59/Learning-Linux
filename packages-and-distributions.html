@@ -6,46 +6,13 @@ last-updated: April 2021
 
 <!--
 
-    <p>
-        Known-good ideas:
-            Dynamic Linking
-        Known-bad ideas:
-            Static Linking!
-    </p>
-
-
-
-    Repositories:
-        Subsection?
-
-    Define 'repository' as a tracked collection of files, and note that they
-    usually contain a package.
-
-
-
-
-        Some people think that rolling releases are
-        the future of Linux distributions
-        <sup><a href="https://frontpagelinux.com/news/centos-crosses-streams-with-the-community/">[1]</a></sup>
-
-        Debian Personal Package Archive
-        https://itsfoss.com/ppa-guide/
-        Arch User's Repository, AUR
-
-
-    Rolling Releases:
-
-    https://wiki.archlinux.org/index.php/Meta_package_and_package_group
-
 <h2>Package Groups and Metapackages</h2>
 <p>
+        https://wiki.archlinux.org/index.php/Meta_package_and_package_group
         A package that contains nothing but dependencies.
         When "installed", the effect is to install a group of packages.
 </p>
 
-
-Debian-specific virtual package: A faux target, only realized by other,
-actual packages.
 
 A section from the Linux Mint User Guide (old)
 https://www.linuxmint.com/documentation/user-guide/Cinnamon/english_18.0.pdf
@@ -53,102 +20,68 @@ https://www.linuxmint.com/documentation/user-guide/Cinnamon/english_18.0.pdf
 Debian Recommends vs. Suggests ("Declaring relationships between packages")
 https://www.debian.org/doc/debian-policy/ch-relationships.html
 
-Other Package Managers:
-    PIP:
-    Cargo:
-
-        Cross-platform packages:
-                Great in theory, horrific in practice (See Torvald's quote).
-    Snap
-    Zero Install
-    https://blog.linuxmint.com/?p=3766 (Critique of Snap)
-    https://blog.linuxmint.com/?p=3906 (Chromium empty package) "In Linux Mint 20, APT will forbid snapd from getting installed.""
-    From https://linuxmint-user-guide.readthedocs.io/en/latest/snap.html
-           "The Snap Store, also known as the Ubuntu Store, is a commercial centralized software store operated by Canonical."
-           Snap is unique in that it solves a problem that didn't actually exist:
-
-
-    https://docs.freebsd.org/en/books/handbook/ports/#ports-using
-    Package Benefits
-
-            Thanks for reading!
-                Ecosystem
-            Where to go from here?
-                Install Ubuntu
-                The Linux Command Line
-                Arch Linux or Linux From Scratch
 
     Like if you looked at computing from outer space:
     https://tomaka.medium.com/the-future-of-operating-systems-efa31e17d66d
 
 
-Repositories
+
+<div class="content" id="closing-remarks">
+    <h2 style="margin-bottom: 0;">Closing Remarks:</h2>
+    <h4>Repositories</h4>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Yay free software!
+        </p>
+    </div>
+
     <p>
-        A <em>repository</em> is a tracked collection of files.  
-        Maintaining and making available a repository of binary packages
-        is a nontrivial component of distribution.
+        A <em>repository</em> is a tracked collection of files.
+        A distribution necessarily maintains one or more repositories of binary
+        packages. 
+        These can become quite large:
+        openSUSE, for instance, maintains five versions of the same
+        repository, each compiled for a different architecture.<sup><a href="https://get.opensuse.org/tumbleweed/">[e]</a></sup>
+        They do this once each for <em>Leap</em> and <em>Tumbleweed</em>.
     </p>
 
     <p>
+        Mirroring repositories both distributes and reduces the assiciated cost 
+        of package distribution; please use mirrors!
+    </p>
+
+    <p>
+        Local repositories
+        Gentoo <code>ebuilds</code> housed in <code>/var/db/repos/gentoo</code> (by default).<sup><a href="https://wiki.gentoo.org/wiki/Ebuild">[d]</a></sup>
+    </p>
+
+    <p>
+        Synchronizing Repositories
+    </p>
+
+    <p>
+        Adding repositories, for instance 
+        Personal package repositories
+        Debian Personal Package Archive
+        https://itsfoss.com/ppa-guide/
+        Arch User's Repository, AUR
+    </p>
+
+    <p>
+        Social repositories
         Github offers services for creating your own repository,
         and forking those of others.
     </p>
 
+    <ul>
+        <li><a href="https://flight-manual.atom.io/getting-started/sections/installing-atom/">Installing Atom</a> (Example instructions to add repository)</li>
+    </ul>
+</div>
+
 
     <li><a href="https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html">Debian Package Basics</a></li>
-</div>
-
-
-<div class="content" id="closing-remarks">
-   <h2>Closing Remarks:</h2>
-    <h4><code>make</code></h4>
-
-    <div class="aside-left">
-    <h4>Aside:</h4>
-
-        <p>
-            An introduction to UNIX or UNIX-likes would not be complete without
-            <code>make</code>!
-        </p>
-    </div>
-
-    One expresses a program to be compiled in "recipes" of the form,
-
-    hello: hello.c
-        gcc -o hello hello.c
-
-
-    and stores them in a file named <code>Makefile</code>.
-    Now, whenever a source file changes (in this example, <code>hello.c</code>),
-    the command <code>make hello</code> will recompile the program,
-    via <code>gcc -o hello hello.c</code>.
-
-
-    Quite a novel little utility, and it is general in the sense that the files
-    in question need not be source/binary.
-    However,
-
-
-    Kernighan:  p96
-    Invented 1976, 7th ed UNIX
-    "an instant success"
-
-    "This approach replaces code with data, and that's almost always a win."
-
-
-    https://en.wikipedia.org/wiki/Make_(software)
-    Original Make was conceived and written over a weekend
-    [It's rediculous to funnel such quantities of software through such a tool]
-    <a href="https://en.wikipedia.org/wiki/GNU_Autotools#Components">obtuse to say the least</a>
-</div>
-
-        Moreover, even in traditional distributions, automation is similarly
-        used to ease project maintenance.
-        For example, in Arch Linux,
-        <a href="https://wiki.archlinux.org/index.php/PKGBUILD"><code>PKGBUILD</code></a>
-        is analogous to <code>ebuild</code> above.  
-
-
 -->
 
 <div id="nav_bar_2" class="nav">
@@ -158,7 +91,8 @@ Repositories
         <li><a href="#building-from-source">Building an OS from Source</a></li>
         <li><a href="#binary-packages">Binary Packages</a></li>
         <li><a href="#package-managers">Package Managers</a></li>
-        <li><a href="#closing-remarks">Closing Remarks</a></li>
+        <li><a href="#release-models">Release Models</a></li>
+        <!--<li><a href="#closing-remarks">Closing Remarks</a></li>-->
         <li><a href="#references"> References </a></li>
     </ul>
 </div>
@@ -261,7 +195,7 @@ Repositories
     <p>
         Gentoo Linux is an operating system built around this strategy.
         The mechanized instructions to build software are kept in 
-        "<code>ebuild</code>"'s&mdash; text files which
+        <code>ebuild</code>'s text files which
         additionally describe where to obtain the original source
         code, software version number and package dependencies.
         The scheme is transparent and flexible, and Gentoo is all about 
@@ -269,7 +203,7 @@ Repositories
     </p>
 
     <p>
-        Compilation remains a time-consuming step: It can take over a day
+        Compilation remains time-consuming: It can take over a day
         to build a working system from source, but nonetheless begins to be 
         approachable by ordinary users.
     </p>
@@ -285,9 +219,9 @@ Repositories
     <h2> Binary Packages </h2>
 
     <p>
-        Packages are typically distributed in preconfigured and precompiled form.
+        Packages are traditionally distributed in preconfigured and precompiled form.
         This yields a smaller archive, saves users the
-        time-consuming step of compilation, and still allows the
+        time-consuming step of compilation, and allows the
         complete automation of installation.
         And software installation is fast!  
         The implication, however, is that each distributed package is preconfigured
@@ -300,7 +234,7 @@ Repositories
         oldest, and possibly simplest, binary packaging scheme.
         By modern standards, it may be considered crude,
         because it leaves dependency resolution to the user.<sup><a href="https://www.slackbook.org/html/package-management.html">[2]</a></sup>
-        It is easily dissected, though, and so represents a nice jumping-off point
+        It is easily dissected, though, and so represents a nice example 
         for us.
     </p>
 
@@ -368,7 +302,7 @@ Repositories
         A utility that obtains and installs packages is referred to as a 
         <em>package manager.</em>
         Package managers are highly distribution-specific, and serve
-        as the user's front-end for getting new software:
+        as the user's front-end for their software:
     </p>
 
     <ul>
@@ -427,6 +361,104 @@ Repositories
     </ul>
 </div>
 
+
+<div class="content" id="release-models">
+    <h2>Release Models</h2>
+    <p>
+        In open-source software, as in any other field, there are 
+        known-good ideas and known-bad ideas.
+    </p>
+
+    <ul>
+        <li>
+            Known-good ideas:
+            <ul>
+                <li>Dynamic linking</li>
+                <li>Breaking a problem down and solving the pieces</li>
+                <li>Abdicating responsibility to people who actually want to do it</li>
+            </ul>
+        </li>
+        <li>
+            Known-bad ideas:
+            <ul>
+                <li>Static linking</li>
+                <li>Solving problems that don't actually exist</li>
+                <li>Dictatorships</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p>
+        Distributing binary packages in the manner described above is a 
+        known-good idea, and there are many successful variations.
+        Among them, the <em>regular release</em> model deals in discretely released
+        operating systems.
+        After the initial release, updates are restricted to bug
+        fixes; new features do not become available within a particular release.
+    </p>
+
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Mint 20.1 "Ulyssa" is a long-term support release, and will be 
+            supported until 2025.<sup><a href="https://blog.linuxmint.com/?p=4011">[d]</a></sup>
+        </p>
+    </div>
+
+    <p>
+        Distributions following the regular release model:
+    </p>
+
+    <ul>
+        <li> Linux Mint </li>
+        <li> openSUSE Leap </li>
+        <li> Debian </li>
+        <li> Slackware </li>
+        <li> Fedora </li>
+        <li> Ubuntu </li>
+    </ul>
+
+    <p>
+        This strategy has produced extremely stable operating 
+        systems.<sup><a href="http://www.slackware.com/about/">[c]</a></sup>
+        Each version is supported for some length of time, 
+        usually asserted beforehand.
+    </p>
+
+    <p>
+        The <em>rolling release</em> model is a newer variant that 
+        dispenses with any versioning scheme.  
+        Instead, updates and features are distributed as they become
+        available.
+        The result is a bleeding-edge operating system&mdash; and
+        a constant stream of updates.  
+    </p>
+
+    <p>
+        Examples:
+    </p>
+
+    <ul>
+        <li> Arch </li>
+        <li> openSUSE Tumbleweed </li>
+    </ul>
+
+    <p>
+        Finally, between the two is <em>semi-rolling releases,</em>
+        best explained through example:
+        <a href="https://getsol.us/home/">Solus Linux</a> is an up-and-coming 
+        distribution focused on the home desktop. 
+        They release a set of package updates every Friday, which, taken together,
+        form the most recent version of their OS. 
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://www.debian.org/News/2021/20210327">Debian -- News -- 10: 10.9 released</a></li>
+        <li><a href="https://wiki.archlinux.org/index.php/Arch_Linux">Arch Linux ArchWiki</a></li>
+    </ul>
+</div>
 
 <div id="references" class="content">
     <h2> References </h2>
