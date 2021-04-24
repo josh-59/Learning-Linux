@@ -9,6 +9,16 @@ last-updated: April, 2021
 To Do:
 
 
+    <div class="aside-right">
+        <h4>Note:</h4>
+        <p>
+            This is a handle to the device, and <em>not</em> the device's 
+            root directory!
+        </p>
+    </div>
+
+
+
     <p>
         The UNIX file has been called "The Universal I/O Model"
 Kerrisk calls File I/O "The Universal I/O Model"
@@ -191,7 +201,7 @@ https://wiki.ubuntu.com/Lvm
     <h2>Regular Files</h2>
 
     <p>
-        A regular file is stored on disk, or some other persistent storage device.
+        A regular file is stored on disk or other persistent storage device.
         Most files are regular files.
     </p>
 
@@ -221,7 +231,7 @@ https://wiki.ubuntu.com/Lvm
         <code>/bin/bash</code> names a regular file.
         The next nine characters are the file's
         <a href="http://linfo.org/permissions.html">permission bits</a>;
-        the <code>r</code> and <code>x</code> present in each trio indicates
+        the <code>r</code> and <code>x</code> present in each trio indicate
         that this file is readable and executable (respectively) by any user on
         the system.
         The <code>w</code> present only in the owner trio indicates that the
@@ -264,7 +274,7 @@ https://wiki.ubuntu.com/Lvm
     <p>
         The GNU/Linux directory tree is used as a general-purpose meeting place.
         In addition to regular files, it also contains
-        information about running processes, information about the running kernel,
+        information about running programs, information about the current kernel,
         and references to hardware&mdash; each in the form of files.
         This mechanism is general, extensible, and allows both users and programmers
         access to the running machine.
@@ -275,7 +285,7 @@ https://wiki.ubuntu.com/Lvm
         They reside in the <code>/dev</code> directory.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[4]</a></sup>
         Each of these files serves as the principle reference to its
         respective device.
-        For instance, when a USB-stick is inserted into my machine,
+        For example, when a USB-stick is inserted into my machine,
         a new file appears in <code>/dev</code>.
     </p>
 
@@ -283,7 +293,8 @@ https://wiki.ubuntu.com/Lvm
         Note that the essential capabilities of the USB-stick are preserved through
         the <em>file</em> interface: We can read from it and write to it.
         If we were to add the capacity to <em>seek</em> (i.e., change location) 
-        within the file, then we would be able to use the device in its entirety.
+        within the file, then we would be able to use the device in its entirety,
+        through the file interface alone.
     </p>
 
     <h3> Block and Character Device Files </h3>
@@ -350,20 +361,21 @@ https://wiki.ubuntu.com/Lvm
 
     <p>
         <strong>Other File Types:</strong>
-    </p>
 
     <ul style="width: 70%; margin-left: 5%;">
-        <li><p>
+        <li>
             <strong>FIFO:</strong> Also known as a <em>named pipe,</em> 
             this is a file type that connects one running program to another.
             "FIFO" stands for <em>First in, first out</em>.
-        </li></p>
+        </li>
 
-        <li><p>
+        <li>
             <strong>Socket:</strong> A file that supports interprocess 
             communication across networks.
-        </li></p>
+        </li>
     </ul>
+
+    </p>
 
     <h3>A Bit More</h3>
 
