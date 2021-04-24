@@ -172,8 +172,8 @@ https://www.debian.org/doc/debian-policy/ch-relationships.html
         <a href="http://linuxfromscratch.org/">Linux From Scratch</a> is
         documentation describing how to build a working
         GNU/Linux system entirely from source.
-        One obtains each package, configures, compiles and
-        installs it by hand.
+        One obtains 88 different packages, and goes about configuring,
+        compiling and installing them by hand.
     </p>
 
     <p>
@@ -185,20 +185,18 @@ https://www.debian.org/doc/debian-policy/ch-relationships.html
     </p>
 
     <p>
-        If we're just a little bit more clever, we'll recognize that 
-        <strike>programming is all about repitition</strike>
-        <em>building</em> is per-package specific, so that we 
-        could maintain descriptions of how to build software, to
+        As a first step towards automating this process, we might
+        notice that <em>building</em> is per-package specific.
+        Hence, we could maintain descriptions of how to build packages, to
         be interpretted by some utility program.
     </p>
 
     <p>
         Gentoo Linux is an operating system built around this strategy.
         The mechanized instructions to build software are kept in 
-        <code>ebuild</code>'s text files which
-        additionally describe where to obtain the original source
-        code, software version number and package dependencies.
-        The scheme is transparent and flexible, and Gentoo is all about 
+        <code>ebuild</code>'s&mdash; text files which
+        additionally describe how to obtain source code.
+        The scheme is minimal, transparent and flexible, and Gentoo is all about 
         openness and choice.<sup><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/About">[a]</a></sup>
     </p>
 
@@ -219,14 +217,13 @@ https://www.debian.org/doc/debian-policy/ch-relationships.html
     <h2> Binary Packages </h2>
 
     <p>
-        Packages are traditionally distributed in preconfigured and precompiled form.
+        Packages are usually distributed in preconfigured and precompiled form.
         This yields a smaller archive, saves users the
         time-consuming step of compilation, and allows the
         complete automation of installation.
         And software installation is fast!  
-        The implication, however, is that each distributed package is preconfigured
-        for a particular operating system, running on a particular computer 
-        architecture.
+        The implication, however, is that each distributed package is configured
+        for a particular operating system and computer architecture.
     </p>
 
     <p>
@@ -301,7 +298,7 @@ https://www.debian.org/doc/debian-policy/ch-relationships.html
     <p>
         A utility that obtains and installs packages is referred to as a 
         <em>package manager.</em>
-        Package managers are highly distribution-specific, and serve
+        Package managers are distribution-specific, and serve
         as the user's front-end for their software:
     </p>
 
@@ -391,10 +388,13 @@ https://www.debian.org/doc/debian-policy/ch-relationships.html
     <p>
         Distributing binary packages in the manner described above is a 
         known-good idea, and there are many successful variations.
-        Among them, the <em>regular release</em> model deals in discretely released
+        The <em>regular release</em> model deals in discretely released
         operating systems.
+        Packages are composed into a working operating system, and undergo
+        some testing period.
         After the initial release, updates are restricted to bug
-        fixes; new features do not become available within a particular release.
+        fixes and security updates; new features do not become available 
+        within a particular release.
     </p>
 
     <p>
@@ -437,7 +437,7 @@ https://www.debian.org/doc/debian-policy/ch-relationships.html
     </ul>
 
     <p>
-        Finally, between the two is the <em>semi-rolling release,</em>
+        Between the two is the <em>semi-rolling release,</em>
         best explained through example:
         <a href="https://getsol.us/home/">Solus Linux</a> is an up-and-coming 
         distribution focused on the home desktop. 
