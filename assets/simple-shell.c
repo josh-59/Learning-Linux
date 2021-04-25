@@ -74,9 +74,8 @@ int main(int argc, char *argv[])
         pid_t rv = fork(); 
         if (rv == 0) {
             // I am child
-            // beep boop subshell environment
  
-            execvp(command, args);
+            execvp(command, args); // This library function searches PATH for us
 
             perror("execvp");
             exit(1);
