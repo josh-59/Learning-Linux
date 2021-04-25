@@ -4,17 +4,197 @@ title: How Open Source Works
 last-updated: March 2021
 ---
 
+<!--
+
+    Bazaar Development Model
+    <p>
+         Whether this development model is best or not is a
+         <a href="https://queue.acm.org/detail.cfm?id=2349257">subject of
+         debate</a>, but there can be no doubt that it has been successful:
+         GNU/Linux is the most-used Unix-like
+         operating system in existence today.
+         I view these pieces as "competing", expect the best of
+         them to rise in popularity, and let someone else worry about
+         fitting them all together.
+    </p>
+
+
+
+<div class="content" id="successful-business-models">
+    <h2>Successful Business Models</h2>
+
+    <p>
+        Community-Driven vs. ...internally-driven?
+        Like Debian is 'community-driven'
+            Ensures users are satisfied
+        Generalization of the Bazaar?
+    </p>
+
+    <p>
+        <strong>Classic Business Model:</strong>:
+        The classic model is to offer support service upon free software.
+        Red Hat Enterprise Linux
+        Cannonical
+        Kubernetes
+
+        They market principally towards business and enterprise.
+    </p>
+
+    <p>
+        <strong>Offset-cost-with-community-contribution:</strong>
+        The following produce closed-source hardware, who depend upon
+        the community for software and documentation:
+        PINE-64
+        Raspberry Pi
+
+        The following produce open-source hardware, and depend upon
+        the community for software and documentation:
+        https://beagleboard.org/about
+    </p>
+
+    <p>
+        <strong>Radio Station Model:</strong>
+        Like a radio station, they accept donations from users and sponsors,
+        and generate revenue from search-engine
+        traffic<sup><a href="http://web.archive.org/web/20150409023855/http://www.techworld.com.au/article/529572/q_clement_lefebvre_man_behind_linux_mint/">[a]</a></sup>
+    </p>
+
+    <p>
+        <strong>Foundation:</strong>
+        <a href="https://en.wikipedia.org/wiki/Foundation_(nonprofit)">Foundation</a>
+        FSF, principally serves to "support" GNU.
+    </p>
+
+    <p>
+        <strong>Contributing:</strong>
+        For-profit companies contributing to open-source
+        Facebook -> btrfs
+    </p>
+
+    Inapplicable domains:
+    Pretty much anything that needs to be cutting-edge.
+    AAA Games, for instance
+
+</div>
+
+
+
+<div class="content" id="closing-remakrs">
+    <h2>Closing Remarks:</h2>
+
+    <!--
+        <p>
+            I do not believe the user is somehow <em>obligated</em> to
+            contribute to open source.  Simply, that isn't the point.
+            More, the cathedral-style development model doesn't necessarily
+            want contributions.
+        </p>
+
+        <p>
+            Projects are usually began to satisfy some programmer's need.
+
+
+    https://blog.documentfoundation.org/blog/2021/04/02/free-software-becomes-a-standard-in-dortmund-germany/
+
+    Open-source hardware
+        Begins with the instruction set
+
+    Textbooks and Academia
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://frame.work/">Framework | Introducing the Framework Laptop</a></li>
+        <li><a href="https://www.crowdsupply.com/">Crowd Supply</a> - For the Greater Goods</li>
+        <li><a href="http://www.linuxcommand.org/tlcl.php">The Linux Command Line</a> by William Shotts</li>
+    </ul>
+</div>
+
+
+<div class="content" id="modularity">
+    <h2 style='margin-bottom: 0px;'>Modularity</h2>
+    <h4>and The Unix Philosophy</h4>
+
+    <p>
+        GNU/Linux can be likened to a 100-piece puzzle with 500 available pieces:
+        For any piece of the puzzle (shell, desktop environment,
+        <em>init</em> system, right down to C libraries) there are, around
+        five competent and competing options to choose from.
+    </p>
+
+    <p>
+        Kernel architecture: Modules
+        Arguably, doesn't take <em>modularity</em> far enough:
+        There's no reason (that I can think of) that there couldn't be more
+        than one memory-management module, for instance, or scheduler...
+    </p>
+
+    <p>
+        Within distinct software components...
+        systemd is a collection of cooperating processes
+        as is xfce https://www.xfce.org/about
+    </p>
+</div>
+
+<div class="content" id="organization">
+    <h2 style='margin-bottom: 0px;'>Organization</h2>
+    <h4>And why businesses rule the earth</h4>
+
+    <p>
+        Organization is about having a clear end-state, a well-defined goal.
+        For example:
+    </p>
+
+    <ul>
+        <li>"Most UNIX-like GNU/Linux distribution out there"</li>
+        <li>"Most secure UNIX-like operating system"</li>
+        <li>"A distribution by the people, for the people"</li>
+    </ul>
+
+    <p>
+        At the risk of being too philosophical,
+        "success" itself is defined only relative to a goal;
+        every project must be well-organized, or it cannot be successful.
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside</h4>
+        <p>
+            "Open source democracy doesn't work."&mdash; Brian Camprill
+        </p>
+    </div>
+
+    <p>
+        In the author's opinion, the Linux kernel was only successful in virtue
+        of Torvald's leadership.
+        The community <em>needed</em> someone to say,
+        "No we're not doing that," on occaision, but firmly,
+        Conversely, I do not see good things for the future of Python.
+        After _____ stepped down, its goal has become "Whatever everyone wants."
+    </p>
+
+    <p>
+        BDFL:
+            1) No-one is forcing anyone to work on their projects
+            2) Open-source projects can always be forked into a sub-project
+    </p>
+</div>
+
+
+<div class="content" id="risc-v">
+    <iframe class="video" src="https://www.youtube-nocookie.com/embed/Rsyn3_PjRXw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+
+
+-->
+
+
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#fork-merge">Fork/Merge</a></li>
         <li><a href="#reiterative-improvement">Reiterative Improvement</a></li>
-        <li><a href="#modularity">Modularity</a></li>
         <li><a href="#bazaar">Bazaar Development Model</a></li>
-        <li><a href="#organization">Organization</a></li>
-        <li><a href="#successful-business-models">Successful Business Models</a></li>
-        <li><a href="#closing-remarks">Closing Remarks</a></li>
-        <li><a href="#bryan-cantrill"> Bryan Cantrill </a></li>
         <li><a href="#references"> References </a></li>
     </ul>
 </div>
@@ -53,7 +233,7 @@ last-updated: March 2021
 
     <p>
         Having created a fork, the software is now *yours*.
-        You can modify it, inspect it, build it, install it, run it,
+        You can inspect it, modify it, build it, install it, run it,
         discard it&mdash; whatever you want.
         If you change some of its files, though, we say that your fork and its source
         have <em>diverged.</em>
@@ -92,7 +272,7 @@ last-updated: March 2021
 
     <p>
         Software development is fundamentally reiterative:
-        You build something, publish it, then improve it and release it again.
+        You build something, publish it, improve it and release it again.
         The "train schedule" formalizes this by putting it on
         a timetable;
         it is often adopted by larger projects as a means
@@ -180,7 +360,7 @@ last-updated: March 2021
 
     <p>
         In a cathedral, software is openly available,
-        sure, but is developed principally in-house; the above
+        sure, but is developed strictly in-house; the above
         remarks on forking and merging effectively don't apply.
         Contributions are restricted to a small cadre,
         who charge themselves with both the architecture and the
@@ -195,192 +375,6 @@ last-updated: March 2021
         The bazaar model, by contast, welcomes strangers to contribute
         to the project, and more, to take responsibility within it.
     </p>
-
-    <p>
-         Whether this development model is best or not is a
-         <a href="https://queue.acm.org/detail.cfm?id=2349257">subject of
-         debate</a>, but there can be no doubt that it has been successful:
-         GNU/Linux is the most-used Unix-like
-         operating system in existence today.
-         I view these pieces as "competing", expect the best of
-         them to rise in popularity, and let someone else worry about
-         fitting them all together.
-    </p>
-</div>
-
-<div class="content" id="modularity">
-    <h2 style='margin-bottom: 0px;'>Modularity</h2>
-    <h4>and The Unix Philosophy</h4>
-
-    <p>
-        If we define <em>success</em> to be the number of operating systems
-        shipped, then GNU/Linux is the most successful UNIX-like operating
-        system ever created.
-        More, <em>success</em> follows a very clear pattern:
-        Modular
-    </p>
-
-    <p>
-        GNU/Linux can be likened to a 1000-piece puzzle with 5000 available pieces:
-        For any piece of the puzzle (shell, desktop environment,
-        <em>init</em> system, right down to C libraries) there are, around
-        five competent and competing options to choose from.
-    </p>
-
-    <p>
-        Kernel architecture: Modules
-        Arguably, doesn't take <em>modularity</em> far enough:
-        There's no reason (that I can think of) that there couldn't be more
-        than one memory-management module, for instance, or scheduler...
-    </p>
-
-    <p>
-        Within distinct software components...
-        systemd is a collection of cooperating processes
-        as is xfce https://www.xfce.org/about
-    </p>
-</div>
-
-
-
-<div class="content" id="organization">
-    <h2 style='margin-bottom: 0px;'>Organization</h2>
-    <h4>And why businesses rule the earth</h4>
-
-    <p>
-        Organization is about having a clear end-state, a well-defined goal.
-        For example:
-    </p>
-
-    <ul>
-        <li>"Most UNIX-like GNU/Linux distribution out there"</li>
-        <li>"Most secure UNIX-like operating system"</li>
-        <li>"A distribution by the people, for the people"</li>
-    </ul>
-
-    <p>
-        At the risk of being too philosophical,
-        "success" itself is defined only relative to a goal;
-        every project must be well-organized, or it cannot be successful.
-    </p>
-
-    <div class="aside-right">
-        <h4>Aside</h4>
-        <p>
-            "Open source democracy doesn't work."&mdash; Brian Camprill
-        </p>
-    </div>
-
-    <p>
-        In the author's opinion, the Linux kernel was only successful in virtue
-        of Torvald's leadership.
-        The community <em>needed</em> someone to say,
-        "No we're not doing that," on occaision, but firmly,
-        Conversely, I do not see good things for the future of Python.
-        After _____ stepped down, its goal has become "Whatever everyone wants."
-    </p>
-
-    <p>
-        BDFL:
-            1) No-one is forcing anyone to work on their projects
-            2) Open-source projects can always be forked into a sub-project
-    </p>
-</div>
-
-
-
-<div class="content" id="successful-business-models">
-    <h2>Successful Business Models</h2>
-
-    <p>
-        Community-Driven vs. ...internally-driven?
-        Like Debian is 'community-driven'
-            Ensures users are satisfied
-        Generalization of the Bazaar?
-    </p>
-
-    <p>
-        <strong>Classic Business Model:</strong>:
-        The classic model is to offer support service upon free software.
-        Red Hat Enterprise Linux
-        Cannonical
-        Kubernetes
-
-        They market principally towards business and enterprise.
-    </p>
-
-    <p>
-        <strong>Offset-cost-with-community-contribution:</strong>
-        The following produce closed-source hardware, who depend upon
-        the community for software and documentation:
-        PINE-64
-        Raspberry Pi
-
-        The following produce open-source hardware, and depend upon
-        the community for software and documentation:
-        https://beagleboard.org/about
-    </p>
-
-    <p>
-        <strong>Radio Station Model:</strong>
-        Like a radio station, they accept donations from users and sponsors,
-        and generate revenue from search-engine
-        traffic<sup><a href="http://web.archive.org/web/20150409023855/http://www.techworld.com.au/article/529572/q_clement_lefebvre_man_behind_linux_mint/">[a]</a></sup>
-    </p>
-
-    <p>
-        <strong>Foundation:</strong>
-        <a href="https://en.wikipedia.org/wiki/Foundation_(nonprofit)">Foundation</a>
-        FSF, principally serves to "support" GNU.
-    </p>
-
-    <p>
-        <strong>Contributing:</strong>
-        For-profit companies contributing to open-source
-        Facebook -> btrfs
-    </p>
-
-    Inapplicable domains:
-    Pretty much anything that needs to be cutting-edge.
-    AAA Games, for instance
-
-</div>
-
-
-
-<div class="content" id="closing-remakrs">
-    <h2>Closing Remarks:</h2>
-
-    <!--
-        <p>
-            I do not believe the user is somehow <em>obligated</em> to
-            contribute to open source.  Simply, that isn't the point.
-            More, the cathedral-style development model doesn't necessarily
-            want contributions.
-        </p>
-
-        <p>
-            Projects are usually began to satisfy some programmer's need.
-
-    -->
-
-    https://blog.documentfoundation.org/blog/2021/04/02/free-software-becomes-a-standard-in-dortmund-germany/
-
-    Open-source hardware
-        - Begins with the instruction set
-
-    Textbooks and Academia
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://frame.work/">Framework | Introducing the Framework Laptop</a></li>
-        <li><a href="https://www.crowdsupply.com/">Crowd Supply</a> - For the Greater Goods</li>
-        <li><a href="http://www.linuxcommand.org/tlcl.php">The Linux Command Line</a> by William Shotts</li>
-    </ul>
-</div>
-
-<div class="content" id="risc-v">
-    <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Rsyn3_PjRXw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 <div id="references" class="content">
