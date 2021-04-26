@@ -1,10 +1,63 @@
 ---
 layout: default
 title: How Open Source Works
-last-updated: March 2021
+last-updated: April 2021
 ---
 
 <!--
+
+Modularity and Reiterative Improvement
+
+        
+
+        Fork/Merge
+             |
+             |
+             |
+            \ /
+    Reiterative Improvement
+             |
+             |
+             |
+            \ /
+        Modularity
+             |
+             |
+             |
+            \ /
+    Well-definedness of goal
+             |      - Leadership, either:
+             |          - Explicit (BDFL) 
+             |          - Implicit (Openly recognized goal)
+             |      - Indefinite improvement and well-definedness of goal are
+             |                   mutally exclusive.  
+             |
+            \ /
+    Organizational Structure
+             |      - Community-driven
+             |      - Corporate Open Source
+             |      
+            \ /
+      Business Models
+             |      - That do work
+             |      - That don't work
+             |          - Nobody owns open-source; that's the whole point.
+             |
+            \ /
+    Customer Involvement
+             |
+             |
+             |
+            \ /
+        Closing Remarks:
+             |      Hobby -> Guido van Rossum, Python
+             |            -> Linus Torvalds, Linux
+             |
+             |
+
+
+
+
 
     Bazaar Development Model
     <p>
@@ -79,19 +132,21 @@ last-updated: March 2021
 
 
 
+
+
 <div class="content" id="closing-remakrs">
     <h2>Closing Remarks:</h2>
 
-    <!--
         <p>
             I do not believe the user is somehow <em>obligated</em> to
             contribute to open source.  Simply, that isn't the point.
-            More, the cathedral-style development model doesn't necessarily
-            want contributions.
+            For instance, the cathedral-style development model doesn't even
+            <em>want</em> contributions.
         </p>
 
         <p>
-            Projects are usually began to satisfy some programmer's need.
+            Do what you do best
+        </p>
 
 
     https://blog.documentfoundation.org/blog/2021/04/02/free-software-becomes-a-standard-in-dortmund-germany/
@@ -107,32 +162,6 @@ last-updated: March 2021
         <li><a href="https://www.crowdsupply.com/">Crowd Supply</a> - For the Greater Goods</li>
         <li><a href="http://www.linuxcommand.org/tlcl.php">The Linux Command Line</a> by William Shotts</li>
     </ul>
-</div>
-
-
-<div class="content" id="modularity">
-    <h2 style='margin-bottom: 0px;'>Modularity</h2>
-    <h4>and The Unix Philosophy</h4>
-
-    <p>
-        GNU/Linux can be likened to a 100-piece puzzle with 500 available pieces:
-        For any piece of the puzzle (shell, desktop environment,
-        <em>init</em> system, right down to C libraries) there are, around
-        five competent and competing options to choose from.
-    </p>
-
-    <p>
-        Kernel architecture: Modules
-        Arguably, doesn't take <em>modularity</em> far enough:
-        There's no reason (that I can think of) that there couldn't be more
-        than one memory-management module, for instance, or scheduler...
-    </p>
-
-    <p>
-        Within distinct software components...
-        systemd is a collection of cooperating processes
-        as is xfce https://www.xfce.org/about
-    </p>
 </div>
 
 <div class="content" id="organization">
@@ -168,8 +197,6 @@ last-updated: March 2021
         of Torvald's leadership.
         The community <em>needed</em> someone to say,
         "No we're not doing that," on occaision, but firmly,
-        Conversely, I do not see good things for the future of Python.
-        After _____ stepped down, its goal has become "Whatever everyone wants."
     </p>
 
     <p>
@@ -179,12 +206,40 @@ last-updated: March 2021
     </p>
 </div>
 
+<div class="content" id="bazaar">
+    <h2>The Bazaar Development Model</h2>
+
+    <p>
+        <strike>A collection of open-source projects is
+        called a <em>bazaar.</em></strike>
+        The term <em>bazaar</em> was first used by Eric S. Raymond
+        to describe the Linux development model&mdash; "release early and often,
+        be open to the point of promiscuity, delegate everything in sight"&mdash;
+        which he contrasted with the traditional, "cathedral"-style development model.
+    </p>
+
+    <p>
+        In a cathedral, software is openly available,
+        sure, but is developed strictly in-house; the above
+        remarks on forking and merging effectively don't apply.
+        Contributions are restricted to a small cadre,
+        who charge themselves with both the architecture and the
+        implementation of an idea.
+        The cathedral has its proponents (GNU, all BSD's).
+        They argue that the traditional model affords greater opportunity for
+        design, conception, and craftsmanship, and that these are
+        critical considerations given their projects' goals.
+    </p>
+
+    <p>
+        The bazaar model, by contast, welcomes strangers to contribute
+        to the project, and more, to take responsibility within it.
+    </p>
+</div>
 
 <div class="content" id="risc-v">
     <iframe class="video" src="https://www.youtube-nocookie.com/embed/Rsyn3_PjRXw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
-
-
 
 -->
 
@@ -194,7 +249,7 @@ last-updated: March 2021
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#fork-merge">Fork/Merge</a></li>
         <li><a href="#reiterative-improvement">Reiterative Improvement</a></li>
-        <li><a href="#bazaar">Bazaar Development Model</a></li>
+        <li><a href="#modularity">Modularity</a></li>
         <li><a href="#references"> References </a></li>
     </ul>
 </div>
@@ -274,6 +329,11 @@ last-updated: March 2021
     <p>
         Software development is fundamentally reiterative:
         You build something, publish it, improve it and release it again.
+        Such reiterative improvement is realized in both open- and closed-source
+        development models.
+    </p>
+
+    <p>
         The "train schedule" formalizes this by putting it on
         a timetable;
         it is often adopted by larger projects as a means
@@ -346,36 +406,65 @@ last-updated: March 2021
     </ul>
 </div>
 
-
-<div class="content" id="bazaar">
-    <h2>The Bazaar Development Model</h2>
+<div class="content" id="modularity">
+    <h2 style='margin-bottom: 0px;'>Modularity</h2>
+    <h4>and The Unix Philosophy</h4>
 
     <p>
-        <strike>A collection of open-source projects is
-        called a <em>bazaar.</em></strike>
-        The term <em>bazaar</em> was first used by Eric S. Raymond
-        to describe the Linux development model&mdash; "release early and often,
-        be open to the point of promiscuity, delegate everything in sight"&mdash;
-        which he contrasted with the traditional, "cathedral"-style development model.
+        GNU/Linux can be likened to a 1000-piece puzzle with 5000 available pieces:
+        For any piece of the puzzle (shell, desktop environment,
+        web browser, text editor&mdash; right down to 
+        C libraries<sup><a href="https://en.wikipedia.org/wiki/C_standard_library#Implementations">[h]</a></sup>
+        and kernels<sup><a href="https://www.kernel.org/">[i]</a></sup>), 
+        there 
+        are around five competent options to choose from.
     </p>
 
     <p>
-        In a cathedral, software is openly available,
-        sure, but is developed strictly in-house; the above
-        remarks on forking and merging effectively don't apply.
-        Contributions are restricted to a small cadre,
-        who charge themselves with both the architecture and the
-        implementation of an idea.
-        The cathedral has its proponents (GNU, all BSD's).
-        They argue that the traditional model affords greater opportunity for
-        design, conception, and craftsmanship, and that these are
-        critical considerations given their projects' goals.
+        This is an example of modular construction, and it is often left to 
+        the user to decide which software component 
+        <a href="https://www.merriam-webster.com/dictionary/instantiate">instantiates</a>
+        each needed piece.
+        Modular (as opposed to <em>monolithic</em>) construction lies at the
+        heart of both open source and the UNIX philosophy:
+    </p>
+
+    <blockquote>
+        "A serious attempt is made to apply the principle of modularity to everything on a Unix-like system, not only programs but also parts of programs, such as algorithms, and even the kernel. Thus, a Unix-like operating system generally (or at least ideally) consists of a small kernel together with a large number of small, specialized programs that can interact with each other through a variety of well-defined interfaces."<sup><a href="http://www.linfo.org/unix_philosophy.html">[g]</a></sup>
+    </blockquote>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            If the first statement of this section is taken literally, there are
+            5<sup>1000</sup> possible GNU/Linux systems.
+        </p>
+    </div>
+
+    <p>
+        Modularity is realized in a variety of ways, and its implications
+        are similarly numerous.
+        Not only is the user presented with an abundance of choice,
+        a programmer working on any given piece must solve a
+        greatly simplified problem. 
+        Consequently, numerous solutions may be tried, which then compete 
+        amongst themselves.
+        Most importantly, however, comprehension of a given piece is made possible,
+        while comprehension of the whole is made unnecessary.
     </p>
 
     <p>
-        The bazaar model, by contast, welcomes strangers to contribute
-        to the project, and more, to take responsibility within it.
+        Through modularity, a complex problem can, and has, been broken down
+        and solved.
+        The strategy has proved crucial not only to the development of computer
+        software, but also 
+        <a href=https://en.wikipedia.org/wiki/Instruction_set_architecture">computer hardware</a>, infrastructure and indeed,
+        to mass production itself.<sup><a href="http://www.linfo.org/module.html">[j]</a></sup>
     </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="http://www.linfo.org/module.html">Module Definition</a> - LINFO</a></li>
 </div>
 
 <div id="references" class="content">
