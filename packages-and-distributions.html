@@ -6,82 +6,10 @@ last-updated: April 2021
 
 <!--
 
-<h2>Package Groups and Metapackages</h2>
-<p>
-        https://wiki.archlinux.org/index.php/Meta_package_and_package_group
-        A package that contains nothing but dependencies.
-        When "installed", the effect is to install a group of packages.
-</p>
+    Gentoo:
+        ebuild(5): https://dev.gentoo.org/~zmedico/portage/doc/man/ebuild.5.html
+        ebuild phase functions: https://devmanual.gentoo.org/ebuild-writing/functions/
 
-
-A section from the Linux Mint User Guide (old)
-https://www.linuxmint.com/documentation/user-guide/Cinnamon/english_18.0.pdf
-
-Debian Recommends vs. Suggests ("Declaring relationships between packages")
-https://www.debian.org/doc/debian-policy/ch-relationships.html
-
-
-    Like if you looked at computing from outer space:
-    https://tomaka.medium.com/the-future-of-operating-systems-efa31e17d66d
-
-
-
-<div class="content" id="closing-remarks">
-    <h2 style="margin-bottom: 0;">Closing Remarks:</h2>
-    <h4>Repositories</h4>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Yay free software!
-        </p>
-    </div>
-
-    <p>
-        A <em>repository</em> is a tracked collection of files.
-        A distribution necessarily maintains one or more repositories of binary
-        packages. 
-        These can become quite large:
-        openSUSE, for instance, maintains five versions of the same
-        repository, each compiled for a different architecture.<sup><a href="https://get.opensuse.org/tumbleweed/">[e]</a></sup>
-        They do this once each for <em>Leap</em> and <em>Tumbleweed</em>.
-    </p>
-
-    <p>
-        Mirroring repositories both distributes and reduces the assiciated cost 
-        of package distribution; please use mirrors!
-    </p>
-
-    <p>
-        Local repositories
-        Gentoo <code>ebuilds</code> housed in <code>/var/db/repos/gentoo</code> (by default).<sup><a href="https://wiki.gentoo.org/wiki/Ebuild">[d]</a></sup>
-    </p>
-
-    <p>
-        Synchronizing Repositories
-    </p>
-
-    <p>
-        Adding repositories, for instance 
-        Personal package repositories
-        Debian Personal Package Archive
-        https://itsfoss.com/ppa-guide/
-        Arch User's Repository, AUR
-    </p>
-
-    <p>
-        Social repositories
-        Github offers services for creating your own repository,
-        and forking those of others.
-    </p>
-
-    <ul>
-        <li><a href="https://flight-manual.atom.io/getting-started/sections/installing-atom/">Installing Atom</a> (Example instructions to add repository)</li>
-    </ul>
-</div>
-
-
-    <li><a href="https://www.debian.org/doc/manuals/debian-faq/pkg-basics.en.html">Debian Package Basics</a></li>
 -->
 
 <div id="nav_bar_2" class="nav">
@@ -91,7 +19,8 @@ https://www.debian.org/doc/debian-policy/ch-relationships.html
         <li><a href="#building-from-source">Building an OS from Source</a></li>
         <li><a href="#binary-packages">Binary Packages</a></li>
         <li><a href="#package-managers">Package Managers</a></li>
-        <li><a href="#release-models">Release Models</a></li>
+        <li><a href="#repositories">Repositories</a></li>
+        <li><a href="#closing-remarks">Closing Remarks: Known-good</a></li>
         <!--<li><a href="#closing-remarks">Closing Remarks</a></li>-->
         <li><a href="#references"> References </a></li>
     </ul>
@@ -108,7 +37,6 @@ https://www.debian.org/doc/debian-policy/ch-relationships.html
     <div class="quote-ref">
         <a href="https://github.com/dwmkerr/hacker-laws#the-unix-philosophy">UNIX Philosophy</a>
     </div>
-
 
     <p>
         A <em>package</em> is a logical unit of software.
@@ -204,12 +132,14 @@ https://www.debian.org/doc/debian-policy/ch-relationships.html
         Gentoo Linux is an operating system built around this strategy.
         The mechanized instructions to build software are kept in 
         <code>ebuild</code>'s&mdash; text files which
-        additionally describe how to obtain source code.
-        The scheme is minimal, transparent and flexible, and Gentoo is all about 
-        openness and choice.<sup><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/About">[a]</a></sup>
+        additionally describe where to obtain source code.
+        These are interpretted by utilities on the user's machine, 
+        and ultimately result in a new package being installed.
     </p>
 
     <p>
+        The scheme is minimal, transparent and flexible, and Gentoo is all about 
+        openness and choice.<sup><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/About">[a]</a></sup>
         Compilation remains time-consuming: It can take over a day
         to build a working system from source, but nonetheless begins to be 
         approachable by ordinary users.
@@ -307,7 +237,8 @@ https://www.debian.org/doc/debian-policy/ch-relationships.html
         A utility that obtains and installs packages is referred to as a 
         <em>package manager.</em>
         Package managers are distribution-specific, and serve
-        as the user's front-end for their software:
+        as the user's front-end for their software.
+        To name a few:
     </p>
 
     <ul>
@@ -366,9 +297,78 @@ https://www.debian.org/doc/debian-policy/ch-relationships.html
     </ul>
 </div>
 
+<div class="content" id="repositories">
+    <h2>Repositories</h2>
 
-<div class="content" id="release-models">
-    <h2>Release Models</h2>
+    <p>
+        A <em>repository</em> is a tracked collection of files. 
+        Each distribution necessarily maintains one or more repositories of binary
+        packages, and makes them publicly available.
+        These can become quite large:
+        Debian counts 90,000 available packages.<sup><a href="https://packages.debian.org/stable/">[k]</a></sup>
+        More, the collection is repeated once for each supported architecture.
+        Mirroring repositories both distributes and reduces the associated cost 
+        of package distribution; please use mirrors!
+    </p>
+
+    <p>
+        With that, we can now sketch out how a package update is propogated from source 
+        to user.
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Typical ("point") releases are 
+            <a href="https://semver.org/">minor revisions</a> 
+            that do not affect intended behavior.
+        </p>
+    </div>
+
+    <p>
+        First, some change is made to the source code.
+        Minor changes can safely be ignored, but 
+        security fixes, for instance, cannot.
+        A distribution maintainer rebuilds and tests the package.
+        This is often done through scripts, similar to 
+        Gentoo's <code>ebuild</code>.
+    </p>
+
+    <p>
+        The rebuilt package gets pushed to the distribution's repositories,
+        then to mirrors.
+        The user's package manager then synchronizes its list of available packages,
+        and alerts the user to any relevant changes.
+        This is usually done automatically, but can be done manually
+        via,
+    </p>
+
+    <div class="code">
+        $ sudo apt update
+    </div>
+    
+    <p>
+        Updated packages are downloaded and installed by the user. 
+        This is usually done manually, with 
+    </p>
+
+    <div class="code">
+        $ sudo apt upgrade
+    </div>
+
+    <h3>See Also:</h3>
+
+    <ul>
+        <li><a href="https://wiki.debian.org/PackageManagement#Repository_management">Package Management</a> - Debian Wiki</a></li>
+        <li><a href="https://flight-manual.atom.io/getting-started/sections/installing-atom/">Installing Atom</a> (Example instructions to add repository)</li>
+    </ul>
+</div>
+
+
+
+<div class="content" id="closing-remarks">
+    <h2 style="margin-bottom: 0;">Closing Remarks:</h2>
+    <h4>Known-good</h4>
 
     <p>
         In open-source software, as in any other field, there are 
@@ -456,7 +456,7 @@ https://www.debian.org/doc/debian-policy/ch-relationships.html
     <h3>See Also:</h3>
     <ul>
         <li><a href="https://www.debian.org/News/2021/20210327">Debian -- News -- 10: 10.9 released</a></li>
-        <li><a href="https://wiki.archlinux.org/index.php/Arch_Linux">Arch Linux ArchWiki</a></li>
+        <li><a href="https://wiki.archlinux.org/index.php/Arch_Linux">Arch Linux</a> - ArchWiki</li>
     </ul>
 </div>
 
