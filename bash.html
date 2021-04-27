@@ -250,8 +250,9 @@ Exercises:
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            In Bash, input is buffered through the GNU 
-            <a href="https://en.wikipedia.org/wiki/GNU_Readline">Readline</a> library.
+            In Bash, input is buffered through the 
+            <a href="https://en.wikipedia.org/wiki/GNU_Readline">GNU Readline</a> 
+            library.
         </p>
     </div>
 
@@ -283,13 +284,13 @@ Exercises:
     <div class="aside-right">
         <h4>Note:</h4>
         <p>
-            If part of the line is single-quoted, then it is exempt from tokenizing and
+            If part of the line is single-quoted, it is exempt from tokenizing and
             expansion.
         </p>
     </div>
 
     <p>
-        In the first expansion pass, variables are expanded to their
+        In the shell expansion pass, variables are expanded to their
         respective values, and command substitution occurs:
     </p>
 
@@ -381,16 +382,15 @@ Exercises:
     </div>
 
     <div class="code">
-        $ *
+        *
     </div>
 
     <p>
-        expands to all files in the current directory (where <code>$</code> 
-        is the prompt).
+        expands to all files in the current directory;
     </p>
 
     <div class="code">
-        $ *.pdf
+        *.pdf
     </div>
 
     <p>
@@ -398,7 +398,7 @@ Exercises:
     </p>
 
     <div class="code">
-        $ *.[gx]z
+        *.[gx]z
     </div>
 
     <p>
@@ -496,32 +496,20 @@ Exercises:
         still be printed to our terminal screen.
     </p>
 
+    <p>
+        After expansion and redirection, Bash finds and executes 
+        the appropriate command, as mentioned in <a href="/terminals-and-shells.html#commands">Terminals and Shells</a>.
+    </p>
+
     <h3>See Also:</h3>
     <ul>
         <li><a href="https://wiki.bash-hackers.org/syntax/redirection">Redirection - Bash Hackers Wiki</a></li>
         <li><a href="https://www.gnu.org/software/bash/manual/html_node/Redirections.html"> Redirections - Bash Reference Manual</a></li>
     </ul>
 </div>
+
 <div class="content" id="terminal-conveniences">
     <h2>Random Stuff</h2>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Most shells support "tab completion":
-            If you've typed enough of a filename or command to
-            uniquely identify it, pressing "tab," will complete it for you.
-        </p>
-    </div>
-
-    <p>
-        An assortment of odds and ends:
-    </p>
-
-    <p>
-        <strong>EOF:</strong>
-        CTRL+D
-    </p>
 
     <h3>Copying and Pasting:</h3>
 
@@ -533,7 +521,25 @@ Exercises:
         copy and paste.
     </p>
 
-    <h3> Manual Sections:
+    <h3>Tab Completion</h3>
+
+    <p>
+        Most shells support "tab completion":
+        If you've typed enough of a filename or command to
+        uniquely identify it, pressing <em>tab</em> will complete it for you.
+    </p>
+
+
+    <h3>End of File</h3>
+
+    <p>
+        Since the shell is connected to the terminal via open file connections,
+        there exists a way to communicate <em>end of file</em> condition.
+        It is CTRL+D, and it's similar to a signal in the sense that it is
+        sent to the foreground process.
+    </p>
+
+    <h3>Manual Sections</h3>
 
     <p>
         When using <code>apropos</code>, you can restrict your search 
@@ -552,6 +558,15 @@ Exercises:
         $ man 7 intro
     </div>
 
+    <p>
+        The manual sections are worth learning, but perhaps not by heart.
+        Section 7 contains many interesting articles, and it's a worthwhile
+        exercise to generate an index of it.
+    </p>
+
+    <p>
+        Alright, now we'll introduce some other useful command-line tools.
+    </p>
 </div>
 
 <div class="content" id="finding-files">
@@ -582,7 +597,11 @@ Exercises:
         It searches there, and then it searches recursively downward through
         the directory tree which started there.
         For each file, it attempts to match its basename against <em>pattern.</em>
-        If it matches, it then prints the name of the file.
+        If the name matches, <code>fd</code> prints the name of the file.
+    </p>
+
+    <p>
+        Simple!
     </p>
 
     <p>
@@ -596,7 +615,7 @@ Exercises:
     </div>
 
     <p>
-        For a few reasons, I recommend (and use) <code>fd</code> over the classic
+        For a few reasons, I recommend <code>fd</code> over the classic
         GNU Findutils:
     </p>
 
@@ -622,7 +641,8 @@ Exercises:
             <p>
                 Regex by default:
                 Regex is a more powerful and expressive string-matching language
-                than shell globbing.
+                than shell globbing, and it is agreeably implemented here via
+                Rust.
             </p>
         </li>
         <li>
@@ -655,7 +675,7 @@ Exercises:
         This, again, is a reimagining of a classic UNIX utility&mdash;
         in this case, the venerable
         <em><a href="https://en.wikipedia.org/wiki/Grep">grep</a></em>.
-        It's mostly just easier to use.
+        Like <code>fd</code>, it's mostly just easier to use.
     </p>
 
     <p>
