@@ -10,6 +10,28 @@ last-updated: April 2021
         ebuild(5): https://dev.gentoo.org/~zmedico/portage/doc/man/ebuild.5.html
         ebuild phase functions: https://devmanual.gentoo.org/ebuild-writing/functions/
 
+        <p>
+            In open-source software, as in any other field, there are
+            known-good ideas and known-bad ideas.
+        </p>
+
+        <ul>
+            <li>
+                Known-good ideas:
+                <ul>
+                    <li>Dynamic linking</li>
+                    <li>Reiterative improvement</li>
+                    <li>Breaking a problem down and solving the pieces</li>
+                    <li>Abdicating responsibility to people who actually want to do it</li>
+                </ul>
+            </li>
+            <li>
+                Known-bad ideas:
+                <ul>
+                    <li>Static linking</li>
+                </ul>
+            </li>
+        </ul>
 -->
 
 <div id="nav_bar_2" class="nav">
@@ -20,7 +42,7 @@ last-updated: April 2021
         <li><a href="#binary-packages">Binary Packages</a></li>
         <li><a href="#package-managers">Package Managers</a></li>
         <li><a href="#repositories">Repositories</a></li>
-        <li><a href="#closing-remarks">Closing Remarks: Known-good</a></li>
+        <li><a href="#closing-remarks">Closing Remarks: Distribution Models</a></li>
         <!--<li><a href="#closing-remarks">Closing Remarks</a></li>-->
         <li><a href="#references"> References </a></li>
     </ul>
@@ -60,8 +82,8 @@ last-updated: April 2021
 
     <p>
         Each project uses its own language and build system;
-        the above 
-        <a href="https://www.gnu.org/software/bash/manual/html_node/Lists.html#Lists">list</a> 
+        the above
+        <a href="https://www.gnu.org/software/bash/manual/html_node/Lists.html#Lists">list</a>
         of commands presupposes C/C++ source built via
         GNU's <em>Autoconf.</em>
         Most packages include a <code>README</code> file of
@@ -85,8 +107,8 @@ last-updated: April 2021
     <p>
         Naturally, the system may be viewed as a collection of installed
         packages.
-        Finally, to configure and compile source code into usable software 
-        is to <em>build</em> it.  
+        Finally, to configure and compile source code into usable software
+        is to <em>build</em> it.
     </p>
 
     <h3>See Also:</h3>
@@ -130,18 +152,18 @@ last-updated: April 2021
 
     <p>
         Gentoo Linux is an operating system built around this strategy.
-        The mechanized instructions to build software are kept in 
+        The mechanized instructions to build software are kept in
         <code>ebuild</code>'s&mdash; text files which
         additionally describe where to obtain source code.
-        These are interpretted by utilities on the user's machine, 
+        These are interpretted by utilities on the user's machine,
         and ultimately result in a new package being installed.
     </p>
 
     <p>
-        The scheme is minimal, transparent and flexible, and Gentoo is all about 
+        The scheme is minimal, transparent and flexible, and Gentoo is all about
         openness and choice.<sup><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/About">[a]</a></sup>
         Compilation remains time-consuming: It can take over a day
-        to build a working system from source, but nonetheless begins to be 
+        to build a working system from source, but nonetheless begins to be
         approachable by ordinary users.
     </p>
 
@@ -159,7 +181,7 @@ last-updated: April 2021
         This yields a smaller archive, saves users the
         time-consuming step of compilation, and allows the
         complete automation of installation.
-        And software installation is fast!  
+        And software installation is fast!
         The implication, however, is that each distributed package is configured
         for a particular operating system running on a particular computer architecture.
     </p>
@@ -169,7 +191,7 @@ last-updated: April 2021
         oldest, and possibly simplest, binary packaging scheme.
         By modern standards, it may be considered crude,
         because it leaves dependency resolution to the user.<sup><a href="https://www.slackbook.org/html/package-management.html">[2]</a></sup>
-        It is easily dissected, though, and so represents a nice example 
+        It is easily dissected, though, and so represents a nice example
         for us.
     </p>
 
@@ -198,7 +220,7 @@ last-updated: April 2021
     </div>
 
     <p>
-        To install the package, the archive is extracted and the files 
+        To install the package, the archive is extracted and the files
         copied into the appropriate directories of the host operating system.
         If a directory does not exist, it is created;
         the <code>install</code> directory is ignored.
@@ -212,12 +234,12 @@ last-updated: April 2021
 
     <p>
         The installation utility is, in this case, either
-        <a href="https://www.slackbook.org/html/package-management-package-utilities.html"><code>installpkg</code> or <code>pkgtools</code></a>. 
+        <a href="https://www.slackbook.org/html/package-management-package-utilities.html"><code>installpkg</code> or <code>pkgtools</code></a>.
         It must be granted root privilege.
     </p>
 
     <p>
-        All major distributions deal in binary packages, and use similar 
+        All major distributions deal in binary packages, and use similar
         compressed-archives of "reflective directory trees,"
         though each to their own taste.
         By and large, however, the <em>package</em> is intended to be
@@ -234,7 +256,7 @@ last-updated: April 2021
     <h2> Package Managers </h2>
 
     <p>
-        A utility that obtains and installs packages is referred to as a 
+        A utility that obtains and installs packages is referred to as a
         <em>package manager.</em>
         Package managers are distribution-specific, and serve
         as the user's front-end for their software.
@@ -301,36 +323,36 @@ last-updated: April 2021
     <h2>Repositories</h2>
 
     <p>
-        A <em>repository</em> is a tracked collection of files. 
+        A <em>repository</em> is a tracked collection of files.
         Each distribution necessarily maintains one or more repositories of binary
         packages, and makes them publicly available.
         These can become quite large:
         Debian counts 90,000 available packages.<sup><a href="https://packages.debian.org/stable/">[k]</a></sup>
         More, the collection is repeated once for each supported architecture.
-        Mirroring repositories both distributes and reduces the associated cost 
+        Mirroring repositories both distributes and reduces the associated cost
         of package distribution; please use mirrors!
     </p>
 
     <p>
-        With that, we can now sketch out how a package update is propogated from source 
+        With that, we can now sketch out how a package update is propogated from source
         to user.
     </p>
 
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            Typical ("point") releases are 
-            <a href="https://semver.org/">minor revisions</a> 
+            Typical ("point") releases are
+            <a href="https://semver.org/">minor revisions</a>
             that do not affect intended behavior.
         </p>
     </div>
 
     <p>
         First, some change is made to the source code.
-        Minor changes can safely be ignored, but 
+        Minor changes can safely be ignored, but
         security fixes, for instance, cannot.
         A distribution maintainer rebuilds and tests the package.
-        This is often done through scripts, similar to 
+        This is often done through scripts, similar to
         Gentoo's <code>ebuild</code>.
     </p>
 
@@ -346,10 +368,10 @@ last-updated: April 2021
     <div class="code">
         $ sudo apt update
     </div>
-    
+
     <p>
-        Updated packages are downloaded and installed by the user. 
-        This is usually done manually, with 
+        Updated packages are downloaded and installed by the user.
+        This is usually done manually, with
     </p>
 
     <div class="code">
@@ -368,44 +390,25 @@ last-updated: April 2021
 
 <div class="content" id="closing-remarks">
     <h2 style="margin-bottom: 0;">Closing Remarks:</h2>
-    <h4>Known-good</h4>
+    <h4>Distribution Models</h4>
 
     <p>
-        In open-source software, as in any other field, there are 
-        known-good ideas and known-bad ideas.
-    </p>
-
-    <ul>
-        <li>
-            Known-good ideas:
-            <ul>
-                <li>Dynamic linking</li>
-                <li>Reiterative improvement</li>
-                <li>Breaking a problem down and solving the pieces</li>
-                <li>Abdicating responsibility to people who actually want to do it</li>
-            </ul>
-        </li>
-        <li>
-            Known-bad ideas:
-            <ul>
-                <li>Static linking</li>
-            </ul>
-        </li>
-    </ul>
-
-    <p>
-        Distributing binary packages in the manner described above is a 
+        Distributing binary packages in the manner described above is a
         known-good idea, and there are many successful variations.
         The <em>regular release</em> model deals in discretely released
         operating systems.
         Packages are composed into a working operating system, and undergo
         some testing period.
         After the initial release, updates are restricted to bug
-        fixes and security updates; new features do not become available 
+        fixes and security updates; new features do not become available
         within a particular release.
     </p>
 
     <p>
+        This strategy has produced extremely stable operating
+        systems.<sup><a href="http://www.slackware.com/about/">[c]</a></sup>
+        Each version is supported for some length of time,
+        usually asserted beforehand.
         Distributions following the regular release model:
     </p>
 
@@ -419,23 +422,17 @@ last-updated: April 2021
     </ul>
 
     <p>
-        This strategy has produced extremely stable operating 
-        systems.<sup><a href="http://www.slackware.com/about/">[c]</a></sup>
-        Each version is supported for some length of time, 
-        usually asserted beforehand.
-    </p>
-
-    <p>
-        The <em>rolling release</em> model is a newer variant that 
-        dispenses with any versioning scheme.  
+        The <em>rolling release</em> model is a newer variant that
+        dispenses with any versioning scheme.
         Instead, updates and features are distributed as they become
         available.
         The result is a bleeding-edge operating system&mdash; and
-        a constant stream of updates.  
+        a constant stream of updates.
     </p>
 
     <p>
-        Examples:
+        This strategy is growing in popularity, especially among desktop
+        users.  Examples:
     </p>
 
     <ul>
@@ -447,10 +444,10 @@ last-updated: April 2021
     <p>
         Between the two is the <em>semi-rolling release,</em>
         best explained through example:
-        <a href="https://getsol.us/home/">Solus Linux</a> is an up-and-coming 
-        distribution focused on the home desktop. 
+        <a href="https://getsol.us/home/">Solus Linux</a> is an up-and-coming
+        distribution focused on the home desktop.
         They release a set of package updates every Friday, which, taken together,
-        form the most recent version of their OS. 
+        form the most recent version of their OS.
     </p>
 
     <h3>See Also:</h3>
