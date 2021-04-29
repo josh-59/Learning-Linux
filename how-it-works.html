@@ -6,13 +6,6 @@ last-updated: April 2021
 
 <!--
 
-Incremental Improvement
-    Release early, release often
-    https://en.wikipedia.org/wiki/Release_early,_release_often
-
-    Kernel development team prefers incremental improvements
-    https://lkml.org/lkml/2007/7/28/145
-
 
 <div class="content" id="leadership">
     <h2>Leadership</h2>
@@ -22,42 +15,75 @@ Incremental Improvement
         Stated formally, For all successful open-source projects, there exists
         a leader.
         Stated another way, "Open source democracy doesn't work."&mdash; Brian Camprill
+        Let's take some examples.
     </p>
 
     <p>
-        For example, Linux kernel development is led by Linus Torvalds.
+        For example, Linux kernel development is led by Linus Torvalds;
+        the Mozilla Corporation leads the Firefox project;
+        Mark Nudelman leads <code>less</code> development; and
+        GNU leads, well, GNU.
+    </p>
+
+    <p>
+        Naturally, the notion has been taken to its limit, with the
+        <a href="https://en.wikipedia.org/wiki/Benevolent_dictator_for_life">Benevolent Dictator for Life</a>.
+        This position is subject to the terms of open-source:
+    </p>
+
+    <ul>
+        <li>No one is forcing anyone to work on their projects</li>
+        <li>Any user is always free to fork the source repository and take <em>their</em> project in a different direction</li>
+    </ul>
+
+    <p>
+        This is where things get interesting, because open-source deals in
+        contributions, not payment.
+    </p>
+
+    <p>
+        On the one hand, it is correct that each "project" is a source repository somewhere in space,
+    </p>
+
+    <p>
+        The result is contributions that must be declined.
+        As Greg Kroah-Hartman has said, "Half my job is to say 'no'."
+    </p>
+
+    <p>
         The community <em>needed</em> someone to say,
         "No we're not doing that," on occaision, but firmly,
     </p>
 
     <p>
-        As Greg Kroah-Hartman has said, "Half my job is to say 'no'."
-    </p>
-
-    <p>
-        This works in open source because any user is always free to
-        fork the source repository and take the project in a new direction.
-        For example, <a href="https://www.devuan.org/">Devuan</a> is a fork of
-        Debian without <code>systemd</code>
-        (the introduction of <code>systemd</code> became cause for very bitter
-        conflict within the Debian developer community).
-    </p>
-
-    BDFL:
-        1) No-one is forcing anyone to work on their projects
-        2) Open-source projects can always be forked into a sub-project
-
-    <p>
-        Linus' Law: Should be in reference to interfaces of a modular system:
-        If it's a bug that people rely on, it's not a bug, it's a feature.
+        <strong>Linus' Rule:</strong>
+            <em>If it's a bug that people rely on, it's not a bug, it's a feature.</em>
+        He's quite emphatic about this point, and
     </p>
 </div>
+
+Torvalds:
+    Kernel is extremely modular
+    https://lkml.org/lkml/2007/7/28/145
+
+Incremental Improvement
+    Release early, release often
+    https://en.wikipedia.org/wiki/Release_early,_release_often
+
+    Kernel development team prefers incremental improvements
+    https://lkml.org/lkml/2007/7/28/145
+
+https://lkml.org/lkml/2007/7/28/145
+
+"Small and incremental improvements are much easier to merge. "
+https://lkml.org/lkml/2007/7/28/145
+
 
 <div class="content" id="building-what-they-want">
     <h2>Building What They Want</h2>
 
     <p>
-        The Linux kernel began as a hobby; 
+        The Linux kernel began as a hobby;
         Torvalds, "GNU emacs of terminal emulators", became a kernel during a
         marathon hacking session.
     </p>
@@ -80,7 +106,7 @@ Incremental Improvement
         </p>
     </div>
 
-   
+
     <h3>See Also:</h3>
     <ul>
         <li><a href="http://www.catb.org/~esr/writings/cathedral-bazaar/afterword/">Afterword: Beyond Software?</a></li>
@@ -98,12 +124,12 @@ Incremental Improvement
     </p>
 
     <p>
-        I do not believe that the ordinary user is obligated to contribute 
-        to open source.  If they do, they should recognize that they are 
+        I do not believe that the ordinary user is obligated to contribute
+        to open source.  If they do, they should recognize that they are
         <em>donating a modification</em>, not necessarily "making a contribution,"
-        and that it is left to the repository mainatainer to do 
+        and that it is left to the repository mainatainer to do
         something&mdash; if anything&mdash; with it.
-        Finally, the most substantial contributions are made by doing 
+        Finally, the most substantial contributions are made by doing
         what you do best :).
     </p>
 </div>
@@ -163,10 +189,10 @@ Incremental Improvement
     <h2>Fork/Merge</h2>
 
     <p>
-        Recall that a repository is tracked collection of files,
-        usually containing a package.
-        Open-source repositories are made publicly available, and anyone
-        may download or otherwise copy them.
+        Recall that a repository is a tracked collection of files.
+        The source code of an open-source package is usually maintained in a
+        publicly available repository, where anyone
+        may download or otherwise copy it.
         Such a copy is called a <em>fork.</em>
     </p>
 
@@ -179,8 +205,8 @@ Incremental Improvement
     </p>
 
     <p>
-        Merging changes with the original is a process, and naturally
-        involves the source repository's maintainer.
+        Merging changes with the original repository is a process, and naturally
+        involves the source's maintainer.
         The process begins with a <em>pull request,</em>
         which initiates a discussion about
         the proposed changes.<sup><a href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests">[a]</a></sup>
@@ -206,21 +232,29 @@ Incremental Improvement
 </div>
 
 <div class="content" id="reiterative-improvement">
-    <h2 style='margin-bottom: 0px;'>  Reiterative Improvement</h2>
+    <h2 style='margin-bottom: 0px;'>Incremental Improvement</h2>
     <h4>and Train Schedules </h4>
 
     <p>
         Software development is fundamentally reiterative:
         You build something, publish it, improve it and release it again.
-        Such reiterative improvement is realized in both open- and closed-source
-        development models.
+        Such reiterative improvement exists in both open- and closed-source
+        environments;
+        in open-source, it is perhaps more transparent, however.
     </p>
 
     <p>
-        The "train schedule" formalizes this by putting it on
-        a timetable;
+        "Small and incremental improvements are much easier to
+        merge,"<sup><a href="https://lkml.org/lkml/2007/7/28/145">[ab]</a></sup>
+
+        More, <a href="https://en.wikipedia.org/wiki/Release_early,_release_often">"Release early, release often,"</a>
+    </p>
+
+    <p>
+        The strategy is implemented with greater force by putting in
+        on a timetable, known as a "train schedule";
         it is often adopted by larger projects as a means
-        of organizing many (individually minor) changes into a coherent whole.
+        of organizing many changes into a coherent whole.
     </p>
 
     <p>
@@ -236,16 +270,14 @@ Incremental Improvement
         <img src="assets/img/train-schedules.png" style="width: 100%;">
     </figure>
 
-
-        <div class="aside-right">
-            <h4>Aside</h4>
-            <p>
-                Firefox is one of the largest and most agressive open-source
-                projects outside of the Linux kernel.
-                It even spawned the (awesome) programming language, Rust.
-            </p>
-        </div>
-
+    <div class="aside-right">
+        <h4>Aside</h4>
+        <p>
+            Firefox is one of the largest and most agressive open-source
+            projects outside of the Linux kernel.
+            It even spawned the (awesome) programming language, Rust.
+        </p>
+    </div>
 
     <p>
         That is, each version spends four weeks in the <em>Mature</em> category,
@@ -281,6 +313,12 @@ Incremental Improvement
         </a>
         <figcaption><center><b><a href="https://wiki.mozilla.org/Release_Management/Calendar">Firefox Release Schedule</a></b></center></figcaption>
     </figure>
+
+    <!--
+    <p>
+        A place where this strategy fails is video game development.
+    </p>
+    -->
 
        <h3>See Also:</h3>
     <ul>
@@ -419,6 +457,8 @@ Incremental Improvement
         <li><a href="https://fedoramagazine.org/5-cool-terminal-pagers-in-fedora/">5 cool terminal pagers in Fedora</a> - Fedora Magazine</li>
     </ul>
 </div>
+
+
 
 
 <div id="references" class="content">
