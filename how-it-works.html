@@ -6,234 +6,105 @@ last-updated: April 2021
 
 <!--
 
-Modularity:
-    Remove reference to mass production?
-        - It is a fair comment, but off-topic
-        - Replace with "modularization of responsiblity", seen most
-            clearly in "distribution", wherein assembling the puzzle is left to someone else
+Incremental Improvement
+    Release early, release often
+    https://en.wikipedia.org/wiki/Release_early,_release_often
 
-            <div class="content" id="leadership">
-                <h2>Leadership</h2>
-
-                <p>
-                    Among successful open-source projects, one element remains constant,
-                    and that is <em>leadership.</em>
-                    Stated formally, For all successful open-source projects, there exists
-                    a leader.
-                    Stated another way, "Open source democracy doesn't work."&mdash; Brian Camprill
-                </p>
-
-                <p>
-                    For example, Linux kernel development is led by Linus Torvalds.
-                    The community <em>needed</em> someone to say,
-                    "No we're not doing that," on occaision, but firmly,
-                </p>
-
-                <p>
-                    As Greg Kroah-Hartman has said, "Half my job is to say 'no'."
-                </p>
-
-                <p>
-                    This works in open source because any user is always free to
-                    fork the source repository and take the project in a new direction.
-                    For example, <a href="https://www.devuan.org/">Devuan</a> is a fork of
-                    Debian without <code>systemd</code>
-                    (the introduction of <code>systemd</code> became cause for very bitter
-                    conflict within the Debian developer community).
-                </p>
-            </div>
-
-            <div class="content" id="closing-remarks">
-                <h2 style="margin-bottom: 0;">Closing Remarks:</h2>
-                <h4>Do What You Want</h4>
-
-                <blockquote>
-                "Thompson wanted to create a comfortable computing environment constructed
-                according to his own design, using whatever means were available. His plans, it
-                is evident in retrospect, incorporated many of the innovative aspects of Multics,
-                including an explicit notion of a process as a locus of control, a tree-structured
-                file system, a command interpreter as user-level program, simple representation
-                of text files, and generalized access to devices. They excluded others, such as
-                unified access to memory and to
-                files."<sup><a href="https://www.bell-labs.com/usr/dmr/www/chist.html">[o]</a></sup>
-                </blockquote>
-
-                <p>
-                    The UNIX philosophy is his legacy.
-                </p>
-
-                https://blog.documentfoundation.org/blog/2021/04/02/free-software-becomes-a-standard-in-dortmund-germany/
-
-                Open-source hardware
-                    Begins with the instruction set
-
-                Textbooks and Academia
-
-                <div class="aside-right">
-                    <h4>Aside:</h4>
-                    <p>
-                        It doesn't become "our thing" just because you had an idea.
-                    </p>
-                </div>
-
-                <p>
-                    I do not believe that the ordinary user is obligated to contribute to
-                    open source.
-                    If they do, they should recognize that they are <em>donating a modification</em>,
-                    not necessarily "making a contribution."
-                    In particular, it is left to the repository mainatainer to do something&mdash; if anything&mdash; with it.
-                    Finally, the most substantial contributions are made by doing what you do best :).
-                </p>
-
-                <h3>See Also:</h3>
-                <ul>
-                    <li><a href="http://www.catb.org/~esr/writings/cathedral-bazaar/afterword/">Afterword: Beyond Software?</a></li>
-                </ul>
-            </div>
+    Kernel development team prefers incremental improvements
+    https://lkml.org/lkml/2007/7/28/145
 
 
-    Bazaar Development Model
+<div class="content" id="leadership">
+    <h2>Leadership</h2>
     <p>
-         Whether this development model is best or not is a
-         <a href="https://queue.acm.org/detail.cfm?id=2349257">subject of
-         debate</a>, but there can be no doubt that it has been successful:
-         GNU/Linux is the most-used Unix-like
-         operating system in existence today.
-         I view these pieces as "competing", expect the best of
-         them to rise in popularity, and let someone else worry about
-         fitting them all together.
-    </p>
-
-
-
-<div class="content" id="successful-business-models">
-    <h2>Successful Business Models</h2>
-
-    <p>
-        Community-Driven vs. ...internally-driven?
-        Like Debian is 'community-driven'
-            Ensures users are satisfied
-        Generalization of the Bazaar?
+        Among successful open-source projects, one element remains constant,
+        and that is <em>leadership.</em>
+        Stated formally, For all successful open-source projects, there exists
+        a leader.
+        Stated another way, "Open source democracy doesn't work."&mdash; Brian Camprill
     </p>
 
     <p>
-        <strong>Classic Business Model:</strong>:
-        The classic model is to offer support service upon free software.
-        Red Hat Enterprise Linux
-        Cannonical
-        Kubernetes
-
-        They market principally towards business and enterprise.
-    </p>
-
-    <p>
-        <strong>Offset-cost-with-community-contribution:</strong>
-        The following produce closed-source hardware, who depend upon
-        the community for software and documentation:
-        PINE-64
-        Raspberry Pi
-
-        The following produce open-source hardware, and depend upon
-        the community for software and documentation:
-        https://beagleboard.org/about
-    </p>
-
-    <p>
-        <strong>Radio Station Model:</strong>
-        Like a radio station, they accept donations from users and sponsors,
-        and generate revenue from search-engine
-        traffic<sup><a href="http://web.archive.org/web/20150409023855/http://www.techworld.com.au/article/529572/q_clement_lefebvre_man_behind_linux_mint/">[a]</a></sup>
-    </p>
-
-    <p>
-        <strong>Foundation:</strong>
-        <a href="https://en.wikipedia.org/wiki/Foundation_(nonprofit)">Foundation</a>
-        FSF, principally serves to "support" GNU.
-    </p>
-
-    <p>
-        <strong>Contributing:</strong>
-        For-profit companies contributing to open-source
-        Facebook -> btrfs
-    </p>
-
-    Inapplicable domains:
-    Pretty much anything that needs to be cutting-edge.
-    AAA Games, for instance
-</div>
-
-
-
-<div class="content" id="organization">
-    <h2 style='margin-bottom: 0px;'>Organization</h2>
-    <h4>And why businesses rule the earth</h4>
-
-    <p>
-        Organization is about having a clear end-state, a well-defined goal.
-        For example:
-    </p>
-
-    <ul>
-        <li>"Most UNIX-like GNU/Linux distribution out there"</li>
-        <li>"Most secure UNIX-like operating system"</li>
-        <li>"A distribution by the people, for the people"</li>
-    </ul>
-
-    <p>
-        At the risk of being too philosophical,
-        "success" itself is defined only relative to a goal;
-        every project must be well-organized, or it cannot be successful.
-    </p>
-
-    <div class="aside-right">
-        <h4>Aside</h4>
-        <p>
-            "Open source democracy doesn't work."&mdash; Brian Camprill
-        </p>
-    </div>
-
-    <p>
-        In the author's opinion, the Linux kernel was only successful in virtue
-        of Torvald's leadership.
+        For example, Linux kernel development is led by Linus Torvalds.
         The community <em>needed</em> someone to say,
         "No we're not doing that," on occaision, but firmly,
     </p>
 
     <p>
-        BDFL:
-            1) No-one is forcing anyone to work on their projects
-            2) Open-source projects can always be forked into a sub-project
+        As Greg Kroah-Hartman has said, "Half my job is to say 'no'."
+    </p>
+
+    <p>
+        This works in open source because any user is always free to
+        fork the source repository and take the project in a new direction.
+        For example, <a href="https://www.devuan.org/">Devuan</a> is a fork of
+        Debian without <code>systemd</code>
+        (the introduction of <code>systemd</code> became cause for very bitter
+        conflict within the Debian developer community).
+    </p>
+
+    BDFL:
+        1) No-one is forcing anyone to work on their projects
+        2) Open-source projects can always be forked into a sub-project
+
+    <p>
+        Linus' Law: Should be in reference to interfaces of a modular system:
+        If it's a bug that people rely on, it's not a bug, it's a feature.
     </p>
 </div>
 
-<div class="content" id="bazaar">
-    <h2>The Bazaar Development Model</h2>
+<div class="content" id="building-what-they-want">
+    <h2>Building What They Want</h2>
 
     <p>
-        <strike>A collection of open-source projects is
-        called a <em>bazaar.</em></strike>
-        The term <em>bazaar</em> was first used by Eric S. Raymond
-        to describe the Linux development model&mdash; "release early and often,
-        be open to the point of promiscuity, delegate everything in sight"&mdash;
-        which he contrasted with the traditional, "cathedral"-style development model.
+        The Linux kernel began as a hobby; 
+        Torvalds, "GNU emacs of terminal emulators", became a kernel during a
+        marathon hacking session.
+    </p>
+
+    <blockquote>
+    "Thompson wanted to create a comfortable computing environment constructed
+    according to his own design, using whatever means were available. His plans, it
+    is evident in retrospect, incorporated many of the innovative aspects of Multics,
+    including an explicit notion of a process as a locus of control, a tree-structured
+    file system, a command interpreter as user-level program, simple representation
+    of text files, and generalized access to devices. They excluded others, such as
+    unified access to memory and to
+    files."<sup><a href="https://www.bell-labs.com/usr/dmr/www/chist.html">[o]</a></sup>
+    </blockquote>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            It doesn't become "your thing" just because you had an idea.
+        </p>
+    </div>
+
+   
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="http://www.catb.org/~esr/writings/cathedral-bazaar/afterword/">Afterword: Beyond Software?</a></li>
+    </ul>
+</div>
+
+
+<div class="content" id="closing-remarks">
+    <h2 style="margin-bottom: 0;">Closing Remarks:</h2>
+    <h4>Don't be a dick</h4>
+
+    <p>
+        As users of their creations, we are very much "after the fact."
+        <em>detailed bug reports.</em>
     </p>
 
     <p>
-        In a cathedral, software is openly available,
-        sure, but is developed strictly in-house; the above
-        remarks on forking and merging effectively don't apply.
-        Contributions are restricted to a small cadre,
-        who charge themselves with both the architecture and the
-        implementation of an idea.
-        The cathedral has its proponents (GNU, all BSD's).
-        They argue that the traditional model affords greater opportunity for
-        design, conception, and craftsmanship, and that these are
-        critical considerations given their projects' goals.
-    </p>
-
-    <p>
-        The bazaar model, by contast, welcomes strangers to contribute
-        to the project, and more, to take responsibility within it.
+        I do not believe that the ordinary user is obligated to contribute 
+        to open source.  If they do, they should recognize that they are 
+        <em>donating a modification</em>, not necessarily "making a contribution,"
+        and that it is left to the repository mainatainer to do 
+        something&mdash; if anything&mdash; with it.
+        Finally, the most substantial contributions are made by doing 
+        what you do best :).
     </p>
 </div>
 
@@ -469,7 +340,7 @@ Modularity:
         Through modularity, a complex problem can, and has, been broken down
         and solved.
         The strategy has proved crucial not only to the development of computer
-        software, but also
+        software as well as
         <a href="https://en.wikipedia.org/wiki/Instruction_set_architecture">computer hardware</a>.
         Finally, the notion may be applied to responsibility:
         A <em>distribution</em> is a project that assembles components into
