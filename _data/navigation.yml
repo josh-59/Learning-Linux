@@ -2,8 +2,8 @@
   link: /
 - name: Introduction to GNU/Linux
   link: /intro-to-gnu-linux.html
-- name: Files and Filesystems
-  link: /files-and-filesystems.html
+- name: Files
+  link: /files.html
 - name: Processes
   link: /processes.html
 - name: Terminals and Shells
