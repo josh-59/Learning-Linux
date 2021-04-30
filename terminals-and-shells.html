@@ -7,14 +7,6 @@ last-updated: March, 2021
 <!--
 To Do:
 
-    Simple Commands:
-        Recall that
-        Each command therefore inherits the shell's attributes, including
-        - Place in the filesystem
-        - Open files
-            - Terminal
-
-
     <p>
         Finally, appending directories to <code>PATH</code> is an important step of
         setting up a development environment.
@@ -33,33 +25,6 @@ To Do:
         Now Bash will look <em>everywhere else</em> before searching my newly
         added directory, and will only look there when Bash is invoked interactively.
     </p>
-
-
-    <h2>Shell Features</h2>
-
-   
-    <h4 style="width: 30%; margin: auto;">In the Beginning</h4>
-
-
-    <p>
-        In 1975, John Mashey and introduced the <code>PATH</code> environment
-        variable:
-    </p>
-
-    <blockquote>
-        "We had a large (1,000+) population of users who were not usually C 
-        programmers, who worked in groups in shared environments.  They wanted
-        to share their own sets of commands by lab, department, group.
-        They often shared systems with others and none could be super-users."
-    </blockquote>
-
-    <p>
-        (User-<em>groups</em> were added for the same reason.)
-    </p>
-
-
-
-
 
 <div class="content" id="closing-remarks">
     <h2>Closing Remarks</h2>
@@ -98,22 +63,13 @@ To Do:
         Some of the most important are:
     </p>
 
-    <ul style="margin-left: 10%;">
-        <li><a href="/bash.html">Variables and Expansions</a></li>
-        <li><a href="/bash.html#standard-file-descriptors">I/O and Redirection</a></li>
-        <li><a href="https://ryanstutorials.net/bash-scripting-tutorial/bash-script.php">Scripting</a></li>
-        <li>Control Characters/Sequences</li>
-    </ul>
-
     <h3>See Also:</h3>
     <ul>
+        <li><a href="https://ryanstutorials.net/bash-scripting-tutorial/bash-script.php">Scripting</a></li>
         <li><a href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">Read-eval-print loop</a> - Wikipedia</li>
         <li><a href="http://shellhaters.org/">Shell Hater's Handbook</a></li>
     </ul>
 </div>
-
-
-
 
 -->
 
@@ -493,8 +449,8 @@ To Do:
     <h2>Arguments</h2>
 
     <p>
-        Commands are the first part of a "typical line of input" given to the
-        shell; the other is arguments.
+        Commands are the first part of a "typical line of input"; 
+        the other is arguments.
         Like commands, arguments are supplied by the user. 
         They are passed to each function, builtin, or program as it begins 
         execution, and it is up to that command to interpret them.
@@ -591,6 +547,7 @@ To Do:
     <h3>See Also:</h3>
     <ul>
         <li><a href="http://man.cat-v.org/unix-1st/1/sh">sh(1)</a> (First Edition)</li>
+        <li><a href="assets/simple-shell.c">simple-shell.c</a></li>
     </ul>
 </div>
 
