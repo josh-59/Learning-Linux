@@ -153,6 +153,7 @@ To Do:
 		<li><a href="#terminal-emulators"> Terminal Emulators </a></li>
 		<li><a href="#shells"> Shells </a></li>
         <li><a href="#commands">Commands</a></li>
+        <li><a href="#path">PATH Environment Variable</a></li>
         <li><a href="#pwd">Working Directory</a></li>
         <li><a href="#closing-remarks">Closing Remarks </a></li>
         <li><a href="#ryan-tomayko">Ryan Tomayko</a></li>
@@ -372,7 +373,7 @@ To Do:
     </ol>
 
     <p>
-        User-defined functions are written in the shell language itself.
+        <a href="https://www.shell-tips.com/bash/functions/">User-defined functions</a> are written in the shell language itself.
         The most common way to define such a function is to include it in
         one of Bash's startup files.
     </p>
@@ -393,8 +394,10 @@ To Do:
         It is found in <code>/usr/bin</code>, and the program <code>/usr/bin/ls</code>
         is executed whenever the command <code>ls</code> is issued. 
     </p>
+</div>
 
-    <h3><code>PATH</code> Environment Variable</h3>
+<div class="content" id="path">
+    <h2><code>PATH</code> Environment Variable</h2>
 
     <div class="aside-right">
         <h4>Remember:</h4>
@@ -464,7 +467,6 @@ To Do:
 
     <h3>See Also:</h3>
     <ul>
-        <li><a href="https://www.shell-tips.com/bash/functions/"> The Complete Guide to Bash Functions</a></li>
         <li><a href="https://en.wikipedia.org/wiki/Environment_variable#True_environment_variables"> Environment Variables </a> - Wikipedia</li>
     </ul>
 </div>
@@ -484,8 +486,8 @@ To Do:
     <div class="aside-right">
         <h4>Aside</h4>
         <p>
-            In particular, relative file names are resolved with respect to this 
-            location.
+            In particular, relative file names are resolved with respect to 
+            the current working directory.  
         </p>
     </div>
 
@@ -551,6 +553,7 @@ To Do:
         <li>Prints prompt</li>
         <li>Gets input</li>
         <li>Finds and executes command</li>
+        <li>Waits for child process to terminate</li>
     </ol>
 
     <p>
