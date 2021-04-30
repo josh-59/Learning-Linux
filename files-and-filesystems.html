@@ -100,9 +100,9 @@ https://wiki.ubuntu.com/Lvm
         <li><a href="#regular-files"> Regular Files</a></li>
         <li><a href="#device-files"> Device Files </a></li>
         <li><a href="#pseudo-files"> Psuedo Files </a></li>
+        <li><a href="#inodes-and-directories">inodes and Directories</a></li>
         <li><a href="#fs-heir"> Filesystem Heirarchy </a></li>
         <li><a href="#mounting-unmounting"> Mounting and Unmounting</a></li>
-        <li><a href="#inodes-and-directories">inodes and Directories</a></li>
         <li><a href="#closing-remarks"> Closing Remarks: inodes </a></li>
         <li><a href="#udacity"> Udacity </a></li>
         <li><a href="#references"> References </a></li>
@@ -374,9 +374,23 @@ https://wiki.ubuntu.com/Lvm
             communication across networks.
         </li>
     </ul>
+
+    </p>
+
+    <h3>A Bit More</h3>
+
+
+    <p>
+        Ken Thompson's UNIX kernel facilitated reading and writing 
+        files, but otherwise refrained from interjecting upon their use.
+        This approach was quite new for its time: Earlier
+        operating systems interposed upon the handling of files, so that
+        some files could only be read by some programs, and not by others.<sup><a href=#references>[1]</a></sup>
     </p>
 
     <p>
+        Thompson's strategy was to leave file interpretation to the program,
+        and the resulting generality has become a hallmark of the UNIX platform.
         The four file operations apply to all file types except directories,
         whose structure (a tree) is protected by the kernel through 
         a distinct set of system calls.  
@@ -389,6 +403,88 @@ https://wiki.ubuntu.com/Lvm
     </ul>
 </div>
 
+
+<div class="content" id="inodes-and-directories">
+    <h2>inodes and Directories</h2>
+
+    <p>
+        In keeping with traditional UNIX file semantics, 
+        every file on a GNU/Linux system is represented by an unique <em>inode.</em><sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html#id1">[18]</a></sup>
+        Inodes are the responsibility of their respective filesystem,
+        wherein each is given a number.
+        Within a filesystem, an inode number identifies an
+        inode, and thereby identifies a particular file.
+    </p>
+
+    <p>
+        A <em>directory</em> is a file that associates filenames (strings) with 
+        inode numbers:
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Every path on the directory tree terminates in an inode reference.
+        </p>
+    </div>
+
+    
+    <div class="code">
+        $ ls -ia ~/Public/Learning-Linux <br>
+        645278 ./<br>
+        384844 ../<br>
+        775487 assets/<br>
+        641473 command-line-1-tutorial-introduction.html<br>
+        645403 _config.yml<br>
+        775449 _data/<br>
+        642188 documentation.html<br>
+        642185 files-and-filesystems.html<br>
+        641460 finding-files.html<br>
+        775463 _future/<br>
+        [...]
+    </div>
+
+    <p>
+        Each such association is called a <em>hard link.</em>
+        A hard link is created upon file creation;
+        we can also create new hard links with the <code>ln</code> command,
+        as the following sequence demonstrates:
+    </p>
+
+    <div class="code">
+        $ echo -n "Hello " &gt; newfile <br>
+        $ ln newfile 2file <br>
+        $ ls -i newfile 2file <br>
+        2112949 newfile <br>
+        2112949 2file <br>
+    </div>
+
+    <p>
+        The name <code>2file</code> is equivalent to the name
+        <code>newfile</code>.
+        If we modify the file using one name,
+        then we have modified the file referred to by the other:
+    </p>
+
+    <div class="code">
+        $ echo "world!" &gt;&gt; 2file<br>
+        $ cat newfile<br>
+        Hello world!
+    </div>
+
+    <p>
+        A file may have more than one hard link, but when it has zero,
+        it is no longer accessible through the directory tree, and
+        the kernel prepares to delete it.<sup><a href="#references">[19]</a></sup>
+    </p>
+
+    <h3> See Also: </h3>
+    <ul>
+        <li> <code><a href="https://man7.org/linux/man-pages/man7/inode.7.html"> inode(7) </a></code></li>
+        <li><a href="http://linfo.org/hard_link.html">What is a hard link?</a> -- definition by The Linux Information Project (LINFO)</li>
+        <li><a href="https://en.wikipedia.org/wiki/Symbolic_link#Overview"> Symbolic Link (Overview) - Wikipedia </a> </li>
+    </ul>
+</div>
 
 <div id="fs-heir" class="content">
     <h2>Filesystem Heirarchy</h2>
@@ -544,90 +640,6 @@ https://wiki.ubuntu.com/Lvm
         <li><a href="https://www.man7.org/linux/man-pages/man8/umount.8.html"><code>umount(8)</code></a></li>
     </ul>
 </div>
-
-
-<div class="content" id="inodes-and-directories">
-    <h2>inodes and Directories</h2>
-
-    <p>
-        In keeping with traditional UNIX file semantics, 
-        every file on a GNU/Linux system is represented by an unique <em>inode.</em><sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html#id1">[18]</a></sup>
-        Inodes are the responsibility of their respective filesystem,
-        wherein each is given a number.
-        Within a filesystem, an inode number identifies an
-        inode, and thereby identifies a particular file.
-    </p>
-
-    <p>
-        A <em>directory</em> is a file that associates filenames (strings) with 
-        inode numbers:
-    </p>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Every path on the directory tree terminates in an inode reference.
-        </p>
-    </div>
-
-    
-    <div class="code">
-        $ ls -ia ~/Public/Learning-Linux <br>
-        645278 ./<br>
-        384844 ../<br>
-        775487 assets/<br>
-        641473 command-line-1-tutorial-introduction.html<br>
-        645403 _config.yml<br>
-        775449 _data/<br>
-        642188 documentation.html<br>
-        642185 files-and-filesystems.html<br>
-        641460 finding-files.html<br>
-        775463 _future/<br>
-        [...]
-    </div>
-
-    <p>
-        Each such association is called a <em>hard link.</em>
-        A hard link is created upon file creation;
-        we can also create new hard links with the <code>ln</code> command,
-        as the following sequence demonstrates:
-    </p>
-
-    <div class="code">
-        $ echo -n "Hello " &gt; newfile <br>
-        $ ln newfile 2file <br>
-        $ ls -i newfile 2file <br>
-        2112949 newfile <br>
-        2112949 2file <br>
-    </div>
-
-    <p>
-        The name <code>2file</code> is equivalent to the name
-        <code>newfile</code>.
-        If we modify the file using one name,
-        then we have modified the file referred to by the other:
-    </p>
-
-    <div class="code">
-        $ echo "world!" &gt;&gt; 2file<br>
-        $ cat newfile<br>
-        Hello world!
-    </div>
-
-    <p>
-        A file may have more than one hard link, but when it has zero,
-        it is no longer accessible through the directory tree, and
-        the kernel prepares to delete it.<sup><a href="#references">[19]</a></sup>
-    </p>
-
-    <h3> See Also: </h3>
-    <ul>
-        <li> <code><a href="https://man7.org/linux/man-pages/man7/inode.7.html"> inode(7) </a></code></li>
-        <li><a href="http://linfo.org/hard_link.html">What is a hard link?</a> -- definition by The Linux Information Project (LINFO)</li>
-        <li><a href="https://en.wikipedia.org/wiki/Symbolic_link#Overview"> Symbolic Link (Overview) - Wikipedia </a> </li>
-    </ul>
-</div>
-
 
 
 <div class="content" id="closing-remarks">
