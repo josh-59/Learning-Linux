@@ -392,7 +392,7 @@ https://wiki.ubuntu.com/Lvm
         Thompson's strategy was to leave file interpretation to the program,
         and the resulting generality has become a hallmark of the UNIX platform.
         The four file operations apply to all file types except directories,
-        whose structure (a mathematical tree) is protected by the kernel through 
+        whose structure (a tree) is protected by the kernel through 
         a distinct set of system calls.  
     </p>
 
@@ -410,29 +410,23 @@ https://wiki.ubuntu.com/Lvm
     <p>
         In keeping with traditional UNIX file semantics, 
         every file on a GNU/Linux system is represented by an unique <em>inode.</em><sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html#id1">[18]</a></sup>
-        More, every path on the directory tree terminates in an unique inode reference.
         Inodes are the responsibility of their respective filesystem,
         wherein each is given a number.
-        Within a filesystem, an inode number uniquely identifies an
-        inode, and thereby uniquely identifies a file.
+        Within a filesystem, an inode number identifies an
+        inode, and thereby identifies a particular file.
     </p>
 
     <p>
         A <em>directory</em> is a file that associates filenames (strings) with 
-        inode numbers. 
-        A directory cannot be <em>read()</em> directly, but may be viewed
-        through <code>ls</code>:
+        inode numbers:
     </p>
-
 
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            GNU/Linux machines run many filesystems simultaneously.
+            Every path on the directory tree terminates in an inode reference.
         </p>
     </div>
-
-
 
     
     <div class="code">
