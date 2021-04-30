@@ -35,133 +35,84 @@ To Do:
     </p>
 
 
-
-    <p>
-        A parent can pass information to its child in other ways,
-        such as environment variables, but
-        ...and tend to remain constant over a session.
-    </p>
-
-<div class="content" id="shell-features">
     <h2>Shell Features</h2>
 
-    <p>
-        Kernighan page 132:
-        Invented by John Mashey and introduced in the 6th edition shell,
-        it was a workaround so that non-expert users could
-        share their own sets of commands by lab, department and group.
-        (User-<em>groups</em> were added for the same reason.)
-    </p>
-
+   
     <h4 style="width: 30%; margin: auto;">In the Beginning</h4>
 
-    <p>
-        The first versions on UNIX entertained exactly two processes:
-        One for each of two terminals connected to the machine.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[3]</a></sup>
-        The shell,
-        <a href="https://en.wikipedia.org/wiki/Thompson_shell"><code>sh</code></a>,
-        existed as a user-space process, but <em>fork()</em> had not been introduced.
-        To execute a command, the shell simply replaced itself with
-        the requested program;
-        the program, on calling <em>exit</em>, replaced itself with the
-        shell once again.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[3]</a></sup>
-    </p>
 
     <p>
-        In particular, <em>change directories</em> was implemented
-        as a separate command.
-        When invoked, it inherited the shell's current working directory,
-        changed it, and then the shell would inherit the resulting working directory.
-        With the inclusion of the <em>fork()</em> system call, though,
-        the <code>chdir</code> command broke:
+        In 1975, John Mashey and introduced the <code>PATH</code> environment
+        variable:
     </p>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            The <code>exit</code> command is also, necessarily, built in to the shell.
-        </p>
-    </div>
-
-
-    <blockquote>
-        "There was much reading of code and anxious introspection about how
-        the addition of fork could have broken the chdir call. Finally the
-        truth dawned: in the old system chdir was an ordinary command; it
-        adjusted the current directory of the (unique) process attached to
-        the terminal. Under the new system, the chdir command correctly
-        changed the current directory of the process created to execute it,
-        but this process promptly terminated and had no effect whatsoever on
-        its parent shell! It was necessary to make chdir a special command,
-        executed internally within the shell. It turns out that several
-        command-like functions have the same property, for example login."
-    </blockquote>
-
-    <p>
-        And so <em>builtins</em> began.
-        In Bash, builtins may be investigated by:
-    </p>
-
-    <div class="code">
-        $ help
-    </div>
-
-    Kernighan p 132 
-    The <code>PATH</code> mechanism was invented by John Mash and introduced into
-    the 6th Edition. He said, 
 
     <blockquote>
         "We had a large (1,000+) population of users who were not usually C 
         programmers, who worked in groups in shared environments.  They wanted
         to share their own sets of commands by lab, department, group.
-        The often shared systems with others and none could be super-users."
+        They often shared systems with others and none could be super-users."
     </blockquote>
 
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="http://man.cat-v.org/unix-1st/1/sh">sh(1)</a> (First Edition)</li>
-    </ul>
-
-    <h3>Arguments</h3>
-
     <p>
-        Commands are the first part of a "typical line of input" given to the
-        shell; the other part is arguments.
-        Like commands, arguments are supplied by the user. 
-        They are passed to each function, builtin, or program as it begins 
-        execution, and it is up to that command to interpret them.
+        (User-<em>groups</em> were added for the same reason.)
     </p>
+
+
+
+
+
+<div class="content" id="closing-remarks">
+    <h2>Closing Remarks</h2>
 
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            Two tools to identify commands are
-            <code>type</code> and <code>which</code>.
-            Use <code>type</code> with argument <code>-a</code> (all),
-            to get the most complete listing.
+            You'd be surprised how much that little shell can do.
         </p>
     </div>
 
     <p>
-        For example, <code>echo</code> responds to arguments 
-        very simply&mdash; It prints them back out:
+        At this point, we have covered the most essential elements of the 
+        shell.
+        It is <a href="assets/simple-shell.c">not a difficult construct</a>,
+        and consists of a main loop which:
     </p>
 
-    <div class="code">
-        $ echo one two three four<br>
-        one two three four<br>
-    </div>
+    <ol>
+        <li>Prints prompt</li>
+        <li>Gets input</li>
+        <li>Finds and executes command</li>
+        <li>Waits for child process to terminate</li>
+    </ol>
 
     <p>
-        See a command's manual page (or other documentation) for details.
+        The variety of shells offered above reflects a variety of interpretations of,
+        and expansions on, this same thing.
+        For instance, the Pythonic shell <code>xonsh</code> exposes
+        a full, general-purpose programming language to the user.
+        The most common shells of our time are <code>bash</code> and <code>zsh</code>.
     </p>
+
+    <p>
+        Many details have not been introduced. 
+        Some of the most important are:
+    </p>
+
+    <ul style="margin-left: 10%;">
+        <li><a href="/bash.html">Variables and Expansions</a></li>
+        <li><a href="/bash.html#standard-file-descriptors">I/O and Redirection</a></li>
+        <li><a href="https://ryanstutorials.net/bash-scripting-tutorial/bash-script.php">Scripting</a></li>
+        <li>Control Characters/Sequences</li>
+    </ul>
 
     <h3>See Also:</h3>
     <ul>
-        <li><a href="https://www.educative.io/blog/bash-shell-command-cheat-sheet">Bash Cheat Sheet: Top 25 commands and Creating Custom Commands</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">Read-eval-print loop</a> - Wikipedia</li>
+        <li><a href="http://shellhaters.org/">Shell Hater's Handbook</a></li>
     </ul>
 </div>
+
+
 
 
 -->
@@ -489,7 +440,7 @@ To Do:
     </p>
 
     <div class="aside-right">
-        <h4>Aside</h4>
+        <h4>Aside:</h4>
         <p>
             In particular, relative file names are resolved with respect to 
             the current working directory.  
@@ -537,54 +488,108 @@ To Do:
     </div>
 </div>
 
-<div class="content" id="closing-remarks">
-    <h2>Closing Remarks</h2>
+<div class="content" id="arguments">
+    <h2>Arguments</h2>
 
-    <div class="aside-right">
+    <p>
+        Commands are the first part of a "typical line of input" given to the
+        shell; the other is arguments.
+        Like commands, arguments are supplied by the user. 
+        They are passed to each function, builtin, or program as it begins 
+        execution, and it is up to that command to interpret them.
+    </p>
+
+     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            You'd be surprised how much that little shell can do.
+            Two tools to identify commands are
+            <code>type</code> and <code>which</code>.
         </p>
     </div>
 
     <p>
-        At this point, we have covered the most essential elements of the 
-        shell.
-        It is <a href="assets/simple-shell.c">not a difficult construct</a>,
-        and consists of a main loop which:
+        For example, <code>echo</code> responds to arguments 
+        very simply&mdash; It prints them back out:
     </p>
 
-    <ol>
-        <li>Prints prompt</li>
-        <li>Gets input</li>
-        <li>Finds and executes command</li>
-        <li>Waits for child process to terminate</li>
-    </ol>
+    <div class="code">
+        $ echo one two three four<br>
+        one two three four<br>
+    </div>
 
     <p>
-        The variety of shells offered above reflects a variety of interpretations of,
-        and expansions on, this same thing.
-        For instance, the Pythonic shell <code>xonsh</code> exposes
-        a full, general-purpose programming language to the user.
-        The most common shells of our time are <code>bash</code> and <code>zsh</code>.
+        Common arguments are:
+    </p>
+
+    <div class="code">
+        $ <i>command</i> --help
+    </div>
+
+    <p>
+        and
+    </p>
+
+    <div class="code">
+        $ <i>command</i> --version
+    </div>
+
+    <p>
+        See a command's manual page (or other documentation) for details.
+    </p>
+</div>
+
+<div class="content" id="closing-remarks">
+    <h2 style="margin-bottom: 0;">Closing Remarks:</h2>
+    <h4>fork()</h4>
+
+    <p>
+        The earliest versions on UNIX entertained exactly two processes:
+        One for each of two terminals connected to the machine.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[3]</a></sup>
+        The shell,
+        <a href="https://en.wikipedia.org/wiki/Thompson_shell"><code>sh</code></a>,
+        existed as a user-space process, but <em>fork()</em> had not been introduced.
+        To execute a command, the shell replaced itself with
+        the requested program;
+        the program, on calling <em>exit</em>, replaced itself with the
+        shell once again.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[3]</a></sup>
     </p>
 
     <p>
-        Many details have not been introduced. 
-        Some of the most important are:
+        In particular, <em>change directories</em> was implemented
+        as a separate command.
+        When invoked, it inherited the shell's current working directory,
+        changed it, and then the shell inherited the resulting working directory.
+        With the inclusion of the <em>fork()</em> system call, though,
+        the <code>chdir</code> command broke:
     </p>
 
-    <ul style="margin-left: 10%;">
-        <li><a href="/bash.html">Variables and Expansions</a></li>
-        <li><a href="/bash.html#standard-file-descriptors">I/O and Redirection</a></li>
-        <li><a href="https://ryanstutorials.net/bash-scripting-tutorial/bash-script.php">Scripting</a></li>
-        <li>Control Characters/Sequences</li>
-    </ul>
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            The <code>exit</code> command is also, necessarily, built in to the shell.
+        </p>
+    </div>
+
+    <blockquote>
+        "There was much reading of code and anxious introspection about how
+        the addition of fork could have broken the chdir call. Finally the
+        truth dawned: in the old system chdir was an ordinary command; it
+        adjusted the current directory of the (unique) process attached to
+        the terminal. Under the new system, the chdir command correctly
+        changed the current directory of the process created to execute it,
+        but this process promptly terminated and had no effect whatsoever on
+        its parent shell! It was necessary to make chdir a special command,
+        executed internally within the shell. It turns out that several
+        command-like functions have the same property, for example login."
+    </blockquote>
+
+    <p>
+        And so, <em>builtins</em> began.
+    </p>
 
     <h3>See Also:</h3>
     <ul>
-        <li><a href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">Read-eval-print loop</a> - Wikipedia</li>
-        <li><a href="http://shellhaters.org/">Shell Hater's Handbook</a></li>
+        <li><a href="http://man.cat-v.org/unix-1st/1/sh">sh(1)</a> (First Edition)</li>
     </ul>
 </div>
 
