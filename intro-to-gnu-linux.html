@@ -5,16 +5,6 @@ last-updated: April, 2021
 ---
 
 <!--
-    To Do:
-
-UNIX: A Brief History:
-Much better source:
-Ken Thompson, Dennis Ritchie and Rudd Canaday drafted the 
-filesystem.<sup><a href="http://www.groklaw.net/article.php?story=20050414215646742">[a]</a></sup>
-
-See Also:
-https://en.wikibooks.org/wiki/Shelf:Open_source
-
 
 Linux Kernel:
     Subsection "Kernel Architecture"?
@@ -35,7 +25,7 @@ Closing Remarks:
     <p>
         Sharing computing resources was common practice in the 1970's.  
         Interactive computing was just becoming feasible, and 
-        machines were prohibitively expensive, purchased by institutions 
+        machines were prohibitively expensive&mdash; purchased by institutions 
         rather than individuals.
         Code sharing followed naturally.
     </p>
@@ -63,14 +53,38 @@ Closing Remarks:
         the lawyers were ultimately told, 
         "...It fell off the back of a truck."
     </p>
+
+<div class="content" id="exercises">
+    <h2>Exercises</h2>
+    <li> Off by one: The second edition UNIX manual says, 
+        "The number of UNIX installations has grown to 10, with more expected."
+        Does <em>ten installations</em> apply to Second edition UNIX or First edition?
+    </li>
+
 </div>
+
+ Within Bell Labs, management put operating systems research on the 
+        backburner, and hesitated to purchase new computing
+        equipment.<sup><a href="#references" title="Kernighan p32">[2]</a></sup><sup><a href="#references">[3]</a></sup>
+
+
+
+<div class="quote-text">
+        "Those who do not understand UNIX<br>
+        are condemned to reinvent it, poorly."
+    </div>
+
+    <div class="quote-ref">
+        Henry Spence, Programmer
+    </div>
+
 
 -->
 
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
-        <li><a href="#unix">UNIX: A Brief History </a></li>
+        <li><a href="#unix">UNIX: A Brief Introduction</a></li>
         <li><a href="#unix-architecture"> The UNIX Architecture </a></li>
         <li><a href="#free-as-in-freedom"> Free as in Freedom </a></li>
         <li><a href="#linux"> The Linux Kernel </a></li>
@@ -84,16 +98,21 @@ Closing Remarks:
 
 <div id="introduction" class="content">
     <h1>Introduction to GNU/Linux</h1>
+
     <div class="quote-text">
-        "Those who do not understand UNIX<br>
-        are condemned to reinvent it, poorly."
-    </div>
-    <div class="quote-ref">
-        Henry Spence, Programmer
+        "...the number of UNIX installations has grown to 10, <br>
+        with more expected."
     </div>
 
+    <div class="quote-ref">
+        Dennis Ritchie and Ken Thompson,<br>
+        <a href="https://minnie.tuhs.org/Archive/Distributions/Research/Dennis_v2/v2man.pdf">UNIX Programming Manual, 2nd Edition</a>,</br>
+        June 1972
+    </div>
+
+    
     <p>
-        An operating system is a collection of software which facilitates
+        An operating system is a piece of software which facilitates
         the use of a computer.
         To this end, its two main responsibilities are to support running
         programs and to maintain persistent data.
@@ -105,7 +124,7 @@ Closing Remarks:
 </div>
 
 <div id="unix" class="content">
-    <h2>UNIX: A Brief History</h2>
+    <h2>UNIX: A Brief Introduction</h2>
 
     <p>
         The UNIX operating system was born in late 1969 at AT&amp;T's
@@ -122,26 +141,38 @@ Closing Remarks:
     </p>
 
     <p>
-        Within Bell Labs, management put operating systems research on the 
-        backburner, and hesitated to purchase new computing
-        equipment.<sup><a href="#references" title="Kernighan p32">[2]</a></sup><sup><a href="#references">[3]</a></sup>
+        In the aftermath of Multics, operating systems developers 
+        Kenneth Thompson, Dennis Ritchie, Douglas McIlroy, and Joe Ossanna
+        found themselves without a clear project to work on.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[2]</a></sup>
+        Many proposals were put forth, but none were accepted:
+    </p>
+
+    <blockquote>
+        "Actually, it is perfectly obvious in retrospect (and should have been 
+        at the time) that we were asking the Labs to spend too much money on too 
+        few people with too vague a plan. Moreover, I am quite sure that at 
+        that time operating systems were not, for our management, an attractive 
+        area in which to support work."<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[2]</a></sup>
+    </blockquote>
+
+    <p>
         After finding a disused <a href="https://www.soemtron.org/pdp7.html">PDP-7</a>,
-        two researchers, Kenneth Thompson and Dennis Ritchie, rewrote 
+        Ken Thompson and Dennis Ritchie rewrote
         the game <em><a href="https://en.wikipedia.org/wiki/Space_Travel_(video_game)">Space Travel</a></em> 
-        for it.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[3]</a></sup>
+        for it.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[2]</a></sup>
         Thompson then continued to work with the machine, implementing a
-        filesystem he and others had
-        devised on paper.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[3]</a></sup>
+        filesystem that he, Dennis Ritchie and Rudd Canaday had devised on
+        paper.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[2]</a></sup>
     </p>
 
     <p>
         At some point in 1969, Thompson realized that he was close to
         an operating system:  All the filesystem needed was an
         assembler, a text editor, a shell and an <em>exec</em> system 
-        call.<sup><a href="#references" title="Kernighan, p34">[2]</a></sup>
+        call.<sup><a href="#references" title="Kernighan, p34">[3]</a></sup>
         The <em>exec</em> call was "trivial", and the other three components were
         done in one week 
-        each.<sup><a href="#references" title="Kernighan, p34">[2]</a></sup>
+        each.<sup><a href="#references" title="Kernighan, p34">[3]</a></sup>
     </p>
 
     <p>
@@ -149,8 +180,8 @@ Closing Remarks:
         operating system, <em>UNIX.</em>
         The novel system 
         <a href="https://www.cs.dartmouth.edu/~doug/dmr.pdf">well outperformed for its size</a>, 
-        and the explosion of its popularity was due in part to its
-        ability to run on relatively inexpensive hardware.<sup><a href="https://archive.org/details/sim_unix-review_1986-10_4_10/page/32/mode/2up">[4]</a></sup>
+        and its popularity (for the time) was due in part to its
+        ability to run on varied and relatively inexpensive hardware.<sup><a href="https://archive.org/details/sim_unix-review_1986-10_4_10/page/32/mode/2up">[4]</a></sup>
     </p>
 
     <h3>See Also:</h3>
@@ -713,11 +744,11 @@ Closing Remarks:
         </li>
 
         <li>
-            Kernighan, Brian. <i>UNIX: A History and a Memoir.</i>  Published 2020, by Brian W. Kernighan via Kindle Direct Publishing.
+            Ritchie, D. M. (1984). <a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">The Evolution of the UNIX Time-sharing System</a>. <em>AT&amp;T Bell Laboratories Technical Journal,</em> 63(6), 2nd ser., 1577-1593.
         </li>
 
         <li>
-            Ritchie, D. M. (1984). <a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">The Evolution of the UNIX Time-sharing System</a>. <em>AT&amp;T Bell Laboratories Technical Journal,</em> 63(6), 2nd ser., 1577-1593.
+            Kernighan, Brian. <i>UNIX: A History and a Memoir.</i>  Published 2020, by Brian W. Kernighan via Kindle Direct Publishing.
         </li>
 
         <li>
