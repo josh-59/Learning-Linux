@@ -6,6 +6,16 @@ last-updated: March, 2021
 
 <!--
 
+    One subsection per major attribute?
+
+    A simple shell:
+            printf("%s", prompt);
+            getline(input);
+
+    UNIX v6 source code, line 1560:
+        "Hand craft 0th process"
+
+
 TODO
     Include: OSTEP "Address Spaces":
         https://pages.cs.wisc.edu/~remzi/OSTEP/vm-intro.pdf
@@ -33,27 +43,6 @@ TODO
         and runlevel 0 told <em>init</em> to kill all processes and shut down the
         system.<sup><a href="http://www.linfo.org/runlevel_def.html">[3]</a></sup>
     </p>
-
-
-<div class="content" id="closing-remarks">
-    <h2 style="margin-bottom: 0;">Closing Remarks:</h2>
-    <h4>The C Programming Language</h4>
-
-    <p>
-        The first through fifth editions of UNIX were written in PDP assembly.
-    </p>
-
-    <p>
-        One detail foregone in the implementation of UNIX as compared to
-        <em>Multics</em> was writing it in a high-level language:
-        UNIX
-    </p>
-
-    <p>
-        UNIX v6 source code, line 1560:
-        "Hand craft 0th process"
-    </p>
-</div>
 
 -->
 
@@ -103,9 +92,9 @@ TODO
     <h2> Actors </h2>
 
     <p>
-        In UNIX and its derivatives, processes are the actors of the system:
+        In Unix and its derivatives, processes are the actors of the system:
         Left to its own devices, the kernel does nothing.
-        All UNIX-like operating systems depend upon processes to direct the kernel,
+        All Unix-like operating systems depend upon processes to direct the kernel,
         and through the kernel, processes direct the machine.
         The result is a low-level demarcation between
         <em>what</em> to do (dictated by processes), and
@@ -360,7 +349,7 @@ TODO
     <h3>See Also:</h3>
     <ul>
         <li><code><a href="https://man7.org/linux/man-pages/man2/read.2.html">read(2)</a></code> - Read from a file descriptor</li>
-        <li><a href="http://www.linfo.org/unix_philosophy.html">UNIX Philosophy Description</a> by The Linux Information Project (LINFO)</li>
+        <li><a href="http://www.linfo.org/unix_philosophy.html">Unix Philosophy Description</a> by The Linux Information Project (LINFO)</li>
     </ul>
 </div>
 
@@ -506,6 +495,7 @@ TODO
         <li><a href="http://www.man7.org/tlpi/index.html">The Linux Programming Interface</a> by Michael Kerrisk (Not Free)</li>
         <li><a href="http://www.csapp.cs.cmu.edu/"> Computer Systems: A Programmer's Perspective, 3<sup>rd</sup> Ed.</a>, Chapter 9: Virtual Memory (Not free)</li>
         <li><a href="https://www.man7.org/linux/man-pages/man1/top.1.html"><code>top(1)</code></a> - Display Linux processes</li>
+        <li><a href="./assets/check.c">check.c</a> - Double-check of the above snippets</li>
     </ul>
 </div>
 
