@@ -10,6 +10,16 @@ last-updated: April 2021
         ebuild(5): https://dev.gentoo.org/~zmedico/portage/doc/man/ebuild.5.html
         ebuild phase functions: https://devmanual.gentoo.org/ebuild-writing/functions/
 
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Typical ("point") releases are
+            <a href="https://semver.org/">minor revisions</a>
+            that do not affect intended behavior.
+        </p>
+    </div>
+
+
     Distribution Models:
         Regular Release model implies multiple code branches
         Rolling release model requires only a single code branch
@@ -330,6 +340,13 @@ last-updated: April 2021
 <div class="content" id="repositories">
     <h2>Repositories</h2>
 
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Yay free software!
+        </p>
+    </div>
+
     <p>
         A <em>repository</em> is a tracked collection of files.
         Each distribution necessarily maintains one or more repositories of binary
@@ -338,22 +355,13 @@ last-updated: April 2021
         Debian counts 90,000 available packages.<sup><a href="https://packages.debian.org/stable/">[k]</a></sup>
         More, the collection is repeated once for each supported architecture.
         Mirroring repositories both distributes and reduces the associated cost
-        of package distribution; please use mirrors!
+        of package distribution: Please use mirrors!
     </p>
 
     <p>
         With that, we can now sketch out how a package update is propogated from source
         to user.
     </p>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Typical ("point") releases are
-            <a href="https://semver.org/">minor revisions</a>
-            that do not affect intended behavior.
-        </p>
-    </div>
 
     <p>
         First, some change is made to the source code.
@@ -393,7 +401,6 @@ last-updated: April 2021
         <li><a href="https://flight-manual.atom.io/getting-started/sections/installing-atom/">Installing Atom</a> (Example instructions to add repository)</li>
     </ul>
 </div>
-
 
 
 <div class="content" id="closing-remarks">
