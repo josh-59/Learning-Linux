@@ -479,8 +479,8 @@ https://wiki.ubuntu.com/Lvm
         UNIX-like operating systems maintain a single directory tree for
         the entire system.
         When a new block device is introduced to the machine, it first appears as
-        a device file in <code>/dev</code>, and its files may then be made
-        available by placing its filesystem's root directory
+        a device file in <code>/dev</code>; its files may then be made
+        available by placing its filesystems' root directories
         in the existing directory tree.
         This operation is known as
         <a href="https://unix.stackexchange.com/questions/3192/what-is-meant-by-mounting-a-device-in-linux"><em>mounting</em></a>.
@@ -524,8 +524,9 @@ https://wiki.ubuntu.com/Lvm
 
     <h3>See Also:</h3>
     <ul>
-        <li><a href="https://www.man7.org/linux/man-pages/man8/findmnt.8.html"><code>findmnt(8)</code></a> - Find a filesystem</li>
+        <li><a href="https://man7.org/linux/man-pages/man8/lsblk.8.html"><code>lsblk(8)</code></a> - List block devices</li>
         <li><a href="https://www.man7.org/linux/man-pages/man8/mount.8.html"><code>mount(8)</code></a> - Mount a filesystem</li>
+        <li><a href="https://www.man7.org/linux/man-pages/man8/findmnt.8.html"><code>findmnt(8)</code></a> - Find a filesystem</li>
         <li><a href="https://www.man7.org/linux/man-pages/man8/umount.8.html"><code>umount(8)</code></a> - Unmount a filesystem</li>
     </ul>
 </div>
