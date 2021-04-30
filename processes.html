@@ -1,32 +1,56 @@
 ---
 layout: default
 title: Processes
-last-updated: March, 2021
+last-updated: April, 2021
 ---
 
 <!--
 
-    One subsection per major attribute?
+<div class="content" id="closing-remarks">
+    <h2>Closing Remarks</h2>
 
-    A simple shell:
-            printf("%s", prompt);
-            getline(input);
+    <p>
+        The directory tree is a persistent data structure of the machine.  
+        It is globally shared by most processes on the system, but there
+        exists ways to reduce its exposure to particular processes.
+    </p>
 
-    UNIX v6 source code, line 1560:
-        "Hand craft 0th process"
+    <p>
+        The earliest dialects of the C programming language were especially
+        simple, mapping high-level statements to assembly, to be interpretted
+        by an already-existant assembler.  
+        At the highest level, the language expresses a model of the system's memory;
+        the most notable component of which is its instructions.
+    </p>
+
+    <p>
+        These instructions are stored in memory, then executed;
+        in the process, they manipulate other regions of memory; through
+        system calls, they manipulate the directory tree.
+    </p>
+
+    <p>
+        6th edition UNIX was written in C, and was commented on by Lions.
+    </p>
+
+    <p>
+        My favorite line (so far):
+    </p>
+
+    <pre>
+    // ...
+    // Hand-craft 0th process
+    // ... 
+    </pre>
+</div>
 
 
 TODO
     Include: OSTEP "Address Spaces":
         https://pages.cs.wisc.edu/~remzi/OSTEP/vm-intro.pdf
 
-        Writing signal handlers is <a href="http://lazarenko.me/signal-handler/">not easy</a>,
-        especially in multi-threaded environments.
-
         Actors: See Also: Examples?
         mirror.linuux.org.au/pub/linux.conf.au/2014/Friday/104-D-Bus_in_the_kernel_-_Lennart_Poettering.mp4
-
-        See Also:
 
     <h3> Runlevels</h3>
 
