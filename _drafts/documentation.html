@@ -4,19 +4,7 @@ title: Documentation
 last-updated: January 2021
 ---
 
-<div id="nav_bar_2" class="nav">
-	<ul>
-		<li><a href="#introduction"> Introduction </a></li>
-		<li><a href="#how-to">How-to</a></li>
-		<li><a href="#official-documentation"> Official Documen-<br>tation</a></li>
-		<li><a href="#unofficial-documentation"> Unofficial Documen-<br>tation</a></li>
-		<li><a href="#references"> References </a></li>
-	</ul>
-</div>
-
-<div id="introduction" class="content">
-	<h1>Documentation</h1>
-
+<!--
     <p>
         The first versions of the Linux kernel were released in late 1991,
         at which point producing an operating system around it was very much
@@ -27,99 +15,33 @@ last-updated: January 2021
         file, split into sections;
         from this, the <a href="https://tldp.org">Linux Documentation Project</a> grew.<sup><a href="https://tldp.org/history.html">[1]</a></sup>
     </p>
-	
+
+
+    Closing Remarks:
+        Document preparation on early UNIX
+-->
+
+<div id="nav_bar_2" class="nav">
+	<ul>
+		<li><a href="#introduction"> Introduction </a></li>
+		<li><a href="#official-documentation"> Official Documen-<br>tation</a></li>
+		<li><a href="#unofficial-documentation"> Unofficial Documen-<br>tation</a></li>
+		<li><a href="#nonfree-books"> Nonfree Books </a></li>
+		<li><a href="#learning-linux">Learning Linux</a></li>
+		<li><a href="#references"> References </a></li>
+	</ul>
+</div>
+
+<div id="introduction" class="content">
+	<h1>Documentation</h1>
+
 	<p>
-		Good, organized documentation is very important to the success of an
-        open-source software project:
+		Good, organized documentation is very important to the success of a
+        software project:
 		It reduces the time required for users to orient themselves within 
         unfamiliar software.
 	</p>
 </div>
-
-<div id="how-to" class="content">
-	<h2>How-to</h2>
-
-	<p>
-		It's worthwhile, from time to time, to take a step back and reconsider
-        the process of learning Linux itself.
-	</p>
-
-	<ol class="big-list" style="padding-bottom: 10px;">
-		<li>
-			<i>What, exactly, is your question?</i>
-			<p>
-                Often, the hardest part is just figuring out what your question is.
-				Try to be specific:
-				In computers, things are <em>very</em> precisely defined.
-			</p>
-		</li>
-
-        <li>
-            <i>Be Patient.</i>
-			<p>
-                Skill accrues.
-                Answer one question at a time.
-			</p>
-		</li>
-
-		<li>
-			<i>Reconsider your sources.</i>
-            <p>
-                Does it make sense that this person would write about the
-                subject at hand?
-                What relationship do they have to the project?
-                How authoritative are they?
-            </p>
-		</li>
-	</ol>
-
-    <p>
-        While many books have been intended to introduce GNU/Linux, few are
-        free, and fewer still are very good.
-        It is a large subject, and moves quickly.
-        The best ones focus on a specific facet.
-        Some of my favorites:
-    </p>
-
-    <ul>
-        <li>
-			<a href="https://debian-handbook.info/">Debian Administrator's Handbook</a>&mdash;
-			A free book written by Raphaël Hertzog and Roland Mas, two Debian developers.
-			It was originally written in French, and has been translated into
-			four other languages, with twenty(!) more translations in-progress.
-		</li>
-
-	    <li>
-            <a href="https://www.man7.org/tlpi/index.html">The Linux Programming Interface</a>&mdash;
-            The definitive text of the programming interface
-			of the Linux kernel.
-			Michael Kerrisk is the maintainer of the
-			Linux Man Page project (below), and his work is simply terrific.
-			If you want all the gory details of the system-call interface offered
-			by the kernel, as well as sound explanations of its
-			internals, this is your book.
-		</li>
-
-        <li>
-			<a href="http://www.kroah.com/lkn/"> Linux Kernel in a Nutshell</a>&mdash;
-			A free book by Greg Kroah-Hartman.
-			He says, "I want this book to help
-			bring more people into the Linux kernel development fold.
-			The act of building a customized kernel for your machine is one
-			of the basic tasks needed to become a Linux kernel developer.
-			The more people that try this out, and realize that there is
-			not any real magic behind the whole Linux kernel process, the
-			more people will be willing to jump in and help out in making
-			the kernel the best that it can be."<sup><a href="http://www.kroah.com/lkn/">[2]</a></sup>
-		</li>
-    </ul>
-
-	<h3> See Also: </h3>
-	<ul>
-		<li><a href="https://www.gnu.org/philosophy/free-doc.html"> Why Free Software needs Free Documentation</a></li>
-	</ul>
-</div>
-
 
 
 <div id="official-documentation" class="content">
@@ -134,10 +56,10 @@ last-updated: January 2021
 	</p>
 
     <div class="aside-right">
-        <h4 style="font-style: normal;">Pro Tip:</h4>
+        <h4 style="font-style: normal;">Aside:</h4>
         <p>
             <em>Reconsider your sources.</em>
-            Official documentation should should be your primary documentation.
+            Official documentation should be your primary documentation.
         </p>
     </div>
     
@@ -285,6 +207,49 @@ last-updated: January 2021
         are usually nonfree.
     </p>
 
+</div>
+
+<div id="learning-linux" class="content">
+	<h2>Learning Linux</h2>
+
+	<p>
+		It's worthwhile, from time to time, to take a step back and reconsider
+        the process of learning Linux itself.
+	</p>
+
+	<ol class="big-list" style="padding-bottom: 10px;">
+		<li>
+			<i>What, exactly, is your question?</i>
+			<p>
+                Often, the hardest part is just figuring out what your question is.
+				Try to be specific:
+				In computers, things are <em>very</em> precisely defined.
+			</p>
+		</li>
+
+        <li>
+            <i>Be Patient.</i>
+			<p>
+                Skill accrues.
+                Answer one question at a time.
+			</p>
+		</li>
+
+		<li>
+			<i>Reconsider your sources.</i>
+            <p>
+                Does it make sense that this person would write about the
+                subject at hand?
+                What relationship do they have to the project?
+                How authoritative are they?
+            </p>
+		</li>
+	</ol>
+
+	<h3> See Also: </h3>
+	<ul>
+		<li><a href="https://www.gnu.org/philosophy/free-doc.html"> Why Free Software needs Free Documentation</a></li>
+	</ul>
 </div>
 
 <div id="references" class="content">
