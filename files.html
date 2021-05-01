@@ -201,7 +201,6 @@ https://wiki.ubuntu.com/Lvm
     -->
 
     <a href="assets/img/ls-long.pdf" target="_blank"><img src="assets/img/ls-long.png" style="width: 100%" title="Click for PDF" ></a>
-    <center style="font-size:12pt;">Click for PDF</center>
 
     <div class="aside-right" style="margin-top:25px;">
         <h4>Aside:</h4>
@@ -627,7 +626,7 @@ https://wiki.ubuntu.com/Lvm
         and formed the basis of its architecture:
     </p>
 
-    <img src="">
+    <a href="./assets/img/inode.pdf"><img src="./assets/img/inode.png"></a>
 
     <p>
         In the design, data blocks are of fixed size, and either free or
@@ -646,6 +645,7 @@ https://wiki.ubuntu.com/Lvm
         reasonable size, while supporting large
         files.<sup><a href="#references">[20]</a></sup>
         Finally, by using direct pointers for the first bytes of a file,
+        and by keeping the inode array in main memory, 
         the design fosters the speedy retrieval of data in small
         files.<sup><a href="#references">[20]</a></sup>
     </p>
