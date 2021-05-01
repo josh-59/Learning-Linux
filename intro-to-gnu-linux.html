@@ -6,6 +6,9 @@ last-updated: April, 2021
 
 <!--
 
+UNIX: A Brief Introduction 
+    - UNIX: Origins
+
 Linux Kernel:
     Subsection "Kernel Architecture"?
         Monolithic, but modular
@@ -67,15 +70,15 @@ Closing Remarks:
         backburner, and hesitated to purchase new computing
         equipment.<sup><a href="#references" title="Kernighan p32">[2]</a></sup><sup><a href="#references">[3]</a></sup>
 
-
-
 <div class="quote-text">
-        "Those who do not understand UNIX<br>
-        are condemned to reinvent it, poorly."
+        "...the number of UNIX installations has grown to 10, <br>
+        with more expected."
     </div>
 
     <div class="quote-ref">
-        Henry Spence, Programmer
+        Dennis Ritchie and Ken Thompson,<br>
+        <a href="https://minnie.tuhs.org/Archive/Distributions/Research/Dennis_v2/v2man.pdf">UNIX Programming Manual, 2nd Edition</a>,</br>
+        June 1972
     </div>
 
 
@@ -84,7 +87,7 @@ Closing Remarks:
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
-        <li><a href="#unix">UNIX: A Brief Introduction</a></li>
+        <li><a href="#unix">UNIX: Origins</a></li>
         <li><a href="#unix-architecture"> The UNIX Architecture </a></li>
         <li><a href="#free-as-in-freedom"> Free as in Freedom </a></li>
         <li><a href="#linux"> The Linux Kernel </a></li>
@@ -99,18 +102,16 @@ Closing Remarks:
 <div id="introduction" class="content">
     <h1>Introduction to GNU/Linux</h1>
 
+
     <div class="quote-text">
-        "...the number of UNIX installations has grown to 10, <br>
-        with more expected."
+        "Those who do not understand UNIX<br>
+        are condemned to reinvent it, poorly."
     </div>
 
     <div class="quote-ref">
-        Dennis Ritchie and Ken Thompson,<br>
-        <a href="https://minnie.tuhs.org/Archive/Distributions/Research/Dennis_v2/v2man.pdf">UNIX Programming Manual, 2nd Edition</a>,</br>
-        June 1972
+        Henry Spence, Programmer
     </div>
 
-    
     <p>
         An operating system is a piece of software which facilitates
         the use of a computer.
@@ -124,13 +125,13 @@ Closing Remarks:
 </div>
 
 <div id="unix" class="content">
-    <h2>UNIX: A Brief Introduction</h2>
+    <h2>UNIX: Origins</h2>
 
     <p>
         The UNIX operating system was born in late 1969 at AT&amp;T's
         <em>Bell Laboratories,</em> in the shadow
         of Multics.
-        Multics was an operating system project intended to enable the
+        Multics was a project intended to enable the
         commercialization of computing as a service, in a business model 
         similar to telephone or electricity:
         Customers would connect their keyboard and monitor to a central mainframe, 
@@ -144,16 +145,9 @@ Closing Remarks:
         In the aftermath of Multics, operating systems developers 
         Kenneth Thompson, Dennis Ritchie, Douglas McIlroy, and Joe Ossanna
         found themselves without a clear project to work on.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[2]</a></sup>
-        Many proposals were put forth, but none were accepted:
+        Many proposals were put forth, but none were accepted, and
+        no new machines were purchased.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[2]</a></sup>
     </p>
-
-    <blockquote>
-        "Actually, it is perfectly obvious in retrospect (and should have been 
-        at the time) that we were asking the Labs to spend too much money on too 
-        few people with too vague a plan. Moreover, I am quite sure that at 
-        that time operating systems were not, for our management, an attractive 
-        area in which to support work."<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[2]</a></sup>
-    </blockquote>
 
     <p>
         After finding a disused <a href="https://www.soemtron.org/pdp7.html">PDP-7</a>,
@@ -176,8 +170,8 @@ Closing Remarks:
     </p>
 
     <p>
-        The software continued to be developed into a feasible, multi-user, time-sharing
-        operating system, <em>UNIX.</em>
+        The software continued to be developed into a minimal, feasible, 
+        multi-user, time-sharing operating system, <em>UNIX.</em>
         The novel system 
         <a href="https://www.cs.dartmouth.edu/~doug/dmr.pdf">well outperformed for its size</a>, 
         and its popularity (for the time) was due in part to its
