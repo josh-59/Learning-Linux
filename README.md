@@ -1,4 +1,6 @@
 Learning Linux:
+===============
+
 A Minor Source and Curated Directory for All Things Linux
 
 Available at [https://josh-59.github.io/Learning-Linux/](https://josh-59.github.io/Learning-Linux/).
@@ -11,10 +13,9 @@ available [on Github](https://github.com/josh-59/Book-Like).
 Landing:
 - [X] Introduction 
 - [X] Directory
-- [X] How to
 - [X] Man Pages
 - [X] Conventions
-- [ ] About
+- [X] About
 
 Intro:
 - [X] UNIX: A Brief History
@@ -29,13 +30,10 @@ Files and Filesystems:
 - [x] Files
 - [x] Regular Files
 - [x] Device Files
-- [x] Synthetic Files
-- [ ] Other Beasts (Named pipes and sockets)
+- [x] Pseudo Files
 - [x] Filesystem Heirarchy
 - [x] Mounting and Unmounting
-- [x] Filesystems
-- [ ] inodes
-- [ ] Directories
+- [X] inodes and Directories
 - [x] Closing Remarks: Inodes
 
 Processes:
@@ -52,18 +50,27 @@ Terminals and Shells:
 - [x] Terminal Emulators
 - [x] Shells
 - [x] Commands
-- [ ] PATH Environment Variable
-- [ ] Working Directory
-- [ ] Closing Remarks: In the Beginning
+- [X] PATH Environment Variable
+- [X] Working Directory
+- [X] Closing Remarks: fork()
 
 Packages:
-- [ ] Open Source
-- [ ] Building an OS from Source
-- [ ] Binary Packages
-- [ ] Dependencies and Package Managers
-- [ ] Rolling Releases, Close to Source
-- [ ] "Minor" Package Managers 
-- [ ] Closing Remarks: Repositories?
+- [X] Open Source
+- [X] Building an OS from Source
+- [X] Binary Packages
+- [X] Package Managers
+- [X] Repositories
+- [X] Closing Remarks: Distribution Models
+
+Appendix: Bash (and other stuff)
+- [X] I/O Redirection
+- [X] Shell Expansion
+- [X] Random Stuff 
+- [X] Finding Files 
+- [ ] Awk Programming Language
+- [ ] Closing Remarks: Make
+
+## Extras
 
 How it Works:
 - [ ] Fork/merge
@@ -73,12 +80,4 @@ How it Works:
 - [ ] Successful Business Models
 - [ ] Closing Remarks: Why it Works
 
-Appendix: Bash (and other stuff)
-- [ ] I/O Redirection
-- [X] Shell Expansion
-- [X] Finding Files 
-- [ ] Startup Files
-- [ ] Shell Constructs (Loops, If/then)
-- [ ] Terminal Pro Tips (copy/paste)
-- [ ] Awk Programming Language
-- [ ] Closing Remarks: Preserving the Paradigm
+
