@@ -634,19 +634,19 @@ https://wiki.ubuntu.com/Lvm
         wholly consumed by a file.<sup><a href="#references">[20]</a></sup>
         The filesystem's <em>index nodes</em> represent one file each,
         contain their file's metadata, and contain pointers to data blocks.<sup><a href="#references">[20]</a></sup>
-        These nodes are arranged in an array, and could be identified
+        These nodes are arranged in an array, and can be identified
         by an index into this array.
     </p>
 
     <p>
-        This design allows a file to grow or shrink without rearranging
+        The design allows a file to grow or shrink without rearranging
         other files.<sup><a href="#references">[20]</a></sup>
         In addition, the inclusion of single-, double- and triple-
         indirection blocks allow the inode to remain of fixed,
         reasonable size, while supporting large
         files.<sup><a href="#references">[20]</a></sup>
         Finally, by using direct pointers for the first bytes of a file,
-        the design fostered the speedy retrieval of data in small
+        the design fosters the speedy retrieval of data in small
         files.<sup><a href="#references">[20]</a></sup>
     </p>
 
@@ -666,15 +666,15 @@ https://wiki.ubuntu.com/Lvm
         those filesystem's capabilities.
         With <code>ext</code>'s inclusion in kernel 0.96c, Linux began to use
         its new <a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">Virtual File System</a>,
-        a kernel subsystem that provides userspace with a
+        a kernel subsystem that provides a
         uniform filesystem interface.
     </p>
 
     <p>
         While each filesystem implements its own functionality,
         most functionality is common;
-        the Virtual File System provides a uniform interface to user-space by
-        mapping filesystem-related system calls to filesystem-driver functions.
+        the Virtual File System maps system calls 
+        to filesystem-driver functions.
         In addition, the VFS imposes inodes on filesystems that do not
         natively employ them, thereby preserving traditional UNIX file
         semantics across all supported filesystems.
