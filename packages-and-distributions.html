@@ -181,10 +181,11 @@ last-updated: April 2021
     <p>
         Gentoo Linux is an operating system built around this strategy.
         The mechanized instructions to build software are kept in
-        <code>ebuild</code>'s&mdash; text files which
+        <code>ebuild</code>'s&mdash; Bash scripts which
         additionally describe where to obtain source code.
         These are interpretted by utilities on the user's machine,
-        and <a href="https://devmanual.gentoo.org/ebuild-writing/functions/">following them</a> ultimately results in a new package being installed.
+        and <a href="https://devmanual.gentoo.org/ebuild-writing/functions/">following them</a> 
+        results in a new package being installed (or otherwise managed).
     </p>
 
     <p>
@@ -247,11 +248,17 @@ last-updated: April 2021
             &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;└── vim.1.gz
     </div>
 
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            The <code>install</code> directory is ignored.
+        </p>
+    </div>
+
     <p>
-        To install the package, the archive is extracted and the files
-        copied into the appropriate directories of the host operating system.
-        If a directory does not exist, it is created;
-        the <code>install</code> directory is ignored.
+        To install the package, the archive is extracted and each file
+        is copied into its respective directory of the host operating system;
+        if a directory does not exist, it is created.
         After these files are copied, the script
         <code>install/doist.sh</code> is executed, if it exists.
     </p>
@@ -287,7 +294,7 @@ last-updated: April 2021
         A utility that obtains and installs packages is referred to as a
         <em>package manager.</em>
         Package managers are distribution-specific, and serve
-        as the user's front-end for their software.
+        as the users' interface to obtain their software.
         To name a few:
     </p>
 
@@ -378,8 +385,6 @@ last-updated: April 2021
         Minor changes can safely be ignored, but
         security fixes, for instance, cannot.
         A distribution maintainer rebuilds and tests the package.
-        This is often done through scripts, similar to
-        Gentoo's <code>ebuild</code>.
     </p>
 
     <p>
@@ -388,7 +393,7 @@ last-updated: April 2021
         The user's package manager then synchronizes its list of available packages,
         and alerts the user to any relevant changes.
         This is usually done automatically, but can be done manually
-        via,
+        with,
     </p>
 
     <div class="code">
@@ -424,7 +429,7 @@ last-updated: April 2021
         operating systems.
         Packages are composed into a working operating system, and undergo
         some testing period.
-        After the initial release, updates are restricted to bug
+        After the public release, updates are restricted to bug
         fixes and security updates; new features do not become available
         within a particular release.
     </p>
@@ -433,7 +438,7 @@ last-updated: April 2021
         This strategy has produced extremely stable operating
         systems.<sup><a href="http://www.slackware.com/about/">[c]</a></sup>
         Each version is supported for some length of time,
-        usually asserted beforehand.
+        sometimes asserted beforehand.
         Distributions following the regular release model:
     </p>
 
@@ -447,10 +452,10 @@ last-updated: April 2021
     </ul>
 
     <p>
-        The <em>rolling release</em> model is a newer variant that
-        dispenses with any versioning scheme.
+        The <em>rolling release</em> model dispenses with any versioning scheme.
         Instead, updates and features are distributed as they become
-        available.
+        available; software is distributed in its 
+        "latest stable" form.
         The result is a bleeding-edge operating system&mdash; and
         a constant stream of updates.
     </p>
