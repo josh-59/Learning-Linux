@@ -6,6 +6,10 @@ last-updated: April, 2021
 
 <!--
 
+    Todo:
+        Exec: Check and double-check; put aside about 'exec' referring
+        to a family of like functions
+
 <div class="content" id="closing-remarks">
     <h2>Closing Remarks</h2>
 
@@ -381,11 +385,29 @@ TODO
     <h2>Executing a Different Program</h2>
 
     <p>
-        Since new process creation is already handled through the <em>fork()</em>
-        system call, 
+        Since new process creation is already handled through 
+        <em>fork()</em>,
         launching another program requires only introducing a system call
         to change the program currently being executed.
-        This is what the <em>exec</em> system call does: 
+        This is what the <em>exec()</em> system call does: 
+    </p>
+
+    <pre>
+        char *args[] = {"ls", "-l", NULL};
+        execv("/bin/ls", args); 
+                // Execution of *this* program terminates here,
+                // and execution of /bin/ls begins at main()
+    </pre>
+
+    <p>
+        Note that there is no need to adjust other 
+        process attributes, and they are preserved across <em>exec().</em>
+        In particular, the PID of the process is left unchanged.
+    </p>
+
+    <p>
+        The <em>exec()</em> system call usually 
+        follows <em>fork()</em>:
     </p>
 
     <pre>
@@ -394,20 +416,15 @@ TODO
             // I am child
             char *args[] = {"ls", "-l", NULL};
             execv("/bin/ls", args); 
-                    // Execution of this program terminates here
-                    // and continues at main() of /bin/ls
 
         } else if ( rv &gt; 0 ) {
-            continue;
-                    // Execution of parent process is unchanged
+            // Execution of parent process continues within this program
         }
     </pre>
 
     <p>
-        This sequence is traditionally called <em>fork and exec.</em>
+        This sequence is called <em>fork and exec.</em>
         and results in one process launching another program.
-        Note that there is no need to adjust other process attributes, and indeed,
-        they are preserved across <em>exec.</em>
     </p>
 
     <h3>See Also:</h3>
