@@ -12,7 +12,6 @@ last-updated: April, 2021
     https://www.linuxjournal.com/sites/default/files/2018-11/GeekGuide-BeyondTrust-BeyondSudo.pdf
 
 
-    <a href="https://zaiste.net/posts/shell-commands-rust/">Rewritten in Rust: Modern Alternatives of Command-Line Tools</a>
 
 
 <div class="content" id="closing-remarks">
@@ -137,6 +136,7 @@ Exercises:
         <li><a href="#shell-expansion">Shell Expansion</a></li>
 		<li><a href="#standard-file-descriptors">Standard File Descriptors</a></li>
 		<li><a href="#terminal-conveniences"> Terminal Conveniences</a></li>
+        <li><a href="#man-pages"><code>man</code> Pages</a></li>
         <li><a href="#finding-files">Finding Files</a></li>
 		<li><a href="#missing-semester">Missing Semester</a></li>
         <!-- <li><a href="#references"> References </a></li> -->
@@ -479,6 +479,64 @@ Exercises:
     <p>
         Alright, now we'll introduce some other useful command-line tools.
     </p>
+</div>
+
+
+<div id="man-pages" class="content">
+    <h2> <code>man</code> Pages </h2>
+	<p>
+		The most useful asset in the Linux documentation pool is the
+		manual ("man") pages.
+		Man pages provide a concise overview of commands and
+        features, with further documentation existing elsewhere.
+		Learn to use them early, for they are a way of life.
+	</p>
+
+	<p>
+		Man pages are accessed at the command line:
+	</p>
+
+	<div class="code">
+		$ man cat
+	</div>
+
+	<p>
+	    This launches a paging utility, which lets you
+        view a page through a read-only interface.
+		Within the <code>man</code> utility, you can search 
+		by typing a single forward slash, then your search term:
+	</p>
+
+	<div class="code">
+        /<i>search-term</i>
+	</div>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Incidentally, these controls have become standard for
+            paging utilites.
+        </p>
+    </div>
+
+	<p>
+		Then, <em>enter</em>.  Jump to the next result by typing a single
+        <code>n</code>.
+		To quit, type <code>q</code>.
+	</p>
+
+	<p>
+        The movement controls of the <code>man</code> paging utility are simple enough:
+		to move up one line, type <code>k</code>.
+		To move down one line, use <code>j</code>;
+		To move down a screenful, press the spacebar.
+	</p>
+
+	<h3>See Also:</h3>
+	<ul>
+		<li><code><a href="https://www.man7.org/linux/man-pages/man1/man.1.html">man(1)</a></code></li>
+        <li><a href="https://tldr.sh/"><code>tldr</code></a> - Simplified and community driven man pages</a></li>
+	</ul>
 </div>
 
 <div class="content" id="finding-files">
