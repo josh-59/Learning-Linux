@@ -7,13 +7,12 @@ last-updated: April, 2021
 <!--
 
 To Do:
-    Introduction:
-        Establish justification for study!
-        E.g., ...are maintained as part of the UNIX architecture...
-
     Directory Structure:
         .
         ..
+
+    (Carefully) split "path name" and "file",
+    as in "names a file".
 
 
 
@@ -118,8 +117,10 @@ https://wiki.ubuntu.com/Lvm
         Designed by the researchers of Bell Laboratories and
         implemented primarily by Ken Thompson,
         this piece of software became an operating system 
-        when a means of interacting with, and executing, its contents was
+        when a means of interacting with its contents was
         introduced.
+        GNU/Linux, being an Unix-like operating system,
+        inherits and reinforces Unix's file semantics.
     </p>
 </div>
 
@@ -127,7 +128,7 @@ https://wiki.ubuntu.com/Lvm
     <h2>Files</h2>
 
     <p>
-        In UNIX, a file is a sequence of bytes.<sup><a href=#references>[1]</a></sup>
+        In Unix, a file is a sequence of bytes.<sup><a href=#references>[1]</a></sup>
         This definition is sufficiently abstract to allow, for instance, a keyboard
         to appear as a file.
         Unix-like kernels facilitate interaction with files via four essential
@@ -152,7 +153,7 @@ https://wiki.ubuntu.com/Lvm
     <h3>File Attributes</h3>
 
     <p>
-        UNIX-like operating systems characteristically store a substantial
+        Unix-like operating systems characteristically store a substantial
         amount of information about each file on the system.
         This information, known as
         <em><a href="https://en.wikipedia.org/wiki/Metadata">metadata</a>,</em>
@@ -291,7 +292,7 @@ https://wiki.ubuntu.com/Lvm
     <h3> Block and Character Device Files </h3>
 
     <p>
-        UNIX-like operating systems recognize two kinds of devices:
+        Unix-like operating systems recognize two kinds of devices:
         <em>Block</em> and <em>character.</em>
         A character device supports reading and writing only a single
         byte (ASCII character) at a time; a terminal is one 
@@ -387,7 +388,7 @@ https://wiki.ubuntu.com/Lvm
     <h2>Filesystem Heirarchy</h2>
 
     <p>
-        Within any UNIX-like operating system, some common themes will be found.
+        Within any Unix-like operating system, some common themes will be found.
         For instance, <code>bin</code> directories are found in several places, such as
         <code>/bin</code>, <code>/sbin</code>, along with <code>/usr/bin</code>
         and often <code>/home/<i>user</i>/bin</code> as well.
@@ -407,7 +408,7 @@ https://wiki.ubuntu.com/Lvm
             describes the GNU/Linux directory structure, and is maintained
             by the Linux Foundation.
             It is intended to promote inter- operability
-            among UNIX-like operating systems,<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html">[7]</a></sup>
+            among Unix-like operating systems,<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html">[7]</a></sup>
             and was developed with help from the BSD development community.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch07s02.html">[8]</a></sup>
         </p>
     </div>
@@ -485,7 +486,7 @@ https://wiki.ubuntu.com/Lvm
     <h2>Mounting a Filesystem</h2>
 
     <p>
-        UNIX-like operating systems maintain a single directory tree for
+        Unix-like operating systems maintain a single directory tree for
         the entire system.
         When a new block device is introduced to the machine, it first appears as
         a device file in <code>/dev</code>; its files may then be made
@@ -545,7 +546,7 @@ https://wiki.ubuntu.com/Lvm
     <h2>inodes and Directories</h2>
 
     <p>
-        In keeping with traditional UNIX file semantics, 
+        In keeping with traditional Unix file semantics, 
         every file on a GNU/Linux system is represented by an unique <em>inode.</em><sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html#id1">[18]</a></sup>
         Inodes are the responsibility of their respective filesystem,
         wherein each is given a number.
@@ -629,7 +630,7 @@ https://wiki.ubuntu.com/Lvm
     <h4>inodes:</h4>
 
     <p>
-        The inode was implemented literally in the Research UNIX filesystem,
+        The inode was implemented literally in the Research Unix filesystem,
         and formed the basis of its architecture:
     </p>
 
@@ -659,9 +660,9 @@ https://wiki.ubuntu.com/Lvm
 
     <p>
         It was the most advanced filesystem of its time,
-        and, as UNIX grew in popularity, was propogated and revised.
+        and, as Unix grew in popularity, was propogated and revised.
         <em>Index node</em> became contracted to <em>inode</em>,
-        and the semantics of file operations in UNIX-like operating systems
+        and the semantics of file operations in Unix-like operating systems
         became dependant upon them.
     </p>
 
@@ -683,7 +684,7 @@ https://wiki.ubuntu.com/Lvm
         the Virtual File System maps system calls 
         to filesystem-driver functions.
         In addition, the VFS imposes inodes on filesystems that do not
-        natively employ them, thereby preserving traditional UNIX file
+        natively employ them, thereby preserving traditional Unix file
         semantics across all supported filesystems.
     </p>
 
