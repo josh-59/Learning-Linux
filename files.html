@@ -225,7 +225,7 @@ https://wiki.ubuntu.com/Lvm
     </p>
 
     <p>
-        Two other tools useful for peeking
+        Two other tools for peeking
         into a file are <code><a href="https://www.man7.org/linux/man-pages/man1/file.1.html">file</a></code>, which attempts to categorize the file, and
         <code><a href="https://man7.org/linux/man-pages/man1/stat.1.html">stat</a></code>, which prints the file's complete metadata:
     </p>
@@ -270,7 +270,7 @@ https://wiki.ubuntu.com/Lvm
         They reside in the <code>/dev</code> directory.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[4]</a></sup>
         Each of these files serves as the principle reference to its
         respective device.
-        For example, when a USB-stick is inserted into my machine,
+        For example, when a USB-stick is inserted,
         a new file appears in <code>/dev</code>.
     </p>
 
@@ -285,17 +285,21 @@ https://wiki.ubuntu.com/Lvm
     <h3> Block and Character Device Files </h3>
 
     <p>
-        Unix-like operating systems recognize two kinds of devices:
+        The Linux kernel supports two kinds of device files:
         <em>Block</em> and <em>character.</em>
-        A character device supports reading and writing only a single
-        byte (ASCII character) at a time; a terminal is one 
-        kind of character device.
-        Hard disks, SSD's and removable mass media are <em>block</em>
-        devices:
-        They support reading and writing blocks of bytes at a time&mdash; 
-        usually, 4096 bytes.
-        Additionally, block device files support seeking, whereas character devices
-        do not.
+        A character device file may only be written to, or read,
+        a single byte (ASCII character) at a time.
+        A terminal is one kind of device represented by the 
+        character device file.
+    </p>
+
+    <p>
+        Hard disks, SSD's and removable mass media are represented by
+        <em>block</em> device files:
+        The underlying devices support reading and writing only in
+        blocks of bytes at a time (traditionally, <a href="https://en.wikipedia.org/wiki/Disk_sector">512 bytes</a>).
+        Additionally, block device files support seeking, 
+        whereas character devices do not.
     </p>
 
     <h3>See Also:</h3>
@@ -693,6 +697,10 @@ https://wiki.ubuntu.com/Lvm
         <b>Exercises:</b>
 
         <ol>
+            <li>
+                <code>cd</code> around your machine and <code>file</code>
+                some device files.
+            </li>
         <li>
             Using <code>watch(1)</code>, create an ad-hoc terminal 
             utility to monitor the system's memory.
