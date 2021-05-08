@@ -85,7 +85,6 @@ TODO
         <li><a href="#file-descriptors"> File Descriptors </a></li>
         <li><a href="#exec">Executing a Different Program</a></li>
         <li><a href="#termination">Process Termination</a></li>
-        <li><a href="#closing-remarks"> Closing Remarks: Concurrency</a></li>
         <li><a href="#dr-fraser"> Dr. Brian Fraser </a></li>
         <li><a href="#references"> References </a></li>
     </ul>
@@ -295,7 +294,7 @@ TODO
         All of these attributes are inherited from the process's parent,
         and most of this information is available for perusal in the
         <code>/proc/<i>PID</i></code> directory.
-        In addition, the kernel offers <a href="https://man7.org/linux/man-pages/man2/intro.2.html">system calls</a>
+        Finally, the kernel offers <a href="https://man7.org/linux/man-pages/man2/intro.2.html">system calls</a>
         to allow a process to change its attributes.
     </p>
 
@@ -319,7 +318,7 @@ TODO
         (specifically, a nonnegative integer).
         This number is called a <em>file descriptor</em>,
         and is returned by the kernel in response to a request to open a file.
-        The process, thereafter, uses it to refer to the 
+        Thereafter, the process uses this number to refer to the 
         file when it wishes to act on it.
     </p>
 
@@ -465,8 +464,8 @@ TODO
 
             <p>
                 Signals are brutal business; for process termination, 
-                <code>SIGINT</code> is preferred.  It affords the program 
-                the oportunity to shut its process down cleanly.<sup><a href="#references" title="Kerrisk, p389">[1]</a></sup>
+                <code>SIGINT</code> is preferred because it affords the program 
+                the oportunity to exit cleanly.<sup><a href="#references" title="Kerrisk, p389">[1]</a></sup>
                 At the command line, it is created and sent to the foreground
                 process with CTRL+C.
             </p>
@@ -492,45 +491,15 @@ TODO
             </p>
         </li>
     </ul>
-</div>
 
-<div class="content" id="closing-remarks">
-    <h2 style="margin-bottom: 0;">Closing Remarks:</h2>
-    <h4>Concurrency</h4>
-    <p>
-        With more than 50 years of use, the process is a well-studied
-        abstraction.
-        It is supported at both the hardware level and the software level.
-        We will conclude this introduction of them by describing how a computer
-        runs more than one process at a time&mdash; That is, how programs
-        are executed <em>concurrently.</em>
-    </p>
+  </div>
 
-    <p>
-        The fundamental insight is that, <em>A program's instructions are oblivious to
-        time.</em>
-        That is, a program's only assumption about its own execution
-        is that each instruction follows the previous one, if any.
-        Since this assumption does not depend upon time, it is possible to 
-        stop its execution and save its state; and later, to reintroduce its 
-        state and continue execution, while preserving the sequence of instructions.
-        When carried out correctly, the program is oblivious to any such
-        interruptions.
-    <p>
+<div class="content" id="dr-fraser">
+    <h2 style="margin-bottom: 2pt;"> Dr. Brian Fraser: </h2>
+    <h4 style="margin-bottom: 18pt;"> Fork and Exec Linux Programming </h4>
+    <iframe class="video" src="https://www.youtube-nocookie.com/embed/l64ySYHmMmY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-    <p>
-        The operating system's kernel, working in conjunction with hardware,
-        is responsible for presenting each process with 
-        <a href="https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-intro.pdf">the illusion</a> 
-        that it ran without interruption, and "concurrency" is achieved by 
-        interweaving process execution with respect to time:
-    </p>
-
-    <p>
-        (Depiction)
-    </p>
-
-  <h3> See Also: </h3>
+<h3> Additional Resources: </h3>
 
     <ul>
         <li><a href="https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-intro.pdf">Operating Systems: Three Easy Pieces</a> Chapter 4: Processes</li>
@@ -539,12 +508,7 @@ TODO
         <li><a href="https://www.man7.org/linux/man-pages/man1/top.1.html"><code>top(1)</code></a> - Display Linux processes</li>
         <li><a href="./assets/check.c">check.c</a> - Double-check of the above snippets</li>
     </ul>
-</div>
 
-<div class="content" id="dr-fraser">
-    <h2 style="margin-bottom: 2pt;"> Dr. Brian Fraser: </h2>
-    <h4 style="margin-bottom: 18pt;"> Fork and Exec Linux Programming </h4>
-    <iframe class="video" src="https://www.youtube-nocookie.com/embed/l64ySYHmMmY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 
