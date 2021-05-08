@@ -2,6 +2,8 @@
 //      - Preserve aspect ratio of videos across window resizing
 //      - Eliminate nav-bar 'flicker' when navigating across pages in 
 //          narrow-window mode
+//      - Window resize width on narrow mode (scrolling left/right
+//          still exists, and it shouldn't)
 
 
 $(document).ready(check_navbars);
