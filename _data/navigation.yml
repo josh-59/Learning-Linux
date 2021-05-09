@@ -8,7 +8,7 @@
   link: /processes.html
 - name: Terminals and Shells
   link: /terminals-and-shells.html
-- name: Packages and Distributions
-  link: /packages-and-distributions.html
+- name: Packages 
+  link: /packages.html
 - name: 'Appendix: Bash <br> (and other stuff)'
   link: /bash.html

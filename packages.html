@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Packages and Distributions
-last-updated: April 2021
+title: Packages 
+last-updated: May 2021
 ---
 
 <!--
@@ -9,6 +9,9 @@ last-updated: April 2021
     Gentoo:
         ebuild(5): https://dev.gentoo.org/~zmedico/portage/doc/man/ebuild.5.html
         ebuild phase functions: https://devmanual.gentoo.org/ebuild-writing/functions/
+
+
+        <li><a href="https://flight-manual.atom.io/getting-started/sections/installing-atom/">Installing Atom</a> (Example instructions to add repository)</li>
 
     <div class="aside-right">
         <h4>Aside:</h4>
@@ -18,15 +21,6 @@ last-updated: April 2021
             that do not affect intended behavior.
         </p>
     </div>
-
-    Repositories:
-        Not really happy with it: It seems to have little point
-        or purpose... It isn't relevant.
-        User repositories?
-
-    Manjaro updated 235 (out of 965) packages at once, and broke my 
-    jekyll installation, for instance.  
-    Linux Mint doesn't have that problem!
 
         <p>
             In open-source software, as in any other field, there are
@@ -51,15 +45,6 @@ last-updated: April 2021
             </li>
         </ul>
 
-
-<div class="content" id="closing-remarks">
-    <h2>Closing Remarks</h2>
-
-    BSD 1.0 was forked from UNIX version 6 source.
-
-    [...]
-
-</div>
 -->
 
 <div id="nav_bar_2" class="nav">
@@ -69,14 +54,13 @@ last-updated: April 2021
         <li><a href="#building-from-source">Building an OS from Source</a></li>
         <li><a href="#binary-packages">Binary Packages</a></li>
         <li><a href="#package-managers">Package Managers</a></li>
-        <li><a href="#repositories">Repositories</a></li>
-        <li><a href="#distribution-models">Distribution Models</a></li>
+        <li><a href="#distributions">Distributions</a></li>
         <li><a href="#references"> References </a></li>
     </ul>
 </div>
 
 <div class="content" id="introduction">
-    <h1>Packages and Distributions </h1>
+    <h1>Packages</h1>
 
     <div class="quote-text">
         Software components should be small, <br>
@@ -90,6 +74,7 @@ last-updated: April 2021
     <p>
         A <em>package</em> is a logical unit of software.
         The obvious example is a program, but libraries are packages, too.
+        Packages may exist in either source-code or precompiled form.
         The purpose of this article is to orient the user to the package-centric
         landscape of pragmatic open-source software.
     </p>
@@ -173,12 +158,12 @@ last-updated: April 2021
     <p>
         As a step towards automating this process, we might
         notice that <em>building</em> is per-package specific.
-        Hence, we could maintain descriptions of how to build packages, to
+        Hence, we could maintain instructions of how to build packages, to
         be interpretted by some utility program.
     </p>
 
     <p>
-        Gentoo Linux is an operating system built around this strategy.
+        Gentoo Linux is an operating system built around this idea.
         The mechanized instructions to build software are kept in
         <code>ebuild</code>'s&mdash; Bash scripts which
         additionally describe where to obtain source code.
@@ -210,8 +195,9 @@ last-updated: April 2021
         time-consuming step of compilation, and allows the
         complete automation of installation.
         And software installation is fast!
-        The implication, however, is that each distributed package is configured
-        for a particular operating system.
+        The implication, however, is that each package is configured
+        for a particular operating system, and compiled for a 
+        particular CPU architecture.
     </p>
 
     <p>
@@ -248,9 +234,9 @@ last-updated: April 2021
     </div>
 
     <div class="aside-right">
-        <h4>Aside:</h4>
+        <h4>Note:</h4>
         <p>
-            The <code>install</code> directory is ignored.
+            The <code>install</code> directory is otherwise ignored.
         </p>
     </div>
 
@@ -259,7 +245,7 @@ last-updated: April 2021
         is copied into its respective directory of the host operating system;
         if a directory does not exist, it is created.
         After these files are copied, the script
-        <code>install/doist.sh</code> is executed, if it exists.
+        <code>./install/doist.sh</code> is executed, if it exists.
     </p>
 
     <p>
@@ -293,13 +279,13 @@ last-updated: April 2021
         A utility that obtains and installs packages is referred to as a
         <em>package manager.</em>
         Package managers are distribution-specific, and serve
-        as the users' interface to obtain their software.
+        as the users' interface to their repositories.
         To name a few:
     </p>
 
     <ul>
-        <li>Debian: <code>apt</code></li>
-        <li>Fedora: <code>rpm</code></li>
+        <li>Debian: <code><a href="https://en.wikipedia.org/wiki/APT_(software)">apt</a></code></li>
+        <li>Fedora: <code><a href="https://docs.fedoraproject.org/en-US/fedora/rawhide/system-administrators-guide/RPM/">rpm</a></code></li>
         <li>openSUSE: <code>zypper</code></li>
         <li>Arch: <code>pacman</code></li>
     </ul>
@@ -340,112 +326,55 @@ last-updated: April 2021
         $ sudo apt install vim
     </div>
 
-    <h3>Dependencies</h3>
-    <p>
-        It's relatively common for a given package to depend upon other packages,
-        and most distributions, including Debian, automate dependency resolution.
-    </p>
-
     <h3>See Also:</h3>
     <ul>
-        <li><a href="https://wiki.debian.org/AptCLI">Apt CLI - Debian Wiki</a></li>
-        <li><a href="https://en.opensuse.org/Package_management">Package management - openSUSE</a></li>
+        <li><a href="https://en.opensuse.org/Package_management">Package management</a> - openSUSE Wiki</li>
     </ul>
 </div>
 
-<div class="content" id="repositories">
-    <h2>Repositories</h2>
+<div class="content" id="distributions">
+    <h2 style="margin-bottom: 0;">Distributions</h2>
+    <h4>and Distribution Models</h4>
+
+    <p>
+        A <em>distribution</em> is a project and community that 
+        obtains open-source software, configures, compiles and assembles 
+        it into useable packages, and makes the results 
+        publicly available.
+        Along the way, they define overarching system practices, within
+        which their packages will fit.
+    </p>
 
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            Yay free software!
+            Here we are adopting the view that distributions focus
+            primarily on package propogation, rather than operating systems.
+            This view is implemented very directly in Arch Linux.
+            For example, the package <code><a href="https://archlinux.org/packages/core/x86_64/filesystem/">filesystem</a></code>
+            creates the system's root directory tree,
+            and initializes the system's core configuration files.
         </p>
     </div>
 
     <p>
-        A <em>repository</em> is a tracked collection of files.
-        Each distribution necessarily maintains one or more repositories of binary
-        packages, and makes them publicly available.
-        These can become quite large:
-        Debian counts 90,000 available packages.<sup><a href="https://packages.debian.org/stable/">[k]</a></sup>
-        More, the collection is repeated once for each supported architecture.
-        Mirroring repositories both distributes and reduces the associated cost
-        of package distribution: Please use mirrors!
+        There are many successful methods of package distribution.
+        The <em>regular release</em> model deals in discrete
+        package sets: 
+        Packages are first composed into a working whole, 
+        then undergo some testing period.
+        The collection is then released publicly, at which point
+        updates are restricted to bug fixes and security updates.
+        New features do not become available within a 
+        particular release.
+        The set is supported for some length of time&mdash; 
+        <em>Long-Term Support</em> releases are often maintained for
+        five years.
     </p>
 
     <p>
-        With that, we can now sketch out how a package update is propogated from source
-        to user.
-    </p>
-
-    <p>
-        First, some change is made to the source code.
-        Minor changes can safely be ignored, but
-        security fixes, for instance, cannot.
-        A distribution maintainer rebuilds and tests the package.
-    </p>
-
-    <p>
-        The rebuilt package gets pushed to the distribution's repositories,
-        then to mirrors.
-        The user's package manager then synchronizes its list of available packages,
-        and alerts the user to any relevant changes.
-        This is usually done automatically, but can be done manually
-        with,
-    </p>
-
-    <div class="code">
-        $ sudo apt update
-    </div>
-
-    <p>
-        Updated packages are downloaded and installed by the user.
-        This is usually done manually, with
-    </p>
-
-    <div class="code">
-        $ sudo apt upgrade
-    </div>
-
-    <h3>See Also:</h3>
-
-    <ul>
-        <li><a href="https://wiki.debian.org/PackageManagement#Repository_management">Package Management</a> - Debian Wiki</a></li>
-        <li><a href="https://flight-manual.atom.io/getting-started/sections/installing-atom/">Installing Atom</a> (Example instructions to add repository)</li>
-    </ul>
-</div>
-
-
-<div class="content" id="distribution-models">
-    <h2>Distribution Models</h2>
-
-    <p>
-        Distributing binary packages in the manner described above is a
-        known-good idea, and there are many successful variations.
-        The <em>regular release</em> model deals in discretely released
-        operating systems.
-        Packages are composed into a working operating system, and undergo
-        some testing period.
-        After the public release, updates are restricted to bug
-        fixes and security updates; new features do not become available
-        within a particular release.
-    </p>
-
-    <p>
-        This strategy has produced extremely stable operating
-        systems.<sup><a href="http://www.slackware.com/about/">[c]</a></sup>
-        Each version is supported for some length of time,
-        sometimes asserted beforehand.
         Distributions following the regular release model:
     </p>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            openSUSE is another favorite of mine.
-        </p>
-    </div>
 
     <ul>
         <li> Linux Mint </li>
@@ -457,37 +386,38 @@ last-updated: April 2021
     </ul>
 
     <p>
-        The <em>rolling release</em> model dispenses with any versioning scheme.
-        Instead, updates and features are distributed as they become
-        available; software is distributed in its 
-        "latest stable" form.
-        The result is a bleeding-edge operating system&mdash; and
-        a constant stream of updates.
+        The <em>rolling release</em> model dispenses with any 
+        versioning scheme.
+        Instead, software is distributed in its "latest stable" form,
+        so that updates and features become available 
+        to users as they are released by developers.
+        The result is access to cutting-edge software&mdash;
+        and a constant stream of updates.
     </p>
 
     <p>
-        This strategy is growing in popularity, especially among desktop
-        users.  Examples:
+        This strategy is growing in popularity, 
+        especially among desktop users.  
+        Examples:
     </p>
 
     <ul>
         <li> Arch </li>
-        <li> Garuda </li>
         <li> openSUSE Tumbleweed </li>
+        <li> Garuda </li>
     </ul>
 
     <p>
         Between the two is the <em>semi-rolling release,</em>
         best explained through example:
-        <a href="https://getsol.us/home/">Solus Linux</a> is an up-and-coming
-        distribution focused on the home desktop.
-        They release a set of package updates every Friday, which, taken together,
-        form the most recent version of their OS.
+        <a href="https://getsol.us/home/">Solus Linux</a> is an
+        up-and-coming distribution focusing on the home computing.
+        They publish updated packages every Friday, which,
+        taken together, forms their latest release.
     </p>
 
     <h3>See Also:</h3>
     <ul>
-        <li><a href="https://www.debian.org/News/2021/20210327">Debian -- News -- 10: 10.9 released</a></li>
         <li><a href="https://wiki.archlinux.org/index.php/Arch_Linux">Arch Linux</a> - ArchWiki</li>
     </ul>
 </div>
