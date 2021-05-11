@@ -6,9 +6,18 @@ last-updated: April 2021
 
 <!--
 
-Incremental Improvement
-    Release early, release often
-    https://en.wikipedia.org/wiki/Release_early,_release_often
+    <h2>Dealing with the Mob</h2>
+
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            If the first statement of this section is taken literally, there are
+            5<sup>1000</sup> possible GNU/Linux systems.
+        </p>
+    </div>
+
+
 
 <div class="content" id="risc-v">
     <iframe class="video" src="https://www.youtube-nocookie.com/embed/Rsyn3_PjRXw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -31,7 +40,8 @@ Incremental Improvement
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#fork-merge">Fork/Merge</a></li>
-        <li><a href="#incremental-improvement">Incremental Improvement</a></li>
+        <li><a href="#time-based-releases">Time-Based Releases</a></li>
+        <li><a href="#build-what-you-want">Build What You Want</a></li>
         <li><a href="#modularity">Modularity</a></li>
         <li><a href="#less"><code>less</code>: A Success Story</a</li>
         <li><a href="#references"> References </a></li>
@@ -43,11 +53,12 @@ Incremental Improvement
     <h1>How Open Source Works</h1>
 
     <div class="quote-text">
-        "Every good work of software starts by scratching a developer's personal itch."
+        "Every good work of software <br>
+        starts by scratching a developer's personal itch."
     </div>
 
     <div class="quote-ref">
-        Eric S. Raymond
+        Eric S. Raymond<br>
         <em><a href="http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/ar01s02.html">The Cathedral and the Bazaar</a></em>
     </div>
 
@@ -55,7 +66,8 @@ Incremental Improvement
         So what makes it all tick?
         In this dramatic conclusion, we'll pick apart the
         common patterns of the open-source ecosystem,
-        from the mechanics of contributing, to their organizational structures.
+        from the mechanics of contributing, to the
+        resultingly modular structure.
         Hope you enjoyed!
     </p>
 </div>
@@ -63,10 +75,17 @@ Incremental Improvement
 <div id="fork-merge" class="content">
     <h2>Fork/Merge</h2>
 
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Repositories exist in many contexts within open-source.
+        </p>
+    </div>
+
     <p>
-        Recall that a repository is a tracked collection of files.
-        The source code of an open-source package is usually maintained in a
-        publicly available repository, where anyone
+        A <em>repository</em> is a tracked collection of files.
+        The source code of an open-source project is available 
+        in a public repository, and anyone
         may download or otherwise copy it.
         Such a copy is called a <em>fork.</em>
     </p>
@@ -93,10 +112,24 @@ Incremental Improvement
         This pattern repeats at various scales.
         Today's revision control software allows an individual programmer
         to create distinct branches within a local repository,
-        and to merge or abandon changes as they fit.
+        and to merge or abandon changes within it.
         At the macro scale, this pattern repeated with GNU's compiler
-        collection, when a collection of forks became a concurrent project, and was subsequently merged
-        into GNU's main trunk.<sup><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection#EGCS_fork">[b]</a></sup>
+        collection, when a collection of forks became a concurrent project, 
+        and was subsequently merged into GNU's main 
+        trunk.<sup><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection#EGCS_fork">[b]</a></sup>
+    </p>
+
+    <p>
+        For a few reasons, small merges are generally preferred over large 
+        ones.
+        First, the change is easier to review by others&mdash; especially,
+        the project's maintainer.
+        Second, bugs are less likely to be introduced.
+        Third, small changes are less likely to break other peoples' work.
+        This is especially important when the project implements
+        some public API, and other projects depend upon it. 
+        Finally, large changes simply don't bode well when 
+        many people are working on the project.
     </p>
 
     <h3>See Also:</h3>
@@ -106,83 +139,54 @@ Incremental Improvement
     </ul>
 </div>
 
-<div class="content" id="incremental-improvement">
-    <h2>Incremental Improvement</h2>
-
-    <p>
-        Software development is fundamentally reiterative:
-        You build something, publish it, improve it and release it again.
-        Such reiterative improvement exists in both open- and closed-source
-        environments;
-        in open-source, however, it is more transparent.
-    </p>
-
-    <p>
-        Small, incremental improvements are much easier to
-        merge.<sup><a href="https://lkml.org/lkml/2007/7/28/145">[ab]</a></sup>
-        More, <a href="https://en.wikipedia.org/wiki/Release_early,_release_often">"Release early, release often,"</a>
-    </p>
-
-    "Time-based releases"
-
-    <h3>Train Schedules</h3>
-
-    <p>
-        The above is implemented with greater force by putting in
-        on a timetable, known as a "train schedule".
-        This is often adopted by larger projects as a means
-        of organizing many changes into a coherent whole.
-    </p>
-
-    <p>
-        Mozilla
-        "stability without stagnation."<sup><a href="https://blog.rust-lang.org/2014/10/30/Stability.html">[6]</a></sup>
-    </p>
-
-    <p>
-        A new Firefox version is scheduled for release every four weeks.<sup><a href="https://wiki.mozilla.org/Release_Management/Release_Process">[7]</a></sup>
-    </p>
-
-    <figure>
-        <img src="assets/img/train-schedules.png" style="width: 100%;">
-    </figure>
+<div class="content" id="time-based-releases">
+    <h2>Time-Based Releases</h2>
 
     <div class="aside-right">
-        <h4>Aside</h4>
+        <h4>Aside:</h4>
         <p>
-            Firefox is one of the largest and most agressive open-source
-            projects outside of the Linux kernel.
-            It even spawned the (awesome) programming language, Rust.
+            This section may be a little simplistic, but it seems worth
+            developing precisely, if only once.
         </p>
     </div>
 
     <p>
-        That is, each version spends four weeks in the <em>Mature</em> category,
-        being the officially-supported, current version of Firefox.
-        When here, no new features are implemented&mdash; rather, only
-        security patches and bug-fixes are implemented and pushed to the user.
-        After its four weeks in the spotlight, it is discarded,
-        for the next version is ready.
+        One of the fundamental challenges of open-source project 
+        leadership is delivering, as Mozilla calls it,
+        "stability without stagnation."<sup><a href="https://blog.rust-lang.org/2014/10/30/Stability.html">[6]</a></sup>
+        On one hand, we want to incorporate changes made by 
+        many unknown people; but on the other,
+        we also want to deliver a consistent product.
     </p>
 
     <p>
-        Before it becomes mature, each version of Firefox has been released as a <a href="https://www.mozilla.org/en-US/firefox/80.0beta/releasenotes/">beta</a>;
-        this status corresponds to <em>Initial Release</em> above.
-        When a release enters the <em>Beta</em> stage, only patches aimed at improving
-        stability are accepted.<sup><a href="https://wiki.mozilla.org/Release_Management/Release_Process">[6]</a></sup>
-        Each release spends four weeks there.
-        Finally, there is the <a href="https://www.mozilla.org/en-US/firefox/80.0a1/releasenotes/">Nightly</a> build,
-        which contains the latest (and most untested) features.
+        One solution is to release a sequence of versions of the product:
+        Even if each release is only
+        marginally better than the previous, those improvements accrue,
+        and the result is guaranteed to be great software.
     </p>
 
     <p>
-        Here we see that <em>Firefox 80</em> will be released as <em>Firefox 81</em>
-        enters Beta and <em>Firefox 82</em> enters Nightly:
+        Large projects, such as the Linux kernel or Mozilla Firefox,
+        for whom many people might want to see a particular change,
+        often adopt a schedule for releases.
     </p>
 
-    <!--
-        There is some irony in trying to control improvement...
-    -->
+    <p>
+        For example, the last opportunity to merge feature
+        changes in Firefox is before it enters <em>beta</em>.
+        In beta, merges are restricted to bug fixes and 
+        security updates. 
+        Each release spends four weeks in <em>beta</em>
+        before being released as the current official Firefox version.
+    </p>
+
+    <p>
+        While it is released to the public, merges 
+        are again restricted to bug fixes and
+        security updates, and, again, each release
+        is supported for four weeks:
+    </p>
 
     <figure>
         <a href="https://wiki.mozilla.org/Release_Management/Calendar">
@@ -191,16 +195,82 @@ Incremental Improvement
         <figcaption><center><b><a href="https://wiki.mozilla.org/Release_Management/Calendar">Firefox Release Schedule</a></b></center></figcaption>
     </figure>
 
-    <!--
     <p>
-        A place where this strategy fails is video game development.
+        Witin Mozilla, this is known as a "train schedule,"
+        and we see that <em>Firefox 80</em> will be released as 
+        <em>Firefox 81</em>
+        enters Beta and <em>Firefox 82</em> enters Nightly.
     </p>
+
+    <p>
+        Firefox is one of the largest and most agressive open-source
+        projects outside of the Linux kernel.
+        It even spawned the (awesome) programming language, Rust.
+    </p>
+
+    <!--
+        There is some irony in trying to control improvement...
+
     -->
+
+    <h3>Game Development</h3>
+
+    <p>
+        One area where "incremental improvement" does not apply 
+        is game development, and the open-source community has always
+        lagged behind their proprietary counterparts here.
+    </p>
 
     <h3>See Also:</h3>
     <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Release_early,_release_often">Release Early, Release Often</a> - Wikipedia</li>
         <li><a href="https://blog.rust-lang.org/2014/10/30/Stability.html"> Stability as a Deliverable | Rust Blog</a></li>
         <li><a href="http://thinking-in-code.blogspot.com/2010/07/train-model-of-software-development.html"> Thinking in Code: Train Model of Software Development</a></li>
+    </ul>
+</div>
+
+<div class="content" id="build-what-you-want">
+    <h2>Build What You Want</h2>
+
+    <p>
+        I do not believe that the ordinary user is 
+        obligated to contribute to open source.  
+        In particular, the "cathedral" model (like GNU) does not
+        accept user modifications to their work:
+        They built what they wanted to build, now it's freely available,
+        and that's that&mdash; their hands are washed from it.
+    </p>
+
+    <p>
+        For me, the magic of open-source is that it's composed of
+        things people created because they wanted to.
+        As it turns out, they've built something stellar, and best
+        of all, you can turn around and inspect it yourself.
+    </p>
+
+    <blockquote>
+        "Thompson wanted to create a comfortable computing environment 
+        constructed according to his own design, using whatever means 
+        were available. His plans, it is evident in retrospect, 
+        incorporated many of the innovative aspects of Multics,
+        including an explicit notion of a process as a locus of 
+        control, a tree-structured file system, a command interpreter 
+        as user-level program, simple representation of text files, 
+        and generalized access to devices. They excluded others, such
+        as unified access to memory and to
+        files."<sup><a href="https://www.bell-labs.com/usr/dmr/www/chist.html">[o]</a></sup>
+    </blockquote>
+
+    <blockquote>
+        This is a program for hackers by a hacker.  I've enjouyed doing
+        it, and somebody might enjoy looking at it and even modifying it for
+        their own needs.<sup><a href="https://josh-59.github.io/Learning-Linux/pre/free-minix-like-kernel-sources-for-386-at.html">[a]</a></sup>
+    </blockquote>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://blog.linuxmint.com/?p=4054">Monthly News - April 2021 - The Linux Mint Block</a></li>
+        <li><a href="http://www.catb.org/~esr/writings/cathedral-bazaar/afterword/">Afterword: Beyond Software?</a></li>
     </ul>
 </div>
 
@@ -209,7 +279,7 @@ Incremental Improvement
     <h4>and The Unix Philosophy</h4>
 
     <p>
-        GNU/Linux can be likened to a 1000-piece puzzle with 5000 available pieces:
+        GNU/Linux can be likened to a 500-piece puzzle with 2500 available pieces:
         For any piece of the puzzle (shell, desktop environment,
         web browser, text editor&mdash; right down to
         C libraries<sup><a href="https://en.wikipedia.org/wiki/C_standard_library#Implementations">[h]</a></sup>
@@ -221,8 +291,7 @@ Incremental Improvement
     <p>
         This is an example of modular construction, and it is often left to
         the user to decide which software component
-        <a href="https://www.merriam-webster.com/dictionary/instantiate">instantiates</a>
-        each needed piece.
+        instantiates each needed piece.
         Modular (as opposed to <em>monolithic</em>) construction lies at the
         heart of both open source and the UNIX philosophy:
     </p>
@@ -230,34 +299,21 @@ Incremental Improvement
     <blockquote>
         "A serious attempt is made to apply the principle of modularity to everything on a Unix-like system, not only programs but also parts of programs, such as algorithms, and even the kernel. Thus, a Unix-like operating system generally (or at least ideally) consists of a small kernel together with a large number of small, specialized programs that can interact with each other through a variety of well-defined interfaces."<sup><a href="http://www.linfo.org/unix_philosophy.html">[g]</a></sup>
     </blockquote>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            If the first statement of this section is taken literally, there are
-            5<sup>1000</sup> possible GNU/Linux systems.
-        </p>
-    </div>
-
     <p>
         Modularity is realized in a variety of ways, and its implications
         are similarly numerous.
-        Not only is the user presented with an abundance of choice,
-        a programmer working on any given piece must solve a
+        First, a programmer working on any given piece must solve a
         greatly simplified problem.
-        Consequently, numerous solutions may be tried, which then compete
+        Consequently, many solutions may be tried, which then compete
         amongst themselves.
-        Most importantly, however, comprehension of a given piece is made 
-        possible, while comprehension of the whole is made unnecessary.
+        Thus, the user is presented with an abundance of choice.
     </p>
 
+    <h3>Linus' Rule</h3>
+
     <p>
-        Through modularity, a complex problem can, and has, been broken down
-        and solved.
-        The strategy has proven crucial not only to the development of computer
-        software as well as
-        <a href="https://en.wikipedia.org/wiki/Instruction_set_architecture">computer hardware</a>.
-    </p>
+    <em>If it's a bug that's being used, it's a feature, not a bug.</em>
+    <p>
 
     <h3>See Also:</h3>
     <ul>
@@ -330,61 +386,6 @@ Incremental Improvement
     <ul>
         <li><a href="https://fedoramagazine.org/5-cool-terminal-pagers-in-fedora/">5 cool terminal pagers in Fedora</a> - Fedora Magazine</li>
         <li><a href="https://zaiste.net/posts/shell-commands-rust/">Rewritten in Rust: Modern Alternatives of Command-Line Tools</a></li>
-    </ul>
-</div>
-
-<div class="content" id="building-what-they-want">
-    <h2>Building What They Want</h2>
-
-    <p>
-        All successful open-source projects share some common attributes.
-        Among them are personal motivation, leadership and goal-orientedness.
-        I'm going to focus on <em>personal motivation</em>
-        because it extends nicely to its limit, Hobbyist productions.
-    </p>
-
-    <blockquote>
-        "Thompson wanted to create a comfortable computing environment constructed
-        according to his own design, using whatever means were available. His plans, it
-        is evident in retrospect, incorporated many of the innovative aspects of Multics,
-        including an explicit notion of a process as a locus of control, a tree-structured
-        file system, a command interpreter as user-level program, simple representation
-        of text files, and generalized access to devices. They excluded others, such as
-        unified access to memory and to
-        files."<sup><a href="https://www.bell-labs.com/usr/dmr/www/chist.html">[o]</a></sup>
-    </blockquote>
-
-    <blockquote>
-        This is a program for hackers by a hacker.  I've enjouyed doing
-        it, and somebody might enjoy looking at it and even modifying it for
-        their own needs.<sup><a href="https://josh-59.github.io/Learning-Linux/pre/free-minix-like-kernel-sources-for-386-at.html">[a]</a></sup>
-    </blockquote>
-
-    <p>
-        The Linux kernel began as a hobby;
-        Torvalds, "GNU emacs of terminal emulators", became a kernel during a
-        marathon hacking session.
-    </p>
-
-    <p>
-        As users of their creations, we are very much "after the fact."
-        <em>detailed bug reports.</em>
-    </p>
-
-    <p>
-        I do not believe that the ordinary user is obligated to contribute
-        to open source.  If they do, they should recognize that they are
-        <em>donating a modification</em>, not necessarily "making a contribution,"
-        and that it is left to the repository mainatainer to do
-        something&mdash; if anything&mdash; with it.
-        Finally, the most substantial contributions are made by doing
-        what you do best :).
-    </p>
-
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="http://www.catb.org/~esr/writings/cathedral-bazaar/afterword/">Afterword: Beyond Software?</a></li>
     </ul>
 </div>
 
