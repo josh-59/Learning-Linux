@@ -5,9 +5,33 @@ last-updated: April, 2021
 ---
 
 <!--
+Citations:
+    Removed [12]
 
 Unix: Origins:
     First BSD fork, documentation?
+
+GNU's Not Unix:
+        whose (version 3) preamble begins:
+    </p>
+
+    <blockquote>
+    The GNU General Public License is a free, copyleft license for
+    software and other kinds of works.
+    </blockquote>
+
+    <blockquote>
+    The licenses for most software and other practical works are designed
+    to take away your freedom to share and change the works.  By contrast,
+    the GNU General Public License is intended to guarantee your freedom to
+    share and change all versions of a program- -to make sure it remains free
+    software for all its users.  We, the Free Software Foundation, use the
+    GNU General Public License for most of our software; it applies also to
+    any other work released this way by its authors.  You can apply it to
+    your programs, too.<sup><a href="https://www.gnu.org/licenses/gpl-3.0.en.html">[12]</a></sup>
+    </blockquote>
+
+
 
 Linux Kernel:
     Subsection "Kernel Architecture"?
@@ -91,7 +115,7 @@ Closing Remarks:
         <li><a href="#unix-architecture"> The UNIX Architecture </a></li>
         <li><a href="#gnu">GNU's Not Unix</a></li>
         <li><a href="#linux"> The Linux Kernel </a></li>
-        <li><a href="#distributions"> Linux Distributions: A Brief History</a></li>
+        <li><a href="#distributions"> Linux Distributions</a></li>
         <li><a href="#mint"> Linux Mint </a></li>
         <li><a href="#open-source">Open Source</a></li>
         <li><a href="#video">Greg Kroah-Hartman </a></li>
@@ -131,25 +155,23 @@ Closing Remarks:
         The UNIX operating system was born in late 1969 at AT&amp;T's
         <em>Bell Laboratories,</em> in the shadow
         of Multics.
-        Multics was a project intended to enable the
-        commercialization of computing as a service, in a business model 
-        similar to telephone or electricity:
-        Customers would connect their keyboard and monitor to a central mainframe, 
-        then pay for computation on an as-used basis.<sup><a href="https://multicians.org/history.html">[1]</a></sup>
+        Multics was a project intended to enable computing as a service, 
+        in a business model similar to telephone or electricity:
+        Customers would connect their keyboard and monitor to a 
+        central mainframe, then pay for computation on an as-used 
+        basis.<sup><a href="https://multicians.org/history.html">[1]</a></sup>
         Multics was a large, and in many ways, <a href="https://multicians.org/features.html">novel</a> project. 
         Developed at MIT, in collaboration with General Electric and AT&amp;T, 
         the project never realized its dream, and in 1969 AT&amp;T withdrew its support.
     </p>
 
     <p>
-        At Bell Labs, in the aftermath of Multics, operating systems developers 
+        At Bell Labs, in the aftermath of Multics, operating systems 
+        developers 
         Kenneth Thompson, Dennis Ritchie, Douglas McIlroy, and Joe Ossanna
         found themselves without a clear project.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[2]</a></sup>
         They proposed many ideas, but none were accepted, and
         no new machines were purchased.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[2]</a></sup>
-    </p>
-
-    <p>
         After finding a disused <a href="https://www.soemtron.org/pdp7.html">PDP-7</a>,
         Ken Thompson and Dennis Ritchie rewrote
         the game <em><a href="https://en.wikipedia.org/wiki/Space_Travel_(video_game)">Space Travel</a></em> 
@@ -167,9 +189,6 @@ Closing Remarks:
         The <em>exec</em> call was "trivial", and the other three components were
         done in one week 
         each.<sup><a href="#references" title="Kernighan, p34">[3]</a></sup>
-    </p>
-
-    <p>
         The software continued to be developed into a minimal, feasible, 
         multi-user, time-sharing operating system, now known as <em>UNIX.</em>
         The novel system 
@@ -210,39 +229,39 @@ Closing Remarks:
         <strong>Drivers:</strong>
         Drivers interact with hardware, and simplify the interface between
         kernel and hardware.
-        These pieces of software are the deepest and most remote elements
+        Drivers are the deepest and most remote elements
         of any operating system.
     </p>
 
     <p>
         <strong>Kernel:</strong>
-        The heart of any UNIX-like operating system is its 
+        The heart of the UNIX architecture is the 
         <a href="http://linffo.org/kernel.html">kernel</a>.
         The kernel is responsible for
         scheduling the CPU, allotting memory, 
         maintaining file integrity, and many other tasks.
-        It is an involved piece of software,
+        It is an involved piece of software&mdash;
         effectively, the "brains" of the operation.
     </p>
 
     <p>
         <strong>System Calls:</strong>
-        The set of operations that a kernel is willing to undertake is 
-        defined by the system calls it supports.
-        The UNIX architecture is characterized by six essential system calls:
-        <em>fork, exec, open, close, read,</em> and
-        <em>write.</em><sup><a href="#references">[5]</a></sup>
-        Both <em>fork</em> and <em>exec</em> are concerned with launching
-        programs, while <em>open, close, read,</em> and <em>write</em>
-        are concerned with files.
+        The set of operations that a kernel is willing to undertake
+        is defined by the system calls it supports.
+        The UNIX architecture is characterized by six essential system 
+        calls:
+        <em>fork(), exec(), open(), close(), read(),</em> and
+        <em>write().</em><sup><a href="#references">[5]</a></sup>
+        Both <em>fork()</em> and <em>exec()</em> are concerned with 
+        launching programs, while the other four are concerned with files. 
     </p>
 
     <p>
         <strong>Processes:</strong>
         A <em>process</em> is an executing program.
         Within the UNIX architecture, processes run the show:
-        The kernel is entirely dependant upon processes to tell it what to do.
-        Effectively, the kernel has no "mind" of its own.
+        The kernel is entirely dependant upon processes to tell it 
+        what to do, and takes no action without instruction by a process.
     </p>
 
     <h3>See Also:</h3>
@@ -314,25 +333,8 @@ Closing Remarks:
         Users can run, study, modify, copy and distribute GNU,
         but <em>if</em> they distribute, then those freedoms must be preserved.
         These stipulations are formalized in the GNU
-        <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">General Public License</a>,
-        whose (version 3) preamble begins:
+        <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">General Public License</a>, now in its third version.
     </p>
-
-    <blockquote>
-    The GNU General Public License is a free, copyleft license for
-    software and other kinds of works.
-    </blockquote>
-
-    <blockquote>
-    The licenses for most software and other practical works are designed
-    to take away your freedom to share and change the works.  By contrast,
-    the GNU General Public License is intended to guarantee your freedom to
-    share and change all versions of a program--to make sure it remains free
-    software for all its users.  We, the Free Software Foundation, use the
-    GNU General Public License for most of our software; it applies also to
-    any other work released this way by its authors.  You can apply it to
-    your programs, too.<sup><a href="https://www.gnu.org/licenses/gpl-3.0.en.html">[12]</a></sup>
-    </blockquote>
 
     <p>
         To create an entire operating system is an enormous task, but
@@ -379,8 +381,17 @@ Closing Remarks:
         attention to the kernel.
         By October of 1991, GNU's Bash, GCC, Make and other
         programs were running on his creation.<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[14]</a></sup>
-        He then sent out this famous invitation:
+        On October 5, 1991, he sent out this famous invitation:
     </p>
+
+    <blockquote>
+        From: torvalds@klaava.Helsinki.FI (Linus Benedict Torvalds)<br>
+        Newsgroups: comp.os.minix<br>
+        Subject: Free minix-like kernel sources for 386-AT<br>
+        Message-ID:<br>
+        Date: 5 Oct 91 05:41:06 GMT<br>
+        Organization: University of Helsinki<br>
+    </blockquote>
 
     <blockquote>
         Do you pine for the nice days of minix-1.1, when men were men and wrote
@@ -395,18 +406,14 @@ Closing Remarks:
         As I mentioned a month(?) ago, I'm working on a free version of a
         minix-lookalike for AT-386 computers.  It has finally reached the stage
         where it's even usable (though may not be depending on what you want),
-        and I am willing to put out the sources for wider distribution.<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[14]</a></sup> 
+        and I am willing to put out the sources for wider distribution. [...]<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[14]</a></sup> 
     </blockquote>
 
     <div class="aside-left">
         <h4>Aside:</h4>
         <p>
-            Linus Torvalds became interested in operating systems after
-            finding an error in the source code of his <a href="https://en.wikipedia.org/wiki/Sinclair_QL">Sinclair QL's</a> QDOS.
-            <sup><a href="#references">[5]</a></sup>
-            In college, Andrew Tanenbaum's
-            <a href="https://en.wikipedia.org/wiki/Operating_Systems:_Design_and_Implementation"><em>Operating Systems: Design and Implementation</em></a>
-            took this interest to new heights.<sup><a href="#references">[5]</a></sup>
+            The Linux kernel is but one of many available kernels.
+            It just happens to be the biggest and most actively developed.
         </p>
     </div>
 
@@ -428,13 +435,17 @@ Closing Remarks:
     </div>
 
     <p>
+        Linux kernel development has since become serious business,
+        with the <em>Linux Foundation</em> being set up in 2000 to
+        support its&mdash; and other projects'&mdash; growth.
         Linus Torvalds remains the maintainer of the Development branch,
-        and often remarks upon the kernel's latest releases.
+        and often remarks on the kernel's latest releases.
     </p>
 
     <p>
-        A major figure of today's Linux development effort is Greg Kroah-Hartman.
-        He is lead maintainer of the stable branch, in addition to various subsystems.<sup><a href="https://en.wikipedia.org/wiki/Greg_Kroah-Hartman">[16]</a></sup>
+        A major figure of today's Linux development effort is 
+        Greg Kroah-Hartman, who is
+        lead maintainer of the stable branch, in addition to various subsystems.<sup><a href="https://en.wikipedia.org/wiki/Greg_Kroah-Hartman">[16]</a></sup>
         According to he, interest in the kernel continues to
         grow, with 1200 new developers contributing each
         year.<sup><a href="https://www.theregister.com/2020/10/26/linux_kernel_intel/">[17]</a></sup>
@@ -450,17 +461,21 @@ Closing Remarks:
 </div>
 
 <div id="distributions" class="content">
-
-    <h2> Linux Distributions: A Brief History </h2>
+    <h2 style="margin-bottom: 0;"> Linux Distributions</h2>
+    <h4> and Early History </h4>
 
     <p>
-        The first versions of the Linux kernel were available
-        only in source-code form, and required compilation on a separate
-        host machine.<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[14]</a></sup>
-        No other software was included, so that the
-        creation of a functional Linux-based machine required the user to 
-        obtain, compile and assemble a number of disparate software components.
+        The Linux kernel is made available by its developers in source-code
+        form, and requires compilation on some separate host machine
+        before it can be used.  
+        In addition, no other software is included, so that
+        creating a functional Linux-based machine requires somebody
+        to obtain, compile and assemble a 
+        number of disparate software components.
+        A <em>distribution</em> is a project or community that 
+        fills this gap.
     </p>
+        
 
     <div class="img-right">
         <a title="Shermozle at English Wikipedia, CC BY-SA 3.0 &lt;https://creativecommons.org/licenses/by-sa/3.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Linux_0_12.jpg"><img width="256" alt="Linux 0 12" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Linux_0_12.jpg/512px-Linux_0_12.jpg"></a>
@@ -468,17 +483,19 @@ Closing Remarks:
     </div>
 
     <p>
-        In 1992, <a href="https://en.wikipedia.org/wiki/HJ_Lu">HJ Lu</a>
-        began packaging utilities alongside the kernel and distributing the
-        collection on a pair of 5.25" disks.<sup><a href="https://www.maketecheasier.com/history-of-early-linux-distros/">[18]</a><a href="https://itsfoss.com/earliest-linux-distros/">[19]</a></sup>
-        Known as the <em>boot/root</em> floppies, they are
-        the first known Linux distribution.<sup><a href="https://itsfoss.com/earliest-linux-distros/">[19]</a></sup>
+        The very first distribution of GNU/Linux was undertaken by 
+        <a href="https://en.wikipedia.org/wiki/HJ_Lu">HJ Lu</a>
+        in 1992.<sup><a href="https://itsfoss.com/earliest-linux-distros/">[18]</a></sup>
+        He packaged utilities alongside the kernel and distributed the
+        collection on a pair of 5.25" disks.
+        Known as the <em>Boot/Root Floppies,</em>
+        it never became widely known.<sup><a href="https://www.maketecheasier.com/history-of-early-linux-distros/">[19]</a><a href="https://itsfoss.com/earliest-linux-distros/">[18]</a></sup>
     </p>
 
     <p>
         Linux's first widely recognized and used distribution was, ironically,
-        a commercial venture, <em>Soft Landing System</em>.<sup><a href="https://lwn.net/Articles/91371/">[20]</a></sup>
-        Released in late 1992, SLS was sold under the slogan "Gentle Touchdowns for DOS Bailouts",<sup><a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">[21]</a></sup>
+        a commercial venture.
+        <em>Soft Landing System,</em> released in late 1992, was sold under the slogan "Gentle Touchdowns for DOS Bailouts,"<sup><a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">[21]</a></sup>
         but users complained that the software was buggy,<sup><a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">[21]</a><a href="https://www.linuxjournal.com/article/2750">[22]</a></sup> and when its developers
         decided to change the executable file format, began to leave.<sup><a href="https://lwn.net/Articles/91371/">[20]</a></sup>
     </p>
@@ -489,7 +506,7 @@ Closing Remarks:
         In late 1992, Patrick Volkerding needed a LISP interpreter for a project
         at school, and, having heard that <em>clisp</em> ran on SLS Linux,
         downloaded them both.<sup><a href="https://www.linuxjournal.com/article/2750">[22]</a></sup>
-        His professor got wind, and asked Patrick to help install the software
+        His professor got wind, and asked Patrick to help him install the software
         on school computers.<sup><a href="https://www.linuxjournal.com/article/2750">[22]</a></sup>
         Volkerding walked him through installing, fixing and patching SLS, and
         afterward, his professor asked, "Is there some way we can fix the install disks so
@@ -500,7 +517,7 @@ Closing Remarks:
         So Volkerding began improving SLS, and internally named his project
         <em>Slackware,</em> not wanting it to be taken too 
         seriously.<sup><a href="https://www.linuxjournal.com/article/2750">[22]</a></sup>
-        By May, though, the improvements were, "more than just cosmetic," and 
+        By May 1993, though, the improvements were, "more than just cosmetic," and 
         his friends convinced him to release it onto the internet.
         The first release proved so popular that the
         number of download requests crashed the system hosting it,<sup><a href="https://www.linuxjournal.com/article/2750">[22]</a></sup>
@@ -510,7 +527,7 @@ Closing Remarks:
     <p>
         Volkerding hadn't intended to produce a distribution,<sup><a href="https://www.linuxjournal.com/article/2750">[22]</a></sup> but still
         maintains <a href="http://www.slackware.com/">Slackware</a> today.<sup><a href="http://www.slackware.com/about">[23]</a></sup>
-        The Slackware Linux Project is aimed at producing, "the most UNIX-like
+        The Slackware Linux Project is aimed at producing "the most UNIX-like
         Linux distribution out there."<sup><a href="http://www.slackware.com/info/">[24]</a></sup>
     </p>
 
@@ -527,7 +544,7 @@ Closing Remarks:
         At about the same time, Ian Murdock grew frustrated with SLS Linux,<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[25]</a></sup>
         and, more, sought a better solution to distribution creation than
         single-person or closed-room schemes.<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[25]</a></sup>
-        Ian wanted an operating system that lived up to the <em>Linux</em> name,
+        Ian wanted an operating system that lived up to the "Linux" name,
         was carefully and conscientiously assembled, and which was maintained
         with equal diligence.<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[25]</a></sup>
         In particular, he wanted a free operating system that could
@@ -798,13 +815,15 @@ Closing Remarks:
         -->
 
         <li>
-            Delony, D. (2012, September 12). History of Early Linux Distros. Retrieved January 20, 2021, from <a href="https://www.maketecheasier.com/history-of-early-linux-distros/">https://www.maketecheasier.com/history-of-early-linux-distros/</a>
-        </li>
-
-        <li>
             Bandyopadhyay, A. (2020, October 29). The Earliest Linux Distros: Before Mainstream Distros Became So Popular. Retrieved January 20, 2021, from <a href="https://itsfoss.com/earliest-linux-distros">https://itsfoss.com/earliest-linux-distros</a>
         </li>
 
+
+        <li>
+            Delony, D. (2012, September 12). History of Early Linux Distros. Retrieved January 20, 2021, from <a href="https://www.maketecheasier.com/history-of-early-linux-distros/">https://www.maketecheasier.com/history-of-early-linux-distros/</a>
+        </li>
+
+      
         <li>
             Klemmer, J. (n.d.). A Short History of Linux Distributions. Retrieved January 20, 2021, from <a href="https://lwn.net/Articles/91371/">/https://lwn.net/Articles/91371/</a>
         </li>
