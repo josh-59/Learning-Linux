@@ -438,8 +438,10 @@ https://wiki.ubuntu.com/Lvm
     <p>
         The directory <code>/etc</code> contains
         system-specific configuration files.
-        It contains, for instance, files describing the configuration of
-        the system's package manager, X11 window system configuration,
+        For example, <code>/etc/passwd</code> contains essential information
+        about each user on the system (but not their password, anymore).
+        In addition, the configuration of
+        the package manager is stored here, 
         and, well, etcetera.
     </p>
 
@@ -475,8 +477,14 @@ https://wiki.ubuntu.com/Lvm
         is more interesting. It contains user-shared files, such as
         man pages (in <code>/usr/share/man</code>) and most of the system's
         programs (in <code>/usr/bin</code>).
-        These (regular) files are shared by all system users, and are mostly
+        These files are shared by all system users, and are mostly
         read-only. 
+    </p>
+
+    <p>
+        Several utilities exist to help locate files; one of my
+        favorites is <code><a href="https://man7.org/linux/man-pages/man1/whereis.1.html">whereis</a></code>, available in the
+        <em>util-linux</em> package.
     </p>
 
     <h3>See Also:</h3>
