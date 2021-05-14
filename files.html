@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Files 
-last-updated: April, 2021
+last-updated: May, 2021
 ---
 
 <!--
@@ -257,49 +257,51 @@ https://wiki.ubuntu.com/Lvm
     <h2>Device Files</h2>
 
     <p>
-        The GNU/Linux directory tree is used as a general-purpose meeting place.
-        In addition to regular files, it also contains
-        information about running programs, information about the current kernel,
-        and references to hardware&mdash; each in the form of files.
+        The Unix directory tree is used as a general-purpose 
+        meeting place:
+        In addition to regular files, it also contains references to
+        hardware, and allows interprocess communication.
         This mechanism is general, extensible, and allows both users and programmers
         access to the running machine.
     </p>
 
     <p>
         A <em>device file</em> represents a device connected to the system.
-        They reside in the <code>/dev</code> directory.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[4]</a></sup>
-        Each of these files serves as the principle reference to its
+        They reside in <code>/dev</code>.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[4]</a></sup>
+        Each file therein serves as the principle reference to its
         respective device.
         For example, when a USB-stick is inserted,
         a new file appears in <code>/dev</code>.
     </p>
 
     <p>
-        Note that the essential capabilities of the USB-stick are preserved through
-        the <em>file</em> interface: We can read from it and write to it.
-        If we were to add the capacity to <em>seek</em> (i.e., change location) 
-        within the file, then we would be able to use the device in its entirety,
-        through the file interface alone.
+        Note that the essential capabilities of the USB-stick are 
+        preserved through the <em>file</em> interface: It can be 
+        written to and read from. 
+        If we were to add the capacity to <em>seek</em> (i.e., change 
+        location) within the file, then we would be able to use the 
+        device in its entirety, through this interface alone.
     </p>
 
     <h3> Block and Character Device Files </h3>
 
     <p>
-        The Linux kernel supports two kinds of device files:
+        Unix kernels traditionally support two kinds of device files:
         <em>Block</em> and <em>character.</em>
-        A character device file may only be written to, or read,
+        A character device file may only be written to, or read from,
         a single byte (ASCII character) at a time.
-        A terminal is one kind of device represented by the 
+        A terminal is one kind of device represented by a 
         character device file.
     </p>
 
     <p>
         Hard disks, SSD's and removable mass media are represented by
-        <em>block</em> device files:
-        The underlying devices support reading and writing only in
-        blocks of bytes at a time (traditionally, <a href="https://en.wikipedia.org/wiki/Disk_sector">512 bytes</a>).
-        Additionally, block device files support seeking, 
-        whereas character devices do not.
+        <em>block</em> device files.
+        Since the underlying devices support reading and writing 
+        in blocks of bytes at a time, the kernel must take care
+        to buffer arbitary, user-space interactions with it. 
+        Finally, block device files support seeking, whereas 
+        character devices do not.
     </p>
 
     <h3>See Also:</h3>
@@ -314,14 +316,17 @@ https://wiki.ubuntu.com/Lvm
     <h2>Pseudo Files</h2>
 
     <p>
-        A <em>psuedo</em> or <em>synthetic</em> file does 
-        not exist on disk, and does not exist on any persistent storage.
-        They are synthesized by the kernel as processes interact
-        with them (and the directories they are in).
+        GNU/Linux augments the traditional Unix directory tree with
+        <em>pseudo</em> (or "synthetic") files, in
+        <code>/proc</code> and <code>/sys</code>.
+        These files do not exist on disk, and does not exist on 
+        any persistent storage. 
+        Instead, their contents are generated dynamically 
+        by the kernel as processes interact with them.
     </p>
 
     <p>
-        For example, <code>/proc/meminfo</code> is a 
+        For example, <code>/proc/meminfo</code> contains a 
         description of the the system's current memory usage:
     </p>
 
@@ -341,12 +346,10 @@ https://wiki.ubuntu.com/Lvm
     </div>
 
     <p>
-        The <code>/proc</code> and <code>/sys</code> directories are
-        reserved for such files.
         <code>/proc</code> contains one directory for each 
-        process on the system; each directory contains substantial 
-        information about its respective process.
-        <code>/sys</code> contains information pertaining to only the
+        process (running program) on the system; therein, each directory 
+        contains substantial information about its respective process.
+        <code>/sys</code> contains information useful to only the
         lowest-level system daemons.<sup><a href="http://linuxfromscratch.org/lfs/view/stable/chapter09/udev.html">[c]</a></sup>
     </p>
 
@@ -368,10 +371,13 @@ https://wiki.ubuntu.com/Lvm
     </p>
 
     <p>
-        The four file operations apply to all file types except directories,
-        whose structure (a tree) is protected by the kernel through 
-        a distinct set of system calls.  
+        The four file operations apply to all file types given above.
     </p>
+
+    <!--
+        Additionally, older Unix systems entertained directories as
+        simple regular files, but since ___ they h
+    -->
 
     <h3>See Also:</h3>
     <ul>
@@ -541,6 +547,10 @@ https://wiki.ubuntu.com/Lvm
 
 <div class="content" id="inodes-and-directories">
     <h2>inodes and Directories</h2>
+    <!--
+        whose structure (a tree) is protected by the kernel through 
+        a distinct set of system calls.  
+    -->
 
     <p>
         In keeping with traditional Unix file semantics, 
