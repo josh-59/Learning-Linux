@@ -7,8 +7,7 @@ last-updated: April, 2021
 <!--
 
     Todo:
-        Exec: Check and double-check; put aside about 'exec' referring
-        to a family of like functions
+        Rewrite to be more reflective of 'files'
 
 <div class="content" id="closing-remarks">
     <h2>Closing Remarks</h2>
@@ -121,32 +120,13 @@ TODO
     <h2> Actors </h2>
 
     <p>
-        In UNIX and its derivatives, processes are the actors of the system:
+        In Unix and its derivatives, processes are the actors of the system.
         Left to its own devices, the kernel does nothing.
-        All UNIX-like operating systems depend upon processes to direct the kernel,
+        All Unix-like operating systems depend upon processes to direct the kernel,
         and through the kernel, processes direct the machine.
-        The result is a low-level demarcation between
+        The result is a clear demarcation between
         <em>what</em> to do (dictated by processes), and
         <em>how</em> to do it (dictated by the kernel).
-    </p>
-
-    <p>
-        There is a process for every function on the system.
-        There's one for the network manager,
-        another for the desktop environment,
-        another acting as a printer spooler,
-        another acting as a web browser, etc..
-    </p>
-
-    <p>
-        Each process has a narrowly defined role,
-        which it is expected to do well.
-        It might copy a file, list the
-        contents of a directory, provide audio services,
-        or intepret and execute commands.
-        These many small programs are used together to accomplish
-        a given task, thereby increasing the modularity of the whole,
-        and simplifying programming and maintenance.
     </p>
 
     <p>
@@ -155,18 +135,25 @@ TODO
 
     <ol>
         <li>
-            Facilitating new process creation
-        </li>
-        <li>
             Allocating hardware resources to processes
         </li>
         <li>
-            Maintaining information about processes
+            Facilitating new process creation
         </li>
         <li>
-            Preserving each process's privacy
+            Maintaining information about each
         </li>
     </ol>
+
+    <p>
+        Each process has a narrowly defined role, which it is 
+        expected to do well. It might copy a file, list the
+        contents of a directory, 
+        provide audio services,
+        or display the current battery usage.
+        These many small programs work together to accomplish
+        a given task; thereby, the utility of each becomes compounded.
+    </p>
 
     <h3> See Also: </h3>
     <ul>
