@@ -7,14 +7,7 @@ last-updated: May, 2021
 <!--
 
 To Do:
-    Directory Structure:
-        .
-        ..
-
-    (Carefully) split "path name" and "file",
-    as in "names a file".
-
-
+    
 
     <div class="aside-right">
         <h4>Note:</h4>
@@ -23,8 +16,6 @@ To Do:
             root directory!
         </p>
     </div>
-
-
 
     <p>
         The UNIX file has been called "The Universal I/O Model"
@@ -371,7 +362,9 @@ https://wiki.ubuntu.com/Lvm
     </p>
 
     <p>
-        The four file operations apply to all file types given above.
+        The four file operations apply to all file types except
+        directories, whose structure (a tree) is protected by the
+        kernel through a distinct set of system calls.
     </p>
 
     <!--
@@ -630,6 +623,42 @@ https://wiki.ubuntu.com/Lvm
         it is no longer accessible through the directory tree, and
         the kernel prepares to delete it.<sup><a href="#references">[19]</a></sup>
     </p>
+
+    <h3>Directory Structure</h3>
+
+    <p>
+        As mentioned, the contents of directories are protected by the
+        kernel through a set system calls distinct from <code>read</code>,
+        <code>write</code>, <code>open</code> and <code>close</code>.
+        Each directory has at least two entries: <code>.</code> ("dot"),
+        and <code>..</code> ("dot dot").
+    </p>
+
+
+    <p>
+        <code>.</code> is a reference to the containing directory itself.
+        It is used as a handle to the current working directory.
+    </p>
+
+    <p>
+        <code>..</code> is a reference to the containing directory's 
+        parent directory.
+        The root directory's parent directory is 
+        the root directory itself.
+        Since each (and every) directory has a single parent, the
+        directory structure forms a tree.
+    </p>
+
+    <p>
+        By convention alone, all filenames beginning with <code>.</code>
+        are considered hidden, including <code>.</code> and <code>..</code>.
+        They can be listed with <code>ls</code> with the <code>-a</code>
+        ("all") switch:
+    </p>
+
+    <div class="code">
+        $ ls -a
+    </div>
 
     <h3> See Also: </h3>
     <ul>
