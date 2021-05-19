@@ -5,8 +5,6 @@ last-updated: May 2021
 ---
 
 <!--
-    This paradigm is extensible, as well.
-    Consider <em>makers</em>
 
     <div class="quote-text">
         "Every good work of software <br>
@@ -17,6 +15,11 @@ last-updated: May 2021
         Eric S. Raymond<br>
         <em><a href="http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/ar01s02.html">The Cathedral and the Bazaar</a></em>
     </div>
+
+    "Modularity is extremely important to such a large collection of
+    software as a distribution."
+        -Ian Murdock, 
+        https://www.linuxjournal.com/article/2841
 
 
     <blockquote>
@@ -51,8 +54,9 @@ last-updated: May 2021
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            If the first statement of this section is taken literally, there are
-            5<sup>1000</sup> possible GNU/Linux systems.
+            If the first statement of this section is taken literally, 
+            there are
+            5<sup>500</sup> possible GNU/Linux systems.
         </p>
     </div>
 
@@ -77,10 +81,12 @@ last-updated: May 2021
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#fork-merge">Fork/Merge</a></li>
-        <li><a href="#time-based-releases">Time-Based Releases</a></li>
+        <li><a href="#tree-of-trust">Tree of Trust</a></li>
+        <li><a href="#project-leadership">Project Leadership</a></li>
         <li><a href="#modularity">Modularity</a></li>
         <li><a href="#less"><code>less</code>: A Success Story</a</li>
-        <li><a href="#build-what-you-want">Build What You Want</a></li>
+
+        <li><a href="#incremental-improvement">Incremental Improvement</a></li>
         <li><a href="#references"> References </a></li>
     </ul>
 </div>
@@ -109,6 +115,7 @@ last-updated: May 2021
         resultingly modular structure.
     </p>
 </div>
+
 
 <div id="fork-merge" class="content">
     <h2>Fork/Merge</h2>
@@ -158,7 +165,7 @@ last-updated: May 2021
     </p>
 
     <p>
-        For a few reasons, small merges are generally preferred over large 
+        For a few reasons, small merges are preferred over large 
         ones.
         First, the change is easier to review by others&mdash; especially,
         the project's maintainer.
@@ -177,16 +184,43 @@ last-updated: May 2021
     </ul>
 </div>
 
-<div class="content" id="time-based-releases">
-    <h2>Time-Based Releases</h2>
 
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            This section may be a little simplistic, but it seems worth
-            developing precisely, if only once.
-        </p>
-    </div>
+<div class="content" id="tree-of-trust">
+    <h2>Tree of Trust</h2>
+
+    <p>
+        
+    </p>
+
+    <p>
+        Nobody cares about credentials.
+        Simply rendered superfluous.
+    </p>
+
+    <p>
+        The University of Minessota...
+
+    </p>
+
+    <p>
+        https://www.reddit.com/r/unpopularopinion/comments/nfh6mu/we_dont_need_free_college_we_need_to_acknowledge/
+    </p>
+</div>
+
+
+<div class="content" id="project-leadership">
+    <h2>Project Leadership</h2>
+
+    <p>
+        Large projects, such as the Linux kernel or Mozilla Firefox,
+        for whom many people might want to see a particular change,
+        often adopt a schedule for releases.
+    </p>
+
+    <p>
+        Outside of the Linux kernel, Firefox is one of the largest and
+        most agressive open-source projects is 
+    </p>
 
     <p>
         One of the challenges of open-source project 
@@ -202,12 +236,6 @@ last-updated: May 2021
         Even if each release is only
         marginally better than the previous, those improvements accrue,
         and the result is guaranteed to be great software.
-    </p>
-
-    <p>
-        Large projects, such as the Linux kernel or Mozilla Firefox,
-        for whom many people might want to see a particular change,
-        often adopt a schedule for releases.
     </p>
 
     <p>
@@ -246,18 +274,8 @@ last-updated: May 2021
         It even spawned the (awesome) programming language, Rust.
     </p>
 
-    <!--
-        There is some irony in trying to control improvement...
 
-    -->
-
-    <h3>Game Development</h3>
-
-    <p>
-        One area where "incremental improvement" does not apply 
-        is game development, and the open-source community has always
-        lagged behind their proprietary counterparts here.
-    </p>
+        Most pull requests are rejected.
 
     <h3>See Also:</h3>
     <ul>
@@ -267,59 +285,12 @@ last-updated: May 2021
     </ul>
 </div>
 
-<div class="content" id="modularity">
-    <h2 style='margin-bottom: 0px;'>Modularity</h2>
-    <h4>and The Unix Philosophy</h4>
-
-    <p>
-        GNU/Linux can be likened to a 500-piece puzzle with 2500 available pieces:
-        For any piece of the puzzle (shell, desktop environment,
-        web browser, text editor&mdash; right down to
-        C libraries<sup><a href="https://en.wikipedia.org/wiki/C_standard_library#Implementations">[h]</a></sup>
-        and kernels<sup><a href="https://www.kernel.org/">[i]</a></sup>),
-        there
-        are around five competent options to choose from.
-    </p>
-
-    <p>
-        This is an example of modular construction, and it is often left to
-        the user to decide which software component
-        instantiates each needed piece.
-        Modular (as opposed to <em>monolithic</em>) construction lies at the
-        heart of both open source and the UNIX philosophy:
-    </p>
-
-    <blockquote>
-        "A serious attempt is made to apply the principle of modularity to everything on a Unix-like system, not only programs but also parts of programs, such as algorithms, and even the kernel. Thus, a Unix-like operating system generally (or at least ideally) consists of a small kernel together with a large number of small, specialized programs that can interact with each other through a variety of well-defined interfaces."<sup><a href="http://www.linfo.org/unix_philosophy.html">[g]</a></sup>
-    </blockquote>
-    <p>
-        Modularity is realized in a variety of ways, and its implications
-        are similarly numerous.
-        First, a programmer working on any given piece must solve a
-        greatly simplified problem.
-        Consequently, many solutions may be tried, which then compete
-        amongst themselves.
-        Thus, the user is presented with an abundance of choice.
-    </p>
-
-    <h3>Linus' Rule</h3>
-
-    <p>
-    <em>If it's a bug that's being used, it's a feature, not a bug.</em>
-    <p>
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="http://www.linfo.org/module.html">Module Definition</a> - LINFO</li>
-    </ul>
-</div>
 
 <div class="content" id="less">
     <h2 style="margin-bottom: 0;"><code>less</code>:</h2>
     <h4>A Success Story</h4>
 
     <p>
-        So, let's take a look at one piece of the puzzle.
         A <em>paging utility</em> is a program that displays a file on 
         the terminal one screenful at a time.
         The first widely used paging utility was <code>more</code>, written by
@@ -366,7 +337,8 @@ last-updated: May 2021
         the concept of what is now called "open source" or "free software",
         and it has, I believe, produced a very high quality product. I'd like
         to thank all the users of less for their invaluable comments and
-        suggestions over the years. Less wouldn't be what it is today without you.
+        suggestions over the years. 
+        Less wouldn't be what it is today without you.
     </blockquote>
 
     <p>
@@ -383,27 +355,89 @@ last-updated: May 2021
 </div>
 
 
-<div class="content" id="build-what-you-want">
-    <h2>Build What You Want</h2>
+<div class="content" id="modularity">
+    <h2 style='margin-bottom: 0px;'>Modularity</h2>
+    <h4>and The Unix Philosophy</h4>
+
+    <p>
+        GNU/Linux can be likened to a 500-piece puzzle with 2500 available pieces:
+        For any piece of the puzzle (shell, desktop environment,
+        web browser, text editor&mdash; right down to
+        C libraries<sup><a href="https://en.wikipedia.org/wiki/C_standard_library#Implementations">[h]</a></sup>
+        and kernels<sup><a href="https://www.kernel.org/">[i]</a></sup>),
+        there are around five competent options to choose from.
+    </p>
+
+    <p>
+        This is an example of modular construction, and it is often
+        left to the user to decide which software component
+        instantiates each needed piece.
+        Modular (as opposed to <em>monolithic</em>) construction lies at the
+        heart of both open source and the UNIX philosophy:
+    </p>
+
+    <blockquote>
+        "A serious attempt is made to apply the principle of modularity to everything on a Unix-like system, not only programs but also parts of programs, such as algorithms, and even the kernel. Thus, a Unix-like operating system generally (or at least ideally) consists of a small kernel together with a large number of small, specialized programs that can interact with each other through a variety of well-defined interfaces."<sup><a href="http://www.linfo.org/unix_philosophy.html">[g]</a></sup>
+    </blockquote>
+
+    <p>
+        Thanks to modular construction, the development of 
+        GNU/Linux becomes cyclic.
+        Consider:
+    </p>
+
+    <ol>
+        <li>
+            Some developer identifies a deficiency in the current ecosystem
+        </li>
+        <li>
+            This component is relatively small, 
+        </li>
+        <li>
+            They may try their hand at solving it
+        </li>
+        <li>
+            These solutions compete amongst themselves, with the
+            more promising of them being developed further.
+        </li>
+        <li>
+            Consequently, the user is presented with an abundance of choice,
+            and the cycle continues.
+        </li>
+    </ol>
+
+    <h3>Linus' Rule</h3>
+
+    <p>
+        <em>If it's a bug that's being used, it's a feature, not a bug.</em>
+    <p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="http://www.linfo.org/module.html">Module Definition</a> - LINFO</li>
+    </ul>
+</div>
+
+<div class="content" id="incremental-improvement">
+    <h2>Incremental Improvement</h2>
 
     <p>
         To call open source a hobby isn't quite strong enough; 
-        simultaneously, it isn't necessarily "work", either.  
-        Open-Source and GNU/Linux is somewhere between the two,
+        at the same time, it isn't necessarily "work," either.  
+        Open-Source and GNU/Linux lie somewhere between the two,
         closer to sport.
         For me, the magic is that it's composed of
         things people created because they wanted to.
         As it turns out, they've built something stellar, and best
-        of all, you can inspect it yourself.
+        of all, you can check it out for yourself.
     </p>
 
     <p>
         I do not believe that the ordinary user is 
         obligated to contribute to open source.  
-        In particular, the "cathedral" model (like GNU) does not
-        even accept user modifications:
-        They built what they wanted to build, and made it freely available,
-        and that's that.
+        In particular, strict adherents of the "cathedral" model 
+        do not accept user modifications:
+        They make what they want, and made it freely available too.
     </p>
 
     <p>
@@ -414,11 +448,19 @@ last-updated: May 2021
         be realized at the user's discretion.
     </p>
 
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://blog.linuxmint.com/?p=4054">Monthly News - April 2021 - The Linux Mint Block</a></li>
-        <li><a href="http://www.catb.org/~esr/writings/cathedral-bazaar/afterword/">Afterword: Beyond Software?</a></li>
-    </ul>
+    <h3>Where to from here?</h3>
+
+    <p>
+        I wrote this because I was interested in computers, and was
+        continually astounded by the quality of open-source wares.
+        Simply put, for those interested in computer science, there does
+        not exist a better platform for research and development that
+        GNU/Linux.
+    </p>
+
+    <p>
+        
+    </p>
 </div>
 
 
