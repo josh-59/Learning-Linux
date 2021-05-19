@@ -5,9 +5,50 @@ last-updated: April, 2021
 ---
 
 <!--
+    Hmmmm...
 
-    Todo:
-        Rewrite to be more reflective of 'files'
+    Actors - User+Group
+
+<div class="content" id="executable-files">
+    <h2>Executable Files</h2>
+
+    <p>
+        On Unix-like operating systems, any file with <em>execute</em>
+        permissions may be treated as a program.
+    </p>
+
+</div>
+
+
+    <p>
+        Each process acts on behalf of some user, and we say
+        that it is executing with that user's <em>permissions.</em>
+        For example, a process executing as user <em>josh</em> is
+        executing with <em>josh's permissions.</em>
+        Such a process can remove files owned by user <em>josh,</em>
+        can change their permission bits, and files created by that
+        process inherit that user.
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Be careful with superuser!
+        </p>
+    </div>
+   
+    <p>
+        Processes acting as user <em>root</em> are somewhat special:
+        They can change any file on the system, without qualification.
+        That is, they by default transcend the file ownership scheme;
+        we therefore use <em>superuser</em> synonymously with root user,
+        and say that a process executing as root is executing with
+        <em>superuser permissions.</em>
+    </p>
+
+
+
+
 
 <div class="content" id="closing-remarks">
     <h2>Closing Remarks</h2>
@@ -15,56 +56,29 @@ last-updated: April, 2021
     <p>
         The directory tree is a persistent data structure of the machine.  
         It is globally shared by most processes on the system, but there
-        are ways to reduce its exposure to particular processes.
-        Among its inhabitatnts are <em>programs,</em> files containing
-        information 
+        are ways to reduce its exposure to particular processes, including
+        <em>chroot</em> and containers.
+        Among the files stored in the directory tree are <em>programs,</em> 
+        files containing the information required to construct a process.
     </p>
 
     <p>
-        The earliest dialects of the C programming language were especially
-        simple, mapping high-level statements to assembly, to be interpretted
-        by an already-existant assembler.  
-        At the highest level, the language expresses a model of the system's memory;
-        the most notable component of which is its instructions.
-    </p>
+        A process without its attributes is.... memory and some CPU time.
 
     <p>
-        These instructions are stored in memory, then executed;
-        in the process, they manipulate other regions of memory; through
-        system calls, they manipulate the directory tree.
+        The Linux kernel supports four distinct kinds of executable files.
+
+        https://www.kernel.org/doc/html/latest/admin-guide/binfmt-misc.html
+
     </p>
 
-    <p>
-        6th edition UNIX was written in C, and was commented on by Lions.
-    </p>
 
     <p>
-        My favorite line (so far):
-    </p>
-
-    <pre>
-    // ...
-    // Hand-craft 0th process
-    // ... 
-    </pre>
-</div>
-
-
-TODO
-    Include: OSTEP "Address Spaces":
-        https://pages.cs.wisc.edu/~remzi/OSTEP/vm-intro.pdf
-
-        Actors: See Also: Examples?
-        mirror.linuux.org.au/pub/linux.conf.au/2014/Friday/104-D-Bus_in_the_kernel_-_Lennart_Poettering.mp4
-
-    <h3> Runlevels</h3>
-
-    <p>
-        Collections of running programs were traditionally
-        called <a href="http://www.linfo.org/runlevel_def.html">runlevels</a>,
-        and are managed by the initialization ("init") process.
-        Different runlevels offered different services, and
-        were therefore intended to be used in different situations.
+        A collection of processes is called a 
+        <a href="http://www.linfo.org/runlevel_def.html">runlevel</a>,
+        and these are managed by the initialization ("init") process.
+        Different runlevels offer different services, and
+        are therefore intended to be used in different situations.
         For instance,
         <a href="http://www.linfo.org/single_user_mode.html">single-user mode</a>
         (runlevel 1) was analogous to <em>safe boot,</em>
@@ -73,16 +87,22 @@ TODO
         system.<sup><a href="http://www.linfo.org/runlevel_def.html">[3]</a></sup>
     </p>
 
+</div>
+
+
+        Actors: See Also: Examples?
+        mirror.linuux.org.au/pub/linux.conf.au/2014/Friday/104-D-Bus_in_the_kernel_-_Lennart_Poettering.mp4
+
+
 -->
 
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#actors"> Actors </a></li>
-        <li><a href="#process-creation"> Process Creation and System Startup </a></li>
-        <li><a href="#process-attributes"> Process Attributes </a></li>
-        <li><a href="#file-descriptors"> File Descriptors </a></li>
+        <li><a href="#process-creation"> Process Creation</a></li>
         <li><a href="#exec">Executing a Different Program</a></li>
+        <li><a href="#file-descriptors"> File Descriptors </a></li>
         <li><a href="#termination">Process Termination</a></li>
         <li><a href="#dr-fraser"> Dr. Brian Fraser </a></li>
         <li><a href="#references"> References </a></li>
@@ -99,20 +119,14 @@ TODO
         <a href="https://www.tldp.org/LDP/sag/html/intro.html">Linux System Administrator's Guide</a>
     </div>
 
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Recall that <a href="files-and-filesystems.html#regular-files">a file</a> is a sequence of bytes.
-        </p>
-    </div>
-
     <p>
-        A process is an instance of an executing program.<sup><a href="#references">[1]</a></sup><sup><a href="#references">[2]</a></sup>
-        A <em>program</em> (also known as an "executable file")
-        is a file containing the information required to
-        construct a process.<sup><a href="#references">[1]</a></sup>
-        The process is, after the file, the most important
-        abstraction of operating systems.
+        A <em>program</em> is a file containing a sequence of 
+        instructions to be carried out by the computer,
+        and a description of initial memory conditions.
+        A <em>process</em> is an instance of an executing 
+        program.<sup><a href="#references">[1]</a></sup><sup><a href="#references">[2]</a></sup>
+        This essay will chisel out the fundamentals of
+        processes, as they exist on Unix-like platforms.
     </p>
 </div>
 
@@ -120,13 +134,10 @@ TODO
     <h2> Actors </h2>
 
     <p>
-        In Unix and its derivatives, processes are the actors of the system.
+        In Unix and its derivatives, processes are the actors of the system:
         Left to its own devices, the kernel does nothing.
-        All Unix-like operating systems depend upon processes to direct the kernel,
-        and through the kernel, processes direct the machine.
-        The result is a clear demarcation between
-        <em>what</em> to do (dictated by processes), and
-        <em>how</em> to do it (dictated by the kernel).
+        All Unix-like operating systems depend upon processes to direct 
+        the kernel, and through the kernel, processes change the machine.
     </p>
 
     <p>
@@ -138,7 +149,7 @@ TODO
             Allocating hardware resources to processes
         </li>
         <li>
-            Facilitating new process creation
+            Creating new processes
         </li>
         <li>
             Maintaining information about each
@@ -147,18 +158,43 @@ TODO
 
     <p>
         Each process has a narrowly defined role, which it is 
-        expected to do well. It might copy a file, list the
-        contents of a directory, 
-        provide audio services,
-        or display the current battery usage.
-        These many small programs work together to accomplish
+        expected to do well. It might copy a file, 
+        display a window, provide audio services, or display the time.
+        These many small programs are used together to accomplish
         a given task; thereby, the utility of each becomes compounded.
     </p>
 
+    <h3> Process Attributes </h3>
+
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            There is a close relationship between a <em>program</em> and a
+            <em>process</em>&mdash; Namely, a program is a file containing
+            the instructions that the process carries out.
+        </p>
+    </div>
+
+    <p>
+        Associated with each process are the following attributes:
+    </p>
+
+    <ul>
+        <li>Pathname of executable file</li>
+        <li>Files currently open</li>
+        <ul>
+            <li>Their access modes (read, write)</li>
+            <li>Location wihin file</li>
+        </ul>
+        <li>Current working directory</li>
+        <li>User ID, Group Id</li>
+        <li>Environment variables</li>
+    </ul>
+    
     <h3> See Also: </h3>
     <ul>
-        <li><a href="https://magcius.github.io/xplain/article/x-basics.html">Explanations - X-window System Basics</a></li>
-        <li><a href="https://www.man7.org/linux/man-pages/man7/daemon.7.html"><code>daemon(7)</code></a> - Writing and packaging system daemons (Background Process)</li>
+        <li><a href="https://man7.org/linux/man-pages/man7/credentials.7.html"><code>credentials(7)</code></a> - Process identifiers</li>
     </ul>
 </div>
 
@@ -173,7 +209,7 @@ TODO
         While init schemes
         <a href="https://arxiv.org/abs/0706.2748">have evolved</a>
         over the years, its purpose has not changed:
-        It is a process with root-level permissions that acts as a
+        It is a process with superroot permissions that acts as a
         manager of the system and trustee among processes.
     </p>
 
@@ -203,26 +239,34 @@ TODO
     </p>
 
     <p>
-        After execution of <code>init</code> begins, process creation is delegated
-        to processes themselves, and is carried out through the
-        <em><a href="https://www.man7.org/linux/man-pages/man2/fork.2.html">fork()</a></em> system call.
+        After executing <code>/sbin/init</code>, process creation 
+        is delegated to processes themselves, and is carried 
+        out through the 
+        <code>fork</code> system call.
     </p>
 
     <p>
-        A call to <em>fork()</em> instructs the kernel to duplicate the current process,
-        and the two resulting processes are very nearly identical.<sup><a href="https://www.man7.org/linux/man-pages/man2/fork.2.html">[4]</a></sup>
-        Of note, they continue executing the same program at the same spot,
-        have the same open files, and have duplicate memory spaces.
+        A call to <code>fork</code> instructs the kernel to duplicate 
+        the current process,
+        and the two resulting processes are very nearly identical.
+        Of note, they both continue to execute the same program at the 
+        same spot, have the same open files, and have duplicate memory spaces.
         The newly created process is referred to as the <em>child</em> process,
         the original is called the <em>parent,</em> and we say
         that the child process <em>inherits</em> its parent's attributes.
     </p>
 
     <p>
-        Of the few ways that parent and child do differ, one is important to us
-        now:
-        They each recieve a different return value from <em>fork()</em>.
-        This allows them to act differently within the same program:
+        Parent and child differ in a few ways.
+        First, upon birth, each process is given its own 
+        identification number by the kernel. 
+        This is guaranteed to be unique to the process, and 
+        remains constant throughout the process's life; 
+        it serves as a system-wide handle to the process.
+        Second, they each recieve a different return value 
+        from <code>fork</code>.
+        This allows them to act differently within the same
+        program:
     </p>
 
 
@@ -238,81 +282,91 @@ TODO
     </pre>
 
     <p>
-        Their executions thereby diverge, and each is free to act independantly.
+        After calling <em>fork</em>, the usual pattern is to 
+        have the child process adjust its attributes, then execute
+        a different program.
     </p>
 
     <h3>See Also:</h3>
     <ul>
         <li><code><a href="https://www.man7.org/linux/man-pages/man2/fork.2.html">fork(2)</code></a> - Create a child process</li>
     </ul>
-
 </div>
 
 
-<div class="content" id="process-attributes">
-    <h2> Process Attributes </h2>
+<div class="content" id="exec">
+    <h2>Executing a Different Program</h2>
+
     <p>
-        Upon birth, each process is given its own PID number by the kernel.
-        This is guaranteed to be unique to the process, and remains constant
-        throughout the process's life. It serves as a system-wide handle
-        to the process.
+        The <code>execve</code> system call changes 
+        the program currently being executed.
+        Its simplest invocation is:
+    </p>
+
+    <pre>
+        char *args[] = {"ls", "-l", NULL};
+        execv("/bin/ls", args); 
+                // Execution of *this* program stops here,
+                // and the process continues executing at /bin/ls
+    </pre>
+
+    <p>
+        
     </p>
 
     <p>
-        Associated with each PID are the following attributes:
+        This is difficult to convey because, in any program,
+        <code>exec</code> causes the process to abandon execution
+        of that program, and to begin execution of another.
+        Within the new program, execution begins at <em>main</em>.
     </p>
 
+    <p>
+        <code>exec</code> usually follows <code>fork</code>:
+    </p>
+
+    <pre>
+        pid_t rv = fork();
+        if( rv == 0 ) {
+            // I am child
+            char *args[] = {"ls", "-l", NULL};
+            execv("/bin/ls", args); 
+
+        } else if ( rv &gt; 0 ) {
+            // Execution of parent process continues within this program
+        }
+    </pre>
+
+    <p>
+        This sequence results in one process launching another program.
+        Note that there is no need to adjust other 
+        process attributes, and they are preserved across
+        <code>exec</code>.
+        In particular, the PID of the process is left unchanged.
+    </p>
+
+    <h3>See Also:</h3>
     <ul>
-        <li>Name and location of executable file</li>
-        <ul>
-            <li>Location of next instruction within</li>
-        </ul>
-        <li>Files currently open</li>
-        <ul>
-            <li>Their access modes (read, write)</li>
-            <li>Location wihin file</li>
-        </ul>
-        <li>Current working directory</li>
-        <li>User ID, Group Id</li>
-        <li>Environment variables</li>
-    </ul>
-
-    <p>
-        All of these attributes are inherited from the process's parent,
-        and most of this information is available for perusal in the
-        <code>/proc/<i>PID</i></code> directory.
-        Finally, the kernel offers <a href="https://man7.org/linux/man-pages/man2/intro.2.html">system calls</a>
-        to allow a process to change its attributes.
-    </p>
-
-    <p>
-        In order to give some idea of how
-        processes interact with the kernel,
-        we will consider one of them: Files currently open.
-    </p>
-
-    <h3> See Also: </h3>
-    <ul>
-        <li><a href="https://man7.org/linux/man-pages/man7/credentials.7.html"><code>credentials(7)</code></a> - Process identifiers</li>
-        <li><code><a href="https://man7.org/linux/man-pages/man2/intro.2.html">intro(2)</a></code> - Introduction to system calls</li>
+        <li><a href="https://man7.org/linux/man-pages/man1/pstree.1.html"><code>pstree(1)</code></a> - Display a tree of processes</li>
     </ul>
 </div>
 
 <div id="file-descriptors" class="content">
     <h2> File Descriptors</h2>
+
     <p>
         Each file that a process has open is associated with a number
         (specifically, a nonnegative integer).
         This number is called a <em>file descriptor</em>,
         and is returned by the kernel in response to a request to open a file.
         Thereafter, the process uses this number to refer to the 
-        file when it wishes to act on it.
+        file whenever it wishes to act on it.
     </p>
 
     <p>
         In the following line, a process is instructing the kernel to
         open the file <em>rubber_ducky</em> for reading, and
-        storing the kernel's response in the variable <em>fd</em>:
+        is storing the kernel's response in the variable <em>fd</em>:
     </p>
 
     <pre>
@@ -329,19 +383,18 @@ TODO
     <pre>
         if (fd &lt; 0) {
                 perror("open");     // Print error message
-                exit(1);            // terminate process 
+                exit(1);            // Terminate process 
         }
     </pre>
 
     <p>
-        and then continue as though <em>open()</em> had succeeded.
+        and then continue as though <code>open</code> had succeeded.
     </p>
 
     <p>
-        In the following line, the kernel is directed to read at-most 
-        <em>buff_size</em>
-        bytes from file <em>fd</em>,
-        and to place the data into the memory space denoted by <em>buff</em>.
+        In the following line, the kernel is instructed to read at-most 
+        <em>buff_size</em> bytes from <em>fd</em>,
+        and place the data into the memory denoted by <em>buff:</em>
     </p>
 
     <pre>
@@ -354,11 +407,11 @@ TODO
         if the kernel encountered an error, it will return with a
         negative value.
         In either case, this value will be assigned to <em>num_bytes_read</em>,
-        which may be checked similarly to <em>open().</em>
+        which may be checked similarly to <code>open.</code>
     </p>
 
     <p>
-        <em>write()</em> is handled analogously, as is closing a file.
+        <code>write</code> is handled analogously, as is closing a file.
         Every system call has an entry in Section 2 of the manual.
     </p>
 
@@ -369,58 +422,6 @@ TODO
     </ul>
 </div>
 
-<div class="content" id="exec">
-    <h2>Executing a Different Program</h2>
-
-    <p>
-        Since new process creation is already handled through 
-        <em>fork()</em>,
-        launching another program requires only introducing a system call
-        to change the program currently being executed.
-        This is what the <em>exec()</em> system call does: 
-    </p>
-
-    <pre>
-        char *args[] = {"ls", "-l", NULL};
-        execv("/bin/ls", args); 
-                // Execution of *this* program terminates here,
-                // and execution of /bin/ls begins at main()
-    </pre>
-
-    <p>
-        Note that there is no need to adjust other 
-        process attributes, and they are preserved across <em>exec().</em>
-        In particular, the PID of the process is left unchanged.
-    </p>
-
-    <p>
-        The <em>exec()</em> system call usually 
-        follows <em>fork()</em>:
-    </p>
-
-    <pre>
-        pid_t rv = fork();
-        if( rv == 0 ) {
-            // I am child
-            char *args[] = {"ls", "-l", NULL};
-            execv("/bin/ls", args); 
-
-        } else if ( rv &gt; 0 ) {
-            // Execution of parent process continues within this program
-        }
-    </pre>
-
-    <p>
-        This sequence is called <em>fork and exec.</em>
-        and results in one process launching another program.
-    </p>
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://man7.org/linux/man-pages/man1/pstree.1.html"><code>pstree(1)</code></a> - Display a tree of processes</li>
-        <li><code><a href="https://www.man7.org/linux/man-pages/man2/execve.2.html">execve(2)</a></code> - Execute a program</li>
-    </ul>
-</div>
 
 <div class="content" id="termination">
     <h2> Process Termination </h2>
@@ -432,11 +433,12 @@ TODO
         <li>
             Explicitly terminates its own execution
             <p>
-                This is the usual and preferred route to terminate a process:
+                This is the usual (and preferred) route of process
+                termination:
                 The program finishes its job or identifies an error, 
                 and explicitly terminates itself.
-                This may be done by either calling <em>exit()</em>, or by
-                returning from <em>main().</em>
+                This may be done by either calling <code>exit</code>, or by
+                returning from <em>main.</em>
             </p>
         </li>
 
@@ -450,10 +452,13 @@ TODO
             </p>
 
             <p>
-                Signals are brutal business; for process termination, 
-                <code>SIGINT</code> is preferred because it affords the program 
-                the oportunity to exit cleanly.<sup><a href="#references" title="Kerrisk, p389">[1]</a></sup>
-                At the command line, it is created and sent to the foreground
+                Signals are brutal business.  
+                For the purposes of process termination,
+                <code>SIGINT</code> is preferred because it 
+                affords the program the oportunity to exit 
+                cleanly.<sup><a href="#references" title="Kerrisk, p389">[1]</a></sup>
+                At the command line, it is created and sent to 
+                the foreground
                 process with CTRL+C.
             </p>
 
@@ -479,23 +484,127 @@ TODO
         </li>
     </ul>
 
+
+    <h3>See Also:</h3>
+
+    <ul>
+        <li><a href="https://www.man7.org/linux/man-pages/man1/top.1.html"><code>top(1)</code></a> - Display Linux processes</li>
+        <li><a href="./assets/check.c">check.c</a> - Double-check of the above snippets</li>
+    </ul>
+
+
   </div>
+
+  <!--
+
+<div class="content" id="what-is">
+    <h2>Ya But What Is It?</h2>
+
+    <p>
+        The short answer is, a section of memory distinct from the
+        rest of the machine, and an allotment of CPU time, both
+        given by the kernel.
+        The long answer is, well, long, but also fairly interesting,
+        so we'll introduce it, if only conceptually, here.
+    </p>
+    
+    <h3> Memory </h3>
+
+    <p>
+        Modern operating systems provide each process with its own memory in the
+        form of a distinct <em>address space.</em>
+        On all modern computers, memory is byte-addressable, so that each
+        address refers to exactly one byte.
+        Addresses themselves are simply numbers, and 
+        an address space is a collection of memory addresses.
+    </p>
+
+    <div class="img-right" style="background: #f1f1f1;">
+        <a style="outline: solid black 2px; " title="Traced by User:Stannered, original by en:User:Dysprosia / BSD (http://opensource.org/licenses/bsd-license.php)" href="https://commons.wikimedia.org/wiki/File:Virtual_address_space_and_physical_address_space_relationship.svg"><img width="256" alt="Virtual address space and physical address space relationship" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Virtual_address_space_and_physical_address_space_relationship.svg/512px-Virtual_address_space_and_physical_address_space_relationship.svg.png"></a>
+    </div>
+
+    <p>
+        For each machine, there exists a unique physical address space;
+        only the kernel has access to this one.
+        For each process, the kernel assigns some subset of the 
+        physical address space, effectively partitioning the machine.
+    </p>
+
+    <p>
+        So far, the kernel must:
+    </p>
+
+    <ol>
+        <li>Keep track of free/used memory</li>
+        <li>Load each program into a new/distinct address space</li>
+    </ol>
+
+    <p>
+        
+        and to assign translations.
+    </p>
+
+    <p>
+        This subset is realized through <em>address translation:</em>
+
+    </p>
+
+    <p>
+        Virtual memory requires support from both the kernel and CPU:
+        The kernel to assign address translations and keep track of
+        free memory, and the CPU to carry them out.
+    </p>
+
+    <p>
+        Through this mechanism, other tricks can be applied, as well.
+
+    </p>
+
+    <p>
+        Other processes are implicitly protected from memory tampering:
+        Their memory simply does not exist within the context of the
+        currently running process, and therefore cannot be read from, 
+        nor written to.
+    </p>
+
+    <h3> CPU </h3>
+
+    <p>
+        Modern CPU's support two distinct modes of operation.
+        <em>Kernel mode,</em> sometimes called "supervisor mode," is
+        the unrestricted mode.
+        Here, all CPU instructions are available, and all memory is available,
+        so that code running in this mode has complete access to the machine.
+    </p>
+
+    <p>
+        <em>User mode</em> is a proper subset of kernel mode; code running
+        in user mode does not have access to all instructions, and 
+        its memory references are redirected through a translation table.
+        All processes run in user mode, and
+        if a process, running in user mode, attempts to execute a restricted
+        instruction (or address memory not given to it), 
+        its execution is halted, and control is given to the kernel.
+        At that point, it is up to the operating system to determine what to do
+        (usually, terminate the offending process).
+    </p>
+
+    <p>
+        This technique is known as <em>limited direct execution.</em><sup><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/cpu-mechanisms.pdf">[3]</a></sup>
+        It is <em>limited</em> in the sense that each process has access to
+        only a restricted subset of the CPU's instructions, and
+        it is <em>direct</em> in the sense that each process runs directly on
+        hardware.
+        It is intended to make safe and efficient use of available hardware.
+    </p>
+</div>
+
+-->
 
 <div class="content" id="dr-fraser">
     <h2 style="margin-bottom: 2pt;"> Dr. Brian Fraser: </h2>
     <h4 style="margin-bottom: 18pt;"> Fork and Exec Linux Programming </h4>
     <iframe class="video" src="https://www.youtube-nocookie.com/embed/l64ySYHmMmY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<h3> Additional Resources: </h3>
-
-    <ul>
-        <li><a href="https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-intro.pdf">Operating Systems: Three Easy Pieces</a> Chapter 4: Processes</li>
-        <li><a href="http://www.man7.org/tlpi/index.html">The Linux Programming Interface</a> by Michael Kerrisk (Not Free)</li>
-        <li><a href="http://www.csapp.cs.cmu.edu/"> Computer Systems: A Programmer's Perspective, 3<sup>rd</sup> Ed.</a>, Chapter 9: Virtual Memory (Not free)</li>
-        <li><a href="https://www.man7.org/linux/man-pages/man1/top.1.html"><code>top(1)</code></a> - Display Linux processes</li>
-        <li><a href="./assets/check.c">check.c</a> - Double-check of the above snippets</li>
-    </ul>
-
 </div>
 
 
@@ -518,3 +627,5 @@ TODO
 
   </ol>
 </div>
+
+
