@@ -83,9 +83,10 @@ https://wiki.ubuntu.com/Lvm
         <li><a href="#regular-files"> Regular Files</a></li>
         <li><a href="#device-files"> Device Files </a></li>
         <li><a href="#pseudo-files"> Psuedo Files </a></li>
+        <li><a href="#basic-file-operations">Basic File Operations</a></li>
         <li><a href="#fs-heir"> Filesystem Heirarchy </a></li>
         <li><a href="#mounting"> Mounting a Filesystem</a></li>
-        <li><a href="#inodes-and-directories">inodes and Directories</a></li>
+        <li><a href="#inodes">inodes</a></li>
         <li><a href="#original-unix">The Original Unix Filesystem</a></li>
         <li><a href="#udacity"> Udacity </a></li>
         <li><a href="#references"> References </a></li>
@@ -369,7 +370,7 @@ https://wiki.ubuntu.com/Lvm
     </p>
 
     <p>
-        Michael Kerrisk has called the Unix file interface
+        Michael Kerrisk has called the Unix file interface,
         "The Universal I/O Model," and for good reason.
         The four file operations apply to all file types except
         directories, whose structure (a tree) is protected by the
@@ -387,6 +388,82 @@ https://wiki.ubuntu.com/Lvm
         <li> <a href="https://mirrors.edge.kernel.org/pub/linux/kernel/people/mochel/doc/papers/ols-2005/mochel.pdf">The <code>sysfs</code> Filesystem</a> by Patrick Mochel</li>
     </ul>
 </div>
+
+<div class="content" id="basic-file-operations">
+    <h2 style="margin-bottom: 0;">Basic File Operations</h2>
+    <h4>and Directories</h4>
+
+    <p>
+        Basic utilities to manipulate files:
+    </p>
+
+    <ul>
+        <li><code>touch</code> - Change file timestamps.
+        Can be used to create new and empty files.</li>
+        <li><code>cp</code> - Copy files and directories</li>
+        <li><code>rm</code> - Remove files or directories</li>
+        <li><code>mv</code> - Move (rename) files</li>
+        <li><code>chown</code> - Change file owner and group</li>
+        <li><code>chmod</code> - Change access permissions</li>
+    </ul>
+
+    <p>
+        Utilities to manipulate file contents:
+    </p>
+
+    <ul>
+        <li><code>cat</code> - Concatenate files and print on the standard output</li>
+        <li><code>head</code> - Output the first part of a file</li>
+        <li><code>wc</code> - Print newline, word and byte counts</li>
+        <li><code>sort</code> - Sort text files</li>
+    </ul>
+
+    <h3>Directories</h3>
+
+
+    <ul>
+        <li><code>mkdir</code> - Make directories</li>
+        <li><code>rmdir</code> - Remove empty directories</li>
+        <li><code>readlink</code> - Print value of symlink or canonical file name</li>
+    </ul>
+
+    <p>
+        The contents of directories are protected by the kernel.
+        Each directory contains at least two entries: <code>.</code> ("dot"),
+        and <code>..</code> ("dot dot").
+    </p>
+
+    <p>
+        <code>.</code> is a reference to the containing directory itself.
+        It is used by processes as a handle to the current working directory.
+    </p>
+
+    <p>
+        <code>..</code> is a reference to the containing directory's 
+        parent directory.
+        Since each (and every) directory has a single parent, the
+        directory structure forms a tree.
+    </p>
+
+    <h3>Hidden Files</h3>
+
+    <p>
+        By convention alone, all filenames beginning with <code>.</code>
+        are considered hidden, including <code>.</code> and <code>..</code>.
+        They can be listed with <code>ls</code> by the <code>-a</code>
+        ("all") switch:
+    </p>
+
+    <div class="code">
+        $ ls -a
+    </div>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://www.gnu.org/software/coreutils/manual/html_node/index.html#SEC_Contents">GNU <code>coreutils</code></a> - Table of Contents</li>
+    </ul>
+</div>
+
 
 
 <div id="fs-heir" class="content">
@@ -566,8 +643,9 @@ https://wiki.ubuntu.com/Lvm
 </div>
 
 
-<div class="content" id="inodes-and-directories">
-    <h2>inodes and Directories</h2>
+
+<div class="content" id="inodes">
+    <h2>inodes</h2>
     <!--
         whose structure (a tree) is protected by the kernel through 
         a distinct set of system calls.  
@@ -575,7 +653,7 @@ https://wiki.ubuntu.com/Lvm
 
     <p>
         In keeping with traditional Unix file semantics, 
-        every file on a GNU/Linux system is represented by a unique <em>inode.</em><sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html#id1">[18]</a></sup>
+        every file on a GNU/Linux system is represented by a unique <em><a href="http://www.linfo.org/inode.html">inode</a>.</em><sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html#id1">[18]</a></sup>
         Inodes are the responsibility of their respective filesystem,
         wherein each is addressed by a number.
         Within a filesystem, an inode number identifies an
@@ -588,7 +666,7 @@ https://wiki.ubuntu.com/Lvm
     </p>
 
     <div class="aside-right">
-        <h4>Aside:</h4>
+        <h4>Remember:</h4>
         <p>
             Every path on the directory tree terminates in an inode reference.
         </p>
@@ -611,8 +689,8 @@ https://wiki.ubuntu.com/Lvm
 
     <p>
         Each such association is called a <em>hard link.</em>
-        A hard link is created upon file creation;
-        we can also create new hard links with the <code>ln</code> command,
+        A hard link is created upon file creation.
+        We can also create new hard links with the <code>ln</code> command,
         as the following sequence demonstrates:
     </p>
 
@@ -625,7 +703,7 @@ https://wiki.ubuntu.com/Lvm
     </div>
 
     <p>
-        The name <code>2file</code> is equivalent to the name
+        The name <code>2file</code> refers to the same file as
         <code>newfile</code>.
         If we modify the file using one name,
         then we have modified the file referred to by the other:
@@ -642,33 +720,6 @@ https://wiki.ubuntu.com/Lvm
         it is no longer accessible through the directory tree, and
         the kernel prepares to delete it.<sup><a href="#references">[19]</a></sup>
     </p>
-
-    <h3>Directory Structure</h3>
-
-    <p>
-        Each directory has at least two entries: <code>.</code> ("dot"),
-        and <code>..</code> ("dot dot").
-    </p>
-
-    <p>
-        <code>.</code> is a reference to the containing directory itself.
-        It is used by processes as a handle to the current working directory.
-        <code>..</code> is a reference to the containing directory's 
-        parent directory.
-        Since each (and every) directory has a single parent, the
-        directory structure forms a tree.
-    </p>
-
-    <p>
-        By convention alone, all filenames beginning with <code>.</code>
-        are considered hidden, including <code>.</code> and <code>..</code>.
-        They can be listed with <code>ls</code> by the <code>-a</code>
-        ("all") switch:
-    </p>
-
-    <div class="code">
-        $ ls -a
-    </div>
 
     <h3> See Also: </h3>
     <ul>
@@ -747,6 +798,7 @@ https://wiki.ubuntu.com/Lvm
         <li> <a href="https://wiki.archlinux.org/title/File_systems">File Systems</a> - Arch Linux Wiki</li>
     </ul>
 </div>
+
 
 <div id="udacity" class="content">
     <!--
