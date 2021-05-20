@@ -7,6 +7,9 @@ last-updated: May, 2021
 <!--
 
 To Do:
+
+    Directory Tree:
+        Depiction w/ root at top
     
 
     <div class="aside-right">
@@ -383,6 +386,10 @@ https://wiki.ubuntu.com/Lvm
 <div id="fs-heir" class="content">
     <h2>Filesystem Heirarchy</h2>
 
+    <div class="img-center">
+<a title="Dhanusha Dhananjaya, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Linux_file_system_foto_no_exif_(1).jpg"><img width="512" alt="Linux file system foto no exif (1)" src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Linux_file_system_foto_no_exif_%281%29.jpg"></a>
+    </div>
+
     <p>
         Within any Unix-like operating system, some common themes will be found.
         For instance, <code>bin</code> directories are found in several places, such as
@@ -414,7 +421,7 @@ https://wiki.ubuntu.com/Lvm
         Each Unix-like operating system has a single directory, <code>/</code>,
         which is the root of the directory tree.
         Every file on the system may be addressed in 
-        absolute terms by giving its location relative to the root 
+        absolute terms by giving its location relative to this
         directory.
     </p>
 
@@ -424,7 +431,7 @@ https://wiki.ubuntu.com/Lvm
         This path is commonly abbreviated to <code>~</code>.
         By default, it contains the usual "Music", "Movies", "Pictures" and
         "Downloads".
-        Per-user configuration files are stored here, either as
+        Per-user configuration files are stored here&mdash; as either
         hidden files or in the directory <code>~/.config</code>.
     </p>
 
@@ -449,6 +456,11 @@ https://wiki.ubuntu.com/Lvm
         $ file /boot/Image<br>
         Image:&emsp;&emsp; Linux kernel ARM64 boot executable Image, little-endian, 4k pages
     </div>
+
+    <p>
+        This kernel is loaded in early boot, after which the file is 
+        no longer needed.
+    </p>
 
     <p>
         Software libraries are kind of boring, but essential to modern systems.
@@ -491,25 +503,26 @@ https://wiki.ubuntu.com/Lvm
     <h2>Mounting a Filesystem</h2>
 
     <p>
-        Unix-like operating systems maintain a single directory tree for
-        the entire system.
-        When a new device is introduced to the machine, it first appears as
-        a device file in <code>/dev</code>; its files may then be made
-        available by placing its filesystems' root directories
-        in the existing directory tree.
+        As mentioned, Unix-like operating systems maintain a single 
+        directory tree for the entire system.
+        When a new device is introduced to the machine, 
+        its directory tree must be placed in the system's existing
+        directory tree.
         This operation is known as
         <a href="https://unix.stackexchange.com/questions/3192/what-is-meant-by-mounting-a-device-in-linux"><em>mounting</em></a>.
-    </p>
-
-    <p>
         Let's take a look at this, for it is new.
     </p>
 
     <p>
-        Suppose we have a usb stick with some music on it, and we'd
-        like to access its contents.
-        When we plug it in, the hardware, then the kernel,
-        recognize it, but it may not be accessible:
+        Suppose we have a usb stick with some music on it. 
+        When we plug it into the machine, a file representing
+        the device appears in <code>/dev</code>, but
+        its contents are not yet available.
+    </p>
+
+    <p>
+        Assuming the device is cleverly named <code>/dev/usb</code>,
+        we could mount it like so:
     </p>
 
     <img style="width:80%" src="assets/img/mounting.png">
@@ -627,8 +640,8 @@ https://wiki.ubuntu.com/Lvm
     <h3>Directory Structure</h3>
 
     <p>
-        As mentioned, the contents of directories are protected by the
-        kernel through a set system calls distinct from <code>read</code>,
+        The contents of directories are protected by the
+        kernel through a set of system calls distinct from <code>read</code>,
         <code>write</code>, <code>open</code> and <code>close</code>.
         Each directory has at least two entries: <code>.</code> ("dot"),
         and <code>..</code> ("dot dot").
@@ -652,7 +665,7 @@ https://wiki.ubuntu.com/Lvm
     <p>
         By convention alone, all filenames beginning with <code>.</code>
         are considered hidden, including <code>.</code> and <code>..</code>.
-        They can be listed with <code>ls</code> with the <code>-a</code>
+        They can be listed with <code>ls</code> by the <code>-a</code>
         ("all") switch:
     </p>
 
