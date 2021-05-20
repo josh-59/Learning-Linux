@@ -21,8 +21,6 @@ To Do:
     </div>
 
     <p>
-        The UNIX file has been called "The Universal I/O Model"
-Kerrisk calls File I/O "The Universal I/O Model"
 
     Somewhere:
         EOF, and CTRL+D
@@ -88,7 +86,7 @@ https://wiki.ubuntu.com/Lvm
         <li><a href="#fs-heir"> Filesystem Heirarchy </a></li>
         <li><a href="#mounting"> Mounting a Filesystem</a></li>
         <li><a href="#inodes-and-directories">inodes and Directories</a></li>
-        <li><a href="#closing-remarks"> Closing Remarks: inodes </a></li>
+        <li><a href="#original-unix">The Original Unix Filesystem</a></li>
         <li><a href="#udacity"> Udacity </a></li>
         <li><a href="#references"> References </a></li>
     </ul>
@@ -280,7 +278,7 @@ https://wiki.ubuntu.com/Lvm
     <h3> Block and Character Device Files </h3>
 
     <p>
-        Unix kernels traditionally support two kinds of device files:
+        Unix kernels support two kinds of device files:
         <em>Block</em> and <em>character.</em>
         A character device file may only be written to, or read from,
         a single byte (ASCII character) at a time.
@@ -293,8 +291,8 @@ https://wiki.ubuntu.com/Lvm
         <em>block</em> device files.
         Since the underlying devices support reading and writing 
         in blocks of bytes at a time, the kernel must take care
-        to buffer arbitary, user-space interactions with it. 
-        Finally, block device files support seeking, whereas 
+        to buffer arbitrary user-space interactions with it. 
+        Additionally, block device files support seeking, whereas 
         character devices do not.
     </p>
 
@@ -310,10 +308,10 @@ https://wiki.ubuntu.com/Lvm
     <h2>Pseudo Files</h2>
 
     <p>
-        GNU/Linux augments the traditional Unix directory tree with
+        The Linux kernel augments the traditional Unix directory tree with
         <em>pseudo</em> (or "synthetic") files, in
         <code>/proc</code> and <code>/sys</code>.
-        These files do not exist on disk, and does not exist on 
+        These files do not exist on disk, and do not exist on 
         any persistent storage. 
         Instead, their contents are generated dynamically 
         by the kernel as processes interact with them.
@@ -338,6 +336,12 @@ https://wiki.ubuntu.com/Lvm
         Inactive(anon):  1061224 kB<br>
         [...]
     </div>
+
+    <p>
+        When <code>cat</code> reads the file <code>/proc/meminfo</code>,
+        the kernel generates the above data, which is then
+        concatenated with <code>STDOUT</code>.
+    </p>
 
     <p>
         <code>/proc</code> contains one directory for each 
@@ -365,6 +369,8 @@ https://wiki.ubuntu.com/Lvm
     </p>
 
     <p>
+        Michael Kerrisk has called the Unix file interface
+        "The Universal I/O Model," and for good reason.
         The four file operations apply to all file types except
         directories, whose structure (a tree) is protected by the
         kernel through a distinct set of system calls.
@@ -640,24 +646,15 @@ https://wiki.ubuntu.com/Lvm
     <h3>Directory Structure</h3>
 
     <p>
-        The contents of directories are protected by the
-        kernel through a set of system calls distinct from <code>read</code>,
-        <code>write</code>, <code>open</code> and <code>close</code>.
         Each directory has at least two entries: <code>.</code> ("dot"),
         and <code>..</code> ("dot dot").
     </p>
 
-
     <p>
         <code>.</code> is a reference to the containing directory itself.
-        It is used as a handle to the current working directory.
-    </p>
-
-    <p>
+        It is used by processes as a handle to the current working directory.
         <code>..</code> is a reference to the containing directory's 
         parent directory.
-        The root directory's parent directory is 
-        the root directory itself.
         Since each (and every) directory has a single parent, the
         directory structure forms a tree.
     </p>
@@ -682,9 +679,8 @@ https://wiki.ubuntu.com/Lvm
 
 
 
-<div class="content" id="closing-remarks">
-    <h2 style="margin-bottom: 0;">Closing Remarks</h2>
-    <h4>inodes:</h4>
+<div class="content" id="original-unix">
+    <h2>The Original Unix Filesystem</h2>
 
     <p>
         The inode was implemented literally in the Research Unix filesystem,
