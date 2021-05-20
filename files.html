@@ -521,7 +521,7 @@ https://wiki.ubuntu.com/Lvm
     </p>
 
     <p>
-        Assuming the device is cleverly named <code>/dev/usb</code>,
+        Assuming the device is named <code>/dev/usb</code>,
         we could mount it like so:
     </p>
 
@@ -542,8 +542,8 @@ https://wiki.ubuntu.com/Lvm
 
     <p>
         Superuser priveledges allow us to mount a filesystem anywhere.
-        When a filesystem's is mounted to a directory that is not empty,
-        those directory's contents become "hidden" by those of the new filesystem,
+        When a filesystem is mounted to a directory that is not empty,
+        those directory's contents become hidden by those of the new filesystem,
         and are inaccessible while the filesystem is mounted.
         Therefore, we typically create an empty directory in the existing
         directory tree, to serve as the to-be mounted filesystem's root
