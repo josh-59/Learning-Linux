@@ -393,6 +393,20 @@ To Do:
         $ ./<i>program</i> 
     </div>
 
+    <p>
+        The <em>PATH</em> environment variable is one of several
+        standard environment variables.  
+        Environment variables are stored on behalf of the process by 
+        the kernel. 
+        They are preserved through both <code>fork</code> and 
+        <code>exec</code>, so that they are inherited by each child process.
+        They may be listed with,
+    </p>
+
+    <div class="code">
+        $ printenv
+    </div>
+
     <h3>See Also:</h3>
     <ul>
         <li><a href="https://en.wikipedia.org/wiki/Environment_variable#True_environment_variables"> Environment Variables </a> - Wikipedia</li>
