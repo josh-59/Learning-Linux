@@ -11,17 +11,16 @@ last-updated: April, 2021
     Explanation of sudo:
     https://www.linuxjournal.com/sites/default/files/2018-11/GeekGuide-BeyondTrust-BeyondSudo.pdf
 
-
-
-
-<div class="content" id="closing-remarks">
-    <h2>Closing Remarks:</h2>
-    <h4><code>make</code></h4>
+<div class="content" id="make">
+    <h2><code>make</code></h2>
 
     <p>
     </p>
 
+
     <p>
+        <code>make</code> is one of the oldest tools in the Unix
+        collection, and is often used 
         One expresses a program to be compiled in "recipes" of the form,
     </p>
 
@@ -548,13 +547,13 @@ Exercises:
         <h4>Aside:</h4>
         <p>
             Remember: <br>
-            <code> fd what where </code>
+            <code>$ fd what where </code>
         </p>
     </div>
 
     <p>
-        The <a href="https://github.com/sharkdp/fd">fd</a>
-        utility is a simple, user-friendly alternative to GNU's
+        <code><a href="https://github.com/sharkdp/fd">fd</a></code>
+        is a simple, user-friendly alternative to GNU's
         <a href="http://www.gnu.org/software/findutils/">find</a>.
         Usage:
     </p>
@@ -579,7 +578,7 @@ Exercises:
     <p>
         By default, <code>fd</code> checks filenames, but it can check many 
         other file characteristics, as well.
-        For instance, to restrict results to directories, we could use
+        For instance, to look for directories, we could use
     </p>
 
     <div class="code">
@@ -628,11 +627,12 @@ Exercises:
     <h3>Searching Files with <code>rg</code></h3>
     <p>
         <a href="https://github.com/BurntSushi/ripgrep"><code>Ripgrep</code></a>
-        recursively descends through a directory tree,
-        opening each file, reading its contents and attempting to
+        is another search tool.
+        It recursively descends through a directory tree,
+        opens each file, reads its contents and attempts to
         match each line against a given regex pattern.
         If a line contains a match, it prints the filename and those lines;
-        effectively, it searches files for a particular pattern.
+        effectively, it searches text files for a particular pattern.
 	</p>
 
 	<p>
