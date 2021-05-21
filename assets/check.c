@@ -46,6 +46,7 @@ int main() {
     return 0;
 }
 
+// fork()
 void check_1() {
     pid_t rv = fork();      // One process executes this line
     if(rv == 0) {           // Two processes execute this line
@@ -56,6 +57,7 @@ void check_1() {
 }
 
 
+// open()
 void check_2() {
     int fd = open("./rubber_ducky", O_RDONLY);
     printf("fd = %d\n", fd);
@@ -76,13 +78,14 @@ void check_2() {
     printf("num_bytes_read = %zu\n", num_bytes_read);
 }
 
+// fork and exec
 void check_3() {
     pid_t rv = fork();
     if( rv == 0 ) {
         char *args[] = {"ls", "-l", NULL};
-        execv("/bin/ls", args);
+        execv("/usr/bin/ls", args);
         
-        perror("execv"); // These lines are only executed if execv failed
+        perror("execv"); // This line is executed only if execv failed
         exit(1);
     } else if ( rv > 0 ) {
         wait(NULL);
