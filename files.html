@@ -743,7 +743,7 @@ https://wiki.ubuntu.com/Lvm
     <p>
         In the design, data blocks are of fixed size, and either free or
         wholly consumed by a file.<sup><a href="#references">[20]</a></sup>
-        The filesystem's <em>index nodes</em> represent one file each,
+        The filesystem's <em>inodes</em> represent one file each,
         contain their file's metadata, and contain pointers to data blocks.<sup><a href="#references">[20]</a></sup>
         These nodes are arranged in an array, and can be identified
         by an index into this array.
@@ -764,13 +764,9 @@ https://wiki.ubuntu.com/Lvm
 
     <p>
         It was the most advanced filesystem of its time,
-        and, as Unix grew in popularity, was propogated and revised.
-        <em>Index node</em> became contracted to <em>inode</em>,
-        and the semantics of file operations in Unix-like operating systems
+        and, as Unix grew in popularity, 
+        the semantics of file operations in Unix-like operating systems
         became dependant upon them.
-    </p>
-
-    <p>
         The design was demonstrated in the
         <a href="https://en.wikipedia.org/wiki/Minix">MINIX</a> filesystem,
         which in turn served as Linux's pre-1.0 filesystem.
