@@ -290,9 +290,9 @@ last-updated: April, 2021
         Properly speaking, there is only one <em>exec()</em> system
         call, and that is <a href="https://man7.org/linux/man-pages/man2/execve.2.html"><em>execve()</em></a>.
         Most C libraries offer six variants of
-        it, each with slightly different conveniences.<sup><a href="https://en.wikipedia.org/wiki/Unistd.h">[e]</a></sup>
+        it, each with slightly different conveniences.<sup><a href="https://en.wikipedia.org/wiki/Unistd.h">[4]</a></sup>
         Under the hood, each of these map to  
-        a call to <em>execve()</em>.<sup><a href="https://man7.org/linux/man-pages/man3/exec.3.html">[d]</a></sup>
+        a call to <em>execve()</em>.<sup><a href="https://man7.org/linux/man-pages/man3/exec.3.html">[5]</a></sup>
         They are collectively referred to as <em>exec()</em> 
         because, used properly, they have the same meaning.
     </p>
@@ -318,10 +318,10 @@ last-updated: April, 2021
     </div>
 
     <p>
-        This is difficult to convey because, in any program,
-        <em>exec()</em> causes the process to abandon execution
-        of that program, and to begin execution of another.
-        Within the new program, execution begins at <em>main</em>.
+        "The <em>execve()</em> system call loads a new program into
+        a process's memory.  
+        During this operation, the old program
+        is discarded, and the process's"
     </p>
 
     <p>
@@ -621,13 +621,12 @@ last-updated: April, 2021
         Bryant, R. E., & O'Hallaron, D. R. (2016).  Processes. In <em>Computer Systems: A Programmer's Perspective</em> (3rd ed., p. 732).  Upper Saddle River, New Jersey: Pearson.
     </li>
     <li>
-        init - Wikipedia (3 Match 2021). Retrieved March 30, 2021, from <a href="https://en.wikipedia.org/wiki/Init">https://en.wikipedia.org/wiki/Init</a>
+        init - Wikipedia (3 March 2021). Retrieved March 30, 2021, from <a href="https://en.wikipedia.org/wiki/Init">https://en.wikipedia.org/wiki/Init</a>
     </li>
 
-    <li>
-        Kerrisk, M. (2020, December 21). Fork(2) - Linux manual page. Retrieved February 09, 2021, from <a href="https://www.man7.org/linux/man-pages/man2/fork.2.html">https://www.man7.org/linux/man-pages/man2/fork.2.html</a>
-    </li>
+    <li>unistd.h - Wikipedia (2020, November 12).<a href="https://en.wikipedia.org/wiki/Unistd.h">https://en.wikipedia.org/wiki/Unistd.h</a>.</li>
 
+    <li>exec(3) - Linux manual page. (2021, March 22). <a href="https://man7.org/linux/man-pages/man3/exec.3.html">https://man7.org/linux/man-pages/man3/exec.3.html</a>.</li>
   </ol>
 </div>
 
