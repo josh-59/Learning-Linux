@@ -6,6 +6,8 @@ last-updated: May, 2021
 
 <!--
 
+        <li>Elhage, N. (2009, December 22). A Brief Introduction to Termios. Retrieved March 07, 2021, from <a href="https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios/">https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios/</a></li>
+
 To Do:
 
     Directory Tree:
@@ -260,7 +262,7 @@ https://wiki.ubuntu.com/Lvm
 
     <p>
         A <em>device file</em> represents a device connected to the system.
-        They reside in <code>/dev</code>.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[4]</a></sup>
+        They reside in <code>/dev</code>.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[3]</a></sup>
         Each file therein serves as the principle reference to its
         respective device.
         For example, when a USB-stick is inserted,
@@ -349,7 +351,7 @@ https://wiki.ubuntu.com/Lvm
         process (running program) on the system; therein, each directory 
         contains substantial information about its respective process.
         <code>/sys</code> contains information useful to only the
-        lowest-level system daemons.<sup><a href="http://linuxfromscratch.org/lfs/view/stable/chapter09/udev.html">[c]</a></sup>
+        lowest-level system daemons.<sup><a href="http://linuxfromscratch.org/lfs/view/stable/chapter09/udev.html">[4]</a></sup>
     </p>
 
     <p>
@@ -494,8 +496,8 @@ https://wiki.ubuntu.com/Lvm
             describes the GNU/Linux directory structure, and is maintained
             by the Linux Foundation.
             It is intended to promote inter- operability
-            among Unix-like operating systems,<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html">[7]</a></sup>
-            and was developed with help from the BSD development community.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch07s02.html">[8]</a></sup>
+            among Unix-like operating systems,<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html">[5]</a></sup>
+            and was developed with help from the BSD development community.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch07s02.html">[6]</a></sup>
         </p>
     </div>
 
@@ -653,7 +655,7 @@ https://wiki.ubuntu.com/Lvm
 
     <p>
         In keeping with traditional Unix file semantics, 
-        every file on a GNU/Linux system is represented by a unique <em><a href="http://www.linfo.org/inode.html">inode</a>.</em><sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html#id1">[18]</a></sup>
+        every file on a GNU/Linux system is represented by a unique <em><a href="http://www.linfo.org/inode.html">inode</a>.</em><sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html#id1">[7]</a></sup>
         Inodes are the responsibility of their respective filesystem,
         wherein each is addressed by a number.
         Within a filesystem, an inode number identifies an
@@ -718,7 +720,7 @@ https://wiki.ubuntu.com/Lvm
     <p>
         A file may have more than one hard link, but when it has zero,
         it is no longer accessible through the directory tree, and
-        the kernel prepares to delete it.<sup><a href="#references">[19]</a></sup>
+        the kernel prepares to delete it.<sup><a href="#references">[8]</a></sup>
     </p>
 
     <h3> See Also: </h3>
@@ -742,24 +744,24 @@ https://wiki.ubuntu.com/Lvm
 
     <p>
         In the design, data blocks are of fixed size, and either free or
-        wholly consumed by a file.<sup><a href="#references">[20]</a></sup>
+        wholly consumed by a file.<sup><a href="#references">[9]</a></sup>
         The filesystem's <em>inodes</em> represent one file each,
-        contain their file's metadata, and contain pointers to data blocks.<sup><a href="#references">[20]</a></sup>
+        contain their file's metadata, and contain pointers to data blocks.<sup><a href="#references">[9]</a></sup>
         These nodes are arranged in an array, and can be identified
         by an index into this array.
     </p>
 
     <p>
         The design allows a file to grow or shrink without rearranging
-        other files.<sup><a href="#references">[20]</a></sup>
+        other files.<sup><a href="#references">[9]</a></sup>
         In addition, the inclusion of single-, double- and triple-
         indirection blocks allow the inode to remain of fixed,
         reasonable size, while supporting large
-        files.<sup><a href="#references">[20]</a></sup>
+        files.<sup><a href="#references">[9]</a></sup>
         Finally, by using direct pointers for the first bytes of a file,
         and by keeping the inode array in main memory, 
         the design fosters the speedy retrieval of data in small
-        files.<sup><a href="#references">[20]</a></sup>
+        files.<sup><a href="#references">[9]</a></sup>
     </p>
 
     <p>
@@ -847,44 +849,19 @@ https://wiki.ubuntu.com/Lvm
 
         <li>Ritchie, D. M. (1984). The Evolution of the Unix Time-sharing System. <em>AT&amp;T Bell Laboratories Technical Journal,</em> 63(6), 2nd ser., 1577-1593.</li>
 
-        <li>Elhage, N. (2009, December 22). A Brief Introduction to Termios. Retrieved March 07, 2021, from <a href="https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios/">https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios/</a></li>
-
         <li> LSB Workgroup, The Linux Foundation. (2015, March 9). 3.6 /dev: Device Files. Retrieved July 17, 2020, from <a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03.html</a> </li>
 
-		<li> Kerrisk, Michael.  <em>The Linux Programming Interface</em>. San Francisco, CA, No Starch Press, 2010.</li>
-
-        <li>Mochel, P. (2005). The sysfs FIlesystem. Retrieved March 24, 2021, from <a href="https://mirrors.edge.kernel.org/pub/linux/kernel/people/mochel/doc/papers/ols-2005/mochel.pdf">https://mirrors.edge.kernel.org/pub/linux/kernel/people/mochel/doc/papers/ols-2005/mochel.pdf</a></li>
+        <li>Beekmans, G. (2021, March 1). 9.3. <em>Overview of Device and Module Handling.</em> 9.3.&nbsp;Overview of Device and Module Handling. <a href="https://linuxfromscratch.org/lfs/view/stable/chapter09/udev.html">https://linuxfromscratch.org/lfs/view/stable/chapter09/udev.html</a>.</li>
 
         <li>Abstract.  Filesystem Hierarchy Standard. (2015, March 15). Retrieved March 18, 2021, from <a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html">https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html</a></li>
 
         <li>7.2. Background of the FHS. (2015, March 15). Retrieved March 18, 2021, from <a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch07s02.html">https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch07s02.html</a></li>
-
-        <li> File Systems. (n.d.). Retrieved July 17, 2020, from <a href="https://wiki.osdev.org/Filesystem">https://wiki.osdev.org/Filesystem</a> </li>
-
-        <li> File systems - ArchWiki. (n.d.). Retrieved July 17, 2020, from <a href="https://wiki.archlinux.org/index.php/File_systems">https://wiki.archlinux.org/index.php/File_systems</a> </li>
-
-        <li>Journaling file system - Wikipedia. (2021, January 06). Retrieved March 02, 2021, from <a href="https://en.wikipedia.org/wiki/Journaling_file_system">https://en.wikipedia.org/wiki/Journaling_file_system</a></li>
-
-
-        <li>btrfs Wiki (2021, February 24). Retrieved March 02, 2021, from <a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">https://btrfs.wiki.kernel.org/index.php/Main_Page</a></li>
-
-        <li>ZFS - ArchWiki. (2021, February 22). Retrieved March 02, 2021, from <a href="https://wiki.archlinux.org/index.php/ZFS">https://wiki.archlinux.org/index.php/ZFS</a></li>
-
-        <li>Btrfs at Facebook [LWN.net]. (2020, July 2). Retrieved March 02, 2021, from <a href="https://lwn.net/Articles/824855/">https://lwn.net/Articles/824855/</a></li>
-
-        <li>Portal:13.2/Features (2016, October 21). Retrieved March 29, 2021, from <a href="https://en.opensuse.org/Portal:13.2/Features">https://en.opensuse.org/Portal:13.2/Features</a></li>
-
-        <li>Fedora 33 is officially here! - Fedora Magazine. (2020, October 27). Retrieved March 2, 2021, from <a href="https://fedoramagazine.org/announcing-fedora-33/">https://fedoramagazine.org/announcing-fedora-33/</a></li>
-
-        <li>Torvalds, L. (2020, January 06). Nuances related to Spinlock implementation and the Linux Scheduler. Retrieved March 02, 2021, from <a href="https://www.realworldtech.com/forum/?threadid=189711&amp;curpostid=189841">https://www.realworldtech.com/forum/?threadid=189711&amp;curpostid=189841</a></li>
-
 
         <li> Overview of the Linux Virtual File System - The Linux Kernel Documentation. (n.d.). Retrieved July 17, 2020, from <a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">https://www.kernel.org/doc/html/latest/filesystems/vfs.html</a> </li>
 
         <li> Kerrisk, Michael.  <em>The Linux Programming Interface</em>. San Francisco, CA, No Starch Press, 2010.</li>
 
         <li>Bach, M. J. (1986). Chapter 4: Internal Representation of Files. In <em>The Design of the UNIX Operating System</em> (pp. 60-90). Englewood Cliffs, NG: Prentice-Hall. </li>
-
     </ol>
 
 </div>
