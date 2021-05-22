@@ -10,7 +10,5 @@
   link: /terminals-and-shells.html
 - name: Packages 
   link: /packages.html
-- name: How it Works
-  link: /how-it-works.html
 - name: 'Appendix: Bash <br> (and other stuff)'
   link: /bash.html
