@@ -5,6 +5,18 @@ last-updated: April, 2021
 ---
 
 <!--
+    Closing Remarks:
+        Hacker Ethic?
+        
+
+    <div class="aside-right">
+        <h4>Fun Fact:</h4>
+        <p>
+            The Linux kernel supports "process accounting" for the purpose
+            of tracking costs of execution.
+        </p>
+    </div>
+
 History:
 
         <a href="https://www.cs.dartmouth.edu/~doug/dmr.pdf">well outperformed for its size</a>, 
@@ -22,14 +34,13 @@ History:
         Speculation about the future of computation was great:
     </p>
 
-
     <blockquote>
 The computing machine is fundamentally an extremely useful device. The service it provides has a kind of universality and generality not unlike that afforded by electric power. Electricity can be harnessed for any of a wide variety of jobs: running machinery, exercising control, transmitting information, producing sound, heat, and light. Symbolic computation can be applied to an equally broad range of tasks: routine numerical calculations, manipulation of textual data, automatic control of instrumentation, simulation of dynamic processes, statistical analyses, problem solving, game playing, information storage, retrieval, and display.
     </blockquote>
 
     <p>
         The computer's commercial future was believed
-        to be in offering an <em>information utility:</em>
+        to be as the center of an <em>information utility:</em>
         In a business model similar to telephone or electricity,
         customers would connect their keyboards and monitors to a 
         central mainframe, then pay for computation on an as-used 
@@ -55,22 +66,32 @@ The computing machine is fundamentally an extremely useful device. The service i
 
     <h3>Multics</h3>
 
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            MULTICS stood for <em>Multiplexed Information and 
-            Computing Service.</em>
-        </p>
-    </div>
-
     <p>
-
+        The idea of offering "dial-up timesharing" through centralized 
+        infrastructure moved many people.
+        https://archive.org/details/sim_unix-review_1986-10_4_10/page/32/mode/1up
+        Many intelligent individuals contributed to MULTICS,
+        and the project introduced a number of
+        novel features which would subsequently become standard in
+        computing, including
     </p>
 
+    <ul>
+        <li>
+            Divisions of system accessibility supported at the hardware level
+        </li>
+        <li>
+            Hierarchical filesystem
+        </li>
+        <li>
+            The process as a nexus of control
+        </li>
+    </ul>
+
     <p>
-        Multics was an extremely large and ambitious project.  
-        For example, from the project's inception, it was
-        written in the high-level programming language <em>PL/I,</em>
+        The project was very ambitious.
+        For example, from its inception, it was to be
+        written in a high-level programming language, <em>PL/I,</em>
         which had, as yet, only been specified.
         More, as the project got underway, obtaining a compiler for
         this language became a significant challenge; the first
@@ -81,201 +102,27 @@ The computing machine is fundamentally an extremely useful device. The service i
     </p>
 
     <p>
-        However, Multics introduced a number of novel features 
-        that would become standard within computing,
-        including:
+        Not really their fault...
     </p>
 
-    <ul>
-        <li>
-            Hierarchical filesystem
-        </li>
-        <li>
-            Divisions of system accessibility supported at the hardware level
-        </li>
-        <li>
-            The process as a nexus of control
-        </li>
-    </ul>
-
     <p>
-        Custom hardware was specified; GE's monstrous 645,
-        The machine was so convoluted that getting it to print
-        a simple greeting message was, "a notable achievement,"
-        and so expensive to run that AT&amp;T's 
-        <em>Bell Laboratories</em>
-        implemented a "funny money" to track its use.
-        Towards 1969, it became clear that Multics would
-        not deliver on its promise of providing the nexus of
-        a profitable information utility, and AT&amp;T began to
-        withdraw its support.
+        Multics never realized its dream of offering profitable
+        centralized computing,
+        Multics endured until ____, at which point the largest
+        installation was capable of supporting 200 simultaneous users.
     </p>
 
     <h3>Unix</h3>
 
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            <em>Space Travel</em> cost $65 per play on the GE 645!
-        </p>
-    </div>
-
-    <p>
-        After AT&amp;T's withdrawal from the Multics project, 
-        operating systems researchers within Bell Laboratories 
-        found themselves without a clear project.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[2]</a></sup>
-        They proposed many ideas, but none were accepted, and
-        no new machines were purchased.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[2]</a></sup>
-        After finding an outdated and disused 
-        <a href="https://www.soemtron.org/pdp7.html">PDP-7</a>,
-        Ken Thompson and Dennis Ritchie rewrote
-        <em><a href="https://en.wikipedia.org/wiki/Space_Travel_(video_game)">Space Travel</a></em> 
-        for it.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[2]</a></sup>
-        Thompson then continued to work with the machine, implementing a
-        filesystem that he, Dennis Ritchie and Rudd Canaday had devised on
-        paper.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[2]</a></sup>
-    </p>
-
-    <p>
-        A filesystem without a means to exercise it is,
-        "...a sterile proposition,"<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[2]</a></sup> 
-        so Thompson continued to develop facilities to use it.
-        At some point in 1969, he recognized that he was close to
-        an operating system:  It needed an
-        assembler, a text editor, a shell and an <em>exec</em> system 
-        call.<sup><a href="#references" title="Kernighan, p34">[3]</a></sup>
-        The <em>exec</em> call was "trivial," and the other three components were
-        done in one week 
-        each.<sup><a href="#references" title="Kernighan, p34">[3]</a></sup>
-        After that, the system was fully self-supporting.
-    </p>
-
-    <p>
-        The name <em>Unix</em> was 
-        a "somewhat treacherous pun" on Multics:
-        Whereas Multics offered more than one way to carry out a 
-        given task, Unix was characterized by simplicity..<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[2]</a><a href="#references" title="Kernighan, p34">[3]</a></sup>
-        By offering its services to the Labs&mdash; 
-        especially, in the field of 
-        text processing for patent applications&mdash; 
-        the team convinced management to purchase a new machine. 
-        Two PDP-11's were acquired; the researchers transferred
-        their work and wrote manuals to document it.
-    </p>
-
-
-        The novel system 
-        well outperformed for its size,
-        and its early popularity was due in part to its
-        ability to run on varied and relatively inexpensive hardware.<sup><a href="https://archive.org/details/sim_unix-review_1986-10_4_10/page/32/mode/2up">[4]</a></sup>
- 
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">The Evolution of the UNIX Time-sharing System</a> by Dennis M. Ritchie</li>
-        <li><a href="https://www.cs.princeton.edu/~bwk/">UNIX: A History and Memoir</a> by Brian Kernighan</a></li>
-        <li><a href="https://archive.org/details/sim_unix-review_1986-10_4_10/page/32/mode/2up">The Unix Success Story</a> by Douglas McIlroy</li>
-    </ul>
-</div>
-
-
-Unix: Origins:
-
-        The novel system well outperformed for its size.<sup><a href="https://www.cs.dartmouth.edu/~doug/dmr.pdf">[a]</a></sup>
-    First BSD fork, documentation?
+    [...]
 
 
     "...demonstrating the feasibility of making a conventional computer accessible to many small remote users simultaneously,"
 
-    "dial-up timesharing"
-        https://archive.org/details/sim_unix-review_1986-10_4_10/page/32/mode/1up
 
-    "conversational" computing
-        https://multicians.org/history.html
-
-
-        From "The Computers of Tomorrow," Published May 1964:
-    </p>
-
-
-GNU's Not Unix:
-        whose (version 3) preamble begins:
-    </p>
-
-
-
-Linux Kernel:
-    Mention Copyleft/GNU GPL V2
-    Subsection "Kernel Architecture"?
-        Monolithic, but modular
-        $ lsmod
-
-    Linux Foundation,
-    Greg Kroah Hartman:
-        Lead maintainer
-        https://en.wikipedia.org/wiki/Linux_Foundation
 
 Closing Remarks:
     More/other citation about MIT license being the most popular.
-
-<div class="content" id="closing-remarks">
-    <h2 style="margin-bottom: 0;">Closing Remarks:</h2>
-
-    <p>
-        Sharing computing resources was common practice in the 1970's.  
-        Interactive computing was just becoming feasible, and 
-        machines were prohibitively expensive&mdash; purchased by institutions 
-        rather than individuals.
-        Code sharing followed naturally.
-    </p>
-
-    <p>
-        Pursuant to anti-monopoly legislation imposed upon AT&amp;T,
-        Bell Labs was required to distribute UNIX source for the cost of media
-        (then, tapes).
-        It is rumored that Ken Thompson signed each copy with <em>Love, Ken.</em><sup><a href="https://en.wikipedia.org/wiki/History_of_Unix">[a]</a></sup>
-    </p>
-
-    <p>
-        It was with the sixth edition of UNIX that management began to realize
-        that the software had value.
-        AT&T lawyers stepped in, first copyrighting the name
-        <em>UNIX</em>, then restricting the distribution of UNIX source.
-    </p>
-
-    <p>
-        The changes from 5th? edition to 6th? reduced to a "<code>diff</code> tape", 
-        a tape recording all relevant changes to source. 
-        Its distribution was explicitly forbidden by AT&amp;T lawyers,
-        but found its way outside the Labs nonetheless.
-        Many possibilities were put forth as explanations of this;
-        the lawyers were ultimately told, 
-        "...It fell off the back of a truck."
-    </p>
-
-<div class="content" id="exercises">
-    <h2>Exercises</h2>
-    <li> Off by one: The second edition UNIX manual says, 
-        "The number of UNIX installations has grown to 10, with more expected."
-        Does <em>ten installations</em> apply to Second edition UNIX or First edition?
-    </li>
-
-</div>
-
-        Within Bell Labs, management put operating systems 
-        research on the 
-        backburner, and hesitated to purchase new computing
-        equipment.<sup><a href="#references" title="Kernighan p32">[2]</a></sup><sup><a href="#references">[3]</a></sup>
-
-<div class="quote-text">
-        "...the number of UNIX installations has grown to 10, <br>
-        with more expected."
-    </div>
-
-    <div class="quote-ref">
-        Dennis Ritchie and Ken Thompson,<br>
-        <a href="https://minnie.tuhs.org/Archive/Distributions/Research/Dennis_v2/v2man.pdf">UNIX Programming Manual, 2nd Edition</a>,</br>
-        June 1972
-    </div>
 
 -->
 
@@ -384,8 +231,7 @@ Closing Remarks:
         Its small size and simple construction
         allowed virtually anyone to modify it to their needs.
         The 4<sup>th</sup> Edition was rewritten in 
-        a high-level programming language, C, developed for the task
-        by Ken Thompson and Dennis Ritchie.<sup><a href="https://www.bell-labs.com/usr/dmr/www/chist.html">[4]</a></sup>
+        a high-level programming language, C.<sup><a href="https://www.bell-labs.com/usr/dmr/www/chist.html">[4]</a></sup>
         By 1974, there were over fifty
         installations, with "many more expected."<sup><a href="https://www.tuhs.org/Archive/Distributions/Research/Dennis_v5/v5man.pdf">[5]</a></sup>
         The first fork, <em>BSD,</em> was produced at 
@@ -404,7 +250,7 @@ Closing Remarks:
     <h2>The UNIX Architecture</h2>
     <p>
         UNIX had a simple, clear, well-documented architecture that
-        <a href="https://upload.wikimedia.org/wikipedia/commons/7/77/Unix_history-simple.svg">inspired many operating systems</a>. 
+        inspired many operating systems.<a href="https://upload.wikimedia.org/wikipedia/commons/7/77/Unix_history-simple.svg">[a]</a>. 
         It is organized as a hierarchy of layers,
         with each layer building upon the ones beneath it, and supporting
         those above it.
@@ -445,10 +291,10 @@ Closing Remarks:
         is defined by the system calls it supports.
         The UNIX architecture is characterized by six essential system 
         calls:<sup><a href="#references">[7]</a></sup>
-        <code>fork</code>, <code>exec</code>, <code>open</code>, 
-        <code>close</code>, <code>read</code>, and
-        <code>write</code>.
-        Both <code>fork</code> and <code>exec</code> are concerned with 
+        <em>fork()</em>, <em>exec()</em>, <em>open()</em>, 
+        <em>close()</em>, <em>read()</em>, and
+        <em>write()</em>.
+        Both <em>fork()</em> and <em>exec()</em> are concerned with 
         launching programs, while the other four deal with files. 
     </p>
 
@@ -910,21 +756,10 @@ Closing Remarks:
         represent a type of copyleft.<sup><a href="https://opensource.org/faq#permissive">[34]</a><a href="https://opensource.org/faq#copyleft">[35]</a></sup>
     </p>
 
-    <p>
-        To be honest, a lot of developers have said, <em>To hell with this,</em>
-        and introduced such novelties as the
-        <a href="https://people.freebsd.org/~phk/">Beerware License</a>,
-        the <a href="https://en.wikipedia.org/wiki/WTFPL">Do What The **** You Want License</a>,
-        and the <a href="https://unlicense.org/">Unlicense</a> (quite popular).
-        These each place code in the public domain;
-        from there, anyone can claim it as their own, can put it in 
-        any other work, under any other license.
-    </p>
-
     <h3>See Also:</h3>
     <ul>
         <li><a href="https://www.gnu.org/philosophy/free-sw.en.html"> What is free software?</a> - GNU Project</a></li>
-        <li><a href="https://ar.to/2010/01/dissecting-the-unlicense"> Dissecting the Unlicense: Software Freedom in Four Clauses and a link</a></li>
+        <li><a href="https://unlicense.org/">Unlicense</a>- Unlicense Yourself: Set Your Code Free</li>
     </ul>
 
 </div>
