@@ -6,30 +6,21 @@ last-updated: May, 2021
 
 <!--
 
+
         <li>Elhage, N. (2009, December 22). A Brief Introduction to Termios. Retrieved March 07, 2021, from <a href="https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios/">https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios/</a></li>
 
 To Do:
+    Device files (or Mounting a filesystem):
+        Device files are user-space references to the device
+            (and not the principle reference to the device).
+        They are useful 
 
-    Directory Tree:
-        Depiction w/ root at top
-    
-
-    <div class="aside-right">
-        <h4>Note:</h4>
-        <p>
-            This is a handle to the device, and <em>not</em> the device's 
-            root directory!
-        </p>
-    </div>
-
-    <p>
 
     Somewhere:
         EOF, and CTRL+D
 
     Add reference to (in mounting and unmounting)
     Sudo/Superuser priveledges
-
 </div>
 
 sysfs:
@@ -256,17 +247,19 @@ https://wiki.ubuntu.com/Lvm
         meeting place:
         In addition to regular files, it also contains references to
         hardware, and allows interprocess communication.
-        This mechanism is general, extensible, and allows both users and programmers
-        access to the running machine.
+        This mechanism is general, extensible, and allows both users 
+        and programmers access to the running machine.
     </p>
 
     <p>
         A <em>device file</em> represents a device connected to the system.
         They reside in <code>/dev</code>.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[3]</a></sup>
-        Each file therein serves as the principle reference to its
+        Each file therein serves as a user-space handle to its
         respective device.
         For example, when a USB-stick is inserted,
-        a new file appears in <code>/dev</code>.
+        a new file appears in <code>/dev</code>, and it may be 
+        read from or written to <em>directly</em> by passing
+        this file to tools like <code>cat</code> or <code>dd</code>.
     </p>
 
     <p>
@@ -297,6 +290,26 @@ https://wiki.ubuntu.com/Lvm
         to buffer arbitrary user-space interactions with it. 
         Additionally, block device files support seeking, whereas 
         character devices do not.
+    </p>
+
+    <h3>Using Block Special Device Files</h3>
+
+    <p>
+        Operations involving block device files are relatively rare,
+        and require superuser permissions.
+        Given a new or blank block device, the typical course is 
+        to first partition the drive with <code>fdisk</code> or 
+        <code>parted</code>, then to create a filesystem on the 
+        partition (using perhaps <code>mkfs.ext4</code>, for example), 
+        then to mount the filesystem and access the device through 
+        the directory tree.
+    </p>
+
+    <p>
+        Other uses include reading the block device to create 
+        a disk image, or writing to it to make use of a disk image.
+        Through the device file, such operations can be carried out
+        with ordinary user-space tools.
     </p>
 
     <h3>See Also:</h3>
