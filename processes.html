@@ -21,36 +21,6 @@ last-updated: April, 2021
 
 
     <p>
-        Each process acts on behalf of some user, and we say
-        that it is executing with that user's <em>permissions.</em>
-        For example, a process executing as user <em>josh</em> is
-        executing with <em>josh's permissions.</em>
-        Such a process can remove files owned by user <em>josh,</em>
-        can change their permission bits, and files created by that
-        process inherit that user.
-    </p>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Be careful with superuser!
-        </p>
-    </div>
-   
-    <p>
-        Processes acting as user <em>root</em> are somewhat special:
-        They can change any file on the system, without qualification.
-        That is, they by default transcend the file ownership scheme;
-        we therefore use <em>superuser</em> synonymously with root user,
-        and say that a process executing as root is executing with
-        <em>superuser permissions.</em>
-    </p>
-
-
-
-
-
-    <p>
         A process without its attributes is.... memory and some CPU time.
 
     <p>
@@ -179,9 +149,47 @@ last-updated: April, 2021
         <li>User ID, Group Id</li>
         <li>Environment variables</li>
     </ul>
+
+    <p>
+        You can think of each process as acting on behalf of some user,
+        and that it is executing with that user's <em>permissions.</em>
+        For example, a process executing as user <em>josh</em> is
+        executing with <em>josh's permission.</em>
+        A process is by-default allowed to manipulate files owned by the user
+        it is acting as:
+        It can remove owned files, and
+        change owned files' permission bits.
+        Files created by a process inherit its associated user.
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            File ownership restrictions are enforced by the kernel.
+        </p>
+    </div>
+   
+    <p>
+    Processes acting as user <em><a href="http://www.linfo.org/root.html">root</a></em> are special:
+        They can change any file on the system, without qualification.
+        That is, they by default transcend the file ownership scheme;
+        we therefore use <em>superuser</em> synonymously with root user,
+        and say that a process executing as root is executing with
+        <em>superuser permissions.</em>
+    </p>
+
+    <p>
+        In practice, <em>root</em> is the adminstrative user.
+        It can, for example, format a physical device and make it 
+        available for system-wide use.
+        Superuser priveledges are typically acquired
+        through <code>sudo</code>.
+    </p>
+
     
     <h3> See Also: </h3>
     <ul>
+        <li><a href="https://www.sudo.ws/man/1.8.3/sudo.man.html"><code>sudo(8)</code></a> - Execute a command as another user</li>
         <li><a href="https://man7.org/linux/man-pages/man7/credentials.7.html"><code>credentials(7)</code></a> - Process identifiers</li>
     </ul>
 </div>
