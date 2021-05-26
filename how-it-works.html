@@ -5,36 +5,38 @@ last-updated: May 2021
 ---
 
 <!--
+    "Write programs that do one thing and do it well.
+    Write programs that work together."
+    Douglas McIlroy 
+    UNIX Time-Sharing System Foreword
+    The Bell System Technical Journal 57, no. 6, 1978
 
-    <div class="quote-text">
-        "Every good work of software <br>
-        starts by scratching a developer's personal itch."
-    </div>
+    Working In Public
+    by Nadia Eghbal
+    Notes:
+        The term <em>open source</em> describes the way that software
+        is distributed and used, not to how it is produced.
+            p 44
 
-    <div class="quote-ref">
-        Eric S. Raymond<br>
-        <em><a href="http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/ar01s02.html">The Cathedral and the Bazaar</a></em>
-    </div>
+
+        Reasons to participate in the "Commons"
+        - Intrinsic Motivation
+            - i.e., it's neat
+        - Modularity and Granular Tasks
+        - Low Coordination Costs
+            Benkler, p74
+
+        "Defining membership boundaries in an open source project turns out to
+        be one of the hardest problems to solve."
+
+        
+
+        Open-source projects create
 
     "Modularity is extremely important to such a large collection of
     software as a distribution."
         -Ian Murdock, 
         https://www.linuxjournal.com/article/2841
-
-
-    <blockquote>
-        "Thompson wanted to create a comfortable computing environment 
-        constructed according to his own design, using whatever means 
-        were available. His plans, it is evident in retrospect, 
-        incorporated many of the innovative aspects of Multics,
-        including an explicit notion of a process as a locus of 
-        control, a tree-structured file system, a command interpreter 
-        as user-level program, simple representation of text files, 
-        and generalized access to devices. They excluded others, such
-        as unified access to memory and to
-        files."<sup><a href="https://www.bell-labs.com/usr/dmr/www/chist.html">[o]</a></sup>
-    </blockquote>
-
 
     Quotes:
         "Don't be a dick."
@@ -82,10 +84,10 @@ last-updated: May 2021
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#fork-merge">Fork/Merge</a></li>
         <li><a href="#tree-of-trust">Tree of Trust</a></li>
+        <li><a href="#money">Money Isn't the Issue</a></li>
         <li><a href="#project-leadership">Project Leadership</a></li>
-        <li><a href="#modularity">Modularity</a></li>
         <li><a href="#less"><code>less</code>: A Success Story</a</li>
-
+        <li><a href="#modularity">Modularity</a></li>
         <li><a href="#incremental-improvement">Incremental Improvement</a></li>
         <li><a href="#references"> References </a></li>
     </ul>
@@ -96,100 +98,62 @@ last-updated: May 2021
     <h1>How Open Source Works</h1>
 
     <div class="quote-text">
-        "This is a program for hackers by a hacker.<br>
-        I've enjoyed doing it, and somebody might enjoy <br>
-        looking at it and even modifying it for <br>
-        their own needs."
+        "These developers aren't developing communities,<br>
+        they're directing air traffic."
     </div>
 
     <div class="quote-ref">
-        Linus Torvalds<br>
-        <a href="https://josh-59.github.io/Learning-Linux/pre/free-minix-like-kernel-sources-for-386-at.html">Subject: Free minix-like kernel sources for 386-AT</a></sup>
+        Nadia Eghbal<br>
+        Working in Public
     </div>
 
     <p>
         So what makes it all tick?
         In this dramatic conclusion, we'll pick apart the
-        common patterns of the open-source ecosystem,
+        key components of the open-source ecosystem,
         from the mechanics of contributing, to the
-        resultingly modular structure.
     </p>
 </div>
 
-
-<div id="fork-merge" class="content">
-    <h2>Fork/Merge</h2>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Repositories exist in many contexts within open-source.
-        </p>
-    </div>
-
+<div class="content" id="from-the-top">
+    <h2>From the Top</h2>
     <p>
-        A <em>repository</em> is a tracked collection of files.
-        The source code of an open-source project is available 
-        in a public repository, and anyone
-        may download or otherwise copy it.
-        Such a copy is called a <em>fork.</em>
+        <em>Open source</em> describes only how software is 
+        distributed and used&mdash; Not how it is produced.<sup><a href="#references" title="Eghbal p44">[a]</a></sup>
+        As Nadia Eghbal points out, code is to open-source projects
+        what money is to businesses, and there are many successful 
+        open-source organizational models, in much the same way that
+        there are many successful business models.
+        For the user, the reasons that a particular 
+        open-source project exists matters less than what it is.
     </p>
 
     <p>
-        Having created a fork, the software is now *yours*.
-        You can inspect it, modify it, build it, install it, run it,
-        discard it&mdash; Whatever you want.
-        If you change some of its files, though, we say that your fork and 
-        its source have <em>diverged.</em>
+        For example, Facebook has put extensive effort into
+        Linux's new <code>btrfs</code>, commonly described as 
+        "a modern copy-on-write filesystem."
+        It eases routine administrative tasks, especially in 
+        enterprise-class settings;
+        They have done so for their own purposes, rather than
+        altruistic motives.
+        Nonetheless, the resulting software is GNU GPL'd 
+        (Version 2, to be specific), 
+        and so from any user's standpoint, it is as free (libre) as anything
+        crafted by GNU's own hand.
     </p>
 
     <p>
-        Merging changes with the original repository is a process, and naturally
-        involves the source's maintainer.
-        The process begins with a <em>pull request,</em>
-        which initiates a discussion about
-        the proposed changes.<sup><a href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests">[a]</a></sup>
-        If accepted, the changes are made to the original,
-        and the two repositories are identical again.
-    </p>
 
-    <p>
-        This pattern repeats at various scales.
-        Today's revision control software allows an individual programmer
-        to create distinct branches within a local repository,
-        and to merge or abandon changes within it.
-        At the macro scale, this pattern repeated with GNU's compiler
-        collection, when a collection of forks became a concurrent project, 
-        and was subsequently merged into GNU's main 
-        trunk.<sup><a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection#EGCS_fork">[b]</a></sup>
     </p>
-
-    <p>
-        For a few reasons, small merges are preferred over large 
-        ones.
-        First, the change is easier to review by others&mdash; especially,
-        the project's maintainer.
-        Second, bugs are less likely to be introduced.
-        Third, small changes are less likely to break other peoples' work.
-        This is especially important when the project implements
-        some public API, and other projects depend upon it. 
-        Finally, large changes simply don't bode well when 
-        many people are working on the project.
-    </p>
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://opensource.guide/">Open Source Guide</a></li>
-        <li><a href="https://en.wikibooks.org/wiki/FOSS_A_General_Introduction/Introduction">FOSS: A General Introduction</a></li>
-    </ul>
 </div>
 
-
-<div class="content" id="tree-of-trust">
-    <h2>Tree of Trust</h2>
+<div class="content" id="mailing-lists">
+    <h2>Mailing Lists</h2>
 
     <p>
-        
+        The first generation of open-source developers, including
+        Richard Stallman, Linus Torvalds and Eric Raymond, 
+
     </p>
 
     <p>
@@ -203,10 +167,13 @@ last-updated: May 2021
     </p>
 
     <p>
+
+    </p>
+
+    <p>
         https://www.reddit.com/r/unpopularopinion/comments/nfh6mu/we_dont_need_free_college_we_need_to_acknowledge/
     </p>
 </div>
-
 
 <div class="content" id="project-leadership">
     <h2>Project Leadership</h2>
@@ -214,12 +181,12 @@ last-updated: May 2021
     <p>
         Large projects, such as the Linux kernel or Mozilla Firefox,
         for whom many people might want to see a particular change,
-        often adopt a schedule for releases.
-    </p>
-
-    <p>
-        Outside of the Linux kernel, Firefox is one of the largest and
-        most agressive open-source projects is 
+        often premetively schedule releases.  
+        The intent is to produce a reiterative cycle 
+        that accomodates both feature introduction <em>and</em> 
+        commit rejection&mdash; if your change doesn't make it into 
+        the latest kernel release, for instance, you only have to 
+        wait six weeks for the next one.
     </p>
 
     <p>
@@ -237,6 +204,15 @@ last-updated: May 2021
         marginally better than the previous, those improvements accrue,
         and the result is guaranteed to be great software.
     </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+    
+        <p>
+            Outside of the Linux kernel, Firefox is one of the largest and
+            most agressive open-source projects is 
+        </p>
+    </div>
 
     <p>
         For example, the last opportunity to merge feature
@@ -285,6 +261,35 @@ last-updated: May 2021
     </ul>
 </div>
 
+<div class="content" id="github">
+    <h2>Social Coding</h2>
+
+    <p>
+        Coding platform <em>Github</em> is a proprietary, for-profit
+        platform.
+        It is the third generation of connectivity among open-source
+        contributors, and I do not expect it to be the last.
+    </p>
+
+</div>
+
+<div class="content" id="next-gen">
+    <h2>The Next Generation</h2>
+
+</div>
+
+<div class="content" id="average-users-role">
+    <h2>A Neat Thing</h2>
+
+    <p>
+        I do not believe that the ordinary user is 
+        obligated to contribute to open source.  
+        In particular, strict adherents of the "cathedral" model 
+        do not accept user modifications:
+        They make what they want, and made it freely available too.
+    </p>
+
+</div>
 
 <div class="content" id="less">
     <h2 style="margin-bottom: 0;"><code>less</code>:</h2>
@@ -406,11 +411,20 @@ last-updated: May 2021
         </li>
     </ol>
 
-    <h3>Linus' Rule</h3>
+    <h3>Linus' Real Law </h3>
+
+    <p>
+        The importance of modularity to software development is difficult
+        to overstate.
+    </p>
 
     <p>
         <em>If it's a bug that's being used, it's a feature, not a bug.</em>
     <p>
+
+    <p>
+
+    </p>
 
     <h3>See Also:</h3>
     <ul>
@@ -430,14 +444,6 @@ last-updated: May 2021
         things people created because they wanted to.
         As it turns out, they've built something stellar, and best
         of all, you can check it out for yourself.
-    </p>
-
-    <p>
-        I do not believe that the ordinary user is 
-        obligated to contribute to open source.  
-        In particular, strict adherents of the "cathedral" model 
-        do not accept user modifications:
-        They make what they want, and made it freely available too.
     </p>
 
     <p>
