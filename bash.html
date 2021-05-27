@@ -11,6 +11,33 @@ last-updated: April, 2021
     Explanation of sudo:
     https://www.linuxjournal.com/sites/default/files/2018-11/GeekGuide-BeyondTrust-BeyondSudo.pdf
 
+<div class="content" id="startup-files">
+    <h2>Startup Files</h2>
+    <h4>and Backwards Compatibility</h4>
+
+    Thompson's (First-Edition) shell sh:
+    Bourne's shell:
+    <p>
+        Bash inherits ideas dating all the way to Thompson's original
+        shell, <code>sh</code>.
+        <Create a faux man-page describing all parts of Thompson's shell
+        that are preserved in "modern" Bash.
+    </p>
+
+    <p>
+        Let's be real: Bash was first released 1989
+        It is not a modern shell.
+    </p>
+
+    <p>
+        There are two big ideas going on with Bash's startup files:
+        1) One file should be executed <em>per user login</em>
+            a) With another file being executed <em>per interactive shell</em>
+        2) Backwards comaptibility
+    </p>
+
+</div>
+
 <div class="content" id="make">
     <h2><code>make</code></h2>
 
