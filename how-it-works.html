@@ -5,6 +5,10 @@ last-updated: May 2021
 ---
 
 <!--
+
+    https://www.youtube.com/watch?v=XFrJcjCbCA8
+
+    
     "Write programs that do one thing and do it well.
     Write programs that work together."
     Douglas McIlroy 
@@ -22,14 +26,14 @@ last-updated: May 2021
         Reasons to participate in the "Commons"
         - Intrinsic Motivation
             - i.e., it's neat
-        - Modularity and Granular Tasks
+        - Modular and Granular Tasks
         - Low Coordination Costs
             Benkler, p74
 
+
+    People don't give away stuff for free.
         "Defining membership boundaries in an open source project turns out to
         be one of the hardest problems to solve."
-
-        
 
         Open-source projects create
 
@@ -82,12 +86,11 @@ last-updated: May 2021
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
-        <li><a href="#fork-merge">Fork/Merge</a></li>
-        <li><a href="#tree-of-trust">Tree of Trust</a></li>
-        <li><a href="#money">Money Isn't the Issue</a></li>
+        <li><a href="#from-the-top">From the Top</a></li>
+        <li><a href="#ortlebs-commons">Ortleb's Commons</a></li>
         <li><a href="#project-leadership">Project Leadership</a></li>
         <li><a href="#less"><code>less</code>: A Success Story</a</li>
-        <li><a href="#modularity">Modularity</a></li>
+        <li><a href="#unix-philosophy">Unix Philosophy</a></li>
         <li><a href="#incremental-improvement">Incremental Improvement</a></li>
         <li><a href="#references"> References </a></li>
     </ul>
@@ -121,11 +124,15 @@ last-updated: May 2021
         <em>Open source</em> describes only how software is 
         distributed and used&mdash; Not how it is produced.<sup><a href="#references" title="Eghbal p44">[a]</a></sup>
         As Nadia Eghbal points out, code is to open-source projects
-        what money is to businesses, and there are many successful 
-        open-source organizational models, in much the same way that
+        what money is to businesses: There are many successful 
+        open-source models, in much the same way that
         there are many successful business models.
-        For the user, the reasons that a particular 
-        open-source project exists matters less than what it is.
+        The only thing that open-source projects necessarily
+        have in common is that they yield appropriately-licensed
+        software.
+        For the user, the reasons behind a particular 
+        open-source project (or contribution) 
+        matter less than what it is.
     </p>
 
     <p>
@@ -143,40 +150,21 @@ last-updated: May 2021
     </p>
 
     <p>
+        
 
     </p>
 </div>
 
-<div class="content" id="mailing-lists">
-    <h2>Mailing Lists</h2>
+<div class="content" id="commons">
+    <h2>Ostreb's <em>Commons:</em></h4>
+    <h4>An Analogy</h4>
 
-    <p>
-        The first generation of open-source developers, including
-        Richard Stallman, Linus Torvalds and Eric Raymond, 
-
-    </p>
-
-    <p>
-        Nobody cares about credentials.
-        Simply rendered superfluous.
-    </p>
-
-    <p>
-        The University of Minessota...
-
-    </p>
-
-    <p>
-
-    </p>
-
-    <p>
-        https://www.reddit.com/r/unpopularopinion/comments/nfh6mu/we_dont_need_free_college_we_need_to_acknowledge/
-    </p>
 </div>
+
 
 <div class="content" id="project-leadership">
-    <h2>Project Leadership</h2>
+    <h2>Project Leadership:</h2>
+    <h4>Curated Modifications</h4>
 
     <p>
         Large projects, such as the Linux kernel or Mozilla Firefox,
@@ -261,36 +249,6 @@ last-updated: May 2021
     </ul>
 </div>
 
-<div class="content" id="github">
-    <h2>Social Coding</h2>
-
-    <p>
-        Coding platform <em>Github</em> is a proprietary, for-profit
-        platform.
-        It is the third generation of connectivity among open-source
-        contributors, and I do not expect it to be the last.
-    </p>
-
-</div>
-
-<div class="content" id="next-gen">
-    <h2>The Next Generation</h2>
-
-</div>
-
-<div class="content" id="average-users-role">
-    <h2>A Neat Thing</h2>
-
-    <p>
-        I do not believe that the ordinary user is 
-        obligated to contribute to open source.  
-        In particular, strict adherents of the "cathedral" model 
-        do not accept user modifications:
-        They make what they want, and made it freely available too.
-    </p>
-
-</div>
-
 <div class="content" id="less">
     <h2 style="margin-bottom: 0;"><code>less</code>:</h2>
     <h4>A Success Story</h4>
@@ -360,77 +318,51 @@ last-updated: May 2021
 </div>
 
 
-<div class="content" id="modularity">
-    <h2 style='margin-bottom: 0px;'>Modularity</h2>
-    <h4>and The Unix Philosophy</h4>
+<div class="content" id="mailing-lists">
+    <h2>Mailing Lists</h2>
 
     <p>
-        GNU/Linux can be likened to a 500-piece puzzle with 2500 available pieces:
-        For any piece of the puzzle (shell, desktop environment,
-        web browser, text editor&mdash; right down to
-        C libraries<sup><a href="https://en.wikipedia.org/wiki/C_standard_library#Implementations">[h]</a></sup>
-        and kernels<sup><a href="https://www.kernel.org/">[i]</a></sup>),
-        there are around five competent options to choose from.
+        The first generation of open-source developers, including
+        Richard Stallman, Linus Torvalds and Eric Raymond, 
     </p>
 
     <p>
-        This is an example of modular construction, and it is often
-        left to the user to decide which software component
-        instantiates each needed piece.
-        Modular (as opposed to <em>monolithic</em>) construction lies at the
-        heart of both open source and the UNIX philosophy:
-    </p>
-
-    <blockquote>
-        "A serious attempt is made to apply the principle of modularity to everything on a Unix-like system, not only programs but also parts of programs, such as algorithms, and even the kernel. Thus, a Unix-like operating system generally (or at least ideally) consists of a small kernel together with a large number of small, specialized programs that can interact with each other through a variety of well-defined interfaces."<sup><a href="http://www.linfo.org/unix_philosophy.html">[g]</a></sup>
-    </blockquote>
-
-    <p>
-        Thanks to modular construction, the development of 
-        GNU/Linux becomes cyclic.
-        Consider:
-    </p>
-
-    <ol>
-        <li>
-            Some developer identifies a deficiency in the current ecosystem
-        </li>
-        <li>
-            This component is relatively small, 
-        </li>
-        <li>
-            They may try their hand at solving it
-        </li>
-        <li>
-            These solutions compete amongst themselves, with the
-            more promising of them being developed further.
-        </li>
-        <li>
-            Consequently, the user is presented with an abundance of choice,
-            and the cycle continues.
-        </li>
-    </ol>
-
-    <h3>Linus' Real Law </h3>
-
-    <p>
-        The importance of modularity to software development is difficult
-        to overstate.
+        Nobody cares about credentials.
+        Simply rendered superfluous.
     </p>
 
     <p>
-        <em>If it's a bug that's being used, it's a feature, not a bug.</em>
-    <p>
+        The University of Minessota...
+
+    </p>
 
     <p>
 
     </p>
 
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="http://www.linfo.org/module.html">Module Definition</a> - LINFO</li>
-    </ul>
+    <p>
+        https://www.reddit.com/r/unpopularopinion/comments/nfh6mu/we_dont_need_free_college_we_need_to_acknowledge/
+    </p>
 </div>
+
+<div class="content" id="github">
+    <h2>Github</h2>
+    <h4>and Platforms in General</h4>
+
+    <p>
+        Coding platform <em>Github</em> is a proprietary, for-profit
+        platform.
+        It is the third generation of connectivity among open-source
+        contributors, and I do not expect it to be the last.
+    </p>
+</div>
+
+<div class="content" id="next-gen">
+    <h2>The Next Generation</h2>
+
+</div>
+
+
 
 <div class="content" id="incremental-improvement">
     <h2>Incremental Improvement</h2>
@@ -454,7 +386,13 @@ last-updated: May 2021
         be realized at the user's discretion.
     </p>
 
-    <h3>Where to from here?</h3>
+    <p>
+        I do not believe that the ordinary user is 
+        obligated to contribute to open source.  
+        In particular, strict adherents of the "cathedral" model 
+        do not accept user modifications:
+        They make what they want, and made it freely available too.
+    </p>
 
     <p>
         I wrote this because I was interested in computers, and was
@@ -462,10 +400,6 @@ last-updated: May 2021
         Simply put, for those interested in computer science, there does
         not exist a better platform for research and development that
         GNU/Linux.
-    </p>
-
-    <p>
-        
     </p>
 </div>
 
