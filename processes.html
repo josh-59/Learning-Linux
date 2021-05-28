@@ -5,44 +5,14 @@ last-updated: April, 2021
 ---
 
 <!--
-    Hmmmm...
-
-    Actors - User+Group
 
 <div class="content" id="executable-files">
     <h2>Executable Files</h2>
 
-    <p>
-        On Unix-like operating systems, any file with <em>execute</em>
-        permissions may be treated as a program.
-    </p>
-
-</div>
-
-
-    <p>
-        A process without its attributes is.... memory and some CPU time.
 
     <p>
         The Linux kernel supports four distinct kinds of executable files.
-
         https://www.kernel.org/doc/html/latest/admin-guide/binfmt-misc.html
-
-    </p>
-
-
-    <p>
-        A collection of processes is called a 
-        <a href="http://www.linfo.org/runlevel_def.html">runlevel</a>,
-        and these are managed by the initialization ("init") process.
-        Different runlevels offer different services, and
-        are therefore intended to be used in different situations.
-        For instance,
-        <a href="http://www.linfo.org/single_user_mode.html">single-user mode</a>
-        (runlevel 1) was analogous to <em>safe boot,</em>
-        runlevel 5 corresponded to multi-user/GUI mode,
-        and runlevel 0 told <em>init</em> to kill all processes and shut down the
-        system.<sup><a href="http://www.linfo.org/runlevel_def.html">[3]</a></sup>
     </p>
 
 </div>
@@ -62,6 +32,7 @@ last-updated: April, 2021
         <li><a href="#exec">Executing a Different Program</a></li>
         <li><a href="#file-descriptors"> File Descriptors </a></li>
         <li><a href="#termination">Process Termination</a></li>
+        <li><a href="#what-is">Ya But What Is It?</a></li>
         <li><a href="#dr-fraser"> Dr. Brian Fraser </a></li>
         <li><a href="#references"> References </a></li>
     </ul>
@@ -506,9 +477,6 @@ last-updated: April, 2021
     </ul>
 </div>
 
-  <!--
-
-
 <div class="content" id="what-is">
     <h2>Ya But What Is It?</h2>
 
@@ -516,12 +484,18 @@ last-updated: April, 2021
         The short answer is, a section of memory distinct from the
         rest of the machine, and some restricted access to the CPU, both
         given by the kernel.
+        The long answer is the primary abstraction presented to programmers,
+        and the environment within which all programs execute.
+        The process is one of the most important ideas
+        of computer science, and we can only scratch the surface of
+        what it is here.
     </p>
     
     <h3> Memory </h3>
 
     <p>
-        Modern operating systems provide each process with its own memory in the
+        Modern operating systems 
+        provide each process with its own memory in the
         form of a distinct <em>address space.</em>
         On all modern computers, memory is byte-addressable, so that each
         address refers to exactly one byte.
@@ -534,17 +508,13 @@ last-updated: April, 2021
     </div>
 
     <p>
-        For each machine, there exists a unique physical address space;
-        only the kernel has access to this one.
-        For each process, the kernel assigns some subset of the 
-        physical address space, effectively partitioning the machine.
-
-    </p>
-
-    <p>
+        For each machine, there exists a unique physical address space.
+        An address in this space refers to an actual byte of memory 
+        (RAM) on the machine;
+        only the kernel has access to this address space.
         The kernel, working in conjunction with hardware, 
         imposes a layer of indirection between each process's
-        memory reference and the physical address space.
+        memory references and the physical address space.
         This layer is known as <em>virtual memory,</em>
         and consists of a collection of virtual addresses 
         mapped to physical ones.
@@ -552,8 +522,9 @@ last-updated: April, 2021
 
     <p>
         Virtual memory requires support from both the kernel and CPU:
-        The kernel to assign address translations, and the CPU to carry 
-        them out.
+        The kernel to assign address translations 
+        (mappings from virtual addresses to physical addresses), 
+        and the CPU to carry them out.
         Each time a process references a virtual address, the
         CPU translates it to a physical address, so that for all
         intents and purposes, virtual addresses behave exactly
@@ -561,13 +532,12 @@ last-updated: April, 2021
     </p>
 
     <p>
-        The result is that each process is presented with 
-        the illusion that it has the entire physical address space to itself,
-        while the connection is actually mediated.
-        More, by excluding other physical addresses,
-        the rest of the machine may be implicitly protected
-        from the currently running process:
-        Their memory simply does not exist within the context of the
+        Since each process operates within its own virtual address space, 
+        each process is presented with the illusion
+        that it has the entire physical address space to itself.
+        By excluding physical addresses from translation,
+        the rest of the machine may be implicitly protected:
+        Other process' memory simply does not exist within the context of the
         currently running process, and therefore cannot be read from, 
         nor written to.
     </p>
@@ -579,24 +549,17 @@ last-updated: April, 2021
         <em>Kernel mode,</em> sometimes called "supervisor mode," is
         the unrestricted mode.
         Here, all CPU instructions are available, and address translation
-        is not performed, so that code running in this mode has 
+        is not performed, so that code running in this mode has
         unmediated access to the machine.
     </p>
 
     <p>
-        <em>User mode</em> is a proper subset of kernel mode; code running
+        <em>User mode</em> is a proper subset of kernel mode: 
+        A program running
         in user mode does not have access to all instructions, and 
         its memory references are redirected through a translation table.
-        All processes run in user mode, and
-        if a process, running in user mode, attempts to execute a restricted
-        instruction (or address memory not given to it), 
-        its execution is halted, and control is given to the kernel.
-        At that point, it is up to the operating system to determine what to 
-        do&mdash; usually, terminate the offending process.
-    </p>
-
-    <p>
-        This technique is known as <em>limited direct execution.</em><sup><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/cpu-mechanisms.pdf">[3]</a></sup>
+        Executing programs in this mode
+        is known as <em>limited direct execution.</em><sup><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/cpu-mechanisms.pdf">[3]</a></sup>
         It is <em>limited</em> in the sense that each process has access to
         only a restricted subset of the CPU's instructions, and
         it is <em>direct</em> in the sense that the program runs
@@ -605,14 +568,19 @@ last-updated: April, 2021
         of available hardware.
     </p>
 
+    <p>
+        Virtual memory and limited direct execution together
+        form a sandboxed environment within which untrusted
+        (that is, arbitrary) programs may be safely executed.
+    </p>
+
     <h3>See Also:</h3>
     <ul>
         <li><a href="https://pages.cs.wisc.edu/~remzi/OSTEP/">Operating Systems: Three Easy Pieces</a> by Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau </li>
+        <li><a href="https://csapp.cs.cmu.edu/">Computer Systems: A Programmer's Perspective</a> by Randal E. Bryant and David R. O'Hallaron</li>
     </ul>
 
 </div>
-
--->
 
 <div class="content" id="dr-fraser">
     <h2 style="margin-bottom: 2pt;"> Dr. Brian Fraser: </h2>
