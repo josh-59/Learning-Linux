@@ -5,6 +5,11 @@ last-updated: April, 2021
 ---
 
 <!--
+
+    Unix History:
+        Note documentation and study by college students
+        Unix Wars?
+
     Distributions: 
         Since most users don't care to obtain software themselves,
         a distribution is a project or community that fills this gap.
@@ -31,7 +36,7 @@ Closing Remarks:
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#history"> History </a></li>
-        <li><a href="#bell-labs">Bell Laboratories</a></li>
+        <li><a href="#unix">Unix</a></li>
         <li><a href="#unix-architecture"> The UNIX Architecture </a></li>
         <li><a href="#gnu">GNU's Not Unix</a></li>
         <li><a href="#linux"> The Linux Kernel </a></li>
@@ -201,9 +206,8 @@ Closing Remarks:
     </ul>
 </div>
 
-<div id="bell-labs" class="content">
-    <h2 style="margin-bottom: 0;">Bell Laboratories:</h2>
-    <h4>UNIX</h4>
+<div id="unix" class="content">
+    <h2>Unix</h2>
 
     <p>
         In the wake of AT&amp;T's withdrawal from Multics, 
@@ -228,17 +232,17 @@ Closing Remarks:
         The <em>exec</em> call was "trivial", and the other three components were
         done in one week 
         each.<sup><a href="#references" title="Kernighan, p34">[2]</a></sup>
-        By late 1969, the software was self-supporting.
     </p>
 
     <p>
-        The software continued to be developed into a 
-        multi-user, time-sharing operating system, now known 
+        By late 1969, the software was self-supporting, and
+        continued to be developed into a 
+        multi-user, time-sharing operating system, known 
         as <em>Unix.</em>
         Its small size and simple construction
         allowed virtually anyone to modify it to their needs.
         The 4<sup>th</sup> Edition was rewritten in 
-        a high-level programming language, C.<sup><a href="https://www.bell-labs.com/usr/dmr/www/chist.html">[11]</a></sup>
+        the high-level programming language, C.<sup><a href="https://www.bell-labs.com/usr/dmr/www/chist.html">[11]</a></sup>
     </p>
 
     <p>
@@ -274,7 +278,7 @@ Closing Remarks:
     <h2>The Unix Architecture</h2>
     <p>
         Unix had a simple, clear, well-documented architecture that
-        inspired many operating systems.<a href="https://upload.wikimedia.org/wikipedia/commons/7/77/Unix_history-simple.svg">[a]</a>. 
+        inspired many operating systems.
         It is organized as a hierarchy of layers,
         with each layer building upon the ones beneath it, and supporting
         those above it.
