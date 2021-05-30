@@ -6,6 +6,18 @@ last-updated: May 2021
 
 <!--
 
+
+    <div class="quote-text">
+        Software components should be small, <br>
+        and focused on doing one specific thing well.
+    </div>
+
+    <div class="quote-ref">
+        <a href="https://github.com/dwmkerr/hacker-laws#the-unix-philosophy">UNIX Philosophy</a>
+    </div>
+
+
+
     Gentoo:
         ebuild(5): https://dev.gentoo.org/~zmedico/portage/doc/man/ebuild.5.html
         ebuild phase functions: https://devmanual.gentoo.org/ebuild-writing/functions/
@@ -76,7 +88,7 @@ last-updated: May 2021
         "A serious attempt is made to apply the principle of modularity to everything on a Unix-like system, not only programs but also parts of programs, such as algorithms, and even the kernel. Thus, a Unix-like operating system generally (or at least ideally) consists of a small kernel together with a large number of small, specialized programs that can interact with each other through a variety of well-defined interfaces."<sup><a href="http://www.linfo.org/unix_philosophy.html">[g]</a></sup>
     </blockquote>
 
-    <p>
+    
         The importance of modularity to software development is difficult
         to overstate, and it is a key of practical software development
         that these pieces work well together.
@@ -120,12 +132,13 @@ last-updated: May 2021
     <h1>Packages</h1>
 
     <div class="quote-text">
-        Software components should be small, <br>
-        and focused on doing one specific thing well.
+        "Modularity is extremely important to <br>
+        such a large collection of
+        software as a distribution."
     </div>
 
     <div class="quote-ref">
-        <a href="https://github.com/dwmkerr/hacker-laws#the-unix-philosophy">UNIX Philosophy</a>
+        <a href="https://www.linuxjournal.com/article/2841">Ian Murdock</a>
     </div>
 
     <p>
@@ -148,6 +161,14 @@ last-updated: May 2021
     <div class="code">
         # ./configure &amp;&amp; make &amp;&amp; make install
     </div>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            The ordinary user is not expected to build software from source.
+        </p>
+    </div>
+
 
     <p>
         Each project uses its own language and build system;
