@@ -6,6 +6,11 @@ last-updated: May 2021
 
 <!--
 
+        So what makes it all tick?
+        In this dramatic conclusion, we'll pick apart the
+        key components of the open-source ecosystem,
+        from the mechanics of contributing, to the
+
     https://www.youtube.com/watch?v=XFrJcjCbCA8
 
     
@@ -30,31 +35,10 @@ last-updated: May 2021
         - Low Coordination Costs
             Benkler, p74
 
-
-    People don't give away stuff for free.
-        "Defining membership boundaries in an open source project turns out to
-        be one of the hardest problems to solve."
-
-        Open-source projects create
-
-    "Modularity is extremely important to such a large collection of
-    software as a distribution."
-        -Ian Murdock, 
-        https://www.linuxjournal.com/article/2841
-
     Quotes:
-        "Don't be a dick."
-            <a href="http://www.wheatonslaw.com/dontbeadick.html">Wheaton's Law</a>
-
         "Be conservative in what you do, be liberal in what you accept from others."
             <a href="https://en.wikipedia.org/wiki/Robustness_principle">Robustness Principle</a>
 
-    Why You Should Choose Open Source:
-        - User control
-        - Free as in Cost, usually
-
-    Why You Should Support Open Source:
-        
 
 
     <div class="aside-right">
@@ -81,17 +65,42 @@ last-updated: May 2021
 <li><a href="#leadership">Leadership</a></li>
 <li><a href="#closing-remarks">Closing Remarks</a></li>
 
+    Not easy
+        |
+        |
+        |
+        |
+       \ /
+Open Source License
+        |
+        |
+        |   Large Projects: Foundations
+        |
+       \ /
+Curated Modifications
+        |   
+        |
+        |   Large projects:  Tree?
+        |
+       \ /
+Incremental Improvement
+        |   
+        |
+        |   Large projects: Time-based Releases
+        |
+       \ /
+  What's it Like?
+            Sport
+
 -->
 
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#from-the-top">From the Top</a></li>
-        <li><a href="#sports">Sports</a></li>
         <li><a href="#project-leadership">Project Leadership</a></li>
         <li><a href="#less"><code>less</code>: A Success Story</a</li>
-        <li><a href="#unix-philosophy">Unix Philosophy</a></li>
-        <li><a href="#incremental-improvement">Incremental Improvement</a></li>
+        <li><a href="#sports">Sports</a></li>
         <li><a href="#references"> References </a></li>
     </ul>
 </div>
@@ -111,10 +120,11 @@ last-updated: May 2021
     </div>
 
     <p>
-        So what makes it all tick?
-        In this dramatic conclusion, we'll pick apart the
-        key components of the open-source ecosystem,
-        from the mechanics of contributing, to the
+        Although I'd love to believe that open-source software
+        is as casual as it's portrayed to be, more often than
+        not, it simply isn't.
+        Good software is not easy to produce, and open-source is
+        not different.
     </p>
 </div>
 
@@ -129,81 +139,75 @@ last-updated: May 2021
         have in common is that they yield appropriately-licensed
         software, in much the same way that a business exists
         for the purpose of making money.
-    </p>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            All I'm saying is, <em>It is what it is.</em>
-        </p>
-    </div>
-
-    <p>
         There are many successful 
         open-source models, in much the same way that
         there are many successful business models.
-        For the user (i.e., noncontributor), the reasons behind a particular 
+    </p>
+
+    <p>
+        For the user, the reasons behind a particular 
         open-source project don't matter.
         For example, Facebook has put extensive effort into
         Linux's new <code>btrfs</code>, commonly described as 
         "a modern copy-on-write filesystem."
         It eases routine administrative tasks, especially in 
-        enterprise-class settings;
-        Facebook has done so for their own purposes, rather than
-        altruistic motives.
-        Nonetheless, the resulting software is GNU GPL'd 
+        enterprise-class settings.
+        Facebook has contributed to the project for their own purposes;
+        nonetheless, the resulting software is GNU GPL'd 
         (Version 2, to be specific), 
-        and so from any user's standpoint, it is as free (libre) as anything
+        and so from the user's standpoint, it is as free (libre) as anything
         crafted by GNU's own hand.
     </p>
 
     <p>
-        So we see that there is a sharp disconnect between 
+        So we see, right off, that there is a sharp disconnect between 
         <em>works</em> and <em>ideologies,</em>&mdash; namely, 
         the ideology that produced the work does 
         not necessarily constrain it.
+
+        Rather, developing the filesystem was seen as beneficial for 
+        Facebook, and 
     </p>
 </div>
 
-<div class="content" id="sports">
-    <h2 style="margin-bottom: 0;">Sports:</h2>
-    <h4>An Analogy</h4>
-
-    <p>
-        To call open source a hobby isn't quite strong enough; 
-        at the same time, it isn't necessarily a nine-to-five, either.  
-        Open-Source and GNU/Linux lie somewhere between the two,
-        closer to sport.
-    </p>
-
-    <p>
-        Focus is usually on hobbiest's works&mdash; 
-        Linux, Python, Rust... 
-        But doing so threatens to ignore how serious these projects
-        can become.
-    </p>
-
-    <p>
-        Starting out:
-            GNU started out as a serious attempt to create a free
-            operating system
-            Linux started out as a hobby
-            Firefox started out as a strategic business move by Netscape
-            Debian vs. Slackware...
-    </p>
-
-    <p>
-        For me, the magic is that it's composed of
-        things people created because they wanted to&mdash;
-        they are <em>intrinsically</em> motivated, as opposed to 
-        <em>extrinsically</em> motivated.
-    </p>
-
-</div>
 
 <div class="content" id="project-leadership">
-    <h2>Project Leadership:</h2>
-    <h4>Curated Modifications</h4>
+    <h2>Curating Modifications:</h2>
+    <h4>Project Leadership</h4>
+
+    <p>
+        Simply *open to the public*
+        Makes them relatively vulnerable
+    </p>
+
+
+    <p>
+        Most pull requests are rejected.
+    </p>
+
+    <!-- Large Projects -->
+
+    <h3>Tree of Trust</h3>
+
+    <p>
+        Tree of 
+    </p>
+
+    <p>
+        University of Minnesota...
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Release_early,_release_often">Release Early, Release Often</a> - Wikipedia</li>
+        <li><a href="https://blog.rust-lang.org/2014/10/30/Stability.html"> Stability as a Deliverable | Rust Blog</a></li>
+        <li><a href="http://thinking-in-code.blogspot.com/2010/07/train-model-of-software-development.html"> Thinking in Code: Train Model of Software Development</a></li>
+    </ul>
+</div>
+
+
+<div class="content" id="incremental-improvement">
+    <h2>Incremental Improvement</h2>
 
     <p>
         Large projects, such as the Linux kernel or Mozilla Firefox,
@@ -277,15 +281,9 @@ last-updated: May 2021
     </p>
 
 
-        Most pull requests are rejected.
 
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://en.wikipedia.org/wiki/Release_early,_release_often">Release Early, Release Often</a> - Wikipedia</li>
-        <li><a href="https://blog.rust-lang.org/2014/10/30/Stability.html"> Stability as a Deliverable | Rust Blog</a></li>
-        <li><a href="http://thinking-in-code.blogspot.com/2010/07/train-model-of-software-development.html"> Thinking in Code: Train Model of Software Development</a></li>
-    </ul>
 </div>
+
 
 <div class="content" id="less">
     <h2 style="margin-bottom: 0;"><code>less</code>:</h2>
@@ -355,15 +353,23 @@ last-updated: May 2021
     </ul>
 </div>
 
-<div class="content" id="incremental-improvement">
-    <h2>Incremental Improvement</h2>
+<div class="content" id="sports">
+    <h2 style="margin-bottom: 0;">Sports:</h2>
+    <h4>An Analogy</h4>
 
     <p>
-        The underlying difference in software is that it is
-        very cheap to copy, and as Richard Stallman points out,
-        doing so does not degrade the original.
-        It therefore exists as a <em>plan</em> of something, to 
-        be realized at the user's discretion.
+        To call open source a hobby isn't quite strong enough; 
+        at the same time, it isn't <em>work</em> in the 
+        traditional sense, either.  
+        Open-Source and GNU/Linux lie somewhere between the two,
+        closer to sport.
+    </p>
+
+    <p>
+        For me, the magic is that it's composed of
+        things people created because they wanted to&mdash;
+        they are <em>intrinsically</em> motivated, as opposed to 
+        <em>extrinsically</em> motivated.
     </p>
 
     <p>
@@ -375,13 +381,17 @@ last-updated: May 2021
     </p>
 
     <p>
-        I wrote this because I was interested in computers, and was
-        continually astounded by the quality of open-source wares.
-        Simply put, for those interested in computer science, there does
-        not exist a better platform for research and development that
-        GNU/Linux.
+        The underlying difference in software is that it is
+        very cheap to copy, and as Richard Stallman points out,
+        doing so does not degrade the original.
+        It therefore exists as a <em>plan</em> of something, to 
+        be realized at the user's discretion.
     </p>
+
+
 </div>
+
+
 
 
 <div id="references" class="content">
