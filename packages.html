@@ -8,14 +8,23 @@ last-updated: May 2021
 
 
     <div class="quote-text">
-        Software components should be small, <br>
-        and focused on doing one specific thing well.
+        "Modularity is extremely important to <br>
+        such a large collection of
+        software as a distribution."
     </div>
 
     <div class="quote-ref">
-        <a href="https://github.com/dwmkerr/hacker-laws#the-unix-philosophy">UNIX Philosophy</a>
+        <a href="https://www.linuxjournal.com/article/2841">Ian Murdock</a>
     </div>
 
+    Package Distribution:
+        Add bit about flatpak:
+        https://flatpak.org/
+
+    <p>
+        Other ways of distributing open-source software have been invented,
+        including Flatpak, Snap Store, and <em>nix</em>
+    </p>
 
 
     Gentoo:
@@ -62,61 +71,6 @@ last-updated: May 2021
         </ul>
 
 
-<div class="content" id="unix-philosophy">
-    <h2 style='margin-bottom: 0px;'>The Unix Philosophy:</h2>
-    <h4>Modularity</h4>
-
-    <p>
-        GNU/Linux can be likened to a 500-piece puzzle with 2500 
-        available pieces:
-        For any piece of the puzzle (shell, desktop environment,
-        web browser, text editor&mdash; right down to
-        C libraries<sup><a href="https://en.wikipedia.org/wiki/C_standard_library#Implementations">[h]</a></sup>
-        and kernels<sup><a href="https://www.kernel.org/">[i]</a></sup>),
-        there are around five competent options to choose from.
-    </p>
-
-    <p>
-        This is an example of modular construction, and it is often
-        left to the user to decide which software component
-        instantiates each needed piece.
-        Modular (as opposed to <em>monolithic</em>) construction lies at the
-        heart of GNU/Linux's relative success and the UNIX philosophy:
-    </p>
-
-    <blockquote>
-        "A serious attempt is made to apply the principle of modularity to everything on a Unix-like system, not only programs but also parts of programs, such as algorithms, and even the kernel. Thus, a Unix-like operating system generally (or at least ideally) consists of a small kernel together with a large number of small, specialized programs that can interact with each other through a variety of well-defined interfaces."<sup><a href="http://www.linfo.org/unix_philosophy.html">[g]</a></sup>
-    </blockquote>
-
-    <p>
-        The Linux kernel began as a terminal emulator project:
-        Linus Torvalds wished to connect his 386 to the University's
-        Unix system, and did so by writing a program that turned his
-        computer into a (large) terminal emulator.
-        The project grew; for some time, it was the
-        "GNU Emacs of Terminal Emulators," supporting many and
-        varied functionality.
-    </p>
-
-    <p>
-        During a marathon hacking session, the project became
-        a kernel, at which point his purpose, formally, 
-        was to support user-space.
-        Soon thereafter, he had GNU's <code>bash</code>, <code>gcc</code>,
-        etc. running.
-    </p>
-
-    <p>
-        <em>If it's a bug that's being used, it's a feature, not a bug.</em>
-        The core components of a GNU/Linux system are interchangeable,
-        and therefore
-    </p>
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="http://www.linfo.org/module.html">Module Definition</a> - LINFO</li>
-    </ul>
-</div>
 
 -->
 
@@ -128,6 +82,7 @@ last-updated: May 2021
         <li><a href="#binary-packages">Binary Packages</a></li>
         <li><a href="#package-managers">Package Managers</a></li>
         <li><a href="#distributions">Distributions</a></li>
+        <li><a href="#unix-philosophy">The Unix Philosophy</a></li>
         <li><a href="#references"> References </a></li>
     </ul>
 </div>
@@ -136,13 +91,12 @@ last-updated: May 2021
     <h1>Packages</h1>
 
     <div class="quote-text">
-        "Modularity is extremely important to <br>
-        such a large collection of
-        software as a distribution."
+        Software components should be small, <br>
+        and focused on doing one specific thing well.
     </div>
 
     <div class="quote-ref">
-        <a href="https://www.linuxjournal.com/article/2841">Ian Murdock</a>
+        <a href="https://github.com/dwmkerr/hacker-laws#the-unix-philosophy">Unix Philosophy</a>
     </div>
 
     <p>
@@ -506,18 +460,96 @@ last-updated: May 2021
         They publish package updates every Friday, which
         forms their latest release.
     </p>
-
     <h3>See Also:</h3>
     <ul>
-        <li><a href="https://linuxmint-user-guide.readthedocs.io/en/latest/snap.html"> Snap Store </a> - Linux Mint User Guide (Criticism of Snap Store)</li>
+        <li><a href="https://linuxmint-user-guide.readthedocs.io/en/latest/snap.html"> Snap Store </a> - Linux Mint User Guide</li>
         <li><a href="https://wiki.archlinux.org/index.php/Arch_Linux">Arch Linux</a> - ArchWiki</li>
     </ul>
 </div>
+
+<div class="content" id="unix-philosophy">
+    <h2 style='margin-bottom: 0px;'>The Unix Philosophy:</h2>
+    <h4>Modularity</h4>
+
+    <p>
+        GNU/Linux can be likened to a 500-piece puzzle with 2500 
+        available pieces:
+        For any piece of the puzzle (shell, desktop environment,
+        web browser, text editor&mdash; right down to
+        C libraries
+        and kernels),
+        there are around five competent options to choose from.
+    </p>
+
+    <p>
+        This is an example of modular construction, and it is often
+        left to the user to decide which software component
+        instantiates each needed piece.
+        Modular (as opposed to <em>monolithic</em>) construction lies at the
+        heart of <a href="https://en.wikipedia.org/wiki/Unix_philosophy">the Unix Philosophy</a>: 
+    </p>
+
+    <blockquote>
+        "A serious attempt is made to apply the principle of modularity to everything on a Unix-like system, not only programs but also parts of programs, such as algorithms, and even the kernel. Thus, a Unix-like operating system generally (or at least ideally) consists of a small kernel together with a large number of small, specialized programs that can interact with each other through a variety of well-defined interfaces."<sup><a href="http://www.linfo.org/unix_philosophy.html">[3]</a></sup>
+    </blockquote>
+
+    <p>
+        In order for disparate projects to work together, it is 
+        necessary that each piece respect its relative bounds.
+        While minor changes to a <em>user</em> interface don't usually
+        cause trouble, when the interface is strictly digital, small
+        changes to it can easily break software depending on it.
+    </p>
+
+    <h3>The Linux Kernel</h3>
+
+    <p>
+        The Linux kernel actually began as a terminal emulator project:
+        In 1991, Linus Torvalds wished to connect his 386 to the 
+        University's new Unix system, and did so by writing a 
+        program that turned his computer into a (large) terminal emulator.<sup><a href="#reference" title="Torvalds p. 78">[4]</a></sup>
+        Although he had Minix running on his machine, he wrote the 
+        emulator to run on bare metal in order to explore the 
+        386's CPU.<sup><a href="#reference" title="Torvalds p. 78">[4]</a></sup>
+    </p>
+
+    <p>
+        The project grew; for some time, it was the
+        "GNU Emacs of Terminal Emulators," supporting many and
+        varied functionality.<sup><a href="#reference" title="Torvalds p. 78">[4]</a></sup>
+        After a multi-day hacking marathon in which he implemented
+        filesystem capabilities, the project morphed into a kernel.<sup><a href="#reference" title="Torvalds p. 78">[4]</a></sup>
+    </p>
+
+    <p>
+        As the Linux kernel matured, Linus informally introduced
+        a single rule: <em><a href="https://lkml.org/lkml/2012/12/23/75">We do not break userspace</a>.</em>
+        This means that, if a proposed change to the kernel breaks a
+        piece of software running on it, then that
+        breakage is the fault of the kernel, and the change will be rejected.
+        In other words, <em>Any used interface will persist.</em>
+        The consequence of this rule is that the Linux kernel
+        is always capable of being the foundation of users' operating 
+        system: Any project which depends upon it will 
+        continue to work on it.
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="http://www.linfo.org/unix_philosophy.html">Unix Philosophy Description</a> by The Linux Information Project (LINFO)</li>
+        <li><a href="http://www.linfo.org/module.html">Module Definition</a> by The Linux Information Project (LINFO)</li>
+    </ul>
+</div>
+
 
 <div id="references" class="content">
     <h2> References </h2>
     <ol>
         <li><em>About the Gentoo Linux Installation.</em> About the Gentoo Linux Installation - Gentoo Wiki. (2015, January 1). <a href=https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/About">https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/About</a>.</li>
         <li>Hicks, A., Lumens, C., Cantrell, D., &amp; Johnson, L. (2005). <em>Chapter 18 Slackware Package Management.</em> Slackware Package Management. <a href="https://www.slackbook.org/html/package-management.html">https://www.slackbook.org/html/package-management.html</a>.</li>
+        <li>Unix philosophy description.  From <em>The Linux Information Project.</em> (2006, August 6) Retrieved June 1, 2021, from <a href="http://www.linfo.org/unix_philosophy.html">http://www.linfo.org/unix_philosophy.html</a></li>
+        <li>
+            Torvalds, L., &amp; Diamond, D. (2002). <em>Just for Fun: The story of an accidental revolutionary.</em> New York ; London ; Toronto ; Sydney: Harper.
+        </li>
     </ol>
 </div>
