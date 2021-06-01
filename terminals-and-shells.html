@@ -7,9 +7,7 @@ last-updated: March, 2021
 <!--
 To Do:
 
-    whereis instead of 'which'
-
-    <p>
+        <p>
         Finally, appending directories to <code>PATH</code> is an important step of
         setting up a development environment.
         I do this in <code>~/.bashrc</code>, and it works for me.
@@ -101,6 +99,14 @@ To Do:
         Linus Torvalds
     </div>
 
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            In the industry, we call it 
+            <em>convsersational computing.</em><sup><a href="https://multicians.org/history.html">[1]</a></sup>
+        </p>
+    </div>
+
     <p>
         Though foreign to most users, the text-terminal is the original
         interface for "interactive computing."
@@ -131,7 +137,7 @@ To Do:
 
 	<center>
 		<a title="Peter Hamer, CC BY-SA 2.0 &lt;https://creativecommons.org/licenses/by-sa/2.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Ken_Thompson_(sitting)_and_Dennis_Ritchie_at_PDP-11_(2876612463).jpg"><img width="1024" alt="Ken Thompson (sitting) and Dennis Ritchie at PDP-11 (2876612463)" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Ken_Thompson_%28sitting%29_and_Dennis_Ritchie_at_PDP-11_%282876612463%29.jpg/1024px-Ken_Thompson_%28sitting%29_and_Dennis_Ritchie_at_PDP-11_%282876612463%29.jpg"></a>
-        Ken Thompson (sitting) and Dennis Ritchie at PDP-11, in Bell Labs' <em>UNIX Room</em><sup><a href="#references" title="Kernighan, p. 45">[1]</a></sup>
+        Ken Thompson (sitting) and Dennis Ritchie at PDP-11, in Bell Labs' <em>Unix Room</em><sup><a href="#references" title="Kernighan, p. 45">[2]</a></sup>
 	</center>
 
     <!--
@@ -156,7 +162,7 @@ To Do:
 	<p>
 		The monitor contained a buffer
         (on the order of a few kilobytes)
-		which maintained the text currently on-screen.<sup><a href="https://tldp.org/HOWTO/Text-Terminal-HOWTO-1.html#ss1.6">[2]</a></sup>
+		which maintained the text currently on-screen.<sup><a href="https://tldp.org/HOWTO/Text-Terminal-HOWTO-1.html#ss1.6">[3]</a></sup>
 		Using an onboard font table, it would redraw the text given to it without
 		further instruction by the computer; thus, the computer's only duties were to feed
 		the terminal characters and to draw characters from it.
@@ -236,8 +242,8 @@ To Do:
 		A shell is a program which interprets and executes our (arbitrary) commands.
 		It is a <em>shell</em> in the sense that it is the outermost layer of the
 		operating system, with which the user has direct
-        contact.<sup><a href="http://www.linfo.org/kernel.html">[3]</a></sup>
-		The UNIX architecture entertains the shell as an ordinary user-space process.
+        contact.<sup><a href="http://www.linfo.org/kernel.html">[4]</a></sup>
+		The Unix architecture entertains the shell as an ordinary user-space process.
 	</p>
 
 	<p>
@@ -298,7 +304,7 @@ To Do:
         <p>
             Bash additionally supports <em>aliasing</em>&mdash; 
             command expansion&mdash;
-            but recommends functions.<sup><a href="https://www.gnu.org/software/bash/manual/html_node/Aliases.html">[4]</a></sup>
+            but recommends functions instead.<sup><a href="https://www.gnu.org/software/bash/manual/html_node/Aliases.html">[5]</a></sup>
         </p>
     </div>
 
@@ -310,7 +316,7 @@ To Do:
 
     <p>
         <a href="https://www.gnu.org/software/bash/manual/bash.html#Shell-Functions">User-defined functions</a> are a way to group commands 
-        together.<sup><a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Functions.html#Shell-Functions">[5]</a></sup>
+        together.<sup><a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Functions.html#Shell-Functions">[6]</a></sup>
         The most common way to define one is to include it in
         one of Bash's startup files.
     </p>
@@ -527,15 +533,15 @@ To Do:
     <h4><em>fork()</em></h4>
 
     <p>
-        The earliest versions of UNIX entertained exactly two processes:
-        One for each of two terminals connected to the machine.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[6]</a></sup>
+        The earliest versions of Unix entertained exactly two processes:
+        One for each of two terminals connected to the machine.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[7]</a></sup>
         The shell,
         <a href="https://en.wikipedia.org/wiki/Thompson_shell"><code>sh</code></a>,
         existed as a user-space process, but <em>fork()</em> had not been introduced.
         To execute a command, the shell replaced itself with
         the requested program;
         the program, on calling <em>exit</em>, replaced itself with the
-        shell once again.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[6]</a></sup>
+        shell once again.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[7]</a></sup>
     </p>
 
     <p>
@@ -564,7 +570,7 @@ To Do:
         but this process promptly terminated and had no effect whatsoever on
         its parent shell! It was necessary to make chdir a special command,
         executed internally within the shell. It turns out that several
-        command-like functions have the same property, for example login."<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[6]</a></sup>
+        command-like functions have the same property, for example login."<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[7]</a></sup>
     </blockquote>
 
     <p>
@@ -632,13 +638,14 @@ To Do:
 <div id="references" class="content">
 	<h2> References </h2>
 	<ol>
+        <li>Multics History. (2021, May 25) Retrieved 2021 June 1, from <a href="https://multicians.org/history.html">https://multicians.org/history.html</a></li>
 		<li> Kernighan, Brian. <i>Unix: A History and a Memoir.</i>  Published 2020, by Brian W. Kernighan via Kindle Direct Publishing. </li>
 		<li> Lawyer, David S. <i>Text-Terminal-HOWTO</i> <a href="https://tldp.org/HOWTO/Text-Terminal-HOWTO-1.html#ss1.6"> https://tldp.org/HOWTO/Text-Terminal-HOWTO-8.html</a>.  The Linux Documentation Project.  Retrieved April 6, 2020. </li>
         <li> Kernel Definition.  From <em>The Linux Information Project.</em> (2005, May 31) Retrieved April 10, 2021,  from <a href="http://www.linfo.org/kernel.html">http://www.linfo.org/kernel.html</a></li>
         <li>Aliases (Bash Reference Manual). (2020, December 21). Retrieved April 10, 2021, from <a href="https://www.gnu.org/software/bash/manual/html_node/Aliases.html">https://www.gnu.org/software/bash/manual/html_node/Aliases.html</a></li>
         <li>Shell Functions (Bash Reference Manual). (2020, December 21). Retrieved May 22, 2021, from <a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Functions.html#Shell-Functions">https://www.gnu.org/software/bash/manual/html_node/Shell-Functions.html#Shell-Functions</a></li>
 
-        <li>Ritchie, D. M. (1984). The Evolution of the Unix Time-sharing System. <em>AT&amp;T Bell Laboratories Technical Journal,</em> 63(6), 2nd ser., 1577-1593.</li>
+        <li>Ritchie, D. M. (1984).<a href="https://www.bell-labs.com/usr/dmr/www/hist.html">The Evolution of the Unix Time-sharing System</a>. <em>AT&amp;T Bell Laboratories Technical Journal,</em> 63(6), 2nd ser., 1577-1593.</li>
 
 	</ol>
 </div>
