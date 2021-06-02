@@ -6,6 +6,33 @@ last-updated: May 2021
 
 <!--
 
+    Distribution Theory:
+        
+    The regular release model is very maintenance-intensive.
+    For each release, a copy of each software package's source is 
+    maitained by the distribution, separately from the original.
+    In Debian, for example, each binary package has a corresponding
+    <em>source</code> package that is used to build the binary.
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Debian releases are named after Toy Story characters.
+        </p>
+    </div>
+
+    The rolling release model is less maintenance-intensive.
+    In Arch, for example, each package is maintained through a 
+    single Bash script, <code>PKGBUILD</code>.  Like Gentoo's 
+    scripts, these follow a distinct format and define 
+    functions to be called when creating the package.
+
+    A copy of the source <em>is not</em> kept, and
+    modifications to source are minimized, thereby leaving it
+    to the software's source maintainer to 
+    
+
+
 
     <div class="quote-text">
         "Modularity is extremely important to <br>
@@ -504,31 +531,35 @@ last-updated: May 2021
     <h3>The Linux Kernel</h3>
 
     <p>
-        The Linux kernel actually began as a terminal emulator project:
+        The Linux kernel began as a terminal emulator project:
         In 1991, Linus Torvalds wished to connect his 386 to the 
         University's new Unix system, and did so by writing a 
-        program that turned his computer into a (large) terminal emulator.<sup><a href="#reference" title="Torvalds p. 78">[4]</a></sup>
+        program that turned his computer into a (large) terminal emulator.<sup><a href="#reference" title="Torvalds p. 62">[4]</a></sup>
         Although he had Minix running on his machine, he wrote the 
-        emulator to run on bare metal in order to explore the 
-        386's CPU.<sup><a href="#reference" title="Torvalds p. 78">[4]</a></sup>
+        emulator to run on bare metal in order to explore the
+        386.<sup><a href="#reference" title="Torvalds p. 62">[4]</a></sup>
     </p>
 
     <p>
         The project grew; for some time, it was the
         "GNU Emacs of Terminal Emulators," supporting many and
         varied functionality.<sup><a href="#reference" title="Torvalds p. 78">[4]</a></sup>
-        After a multi-day hacking marathon in which he implemented
-        filesystem capabilities, the project morphed into a kernel.<sup><a href="#reference" title="Torvalds p. 78">[4]</a></sup>
+        Because he wanted to save files with the terminal emulator 
+        and then access them from the 
+        <a href="https://en.wikipedia.org/wiki/Minix">Minix OS</a>, 
+        he endeavored to implement 
+        Minix filesystem capabilities within it.<sup><a href="#reference" title="Torvalds p. 78">[4]</a></sup>  
+        When this was done, it was clear to him that the project was on
+        its way to being a kernel; the next step was to obtain
+        the POSIX specification and implement each system call precisely.<sup><a href="#reference" title="Torvalds p. 78">[4]</a></sup>  
     </p>
 
     <p>
         As the Linux kernel matured, Linus informally introduced
         a single rule: <em><a href="https://lkml.org/lkml/2012/12/23/75">We do not break userspace</a>.</em>
         This means that, if a proposed change to the kernel breaks a
-        piece of software running on it, then that
-        breakage is the fault of the kernel, and the change will be rejected.
-        In other words, <em>Any used interface will persist.</em>
-        The consequence of this rule is that the Linux kernel
+        piece of software running on it, then the change will be rejected.
+        The consequence is that the Linux kernel
         is always capable of being the foundation of users' operating 
         system: Any project which depends upon it will 
         continue to work on it.
