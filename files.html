@@ -358,8 +358,9 @@ https://wiki.ubuntu.com/Lvm
 
     <p>
         When <code>cat</code> reads the file <code>/proc/meminfo</code>,
-        the kernel generates the above data, which is then
-        printed to <code>STDOUT</code>.
+        the kernel generates the above data, and hands it back to 
+        <code>cat</code>,
+        which then prints it to <code>STDOUT</code>.
     </p>
 
     <p>
@@ -387,18 +388,22 @@ https://wiki.ubuntu.com/Lvm
     </ul>
     </p>
 
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            If you're interested in the Linux programming interface,
+            I highly recommend <a href="https://man7.org/tlpi/index.html">his book</a>!
+        </p>
+    </div>
+
     <p>
-        Michael Kerrisk has called the Unix file interface,
+        <a href="https://man7.org/">Michael Kerrisk</a> has called the 
+        Unix file interface,
         "The Universal I/O Model," and for good reason.
         The four file operations apply to all file types except
         directories, whose structure (a tree) is protected by the
         kernel through a distinct set of system calls.
     </p>
-
-    <!--
-        Additionally, older Unix systems entertained directories as
-        simple regular files, but since ___ they h
-    -->
 
     <h3>See Also:</h3>
     <ul>
@@ -409,10 +414,10 @@ https://wiki.ubuntu.com/Lvm
 
 <div class="content" id="basic-file-operations">
     <h2 style="margin-bottom: 0;">Basic File Operations</h2>
-    <h4>and Directories</h4>
+    <h4>and Introduction to Directories</h4>
 
     <p>
-        Basic utilities to manipulate files:
+        Basic command-line utilities to manipulate files:
     </p>
 
     <ul>
@@ -436,8 +441,9 @@ https://wiki.ubuntu.com/Lvm
         <li><code>sort</code> - Sort text files</li>
     </ul>
 
-    <h3>Directories</h3>
-
+    <p>
+        Utilities to manipulate directories:
+    </p>
 
     <ul>
         <li><code>mkdir</code> - Make directories</li>
@@ -445,30 +451,62 @@ https://wiki.ubuntu.com/Lvm
         <li><code>readlink</code> - Print value of symlink or canonical file name</li>
     </ul>
 
+    <h3>Introduction to Directories</h3>
+
+    <div class='aside-right'>
+        <h4>Aside:</h4>
+        <p>
+            <code>find</code> recursively descends through a directory
+            tree, in search of files.
+        </p>
+    </div>
+
     <p>
-        The contents of directories are protected by the kernel.
-        Each directory contains at least two entries: <code>.</code> ("dot"),
-        and <code>..</code> ("dot dot").
+        Directories are files, and on early Unix kernels were 
+        manipulated unabated through the usual file interface.
+        However, the directory structure is intended to be a 
+        heirarchy, and some software (like <code>find</code>)
+        depends upon this structure.
     </p>
 
     <p>
+        Leaving directories so exposed introduced the possibility that,
+    </p>
+
+    <ol>
+        <li>
+            A cycle (loop) could form
+        </li>
+        <li>
+            A subtree could be 'broken off' without being properly deleted
+        </li>
+    </ol>
+
+    <p>
+        So directories are now hidden behind a distinct set
+        of system calls.
+        When a directory is created, it contains two entries: 
+        <code>.</code> ("dot"),
+        and <code>..</code> ("dot dot").
+        These entries cannot be removed, nor changed.
         <code>.</code> is a reference to the containing directory itself.
         It is used by processes as a handle to the current working directory.
+        <code>..</code> is a reference to the directory's 
+        parent directory.
     </p>
 
     <p>
-        <code>..</code> is a reference to the containing directory's 
-        parent directory.
-        Since each (and every) directory has a single parent, the
-        directory structure forms a tree.
+        Since each directory has a single parent, 
+        and creating new references to directories is not allowed, the
+        directory heirarchy is guaranteed.
     </p>
 
     <h3>Hidden Files</h3>
 
     <p>
-        By convention alone, all filenames beginning with <code>.</code>
+        By convention alone, filenames beginning with <code>.</code>
         are considered hidden, including <code>.</code> and <code>..</code>.
-        They can be listed with <code>ls</code> by the <code>-a</code>
+        They can be listed by <code>ls</code> with the <code>-a</code>
         ("all") switch:
     </p>
 
@@ -478,7 +516,7 @@ https://wiki.ubuntu.com/Lvm
 
     <h3>See Also:</h3>
     <ul>
-        <li><a href="https://www.gnu.org/software/coreutils/manual/html_node/index.html#SEC_Contents">GNU <code>coreutils</code></a> - Table of Contents</li>
+        <li><a href="https://www.gnu.org/software/coreutils/manual/html_node/index.html">GNU <code>coreutils</code></a> - Table of Contents</li>
     </ul>
 </div>
 
@@ -559,8 +597,8 @@ https://wiki.ubuntu.com/Lvm
     </div>
 
     <p>
-        This kernel is loaded in early boot, after which the file is 
-        no longer needed.
+        This file is copied (loaded) into memory early in the boot process, 
+        after which it is no longer needed.
     </p>
 
     <p>
@@ -596,7 +634,6 @@ https://wiki.ubuntu.com/Lvm
     <h3>See Also:</h3>
     <ul>
         <li><a href="https://wiki.archlinux.org/index.php/XDG_Base_Directory">XDG Base Directory</a> - Arch Linux (An additional, super-specification)</li>
-        <li><a href="http://linfo.org/root.html">What is root?</a> -- definition by the Linux Information Project (LINFO)</li>
     </ul>
 </div>
 
@@ -607,7 +644,7 @@ https://wiki.ubuntu.com/Lvm
         As mentioned, Unix-like operating systems maintain a single 
         directory tree for the entire system.
         When a new device is introduced to the machine, 
-        its directory tree must be placed in the system's existing
+        its directory tree is be placed in the system's existing
         directory tree.
         This operation is known as
         <a href="https://unix.stackexchange.com/questions/3192/what-is-meant-by-mounting-a-device-in-linux"><em>mounting</em></a>.
@@ -615,7 +652,7 @@ https://wiki.ubuntu.com/Lvm
     </p>
 
     <p>
-        Suppose we have a usb stick with some music on it. 
+        Suppose we have a USB stick with some music on it. 
         When we plug it into the machine, a file representing
         the device appears in <code>/dev</code>, but
         its contents are not yet available.
@@ -629,7 +666,7 @@ https://wiki.ubuntu.com/Lvm
     <img style="width:80%" src="assets/img/mounting.png">
 
     <p>
-        The Linux Filesystem Heirarchy Standard provides two places to mount
+        The Filesystem Heirarchy Standard offers two places to mount
         temporary filesystems: <code>/mnt</code> and <code>/media/[user]</code>.
         When mounting new devices manually, the usual method is to identify the
         device with
@@ -664,29 +701,35 @@ https://wiki.ubuntu.com/Lvm
 
 <div class="content" id="inodes">
     <h2>inodes</h2>
-    <!--
-        whose structure (a tree) is protected by the kernel through 
-        a distinct set of system calls.  
-    -->
 
     <p>
-        In keeping with traditional Unix file semantics, 
-        every file on a GNU/Linux system is represented by a unique <em><a href="http://www.linfo.org/inode.html">inode</a>.</em><sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html#id1">[7]</a></sup>
-        Inodes are the responsibility of their respective filesystem,
-        wherein each is addressed by a number.
-        Within a filesystem, an inode number identifies an
-        inode, and thereby identifies a particular file.
+        A file's inode serves as the reference to the file.
+        On traditional Unix filesystems, it contains the file's metadata, 
+        in addition to pointers to the file's contents.
+        When a program instructs the kernel to open a file, for instance,
+        the kernel identifies the relevant inode, loads it into memory,
+        inspects it to determine if the process has sufficient permission
+        to read or write it, and returns to the process a response
+        saying so.
     </p>
 
     <p>
-        A <em>directory</em> is a file that associates filenames (strings) with 
+        Inodes themselves are the responsibility of their respective 
+        filesystem, wherein each is given a number.
+        Within a filesystem, an inode number identifies an
+        inode, and thereby identifies a file.
+    </p>
+
+    <p>
+        A directory is a file that associates filenames (strings) with 
         inode numbers:
     </p>
 
     <div class="aside-right">
         <h4>Remember:</h4>
         <p>
-            Every path on the directory tree terminates in an inode reference.
+            Every path on the directory tree terminates in a unique 
+            inode reference.
         </p>
     </div>
     
@@ -708,9 +751,18 @@ https://wiki.ubuntu.com/Lvm
     <p>
         Each such association is called a <em>hard link.</em>
         A hard link is created upon file creation.
-        We can also create new hard links with the <code>ln</code> command,
+        In addition, we can create new hard links with the 
+        <code>ln</code> command,
         as the following sequence demonstrates:
     </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Hard links are not inodes, but references
+            to them.
+        </p>
+    </div>
 
     <div class="code">
         $ echo -n "Hello " &gt; newfile <br>
@@ -721,8 +773,8 @@ https://wiki.ubuntu.com/Lvm
     </div>
 
     <p>
-        The name <code>2file</code> refers to the same file as
-        <code>newfile</code>.
+        The name <code>2file</code> is equivalent to <code>newfile</code>:
+        Each name refers to the same file.
         If we modify the file using one name,
         then we have modified the file referred to by the other:
     </p>
@@ -742,7 +794,9 @@ https://wiki.ubuntu.com/Lvm
     <h3> See Also: </h3>
     <ul>
         <li><a href="http://linfo.org/hard_link.html">What is a hard link?</a> -- definition by The Linux Information Project (LINFO)</li>
-        <li><a href="https://en.wikipedia.org/wiki/Symbolic_link#Overview"> Symbolic Link (Overview) - Wikipedia </a> </li>
+        <li><a href="http://www.linfo.org/inode.html">Inode Definition</a> by The Linux Information Project (LINFO)</li>
+        <li> <code><a href="https://man7.org/linux/man-pages/man7/inode.7.html"> inode(7) </a></code></li>
+        <li><a href="https://en.wikipedia.org/wiki/Symbolic_link#Overview"> Symbolic Link (Overview)</a> - Wikipedia</li>
     </ul>
 </div>
 
@@ -775,7 +829,7 @@ https://wiki.ubuntu.com/Lvm
         reasonable size, while supporting large
         files.<sup><a href="#references">[9]</a></sup>
         Finally, by using direct pointers for the first bytes of a file,
-        and by keeping the inode array in main memory, 
+        and by keeping the inode array in memory, 
         the design fosters the speedy retrieval of data in small
         files.<sup><a href="#references">[9]</a></sup>
     </p>
@@ -787,12 +841,12 @@ https://wiki.ubuntu.com/Lvm
         became dependant upon them.
         The design was demonstrated in the
         <a href="https://en.wikipedia.org/wiki/Minix">MINIX</a> filesystem,
-        which in turn served as Linux's pre-1.0 filesystem.
+        which in turn served as Linux's first filesystem.
         The <em>extended</em> filesystem, <code>ext</code>, extended
         those filesystem's capabilities.
         With <code>ext</code>'s inclusion in kernel 0.96c, Linux began to use
         its new <a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">Virtual File System</a>,
-        a kernel subsystem that provides a
+        a kernel subsystem that provides userspace with a
         uniform filesystem interface.
     </p>
 
@@ -800,7 +854,7 @@ https://wiki.ubuntu.com/Lvm
         While each filesystem implements its own functionality,
         most functionality is common;
         the Virtual File System maps system calls 
-        to filesystem-driver functions.
+        to filesystem-specific functions.
         In addition, the VFS imposes inodes on filesystems that do not
         natively employ them, thereby preserving traditional Unix file
         semantics across all supported filesystems.
@@ -808,8 +862,8 @@ https://wiki.ubuntu.com/Lvm
 
     <h3>See Also:</h3>
     <ul>
-        <li> <code><a href="https://man7.org/linux/man-pages/man7/inode.7.html"> inode(7) </a></code></li>
-        <li> <a href="https://wiki.archlinux.org/title/File_systems">File Systems</a> - Arch Linux Wiki</li>
+        <li><a href="https://archive.org/details/designofunixoper00bach">The Design of the Unix Operating System</a> by Maurice J. Bach</li>
+        <li><a href="https://en.wikipedia.org/wiki/Lions%27_Commentary_on_UNIX_6th_Edition,_with_Source_Code">A Commentary on the UNIX Operating System</a> by John Lions</li>
     </ul>
 </div>
 
