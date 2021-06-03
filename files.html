@@ -462,35 +462,27 @@ https://wiki.ubuntu.com/Lvm
     </div>
 
     <p>
-        Directories are files, and on early Unix kernels were 
-        manipulated unabated through the usual file interface.
+        Directories are a special kind of file, and early Unix 
+        kernels allowed them to be manipulated relatively unabated.<sup><a href="http://read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[2]</a></sup>
         However, the directory structure is intended to be a 
         heirarchy, and some software (like <code>find</code>)
         depends upon this structure.
     </p>
 
     <p>
-        Leaving directories so exposed introduced the possibility that,
+        Leaving directories exposed introduced the possibility that
+        a cycle (loop) could form.
+        So, directories are now hidden behind a separate system
+        call interface.
     </p>
 
-    <ol>
-        <li>
-            A cycle (loop) could form
-        </li>
-        <li>
-            A subtree could be 'broken off' without being properly deleted
-        </li>
-    </ol>
-
     <p>
-        So directories are now hidden behind a distinct set
-        of system calls.
         When a directory is created, it contains two entries: 
         <code>.</code> ("dot"),
         and <code>..</code> ("dot dot").
         These entries cannot be removed, nor changed.
         <code>.</code> is a reference to the containing directory itself.
-        It is used by processes as a handle to the current working directory.
+        It is used as a handle to the current working directory.
         <code>..</code> is a reference to the directory's 
         parent directory.
     </p>
@@ -863,7 +855,7 @@ https://wiki.ubuntu.com/Lvm
     <h3>See Also:</h3>
     <ul>
         <li><a href="https://archive.org/details/designofunixoper00bach">The Design of the Unix Operating System</a> by Maurice J. Bach</li>
-        <li><a href="https://en.wikipedia.org/wiki/Lions%27_Commentary_on_UNIX_6th_Edition,_with_Source_Code">A Commentary on the UNIX Operating System</a> by John Lions</li>
+        <li><a href="https://warsus.github.io/lions-/"> A Commentary on the UNIX Operating System</a> by John Lions</li>
     </ul>
 </div>
 
