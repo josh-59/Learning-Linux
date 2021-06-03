@@ -5,12 +5,49 @@ last-updated: May 2021
 ---
 
 <!--
-        So what makes it all tick?
-        In this dramatic conclusion, we'll pick apart the
-        key components of the open-source ecosystem,
-        from the mechanics of contributing, to the
+Although I'd love to believe that open-source software
+        is as casual as it's portrayed to be, it simply isn't.
+        Good software is not easy to produce, and open-source is
+        no different.
+    </p>
 
     https://www.youtube.com/watch?v=XFrJcjCbCA8
+
+    <p>
+        Given intrinsic motivation, the open-source scene naturally
+        decomposes into projects, with people working on what they want.
+        This can give the appearance of self-satisfying development:
+        For example, producing an operating system
+        is outside the scope of the Linux kernel project.
+        Nonetheless, these projects have formed something substantial.
+    </p>
+
+
+    <p>
+        For example, Facebook has put extensive effort into
+        Linux's new <code>btrfs</code>, commonly described as 
+        "a modern copy-on-write filesystem."
+        The filesystem eases routine administrative tasks, especially in 
+        enterprise-class settings.
+        Facebook has contributed to the project for their own purposes;
+        nonetheless, the resulting software is GNU GPL'd 
+        (Version 2, to be specific), 
+        and so from the user's standpoint, is as free (libre) as anything
+        crafted by GNU's own hand.
+    </p>
+
+
+
+    <p>
+        "No one "owns" the software in the traditional sense of 
+        being able to command how it is used or developed,
+        or to control its disposition."
+            http://www.benkler.org/CoasesPenguin.PDF
+        "[Common's] central characteristic is that groups of individuals
+        successfully collaborate on large-scale projects following a
+        diverse cluster of motivational drives and social signals,
+        rath than either market prices or managerial commands."
+    </p>
 
     
     "Write programs that do one thing and do it well.
@@ -65,15 +102,18 @@ last-updated: May 2021
 <li><a href="#closing-remarks">Closing Remarks</a></li>
 
 
+        <li><a href="https://press.stripe.com/">Stripe Press</a> - Ideas for progress</a></li>
+
+
     Not easy
         |
         |
         |
         |
        \ /
-Open Source License
+Intrinsic Motivation
         |
-        |   Intrinsic Motivation
+        |   
         |   
         |
        \ /
@@ -129,10 +169,11 @@ Incremental Improvement
     </div>
 
     <p>
-        Although I'd love to believe that open-source software
-        is as casual as it's portrayed to be, it simply isn't.
-        Good software is not easy to produce, and open-source is
-        not different.
+        So what makes it all tick?
+        In this dramatic conclusion, we'll pick apart the
+        key components of the open-source ecosystem,
+        from the motivations of contributors to the leadership
+        style necessarily implied by them.
     </p>
 </div>
 
@@ -142,87 +183,186 @@ Incremental Improvement
     <p>
         <em>Open source</em> describes only how software is 
         distributed and used&mdash; Not how it is produced.<sup><a href="#references" title="Eghbal p44">[a]</a></sup>
-        As Nadia Eghbal points out, code is to open-source projects
-        what money is to businesses: 
+        There isn't a great deal of money to be made in open source,
+        and without the clear external motivation of money, open-source
+        has been described as <em>intrinsically motivated.</em> 
+    </p>
+
+    <p>
+        Whereas businesses start out pursuing money,
+        open-source works characteristically begin by 
+        satisfying some developer's itch.
+    </p>
+
+    <p>
+        Thus, the open-source scene naturally
+        decomposes into projects, with people working on what they want;
+        the result is simple self-satisfying development.
+        For example, producing an operating system
+        is outside the scope of the Linux kernel project:
+        They do kernels for kernels' sake, and somebody interested
+        in composing operating systems does that.
+    </p>
+
+    <div class="aside-right">
+        <h4>Fun Fact:</h4>
+        <p>
+            Linus Torvalds once turned down a job offer from Steve Jobs
+            because it wasn't interesting from a technical 
+            standpoint.
+        </p>
+    </div>
+
+    <p>
+        That these projects have formed something substantial
+        has called into question Coase's economic theory of the firm.
+        By focusing only on the work, all other factors 
+        may be ignored.
+        Since money is the not issue, we don't have to worry about selling
+        it;
+        since nobody is being paid, personal qualifications may 
+        be ignored;
+        since 
+    </p>
+</div>
+
+
+<div class="content" id="dividing">
+    <h2>Dividing Open Source</h2>
+
+    <p>
+        Code is to an open-source project what money is to business: 
         The only thing that open-source projects necessarily
         have in common is that they each yield appropriately-licensed
         software, in much the same way that all business exist
         for the purpose of making money.
+        Like businesses, open-source projects often follow
+        a few models.
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            The cathedral is characterized by a closed group of 
+            developers publishing free software; it
+            still has a place in modern open-source.
+        </p>
+    </div>
+
+    <p>
+        The most common open-source model today is what Eric S. 
+        Raymond called the <em>Bazaar:</em> Contributions are welcome.
+        This he juxtaposed against the then-traditional <em>Cathedral,</em>
+        which is closed from public modifications.  
+        Since its introduction, the bazaar model 
+        has dominated open source.
     </p>
 
     <p>
-        For the user, the reasons behind a particular 
-        open-source project don't matter.
-        For example, Facebook has put extensive effort into
-        Linux's new <code>btrfs</code>, commonly described as 
-        "a modern copy-on-write filesystem."
-        The software eases routine administrative tasks, especially in 
-        enterprise-class settings.
-        Facebook has contributed to the project for their own purposes;
-        nonetheless, the resulting software is GNU GPL'd 
-        (Version 2, to be specific), 
-        and so from the user's standpoint, is as free (libre) as anything
-        crafted by GNU's own hand.
+        Nadia Eghbal, in her book <em>Working in Public,</em>
+        further divides Bazaars into four:
+    </p>
+
+    <ul>
+        <li>
+            <p> 
+                <b>Federation:</b> 
+                Many users, many contributors; usually subdivided.  
+                Examples: Linux kernel, Firefox, Debian
+            </p>
+        </li>
+        <li>
+            <p>
+                <b>Stadium:</b> 
+                Many users, few contributors. 
+                Examples: Bash, Linux Mint
+            </p>
+        </li>
+        <li>
+            <p>
+                <b>Club:</b> 
+                Few users, most of whom are contributors. 
+                Example: Slackware
+            </p>
+        </li>
+        <li>
+            <p> 
+                <b>Toy:</b> 
+                Few users, few contributors. 
+                Most projects start out as 'toys'
+            </p>
+        </li>
+    </ul>
+
+    <p>
+        Inviting people to contribute promotes project growth, 
+        and projects have been known to move at shocking speed.  
     </p>
 
     <p>
-        The difference between an open-source project and a free-market
-        business has been the subject of formal research by a few
-        economists.  
-        For me, their discussion reduces to <em>motivation:</em> 
-        Whereas businesses are motivated to produce for money 
-        (in their words, "extrinsically motivated"), 
-        open-source is "intrinsically motivated"&mdash; it's done for
-        its own sake.
-    </p>
-
-    <p>
-        "No one "owns" the software in the traditional sense of 
-        being able to command how it is used or developed,
-        or to control its disposition."
-            http://www.benkler.org/CoasesPenguin.PDF
-        "[Common's] central characteristic is that groups of individuals
-        successfully collaborate on large-scale projects following a
-        diverse cluster of motivational drives and social signals,
-        rath than either market prices or managerial commands."
-    </p>
-</div>
-
-<div class="content" id="project-leadership">
-    <h2>Curating Modifications:</h2>
-    <h4>Project Leadership</h4>
-
-    <p>
-        Most pull requests are rejected.
-    </p>
-
-    <p>
-        Simply *open to the public*
-        ...highly exposed...
-    </p>
-
-    <!-- Large Projects -->
-
-    <h3>Tree of Trust</h3>
-
-    <p>
-        Tree of 
-    </p>
-
-    <p>
-        University of Minnesota...
+        Given <em>too many</em> contributions, your primary goal is
+        to filter them to something manageable.
+        "These developers aren't building communities; they're 
+        directing air 
+        traffic."<sup><a href="#references" title="Eghbal p13">[a]</a></sup>
     </p>
 
     <h3>See Also:</h3>
     <ul>
+        <li><a href="https://www.amazon.com/Working-Public-Making-Maintenance-Software/dp/0578675862/ref=sr_1_1?dchild=1&keywords=working+in+public&qid=1622666313&sr=8-1">Working in Public: The Making and Maintence of Open Source Software</a> by Nadia Eghbal</li>
         <li><a href="https://en.wikipedia.org/wiki/Release_early,_release_often">Release Early, Release Often</a> - Wikipedia</li>
         <li><a href="https://blog.rust-lang.org/2014/10/30/Stability.html"> Stability as a Deliverable | Rust Blog</a></li>
         <li><a href="http://thinking-in-code.blogspot.com/2010/07/train-model-of-software-development.html"> Thinking in Code: Train Model of Software Development</a></li>
     </ul>
 </div>
 
+
+<div class="content" id="project-leadership">
+    <h2 style="margin-bottom: 0;">Curating Modifications:</h2>
+    <h4>Maintainership</h4>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Greg Kroah-Hartman once said, "Half my job is to say 'no'."
+        </p>
+    </div>
+
+    <p>
+        Most proposed modifications are rejected.
+        In fact, the role of maintainer quickly skews from developer
+        to reviewer and curator.  
+    </p>
+
+    <p>
+        Github is a propietary, for-profit business that describes itself
+        as a "social coding platform." 
+        It is characteristically two-dimensional, offering convenience
+        at the expense of structure, and is appropriate for small
+        projects (toys and clubs).
+    </p>
+
+    <p>
+        Of course, a community is not out of the question;
+    </p>
+
+    <p>
+        A <em>maintainer</em> is a person responsible for the future of the
+        project.
+        A <em>contributor</em> is a person who makes a modification to it,
+        ranging from casual to significant.
+    </p>
+
+</div>
+
+
+
 <div class="content" id="incremental-improvement">
     <h2>Incremental Improvement</h2>
+
+    <p>
+
+    </p>
 
     <p>
         Large projects, such as the Linux kernel or Mozilla Firefox,
@@ -368,10 +508,9 @@ Incremental Improvement
 <div class="content" id="sports">
     <h2 style="margin-bottom: 0;">Sports:</h2>
     <h4>An Analogy</h4>
-        
-
+       
     <p>
-        To call open source a hobby isn't quite strong enough; 
+        To call open-source a hobby isn't quite strong enough; 
         at the same time, it isn't <em>work</em> in the 
         traditional sense, either.  
         Open-Source and GNU/Linux lie somewhere between the two,
@@ -381,18 +520,41 @@ Incremental Improvement
     </p>
 
     <p>
-        I do not believe that the ordinary user is 
-        obligated to contribute to open source.
-        In particular, projects strictly following the "cathedral" model 
-        do not accept user modifications:
-        Rather, they are interested in making what they want, 
-        and have little interest in accepting modifications from outsiders.
+        While I'd love to believe that open-source is as casual
+        as it's portrayed to be, it's simply not.
+        Good software is not easy to produce: 
+        It's one thing to write a Python script for your own 
+        purposes (or even a shell to demonstrate the idea); it's
+        quite another to produce a product that's useable by 
+        millions of people.
     </p>
 
     <p>
-        The underlying difference in software is that it is
-        very cheap to copy, and as Richard Stallman points out,
-        copying software does not degrade the original.
+        The reason I wrote this was because I spent a great deal
+        of time failing to learn the material owing to
+        misguided sources:  
+        I didn't know where to look for relevant information, and often
+        didn't know what to ask, to boot. 
+        The reason I persisted with it was because, as it
+        turns out, I'm better at writing than programming.  
+    </p>
+
+    <p>
+        The ordinary user is not obligated to contribute.
+        As Richard Stallman pointed out, software is not 
+        like other tangible goods because software is very cheap
+        to copy, and doing so does not degrade the original.
+        The upshot is, you can be a lurker and <em>No one will know!</em>
+        By far, the best thing a normal user can do 
+        is create and pass detailed bug reports, when you find them.
+    </p>
+
+    <p>
+        The core motivation behind these works is not ideological,
+        but rather simple:
+        They create things because it satisfies some desire of their own.
+        I do not believe that engineers would, left to their own devices,
+        build a pickup-truck that destroys the planet.
     </p>
 </div>
 
