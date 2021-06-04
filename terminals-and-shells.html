@@ -6,70 +6,7 @@ last-updated: March, 2021
 
 <!--
 To Do:
-
-        <p>
-        Finally, appending directories to <code>PATH</code> is an important step of
-        setting up a development environment.
-        I do this in <code>~/.bashrc</code>, and it works for me.
-        The correct construct appends the directory
-        only if it is not already present:
-    </p>
-
-    <div class="code">
-        if [[ ! $PATH =~ $HOME/.local/bin ]]; then<br>
-        &emsp;&emsp;&emsp;&emsp;PATH=$PATH:$HOME/.local/bin<br>
-        fi
-    </div>
-
-    <p>
-        Now Bash will look <em>everywhere else</em> before searching my newly
-        added directory, and will only look there when Bash is invoked interactively.
-    </p>
-
-<div class="content" id="closing-remarks">
-    <h2>Closing Remarks</h2>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            You'd be surprised how much that little shell can do.
-        </p>
-    </div>
-
-    <p>
-        At this point, we have covered the most essential elements of the 
-        shell.
-        It is <a href="assets/simple-shell.c">not a difficult construct</a>,
-        and consists of a main loop which:
-    </p>
-
-    <ol>
-        <li>Prints prompt</li>
-        <li>Gets input</li>
-        <li>Finds and executes command</li>
-        <li>Waits for child process to terminate</li>
-    </ol>
-
-    <p>
-        The variety of shells offered above reflects a variety of interpretations of,
-        and expansions on, this same thing.
-        For instance, the Pythonic shell <code>xonsh</code> exposes
-        a full, general-purpose programming language to the user.
-        The most common shells of our time are <code>bash</code> and <code>zsh</code>.
-    </p>
-
-    <p>
-        Many details have not been introduced. 
-        Some of the most important are:
-    </p>
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://ryanstutorials.net/bash-scripting-tutorial/bash-script.php">Scripting</a></li>
-        <li><a href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">Read-eval-print loop</a> - Wikipedia</li>
-        <li><a href="http://shellhaters.org/">Shell Hater's Handbook</a></li>
-    </ul>
-</div>
+    Pipelines?
 
 -->
 
@@ -346,20 +283,20 @@ To Do:
 </div>
 
 <div class="content" id="path">
-    <h2><code>PATH</code> Environment Variable</h2>
+    <h2>Path</h2>
 
     <div class="aside-right">
         <h4>Remember:</h4>
         <p>
-            The shell searches the directories in <em>PATH</em> only after
-            looking for a user-defined function and a builtin by the
+            The shell searches the directories in <code>PATH</code> only 
+            after looking for a user-defined function and a builtin by the
             same name.
         </p>
     </div>
 
     <p>
         So where does the shell look for external programs?
-        The <em>PATH</em> environment variable
+        The <code>PATH</code> environment variable
         contains a colon (<code>:</code>)-separated list of directories to be searched
         when looking for a program.
         It may look like this:
@@ -400,11 +337,10 @@ To Do:
     </div>
 
     <p>
-        The <em>PATH</em> environment variable is one of several
+        The <code>PATH</code> environment variable is one of several
         standard environment variables.  
-        Environment variables are stored on behalf of the process by 
-        the kernel. 
-        They may be listed with,
+        These variables are stored on behalf of the process by 
+        the kernel, and may be listed with,
     </p>
 
     <div class="code">
@@ -577,8 +513,40 @@ To Do:
         And so, <em>builtins</em> began.
     </p>
 
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            You can always get back to the main loop with ctrl+c.
+        </p>
+    </div>
+
+    <p>
+        At this point, we have covered the most essential elements of the 
+        shell.
+        It is not a difficult concept,
+        consisting of a main loop which:
+    </p>
+
+    <ol>
+        <li>Prints prompt</li>
+        <li>Gets a line of input</li>
+        <li>Finds and executes command</li>
+        <li>Waits for child process to terminate</li>
+    </ol>
+
+    <p>
+        The variety of shells shown above reflects a variety of 
+        interpretations of, and expansions on, this same thing.
+        For instance, the Pythonic shell <code>xonsh</code> exposes
+        a full, general-purpose programming language to the user&mdash;
+        in addition to a shell.
+    </p>
+
     <h3>See Also:</h3>
     <ul>
+        <li><a href="https://ryanstutorials.net/bash-scripting-tutorial/bash-script.php">What is a Bash Script?</a> - Bash Scripting Tutorial</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">Read-eval-print loop</a> - Wikipedia</li>
+        <li><a href="http://shellhaters.org/">Shell Hater's Handbook</a></li>
         <li><a href="http://man.cat-v.org/unix-1st/1/sh">sh(1)</a> (First Edition)</li>
         <li><a href="assets/simple-shell.c">simple-shell.c</a></li>
     </ul>
