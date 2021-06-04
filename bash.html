@@ -5,6 +5,18 @@ last-updated: April, 2021
 ---
 
 <!--
+
+
+    <p>
+        The redirection operation <code>></code> is not an argument,
+        and is not passed to the command.  
+        It is interpretted as an instruction to open the file 
+        <code>cpu_stats</code> for writing, make its length zero, then assign 
+        it to <code>STDOUT</code> (file descriptor 1); 
+        then, call <em>exec()</em> on <code>lscpu</code>.
+    </p>
+
+
     Termios:
         A kernel
 
