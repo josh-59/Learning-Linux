@@ -6,73 +6,8 @@ last-updated: March, 2021
 
 <!--
 To Do:
-    Pipelines?
-
-    <p>
-        One of the features that made Unix was the ability 
-        to direct output away from the terminal.
-        Since the terminal is represented as a file, 
-        we can send a command's output to a file
-        without that program being aware.
-        By this method, we can save, rather than view, the output
-        of any command:
-    </p>
-
-    <div class="code">
-        $ 
-    </div>
-
-    <p>
-        We can also direct the output of one command
-        to be the input of another:
-    </p>
-
-    <div class="code">
-        $ apropos -s | less
-    </div>
-
-    <p>
-        The redirection operators <code>></code> and <code>|</code> 
-        are not an arguments, and are not passed to commands.
-        It is interpretted by the shell as an instruction;
-        the shell, after calling <em>fork()</em> and
-        before calling <em>exec()</em> opens the the file
-        (or pipe), and assigns it as output.
-    </p>
-
-    <p>
-        Pipelines may be of arbitrary length.
-    </p>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            You can always get back to the main loop with ctrl+c.
-        </p>
-    </div>
-
-    <p>
-        At this point, we have covered the most essential elements of the 
-        shell.
-        It is not a difficult concept,
-        consisting of a main loop which:
-    </p>
-
-    <ol>
-        <li>Prints prompt</li>
-        <li>Gets a line of input</li>
-        <li>Finds and executes command</li>
-        <li>Waits for child process to terminate</li>
-    </ol>
-
-    <p>
-        The variety of shells shown above reflects a variety of 
-        interpretations of, and expansions on, this same thing.
-        For instance, the Pythonic shell <code>xonsh</code> exposes
-        a full, general-purpose programming language to the user&mdash;
-        in addition to a shell.
-    </p>
-
+    
+    too much 'echo'
 
 
     <div class="aside-right">
@@ -96,6 +31,7 @@ To Do:
         <li><a href="#path">PATH Environment Variable</a></li>
         <li><a href="#pwd">Working Directory</a></li>
         <li><a href="#arguments">Arguments</a></li>
+        <li><a href="#redirection">Redirection</a></li>
         <li><a href="#closing-remarks">Closing Remarks </a></li>
         <li><a href="#missing-semester">Missing Semester</a></li>
 		<li><a href="#references"> References </a></li>
@@ -532,13 +468,111 @@ To Do:
     </p>
 </div>
 
+<div class="content" id="redirection">
+    <h2>Redirection</h2>
+
+    <p>
+        One of the features that make the Unix command-line interface
+        powerful is the ability to direct output away from the terminal.
+        Since the terminal is represented as a file, 
+        the operations on it and any other file are identical.
+        Thus, by changing the file before calling the command,
+        we can easily capture its output in a (regular) file;
+        the command does not need to know:
+    </p>
+
+    <div class="code">
+        $ lscpu &gt; cpu_stats
+    </div>
+
+    <p>
+        This is called <em><a href="https://www.gnu.org/software/bash/manual/html_node/Redirections.html">redirection</a>.</em> 
+        The shell creates the file <code>cpu_stats</code> 
+        if it does not exist, and assigns it to be the output file of
+        <code>lscpu</code>.
+        For reasons we'll dive into later, any error messages produced
+        by <code>lscpu</code> will still be printed to the terminal.
+    </p>
+
+    <p>
+        We can also redirect the output of one command
+        to be the input of another, forming a <em><a href="https://www.gnu.org/software/bash/manual/html_node/Pipelines.html">pipeline</a></em>:
+    </p>
+
+    <div class="code">
+        $ apropos make | less
+    </div>
+
+    <p>
+        The redirection operators <code>&gt;</code> and <code>|</code>
+        are not arguments, and are not passed to their respective commands.
+        In fact, <code>apropos</code> does not even know about <code>less</code>!
+    </p>
+
+    <p>
+        Pipelines may be of arbitrary length;
+        the <code>cat</code> command is often used to begin pipelines,
+        but may also be used to interject on them:
+    </p>
+
+    <div class="code">
+        $ uname -a | cat - /proc/meminfo | less
+    </div>
+
+    <p>
+        Finally, if we want to discard the output of a command or
+        pipeline, we can redirect it to <code>/dev/null</code>.
+    </p>
+
+    <p>
+        Redirection into files was implemented by Ken Thompson and
+        Dennis Ritchie, but pipelines were implemented at the
+        behest of their boss, Douglas McKilroy.
+        The paradigm they invented supports small software
+        "tools" being used together to accomplish a given task,
+        and is both powerful and general.
+    </p>
+
+</div>
+
 <div class="content" id="closing-remarks">
-    <h2 style="margin-bottom: 0;">Closing Remarks:</h2>
+    <h2>Closing Remarks</h2>
+
+    <p>
+        At this point, we have covered the essential elements of the 
+        shell.
+        It is not a difficult concept,
+        consisting of a main loop which:
+    </p>
+
+    <div style="margin-top: -20px;" class="aside-right">
+        <h4>Pro Tip:</h4>
+        <p>
+            You can always get back to the main loop with ctrl+c.
+        </p>
+    </div>
+
+
+    <ol>
+        <li>Prints prompt</li>
+        <li>Gets a line of input</li>
+        <li>Finds and executes command</li>
+        <li>Waits for command to terminate</li>
+    </ol>
+
+    <p>
+        The variety of shells shown above reflects a variety of 
+        interpretations of, and expansions on, this same thing.
+        For instance, the Pythonic shell <code><a href="https://xon.sh/">xonsh</a></code> exposes
+        a full, general-purpose programming language to the user&mdash;
+        in addition to a shell.
+    </p>
+
     <h4><em>fork()</em></h4>
 
     <p>
-        The earliest versions of Unix entertained exactly two processes:
-        One for each of two terminals connected to the machine.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[7]</a></sup>
+        The earliest versions of Unix entertained exactly two processes&mdash;
+        one for each of two terminals connected to the machine.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[7]</a></sup>
         The shell,
         <a href="https://en.wikipedia.org/wiki/Thompson_shell"><code>sh</code></a>,
         existed as a user-space process, but <em>fork()</em> had not been introduced.
