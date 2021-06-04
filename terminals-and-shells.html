@@ -8,6 +8,41 @@ last-updated: March, 2021
 To Do:
     Pipelines?
 
+    <p>
+        One of the features that made Unix was the ability 
+        to direct output away from the terminal.
+        Since the terminal is represented as a file, 
+        we can send a command's output to a file
+        without that program being aware.
+        By this method, we can save, rather than view, the output
+        of any command:
+    </p>
+
+    <div class="code">
+        $ 
+    </div>
+
+    <p>
+        We can also direct the output of one command
+        to be the input of another:
+    </p>
+
+    <div class="code">
+        $ apropos -s | less
+    </div>
+
+    <p>
+        The redirection operators <code>></code> and <code>|</code> 
+        are not an arguments, and are not passed to commands.
+        It is interpretted by the shell as an instruction;
+        the shell, after calling <em>fork()</em> and
+        before calling <em>exec()</em> opens the the file
+        (or pipe), and assigns it as output.
+    </p>
+
+    <p>
+        Pipelines may be of arbitrary length.
+    </p>
 
     <div class="aside-right">
         <h4>Aside:</h4>
