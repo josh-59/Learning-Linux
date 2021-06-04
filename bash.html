@@ -5,11 +5,10 @@ last-updated: April, 2021
 ---
 
 <!--
+    Termios:
+        A kernel
 
     <li><a href="https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios/">A Brief Introduction to Termios</a> - Made of Bugs</li>
-
-    Explanation of sudo:
-    https://www.linuxjournal.com/sites/default/files/2018-11/GeekGuide-BeyondTrust-BeyondSudo.pdf
 
 <div class="content" id="startup-files">
     <h2>Startup Files</h2>
@@ -42,8 +41,8 @@ last-updated: April, 2021
     <h2><code>make</code></h2>
 
     <p>
-    </p>
 
+    </p>
 
     <p>
         <code>make</code> is one of the oldest tools in the Unix
@@ -216,7 +215,7 @@ Exercises:
     <p>
         The first pass splits the line by whitespace into <em>tokens.</em> 
         Then, two expansion passes follow: <em>shell expansion</em>, 
-        followed by <em>filename expansion.</em>
+        then <em>filename expansion.</em>
     </p>
 
     <div class="aside-right">
@@ -289,6 +288,13 @@ Exercises:
         filenames in the current directory matching that pattern.<sup><a href="https://www.gnu.org/software/bash/manual/html_node/Filename-Expansion.html#Filename-Expansion">[a]</a></sup>
     </p>
 
+    <div class="aside-right">
+        <h4>Note:</h4>
+        <p>
+            By default, hidden files must be matched explicitly.
+        </p>
+    </div>
+
     <p>
         The meanings of these metacharacters are as follows:
     </p>
@@ -308,16 +314,9 @@ Exercises:
     </ul>
 
     <p>
+        All other characters are treated literally.
         For example,
     </p>
-
-    <div class="aside-right">
-        <h4>Note:</h4>
-        <p>
-            In patterns, all other characters are treated literally.
-            By default, hidden files must be matched explicitly.
-        </p>
-    </div>
 
     <div class="code">
         *
@@ -510,7 +509,7 @@ Exercises:
 
 
 <div id="man-pages" class="content">
-    <h2> <code>man</code> Pages </h2>
+    <h2> The man Pages </h2>
 	<p>
 		The most useful asset in the Linux documentation pool is the
 		manual ("man") pages.
@@ -553,8 +552,8 @@ Exercises:
 	</p>
 
 	<p>
-        The movement controls of the <code>man</code> paging utility are simple enough:
-		to move up one line, type <code>k</code>.
+        The other movement controls are simple enough:
+		To move up one line, type <code>k</code>.
 		To move down one line, use <code>j</code>;
 		To move down a screenful, press the spacebar.
 	</p>
@@ -607,6 +606,14 @@ Exercises:
         other file characteristics, as well.
         For instance, to look for directories, we could use
     </p>
+
+    <div class="aside-right">
+        <h4>Note:</h4>
+        <p>
+            On Debian/Ubuntu/Mint, the <code>fd</code> 
+            package is <code>fd-find</code>.
+        </p>
+    </div>
 
     <div class="code">
         $ fd --type d [pattern] [path ...]
