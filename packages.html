@@ -549,20 +549,28 @@ last-updated: May 2021
         <a href="https://en.wikipedia.org/wiki/Minix">Minix OS</a>, 
         he endeavored to implement 
         Minix filesystem capabilities within it.<sup><a href="#reference" title="Torvalds p. 78">[4]</a></sup>  
-        When this was done, it was clear to him that the project was on
+        This took several days, but when it was done,
+        it was clear to him that the project was on
         its way to being a kernel; the next step was to obtain
         the POSIX specification and implement each system call precisely.<sup><a href="#reference" title="Torvalds p. 78">[4]</a></sup>  
     </p>
 
     <p>
         As the Linux kernel matured, Linus informally introduced
-        a single rule: <em><a href="https://lkml.org/lkml/2012/12/23/75">We do not break userspace</a>.</em>
+        a single rule: <em>We do not break userspace.</em>
         This means that, if a proposed change to the kernel breaks a
         piece of software running on it, then the change will be rejected.
         The consequence is that the Linux kernel
         is always capable of being the foundation of users' operating 
         system: Any project which depends upon it will 
         continue to work on it.
+    </p>
+
+    <p>
+        In my view, this policy is
+        an example of what ideal support of modularity is,
+        and has helped make the Linux kernel
+        the most popular Unix-like kernel in existence.
     </p>
 
     <h3>See Also:</h3>
