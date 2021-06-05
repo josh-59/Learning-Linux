@@ -5,6 +5,10 @@ last-updated: May 2021
 ---
 
 <!--
+
+        I do not believe that engineers would, left to their own devices,
+        build a pickup-truck that destroys the planet.
+
 Although I'd love to believe that open-source software
         is as casual as it's portrayed to be, it simply isn't.
         Good software is not easy to produce, and open-source is
@@ -19,9 +23,12 @@ Although I'd love to believe that open-source software
         This can give the appearance of self-satisfying development:
         For example, producing an operating system
         is outside the scope of the Linux kernel project.
-        Nonetheless, these projects have formed something substantial.
+        Their focus is on the kernel.
     </p>
 
+    <p>
+        Nonetheless, these projects have formed something substantial.
+    </p>
 
     <p>
         For example, Facebook has put extensive effort into
@@ -36,8 +43,6 @@ Although I'd love to believe that open-source software
         crafted by GNU's own hand.
     </p>
 
-
-
     <p>
         "No one "owns" the software in the traditional sense of 
         being able to command how it is used or developed,
@@ -49,7 +54,6 @@ Although I'd love to believe that open-source software
         rath than either market prices or managerial commands."
     </p>
 
-    
     "Write programs that do one thing and do it well.
     Write programs that work together."
     Douglas McIlroy 
@@ -72,10 +76,10 @@ Although I'd love to believe that open-source software
             Benkler, p74
 
     Quotes:
-        "Be conservative in what you do, be liberal in what you accept from others."
-            <a href="https://en.wikipedia.org/wiki/Robustness_principle">Robustness Principle</a>
-
-
+        "Be conservative in what you do, be liberal in what you accept from 
+        others."
+        <a href="https://en.wikipedia.org/wiki/Robustness_principle">Robustness 
+        Principle</a>
 
     <div class="aside-right">
         <h4>Aside:</h4>
@@ -175,34 +179,37 @@ Incremental Improvement
         from the motivations of contributors to the leadership
         style necessarily implied by them.
     </p>
+
 </div>
 
-<div class="content" id="from-the-top">
-    <h2>From the Top</h2>
+<div class="content" id="motivations">
+    <h2>Motivations</h2>
 
     <p>
-        <em>Open source</em> describes only how software is 
-        distributed and used&mdash; Not how it is produced.<sup><a href="#references" title="Eghbal p44">[a]</a></sup>
-        There isn't a great deal of money to be made in open source,
-        and without the clear external motivation of money, open-source
-        has been described as <em>intrinsically motivated.</em> 
+        The core motivation behind these works is not 
+        typically ideological, but rather simple:
+        It's just <em>interesting!</em>
+        We create things because it satisfies some desire of our own.
+        The result is simple self-satisfying development,
+        which sounds a little crazy at first.
     </p>
 
     <p>
-        Whereas businesses start out pursuing money,
-        open-source works characteristically begin by 
-        satisfying some developer's itch.
-    </p>
-
-    <p>
-        Thus, the open-source scene naturally
-        decomposes into projects, with people working on what they want;
-        the result is simple self-satisfying development.
         For example, producing an operating system
         is outside the scope of the Linux kernel project:
         They do kernels for kernels' sake, and somebody interested
         in composing operating systems does that.
     </p>
+
+    <p>
+        Open-source works characteristically begin by 
+        satisfying some developer's personal itch.
+        Consequently, the open-source scene naturally
+        decomposes into projects, with people working on what they want.
+        That these projects have formed something truly substantial
+        is outside the scope of any of them!
+    </p>
+
 
     <div class="aside-right">
         <h4>Fun Fact:</h4>
@@ -214,31 +221,35 @@ Incremental Improvement
     </div>
 
     <p>
-        That these projects have formed something substantial
-        has called into question Coase's economic theory of the firm.
-        By focusing only on the work, all other factors 
-        may be ignored.
-        Since money is the not issue, we don't have to worry about selling
-        it;
-        since nobody is being paid, personal qualifications may 
-        be ignored;
-        since 
+        World is not perfect, and many contributors have motivations
+        other than the software itself.
+        These individuals do not have the project's 
+        raison diatre (?) at heart, and often leave.
+    </p>
+
+    <p>
+        For Debian developer __________, Debian was a "make the world
+        a better place" project.  
+        But, <em>making the world a better place</em> was not 
+        the project's stated intent; Ian Murdoch's intent was to 
+        create a distribution that was supported by interested users,
+        especially, one that could compete with commercial operating 
+        systems!
     </p>
 </div>
 
-
-<div class="content" id="dividing">
-    <h2>Dividing Open Source</h2>
+<div class="content" id="projects">
+    <h2>Projects</h2>
 
     <p>
-        Code is to an open-source project what money is to business: 
-        The only thing that open-source projects necessarily
-        have in common is that they each yield appropriately-licensed
-        software, in much the same way that all business exist
-        for the purpose of making money.
-        Like businesses, open-source projects often follow
-        a few models.
+        For example, while Bash is 31 years old, and is 
+        extremely stable software, it's still under
+        significant development.
     </p>
+</div>
+
+<div class="content" id="dividing">
+    <h2>The Cathedral and the Bazaar</h2>
 
     <div class="aside-right">
         <h4>Aside:</h4>
@@ -249,77 +260,97 @@ Incremental Improvement
         </p>
     </div>
 
+
+    <p>
+        To call open-source a hobby isn't quite strong enough; 
+        at the same time, it isn't <em>work</em> in the 
+        traditional sense, either.  
+        Open-Source and GNU/Linux lie somewhere between the two,
+        closer to sport.
+        For me, the magic is that it's composed of
+        things people created because they wanted to.
+    </p>
+
     <p>
         The most common open-source model today is what Eric S. 
-        Raymond called the <em>Bazaar:</em> Contributions are welcome.
-        This he juxtaposed against the then-traditional <em>Cathedral,</em>
-        which is closed from public modifications.  
-        Since its introduction, the bazaar model 
+        Raymond termed the <em>Bazaar:</em> The project's 
+        maintainers make themselves publicly available, and
+        contributions are welcome.
+        This he juxtaposed with the then-traditional <em>Cathedral,</em>
+        in which the maintainers of the project seal themselves
+        from public suggestion.
+    </p>
+
+    <p>
+        Since its introduction, the Bazaar model 
         has dominated open source.
+        In my view, this is because it supports project growth much
+        more responsively than the Cathedral: When projects are
+        interesting (or of interest), people can more easily
+        improve it, making it more successful.
+        Besides: If everyone is invited, then you are too!
     </p>
 
     <p>
-        Nadia Eghbal, in her book <em>Working in Public,</em>
-        further divides Bazaars into four:
-    </p>
-
-    <ul>
-        <li>
-            <p> 
-                <b>Federation:</b> 
-                Many users, many contributors; usually subdivided.  
-                Examples: Linux kernel, Firefox, Debian
-            </p>
-        </li>
-        <li>
-            <p>
-                <b>Stadium:</b> 
-                Many users, few contributors. 
-                Examples: Bash, Linux Mint
-            </p>
-        </li>
-        <li>
-            <p>
-                <b>Club:</b> 
-                Few users, most of whom are contributors. 
-                Example: Slackware
-            </p>
-        </li>
-        <li>
-            <p> 
-                <b>Toy:</b> 
-                Few users, few contributors. 
-                Most projects start out as 'toys'
-            </p>
-        </li>
-    </ul>
-
-    <p>
-        Inviting people to contribute promotes project growth, 
-        and projects have been known to move at shocking speed.  
+        Within a bazaar, there is usually structure, in the form of a
+        "tree of trust" to handle code review and commit acceptance:
+        Suggested edits are reviewed and filtered up on their way
+        to being accepted.
     </p>
 
     <p>
-        Given <em>too many</em> contributions, your primary goal is
-        to filter them to something manageable.
-        "These developers aren't building communities; they're 
-        directing air 
-        traffic."<sup><a href="#references" title="Eghbal p13">[a]</a></sup>
+        To support these communities and projects, you will
+        often see Foundations&mdash; Linux Foundation, 
+        Free Software Foundation, Mozilla Foundation, etc..
+        These are 
+    </p>
+
+    <p>
+        By contrast, <a href="">Github</a> is a propietary, 
+        for-profit business that describes itself as a 
+        "social coding platform." 
+        It is characteristically two-dimensional, offering convenience
+        at the expense of structure, and is not appropriate for
+        large and popular projects. 
     </p>
 
     <h3>See Also:</h3>
     <ul>
-        <li><a href="https://www.amazon.com/Working-Public-Making-Maintenance-Software/dp/0578675862/ref=sr_1_1?dchild=1&keywords=working+in+public&qid=1622666313&sr=8-1">Working in Public: The Making and Maintence of Open Source Software</a> by Nadia Eghbal</li>
-        <li><a href="https://en.wikipedia.org/wiki/Release_early,_release_often">Release Early, Release Often</a> - Wikipedia</li>
-        <li><a href="https://blog.rust-lang.org/2014/10/30/Stability.html"> Stability as a Deliverable | Rust Blog</a></li>
-        <li><a href="http://thinking-in-code.blogspot.com/2010/07/train-model-of-software-development.html"> Thinking in Code: Train Model of Software Development</a></li>
+        <li><a href="https://www.contributor-covenant.org/">Contributor Covenant[...] </a> by Coraline Ada Ehmke</li>
     </ul>
 </div>
 
+<div class="content" id="not-easy">
+    <h2>Not Easy!</h2>
 
-<div class="content" id="project-leadership">
-    <h2 style="margin-bottom: 0;">Curating Modifications:</h2>
-    <h4>Maintainership</h4>
+    <p>
+        While I'd love to believe that open-source is as casual as
+        Github portrays it to be, it's simply not:
+        Good software is not easy to produce. 
+        It's one thing to write a Python script for your own 
+        purposes (or even a shell to demonstrate the idea); it's
+        quite another to produce a product that's useable by 
+        millions of people.
+    </p>
+
+    <p>
+        In particular, there is a significant connection between 
+        mathematical thinking and programming skill.
+        For example, all of the operating systems researchers 
+        of Bell Laboratories held
+        Ph.D.'s in mathematics&mdash; and bear in mind that 
+        UNIX was their <em>second</em> try!
+    </p>
+
+    <p>
+        The role of project leader quickly skews from 
+        <em>lead developer</em> to 
+        <em>code reviewer and modification curator;</em>
+        today, you will often see the term <em>maintainer</em>
+        to describe the project's head honcho.
+    </p>
+
+
 
     <div class="aside-right">
         <h4>Aside:</h4>
@@ -328,46 +359,52 @@ Incremental Improvement
         </p>
     </div>
 
-    <p>
-        Most proposed modifications are rejected.
-        In fact, the role of maintainer quickly skews from developer
-        to reviewer and curator.  
-    </p>
+
 
     <p>
-        Github is a propietary, for-profit business that describes itself
-        as a "social coding platform." 
-        It is characteristically two-dimensional, offering convenience
-        at the expense of structure, and is appropriate for small
-        projects (toys and clubs).
-    </p>
+        It isn't a coincidence that most of open-source's
+        founders were college students.  
+
 
     <p>
-        Of course, a community is not out of the question;
+        For the serious developer, mathematics is used literally in,
+        especially, data structures.  
+        Data structures, discrete mathematics, logic and 
+        computer architecture form the core
+        of undergraduate computer science today; nonetheless,
+        skill is best accrued by reading and writing source.
     </p>
 
-    <p>
-        A <em>maintainer</em> is a person responsible for the future of the
-        project.
-        A <em>contributor</em> is a person who makes a modification to it,
-        ranging from casual to significant.
-    </p>
-
+    <ul>
+        <li><a href="https://www.hackerrank.com/">HackerRank</a></li>
+        <li><a href="https://opendatastructures.org/">Open Data Structures</a> by Pat Morin</li>
+        <li><a href="http://discrete.openmathbooks.org/dmoi3.html">Discrete Mathematics: An Open Introduction</a> by Oscar Levin</li>
+        <li><a href="https://csapp.cs.cmu.edu/">Computer Systems: A Programmer's Perspective</a> by Randal E. Bryant and David R. O'Hallaron</li>
+        <li><a href="https://man7.org/tlpi/index.html">The Linux Programming Interface</a> by Michael Kerrisk</li>
+        <li><a href="https://store.doverpublications.com/0486406873.html">Introduction to Logic</a> by Patrick Suppes (Bonus!)</li>
+    </ul>
 </div>
-
-
 
 <div class="content" id="incremental-improvement">
     <h2>Incremental Improvement</h2>
 
     <p>
-
+        The general strategy employed is to build something,
+        release it, review it, improve it, and then rebuild it.
     </p>
 
     <p>
-        Large projects, such as the Linux kernel or Mozilla Firefox,
-        for whom many people might want to see a particular change,
-        often preemptively schedule releases.  
+        I like to think that, first, code left untouched does not degrade;
+        that is, it persists.  
+        ...Improvement is incidental to its being publicly exposed...
+        Even if each release is only
+        marginally better than the previous, those improvements accrue,
+        and the result is guaranteed to be great software.
+    </p>
+
+    <p>
+        Large projects, for whom many people might want to see a 
+        particular change, often preemptively schedule releases.  
         The intent is to produce a reiterative cycle 
         that accomodate both feature introduction <em>and</em> 
         commit rejection&mdash; if your change doesn't make it into 
@@ -382,13 +419,6 @@ Incremental Improvement
         On one hand, we want to incorporate changes made by 
         many unknown people; but on the other,
         we also want to deliver a consistent product.
-    </p>
-
-    <p>
-        One solution is to release a sequence of versions of the product:
-        Even if each release is only
-        marginally better than the previous, those improvements accrue,
-        and the result is guaranteed to be great software.
     </p>
 
     <div class="aside-right">
@@ -409,7 +439,7 @@ Incremental Improvement
     </p>
 
     <p>
-        While it is released to the public, merges 
+        While it is being used by the, merges 
         are again restricted to bug fixes and
         security updates, and, again, each release
         is supported for four weeks:
@@ -434,7 +464,16 @@ Incremental Improvement
         projects outside of the Linux kernel.
         It even spawned the (awesome) programming language, Rust.
     </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Release_early,_release_often">Release Early, Release Often</a> - Wikipedia</li>
+        <li><a href="https://blog.rust-lang.org/2014/10/30/Stability.html"> Stability as a Deliverable | Rust Blog</a></li>
+        <li><a href="http://thinking-in-code.blogspot.com/2010/07/train-model-of-software-development.html"> Thinking in Code: Train Model of Software Development</a></li>
+    </ul>
 </div>
+
+
 
 
 <div class="content" id="less">
@@ -446,8 +485,8 @@ Incremental Improvement
         the terminal one screenful at a time.
         The first widely used paging utility was <code>more</code>, written by
         Dan Halbert as a graduate student at UC Berkley in 1978.<sup><a href="https://danhalbert.org/more.html">[aa]</a></sup>
-        <code>more</code> is a simple program, first filling up the screen,
-        then waiting for user input to print the next line(s).
+        <code>more</code> is relatively simple: It first fills up the screen,
+        then waits for user input to print the next line(s).
     </p>
 
     <p>
@@ -503,59 +542,6 @@ Incremental Improvement
         <li><a href="https://fedoramagazine.org/5-cool-terminal-pagers-in-fedora/">5 cool terminal pagers in Fedora</a> - Fedora Magazine</li>
         <li><a href="https://zaiste.net/posts/shell-commands-rust/">Rewritten in Rust: Modern Alternatives of Command-Line Tools</a></li>
     </ul>
-</div>
-
-<div class="content" id="sports">
-    <h2 style="margin-bottom: 0;">Sports:</h2>
-    <h4>An Analogy</h4>
-       
-    <p>
-        To call open-source a hobby isn't quite strong enough; 
-        at the same time, it isn't <em>work</em> in the 
-        traditional sense, either.  
-        Open-Source and GNU/Linux lie somewhere between the two,
-        closer to sport.
-        For me, the magic is that it's composed of
-        things people created because they wanted to.
-    </p>
-
-    <p>
-        While I'd love to believe that open-source is as casual
-        as it's portrayed to be, it's simply not.
-        Good software is not easy to produce: 
-        It's one thing to write a Python script for your own 
-        purposes (or even a shell to demonstrate the idea); it's
-        quite another to produce a product that's useable by 
-        millions of people.
-    </p>
-
-    <p>
-        The reason I wrote this was because I spent a great deal
-        of time failing to learn the material owing to
-        misguided sources:  
-        I didn't know where to look for relevant information, and often
-        didn't know what to ask, to boot. 
-        The reason I persisted with it was because, as it
-        turns out, I'm better at writing than programming.  
-    </p>
-
-    <p>
-        The ordinary user is not obligated to contribute.
-        As Richard Stallman pointed out, software is not 
-        like other tangible goods because software is very cheap
-        to copy, and doing so does not degrade the original.
-        The upshot is, you can be a lurker and <em>No one will know!</em>
-        By far, the best thing a normal user can do 
-        is create and pass detailed bug reports, when you find them.
-    </p>
-
-    <p>
-        The core motivation behind these works is not ideological,
-        but rather simple:
-        They create things because it satisfies some desire of their own.
-        I do not believe that engineers would, left to their own devices,
-        build a pickup-truck that destroys the planet.
-    </p>
 </div>
 
 <div id="references" class="content">
