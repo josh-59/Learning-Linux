@@ -5,10 +5,11 @@ last-updated: March, 2021
 ---
 
 <!--
+ 
 To Do:
+    References, "boss"
     
     too much 'echo'
-
 
     <div class="aside-right">
         <h4>Aside:</h4>
@@ -472,12 +473,12 @@ To Do:
     <h2>Redirection</h2>
 
     <p>
-        One of the features that make the Unix command-line interface
+        One of the features that makes the Unix command-line interface
         powerful is the ability to direct output away from the terminal.
         Since the terminal is represented as a file, 
         the operations on it and any other file are identical.
         Thus, by changing the file before calling the command,
-        we can easily capture its output in a (regular) file;
+        we can easily capture its output in a regular file;
         the command does not need to know:
     </p>
 
@@ -495,7 +496,7 @@ To Do:
     </p>
 
     <p>
-        We can also redirect the output of one command
+        We can also direct the output of one command
         to be the input of another, forming a <em><a href="https://www.gnu.org/software/bash/manual/html_node/Pipelines.html">pipeline</a></em>:
     </p>
 
@@ -510,64 +511,19 @@ To Do:
     </p>
 
     <p>
-        Pipelines may be of arbitrary length;
-        the <code>cat</code> command is often used to begin pipelines,
-        but may also be used to interject on them:
-    </p>
-
-    <div class="code">
-        $ uname -a | cat - /proc/meminfo | less
-    </div>
-
-    <p>
         Finally, if we want to discard the output of a command or
         pipeline, we can redirect it to <code>/dev/null</code>.
     </p>
 
-    <p>
-        Redirection into files was implemented by Ken Thompson and
-        Dennis Ritchie, but pipelines were implemented at the
-        behest of their boss, Douglas McKilroy.
-        The paradigm they invented supports small software
-        "tools" being used together to accomplish a given task,
-        and is both powerful and general.
-    </p>
+    <h3>See Also</h3>
+    <ul>
+        <li><a href="https://youtu.be/oB1uZf6Z27Y">Lesson 3: I/O, Redirect, & Pipe: Pipin' Ain't Easy But It Sure Is Fun</a> by Level 099 Techs (Youtube video)</li>
+    </ul>
 
 </div>
 
 <div class="content" id="closing-remarks">
-    <h2>Closing Remarks</h2>
-
-    <p>
-        At this point, we have covered the essential elements of the 
-        shell.
-        It is not a difficult concept,
-        consisting of a main loop which:
-    </p>
-
-    <div style="margin-top: -20px;" class="aside-right">
-        <h4>Pro Tip:</h4>
-        <p>
-            You can always get back to the main loop with ctrl+c.
-        </p>
-    </div>
-
-
-    <ol>
-        <li>Prints prompt</li>
-        <li>Gets a line of input</li>
-        <li>Finds and executes command</li>
-        <li>Waits for command to terminate</li>
-    </ol>
-
-    <p>
-        The variety of shells shown above reflects a variety of 
-        interpretations of, and expansions on, this same thing.
-        For instance, the Pythonic shell <code><a href="https://xon.sh/">xonsh</a></code> exposes
-        a full, general-purpose programming language to the user&mdash;
-        in addition to a shell.
-    </p>
-
+    <h2 style="margin-bottom: 0;">Closing Remarks</h2>
     <h4><em>fork()</em></h4>
 
     <p>
@@ -578,15 +534,16 @@ To Do:
         existed as a user-space process, but <em>fork()</em> had not been introduced.
         To execute a command, the shell replaced itself with
         the requested program;
-        the program, on calling <em>exit</em>, replaced itself with the
+        the program, on calling <em>exit()</em>, replaced itself with the
         shell once again.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[7]</a></sup>
     </p>
 
     <p>
         In particular, <em>change directories</em> was implemented
         as a separate command.
-        When invoked, it inherited the shell's current working directory,
-        changed it, and then the shell inherited the resulting working directory.
+        When invoked, it inherited the shell's current working directory
+        and changed it, so that the shell would inherit a new
+        working directory.
         With the inclusion of the <em>fork()</em> system call, though,
         the <code>chdir</code> command broke:
     </p>
@@ -619,8 +576,8 @@ To Do:
     <ul>
         <li><a href="https://ryanstutorials.net/bash-scripting-tutorial/bash-script.php">What is a Bash Script?</a> - Bash Scripting Tutorial</a></li>
         <li><a href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">Read-eval-print loop</a> - Wikipedia</li>
-        <li><a href="http://shellhaters.org/">Shell Hater's Handbook</a></li>
-        <li><a href="http://man.cat-v.org/unix-1st/1/sh">sh(1)</a> (First Edition)</li>
+
+               <li><a href="http://man.cat-v.org/unix-1st/1/sh">sh(1)</a> (First Edition)</li>
         <li><a href="assets/simple-shell.c">simple-shell.c</a></li>
     </ul>
 </div>
