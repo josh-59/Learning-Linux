@@ -388,14 +388,6 @@ https://wiki.ubuntu.com/Lvm
     </ul>
     </p>
 
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            If you're interested in the Linux programming interface,
-            I highly recommend <a href="https://man7.org/tlpi/index.html">his book</a>!
-        </p>
-    </div>
-
     <p>
         <a href="https://man7.org/">Michael Kerrisk</a> has called the 
         Unix file interface,
@@ -481,8 +473,8 @@ https://wiki.ubuntu.com/Lvm
         <code>.</code> ("dot"),
         and <code>..</code> ("dot dot").
         These entries cannot be removed, nor changed.
-        <code>.</code> is a reference to the containing directory itself.
-        It is used as a handle to the current working directory.
+        <code>.</code> is a reference to the containing directory itself,
+        and is used as a handle to the current working directory.
         <code>..</code> is a reference to the directory's 
         parent directory.
     </p>
@@ -490,7 +482,7 @@ https://wiki.ubuntu.com/Lvm
     <p>
         Since each directory has a single parent, 
         and creating new references to directories is not allowed, the
-        directory heirarchy is guaranteed.
+        intended directory structure is guaranteed.
     </p>
 
     <h3>Hidden Files</h3>
