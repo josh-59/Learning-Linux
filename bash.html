@@ -5,86 +5,12 @@ last-updated: April, 2021
 ---
 
 <!--
-
-    <p>
-        Redirection into files was implemented by Ken Thompson and
-        Dennis Ritchie, but pipelines were implemented at the
-        behest of their 
-        <span title="'Boss' is a little strong.  The researchers of Bell Labs were highly qualified, usually with graduate degrees in mathematics; they were not directed, per se, but rather, 'expected to produce about a year's work in about a year's time.'">
-        boss</span>,
-        Douglas McKilroy.
-        The paradigm they invented supports small software
-        "tools" being used together to accomplish a given task.
-        It is both powerful and general, and lends the 
-        Unix command line a significant advantage over 
-        competing schemes.
-    </p>
-
-
-
-
-<div class="content" id="shell-haters">
-	<h2 style="margin-bottom: 2pt;">Lesson 3: I/O, Redirect, & Pipe<h2>
-    <iframe class="video" src="https://www.youtube.com/embed/oB1uZf6Z27Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-
-
-        <li><a href="http://shellhaters.org/">Shell Hater's Handbook</a></li>
-
-
-
-    <p>
-        The redirection operation <code>></code> is not an argument,
-        and is not passed to the command.  
-        It is interpretted as an instruction to open the file 
-        <code>cpu_stats</code> for writing, make its length zero, then assign 
-        it to <code>STDOUT</code> (file descriptor 1); 
-        then, call <em>exec()</em> on <code>lscpu</code>.
-    </p>
-
-
-    Termios:
-        A kernel
-
-    <li><a href="https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios/">A Brief Introduction to Termios</a> - Made of Bugs</li>
-
-<div class="content" id="startup-files">
-    <h2>Startup Files</h2>
-    <h4>and Backwards Compatibility</h4>
-
-    Thompson's (First-Edition) shell sh:
-    Bourne's shell:
-    <p>
-        Bash inherits ideas dating all the way to Thompson's original
-        shell, <code>sh</code>.
-        <Create a faux man-page describing all parts of Thompson's shell
-        that are preserved in "modern" Bash.
-    </p>
-
-    <p>
-        Let's be real: Bash was first released 1989
-        It is not a modern shell.
-    </p>
-
-    <p>
-        There are two big ideas going on with Bash's startup files:
-        1) One file should be executed <em>per user login</em>
-            a) With another file being executed <em>per interactive shell</em>
-        2) Backwards comaptibility
-    </p>
-
-</div>
-
 <div class="content" id="make">
     <h2><code>make</code></h2>
 
     <p>
-
-    </p>
-
-    <p>
         <code>make</code> is one of the oldest tools in the Unix
-        collection, and is often used 
+        collection, and is used to simplify the build process.
         One expresses a program to be compiled in "recipes" of the form,
     </p>
 
@@ -96,7 +22,7 @@ last-updated: April, 2021
     <p>
         This tells <code>make</code> that <em>hello</em> is a target file,
         and that it depends upon <em>hello.c</em>.
-        One can then run:
+        One can then execute:
     </p>
 
     <div class="code">
@@ -104,14 +30,14 @@ last-updated: April, 2021
     </div>
 
     <p>
-        and make will execute the shell command 
+        and <code>make</code> will execute the shell command 
         <code>gcc -o hello hello.c</code> if 
         <em>hello</em> does not exist, or it does exist and is older 
         than <em>hello.c</em>.
     </p>
 
     <p>
-        Quite a novel little utility, and it is general in the sense that the files
+        A classic utility, it is general in the sense that the files
         in question need not be source/binary.
         An introduction to UNIX would not be complete without an introduction 
         to <em>make</em>!
@@ -135,6 +61,48 @@ last-updated: April, 2021
         <li><code><a href="https://en.wikipedia.org/wiki/Less_%28Unix%29#Frequently_used_commands">less</code> (UNIX) - Frequently Used Commands</a> - Wikipedia</li>
     </ul>
 </div>
+
+<div class="content" id="startup-files">
+    <h2>Bash Startup Files</h2>
+
+    <p>
+        There are two big ideas going on with Bash's startup files:
+        1) One file should be executed <em>per user login</em>
+            a) With another file being executed <em>per interactive shell</em>
+        2) Backwards comaptibility
+    </p>
+
+    <p>
+        Bash has many startup files.
+
+    Thompson's (First-Edition) shell sh:
+    Bourne's shell:
+    <p>
+        Bash inherits ideas dating all the way to Thompson's original
+        shell, <code>sh</code>.
+        <Create a faux man-page describing all parts of Thompson's shell
+        that are preserved in "modern" Bash.
+    </p>
+
+    <h4>and Backwards Compatibility</h4>
+
+</div>
+
+
+
+
+<div class="content" id="shell-haters">
+	<h2 style="margin-bottom: 2pt;">Lesson 3: I/O, Redirect, & Pipe<h2>
+    <iframe class="video" src="https://www.youtube.com/embed/oB1uZf6Z27Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+
+        <li><a href="http://shellhaters.org/">Shell Hater's Handbook</a></li>
+
+
+    <li><a href="https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios/">A Brief Introduction to Termios</a> - Made of Bugs</li>
+
+
 
 Exercises:
 
@@ -384,7 +352,7 @@ Exercises:
     <p>
         Pretty spiffy!
         After these steps have been completed, Bash removes unquoted
-        quotes, and prepares to execute the command.
+        quotes, and inspects the line for redirection operators.
     </p>
 
     <h3> See Also: </h3>
@@ -408,19 +376,18 @@ Exercises:
     </p>
 
     <p>
-        In practice, there are three files:
+        There are three such files:
     </p>
 
     <ul>
-        <li><code>STDIN</code> the keyboard, at file descriptor 0</li>
+        <li><code>STDIN</code> the terminal keyboard, at file descriptor 0</li>
         <li><code>STDOUT</code> the terminal screen, buffered, at file descriptor 1</li>
         <li><code>STDERR</code> the terminal screen, unbuffered, at file descriptor 2</li>
     </ul>
 
     <p>
         These are known as the <em>standard file descriptors,</em> and are 
-        universally adhered to across UNIX-like operating systems;
-        it is, essentially, part of the UNIX architecture.
+        part of the POSIX standard.
         For example, the program <code>/usr/bin/ls</code>
         prints to <code>STDOUT</code>, and our command
     </p>
@@ -443,8 +410,7 @@ Exercises:
     </p>
 
     <p>
-        In Bash, the character <code>&lt;</code> redirects <code>STDIN</code>.
-        Its formal semantics are:
+        In Bash, the character <code>&lt;</code> redirects <code>STDIN</code>:
     </p>
 
     <ul style="list-style-type: none;">
