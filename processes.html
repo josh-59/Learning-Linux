@@ -6,6 +6,15 @@ last-updated: April, 2021
 
 <!--
 
+Directory Tree...
+
+From the user's perspective, the directory tree is where you store your
+stuff. Using commands, utilities, or other programs, you modify its 
+contents and structure to your liking.
+
+From the programmer's perspective, the directory tree is a globally
+shared, persistent data structure.
+
 <div class="content" id="executable-files">
     <h2>Executable Files</h2>
 
@@ -128,8 +137,8 @@ last-updated: April, 2021
         executing with <em>josh's permission.</em>
         A process is by-default allowed to manipulate files owned by the user
         it is acting as:
-        It can remove owned files, and
-        change owned files' permission bits.
+        It can remove owned files, 
+        change owned files' permission bits, etc..
         Files created by a process inherit its associated user.
     </p>
 
@@ -271,9 +280,9 @@ last-updated: April, 2021
         currently being executed.  
         Properly speaking, there is only one <em>exec()</em> system
         call, and that is <a href="https://man7.org/linux/man-pages/man2/execve.2.html"><em>execve()</em></a>.
-        Most C libraries offer six variants of
-        it, each with slightly different conveniences.<sup><a href="https://en.wikipedia.org/wiki/Unistd.h">[4]</a></sup>
-        Under the hood, each of these map to  
+        POSIX-conforming C libraries offer six variants of
+        it, each with slightly different conveniences.<sup><a href="https://pubs.opengroup.org/onlinepubs/009695399/functions/exec.html">[4]</a></sup>
+        Under the hood, they each map to  
         a call to <em>execve()</em>.<sup><a href="https://man7.org/linux/man-pages/man3/exec.3.html">[5]</a></sup>
         They are collectively referred to as <em>exec()</em> 
         because, used properly, they have the same meaning.
@@ -287,7 +296,7 @@ last-updated: April, 2021
         char *args[] = {"ls", "-l", NULL};
         execv("/usr/bin/ls", args); 
                 // Execution of *this* program stops here,
-                // and the process continues executing at usr/bin/ls
+                // and the process continues executing at /usr/bin/ls
     </pre>
 
     <div class="aside-right">
@@ -359,7 +368,7 @@ last-updated: April, 2021
     </pre>
 
     <p>
-        If this call failed (which it would if <code>./rubber_ducky</code> did not
+        If this call failed (which it would if <em>./rubber_ducky</em> did not
         exist, for example), then <em>fd</em> would be assigned -1, an invalid file
         descriptor.
         We can therefore check with:
@@ -602,7 +611,8 @@ last-updated: April, 2021
         init - Wikipedia (3 March 2021). Retrieved March 30, 2021, from <a href="https://en.wikipedia.org/wiki/Init">https://en.wikipedia.org/wiki/Init</a>
     </li>
 
-    <li>unistd.h - Wikipedia (2020, November 12).<a href="https://en.wikipedia.org/wiki/Unistd.h">https://en.wikipedia.org/wiki/Unistd.h</a>.</li>
+    <li>exec. (2008). <a href="https://pubs.opengroup.org/onlinepubs/009695399/functions/exec.html">https://pubs.opengroup.org/onlinepubs/009695399/functions/exec.html</a>.</li>
+
 
     <li>exec(3) - Linux manual page. (2021, March 22). <a href="https://man7.org/linux/man-pages/man3/exec.3.html">https://man7.org/linux/man-pages/man3/exec.3.html</a>.</li>
   </ol>
