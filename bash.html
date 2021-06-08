@@ -5,62 +5,6 @@ last-updated: April, 2021
 ---
 
 <!--
-<div class="content" id="make">
-    <h2><code>make</code></h2>
-
-    <p>
-        <code>make</code> is one of the oldest tools in the Unix
-        collection, and is used to simplify the build process.
-        One expresses a program to be compiled in "recipes" of the form,
-    </p>
-
-    <div class="code">
-    hello: hello.c<br>
-        &emsp;&emsp;&emsp;&emsp;gcc -o hello hello.c
-    </div>
-
-    <p>
-        This tells <code>make</code> that <em>hello</em> is a target file,
-        and that it depends upon <em>hello.c</em>.
-        One can then execute:
-    </p>
-
-    <div class="code">
-        $ make hello
-    </div>
-
-    <p>
-        and <code>make</code> will execute the shell command 
-        <code>gcc -o hello hello.c</code> if 
-        <em>hello</em> does not exist, or it does exist and is older 
-        than <em>hello.c</em>.
-    </p>
-
-    <p>
-        A classic utility, it is general in the sense that the files
-        in question need not be source/binary.
-        An introduction to UNIX would not be complete without an introduction 
-        to <em>make</em>!
-    </p>
-
-
-    Invented 1976, 7th ed UNIX
-    "an instant success"
-
-
-    "This approach replaces code with data, and that's almost always a win."
-
-
-    https://en.wikipedia.org/wiki/Make_(software)
-    Original Make was conceived and written over a weekend
-    <a href="https://en.wikipedia.org/wiki/GNU_Autotools#Components">obtuse to say the least</a>
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://archive.org/details/pdfy-MgN0H1joIoDVoIC7">The AWK Programming Language</a></li>
-        <li><code><a href="https://en.wikipedia.org/wiki/Less_%28Unix%29#Frequently_used_commands">less</code> (UNIX) - Frequently Used Commands</a> - Wikipedia</li>
-    </ul>
-</div>
 
 <div class="content" id="startup-files">
     <h2>Bash Startup Files</h2>
@@ -88,6 +32,9 @@ last-updated: April, 2021
 
 </div>
 
+
+        <li><a href="https://archive.org/details/pdfy-MgN0H1joIoDVoIC7">The AWK Programming Language</a></li>
+        <li><code><a href="https://en.wikipedia.org/wiki/Less_%28Unix%29#Frequently_used_commands">less</code> (UNIX) - Frequently Used Commands</a> - Wikipedia</li>
 
 
 
@@ -169,8 +116,9 @@ Exercises:
 		<li><a href="#terminal-conveniences"> Terminal Conveniences</a></li>
         <li><a href="#man-pages"><code>man</code> Pages</a></li>
         <li><a href="#finding-files">Finding Files</a></li>
+        <li><a href="#make"><code>make</code></a></li>
 		<li><a href="#shell-haters">The Shell Hater's Handbook</a></li>
-        <!-- <li><a href="#references"> References </a></li> -->
+        <li><a href="#references">References</a></li>
 	</ul>
 </div>
 
@@ -291,7 +239,7 @@ Exercises:
         If any token contains an asterisk <code>*</code>, question mark
         <code>?</code>, or brackets <code>[]</code>, then it is regarded as a
         <em>pattern,</em> and is replaced by an alphabetical list of all
-        filenames in the current directory matching that pattern.<sup><a href="https://www.gnu.org/software/bash/manual/html_node/Filename-Expansion.html#Filename-Expansion">[a]</a></sup>
+        filenames in the current directory matching that pattern.<sup><a href="https://www.gnu.org/software/bash/manual/html_node/Filename-Expansion.html#Filename-Expansion">[1]</a></sup>
     </p>
 
     <div class="aside-right">
@@ -357,11 +305,10 @@ Exercises:
 
     <h3> See Also: </h3>
     <ul>
+        <li><a href="https://www.gnu.org/software/bash/manual/bash.html#Shell-Parameters">Bash Reference Manual Section 3.4: Shell Parameters</a></li>
         <li><a href="http://mywiki.wooledge.org/glob"> glob - Greg's Wiki </a></li>
     </ul>
 </div>
-
-
 
 <div id="standard-file-descriptors" class="content">
 	<h2 style="margin-bottom: 0;">Standard File Descriptors</h2>
@@ -370,7 +317,7 @@ Exercises:
 	<p>
         Recall that the shell is connected to its terminal by open files, and
         that such files are preserved across both <em>fork()</em> 
-        and <em>exec()</em> system calls. 
+        and <em>exec().</em> 
         This means that each child of <code>bash</code> (that is, each command) 
         will, by default, inherit our keyboard and our terminal screen as open files.
     </p>
@@ -387,9 +334,9 @@ Exercises:
 
     <p>
         These are known as the <em>standard file descriptors,</em> and are 
-        part of the POSIX standard.
+        part of the POSIX standard.<sup><a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/stdin.html">[2]</a></sup>
         For example, the program <code>/usr/bin/ls</code>
-        prints to <code>STDOUT</code>, and our command
+        prints to <code>STDOUT</code>; our command
     </p>
 
     <div class="code">
@@ -403,10 +350,11 @@ Exercises:
     <h3> Redirection </h3>
 
     <p>
-        <em>Redirection</em> is the act of assigning a different file to the standard
-        file descriptors before executing a command.
-        They are a powerful tool, letting the user capture output, create scripts,
-        and even chain commands together.
+        <em>Redirection</em> is the act of assigning a different file to 
+        the one of the standard file descriptors before executing a command.
+        They are a powerful tool, letting the user capture output, 
+        create scripts, and (through the <code><a href="https://man7.org/linux/man-pages/man1/tee.1.html">tee</a></code> utility)
+        copy the <code>STDOUT</code> stream.
     </p>
 
     <p>
@@ -414,7 +362,7 @@ Exercises:
     </p>
 
     <ul style="list-style-type: none;">
-        <li> <code>$ <i>command</i> [arg ...] &lt; file </code> &emsp; Open <code>file</code>
+        <li> <code>$ <i>command</i> [arg ...] &lt; <i>file</i> </code> &emsp; Open <code><i>file</i></code>
             for reading,
             assign to <code>STDIN</code>, then execute <code><em>command</em></code></li>
     </ul>
@@ -424,10 +372,10 @@ Exercises:
     </p>
 
     <ul style="list-style-type: none;">
-        <li> <code>$ <em>command</em> [arg ...] &gt; file </code> &emsp; Open <code>file</code>
+        <li> <code>$ <em>command</em> [arg ...] &gt; <i>file</i> </code> &emsp;&ensp; Open <code><i>file</i></code>
             for writing; set length to zero; assign to <code>STDOUT</code>.
             Then execute command.</li>
-        <li> <code>$ <em>command</em> [arg ...] &gt;&gt; file </code> &emsp; Open <code>file</code>
+        <li> <code>$ <em>command</em> [arg ...] &gt;&gt; <i>file</i> </code> &emsp; Open <code><i>file</i></code>
             for writing; seek to end; assign to <code>STDOUT</code>.
             Then execute command.</li>
     </ul>
@@ -472,12 +420,11 @@ Exercises:
         uniquely identify it, pressing <em>tab</em> will complete it for you.
     </p>
 
-
     <h3>End of File</h3>
 
     <p>
-        Since the shell is connected to the terminal via open file connections,
-        there exists a way to communicate <em>end of file</em> condition.
+        The shell is connected to the terminal via open file connections,
+        and there exists a way to communicate <em>end of file</em> condition.
         It is CTRL+D, and it's similar to a signal in the sense that it is
         sent to the foreground process.
     </p>
@@ -509,10 +456,9 @@ Exercises:
 
     <h3>See Also:</h3>
     <ul>
-        <li><a href="https://www.gnu.org/software/bash/manual/bash.html#Shell-Parameters">Bash Reference Manual Section 3.4: Shell Parameters</a></li>
+        <li><a href="https://www.cyberciti.biz/tips/displays-animations-when-accidentally-you-type-sl-instead-of-ls.html">Steam_Locomotive</a> - Linux/Unix Desktop Fun</li>
     </ul>
 </div>
-
 
 <div id="man-pages" class="content">
     <h2> The man Pages </h2>
@@ -566,7 +512,6 @@ Exercises:
 
 	<h3>See Also:</h3>
 	<ul>
-		<li><code><a href="https://www.man7.org/linux/man-pages/man1/man.1.html">man(1)</a></code></li>
         <li><a href="https://tldr.sh/"><code>tldr</code></a> - Simplified and community driven man pages</a></li>
         <li><a href="https://www.bell-labs.com/usr/dmr/www/1stEdman.html">Unix Programmer's Manual, First Edition</a></li>
 	</ul>
@@ -616,8 +561,8 @@ Exercises:
     <div class="aside-right">
         <h4>Note:</h4>
         <p>
-            On Debian/Ubuntu/Mint, the <code>fd</code> 
-            package is <code>fd-find</code>.
+            On Debian, Ubuntu, or Mint, the <code>fd</code> 
+            package is named <code>fd-find</code>.
         </p>
     </div>
 
@@ -703,10 +648,78 @@ Exercises:
     </ul>
 </div>
 
+<div class="content" id="make">
+    <h2><code>make</code></h2>
+
+    <p>
+        <code><a href="https://www.gnu.org/software/make/">make</a></code> 
+        is one of the oldest tools in the Unix
+        collection, and is used to simplify the build process.
+        One creates a plain text file named <code>Makefile</code>, and
+        puts in it "recipes" of the form,
+    </p>
+
+    <pre>
+    hello: hello.c
+        gcc -o hello hello.c
+    </pre>
+
+    <p>
+        This says that <em>hello</em> is a target file,
+        and that it depends upon the file <em>hello.c</em>.
+        More, to obtain <em>hello</em>, it says to run the command
+        <code>gcc -o hello hello.c</code>
+    </p>
+
+    <p>
+        When one executes:
+    </p>
+
+    <div class="code">
+        $ make hello
+    </div>
+
+    <p>
+        the utility will read the makefile, and 
+        execute the shell command 
+        <code>gcc -o hello hello.c</code> if 
+        <em>hello</em> does not exist, or it does exist but
+        <em>hello.c</em> has been modified more recently.
+    </p>
+
+    <p>
+        This is a boon to developers because it allows them to 
+        edit source code files, then let a utility sort out what
+        compilation needs to be done&mdash; Not to mention, they
+        don't have to enter <code>gcc -o hello hello.c</code>!
+    </p>
+
+    <p>
+        Make is a classic Unix utility, and it is general in the 
+        sense that the files in question need not be source/binary.
+        Suffice it to say, an introduction to Unix would not be 
+        complete without mentioning <em>make</em>.
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://www.gnu.org/software/make/">Make - GNU Project - Free Software Foundation</a></li>
+    </ul>
+</div>
+
+
 <div class="content" id="shell-haters">
 	<h2 style="margin-bottom: 2pt;">The Shell Hater's Handbook</h2>
 	<h4 style="margin-bottom: 18pt;">by Ryan Tomayko<h4>
     <iframe class="video" src="https://www.youtube.com/embed/olH-9b3VJfs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
+<div class="content" id="references">
+    <h2>References</h2>
+
+    <ol>
+        <li>Filename Expansion (Bash Reference Manual). (n.d.). <a href="https://www.gnu.org/software/bash/manual/html_node/Filename-Expansion.html#Filename-Expansion">https://www.gnu.org/software/bash/manual/html_node/Filename-Expansion.html#Filename-Expansion</a>.</li>
+        <li>stdin. (2008). <a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/stdin.html">https://pubs.opengroup.org/onlinepubs/9699919799/functions/stdin.html</a>.</li>
+    </ol>
+</div>
 
