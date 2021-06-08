@@ -129,7 +129,9 @@ last-updated: May 2021
     <p>
         A <em>package</em> is a logical unit of software.
         The obvious example is a program, but libraries are packages, too.
-        Packages may exist in either source-code or precompiled form.
+        Packages may exist in either source-code or precompiled form;
+        to configure and compile source code into usable form
+        is to <em>build</em> it.
         The purpose of this article is to orient the user to the package-centric
         landscape of pragmatic open-source software.
     </p>
@@ -143,15 +145,15 @@ last-updated: May 2021
         form. The GNU-way of building and installing their stuff is:
     </p>
 
-    <div class="code">
-        # ./configure &amp;&amp; make &amp;&amp; make install
-    </div>
-
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
             The ordinary user is not expected to build software from source.
         </p>
+    </div>
+
+    <div class="code">
+        # ./configure &amp;&amp; make &amp;&amp; make install
     </div>
 
 
@@ -161,8 +163,8 @@ last-updated: May 2021
         <a href="https://www.gnu.org/software/bash/manual/html_node/Lists.html#Lists">list</a>
         of commands presupposes C/C++ source built via
         GNU's <em>Autoconf.</em>
-        Most packages include a <code>README</code> file of
-        instructions to build, install, or tinker.
+        Most packages include documentation 
+        to build, install, or tinker.
     </p>
 
     <p>
@@ -177,13 +179,6 @@ last-updated: May 2021
 
     <p>
         yielding a directory reflective of its original packager's.
-    </p>
-
-    <p>
-        Naturally, the system may be viewed as a collection of installed
-        packages.
-        Finally, to configure and compile source code into usable software
-        is to <em>build</em> it.
     </p>
 
     <h3>See Also:</h3>
@@ -203,6 +198,8 @@ last-updated: May 2021
     </div>
 
     <p>
+        Naturally, the system may be viewed as a collection of installed
+        packages.
         <a href="http://linuxfromscratch.org/">Linux From Scratch</a> is
         documentation describing how to build a working
         GNU/Linux system entirely from source.
@@ -219,18 +216,27 @@ last-updated: May 2021
     </p>
 
     <p>
-        As a step towards automating this process, we might
-        notice that <em>building</em> is per-package specific.
-        Hence, we could maintain instructions of how to build packages, to
-        be interpretted by some utility program.
+        As a step towards speeding up the package installation process, 
+        we might note that both <em>building</em> and 
+        <em>installing</em> are per-package specific.
+        Hence, we could maintain scripts describing
+        how to do these things, and then let the computer do them for us.
     </p>
 
+    <div class="aside-right">
+        <h4>Note:</h4>
+        <p>
+            Gentoo additionally supports precompiled packages.
+        </p>
+    </div>
+
     <p>
-        Gentoo Linux is an operating system built around this idea.
+        <a href="https://www.gentoo.org/">Gentoo Linux</a> 
+        is an operating system built around this idea.
         The mechanized instructions to build software are kept in
         <code>ebuild</code>'s&mdash; Bash scripts which
         additionally describe where to obtain source code.
-        These are interpretted by utilities on the user's machine,
+        These are interpretted by the user's machine,
         and <a href="https://devmanual.gentoo.org/ebuild-writing/functions/">executing them</a> 
         results in a new package being installed.
     </p>
@@ -253,7 +259,8 @@ last-updated: May 2021
     <h2> Binary Packages </h2>
 
     <p>
-        Packages are usually distributed in preconfigured and precompiled form.
+        Packages are usually distributed in preconfigured and precompiled 
+        form.
         This yields a smaller archive, saves users the
         time-consuming step of compilation, and allows the
         complete automation of installation.
@@ -263,11 +270,20 @@ last-updated: May 2021
         particular CPU architecture.
     </p>
 
+    <div class="aside-right">
+        <h4>Note:</h4>
+        <p>
+            As a convenience, Slackware also distributes
+            packages in precomposed sets.<sup><a href="http://www.slackbook.org/html/installation-requirements.html#INSTALLATION-SOFTWARE-SERIES">[2]</a></sup>
+        </p>
+    </div>
+
+
     <p>
         Among major distributions, the Slackware Project entertains the
         oldest, and possibly simplest, binary packaging scheme.
         By modern standards, it may be considered crude,
-        because it leaves dependency resolution to the user.<sup><a href="https://www.slackbook.org/html/package-management.html">[2]</a></sup>
+        because it leaves dependency resolution to the user.<sup><a href="https://www.slackbook.org/html/package-management.html">[3]</a></sup>
         It is easily dissected, though, and so represents a nice example
         for us.
     </p>
@@ -343,28 +359,35 @@ last-updated: May 2021
         packages.
         Package managers are distribution-specific, and serve
         as the users' interface to their repositories.
+        Whereas Slackware leaves dependency resolution to the user, 
+        most modern package management
+        suites keep a dependency list in each package,
+        and resolve the list dynamically. 
+    </p>
+
+    <p>
         To name a few:
     </p>
 
     <ul>
         <li>Debian: <code><a href="https://en.wikipedia.org/wiki/APT_(software)">apt</a></code></li>
         <li>Fedora: <code><a href="https://docs.fedoraproject.org/en-US/fedora/rawhide/system-administrators-guide/RPM/">rpm</a></code></li>
-        <li>openSUSE: <code><a href="https://doc.opensuse.org/documentation/leap/reference/html/book.opensuse.reference/cha-sw-cl.html">zypper</a></code></li>
+        <li>openSUSE: <code><a href="https://doc.opensuse.org/documentation/leap/reference/html/book-reference/cha-sw-cl.html#sec-zypper">zypper</a></code></li>
         <li>Arch: <code><a href="https://wiki.archlinux.org/title/Pacman">pacman</a></code></li>
     </ul>
 
     <p>
-        Modern package managers are among the most powerful pieces of software
+        Package managers are among the most powerful pieces of software
         on GNU/Linux operating systems.
-        To update a machine utilizing Debian's packaging facilities, for example,
-        we simply,
+        To update a machine utilizing Debian's packaging facilities, 
+        for example, we simply,
     </p>
 
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            Mint ships with a graphical installer&mdash; look for 
-            <em>Software Manager</em> in the menu.
+            Most desktop distributions ship with a graphical 
+            package manager. Look for <em>Software Manager</em> in the menu.
         </p>
     </div>
 
@@ -487,6 +510,7 @@ last-updated: May 2021
         They publish package updates every Friday, which
         forms their latest release.
     </p>
+
     <h3>See Also:</h3>
     <ul>
         <li><a href="https://linuxmint-user-guide.readthedocs.io/en/latest/snap.html"> Snap Store </a> - Linux Mint User Guide</li>
@@ -512,12 +536,12 @@ last-updated: May 2021
         This is an example of modular construction, and it is often
         left to the user to decide which software component
         instantiates each needed piece.
-        Modular (as opposed to <em>monolithic</em>) construction lies at the
+        Modular (as opposed to <em>monolithic</em><sup><a href="http://www.linfo.org/module.html">[4]</a></sup>) construction lies at the
         heart of <a href="https://en.wikipedia.org/wiki/Unix_philosophy">the Unix Philosophy</a>: 
     </p>
 
     <blockquote>
-        "A serious attempt is made to apply the principle of modularity to everything on a Unix-like system, not only programs but also parts of programs, such as algorithms, and even the kernel. Thus, a Unix-like operating system generally (or at least ideally) consists of a small kernel together with a large number of small, specialized programs that can interact with each other through a variety of well-defined interfaces."<sup><a href="http://www.linfo.org/unix_philosophy.html">[3]</a></sup>
+        "A serious attempt is made to apply the principle of modularity to everything on a Unix-like system, not only programs but also parts of programs, such as algorithms, and even the kernel. Thus, a Unix-like operating system generally (or at least ideally) consists of a small kernel together with a large number of small, specialized programs that can interact with each other through a variety of well-defined interfaces."<sup><a href="http://www.linfo.org/unix_philosophy.html">[5]</a></sup>
     </blockquote>
 
     <p>
@@ -534,25 +558,25 @@ last-updated: May 2021
         The Linux kernel began as a terminal emulator project:
         In 1991, Linus Torvalds wished to connect his 386 to the 
         University's new Unix system, and did so by writing a 
-        program that turned his computer into a (large) terminal emulator.<sup><a href="#reference" title="Torvalds p. 62">[4]</a></sup>
+        program that turned his computer into a (large) terminal emulator.<sup><a href="#reference" title="Torvalds p. 62">[6]</a></sup>
         Although he had Minix running on his machine, he wrote the 
-        emulator to run on bare metal in order to explore the
-        386.<sup><a href="#reference" title="Torvalds p. 62">[4]</a></sup>
+        emulator to run on "bare metal" in order to explore the
+        machine.<sup><a href="#reference" title="Torvalds p. 62">[6]</a></sup>
     </p>
 
     <p>
         The project grew; for some time, it was the
         "GNU Emacs of Terminal Emulators," supporting many and
-        varied functionality.<sup><a href="#reference" title="Torvalds p. 78">[4]</a></sup>
+        varied functionality.<sup><a href="#reference" title="Torvalds p. 78">[6]</a></sup>
         Because he wanted to save files with the terminal emulator 
         and then access them from the 
         <a href="https://en.wikipedia.org/wiki/Minix">Minix OS</a>, 
-        he endeavored to implement 
-        Minix filesystem capabilities within it.<sup><a href="#reference" title="Torvalds p. 78">[4]</a></sup>  
+        he decided to implement 
+        Minix filesystem capabilities within it.<sup><a href="#reference" title="Torvalds p. 78">[6]</a></sup>  
         This took several days, but when it was done,
         it was clear to him that the project was on
         its way to being a kernel; the next step was to obtain
-        the POSIX specification and implement each system call precisely.<sup><a href="#reference" title="Torvalds p. 78">[4]</a></sup>  
+        the POSIX specification and implement each system call precisely.<sup><a href="#reference" title="Torvalds p. 78">[6]</a></sup>  
     </p>
 
     <p>
@@ -560,35 +584,32 @@ last-updated: May 2021
         a single rule: <em>We do not break userspace.</em>
         This means that, if a proposed change to the kernel breaks a
         piece of software running on it, then the change will be rejected.
-        The consequence is that the Linux kernel
-        is always capable of being the foundation of users' operating 
-        system: Any project which depends upon it will 
+        The consequence is that each Linux kernel 
+        is fully backwards-compatible with previous versions: 
+        Any project which depends upon it will 
         continue to work on it.
-    </p>
-
-    <p>
-        In my view, this policy is
-        an example of what ideal support of modularity is,
-        and has helped make the Linux kernel
+        While this is not the strict support of mudularity per se, it
+        has helped make the Linux kernel
         the most popular Unix-like kernel in existence.
     </p>
 
     <h3>See Also:</h3>
     <ul>
         <li><a href="http://www.linfo.org/unix_philosophy.html">Unix Philosophy Description</a> by The Linux Information Project (LINFO)</li>
-        <li><a href="http://www.linfo.org/module.html">Module Definition</a> by The Linux Information Project (LINFO)</li>
+        <li><a href="https://wiki.archlinux.org/title/kernel">Kernel</a> - Arch Linux Wiki</a></li>
     </ul>
 </div>
-
 
 <div id="references" class="content">
     <h2> References </h2>
     <ol>
         <li><em>About the Gentoo Linux Installation.</em> About the Gentoo Linux Installation - Gentoo Wiki. (2015, January 1). <a href=https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/About">https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/About</a>.</li>
+        <li><em>Software Series.</em> System Requirements - Slackware Linux Essentials. Available at <a href="http://www.slackbook.org/html/installation-requirements.html#INSTALLATION-SOFTWARE-SERIES">http://www.slackbook.org/html/installation-requirements.html#INSTALLATION-SOFTWARE-SERIES</a></li>
         <li>Hicks, A., Lumens, C., Cantrell, D., &amp; Johnson, L. (2005). <em>Chapter 18 Slackware Package Management.</em> Slackware Package Management. <a href="https://www.slackbook.org/html/package-management.html">https://www.slackbook.org/html/package-management.html</a>.</li>
+        <li>Module Definition by <em>The Linux Information Project.</em> (2006, March 1) Retrieved June 8, 2021, from <a href="http://www.linfo.org/module.html">http://www.linfo.org/module.html</a></li>
         <li>Unix philosophy description.  From <em>The Linux Information Project.</em> (2006, August 6) Retrieved June 1, 2021, from <a href="http://www.linfo.org/unix_philosophy.html">http://www.linfo.org/unix_philosophy.html</a></li>
         <li>
-            Torvalds, L., &amp; Diamond, D. (2002). <em>Just for Fun: The story of an accidental revolutionary.</em> New York ; London ; Toronto ; Sydney: Harper.
+            Torvalds, L., &amp; Diamond, D. (2002). <em>Just for Fun: The Story of an Accidental Revolutionary.</em> New York; London; Toronto; Sydney: Harper.
         </li>
     </ol>
 </div>
