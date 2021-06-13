@@ -6,6 +6,34 @@ last-updated: April, 2021
 
 <!--
 
+<div class="content" id="pipelines">
+    <h2>Pipelines</h2>
+
+    <p>
+        A pipeline is a sequence of commands with each command's
+
+        
+    </p>
+
+
+    <p>
+        Finally, each command in a pipeline is executed in its own 
+        subshell. For example,
+    </p>
+
+    <div class="code">
+        $ echo words | cd 
+    </div>
+    
+    <p>
+        Will not change the shell's current working directory.
+    </p>
+
+    <p>
+        
+    </p>
+</div>
+
 <div class="content" id="startup-files">
     <h2>Bash Startup Files</h2>
 
@@ -113,7 +141,7 @@ Exercises:
 		<li><a href="#introduction"> Introduction </a></li>
         <li><a href="#shell-expansion">Shell Expansion</a></li>
 		<li><a href="#standard-file-descriptors">Standard File Descriptors</a></li>
-		<li><a href="#terminal-conveniences"> Terminal Conveniences</a></li>
+		<li><a href="#random-stuff">Random Stuff</a></li>
         <li><a href="#man-pages"><code>man</code> Pages</a></li>
         <li><a href="#finding-files">Finding Files</a></li>
         <li><a href="#make"><code>make</code></a></li>
@@ -153,6 +181,11 @@ Exercises:
         This article will cover some of the gory detail behind the modern
         GNU/Linux command-line, then introduce some handy command-line tools.
     </p>
+
+    <h3>See Also</h3>
+    <ul>
+        <li><a href="https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios/">A Brief Introduction to Termios</a> - Made of Bugs</li>
+    </ul>
 </div>
 
 <div class="content" id="shell-expansion">
@@ -315,15 +348,9 @@ Exercises:
     <h4> and Redirection</h4>
 
 	<p>
-        Recall that the shell is connected to its terminal by open files, and
-        that such files are preserved across both <em>fork()</em> 
-        and <em>exec().</em> 
-        This means that each child of <code>bash</code> (that is, each command) 
-        will, by default, inherit our keyboard and our terminal screen as open files.
-    </p>
-
-    <p>
-        There are three such files:
+        Recall that the shell is connected to its terminal by open files. 
+        There are three such files, known as 
+        the <em>standard file descriptors:</em><sup><a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/stdin.html">[2]</a></sup>
     </p>
 
     <ul>
@@ -333,10 +360,16 @@ Exercises:
     </ul>
 
     <p>
-        These are known as the <em>standard file descriptors,</em> and are 
-        part of the POSIX standard.<sup><a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/stdin.html">[2]</a></sup>
+        Since open files are preserved across both <em>fork()</em> 
+        and <em>exec(),</em> 
+        each child of Bash&mdash; that is, each command&mdash;
+        will inherit our keyboard and terminal screen 
+        at these file descriptors.
+    </p>
+
+    <p>
         For example, the program <code>/usr/bin/ls</code>
-        prints to <code>STDOUT</code>; our command
+        prints to <code>STDOUT</code>, and our command
     </p>
 
     <div class="code">
@@ -351,14 +384,14 @@ Exercises:
 
     <p>
         <em>Redirection</em> is the act of assigning a different file to 
-        the one of the standard file descriptors before executing a command.
-        They are a powerful tool, letting the user capture output, 
-        create scripts, and (through the <code><a href="https://man7.org/linux/man-pages/man1/tee.1.html">tee</a></code> utility)
-        copy the <code>STDOUT</code> stream.
+        a file descriptor before executing a command.
+        It is a powerful component of the shell language,
+        allowing users to capture output and create scripts.
     </p>
 
     <p>
-        In Bash, the character <code>&lt;</code> redirects <code>STDIN</code>:
+        In Bash, the redirection operator <code>&lt;</code> redirects 
+        <code>STDIN</code>:
     </p>
 
     <ul style="list-style-type: none;">
@@ -372,18 +405,17 @@ Exercises:
     </p>
 
     <ul style="list-style-type: none;">
-        <li> <code>$ <em>command</em> [arg ...] &gt; <i>file</i> </code> &emsp;&ensp; Open <code><i>file</i></code>
+        <li> <code>$ <em>command</em> [arg ...] &gt; <i>file</i> </code> &emsp;&ensp; "Overwrite:" Open <code><i>file</i></code>
             for writing; set length to zero; assign to <code>STDOUT</code>.
             Then execute command.</li>
-        <li> <code>$ <em>command</em> [arg ...] &gt;&gt; <i>file</i> </code> &emsp; Open <code><i>file</i></code>
+        <li> <code>$ <em>command</em> [arg ...] &gt;&gt; <i>file</i> </code> &emsp; "Append:" Open <code><i>file</i></code>
             for writing; seek to end; assign to <code>STDOUT</code>.
             Then execute command.</li>
     </ul>
 
-
     <p>
         Since <code>STDERR</code> has been left unchanged, errors will
-        still be printed to our terminal screen.
+        still be printed to our terminal screen. 
     </p>
 
     <p>
@@ -399,7 +431,7 @@ Exercises:
     </ul>
 </div>
 
-<div class="content" id="terminal-conveniences">
+<div class="content" id="random-stuff">
     <h2>Random Stuff</h2>
 
     <h3>Copying and Pasting:</h3>
