@@ -1,0 +1,76 @@
+---
+layout: default
+title: How Open Source Works
+last-updated: May 2021
+---
+
+<div class="content" id="less">
+    <h2 style="margin-bottom: 0;"><code>less</code>:</h2>
+    <h4>A Success Story</h4>
+
+    <p>
+        A <em>paging utility</em> is a program that displays a file on 
+        the terminal one screenful at a time.
+        The first widely used paging utility was <code>more</code>, written by
+        Dan Halbert as a graduate student at UC Berkley in 1978.<sup><a href="https://danhalbert.org/more.html">[aa]</a></sup>
+        <code>more</code> is a relatively simple program: It first 
+        fills up the screen, then waits for user input to print the 
+        next line(s).
+    </p>
+
+    <p>
+        In 1983, Mark Nudelman was a software developer working for a
+        company called Integrated Office Systems. From the <a href="http://www.greenwoodsoftware.com/less/faq.html#history"><code>less</code> FAQ</a>:
+    </p>
+
+    <blockquote>
+        Some of our software ran on a Unix system and produced enormous log files
+        of its transactions. We wanted to be able to search these log files for
+        error messages. But the version of "vi" we were using couldn't handle
+        files larger than a certain size, and our log files often exceeded that
+        size. So we were forced to use "more" to view the files. The problem was,
+        once we found an error message, what we really wanted to see was the
+        transactions leading up to the error; that is, the lines in the log file
+        immediately before the error message. But more didn't allow backward
+        movement in the file.
+    </blockquote>
+
+    <blockquote>
+        We often complained about this problem. We said we needed a "backwards
+        more"; someone (it wasn't me, but unfortunately I don't remember who
+        it was) coined the name "less" as a joke on the concept of a "backwards
+        more". It didn't seem to me that it would be too difficult to write a
+        simple pager that would allow forward and backward movement.
+        I wrote the first version in late 1983 and we began using it internally.
+        I continued to enhance it and finally decided it was a useful enough
+        tool that I should make it available to the world. I posted the first
+        version to the newsgroup called (at that time) net.sources in May, 1985.
+    </blockquote>
+
+    <blockquote>
+        Making the program publicly available allowed an enormous number of
+        people to use it. Many people have made their own modifications and
+        donated them to me for incorporation into the official version, and
+        many more have reported bugs they've found or made suggestions about
+        features they'd like to see added. This was my first experience with
+        the concept of what is now called "open source" or "free software",
+        and it has, I believe, produced a very high quality product. I'd like
+        to thank all the users of less for their invaluable comments and
+        suggestions over the years. 
+        Less wouldn't be what it is today without you.
+    </blockquote>
+
+    <p>
+        Mark Nudelman continues to maintain the project today.  
+        It is, at the time of this writing, in its 581<sup>st</sup> 
+        version.<sup><a href="http://www.greenwoodsoftware.com/less/faq.html#version">[q]</a></sup><sup><a href="http://www.greenwoodsoftware.com/less/index.html">[r]</a></sup>
+    </p>
+
+
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://fedoramagazine.org/5-cool-terminal-pagers-in-fedora/">5 cool terminal pagers in Fedora</a> - Fedora Magazine</li>
+        <li><a href="https://zaiste.net/posts/shell-commands-rust/">Rewritten in Rust: Modern Alternatives of Command-Line Tools</a></li>
+    </ul>
+</div>
