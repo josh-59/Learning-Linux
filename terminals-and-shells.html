@@ -31,11 +31,10 @@ To Do:
 		<li><a href="#physical-terminals"> Physical Terminals </a></li>
 		<li><a href="#terminal-emulators"> Terminal Emulators </a></li>
 		<li><a href="#shells"> Shells </a></li>
-        <li><a href="#commands">Commands</a></li>
+        <li><a href="#simple-commands">Simple Commands</a></li>
         <li><a href="#path">PATH Environment Variable</a></li>
         <li><a href="#pwd">Working Directory</a></li>
         <li><a href="#arguments">Arguments</a></li>
-        <li><a href="#redirection">Redirection</a></li>
         <li><a href="#closing-remarks">Closing Remarks </a></li>
         <li><a href="#missing-semester">Missing Semester</a></li>
 		<li><a href="#references"> References </a></li>
@@ -221,8 +220,8 @@ To Do:
     </p>
 </div>
 
-<div class="content" id="commands">
-    <h2>Commands</h2>
+<div class="content" id="simple-commands">
+    <h2>Simple Commands</h2>
 
     <p>
         A typical line of input to the shell has the following form:
@@ -347,8 +346,8 @@ To Do:
     <p>
         The <code>PATH</code> environment variable is one of several
         standard environment variables.  
-        These variables are stored on behalf of the process by 
-        the kernel, and may be listed with,
+        These variables are stored by the kernel on behalf of the process, 
+        and may be listed with,
     </p>
 
     <div class="code">
@@ -470,59 +469,6 @@ To Do:
     <p>
         See a command's manual page (or other documentation) for details.
     </p>
-</div>
-
-<div class="content" id="redirection">
-    <h2>Redirection</h2>
-
-    <p>
-        One of the features that makes the Unix command-line interface
-        powerful is the ability to direct output away from the terminal.
-        Since the terminal is represented as a file, 
-        the operations on it and any other file are identical.
-        Thus, by changing the file before calling the command,
-        we can easily capture its output in a regular file;
-        the command does not need to know:
-    </p>
-
-    <div class="code">
-        $ lscpu &gt; cpu_stats
-    </div>
-
-    <p>
-        This is called <em><a href="https://www.gnu.org/software/bash/manual/html_node/Redirections.html">redirection</a>.</em> 
-        The shell creates the file <code>cpu_stats</code> 
-        if it does not exist, and assigns it to be the output file of
-        <code>lscpu</code>.
-        For reasons we'll dive into later, any error messages produced
-        by <code>lscpu</code> will still be printed to the terminal.
-    </p>
-
-    <p>
-        We can also direct the output of one command
-        to be the input of another, forming a <em><a href="https://www.gnu.org/software/bash/manual/html_node/Pipelines.html">pipeline</a></em>:
-    </p>
-
-    <div class="code">
-        $ apropos make | less
-    </div>
-
-    <p>
-        The redirection operators <code>&gt;</code> and <code>|</code>
-        are not arguments, and are not passed to their respective commands.
-        In fact, <code>apropos</code> does not even know about <code>less</code>!
-    </p>
-
-    <p>
-        Finally, if we want to discard the output of a command or
-        pipeline, we can redirect it to <code>/dev/null</code>.
-    </p>
-
-    <h3>See Also</h3>
-    <ul>
-        <li><a href="https://youtu.be/oB1uZf6Z27Y">Lesson 3: I/O, Redirect, & Pipe: Pipin' Ain't Easy But It Sure Is Fun</a> by Level 099 Techs (Youtube video)</li>
-    </ul>
-
 </div>
 
 <div class="content" id="closing-remarks">
