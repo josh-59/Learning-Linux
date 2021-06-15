@@ -1,0 +1,52 @@
+<div class="content" id="redirection">
+    <h2>Redirection</h2>
+
+    <p>
+        One of the features that makes the Unix command-line interface
+        powerful is the ability to direct output away from the terminal.
+        Since the terminal is represented as a file, 
+        the operations on it and any other file are identical.
+        Thus, by changing the file before calling the command,
+        we can easily capture its output in a regular file;
+        the command does not need to know:
+    </p>
+
+    <div class="code">
+        $ lscpu &gt; cpu_stats
+    </div>
+
+    <p>
+        This is called <em><a href="https://www.gnu.org/software/bash/manual/html_node/Redirections.html">redirection</a>.</em> 
+        The shell creates the file <code>cpu_stats</code> 
+        if it does not exist, and assigns it to be the output file of
+        <code>lscpu</code>.
+        For reasons we'll dive into later, any error messages produced
+        by <code>lscpu</code> will still be printed to the terminal.
+    </p>
+
+    <p>
+        We can also direct the output of one command
+        to be the input of another, forming a <em><a href="https://www.gnu.org/software/bash/manual/html_node/Pipelines.html">pipeline</a></em>:
+    </p>
+
+    <div class="code">
+        $ apropos make | less
+    </div>
+
+    <p>
+        The redirection operators <code>&gt;</code> and <code>|</code>
+        are not arguments, and are not passed to their respective commands.
+        In fact, <code>apropos</code> does not even know about <code>less</code>!
+    </p>
+
+    <p>
+        Finally, if we want to discard the output of a command or
+        pipeline, we can redirect it to <code>/dev/null</code>.
+    </p>
+
+    <h3>See Also</h3>
+    <ul>
+        <li><a href="https://youtu.be/oB1uZf6Z27Y">Lesson 3: I/O, Redirect, & Pipe: Pipin' Ain't Easy But It Sure Is Fun</a> by Level 099 Techs (Youtube video)</li>
+    </ul>
+
+</div>
