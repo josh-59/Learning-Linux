@@ -6,54 +6,13 @@ last-updated: May 2021
 
 <!--
 
-    <p>
-        It isn't a coincidence that most of open-source's
-        founders were college students.  
-
 
     <p>
-        For the serious developer, mathematics is used literally in,
-        especially, data structures.  
-        Data structures, discrete mathematics, logic and 
-        computer architecture form the core
-        of undergraduate computer science today; nonetheless,
-        skill is best accrued by reading and writing source.
-    </p>
-
-
-
-        I do not believe that engineers would, left to their own devices,
-        build a pickup-truck that destroys the planet.
-
-        Although I'd love to believe that open-source software
-        is as casual as it's portrayed to be, it simply isn't.
+        We really depend upon maintainers to ensure the quality of
+        the code we use.
     </p>
 
     https://www.youtube.com/watch?v=XFrJcjCbCA8
-
-    <p>
-        For example, Facebook has put extensive effort into
-        Linux's new <code>btrfs</code>, commonly described as 
-        "a modern copy-on-write filesystem."
-        The filesystem eases routine administrative tasks, especially in 
-        enterprise-class settings.
-        Facebook has contributed to the project for their own purposes;
-        nonetheless, the resulting software is GNU GPL'd 
-        (Version 2, to be specific), 
-        and so from the user's standpoint, is as free (libre) as anything
-        crafted by GNU's own hand.
-    </p>
-
-    <p>
-        "No one "owns" the software in the traditional sense of 
-        being able to command how it is used or developed,
-        or to control its disposition."
-            http://www.benkler.org/CoasesPenguin.PDF
-        "[Common's] central characteristic is that groups of individuals
-        successfully collaborate on large-scale projects following a
-        diverse cluster of motivational drives and social signals,
-        rath than either market prices or managerial commands."
-    </p>
 
     "Write programs that do one thing and do it well.
     Write programs that work together."
@@ -67,29 +26,6 @@ last-updated: May 2021
         The term <em>open source</em> describes the way that software
         is distributed and used, not to how it is produced.
             p 44
-
-
-        Reasons to participate in the "Commons"
-        - Intrinsic Motivation
-            - i.e., it's neat
-        - Modular and Granular Tasks
-        - Low Coordination Costs
-            Benkler, p74
-
-    Quotes:
-        "Be conservative in what you do, be liberal in what you accept from 
-        others."
-        <a href="https://en.wikipedia.org/wiki/Robustness_principle">Robustness 
-        Principle</a>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            If the first statement of this section is taken literally, 
-            there are
-            5<sup>500</sup> possible GNU/Linux systems.
-        </p>
-    </div>
 
 <div class="content" id="risc-v">
     <iframe class="video" src="https://www.youtube-nocookie.com/embed/Rsyn3_PjRXw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -110,28 +46,28 @@ last-updated: May 2021
         <li><a href="https://press.stripe.com/">Stripe Press</a> - Ideas for progress</a></li>
 
 
-    Not easy
-        |
-        |
-        |
-        |
-       \ /
-Intrinsic Motivation
+  Self-motivated
         |
         |   
         |   
         |
        \ /
-Project Leadership
+ User-Contributor
+        |
+        |   
+        |   
+        |
+       \ /
+Success of the Bazaar
         |   Curating Modifications
         |
         |   Large projects:  Tree?
         |
        \ /
-Incremental Improvement
-        |   
+ Time-based Releases
         |
-        |   Large projects: Time-based Releases
+        |   
+        |   
         |
        \ /
   Github is a Platform!
@@ -148,15 +84,23 @@ Incremental Improvement
         |
        \ /
 
+
+        Those contributors that persist&mdash;
+        the ones that actually produce excellent works&mdash;
+        are those interested in the project <em>for its own sake.</em>
+
+
 -->
 
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#from-the-top">From the Top</a></li>
-        <li><a href="#project-leadership">Project Leadership</a></li>
+        <li><a href="#organizing-work">Organizing Work</a></li>
+        <li><a href="#supporting-collaboration">Supporting Collaboration</a></li>
+        <li><a href="#time-based-releases">Time-Based Releases</a></li>
         <li><a href="#less"><code>less</code>: A Success Story</a</li>
-        <li><a href="#sports">Sports</a></li>
+        <li><a href="#a-sport">A Sport</a></li>
         <li><a href="#references"> References </a></li>
     </ul>
 </div>
@@ -179,109 +123,244 @@ Incremental Improvement
         key components of the open-source ecosystem,
         from the motivations of contributors to the leadership
         style necessarily implied by them.
+        As we shall blithely assume, <em>interest</em> is the currency
+        of the future!
     </p>
-
 </div>
 
-<div class="content" id="motivations">
-    <h2>Motivations</h2>
-
-    <p>
-        As Eric S. Raymond stated,
-        "Every good software project starts by a developer
-        scratching a personal itch,"
-        That's the crux of open-source: It isn't altruistic, per se,
-        but rather, simply self-motivated.
-        Economists today call this <em>intrinsic</em> motivation,
-        and it may be contrasted with the "extrinsic" motivation
-        of money.
-    </p>
-
-    <p>
-        The open-source scene has naturally decomposed into projects, 
-        with people working on what they want.
-        That these projects have formed something truly substantial
-        is, strictly speaking, outside the scope of any of them!
-        For example, producing an operating system
-        is outside the scope of the Linux kernel:
-        They do kernels for kernels' sake, and somebody interested
-        in composing operating systems does that.
-    </p>
-
-    <div class="aside-right">
-        <h4>Fun Fact:</h4>
-        <p>
-            Linus Torvalds once turned down a job offer from Steve Jobs
-            because it wasn't interesting from a technical 
-            standpoint.
-        </p>
-    </div>
-
-    <p>
-        In my opinion, to have goals other than the project at heart 
-        (e.g., <em>Make the World a Better Place,</em>
-        <em>Write the Next Big Thing,</em> etc..)
-        is to <em>not</em> have the project's
-        raison diatre (?) at heart.
-        These developers often leave projects with a bang.
-    </p>
-
-    <p>
-        To call open-source a hobby isn't quite strong enough; 
-        at the same time, it isn't <em>work</em> in the 
-        traditional sense, either.  
-        Open-Source and GNU/Linux lie somewhere between the two,
-        closer to sport.
-        For me, the magic is that it's composed of
-        things people created because they wanted to.
-    </p>
-
-</div>
-
-<div class="content" id="dividing">
-    <h2>The Cathedral and the Bazaar</h2>
+<div class="content" id="from-the-top">
+    <h2>From the Top</h2>
 
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            The cathedral is characterized by a closed group of 
-            developers publishing free software; it
-            still has a place in modern open-source.
+            Recall that <em>open source</em> is a synonym for
+            <em>free software.</em>
         </p>
     </div>
 
     <p>
-        The most common open-source model today is what Eric S. 
-        Raymond termed the <em>Bazaar:</em> The project's 
-        maintainers make themselves publicly available, and
-        contributions are welcome.
-        This he juxtaposed with the then-traditional <em>Cathedral,</em>
-        in which the maintainers of the project seal themselves
-        from public suggestion.
+        Properly speaking, open-source describes only how
+        software is distributed and used&mdash; not how it is produced.
+        Notably, it requires that human-readable "source" be made available 
+        alongside machine-readable instructions, and 
+        that software be redistributable by any user.
     </p>
 
     <p>
-        Since its introduction, the Bazaar model 
-        has dominated open source.
-        In my opinion, it supports project growth much
-        more responsively than the Cathedral: 
-        When projects are interesting (or of interest), 
-        people can easily improve it.
+        In particular, the organizational structure adopted to produce
+        this software is not restricted, and
+        many open-source projects are <em>not</em> open to collaboration.
+        For example, GNU is not collaborative:
+        While users are permitted to
+        modify and redistribute the project's works, those modifications 
+        were never intended to make their way back into GNU source,
+        and they usually do not.
+    </p>
+
+    <p>
+        Hence, there is a deliberate delineation between <em>user</em> and 
+        <em>developer.</em>
+        The GNU project sets itself apart from other non-profit organizations
+        in that its products are impactful in virtue of their
+        low "marginal" cost:
+        It costs very little to create another copy, and 
+        thereby support another user.
+    </p>
+
+    <h3>Collaborative Open Source</h3>
+    
+    <p>
+        When Linus Torvalds invited any interested hacker to
+        collaborate on his new kernel project, he invented a new
+        way of making free software.
+        The result was "Accidentally Revolutionary," and has
+        dominated open-source since.
     </p>
 
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            Greg Kroah-Hartman once said, "Half my job is to say 'no'."
+            There is no "rule" that free software be carried out by
+            hobbyists alone.
+            Facebook, for example, has put considerable effort
+            into Linux's new <code>btrfs</code>.
         </p>
     </div>
 
     <p>
-        In the context of a bazaar, the role of project leader 
-        quickly skews from <em>lead developer</em> to 
-        <em>code reviewer and modification curator;</em>
-        today, you will often see the term <em>maintainer</em>
-        to describe the project's head honcho.
+        Within his project, the heavy lifting is
+        carried out by user-contributors&mdash; People who,
+        having a desire, implement it themselves,
+        then make the change available back to its source.
+        Without the clear external motivation of money, 
+        economists say that collaborative open source is 
+        <em>intrinsically motivated:</em>
+        They are carried out because what they are <em>is</em> what their 
+        creators want.
+    </p>
+
+    <p>
+        The open-source ecosystem has naturally decomposed into
+        projects, with people working on what they want.
+    </p>
+</div>
+
+<div class="content" id="organizing-work">
+    <h2 style="margin-bottom: 0;">Organizing Work:</h2>
+    <h4>Bazaar Style</h4>
+
+    <p>
+        While we may wish to think that each project is a paradigm
+        of virtue and cooperation, this is in fact not the case.
+        Public desire is not homogenous, and 
+        the role of project leader can quickly skew from 
+        <em>lead developer</em> to <em>modification curator.</em>
+    </p>
+
+    <p>
+        This is the key point, and the primary difference between 
+        collaborative open-source and every other model of development:
+        In collaborative open-source, work is submitted <em>by users,</em>
+        inspected on a case-by-case basis, 
+        and then either accepted into the project or rejected.
+        Project leaders, then, are the stars of the show: 
+        They take on the responsibility of the work's 
+        overall well-being, and foster its improvement by
+        sifting through proposed modifications.
+    </p>
+
+    <div class="aside-right">
+        <h4>Note:</h4>
+        <p>
+            The term <em>maintainer</em> is usually used to refer to
+            project leader.
+        </p>
+    </div>
+
+    <p>
+        So, while individuals are, in theory, 
+        empowerd to shape a project into what they want, 
+        in practice these modifications are moderated by the project's
+        leader, typically, a relevant authority.
+        Given significant difference of opinion, contributors are
+        always free to fork the source repository and to lead
+        a sister project in their preferred direction, to
+        be adopted as the bazaar sees fit.
+    </p>
+
+    <p>
+        Even supposing perfect cooperation, many disconnected but well-meaning 
+        contributors work in parallel, not in concert&mdash; 
+        they're each modifying the same sheet, essentially.
+        Consequently, small changes are much preferred, with
+        the result being highly evolutionary, and rarely revolutionary, 
+        improvement.
+    </p>
+
+    <ul>
+        <a href="https://youtu.be/FqWLbjov-bQ">evolutionary</a> 
+    </ul>
+</div>
+
+<div class="content" id="supporting-collaboration">
+    <h2>Supporting Collaboration</h2>
+
+    <p>
+        Within this context, 
+    </p>
+
+    <p>
+        <u>Scratch an Itch.</u>
+            - <a href="https://gitlab.redox-os.org/redox-os">Redox OS</a>,
+    </p>
+
+    <p>
+        <u>Make it work first, then make it work better.</u>
+    </p>
+
+    <p>
+        <u>Release early and often.</u>
+        As mentioned, many people are working to modify the same 
+        software base; 
+    </p>
+
+    <p>
+        <u>Talk a lot, and say what you think.</u>
+    </p>
+
+    <p>
+        <em>Win-Win</em> (self-checkout lanes)
+    </p>
+
+    <p>
+        - Make contributing convenient (if you dare)
+        <a href="">Github</a>, while being both for-profit and
+        closed-source, attracts developers in virtue of its convenience.
+    </p>
+ 
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://www.contributor-covenant.org/">Contributor Covenant[...] </a> by Coraline Ada Ehmke</li>
+    </ul>
+
+</div>
+
+<div class="content" id="time-based-releases">
+    <h2>Time-based Releases</h2>
+
+    <p>
+        Large collaborative projects, for whom many people want 
+        to include changes, often schedule releases.  
+        The intent is to accomodates both feature introduction and 
+        commit rejection. 
+        If your new feature doesn't make it into the latest version of 
+        Firefox, for instance, you only have to 
+        wait six weeks for the next chance.
+    </p>
+
+    <p>
+        Mozilla calls this, "stability without stagnation."<sup><a href="https://blog.rust-lang.org/2014/10/30/Stability.html">[6]</a></sup>
+    </p>
+
+    <p>
+        Another example: Debian Sid
+    </p>
+
+    <p>
+        For example, the last opportunity to merge feature
+        changes in Firefox is before it enters <em>beta</em>.
+        In beta, merges are restricted to bug fixes and 
+        security updates. 
+        Each release spends four weeks in <em>beta</em>
+        before being released as the current official Firefox version.
+    </p>
+
+    <p>
+        While it is being used by the public, merges 
+        are again restricted to bug fixes and
+        security updates, and, again, each release
+        is supported for four weeks:
+    </p>
+
+    <figure>
+        <a href="https://wiki.mozilla.org/Release_Management/Calendar">
+            <img src="assets/img/firefox-train-schedule.png" style="width: 90%; padding-bottom: 10pt;">
+        </a>
+        <figcaption><center><b><a href="https://wiki.mozilla.org/Release_Management/Calendar">Firefox Release Schedule</a></b></center></figcaption>
+    </figure>
+
+    <p>
+        Witin Mozilla, this is known as a "train schedule,"
+        and we see that <em>Firefox 80</em> will be released as 
+        <em>Firefox 81</em>
+        enters Beta and <em>Firefox 82</em> enters Nightly.
+    </p>
+
+    <p>
+        Firefox is one of the largest and most agressive of
+        open-source projects&mdash;
+        It even spawned the (awesome) programming language, Rust.
     </p>
 
     <p>
@@ -292,59 +371,12 @@ Incremental Improvement
         to being accepted.
     </p>
 
-    <p>
-        To support these communities and projects, you will
-        often see Foundations&mdash; Linux Foundation, 
-        Free Software Foundation, Mozilla Foundation, etc..
-        A foundation is a nonprofit organization...
-    </p>
-
-    <p>
-        <a href="">Github</a>, by contrast, is a propietary, 
-        for-profit business that describes itself as a 
-        "social coding platform." 
-        It tends to be more two-dimensional, offering convenience
-        at the expense of structure, and is not appropriate for
-        large and bustling projects. 
-    </p>
-
     <h3>See Also:</h3>
     <ul>
-        <li><a href="https://www.contributor-covenant.org/">Contributor Covenant[...] </a> by Coraline Ada Ehmke</li>
+        <li><a href="https://en.wikipedia.org/wiki/Release_early,_release_often">Release Early, Release Often</a> - Wikipedia</li>
+        <li><a href="https://blog.rust-lang.org/2014/10/30/Stability.html"> Stability as a Deliverable | Rust Blog</a></li>
+        <li><a href="http://thinking-in-code.blogspot.com/2010/07/train-model-of-software-development.html"> Thinking in Code: Train Model of Software Development</a></li>
     </ul>
-</div>
-
-<div class="content" id="incremental-improvement">
-    <h2>Incremental Improvement</h2>
-
-    <p>
-        While I'd love to believe that open-source is as casual as
-        it's portrays to be, it's simply not:
-        Good software is not easy to produce. 
-        It's one thing to write a Python script for your own 
-        purposes (or even a shell to demonstrate the idea); it's
-        quite another to produce a product that's useable by 
-        millions of people.
-    </p>
-
-    <p>
-        The general strategy is to build something,
-        release it, review it, improve it, and then re-release it.
-        For example, while Bash is 31 years old, and is 
-        both mature and stable, it's still under
-        significant development! 
-        Its latest release, 5.1, introduced 
-        a number of new features and bug fixes.
-    </p>
-
-    <p>
-        No matter the age, open-source software that's in use is 
-        actively being developed.  
-        ...Improvement is incidental to its being publicly exposed...
-        Even if each release is only
-        marginally better than the previous, those improvements accrue,
-        and the result is guaranteed to be great software.
-    </p>
 </div>
 
 <div class="content" id="less">
@@ -416,80 +448,63 @@ Incremental Improvement
     </ul>
 </div>
 
-<div class="content" id="train-schedules">
-    <h2>Time-based Releases</h2>
+
+<div class="content" id="a-sport">
+    <h2>A Sport</h2>
 
     <p>
-        Large projects, for whom many people might want to include
-        changes, often schedule releases.  
-        The intent is to produce a reiterative cycle 
-        that accomodates both feature introduction <em>and</em> 
-        commit rejection&mdash; If your change doesn't make it into 
-        the latest kernel release, for instance, you only have to 
-        wait six weeks for the next one.
+        To call open-source a hobby isn't quite strong enough. 
+        At the same time, it isn't <em>work</em> in the 
+        traditional sense, either.  
+        I think it's somewhere between the two, closer to sport.
+        For me, the magic is that it's composed of
+        things people created because they wanted to.
     </p>
 
     <p>
-        Mozilla calls this,
-        "stability without stagnation."<sup><a href="https://blog.rust-lang.org/2014/10/30/Stability.html">[6]</a></sup>
-    </p>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Outside of the Linux kernel, Firefox is one of the largest and
-            most aggressive open-source projects is 
-        </p>
-    </div>
-
-    <p>
-        Debian Sid
+        Fact is, good software is not easy to produce. 
+        It's one thing to write a Python script for your own 
+        purposes (or even a shell to demonstrate the idea); it's
+        quite another to produce a product that's useable by 
+        millions of people, and actually satisfies some demand.
     </p>
 
     <p>
-        For example, the last opportunity to merge feature
-        changes in Firefox is before it enters <em>beta</em>.
-        In beta, merges are restricted to bug fixes and 
-        security updates. 
-        Each release spends four weeks in <em>beta</em>
-        before being released as the current official Firefox version.
+        As Poul-Henning Kamp writes,
+    </p>
+
+    <blockquote>
+        "Getting hooked on computers is easy—almost anybody can make a 
+        program work, just as almost anybody can nail two pieces of wood 
+        together in a few tries. The trouble is that the market for two 
+        pieces of wood nailed together—inexpertly—is fairly small outside 
+        of the "proud grandfather" segment, and getting from there to a 
+        decent set of chairs or fitted cupboards takes talent, practice, 
+        and education."
+    </blockquote>
+
+    <p>
+        Code and money are not the only ways to support your
+        favorite open-source project,
+        and I would encourage you to help any way that you can.
     </p>
 
     <p>
-        While it is being used by the, merges 
-        are again restricted to bug fixes and
-        security updates, and, again, each release
-        is supported for four weeks:
+        Individual's works in the open-source ecosystem are
+        fundamentally creative in nature.
     </p>
 
-    <figure>
-        <a href="https://wiki.mozilla.org/Release_Management/Calendar">
-            <img src="assets/img/firefox-train-schedule.png" style="width: 90%; padding-bottom: 10pt;">
-        </a>
-        <figcaption><center><b><a href="https://wiki.mozilla.org/Release_Management/Calendar">Firefox Release Schedule</a></b></center></figcaption>
-    </figure>
-
-    <p>
-        Witin Mozilla, this is known as a "train schedule,"
-        and we see that <em>Firefox 80</em> will be released as 
-        <em>Firefox 81</em>
-        enters Beta and <em>Firefox 82</em> enters Nightly.
-    </p>
-
-    <p>
-        Firefox is one of the largest and most agressive open-source
-        projects outside of the Linux kernel.
-        It even spawned the (awesome) programming language, Rust.
-    </p>
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://en.wikipedia.org/wiki/Release_early,_release_often">Release Early, Release Often</a> - Wikipedia</li>
-        <li><a href="https://blog.rust-lang.org/2014/10/30/Stability.html"> Stability as a Deliverable | Rust Blog</a></li>
-        <li><a href="http://thinking-in-code.blogspot.com/2010/07/train-model-of-software-development.html"> Thinking in Code: Train Model of Software Development</a></li>
-    </ul>
+    <blockquote>
+        "Human beings often have a passionate relationship to their
+        creative endeavors and their work; they wish to share
+        their creativity with others; and value inheres in
+        things other than monetizable rewards.  Each of these
+        attitudes exists within the open source community."<sup><a href="#references" title="Weber p10">[g]</a></sup>
+    </blockquote>
 
     <ul>
+
+        <li><a href="https://vimeo.com/19064597">Tux Goes to Space</a></li>
         <li><a href="https://www.hackerrank.com/">HackerRank</a></li>
         <li><a href="https://opendatastructures.org/">Open Data Structures</a> by Pat Morin</li>
         <li><a href="http://discrete.openmathbooks.org/dmoi3.html">Discrete Mathematics: An Open Introduction</a> by Oscar Levin</li>
@@ -499,59 +514,10 @@ Incremental Improvement
     </ul>
 </div>
 
-<div class="content" id="c">
-    <h2>The C Programming Language</h2>
-
-    <p>
-        I know it looks like there's a bunch of programming languages
-        out there, but there's really only one:
-        The C programming language was invented by Dennis Ritchie and
-        Ken Thompson.
-        Then working on the PDP-11, they were the first working
-        developers to create a high-language for their own use.
-    </p>
-
-    <p>
-        C has been called 'spartan', 'low-level', and
-        'the lingua franca of computing':
-        It presents the programmer with an unabated view
-        of the process's environment.
-        It is a high-level programming language that 
-        offers typing, 
-    </p>
- 
-    <p>
-        A <em>pointer</em> is a variable that holds an address.
-        A pointer may point to any memory location in the program.
-        In C, a pointer may point to an integer, a character, or any other
-        <em>typed</em> memory location.
-        Accessing that memory is called <em>dereferencing</em> the pointer;
-        naturally, many pointers may refer to the same location in memory.
-    </p>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Rust is pretty good, too.
-        </p>
-    </div>
-
-    <p>
-        No metadata is stored alongside this unit of memory, and, 
-        each byte may be interpretted in a variety of ways. 
-        Without getting into specifics, most interpretations reflect numbers;
-        for the purposes of lightening your wallet, these interpretation, 
-        and elementary operations on them, are supported by hardware natively.
-    </p>
-      
-    <p>
-        
-    </p>
-</div>
-
 <div class="content" id="">
     <h2> Marble Machine </h2>
 <iframe class="video" src="https://www.youtube.com/embed/0b-B_Bg31Zg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 
 <div id="references" class="content">
