@@ -6,8 +6,7 @@ last-updated: May, 2021
 
 <!--
     To Do:
-        Filesystem heirarchy: /etc: human-readable, plain-text
-        configuration files
+        Mounting: Is incomplete: Must mention mounting a <em>partition</em>
 
 
         <li> Wirzenius, L. (2004). Chapter 3: Overview of the Directory Tree. In <em>Linux System Administrator's Guide.</em> <a href="https://www.tldp.org/LDP/sag/html/fs-background.html">https://www.tldp.org/LDP/sag/html/fs-background.html</a></li>
@@ -503,17 +502,25 @@ last-updated: May, 2021
     </p>
 
     <p>
-        The directory <code>/etc</code> contains
-        system-specific configuration files.
-        For example, <code>/etc/passwd</code> contains essential information
-        about each user on the system (but not their password, anymore).
-        In addition, the configuration of
-        the package manager is stored here, 
-        and, well, etcetera.
+        The <code>/usr</code> directory is dedicated to 
+        user-space (as opposed to kernel-space) files.<sup><a href="https://tldp.org/LDP/Linux-Filesystem-Hierarchy/html/usr.html">[7]</a></sup>
+        It contains programs, libraries, manual pages, C header
+        files, and other things.
+        These files are shared by all system users, and are read-only. 
     </p>
 
     <p>
-        <code>/tmp</code>, <code>/run</code>,  and <code>/var</code> each hold
+        System configuration is maintained as a collection of 
+        plain-text, human-readable regular files.
+        System-specific configuration is kept in <code>/etc</code>,
+        while default configurations are typically
+        stored in <code>/usr</code>, alongside their respective packages.
+        As a general rule, modify <code>/etc</code>, and let your
+        distribution handle <code>/usr</code>.<sup><a href="#references" title="Ward">[8]</a></sup>
+    </p>
+
+    <p>
+        <code>/tmp</code>, <code>/run</code>, and <code>/var</code> each hold
         transient files of running programs.
         <code>/boot</code> holds everything required for the boot sequence,
         including my very own Linux kernel:
@@ -545,16 +552,7 @@ last-updated: May, 2021
     </p>
 
     <p>
-        The last directory we will look at is <code>/usr</code>, which
-        is more interesting. It contains user-shared files, such as
-        man pages (in <code>/usr/share/man</code>) and most of the system's
-        programs (in <code>/usr/bin</code>).
-        These files are shared by all system users, and are mostly
-        read-only. 
-    </p>
-
-    <p>
-        Several utilities exist to help locate files; one of my
+        Several utilities exist to help locate files. One of my
         favorites is <code><a href="https://man7.org/linux/man-pages/man1/whereis.1.html">whereis</a></code>, available in the
         <em>util-linux</em> package.
     </p>
@@ -572,10 +570,10 @@ last-updated: May, 2021
         As mentioned, Unix-like operating systems maintain a single 
         directory tree for the entire system.
         When a new device is introduced to the machine, 
-        its directory tree is be placed in the system's existing
-        directory tree.
-        This operation is known as
-        <a href="https://unix.stackexchange.com/questions/3192/what-is-meant-by-mounting-a-device-in-linux"><em>mounting</em></a>.
+        any directory tree it contains must be placed in the 
+        system's existing directory tree before its contents can
+        be accessed.
+        This operation is known as <em>mounting.</em>
         Let's take a look at this, for it is new.
     </p>
 
@@ -594,30 +592,37 @@ last-updated: May, 2021
     <img style="width:80%" src="assets/img/mounting.png">
 
     <p>
-        The Filesystem Heirarchy Standard offers two places to mount
-        temporary filesystems: <code>/mnt</code> and <code>/media/[user]</code>.
-        When mounting new devices manually, the usual method is to identify the
-        device with
-        <a href="https://man7.org/linux/man-pages/man8/lsblk.8.html"><code>lsblk</code></a>,
-        then mount it with
+        In practice, a USB-device is 
+        <a href="https://wiki.archlinux.org/title/Device_file">much more likely</a> to be named 
+        <code>/dev/sdb</code> or <code>/dev/sdc</code>, with partitions, 
+        <code>/dev/sdc1</code>, <code>/dev/sdc2</code>, <code>/dev/sdc3</code>, <code>...</code> .
+        Hence, a more realistic call to <code>mount</code> would be,
     </p>
 
     <div class="code">
-        $ sudo mount <i>device</i> <i>mountpoint</i>
+        $ sudo mount /dev/sdc1 /mnt
     </div>
+
+    <p>
+        Before mounting, we can identify the partition we want with
+        <a href="https://man7.org/linux/man-pages/man8/lsblk.8.html"><code>lsblk</code></a>.
+        The Filesystem Heirarchy Standard offers two places to mount such
+        temporary filesystems: <code>/mnt</code> and <code>/media/[user]</code>.
+    </p>
 
     <p>
         Superuser priveledges allow us to mount a filesystem anywhere.
         When a filesystem is mounted to a directory that is not empty,
         those directory's contents become hidden by those of the new filesystem,
         and are inaccessible while the filesystem is mounted.
-        Therefore, we typically create an empty directory in the existing
+        Therefore, we typically locate an empty directory in the existing
         directory tree, to serve as the to-be mounted filesystem's root
         directory.
     </p>
 
     <h3>See Also:</h3>
     <ul>
+        <li><a href="https://wiki.archlinux.org/title/File_systems#Mount_a_file_system">Mount a file system</a> - ArchWiki (from <em>File Systems</em>)</li>
         <li><a href="https://man7.org/linux/man-pages/man8/lsblk.8.html"><code>lsblk(8)</code></a> - List block devices</li>
         <li><a href="https://www.man7.org/linux/man-pages/man8/mount.8.html"><code>mount(8)</code></a> - Mount a filesystem</li>
         <li><a href="https://www.man7.org/linux/man-pages/man8/findmnt.8.html"><code>findmnt(8)</code></a> - Find a filesystem</li>
@@ -716,7 +721,7 @@ last-updated: May, 2021
     <p>
         A file may have more than one hard link, but when it has zero,
         it is no longer accessible through the directory tree, and
-        the kernel prepares to delete it.<sup><a href="#references">[8]</a></sup>
+        the kernel prepares to delete it.<sup><a href="#references">[9]</a></sup>
     </p>
 
     <h3> See Also: </h3>
@@ -742,24 +747,24 @@ last-updated: May, 2021
 
     <p>
         In the design, data blocks are of fixed size, and either free or
-        wholly consumed by a file.<sup><a href="#references">[9]</a></sup>
+        wholly consumed by a file.<sup><a href="#references">[10]</a></sup>
         The filesystem's <em>inodes</em> represent one file each,
-        contain their file's metadata, and contain pointers to data blocks.<sup><a href="#references">[9]</a></sup>
+        contain their file's metadata, and contain pointers to data blocks.<sup><a href="#references">[10]</a></sup>
         These nodes are arranged in an array, and can be identified
         by an index into this array.
     </p>
 
     <p>
         The design allows a file to grow or shrink without rearranging
-        other files.<sup><a href="#references">[9]</a></sup>
+        other files.<sup><a href="#references">[10]</a></sup>
         In addition, the inclusion of single-, double- and triple-
         indirection blocks allow the inode to remain of fixed,
         reasonable size, while supporting large
-        files.<sup><a href="#references">[9]</a></sup>
+        files.<sup><a href="#references">[10]</a></sup>
         Finally, by using direct pointers for the first bytes of a file,
         and by keeping the inode array in memory, 
         the design fosters the speedy retrieval of data in small
-        files.<sup><a href="#references">[9]</a></sup>
+        files.<sup><a href="#references">[10]</a></sup>
     </p>
 
     <p>
@@ -782,10 +787,10 @@ last-updated: May, 2021
         While each filesystem implements its own functionality,
         most functionality is common;
         the Virtual File System maps system calls 
-        to filesystem-specific functions.
+        to filesystem-specific functions.<sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">[11]</a></sup>
         In addition, the VFS imposes inodes on filesystems that do not
         natively employ them, thereby preserving traditional Unix file
-        semantics across all supported filesystems.
+        semantics across all supported filesystems.<sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">[11]</a></sup>
     </p>
 
     <h3>See Also:</h3>
@@ -838,6 +843,30 @@ last-updated: May, 2021
     <h2 style="margin-bottom: 2pt;">Udacity:</h2>
     <h4 style="margin-bottom: 18pt;"> Inode Structure</h4>
     <iframe class="video" src="https://www.youtube.com/embed/tMVj22EWg6A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+    <h2>Suggested Reading</h2>
+
+    <div class="img-right">
+        <a href="https://nostarch.com/howlinuxworks3">
+            <img src="./assets/img/HowLinuxWorks3e_vfront_0.png" 
+            style="height:150px;">
+        </a>
+    </div>
+
+    <p>
+        <ul>
+            <li>
+        <a href="https://nostarch.com/howlinuxworks3">How Linux Works: What Every Superuser Should Know</a> by Brian Ward.  
+        Brian Ward has been working with GNU/Linux since 1993, and 
+        his knowledge about the subject is encyclopedic.
+        In his book, you'll find, for instance,
+        a much more satisfying development of <em>init</em> than given here,
+        an introduction to GNU's <em>Autoconf</em>, and 
+        a thorough discussion of disks, partitions and filesystems.
+        If you want to take the next step in Linux, he's your guy.
+            </li>
+        </ul>
+    </p>
 </div>
 
 <div id="references" class="content">
@@ -855,11 +884,16 @@ last-updated: May, 2021
 
         <li>7.2. Background of the FHS. (2015, March 15). Retrieved March 18, 2021, from <a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch07s02.html">https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch07s02.html</a></li>
 
-        <li> Overview of the Linux Virtual File System - The Linux Kernel Documentation. (n.d.). Retrieved July 17, 2020, from <a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">https://www.kernel.org/doc/html/latest/filesystems/vfs.html</a> </li>
+        <li>Nguyen, B. (2004, April 30). <em>The Linux Filesystem Heirarchy, Section 1.17. /usr. </em>/usr. <a href="https://tldp.org/LDP/Linux-Filesystem-Hierarchy/html/usr.html">https://tldp.org/LDP/Linux-Filesystem-Hierarchy/html/usr.html</a>.</li>
+
+        <li>Ward, B. (2021). <em>How Linux Works: What Every Superuser Should Know</em> (3rd ed.). No Starch Press.</li>
+
 
         <li> Kerrisk, Michael.  <em>The Linux Programming Interface</em>. San Francisco, CA, No Starch Press, 2010.</li>
 
         <li>Bach, M. J. (1986). Chapter 4: Internal Representation of Files. In <em>The Design of the UNIX Operating System</em> (pp. 60-90). Englewood Cliffs, NG: Prentice-Hall. </li>
+
+        <li> Overview of the Linux Virtual File System - The Linux Kernel Documentation. (n.d.). Retrieved July 17, 2020, from <a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">https://www.kernel.org/doc/html/latest/filesystems/vfs.html</a> </li>
     </ol>
 
 </div>
