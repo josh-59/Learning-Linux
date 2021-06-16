@@ -51,7 +51,7 @@ ol {
     padding: 0;
     height: 100%;
     width: inherit; /* Inherit from containing element */
-    overflow: auto; /* Allow scrollbar automatically */
+    overflow: none; /* No scrollbar */
 }
 
 /* Inactive page */
