@@ -178,14 +178,10 @@ Exercises:
     <p>
         The above quote refers to <em>buffered i/o,</em> which has been called
         a "necessary evil" of terminal-based computing.
-        This article will cover some of the gory detail behind the modern
+        This article will cover some of the 
+        <a href="https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios/">gory detail</a> behind the modern
         GNU/Linux command-line, then introduce some handy command-line tools.
     </p>
-
-    <h3>See Also</h3>
-    <ul>
-        <li><a href="https://blog.nelhage.com/2009/12/a-brief-introduction-to-termios/">A Brief Introduction to Termios</a> - Made of Bugs</li>
-    </ul>
 </div>
 
 <div class="content" id="shell-expansion">
@@ -195,21 +191,21 @@ Exercises:
     <p>
         After one presses <em>return</em> at the command line, the preceding
         line of text is sent to Bash.  
-        Bash makes several passes over the text, interpretting it and modifying it, 
-        before executing any command it contains.
+        Bash makes several passes over the text, interpretting and 
+        modifying it, before executing any command it contains.
     </p>
 
     <p>
         The first pass splits the line by whitespace into <em>tokens.</em> 
-        Then, two expansion passes follow: <em>shell expansion</em>, 
+        Two expansion passes follow: <em>shell expansion</em>, 
         then <em>filename expansion.</em>
     </p>
 
     <div class="aside-right">
         <h4>Note:</h4>
         <p>
-            If part of the line is single-quoted, it is exempt from tokenizing and
-            expansion.
+            If part of the line is single-quoted, it is exempt from 
+            tokenizing and expansion.
         </p>
     </div>
 
@@ -252,8 +248,8 @@ Exercises:
 
     <p>
         These expansions can be understood through the
-        <code>echo</code> command, which, as a rule, simply prints out whatever arguments
-        it recieves.
+        <code>echo</code> command, which, as a rule, simply prints 
+        out whatever arguments it recieves.
         In the following example, the <code>echo</code> command
         recieves exactly two arguments, <code>12</code> and <code>13</code>,
         and it is Bash that has done the work:
@@ -267,9 +263,11 @@ Exercises:
     <h3 id="globbing"> Filename Expansion </h3>
 
     <p>
-        The second expansion pass is <em>filename expansion,</em> sometimes
+        The second expansion pass is <em>filename expansion,</em> traditionally
         referred to as <em>globbing.</em>
-        If any token contains an asterisk <code>*</code>, question mark
+        After shell expansion, each token is scanned again for 
+        whitespace and split; the results are referred to as <em>words.</em>
+        If a word contains an asterisk <code>*</code>, question mark
         <code>?</code>, or brackets <code>[]</code>, then it is regarded as a
         <em>pattern,</em> and is replaced by an alphabetical list of all
         filenames in the current directory matching that pattern.<sup><a href="https://www.gnu.org/software/bash/manual/html_node/Filename-Expansion.html#Filename-Expansion">[1]</a></sup>
@@ -331,9 +329,8 @@ Exercises:
     </p>
 
     <p>
-        Pretty spiffy!
         After these steps have been completed, Bash removes unquoted
-        quotes, and inspects the line for redirection operators.
+        quotes, then inspects the line for redirection operators.
     </p>
 
     <h3> See Also: </h3>
@@ -345,12 +342,12 @@ Exercises:
 
 <div id="standard-file-descriptors" class="content">
 	<h2 style="margin-bottom: 0;">Standard File Descriptors</h2>
-    <h4> and Redirection</h4>
+    <h4>and Redirection</h4>
 
 	<p>
-        Recall that the shell is connected to its terminal by open files. 
-        There are three such files, known as 
-        the <em>standard file descriptors:</em><sup><a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/stdin.html">[2]</a></sup>
+        The shell is connected to its terminal by three open files,
+        known as 
+        the <em>standard file descriptors:</em>
     </p>
 
     <ul>
@@ -385,9 +382,9 @@ Exercises:
     <p>
         <em>Redirection</em> is the act of assigning a different file to 
         a file descriptor before executing a command.
-        It is a powerful component of the shell language,
+        It is a powerful and general component of the shell language,
         allowing users to capture output, create log files and 
-        create scripts.
+        make use of scripts, for any command.
     </p>
 
     <p>
@@ -473,20 +470,6 @@ Exercises:
         $ apropos -s 1
     </div>
 
-    <p>
-        And you can specify a specific section when using <code>man</code>:
-    </p>
-
-    <div class="code">
-        $ man 7 intro
-    </div>
-
-    <p>
-        The manual sections are worth learning, but perhaps not by heart.
-        Section 7 contains many interesting articles, and it's a worthwhile
-        exercise to generate an index of it.
-    </p>
-
     <h3>See Also:</h3>
     <ul>
         <li><a href="https://www.cyberciti.biz/tips/displays-animations-when-accidentally-you-type-sl-instead-of-ls.html">Steam_Locomotive</a> - Linux/Unix Desktop Fun</li>
@@ -542,6 +525,15 @@ Exercises:
 		To move down one line, use <code>j</code>;
 		To move down a screenful, press the spacebar.
 	</p>
+
+    <p>
+        The manual is divided into eight sections (traditionally);
+        you can specify a specific section: 
+    </p>
+
+    <div class="code">
+        $ man 1 intro
+    </div>
 
 	<h3>See Also:</h3>
 	<ul>
@@ -687,7 +679,7 @@ Exercises:
     <p>
         <code><a href="https://www.gnu.org/software/make/">make</a></code> 
         is one of the oldest tools in the Unix
-        collection, and is used to simplify the build process.
+        collection, and is used to simplify the software build process.
         One creates a plain text file named <code>Makefile</code>, and
         puts in it "recipes" of the form,
     </p>
@@ -698,10 +690,11 @@ Exercises:
     </pre>
 
     <p>
-        This says that <em>hello</em> is a target file,
-        and that it depends upon the file <em>hello.c</em>.
-        More, to obtain <em>hello</em>, it says to run the command
-        <code>gcc -o hello hello.c</code>
+        The <code>make</code> utility interprets this to say that
+        <em>hello</em> is a target file
+        which depends upon the file <em>hello.c</em>,
+        and that to obtain <em>hello</em>, run the command
+        <code>gcc -o hello hello.c</code>.
     </p>
 
     <p>
@@ -746,6 +739,19 @@ Exercises:
 	<h2 style="margin-bottom: 2pt;">The Shell Hater's Handbook</h2>
 	<h4 style="margin-bottom: 18pt;">by Ryan Tomayko<h4>
     <iframe class="video" src="https://www.youtube.com/embed/olH-9b3VJfs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+    <!--
+        <h3>Exercises</h3>
+        <ol>
+            <li>
+        Section 7 of the man pages contains many interesting articles.  
+        Using apropos, generate an index of it. 
+        Why can't an index be distributed?
+            </li>
+        </ol>
+    -->
+
+
 </div>
 
 <div class="content" id="references">
@@ -753,7 +759,6 @@ Exercises:
 
     <ol>
         <li>Filename Expansion (Bash Reference Manual). (n.d.). <a href="https://www.gnu.org/software/bash/manual/html_node/Filename-Expansion.html#Filename-Expansion">https://www.gnu.org/software/bash/manual/html_node/Filename-Expansion.html#Filename-Expansion</a>.</li>
-        <li>stdin. (2008). <a href="https://pubs.opengroup.org/onlinepubs/9699919799/functions/stdin.html">https://pubs.opengroup.org/onlinepubs/9699919799/functions/stdin.html</a>.</li>
     </ol>
 </div>
 
