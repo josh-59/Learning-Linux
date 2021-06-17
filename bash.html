@@ -330,7 +330,8 @@ Exercises:
 
     <p>
         After these steps have been completed, Bash removes unquoted
-        quotes, then inspects the line for redirection operators.
+        quotes, then inspects the line for pipes and
+        redirection operators.
     </p>
 
     <h3> See Also: </h3>
@@ -377,38 +378,86 @@ Exercises:
         runs that program in the context of the terminal.
     </p>
 
+    <h3>Pipelines</h3>
+
+    <p>
+        A <em>pipeline</em> is a sequence of commands,
+    </p>
+
+    <div class="code">
+        $ <i>command1</i> | <i>command2</i> | <i>command3</i> | ... | <i>commandn</i>
+    </div>
+
+    <p>
+        such that command <em>i</em>'s <code>STDOUT</code>
+        is connected to command <em>i+1</em>'s <code>STDIN</code>.
+    </p>
+
+    <p>
+        For example, 
+    </p>
+
+    <div class="code">
+        $ apropos make | less
+    </div>
+
+    <p>
+        will pipe the results of <code>apropos</code> into the paging
+        utility <code>less</code> for easier viewing.
+    </p>
+
+    <p>
+        If the line given to Bash is a pipeline, 
+        Bash creates one fork of itself for each command,
+        connecting pipes as it goes, before conducting redirection
+        in each.
+    </p>
+
     <h3> Redirection </h3>
 
     <p>
         <em>Redirection</em> is the act of assigning a different file to 
         a file descriptor before executing a command.
-        It is a powerful and general component of the shell language,
-        allowing users to capture output, create log files and 
-        make use of scripts, for any command.
     </p>
 
     <p>
-        In Bash, the redirection operator <code>&lt;</code> redirects 
+        The redirection operator <code>&lt;</code> redirects 
         <code>STDIN</code>:
     </p>
 
-    <ul style="list-style-type: none;">
-        <li> <code>$ <i>command</i> [arg ...] &lt; <i>file</i> </code> &emsp; Open <code><i>file</i></code>
-            for reading,
-            assign to <code>STDIN</code>, then execute <code><em>command</em></code></li>
-    </ul>
+    <div class="code">
+        $ <i>command</i> [arg1 arg2 ...] &lt; <i>file</i> 
+    </div>
+
+    <p>
+        Formally: Open <code><i>file</i></code> for reading, assign to 
+        <code>STDIN</code>, then find and execute 
+        <code><em>command</em></code>.
+    </p>
 
     <p>
         To redirect output:
     </p>
 
-    <ul style="list-style-type: none;">
-        <li> <code>$ <em>command</em> [arg ...] &gt; <i>file</i> </code> &emsp;&ensp; "Overwrite:" Open <code><i>file</i></code>
-            for writing; set length to zero; assign to <code>STDOUT</code>.
-            Then execute command.</li>
-        <li> <code>$ <em>command</em> [arg ...] &gt;&gt; <i>file</i> </code> &emsp; "Append:" Open <code><i>file</i></code>
-            for writing; seek to end; assign to <code>STDOUT</code>.
-            Then execute command.</li>
+    <div class="code">
+        $ <em>command</em> [arg1 arg2 ...] &gt; <i>file</i> 
+    </div>
+
+
+    <p>
+        "Overwrite:" Open <code><i>file</i></code>
+        for writing; set length to zero; assign to <code>STDOUT</code>.
+        Then execute command.
+    </p>
+
+    <div class="code">
+        $ <em>command</em> [arg1 arg2 ...] &gt;&gt; <i>file</i> 
+    </div>
+
+    <p>
+        "Append:" Open <code><i>file</i></code>
+        for writing; seek to end; assign to <code>STDOUT</code>.
+        Then execute command.</li>
     </ul>
 
     <p>
@@ -417,9 +466,17 @@ Exercises:
     </p>
 
     <p>
-        After expansion and redirection, Bash finds and executes 
-        the command, as mentioned in <a href="./terminals-and-shells.html#commands">Terminals and Shells</a>.
+        Redirection and piping are powerful and general components
+        of the shell language, allowing users to capture output, 
+        create log files, proccess or filter output, 
+        and make use of scripts, in any combination, for any command.
     </p>
+
+    <p>
+        Finally, Bash finds and executes 
+        the command as mentioned in <a href="./terminals-and-shells.html#commands">Terminals and Shells</a>.
+    </p>
+
 
     <h3>See Also:</h3>
     <ul>
@@ -483,7 +540,6 @@ Exercises:
 		manual ("man") pages.
 		Man pages provide a concise overview of commands and
         features, with further documentation existing elsewhere.
-		Learn to use them early, for they are a way of life.
 	</p>
 
 	<p>
@@ -522,18 +578,23 @@ Exercises:
 	<p>
         The other movement controls are simple enough:
 		To move up one line, type <code>k</code>.
-		To move down one line, use <code>j</code>;
-		To move down a screenful, press the spacebar.
+		To move down one line, use <code>j</code>.
+        To move down half a screenful, press <code>d</code>,
+        and to move up half a screenful, press <code>u</code>.
 	</p>
 
     <p>
         The manual is divided into eight sections (traditionally);
-        you can specify a specific section: 
+        you can specify a specific section:
     </p>
 
     <div class="code">
         $ man 1 intro
     </div>
+
+    <p>
+		Learn to use them early, for they are a way of life.
+    </p>
 
 	<h3>See Also:</h3>
 	<ul>
