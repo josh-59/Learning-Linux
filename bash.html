@@ -347,8 +347,7 @@ Exercises:
 
 	<p>
         The shell is connected to its terminal by three open files,
-        known as 
-        the <em>standard file descriptors:</em>
+        known as the <em>standard file descriptors:</em>
     </p>
 
     <ul>
@@ -409,8 +408,8 @@ Exercises:
     <p>
         If the line given to Bash is a pipeline, 
         Bash creates one fork of itself for each command,
-        connecting pipes as it goes, before conducting redirection
-        in each.
+        connecting pipes as it goes, then conducts redirection
+        within each, before finally executing the command.
     </p>
 
     <h3> Redirection </h3>
@@ -430,7 +429,7 @@ Exercises:
     </div>
 
     <p>
-        Formally: Open <code><i>file</i></code> for reading, assign to 
+        In detail: Open <code><i>file</i></code> for reading, assign to 
         <code>STDIN</code>, then find and execute 
         <code><em>command</em></code>.
     </p>
@@ -474,9 +473,9 @@ Exercises:
 
     <p>
         Finally, Bash finds and executes 
-        the command as mentioned in <a href="./terminals-and-shells.html#commands">Terminals and Shells</a>.
+        the command as mentioned in 
+        <a href="./terminals-and-shells.html#commands">Terminals and Shells</a>.
     </p>
-
 
     <h3>See Also:</h3>
     <ul>
@@ -540,7 +539,8 @@ Exercises:
 		manual ("man") pages.
 		Man pages provide a concise overview of commands and
         features, with further documentation existing elsewhere.
-	</p>
+		Learn to use them early, for they are a way of life.
+    </p>
 
 	<p>
 		Man pages are accessed at the command line:
@@ -551,8 +551,6 @@ Exercises:
 	</div>
 
 	<p>
-	    This launches a paging utility, which lets you
-        view a page through a read-only interface.
 		Within the <code>man</code> utility, you can search 
 		by typing a single forward slash, then your search term:
 	</p>
@@ -564,8 +562,7 @@ Exercises:
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            Incidentally, these controls have become standard for
-            paging utilites.
+            Don't worry about messing up: The interface is read-only.
         </p>
     </div>
 
@@ -591,10 +588,6 @@ Exercises:
     <div class="code">
         $ man 1 intro
     </div>
-
-    <p>
-		Learn to use them early, for they are a way of life.
-    </p>
 
 	<h3>See Also:</h3>
 	<ul>
@@ -657,8 +650,8 @@ Exercises:
     </div>
 
     <p>
-        For a few reasons, I recommend <code>fd</code> over the classic
-        GNU Findutils:
+        Although it's nonstandard, I recommend <code>fd</code> 
+        for a few reasons:
     </p>
 
     <ol style="margin-left: 5%; padding-right: 10%;">
@@ -674,8 +667,8 @@ Exercises:
         <li>
             <p>
                 Ameniable defaults:
-                <code>fd</code> matches only basenames, and thereby avoids printing
-                pages of results.
+                <code>fd</code> matches only basenames, and thereby 
+                avoids printing pages of results.
                 More, it does not require a flag to search for filenames.
             </p>
         </li>
@@ -751,11 +744,10 @@ Exercises:
     </pre>
 
     <p>
-        The <code>make</code> utility interprets this to say that
-        <em>hello</em> is a target file
+        This says that <em>hello</em> is a target file
         which depends upon the file <em>hello.c</em>,
-        and that to obtain <em>hello</em>, run the command
-        <code>gcc -o hello hello.c</code>.
+        and that to obtain <em>hello</em> from <em>hello.c</em>, 
+        the command <code>gcc -o hello hello.c</code> should be ran.
     </p>
 
     <p>
@@ -767,10 +759,8 @@ Exercises:
     </div>
 
     <p>
-        the utility will read the makefile, and 
-        execute the shell command 
-        <code>gcc -o hello hello.c</code> if 
-        <em>hello</em> does not exist, or it does exist but
+        the utility will read the makefile and create <em>hello</em>
+        if either it does not exist, or it does exist but
         <em>hello.c</em> has been modified more recently.
     </p>
 
