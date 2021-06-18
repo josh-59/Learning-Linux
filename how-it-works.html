@@ -5,20 +5,12 @@ last-updated: May 2021
 ---
 
 <!--
+    util-linux development stalled, got forked, and 
+    distribution's patches served as *first* modifications:
+    https://lkml.org/lkml/2006/12/18/19
 
 
-    <p>
-        We really depend upon maintainers to ensure the quality of
-        the code we use.
-    </p>
-
-    https://www.youtube.com/watch?v=XFrJcjCbCA8
-
-    "Write programs that do one thing and do it well.
-    Write programs that work together."
-    Douglas McIlroy 
-    UNIX Time-Sharing System Foreword
-    The Bell System Technical Journal 57, no. 6, 1978
+       https://www.youtube.com/watch?v=XFrJcjCbCA8
 
     Working In Public
     by Nadia Eghbal
@@ -44,50 +36,6 @@ last-updated: May 2021
 
 
         <li><a href="https://press.stripe.com/">Stripe Press</a> - Ideas for progress</a></li>
-
-
-  Self-motivated
-        |
-        |   
-        |   
-        |
-       \ /
- User-Contributor
-        |
-        |   
-        |   
-        |
-       \ /
-Success of the Bazaar
-        |   Curating Modifications
-        |
-        |   Large projects:  Tree?
-        |
-       \ /
- Time-based Releases
-        |
-        |   
-        |   
-        |
-       \ /
-  Github is a Platform!
-        |   
-        |
-        |   Large projects: Make their own platform
-        |   Large Projects: Foundations
-        |
-       \ /
-  What's it Like?
-        |   
-        |   Sport
-        |  
-        |
-       \ /
-
-
-        Those contributors that persist&mdash;
-        the ones that actually produce excellent works&mdash;
-        are those interested in the project <em>for its own sake.</em>
 
 
 -->
@@ -126,6 +74,49 @@ Success of the Bazaar
     </p>
 </div>
 
+<div class="content" id="analogy">
+    <h2>An Analogy</h2>
+
+    <p>
+        Let's start by ignoring the actual <em>software</em> part of
+        open source, and consider another ecosystem that produces
+        free works: 3D Printing.
+        The 3D printing community is composed principally (but not
+        exclusively) of hobbiests,
+        whom share plans in much the same way that the
+        open-source ecosystem shares source.
+    </p>
+
+
+            Cute Kirby Fume Extractor
+            https://www.thingiverse.com/thing:4865478
+                ++Creative Commons
+
+    <p>
+        The typical plan is not sophisticated, and is principally
+        a creative endeavor. 
+        About this, economist ______ Weber says,
+    </p>
+
+    <blockquote>
+        "Human beings often have a passionate relationship to their
+        creative endeavors and their work; they wish to share
+        their creativity with others; and value inheres in
+        things other than monetizable rewards.  Each of these
+        attitudes exists within the open source community."<sup><a href="#references" title="Weber p10">[g]</a></sup>
+    </blockquote>
+   
+    <p>
+        In contrast to the maker community, open source is older,
+        has produced much more sophisticated entities through
+        much larger cooperative efforts, and is
+        comparatively well-studied.
+        We have found that most people do not contribute, 
+        and even those that do contribute tend to contribute just
+        once or twice.
+    </p>
+</div>
+
 <div class="content" id="organizational-structures">
     <h2>Organizational Structures</h2>
 
@@ -140,7 +131,7 @@ Success of the Bazaar
     <p>
         Properly speaking, open-source describes only how
         software is distributed and used&mdash; Not how it is produced.
-        Notably, it requires that human-readable "source" be made available 
+        Notably, it requires human-readable "source" be made available 
         alongside machine-readable instructions, and 
         that software be redistributable by any user.
     </p>
@@ -170,7 +161,7 @@ Success of the Bazaar
     
     <p>
         When Linus Torvalds invited any interested hacker to
-        collaborate on his new kernel project, he invented a new
+        tinker on his kernel, he invented a new
         way of making free software.
         The result was "Accidentally Revolutionary," and has
         dominated open-source since.
@@ -190,19 +181,9 @@ Success of the Bazaar
     <p>
         Collaborative open-source blurs the line between "user"
         and "developer": You can get as involved as you want.
-        In practice, most contributors are casual, offering 
+        In practice, most contributors are casual, offering just
         one or two changes, with a relatively small cadre
-        ensuring project coherence.
-    </p>
-
-    <p>
-        With this motif in place, the open-source ecosystem has 
-        decomposed into projects, with people working on what they want.
-        Without the clear external motivation of money, 
-        collaborative open source is said to be
-        <em>intrinsically motivated:</em>
-        They are carried out because what they are <em>is</em> what their 
-        creators want.
+        tasking themselves with ensuring project coherence.
     </p>
 </div>
 
@@ -211,22 +192,31 @@ Success of the Bazaar
     <h4>Bazaar Style</h4>
 
     <p>
+        The open-source ecosystem has naturally
+        decomposed into projects, with people working on what they want.
+        Without the clear external motivation of money, 
+        collaborative open source is said to be
+        <em>intrinsically motivated:</em>
+        They are carried out because what they are <em>is</em> what their 
+        creators want.
+    </p>
+
+    <p>
         While we may wish to think that each project is a paradigm
         of virtue and cooperation, this is in fact not the case.
-        Public desire is not homogenous, and 
-        the role of project leader can quickly skew from 
+        Public desire is not homogenous, and, especially in large
+        projects, the role of project leader can quickly skew from 
         <em>lead developer</em> to <em>modification curator.</em>
     </p>
 
     <p>
         This is the key point, and the primary difference between 
-        collaborative open-source and every other model of development:
+        Linus' model and every other way of working:
         In collaborative open-source, work is submitted <em>by users,</em>
         inspected on a case-by-case basis, 
         and then either accepted into the project or rejected.
-        Project leaders, then, are the stars of the show: 
-        They take on the responsibility of the work's 
-        overall well-being, and foster its improvement by
+        Project leaders take on the responsibility of the work's 
+        overall well-being, and foster its development by
         sifting through (and modifying) proposed modifications.
     </p>
 
@@ -243,8 +233,8 @@ Success of the Bazaar
         empowerd to shape a project into what they want, 
         in practice these modifications are moderated by the project's
         maintainers.
-        Given significant difference of opinion, users are
-        always free to fork the source repository and to lead
+        Given significant difference of opinion, users 
+        can always fork the source repository and lead
         a sister project in their preferred direction.
     </p>
 
@@ -258,56 +248,16 @@ Success of the Bazaar
     </p>
 
     <p>
-        It should be emphasized that project leaders are free to lead
-        their projects however they like.  
+        Within Linus' project, those dedicated maintainers 
+        form of a "tree of trust" to handle code review and commit acceptance:
+        Each edit suggested by someone outside the group
+        filters up towards the more seniour developers, on their way
+        to being accepted.
     </p>
 
     <ul>
         <a href="https://youtu.be/FqWLbjov-bQ">evolutionary</a> 
     </ul>
-</div>
-
-<div class="content" id="supporting-collaboration">
-    <h2>Supporting Collaboration</h2>
-
-    <p>
-        Within this context, 
-    </p>
-
-    <p>
-        <u>Scratch an Itch.</u>
-            - <a href="https://gitlab.redox-os.org/redox-os">Redox OS</a>,
-    </p>
-
-    <p>
-        <u>Make it work first, then make it work better.</u>
-    </p>
-
-    <p>
-        <u>Release early and often.</u>
-        As mentioned, many people are working to modify the same 
-        software base; 
-    </p>
-
-    <p>
-        <u>Talk a lot, and say what you think.</u>
-    </p>
-
-    <p>
-        <em>Win-Win</em> (self-checkout lanes)
-    </p>
-
-    <p>
-        - Make contributing convenient (if you dare)
-        <a href="">Github</a>, while being both for-profit and
-        closed-source, attracts developers in virtue of its convenience.
-    </p>
- 
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://www.contributor-covenant.org/">Contributor Covenant[...] </a> by Coraline Ada Ehmke</li>
-    </ul>
-
 </div>
 
 <div class="content" id="time-based-releases">
@@ -316,8 +266,8 @@ Success of the Bazaar
     <p>
         Large collaborative projects, for whom many people want 
         to include changes, often schedule releases.  
-        The intent is to accomodates both feature introduction and 
-        commit rejection. 
+        This pattern accomodates both feature introduction and 
+        commit rejection: 
         If your new feature doesn't make it into the latest version of 
         Firefox, for instance, you only have to 
         wait six weeks for the next chance.
@@ -368,11 +318,8 @@ Success of the Bazaar
     </p>
 
     <p>
-        Within a project, there is usually some structure, in the form of a
-        "tree of trust" to handle code review and commit acceptance:
-        Each suggested edit is filters up towards the
-        more seniour developers, on their way
-        to being accepted.
+        Let's take a step back from the organization of large
+        projects, and consider the success of one that is much smaller.
     </p>
 
     <h3>See Also:</h3>
@@ -452,6 +399,64 @@ Success of the Bazaar
     </ul>
 </div>
 
+<div class="content" id="working-in-open-source">
+    <h2>Working in Open Source</h2>
+
+    <p>
+        Open-source is a strange beast:
+        Its works were built at the behest of their creators.
+        Counterintuitively, those that are most successful and enduring
+        are carried out for their own sake.
+    </p>
+
+    <p>
+        Apparently, she thought that Redox OS would be the next big
+        thing.
+        ...Apparently, she thought that Debian would make the world 
+        a better place.
+    </p>
+
+    <p>
+        <u>Do what you Want.</u> 
+    </p>
+
+    <p>
+        Especially in the case of large projects, 
+        one can expect to find that they are not alone in their
+        desire for it. 
+        The consequence is both appreciation for the work, and if
+        it is large enough to require collaboration, collaboration.
+    </p>
+
+    <p>
+        <u>Make it work first, then make it work better,</u>
+        From filesystems to operating systems...
+        Even Linus Torvalds started off writing <em>A</em> and <em>B</em>
+        on his 386.
+    </p>
+
+    <p>
+        <u>Do one thing and do it well.</u>
+        Precisely state your project's goal.
+    </p>
+
+    <p>
+        The most important component is 
+        <em>reiterative improvement.</em>
+    </p>
+
+    <p>
+        - Make contributing convenient (if you dare)
+        <a href="">Github</a>, while being both for-profit and
+        closed-source, attracts developers in virtue of its convenience.
+    </p>
+ 
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://www.contributor-covenant.org/">Contributor Covenant[...] </a> by Coraline Ada Ehmke</li>
+    </ul>
+</div>
+
 
 <div class="content" id="a-sport">
     <h2>A Sport</h2>
@@ -461,50 +466,27 @@ Success of the Bazaar
         At the same time, it isn't <em>work</em> in the 
         traditional sense, either.  
         I think it's somewhere between the two, closer to sport.
-        For me, the magic is that it's composed of
-        things people created because they wanted to.
     </p>
 
     <p>
-        Fact is, good software is not easy to produce. 
-        It's one thing to write a Python script for your own 
-        purposes (or even a shell to demonstrate the idea); it's
-        quite another to produce a product that's useable by 
-        millions of people, and actually satisfies some demand.
+        Most people can make a program work&mdash; and programming is a
+        great hobby and a useful skill&mdash; but the software that
+        actually gets used on a daily basis (e.g., Bash) 
+        is extremely sophisticated.
+        These projects are shepherded by talented and educated
+        individuals, whom are professionals of their field.
+        The magic is that they make the things they do because they
+        want to.
     </p>
-
-    <p>
-        As Poul-Henning Kamp writes,
-    </p>
-
-    <blockquote>
-        "Getting hooked on computers is easy—almost anybody can make a 
-        program work, just as almost anybody can nail two pieces of wood 
-        together in a few tries. The trouble is that the market for two 
-        pieces of wood nailed together—inexpertly—is fairly small outside 
-        of the "proud grandfather" segment, and getting from there to a 
-        decent set of chairs or fitted cupboards takes talent, practice, 
-        and education."
-    </blockquote>
 
     <p>
         Code and money are not the only ways to support your
-        favorite open-source project,
-        and I would encourage you to help any way that you can.
+        favorite open-source project, and I would encourage you
+        to help in any way you can. 
+        Detailed bug reports, if you find them.
+        More, I would encourage you to find something <em>you</em> want
+        to do, and make it happen.
     </p>
-
-    <p>
-        Individual's works in the open-source ecosystem are
-        fundamentally creative in nature.
-    </p>
-
-    <blockquote>
-        "Human beings often have a passionate relationship to their
-        creative endeavors and their work; they wish to share
-        their creativity with others; and value inheres in
-        things other than monetizable rewards.  Each of these
-        attitudes exists within the open source community."<sup><a href="#references" title="Weber p10">[g]</a></sup>
-    </blockquote>
 
     <ul>
 
