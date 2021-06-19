@@ -8,32 +8,6 @@ last-updated: April, 2021
 
     Todo: Stress generality
 
-<div class="content" id="pipelines">
-    <h2>Pipelines</h2>
-
-    <p>
-        A pipeline is a sequence of commands with each command's
-    </p>
-
-
-    <p>
-        Finally, each command in a pipeline is executed in its own 
-        subshell. For example,
-    </p>
-
-    <div class="code">
-        $ echo words | cd 
-    </div>
-    
-    <p>
-        Will not change the shell's current working directory.
-    </p>
-
-    <p>
-        
-    </p>
-</div>
-
 <div class="content" id="startup-files">
     <h2>Bash Startup Files</h2>
 
@@ -146,7 +120,6 @@ Exercises:
         <li><a href="#finding-files">Finding Files</a></li>
         <li><a href="#make"><code>make</code></a></li>
 		<li><a href="#shell-haters">The Shell Hater's Handbook</a></li>
-        <li><a href="#references">References</a></li>
 	</ul>
 </div>
 
@@ -263,14 +236,14 @@ Exercises:
     <h3 id="globbing"> Filename Expansion </h3>
 
     <p>
-        The second expansion pass is <em>filename expansion,</em> traditionally
+    The second expansion pass is <a href="https://www.gnu.org/software/bash/manual/html_node/Filename-Expansion.html#Filename-Expansion"><em>filename expansion</a>,</em> traditionally
         referred to as <em>globbing.</em>
         After shell expansion, each token is scanned again for 
         whitespace and split; the results are referred to as <em>words.</em>
         If a word contains an asterisk <code>*</code>, question mark
         <code>?</code>, or brackets <code>[]</code>, then it is regarded as a
         <em>pattern,</em> and is replaced by an alphabetical list of all
-        filenames in the current directory matching that pattern.<sup><a href="https://www.gnu.org/software/bash/manual/html_node/Filename-Expansion.html#Filename-Expansion">[1]</a></sup>
+        filenames in the current directory matching that pattern.
     </p>
 
     <div class="aside-right">
@@ -360,7 +333,7 @@ Exercises:
         Since open files are preserved across both <em>fork()</em> 
         and <em>exec(),</em> 
         each command&mdash; function, builtin or program&mdash;
-        will have our keyboard and terminal screen 
+        will inherit our keyboard and terminal screen 
         at these file descriptors.
     </p>
 
@@ -375,41 +348,6 @@ Exercises:
 
     <p>
         runs that program in the context of the terminal.
-    </p>
-
-    <h3>Pipelines</h3>
-
-    <p>
-        A <em>pipeline</em> is a sequence of commands,
-    </p>
-
-    <div class="code">
-        $ <i>command1</i> | <i>command2</i> | <i>command3</i> | ... | <i>commandn</i>
-    </div>
-
-    <p>
-        such that command <em>i</em>'s <code>STDOUT</code>
-        is connected to command <em>i+1</em>'s <code>STDIN</code>.
-    </p>
-
-    <p>
-        For example, 
-    </p>
-
-    <div class="code">
-        $ apropos make | less
-    </div>
-
-    <p>
-        will pipe the results of <code>apropos</code> into the paging
-        utility <code>less</code> for easier viewing.
-    </p>
-
-    <p>
-        If the line given to Bash is a pipeline, 
-        Bash creates one fork of itself for each command,
-        connecting pipes as it goes, then conducts redirection
-        within each, before finally executing the command.
     </p>
 
     <h3> Redirection </h3>
@@ -442,9 +380,8 @@ Exercises:
         $ <em>command</em> [arg1 arg2 ...] &gt; <i>file</i> 
     </div>
 
-
     <p>
-        "Overwrite:" Open <code><i>file</i></code>
+        This means, "Overwrite": Open <code><i>file</i></code>
         for writing; set length to zero; assign to <code>STDOUT</code>.
         Then execute command.
     </p>
@@ -460,19 +397,20 @@ Exercises:
     </ul>
 
     <p>
-        Since <code>STDERR</code> has been left unchanged, errors will
+        Neither redirection operators nor their corresponding 
+        <code><i>file</i></code>'s are arguments: Bash removes them
+        after they have been interpretted.
+        Since <code>STDERR</code> has been left unchanged, errors 
+        that the command encounters will
         still be printed to our terminal screen. 
     </p>
 
     <p>
-        Redirection and piping are powerful and general components
+        Redirection is a powerful and general component
         of the shell language, allowing users to capture output, 
-        create log files, proccess or filter output, 
-        and make use of scripts, in any combination, for any command.
-    </p>
-
-    <p>
-        Finally, Bash finds and executes 
+        create log files, and make use of scripts, 
+        for any command.
+        After redirection, Bash finds and executes 
         the command as mentioned in 
         <a href="./terminals-and-shells.html#commands">Terminals and Shells</a>.
     </p>
@@ -581,8 +519,8 @@ Exercises:
 	</p>
 
     <p>
-        The manual is divided into eight sections (traditionally);
-        you can specify a specific section:
+        The manual is divided into eight sections. 
+        You can specify a specific section:
     </p>
 
     <div class="code">
@@ -807,10 +745,9 @@ Exercises:
         Brian Ward has been working with GNU/Linux since 1993, and 
         his knowledge about the subject is encyclopedic.
         In his book, you'll find, for instance,
-        a much more satisfying development of <em>init</em> than given here,
-        an introduction to GNU's <em>Autoconf</em>, and 
-        a thorough discussion of disks, partitions and filesystems.
-        If you want to take the next step in Linux, he's your guy.
+        a tour of <code>systemd</code>,
+        a thorough discussion of disks, partitions and filesystems,
+        and an introduction to GNU's <em>Autoconf</em>.
             </li>
         </ul>
     </p>
@@ -830,11 +767,4 @@ Exercises:
 
 </div>
 
-<div class="content" id="references">
-    <h2>References</h2>
-
-    <ol>
-        <li>Filename Expansion (Bash Reference Manual). (n.d.). <a href="https://www.gnu.org/software/bash/manual/html_node/Filename-Expansion.html#Filename-Expansion">https://www.gnu.org/software/bash/manual/html_node/Filename-Expansion.html#Filename-Expansion</a>.</li>
-    </ol>
-</div>
 
