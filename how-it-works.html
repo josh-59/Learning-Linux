@@ -84,9 +84,6 @@ last-updated: May 2021
         is a derivate of Mozilla Firefox focused on privacy, security and
         freedom.
 
-
-
-
         <li><a href="https://youtu.be/FqWLbjov-bQ">Pinephone review (it
         sucks but we need it!)</a></li>
 
@@ -147,12 +144,6 @@ last-updated: May 2021
         key components of the open-source ecosystem,
         from the motivations of contributors to the leadership
         style necessarily implied by them.
-        <b>Disclaimer:</b>
-        The open-source community is so diverse that general
-        statements about it don't usually hold true.
-        What holds for many might not hold for a few.  
-        Consequently, this article principally conveys
-        the author's opinion about its works.
     </p>
 </div>
 
@@ -286,15 +277,6 @@ last-updated: May 2021
         all; it is not the case that open-source is 
         powered by a collection of average users. 
     </p>
-
-    <p>
-        Code and money are not the only ways to support your
-        favorite open-source project.
-        Documentation, translation, and project promotion 
-        are all universally appreciated.
-        In addition, the best programming aide that a developer can 
-        receive is detailed bug reports.
-    </p>
     
     <h3>See Also:</h3>
     <ul>
@@ -353,12 +335,12 @@ last-updated: May 2021
     </ul>
 </div>
 
-
 <div class="content" id="curating-work">
     <h2>Curating Work</h2>
+    <h4>and Project Leadership</h4>
 
     <p>
-        The open-source ecosystem has naturally decomposed into
+        The open-source ecosystem has decomposed into
         projects, with people working on what they want.
         While we may wish to think that each project is a paradigm
         of virtue and cooperation, this is in fact not the case.
@@ -390,10 +372,16 @@ last-updated: May 2021
     </p>
 
     <p>
-        While users are in theory
+        So, while users are in theory
         empowered to shape a project into what they want, 
         in practice these modifications are moderated by the project's
         maintainers.
+        In this way, entities within the open-source ecosystem
+        retain definition, and the community does not
+        devolve into an equal-merit free-for-all.
+    </p>
+
+    <p>
         Given significant difference of opinion, an individual or group
         can always fork the source repository and 
         lead a sister project in their preferred direction.
@@ -401,12 +389,10 @@ last-updated: May 2021
         of GNU's compiler collection that included new languages 
         in a manner more free-wheeling than the FSF 
         found acceptable.
-        Through this mechanism, users (collectively speaking) control
-        the programs available.
     </p>
 
     <p>
-        In a nontrivial sense, this ability to choose and curate
+        In a nontrivial sense, the ability to choose and curate
         is the backbone of open-source, and takes place on
         multiple levels. 
         A distribution implicitly curates
@@ -421,66 +407,69 @@ last-updated: May 2021
     </ul>
 </div>
 
+
 <div class="content" id="working-together">
     <h2>Working Together</h2>
 
     <p>
         In Linus' project, long-term contributors have become
         maintainers, and have formed a "tree of trust" to handle 
-        code review and commit acceptance.
+        code review and commit acceptance:
         Each proposed edit filters up towards a more senior developer
         on its way to being accepted.
         Linus himself has attained the vaunted role of 
         <em><a href="https://en.wikipedia.org/wiki/Benevolent_dictator_for_life">Benevolent Dictator for Life</a>.</em>
     </p>
 
-    <p>
-
-    </p>
-
-    <p>
-        The above comments apply to works outside of software.
-        The Linux Foundation, for example, is 
-    </p>
-
-</div>
-
-
-<div class="content" id="apache-way">
-    <h2>The Apache Way</h2>
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Arguably the most successful of these is the Apache Foundation.
+        </p>
+    </div>
 
     <p>
-        Several organizations have been created to support this
-        "curated collaboration,"
-        such as the Linux Foundation, the 
+        Several organizations have been created to support 
+        this paradigm of "curated collaboration,"
+        including the Linux Foundation, the 
         Mozilla Foundation, the Python Foundation and the Apache Foundation.
         These are each 503.c Nonprofit Foundations that play
         host to many projects.
-        Since it is, in my opinion, the most sustainable of them,
-        we will dissect the Apache Foundation.
+        Each project has the same fundamental structure of
+        "trusted maintainers" (which form any structure they like) 
+        leading and curating development.
     </p>
 
     <p>
-        The Apache Software Foundation is a corporation to 
-        supervise development of its projects.
-        Organizationally, there are several components.
-        it is composed of two groups of people:
-        A Board of Directors, responsible for management and oversight
-        of business and affairs of the corporation (of which there
-        are nine); and, 
-        a large group of "members."
+        Large projects preemptively schedule releases. 
+        For example, Mozilla's so-called "train-schedule" strategy is 
+        intended to provide
+        <a href="https://blog.rust-lang.org/2014/10/30/Stability.html">stability as a deliverable</a>.
+        They release a new version of Firefox every six weeks;
+        while released to the public, updates are restricted to 
+        security and bug fixes.  
+        After its six weeks in the spotlight, it is discarded, and the
+        next version is released.
     </p>
 
     <p>
-        Retains a modular structure in the form of supported projects;
-        these are not structured, which is to say that 
+        Many disconnected but well-meaning contributors 
+        work in parallel, not concert&mdash; 
+        they're each modifying the same sheet, essentially.
+        More, without the direction offered by a boss, 
+        efforts are highly unstructured (to say the least).
+        Releasing often is a friendly way of keeping everyone
+        on the same page.
     </p>
 
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://www.apache.org/foundation/governance/members.html">Apache Corporate Governance</a></li>
-        <li><a href="https://www.apache.org/foundation/how-it-works.html">How the ASF (Apache Software Foundation) works</a></li>
-    </ul>
+    <p>
+        Code and money are not the only ways to support your
+        favorite open-source project.
+        Documentation, translation, and project promotion 
+        are all universally appreciated.
+        In addition, the best programming aide that a developer can 
+        receive is detailed bug reports.
+    </p>
 </div>
 
 <div class="content" id="less">
@@ -492,7 +481,7 @@ last-updated: May 2021
         the terminal one screenful at a time.
         The first widely used paging utility was <code>more</code>, written by
         Dan Halbert as a graduate student at UC Berkley in 1978.<sup><a href="https://danhalbert.org/more.html">[aa]</a></sup>
-        <code>more</code> is a relatively simple program: It first 
+        <code>more</code> is a simple program: It first 
         fills up the screen, then waits for user input to print the 
         next line(s).
     </p>
@@ -549,6 +538,31 @@ last-updated: May 2021
     <ul>
         <li><a href="https://fedoramagazine.org/5-cool-terminal-pagers-in-fedora/">5 cool terminal pagers in Fedora</a> - Fedora Magazine</li>
         <li><a href="https://zaiste.net/posts/shell-commands-rust/">Rewritten in Rust: Modern Alternatives of Command-Line Tools</a></li>
+    </ul>
+</div>
+
+<div class="content" id="looking-forward">
+    <h2>Looking Forward</h2>
+
+    <p>
+        Economist Steve Weber argues that open-source is structured
+        around a new notion of property rights&mdash;
+        specifically, the right to distribute, as opposed to exclude.
+        In this article, we presupposed that notion, implicitly adopting
+        the free software paradigm in an effort to describe how it
+        works, as from a first-person perspective.
+    </p>
+
+    <p>
+        The above comments apply to works outside of software.
+        The Linux Foundation, for example, is currently supporting
+        RiscV, an entirely open source instruction set architecture
+        that will, one day, define generations of CPU's.
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://arstechnica.com/gadgets/2021/06/sifives-brand-new-p550-is-one-of-the-worlds-fastest-risc-v-cpus/">SiFive's brand-new P550 is one of the world's fastest RISC-V CPUs</a> | Ars Technica</li>
     </ul>
 </div>
 
