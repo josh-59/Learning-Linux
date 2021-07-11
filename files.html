@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Files 
-last-updated: May, 2021
+last-updated: July, 2021
 ---
 
 <!--
@@ -89,6 +89,10 @@ last-updated: May, 2021
         is stored alongside the file, typically on-disk.
     </p>
 
+    <p>
+        File metadata consists of:
+    </p>
+
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
@@ -96,11 +100,6 @@ last-updated: May, 2021
             More on this below.
         </p>
     </div>
-
-    <p>
-        File metadata consists of:
-    </p>
-
 
     <ul>
         <li>File Type</li>
@@ -132,6 +131,7 @@ last-updated: May, 2021
     </p>
 
     <a href="assets/img/ls-long.pdf" target="_blank"><img src="assets/img/ls-long.png" style="width: 100%" title="Click for PDF" ></a>
+    <caption><center><em>Click for PDF</em></center></caption>
 
     <div class="aside-right" style="margin-top:25px;">
         <h4>Aside:</h4>
@@ -142,8 +142,8 @@ last-updated: May, 2021
 
     <p>
         The first character, a hyphen (<code>-</code>), tells us that
-        <code>/bin/bash</code> names a regular file.
-        The next nine characters are the file's
+        <code>/bin/bash</code> is a regular file.
+        The next nine characters are its
         <a href="http://linfo.org/permissions.html">permission bits</a>;
         the <code>r</code> and <code>x</code> present in each trio indicate
         that this file is readable and executable (respectively) by any user on
@@ -177,7 +177,8 @@ last-updated: May, 2021
     </div>
 
     <p>
-        To simply view the contents of a file, we can use the <code>less</code>
+        To simply view the contents of a file, we can use the 
+        <a href="https://www.greenwoodsoftware.com/less/"><code>less</code></a>
         paging utility, which displays one screenful of the file at a time.
     </p>
 </div>
@@ -200,7 +201,7 @@ last-updated: May, 2021
         Each file therein serves as a user-space handle to its
         respective device.
         For example, when a USB-stick is inserted,
-        a new file appears in <code>/dev</code>, and it may be 
+        a new file appears in <code>/dev</code>, and the device may be 
         read from or written to <em>directly</em> by passing
         this file to tools like <code>cat</code> or <code>dd</code>.
     </p>
@@ -209,9 +210,10 @@ last-updated: May, 2021
         Note that the essential capabilities of the USB-stick are 
         preserved through the <em>file</em> interface: It can be 
         written to and read from. 
-        If we were to add the capacity to <em>seek</em> (i.e., change 
-        location) within the file, then we would be able to use the 
-        device in its entirety, through this interface alone.
+        If we were to add the capacity to 
+        <a href="https://man7.org/linux/man-pages/man2/lseek.2.html"><em>seek</em></a> 
+        (i.e., change location) within the file, then we would be able to use the 
+        device in its entirety, through the file interface alone.
     </p>
 
     <h3> Block and Character Device Files </h3>
@@ -227,9 +229,9 @@ last-updated: May, 2021
 
     <p>
         Hard disks, SSD's and removable mass media are represented by
-        <em>block</em> device files.
-        Since the underlying devices support reading and writing 
-        in blocks of bytes at a time, the kernel must take care
+        <em>block</em> device files:
+        These devices support reading and writing only
+        in blocks of bytes at a time, and the kernel must take care
         to buffer arbitrary user-space interactions with it. 
         Additionally, block device files support seeking, whereas 
         character devices do not.
@@ -299,7 +301,7 @@ last-updated: May, 2021
 
     <p>
         When <code>cat</code> reads the file <code>/proc/meminfo</code>,
-        the kernel generates the above data, and hands it back to 
+        the kernel generates the above data and hands it back to 
         <code>cat</code>,
         which then prints it to <code>STDOUT</code>.
     </p>
@@ -413,8 +415,8 @@ last-updated: May, 2021
         When a directory is created, it contains two entries: 
         <code>.</code> ("dot"),
         and <code>..</code> ("dot dot").
-        These entries cannot be removed, nor changed.
-        <code>.</code> is a reference to the containing directory itself,
+        These entries cannot be removed, nor changed. The first,
+        <code>.</code>, is a reference to the containing directory itself,
         and is used as a handle to the current working directory.
         <code>..</code> is a reference to the directory's 
         parent directory.
@@ -426,7 +428,13 @@ last-updated: May, 2021
         intended directory structure is guaranteed.
     </p>
 
-    <h3>Hidden Files</h3>
+    <h3>Filenames</h3>
+
+    <p>
+        Filenames may include any characters except <code>/</code>,
+        the filepath separator, and <code>\NULL</code>, the
+        end-of-string delimiter.
+    </p>
 
     <p>
         By convention alone, filenames beginning with <code>.</code>
@@ -439,9 +447,15 @@ last-updated: May, 2021
         $ ls -a
     </div>
 
+    <p>
+        Finally, to avoid ambiguity at the command-line, we generally avoid
+        including spaces in filenames.
+    </p>
+
     <h3>See Also:</h3>
     <ul>
         <li><a href="https://www.gnu.org/software/coreutils/manual/html_node/index.html">GNU <code>coreutils</code></a> - Table of Contents</li>
+        <li><code><a href="https://man7.org/linux/man-pages/man7/ascii.7.html">ascii(7)</a></code></li>
     </ul>
 </div>
 
@@ -530,7 +544,7 @@ last-updated: May, 2021
     </div>
 
     <p>
-        This file is copied (loaded) into memory early in the boot process, 
+        This file is copied ("loaded") into memory early in the boot process, 
         after which it is no longer needed.
     </p>
 
@@ -602,13 +616,6 @@ last-updated: May, 2021
     </div>
 
     <p>
-        Before mounting, we can identify the partition we want with
-        <a href="https://man7.org/linux/man-pages/man8/lsblk.8.html"><code>lsblk</code></a>.
-        The Filesystem Heirarchy Standard offers two places to mount such
-        temporary filesystems: <code>/mnt</code> and <code>/media/[user]</code>.
-    </p>
-
-    <p>
         Superuser priveledges allow us to mount a filesystem anywhere.
         When a filesystem is mounted to a directory that is not empty,
         those directory's contents become hidden by those of the new filesystem,
@@ -618,10 +625,20 @@ last-updated: May, 2021
         directory.
     </p>
 
+    <p>
+        The Filesystem Heirarchy Standard offers two places to mount such
+        temporary filesystems: <code>/mnt</code> and <code>/media/[user]</code>.
+        Before mounting, the usual practice is to identify the partition 
+        we want with
+        <a href="https://man7.org/linux/man-pages/man8/lsblk.8.html"><code>lsblk</code></a>.
+    </p>
+
+
     <h3>See Also:</h3>
     <ul>
+        <li><a href="https://youtu.be/2Z6ouBYfZr8">Linux Essentials - Formatting &amp; Mounting Storage Volumes</a> LearnLinuxTV (Youtube Video)</a></li>
         <li><a href="https://wiki.archlinux.org/title/File_systems#Mount_a_file_system">Mount a file system</a> - ArchWiki (from <em>File Systems</em>)</li>
-        <li><a href="https://man7.org/linux/man-pages/man8/lsblk.8.html"><code>lsblk(8)</code></a> - List block devices</li>
+        <li><a href=""><code>lsblk(8)</code></a> - List block devices</li>
         <li><a href="https://www.man7.org/linux/man-pages/man8/mount.8.html"><code>mount(8)</code></a> - Mount a filesystem</li>
         <li><a href="https://www.man7.org/linux/man-pages/man8/findmnt.8.html"><code>findmnt(8)</code></a> - Find a filesystem</li>
         <li><a href="https://www.man7.org/linux/man-pages/man8/umount.8.html"><code>umount(8)</code></a> - Unmount a filesystem</li>
@@ -631,7 +648,8 @@ last-updated: May, 2021
 
 
 <div class="content" id="inodes">
-    <h2>inodes</h2>
+    <h2 style="margin-bottom: 0;">inodes</h2>
+    <h4>and Hard Links</h4>
 
     <p>
         A file's inode serves as the reference to the file.
