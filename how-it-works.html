@@ -6,6 +6,13 @@ last-updated: May 2021
 
 <!--
 
+    Maybe tone this back to the slightly more (user) approachable
+    "What is Open Souce?"
+    I mean, the average user is not expected to contribute, and therefore
+    "how it works" is somewhat outside the scope of this work...
+
+
+
 <div class="content" id="working-in-open-source">
     <h2>How To Contribute</h2>
 
@@ -20,7 +27,6 @@ last-updated: May 2021
         Some guy (or gal) wants some <em>thing</em> and makes it, then
         makes it available to others, and presto, we've got it.
     </p>
-
 
     <p>
         <u>Do one thing and do it well.</u>
@@ -92,6 +98,7 @@ last-updated: May 2021
         <li><a href="#motivation">Motivations</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#less"><code>less</code>: A Success Story</a</li>
+        <li><a href="#community">Community?</a></li>
         <li><a href="#references"> References </a></li>
     </ul>
 </div>
@@ -116,8 +123,111 @@ last-updated: May 2021
     </p>
 </div>
 
+<div class="content" id="collaboration">
+    <h2>Collaboration</h2>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Recall that <em>open source</em> is a synonym for
+            <em>free software.</em>
+        </p>
+    </div>
+
+    <p>
+        Properly speaking, open-source describes only how
+        software is distributed and used&mdash; Not how
+        it is produced.<sup><a href="#references" title="Eghbal p44">[a]</a></sup>
+        Notably, it requires human-readable "source" be made available 
+        alongside machine-readable instructions, and 
+        that software be redistributable by any user.
+    </p>
+
+    <p>
+        In particular, it does not restrict
+        the organizational structure adopted to produce
+        these works, and many open-source projects are <em>not</em> 
+        open to collaboration.
+    </p>
+
+    <p>
+        For example, GNU is not collaborative:
+        While users are permitted to
+        modify and redistribute the project's works, those modifications 
+        were never intended to make their way back into GNU source.
+        Hence, there is a deliberate delineation between <em>user</em> and 
+        <em>developer.</em>
+        This model is now referred to as the <em>Cathedral</em> model.
+    </p>
+
+    <h3>Collaborative Open Source</h3>
+    
+    <p>
+        When Linus Torvalds invited any interested hacker to
+        tinker on his kernel, he invented a new
+        way of making free software:
+        Changes are submitted <em>by individuals to projects,</em>
+        inspected on a case-by-case basis, and then either
+        accepted into the project or rejected&mdash; at the
+        project leader's discretion.
+    </p>
+
+    <p>
+        The result was "Accidentally Revolutionary," and has
+        dominated open-source since.
+        Project leaders take on the responsibility of their work's 
+        overall well-being, and can modify the code however they see
+        fit. 
+        they foster its development by
+        considering proposed modifications.
+    </p>
+
+    <p>
+        It should be noted that there is no "rule" that collaboration
+        is restricted to hobbyists, and being inclusive with
+        respect to organizations fosters project success.
+        Facebook, for example, has put considerable effort
+        into Linux's new <code><a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">btrfs</a></code>.<sup><a href="https://lwn.net/Articles/824855/">[h]</a></sup>
+    </p>
+
+    <p>
+        In practice, most modifications (~80%) are made by a small
+        group of people: It is not the case that open-source is
+        powered by a large collection of average users.
+        Moreover, most collaborators are "casual," offering one or 
+        two commits to a project over its life.
+        By and large, the typical project has a handful (or fewer) 
+        core developers, whom shoulder the vast majority of the
+        burden of development.
+    </p>
+    
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://www.extremetech.com/extreme/155392-international-space-station-switches-from-windows-to-linux-for-improved-reliability">International Space Station switches from Windows to Linux, for Improved Reliability</a></li>
+    </ul>
+</div>
+
 <div class="content" id="ownership">
     <h2>Ownership in Open-Source</h2>
+
+    <p>
+        Open-source licenses has called into question the notion
+        of ownership, with at least one economist arguing that 
+        ownership in open-source is defined in terms of the right
+        to distribute, as opposed to the more traditional 
+        right-to-exclude.
+        His perspective is that since open-source software must
+        be redistributable by any user, it is not the case that
+        any individual or organization "owns" the code, in the sense
+        that they can stipulate what may or may not be done with it.
+    </p>
+
+    <p>
+        I personally don't hold with this notion: I find it
+        too far removed from our usual interpretation of <em>ownership,</em>
+        and prefer instead to identify what <em>is</em> owned in
+        open-source.
+    </p>
 
     <p>
         Repository maintainer decides what goes into 
@@ -132,20 +242,6 @@ last-updated: May 2021
             the position of project leader.
         </p>
     </div>
-
-    <p>
-        Although it may seem minor, this is the key point, 
-        the primary difference between Linus' model and 
-        every other way of developing software:
-        Changes are submitted <em>by individuals to projects,</em> 
-        inspected on a case-by-case basis, 
-        and then either accepted into the project or rejected.
-        Project leaders take on the responsibility of their work's 
-        overall well-being, and can modify the code however they see
-        fit; 
-        they foster its development by
-        considering proposed modifications.
-    </p>
 
     <p>
         So, while users are in theory
@@ -183,85 +279,6 @@ last-updated: May 2021
     </ul>
 </div>
 
-<div class="content" id="collaboration">
-    <h2>Collaboration</h2>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Recall that <em>open source</em> is a synonym for
-            <em>free software.</em>
-        </p>
-    </div>
-
-    <p>
-        Properly speaking, open-source describes only how
-        software is distributed and used&mdash; Not how
-        it is produced.<sup><a href="#references" title="Eghbal p44">[a]</a></sup>
-        Notably, it requires human-readable "source" be made available 
-        alongside machine-readable instructions, and 
-        that software be redistributable by any user.
-    </p>
-
-    <p>
-        In particular, it does not restrict
-        the organizational structure adopted to produce
-        these works, and many open-source projects are <em>not</em> 
-        open to collaboration.
-    </p>
-
-    <p>
-        For example, GNU is not collaborative:
-        While users are permitted to
-        modify and redistribute the project's works, those modifications 
-        were never intended to make their way back into GNU source.
-        Hence, there is a deliberate delineation between <em>user</em> and 
-        <em>developer.</em>
-    </p>
-
-    <h3>Collaborative Open Source</h3>
-    
-    <p>
-        When Linus Torvalds invited any interested hacker to
-        tinker on his kernel, he invented a new
-        way of making free software.
-        The result was "Accidentally Revolutionary," and has
-        dominated open-source since.
-    </p>
-
-    <p>
-        It should be noted that there is no "rule" that collaboration
-        is restricted to hobbyists, and being inclusive with
-        respect to organizations fosters project success.
-        Facebook, for example, has put considerable effort
-        into Linux's new <code><a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">btrfs</a></code>.<sup><a href="https://lwn.net/Articles/824855/">[h]</a></sup>
-    </p>
-
-    <p>
-        Collaborative open-source blurs the line between "user"
-        and "developer": You can get as involved as you want.
-        The advantages of this organizational structure are that
-        developers are distributed, organizational costs are
-        minimized, and individuals or groups
-        may contribute to a project according to their own 
-        desires.
-    </p>
-
-    <p>
-        In practice, most modifications (~80%) are made by a small
-        group of people. 
-        More, most collaborators are "casual," offering one or 
-        two commits to a project over its life.
-        Finally, the vast majority of users are not collaborators at
-        all; it is not the case that open-source is 
-        powered by a collection of average users. 
-    </p>
-    
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://www.extremetech.com/extreme/155392-international-space-station-switches-from-windows-to-linux-for-improved-reliability">International Space Station switches from Windows to Linux, for Improved Reliability</a></li>
-    </ul>
-</div>
 
 <div class="content" id="intrinsic-motivation">
     <h2>Intrinsic Motivation</h2>
@@ -313,6 +330,7 @@ last-updated: May 2021
     <h3>See Also:</h3>
     <ul>
         <li><a href="https://www.zdnet.com/article/spacex-weve-launched-32000-linux-computers-into-space-for-starlink-internet/">SpaceX: We've launched 32,000 Linux computers into space for Starlink Internet | ZDNet</a></li>
+        <li><a href="https://hackaday.com/2021/07/17/open-source-is-choice/">Open Source is Choice</a> by Elliot Williams</li>
         <li><a href="https://www.hackerrank.com/">HackerRank</a></li>
     </ul>
 </div>
@@ -407,15 +425,38 @@ last-updated: May 2021
     </ul>
 </div>
 
+<div class="content" id="community">
+    <h2>Community?</h2>
+
+    <p>
+        To me, the magic of open-source is that it's composed of works
+        people created because they wanted to.
+        Nobody is collecting your data; nobody is getting rich;
+        it's just good things made for their own sakes'.
+    </p>
+
+    <p>
+        It is certainly the case that the project (money, good) comes
+        before the community.
+    </p>
+</div>
+
 <div class="content" id="closing-remarks">
     <h2>Closing Remarks:</h2>
-    <h4>Beware Hyperbole</h4>
+    <h4>So What?</h4>
+
+    <p>
+        <em>
+
+    <p>
+        Respects user's freedoms
+    </p>
 
     <p>
         Most people can make a program work&mdash; and programming is 
         a great hobby and a useful skill&mdash;
         but software that is widely used is extremely sophisticated.
-        These projects are shepherded by talented and educated
+        The works we use every day are shepherded by talented and educated
         individuals, whom are professionals of their field.
     </p>
 
@@ -428,6 +469,7 @@ last-updated: May 2021
         decent set of chairs or fitted cupboards takes talent, practice, 
         and education."<sup><a href="https://queue.acm.org/detail.cfm?id=2349257">[123]</a></sup>
     </blockquote>
+
 </div>
 
 <div class="content" id="">
