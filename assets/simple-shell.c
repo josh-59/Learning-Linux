@@ -59,11 +59,11 @@ int main(int argc, char *argv[])
         if (getline(&line, &line_len, stdin) < 0)
             exit(0);
 
-        // Is line empty?
+        // Exit if line is empty 
         get_args(line, args);
         command = args[0];
-        if (command == NULL)
-            continue;
+        if (command == NULL) 
+            exit(0);
 
         // Is it cd? 
         if (is_cd(command)) {
