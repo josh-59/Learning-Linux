@@ -40,8 +40,8 @@ void check_3();
 
 int main() {
     //check_1();
-    //check_2();
-    check_3();
+    check_2();
+    //check_3();
 
     return 0;
 }
@@ -59,7 +59,7 @@ void check_1() {
 
 // open()
 void check_2() {
-    int fd = open("./rubber_ducky", O_RDONLY);
+    int fd = open("rubber_ducky", O_RDONLY);
     printf("fd = %d\n", fd);
 
     if( fd == -1 ) {
