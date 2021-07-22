@@ -61,8 +61,8 @@ last-updated: July, 2021
         In Unix, a file is a sequence of bytes.<sup><a href=#references>[1]</a></sup>
         This definition is sufficiently abstract to allow, for instance, a keyboard
         to appear as a file.
-        Unix-like kernels facilitate interaction with files via four essential
-        system calls:
+        Unix-like operatins sytems facilitate interaction with 
+        files through four essential system calls:
     </p>
 
     <ol>
@@ -83,15 +83,16 @@ last-updated: July, 2021
     <h3>File Attributes</h3>
 
     <p>
-        Unix-like operating systems characteristically store a substantial
-        amount of information about each file on the system.
-        This information, known as
+        A substantial amount of information is stored about each file
+        on the system.
+        Such information is called
         <em><a href="https://en.wikipedia.org/wiki/Metadata">metadata</a>,</em>
-        is stored alongside the file, typically on-disk.
+        though within the context of Unix files, 
+        we typically refer to it as <em>file attributes.</em>
     </p>
 
     <p>
-        File metadata consists of:
+        File attributes consist of:
     </p>
 
     <div class="aside-right">
@@ -112,11 +113,11 @@ last-updated: July, 2021
     </ul>
 
     <p>
-        This information is kept for every file on the machine,
-        and can be explained in part by the operating system's multi-user heritage.
+        It is stored alongside the file, typically on-disk,
+        and its quantity can be explained by the operating system's
+        time-sharing heritage.
         It is used today to compartmentalize the machine.
     </p>
-
 </div>
 
 <div class="content" id="regular-files">
