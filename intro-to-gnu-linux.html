@@ -7,6 +7,9 @@ last-updated: April, 2021
 <!--
     To do:
 
+    Rewrite first two paragraphs of 'UNIX'
+
+
         <li><a href="https://archive.org/details/sim_unix-review_1986-10_4_10/page/31/mode/1up">The UNIX Success Story</a> by Douglas McIlroy</a></li>
 
     Open Source: 
@@ -43,6 +46,18 @@ last-updated: April, 2021
         Scattered throughout are biographies of major figures of Unix's
         development.
     </p>
+
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            The first complete <em>PL/I</em> compiler was available in 1969,
+            four years after the project began; it took a team of 
+            six GE engineers 18 months to produce.<sup><a href="https://multicians.org/features.html">[6]</a><a href="https://multicians.org/pl1.html#v1pl1">[7]</a></sup>
+        </p>
+    </div>
+
+
 
 -->
 
@@ -197,21 +212,19 @@ last-updated: April, 2021
         As the project got underway, obtaining a compiler for
         it became a significant challenge, so much so that a lesser 
         dialect was first devised and implemented.<sup><a href="https://multicians.org/pl1.html">[7]</a></sup>
-        The first complete <em>PL/I</em> compiler was available in 1969,
-        four years after the project began, and took a team of 
-        six GE engineers 18 months to complete.<sup><a href="https://multicians.org/features.html">[6]</a><a href="https://multicians.org/pl1.html#v1pl1">[7]</a></sup>
     </p>
 
     <p>
-        Although it was demonstrated at Bell Labs by 1968, 
-        it could only supported a small team of developers,
-        and it became increasingly clear that Multics would not deliver on
-        its promise of being the nexus of an information utility:
+        Although Multics was working at Bell Labs by 1968, 
+        it could only support a small team of developers,
+        and as it became increasingly clear that the project would 
+        not deliver on its promise of supporting a
+        profitable information utility,
         AT&amp;T withdrew.<sup><a href="#references" title="Kernighan p 32">[2]</a></sup>
         Multics soldiered on:
         The first installation (1970)
         supported 35 simultaneous users, and one of its later installations
-        (General Motors) could support 200 users.<sup><a href="http://web.mit.edu/Saltzer/www/multics.html">[9]</a></sup>
+        (General Motors) could support 200.<sup><a href="http://web.mit.edu/Saltzer/www/multics.html">[9]</a></sup>
     </p>
 
     <h3>See Also:</h3>
@@ -227,40 +240,48 @@ last-updated: April, 2021
         In the wake of AT&amp;T's withdrawal from Multics, 
         operating systems researchers working at Bell Labs
         found themselves without a clear project.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[10]</a></sup>
-        They proposed many ideas, but none were accepted, and
-        no new machines were purchased.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[10]</a></sup>
+        Still reeling from Multics, management
+        refused to purchase any new computer equipment.
+        For the reasearchers of Bell Labs, this period was
+        frustrating, because their proposals,
+        "...were never clearly and finally turned down, but yet were certainly never accepted."<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[10]</a></sup>
+    </p>
+
+    <p>
         After finding a disused <a href="https://www.soemtron.org/pdp7.html">PDP-7</a>,
         Ken Thompson and Dennis Ritchie decided to rewrite
         <em><a href="https://en.wikipedia.org/wiki/Space_Travel_(video_game)">Space Travel</a></em> 
         for it.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[10]</a></sup>
-        Thompson then continued to work with the machine, implementing a
-        filesystem that he, Dennis Ritchie and Rudd Canaday had devised on
+        Afterwards, Ken Thompson continued to work with the machine, 
+        implementing a filesystem that he, Dennis Ritchie and 
+        Rudd Canaday had devised on
         paper.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[10]</a></sup>
     </p>
 
     <p>
         In mid-1969, Thompson realized that he was close to
         an operating system:  All he needed was an
-        assembler, a text editor, a shell and an <em>exec</em> system 
-        call.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[10]</a><a href="#references" title="Kernighan, p34">[2]</a></sup>
-        The <em>exec</em> call was "trivial", and the other three components were
-        done in one week 
+        assembler, a text editor, a shell and a system call to
+        launch programs.<sup><a href="#references" title="Kernighan, p34">[2]</a><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[10]</a></sup>
+        The system call was "trivial", and the other three 
+        components were done in one week 
         each.<sup><a href="#references" title="Kernighan, p34">[2]</a></sup>
     </p>
 
     <p>
-        By late 1969, the software was self-supporting, and
-        continued to be developed into a 
-        multi-user, time-sharing operating system, known 
-        as <em>Unix.</em>
+        By late 1969, the software was self-supporting, and it
+        quickly became the focus of the researchers;
+        it was developed into a multi-user, time-sharing operating 
+        system, called <em>Unix.</em>
         Whereas Multics required specialized mainframe
-        hardware, Unix made efficient use of an 
-        emerging line of minicomputers.
-        Its small size and simple construction
-        allowed virtually anyone to modify it to their needs.
+        hardware, Unix made use of an emerging line of minicomputers.
+        Whereas Multics was large, and offered many ways to
+        handle a given task, Unix was simple, and usually offered one.
     </p>
 
     <p>
+        Unix's small size and simple construction
+        allowed virtually anyone to modify it to their needs.
         The 4<sup>th</sup> Edition was rewritten in 
         the high-level programming language, C.<sup><a href="https://www.bell-labs.com/usr/dmr/www/chist.html">[11]</a></sup>
         By 1974, there were over fifty
@@ -330,8 +351,8 @@ last-updated: April, 2021
 
     <p>
         <strong>System Calls:</strong>
-        The set of operations that a kernel is willing to undertake
-        is defined by the system calls it supports.
+        The set of operations that an operating system is willing 
+        to undertake is defined by the system calls it supports.
         The Unix architecture is characterized by six essential system 
         calls:<sup><a href="#references">[14]</a></sup>
         <em>fork()</em>, <em>exec()</em>, <em>open()</em>, 
@@ -344,7 +365,8 @@ last-updated: April, 2021
     <p>
         <strong>Processes:</strong>
         A <em>process</em> is an executing program.
-        Within Unix-like operating systems, processes run the show:
+        Within the Unix family of operating systems, 
+        processes run the show:
         The kernel depends entirely on processes to tell it 
         what to do, and takes no action without explicit instruction by a process.
     </p>
@@ -449,7 +471,7 @@ last-updated: April, 2021
     <p>
         On August 25, 1991, a Finnish graduate student by the name of 
         Linus Torvalds announced his own operating system project.
-        Again following Unix architecture,
+        Again following the Unix architecture,
         his project was intended to be "...just a hobby, won't be big and
         professional like GNU."<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[23]</a></sup>
     </p>
@@ -727,8 +749,8 @@ last-updated: April, 2021
     <h3 id="desktop-distros">Some Other Popular Desktop-Oriented Distributions</h3>
     
     <ul>
-        <li><a href="https://getfedora.org/">Fedora</a></li>
-        <li><a href="https://www.opensuse.org/">openSUSE</a></li>
+        <li><a href="https://getfedora.org/">Fedora</a> - Independant</li>
+        <li><a href="https://www.opensuse.org/">openSUSE</a> - Independant</li>
         <li><a href="https://ubuntu.com/">Ubuntu</a> - Large Community</li>
         <li><a href="https://www.debian.org/">Debian</a></li>
         <li><a href="https://elementary.io/">elementary OS</a></li>
