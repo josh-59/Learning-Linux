@@ -1,10 +1,63 @@
 ---
 layout: default
 title: Processes
-last-updated: April, 2021
+last-updated: July, 2021
 ---
 
 <!--
+
+To Do: 
+    Rewrite!
+
+<div class="content" id="process-attributes">
+    <h2>Process Attributes</h2>
+
+    <p>
+        Much as with files, the kernel stores a number of attributes
+        for each process it is hosting; we will not exhaust them here.
+        The process's PID is one such piece of information; it cannot
+        be changed.
+    </p>
+
+    <p>
+        Each process has a current working directory. 
+        Relative filenames are resolved with respect to
+        this path, and a process may change it via the 
+        <em>chdir()</em> system call.
+        In effect, it reflects "where" in the filesystem heirarchy 
+        the process is currently located.  
+    </p>
+
+    <p>
+        Environment variables are <em>name=value</em> strings
+        that are stored on behalf of each process. 
+        The kernel does not interpret these variables directly,
+        but instead allows processes to set them, and allows
+        them to be retrieved.
+        They are preserved across both <em>fork()</em>
+        and <em>exec(),</em>
+        and we may view the shell's environment variables with 
+        the <code>printenv</code> command:
+    </p>
+
+    <div class="code">
+        $ printenv<br>
+        SHELL=/bin/bash<br>
+        COLORTERM=truecolor<br>
+        XDG_CONFIG_DIRS=/etc/xdg<br>
+        XDG_MENU_PREFIX=xfce-<br>
+        DESKTOP_SESSION=xfce<br>
+        EDITOR=nvim<br>
+    </div>
+
+    <p>
+        This scheme allows a single process to set such a variable,
+        and by-default propogate its value to all of the process's descendants.
+        A good example of their use is <code>LANG</code>,
+        which stipulates the current locale, including preferred language.
+    <p>
+</div>
+
 
 Directory Tree...
 
@@ -41,6 +94,7 @@ shared, persistent data structure.
         <li><a href="#exec">Executing a Different Program</a></li>
         <li><a href="#file-descriptors"> File Descriptors </a></li>
         <li><a href="#termination">Process Termination</a></li>
+        <li><a href="#process-attributes">Process Attributes</a></li>
         <li><a href="#what-is">Ya But What Is It?</a></li>
         <li><a href="#dr-fraser"> Dr. Brian Fraser </a></li>
         <li><a href="#references"> References </a></li>
@@ -99,7 +153,7 @@ shared, persistent data structure.
         expected to do well. It might copy a file, 
         display a window, provide audio services, or display the time.
         These many small programs are used together to accomplish
-        a given task; thereby, the utility of each becomes compounded.
+        a given task; thereby, the utility of each is compounded.
     </p>
 
     <h3> Process Attributes </h3>
@@ -275,6 +329,15 @@ shared, persistent data structure.
 <div class="content" id="exec">
     <h2>Executing a Different Program</h2>
 
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            <em>execvp()</em>, for example,  
+            searches the PATH environment variable for 
+            a particular file.
+        </p>
+    </div>
+
     <p>
         The <em>exec()</em> family of functions change the program
         currently being executed.  
@@ -284,8 +347,7 @@ shared, persistent data structure.
         it, each with slightly different conveniences.<sup><a href="https://pubs.opengroup.org/onlinepubs/009695399/functions/exec.html">[4]</a></sup>
         Under the hood, they each map to  
         a call to <em>execve()</em>.<sup><a href="https://man7.org/linux/man-pages/man3/exec.3.html">[5]</a></sup>
-        They are collectively referred to as <em>exec()</em> 
-        because, used properly, they have the same meaning.
+        They are collectively referred to as <em>exec().</em> 
     </p>
 
     <p>
@@ -299,20 +361,11 @@ shared, persistent data structure.
                 // and the process continues executing at /usr/bin/ls
     </pre>
 
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            <em>execvp()</em>, for example,  
-            searches the PATH environment variable for 
-            a particular file.
-        </p>
-    </div>
-
     <p>
-        "The <em>execve()</em> system call loads a new program into
+        The <em>execve()</em> system call loads a new program into
         a process's memory.  
-        During this operation, the old program
-        is discarded, and the process's"
+        During this operation, the old program and its
+        memory&mdash; that is, its state&mdash; is discarded.
     </p>
 
     <p>
@@ -332,7 +385,8 @@ shared, persistent data structure.
     </pre>
 
     <p>
-        This sequence results in one process launching another program.
+        This sequence results in one process launching another program,
+        and is traditionally referred to as <em>fork and exec.</em>
         Note that there is no need to adjust other 
         process attributes, and they are preserved across
         <em>exec()</em>.
@@ -350,7 +404,7 @@ shared, persistent data structure.
 
     <p>
         Within a process, each file that the process has open is associated
-        with a number&mdash; specifically, a nonnegative integer.
+        with a small nonegative integer.
         This number is called a <em>file descriptor</em>,
         and is returned by the kernel in response to a request to open a file.
         Thereafter, the process uses the number to refer to the 
@@ -359,8 +413,9 @@ shared, persistent data structure.
 
     <p>
         In the following line, a process is instructing the kernel to
-        open the file <em>rubber_ducky</em> for reading, and
-        is storing the kernel's response in the variable <em>fd</em>:
+        open the file <em>rubber_ducky</em> for reading. 
+        The process is storing the kernel's response in the 
+        variable <em>fd:</em>
     </p>
 
     <pre>
@@ -386,7 +441,7 @@ shared, persistent data structure.
     </p>
 
     <p>
-        In the following line, the kernel is instructed to read at-most 
+        In the following line, the kernel is directed to read at-most 
         <em>buff_size</em> bytes from <em>fd</em>,
         and place the data into the memory denoted by <em>buff:</em>
     </p>
