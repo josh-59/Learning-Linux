@@ -1,75 +1,109 @@
 ---
 layout: default
 title: Introduction to GNU/Linux
-last-updated: April, 2021
+last-updated: July, 2021
 ---
 
 <!--
-    To do:
-
-    Rewrite first two paragraphs of 'UNIX'
-
-
-        <li><a href="https://archive.org/details/sim_unix-review_1986-10_4_10/page/31/mode/1up">The UNIX Success Story</a> by Douglas McIlroy</a></li>
-
-    Open Source: 
-    Note Netscape's decision to open-source its browser.
-    What motivated them? Why?  Was the corporate structure largely
-    retained?
-    Netscape's open-sourcing of its browser was a windfall...
-
-    Unix Wars?:
-        Documentation and study by college students
-        BSD/Unix...
-        POSIX Specification
-
-    <h3>Suggested Reading</h3>
-
-    <div class="img-right">
-        <a href="https://www.cs.princeton.edu/~bwk/memoir.html">
-            <img src="./assets/img/memoircover.png" 
-            style="height:150px; outline: solid; outline-width: 2px;">
-        </a>
-
-    </div>
+    Unix:
 
     <p>
-        <em><a href="https://www.cs.princeton.edu/~bwk/memoir.html">Unix: A History and a Memoir</a></em> by Brian Kernighan.
-        Like all of Kernighan's works, this one is imminently
-        readable, and does not presuppose familiarity with Unix. 
-        Early chapters recount Bell Labs, its culture
-        and climate, and the circumstances around the birth of Unix.
-        The second half chronicles development of production versions
-        of Unix, inclusion of features, development of
-        tools that now constitute the standard Unix environment, and its
-        eventual departure from Bell Labs.
-        Scattered throughout are biographies of major figures of Unix's
-        development.
+        By offering to support text formatting and processing for the
+        purpose of patent applications within the laboratory,
+        the team acquired a then-new PDP-11.
+        They supported a sequence of versions of Unix and
+        an accompanying online manual, while they themselves worked on 
+        "Reaseach Unix." 
     </p>
 
 
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            The first complete <em>PL/I</em> compiler was available in 1969,
-            four years after the project began; it took a team of 
-            six GE engineers 18 months to produce.<sup><a href="https://multicians.org/features.html">[6]</a><a href="https://multicians.org/pl1.html#v1pl1">[7]</a></sup>
-        </p>
-    </div>
+<div class="content" id=unix-wars">
+    <h2>Unix Wars</h2>
+
+    <p>
+        In ____ Ken Thompson and Dennis Ritchie published the first
+        paper about their work, 
+        <em>The Unix Time-Sharing Operating System.</em>
+        Owing to anti-monopoly legislation, AT&amp;T was forbidden
+        from profitting from the software, and
+        from 19__ to 19__ the latest version of Unix was available for
+        the cost of media.
+    </p>
+
+    <p>
+        The work was of interest, especially, to academics, 
+        who, for the first time, could afford to purchase a 
+        computer&mdash; by department.
+        ...first DEC's PDP-11, then their VAX-11
+        ...was documented by professors and studied by college students,
+        as an exemplar operating system.
+    </p>
+
+    <p>
+        In ____ Ken Thompson took a sabatical from Bell Laboraties to
+        teach at the University of California Berkley.
+        His first task, of course, was installing Unix on 
+        their  PDP-Something Something.
+        Ken Thompson taught for two years, four semesters, and 
+        recounted the experience as being intriguing only for the first
+        two semesters.
+    </p>
+
+    <p>
+        Nonetheless, the time was sufficient to get a fork of UNIX
+        off the ground.
+        Known as the <em>Berkley Software Distribution,</em>
+        it began at Unix source and diverged upon the
+        efforts of professors and students alike.
+        Improvements were welcome from any source, and this
+        project marked the first time that the production of software
+        was open and distributed.
+        The result became, in subtle ways, more novel and higher-performing
+        than the original.
+    </p>
+
+    <p>
+        BSD marked the first of many Unix clones; 
+        Commercial Proliferation 
+    </p>
+
+    <p>
+        The Unix&copy; Operating System
+    </p>
+
+    <p>
+        Standardization?
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://people.eecs.berkeley.edu/~brewer/cs262/unix.pdf">The UNIX Time-Sharing Operating System</a> By Dennis M. Ritchie and Ken Thompson</li>
+    </ul>
+</div>
 
 
+    GNU:
+        In the heyday of time-sharing operating system,
+        the culture that formed around them was naturally communal.
 
+    Open Source: 
+        Note Netscape's decision to open-source its browser.
+        What motivated them? Why?  Was the corporate structure largely
+        retained?
+        Netscape's open-sourcing of its browser was a windfall...
+
+        ...A kind of free culture...
 -->
 
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
-        <li><a href="#history"> History </a></li>
+        <li><a href="#history"> History: Time Sharing </a></li>
         <li><a href="#unix">Unix</a></li>
         <li><a href="#unix-architecture"> The UNIX Architecture </a></li>
         <li><a href="#gnu">GNU's Not Unix</a></li>
         <li><a href="#linux"> The Linux Kernel </a></li>
-        <li><a href="#distributions"> Linux Distributions</a></li>
+        <li><a href="#distributions"> Linux Distributions: Early History</a></li>
         <li><a href="#mint"> Linux Mint </a></li>
         <li><a href="#open-source">Open Source</a></li>
         <li><a href="#video">Greg Kroah-Hartman </a></li>
@@ -222,9 +256,10 @@ last-updated: April, 2021
         profitable information utility,
         AT&amp;T withdrew.<sup><a href="#references" title="Kernighan p 32">[2]</a></sup>
         Multics soldiered on:
-        The first installation (1970)
-        supported 35 simultaneous users, and one of its later installations
-        (General Motors) could support 200.<sup><a href="http://web.mit.edu/Saltzer/www/multics.html">[9]</a></sup>
+        In 1970, the first installation was complete, at MIT's AI Laboratories.
+        It could support 35 simultaneous users. 
+        One of its later installations, General Motors, could support 
+        200.<sup><a href="http://web.mit.edu/Saltzer/www/multics.html">[9]</a></sup>
     </p>
 
     <h3>See Also:</h3>
@@ -242,8 +277,8 @@ last-updated: April, 2021
         found themselves without a clear project.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[10]</a></sup>
         Still reeling from Multics, management
         refused to purchase any new computer equipment.
-        For the reasearchers of Bell Labs, this period was
-        frustrating, because their proposals,
+        For the reasearchers of Bell Labs, this period might be described
+        as frustrating: Their proposals,
         "...were never clearly and finally turned down, but yet were certainly never accepted."<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[10]</a></sup>
     </p>
 
@@ -261,9 +296,9 @@ last-updated: April, 2021
     <p>
         In mid-1969, Thompson realized that he was close to
         an operating system:  All he needed was an
-        assembler, a text editor, a shell and a means to
+        assembler, a text editor, a shell and a system call to
         launch programs.<sup><a href="#references" title="Kernighan, p34">[2]</a><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[10]</a></sup>
-        Launching programs was "trivial", and the other three 
+        The system call was "trivial", and the other three 
         components were done in one week 
         each.<sup><a href="#references" title="Kernighan, p34">[2]</a></sup>
     </p>
@@ -280,13 +315,11 @@ last-updated: April, 2021
     </p>
 
     <p>
-        Unix's small size and simple construction
-        allowed virtually anyone to modify it to their needs.
         The 4<sup>th</sup> Edition was rewritten in 
         the high-level programming language, C.<sup><a href="https://www.bell-labs.com/usr/dmr/www/chist.html">[11]</a></sup>
         By 1974, there were over fifty
         installations, with "...many more expected."<sup><a href="https://www.tuhs.org/Archive/Distributions/Research/Dennis_v5/v5man.pdf">[12]</a></sup>
-        The first fork, <em>BSD,</em> was produced at 
+        The first fork, <em>BSD,</em> was produced at the
         University of California, Berkley, in 1977.<sup><a href="https://forums.freebsd.org/threads/history-of-freebsd-part-1-unix-and-bsd.77407/">[13]</a></sup>
     </p>
 
@@ -306,6 +339,7 @@ last-updated: April, 2021
 
     <h3>See Also:</h3>
     <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Ken_Thompson">Ken Thompson</a> - Wikipedia</li>
         <li><a href="https://www.cs.princeton.edu/~bwk/">UNIX: A History and Memoir</a> by Brian Kernighan</a></li>
     </ul>
 </div>
@@ -375,7 +409,6 @@ last-updated: April, 2021
     <ul>
         <li><a href="http://www.linfo.org/kernel.html">Kernel Definition</a> by The Linux Information Project (LINFO)</a></li>
     </ul>
-        
 </div>
 
 <div class="content" id="gnu">
@@ -561,8 +594,8 @@ last-updated: April, 2021
 </div>
 
 <div id="distributions" class="content">
-    <h2 style="margin-bottom: 0;"> Linux Distributions</h2>
-    <h4> and Early History </h4>
+    <h2 style="margin-bottom: 0;">Linux Distributions:</h2>
+    <h4> Early History </h4>
 
     <p>
         The Linux kernel is made available by its developers in source-code
