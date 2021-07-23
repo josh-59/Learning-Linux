@@ -7,57 +7,6 @@ last-updated: July, 2021
 <!--
 
 To Do: 
-    Rewrite!
-
-<div class="content" id="process-attributes">
-    remove id="process-attributes' from h3 above...
-    <h2>Process Attributes</h2>
-
-    <p>
-        Much as with files, the kernel stores a number of attributes
-        for each process it is hosting; we will not exhaust them here.
-        The process's PID is one such piece of information; it cannot
-        be changed.
-    </p>
-
-    <p>
-        Each process has a current working directory. 
-        Relative filenames are resolved with respect to
-        this path, and a process may change it via the 
-        <em>chdir()</em> system call.
-        In effect, it reflects "where" in the filesystem heirarchy 
-        the process is currently located.  
-    </p>
-
-    <p>
-        Environment variables are <em>name=value</em> strings
-        that are stored on behalf of each process. 
-        The kernel does not interpret these variables directly,
-        but instead allows processes to set them, and allows
-        them to be retrieved.
-        They are preserved across both <em>fork()</em>
-        and <em>exec(),</em>
-        and we may view the shell's environment variables with 
-        the <code>printenv</code> command:
-    </p>
-
-    <div class="code">
-        $ printenv<br>
-        SHELL=/bin/bash<br>
-        COLORTERM=truecolor<br>
-        XDG_CONFIG_DIRS=/etc/xdg<br>
-        XDG_MENU_PREFIX=xfce-<br>
-        DESKTOP_SESSION=xfce<br>
-        EDITOR=nvim<br>
-    </div>
-
-    <p>
-        This scheme allows a single process to set such a variable,
-        and by-default propogate its value to all of the process's descendants.
-        A good example of their use is <code>LANG</code>,
-        which stipulates the current locale, including preferred language.
-    <p>
-</div>
 
 
 Directory Tree...
@@ -95,6 +44,7 @@ shared, persistent data structure.
         <li><a href="#exec">Executing a Different Program</a></li>
         <li><a href="#file-descriptors"> File Descriptors </a></li>
         <li><a href="#termination">Process Termination</a></li>
+        <li><a href="#attributes">Process Attributes</a></li>
         <li><a href="#what-is">Ya But What Is It?</a></li>
         <li><a href="#dr-fraser"> Dr. Brian Fraser </a></li>
         <li><a href="#references"> References </a></li>
@@ -125,6 +75,16 @@ shared, persistent data structure.
 <div class="content" id="actors">
     <h2> Actors </h2>
 
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            There is a close relationship between a <em>program</em> and a
+            <em>process</em>&mdash; Namely, a program is a file containing
+            the instructions that the process carries out.
+        </p>
+    </div>
+
+
     <p>
         In Unix and its derivatives, processes are the actors of the system:
         Left to its own devices, the kernel does nothing.
@@ -144,7 +104,7 @@ shared, persistent data structure.
             Creating new processes
         </li>
         <li>
-            Maintaining information about each
+            Maintaining information about each, including
         </li>
     </ol>
 
@@ -156,72 +116,53 @@ shared, persistent data structure.
         a given task; thereby, the utility of each is compounded.
     </p>
 
-    <h3 id="process-attributes"> Process Attributes </h3>
-
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            There is a close relationship between a <em>program</em> and a
-            <em>process</em>&mdash; Namely, a program is a file containing
-            the instructions that the process carries out.
-        </p>
-    </div>
-
-    <p>
-        Associated with each process are the following attributes:
-    </p>
-
-    <ul>
-        <li>Pathname of executable file</li>
-        <li>Files currently open</li>
-        <ul>
-            <li>Their access modes (read, write)</li>
-            <li>Location wihin file</li>
-        </ul>
-        <li>Current working directory</li>
-        <li>User ID, Group Id</li>
-        <li>Environment variables</li>
-    </ul>
-
-    <p>
-        You can think of each process as acting on behalf of some user,
-        and that it is executing with that user's <em>permissions.</em>
-        For example, a process executing as user <em>josh</em> is
-        executing with <em>josh's permission.</em>
-        A process is by-default allowed to manipulate files owned by the user
-        it is acting as:
-        It can remove owned files, 
-        change owned files' permission bits, etc..
-        Files created by a process inherit its associated user.
-    </p>
+    <h3 id="priveledges"> Priveledges </h3>
 
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            File ownership restrictions are enforced by the kernel.
+            Each process has an associated group, as well.
+            Formally, these are referred to as <em>credentials.</em>
         </p>
     </div>
-   
+
+    <p>
+        Each process is associated with some user, and we say that 
+        it is executing with that user's <em>permissions.</em>
+        A process is, by default, allowed to manipulate files owned by 
+        its associated user, and 
+        files created by a process inherit its associated user.
+    </p>
+
     <p>
         Processes acting as user 
         <em><a href="http://www.linfo.org/root.html">root</a></em> 
         are special:
         They can change any file on the system, without qualification.
-        That is, they by default transcend the file ownership scheme;
-        we therefore use <em>superuser</em> synonymously with root user,
+        That is, they by-default transcend the file ownership scheme;
+        we therefore use "superuser" synonymously with "root user",
         and say that a process executing as root is executing with
         <em>superuser permissions.</em>
     </p>
-
+      
     <p>
-        In practice, <em>root</em> is the adminstrative user.
-        It can, for example, format a physical device and make it 
-        available for system-wide use.
-        Superuser priveledges are typically acquired
+        File ownership restrictions are enforced by the kernel, and
+        in practice, <em>root</em> is the adminstrative user.
+        A typical use of superuser priveledges is to 
+        format a physical device to prepare it for system-wide
+        use.
+        Superuser priveledges are usually acquired
         through <code>sudo</code>.
     </p>
 
+    <p>
+        Much like with files, the kernel maintains a large volume of
+        information about each process on the machine.
+        The user is part of a larger collection referred to as
+        <em>credentials,</em> which also includes group.<sup><a href="https://man7.org/tlpi/">[1]</a></sup>
+        Finally, the kernel gives each process a unique identification number
+        upon birth, known as its <code>PID</code>.
+    </p>
     
     <h3> See Also: </h3>
     <ul>
@@ -242,7 +183,7 @@ shared, persistent data structure.
         While init schemes
         <a href="https://arxiv.org/abs/0706.2748">have evolved</a>
         over the years, its purpose has not changed:
-        It is a process with superroot permissions that acts as a
+        It is a process with superuser permissions that acts as a
         manager of the system and trustee among processes.
     </p>
 
@@ -264,18 +205,16 @@ shared, persistent data structure.
     <p>
         <code>init</code>'s first responsibility is to bring up userspace.
         It does this by launching a sequence of programs, most of which
-        are daemons, some of which the user interacts with directly.
-        After this, it operates in the background, managing services,
-        restarting them if they falter, and logging events for administrative
-        purposes.
+        act in the background, some of which the user interacts with directly.
+        After this, <em>init</em> is tasked with managing services
+        and logging events for administrative purposes.
         Its final responsibility is to shut the system down cleanly.
     </p>
 
     <p>
         After executing <code>/sbin/init</code>, process creation 
         is delegated to processes themselves, and is carried 
-        out through the 
-        <em>fork()</em> system call.
+        out through the <em>fork()</em> system call.
     </p>
 
     <p>
@@ -290,14 +229,11 @@ shared, persistent data structure.
     </p>
 
     <p>
-        Parent and child differ in a few ways.
-        First, upon birth, each process is given its own 
-        identification number by the kernel. 
-        This is guaranteed to be unique to the process, and 
-        remains constant throughout the process's life; 
-        it serves as a system-wide handle to the process.
+        Parent and child do differ in a few ways.
+        First, upon birth, each process is given its own (unique)
+        identification number by the kernel.
         Second, they each recieve a different return value 
-        from <em>fork()</em>.
+        from the <em>fork()</em> system call.
         This allows them to act differently within the same
         program:
     </p>
@@ -541,6 +477,63 @@ shared, persistent data structure.
     </ul>
 </div>
 
+
+<div class="content" id="attributes">
+    <h2>Process Attributes</h2>
+
+    <p>
+        Much as with files, the kernel stores a number of attributes
+        for each process it is hosting; we will not exhaust them here.
+        The process's PID is one such piece of information; it cannot
+        be changed.
+    </p>
+
+    <p>
+        Each process has a current working directory. 
+        Relative filenames are resolved with respect to
+        this path, and a process may change it via the 
+        <em>chdir()</em> system call.
+        In effect, it reflects "where" in the filesystem heirarchy 
+        the process is located.  
+    </p>
+
+    <p>
+        Environment variables are <em>name=value</em> strings
+        that are stored on behalf of each process. 
+        The kernel does not interpret these variables directly,
+        but instead allows processes to set them, and allows
+        them to be retrieved later.
+        They are preserved across both <em>fork()</em>
+        and <em>exec().</em>
+    </p>
+
+    <p>
+        Environment variables allow a single process to communicate with
+        all of its descendants.
+        A good example of their use is <code>LANG</code>,
+        which stipulates the current locale, including preferred language.
+        We may view the shell's environment variables with 
+        the <code>printenv</code> command:
+    </p>
+
+    <div class="code">
+        $ printenv<br>
+        SHELL=/bin/bash<br>
+        COLORTERM=truecolor<br>
+        XDG_CONFIG_DIRS=/etc/xdg<br>
+        XDG_MENU_PREFIX=xfce-<br>
+        DESKTOP_SESSION=xfce<br>
+        EDITOR=nvim<br>
+        [...]
+    </div>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Environment_variable#True_environment_variables">Environment Variables</a> - Wikipedia</li>
+    </ul>
+</div>
+
+
 <div class="content" id="what-is">
     <h2>Ya But What Is It?</h2>
 
@@ -641,6 +634,8 @@ shared, persistent data structure.
     <h3>See Also:</h3>
     <ul>
         <li><a href="https://pages.cs.wisc.edu/~remzi/OSTEP/">Operating Systems: Three Easy Pieces</a> by Remzi H. Arpaci-Dusseau and Andrea C. Arpaci-Dusseau </li>
+        <li><a href="https://man7.org/tlpi/">The Linux Programming Interface</a> by Michael Kerrisk</li>
+        <li><a href="https://csapp.cs.cmu.edu/">Computer Systems: A Programmer's Perspective</a> by Randal E. Bryant and David R. O'Hallaron</li>
     </ul>
 
 </div>
