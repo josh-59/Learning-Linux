@@ -1,7 +1,7 @@
 Learning Linux:
 ===============
 
-A Formal Introduction to Linux
+An Introduction to GNU/Linux
 
 Available at [https://josh-59.github.io/Learning-Linux/](https://josh-59.github.io/Learning-Linux/).
 
@@ -14,7 +14,8 @@ Landing:
 - [X] About
 
 Intro:
-- [X] UNIX: A Brief History
+- [X] Multics
+- [X] Unix
 - [X] The UNIX Architecture
 - [X] GNU's Not Unix
 - [X] The Linux Kernel
