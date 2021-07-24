@@ -7,15 +7,6 @@ last-updated: July, 2021
 <!--
     Unix:
 
-    <p>
-        By offering to support text formatting and processing for the
-        purpose of patent applications within the laboratory,
-        the team acquired a then-new PDP-11.
-        They supported a sequence of versions of Unix and
-        an accompanying online manual, while they themselves worked on 
-        "Research Unix." 
-    </p>
-
     GNU:
         In the heyday of time-sharing operating system,
         the culture that formed around them was naturally communal.
@@ -80,20 +71,12 @@ last-updated: July, 2021
         To understand Unix and the origins of GNU/Linux, we have
         to step back in time, to the 1960's, when the computer industry
         was just beginning.
-        At the time, computers were immense &mdash;
+        Computer then were immense&mdash;
         and largely uncontrolled&mdash; machines, either
         processing data and instructions from punched cards in
         discrete sessions called <em><a href="https://en.wikipedia.org/wiki/Batch_processing">batches</a>,</em>
-        or supporting single privileged users for interactive sessions.<sup><a href="https://multicians.org/project-mac.html">[1]</a></sup>
+        or supporting a single user for an interactive session.<sup><a href="https://multicians.org/project-mac.html">[1]</a></sup>
     </p>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            "Time-sharing" is the strategy used today to run more than
-            one program at a time.
-        </p>
-    </div>
 
     <p>
         Next-generation computers were interactive,
@@ -102,8 +85,8 @@ last-updated: July, 2021
         In 1960, an operating system was devised to "steal" time 
         from batch jobs on behalf of interactive users, and thereby
         support both interactive and batch computing simultaneously.<sup><a href="https://multicians.org/project-mac.html">[1]</a></sup>
-        In 1961, a purely time-sharing operating system 
-        that could support four interactive sessions simultaneously
+        In 1961, a purely time-sharing operating system&mdash;
+        which could support four users simultaneously&mdash;
         was demonstrated.<sup><a href="https://multicians.org/project-mac.html">[1]</a></sup>
     </p>
 
@@ -121,7 +104,7 @@ last-updated: July, 2021
     <ol>
         <li>Creating the necessary infrastructure to distribute the service</li>
         <li>The procurement of capable computer hardware</li>
-        <li>Allotting controlled and useful computation to individual customers</li>
+        <li>Allotting useful and controlled computation to individual customers</li>
     </ol>
 
     <p>
@@ -162,8 +145,9 @@ last-updated: July, 2021
     <p>
         To support the controlled execution of customers' software, 
         for example,
-        it relied on the <em>process,</em> a virtualized environment
-        within which software could safely execute.<sup><a href="https://multicians.org/exec-env.html">[5]</a></sup>  
+        it relied on the <em>process,</em> a virtual environment
+        within which software could safely be 
+        executed.<sup><a href="https://multicians.org/exec-env.html">[5]</a></sup>  
         To support multiple users, multiple processes
         were supported simultaneously.<sup><a href="https://multicians.org/exec-env.html">[6]</a></sup>
         To manage these, a "supervisor" program was introduced.
@@ -183,16 +167,16 @@ last-updated: July, 2021
     </p>
 
     <p>
-        Although Multics was working at Bell Labs by 1968, 
+        Although Multics was working by 1968, 
         it could only support a small team of developers,
         and as it became increasingly clear that the project would 
         not deliver on its promise of supporting a
         profitable information utility,
         AT&amp;T withdrew.<sup><a href="#references" title="Kernighan p 32">[2]</a></sup>
         Multics soldiered on:
-        In 1970, the first installation was complete, at MIT's AI Laboratories.
-        It could support 35 simultaneous users. 
-        One of its later installations, General Motors, could support 
+        1970 saw its first installation, which could support 
+        35 simultaneous users. 
+        One of its later installations (General Motors) could support 
         200.<sup><a href="http://web.mit.edu/Saltzer/www/multics.html">[9]</a></sup>
     </p>
 
@@ -209,9 +193,9 @@ last-updated: July, 2021
         In the wake of AT&amp;T's withdrawal from Multics, 
         operating systems researchers working at Bell Labs
         found themselves without a clear project.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[10]</a></sup>
-        Still reeling from Multics, management
+        Still reeling from the disaster of Multics, management
         refused to purchase any new computer equipment.
-        For the reasearchers of Bell Labs, this period might be described
+        For the researchers of Bell Labs, this period might be described
         as frustrating: Their proposals,
         "...were never clearly and finally turned down, but yet were certainly never accepted."<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[10]</a></sup>
     </p>
@@ -238,25 +222,14 @@ last-updated: July, 2021
     </p>
 
     <p>
-        By late 1969, the software was self-supporting, and it
-        quickly became the focus of the researchers.
-        It was developed into a multi-user, time-sharing operating 
+        By late 1969, the software was self-supporting, and 
+        was quickly developed into a multi-user, time-sharing operating
         system, called <em>Unix.</em>
         Whereas Multics required specialized mainframe
         hardware, Unix made use of an emerging line of minicomputers.
         Whereas Multics was large, and offered many ways to
         handle a given task, Unix was simple, and usually offered one.
     </p>
-
-    <p>
-        The 4<sup>th</sup> Edition was rewritten in 
-        the high-level programming language, C.<sup><a href="https://www.bell-labs.com/usr/dmr/www/chist.html">[11]</a></sup>
-        By 1974, there were over fifty
-        installations, with "...many more expected."<sup><a href="https://www.tuhs.org/Archive/Distributions/Research/Dennis_v5/v5man.pdf">[12]</a></sup>
-        The first fork, <em>BSD,</em> was produced at the
-        University of California, Berkley, in 1977.<sup><a href="https://forums.freebsd.org/threads/history-of-freebsd-part-1-unix-and-bsd.77407/">[13]</a></sup>
-    </p>
-
     <p>
         About his colleague's early work, Dennis Ritchie would later write,
     </p>
@@ -270,6 +243,20 @@ last-updated: July, 2021
         command interpreter as user-level program, simple representation of
         text files, and generalized access to devices."<sup><a href="https://www.bell-labs.com/usr/dmr/www/chist.html">[11]</a></sup>
     </blockquote>
+
+    <p>
+        By offering text processing services for the
+        purposes of patent applications within the laboratory,
+        the team acquired a new PDP-11.<sup><a href="#references" title="Kernighan">[2]</a></sup>
+        They supported a sequence of versions of the software and
+        an accompanying online manual, while they themselves worked on 
+        "Research Unix."<sup><a href="#references" title="Kernighan">[2]</a></sup> 
+        By 1974, there were over fifty
+        installations, with "...many more expected."<sup><a href="https://www.tuhs.org/Archive/Distributions/Research/Dennis_v5/v5man.pdf">[12]</a></sup>
+        The first fork, <em>BSD,</em> was produced at the
+        University of California, Berkeley, in 1977.<sup><a href="https://forums.freebsd.org/threads/history-of-freebsd-part-1-unix-and-bsd.77407/">[13]</a></sup>
+    </p>
+
 
     <h3>See Also:</h3>
     <ul>
@@ -285,7 +272,7 @@ last-updated: July, 2021
         inspired <a href="https://en.wikipedia.org/wiki/Category:Unix_variants">many</a> operating systems.
         It is organized as a hierarchy of layers,
         with each layer building upon the ones beneath it, and supporting
-        those above it.
+        those above it:
     </p>
 
     <img src="assets/img/linux-architecture.png" style="height: 400px;">
