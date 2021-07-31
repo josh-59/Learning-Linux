@@ -76,7 +76,7 @@ shared, persistent data structure.
     <h2> Actors </h2>
 
     <div class="aside-right">
-        <h4>Aside:</h4>
+        <h4>Note:</h4>
         <p>
             There is a close relationship between a <em>program</em> and a
             <em>process</em>&mdash; Namely, a program is a file containing
@@ -98,13 +98,13 @@ shared, persistent data structure.
 
     <ol>
         <li>
-            Allocating hardware resources to processes
-        </li>
-        <li>
             Creating new processes
         </li>
         <li>
-            Maintaining information about each, including
+            Allocating hardware resources to processes
+        </li>
+        <li>
+            Maintaining information about each
         </li>
     </ol>
 
@@ -116,20 +116,21 @@ shared, persistent data structure.
         a given task; thereby, the utility of each is compounded.
     </p>
 
-    <h3 id="priveledges"> Priveledges </h3>
+    <p>
+        A given user may have more than one process acting on
+        their behalf at a time, and there can easily be hundreds
+        of processes on the system at a time.
+        Much like with files, the kernel maintains a large volume of
+        information about each process on the machine.
+        We'll cover the most relevant of this information in turn.
+    </p>
 
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Each process has an associated group, as well.
-            Formally, these are referred to as <em>credentials.</em>
-        </p>
-    </div>
+    <h3 id="priveledges"> Interacting with Files: Process Permissions</h3>
 
     <p>
-        Each process is associated with some user, and we say that 
+        Every process is associated with some user, and we say that 
         it is executing with that user's <em>permissions.</em>
-        A process is, by default, allowed to manipulate files owned by 
+        A process can freely manipulate files owned by 
         its associated user, and 
         files created by a process inherit its associated user.
     </p>
@@ -139,29 +140,18 @@ shared, persistent data structure.
         <em><a href="http://www.linfo.org/root.html">root</a></em> 
         are special:
         They can change any file on the system, without qualification.
-        That is, they by-default transcend the file ownership scheme;
-        we therefore use "superuser" synonymously with "root user",
-        and say that a process executing as root is executing with
-        <em>superuser permissions.</em>
+        That is, they they by-default transcend the file 
+        ownership scheme, and we often use 
+        <em>superuser</em> to describe this user.
     </p>
       
     <p>
-        File ownership restrictions are enforced by the kernel, and
-        in practice, <em>root</em> is the adminstrative user.
-        A typical use of superuser priveledges is to 
+        In practice, root is the administrative user.
+        A typical use of superuser privileges is to 
         format a physical device to prepare it for system-wide
         use.
-        Superuser priveledges are usually acquired
+        Superuser privileges are typically acquired
         through <code>sudo</code>.
-    </p>
-
-    <p>
-        Much like with files, the kernel maintains a large volume of
-        information about each process on the machine.
-        The user is part of a larger collection referred to as
-        <em>credentials,</em> which also includes group.<sup><a href="https://man7.org/tlpi/">[1]</a></sup>
-        Finally, the kernel gives each process a unique identification number
-        upon birth, known as its <code>PID</code>.
     </p>
     
     <h3> See Also: </h3>
@@ -206,14 +196,14 @@ shared, persistent data structure.
         <code>init</code>'s first responsibility is to bring up userspace.
         It does this by launching a sequence of programs, most of which
         act in the background, some of which the user interacts with directly.
-        After this, <em>init</em> is tasked with managing services
+        After this, <em>init</em> is tasked with managing available services
         and logging events for administrative purposes.
         Its final responsibility is to shut the system down cleanly.
     </p>
 
     <p>
-        After executing <code>/sbin/init</code>, process creation 
-        is delegated to processes themselves, and is carried 
+        After the execution of <code>/sbin/init</code>, process creation 
+        is initiated by processes themselves, and is carried 
         out through the <em>fork()</em> system call.
     </p>
 
@@ -232,12 +222,11 @@ shared, persistent data structure.
         Parent and child do differ in a few ways.
         First, upon birth, each process is given its own (unique)
         identification number by the kernel.
-        Second, they each recieve a different return value 
+        Second, they each receive a different return value 
         from the <em>fork()</em> system call.
         This allows them to act differently within the same
         program:
     </p>
-
 
     <pre>
         pid_t rv = fork();      // One process executes this line
@@ -279,11 +268,12 @@ shared, persistent data structure.
         currently being executed.  
         Properly speaking, there is only one <em>exec()</em> system
         call, and that is <a href="https://man7.org/linux/man-pages/man2/execve.2.html"><em>execve()</em></a>.
-        POSIX-conforming C libraries offer six variants of
+        Modern C libraries offer several variants of
         it, each with slightly different conveniences.<sup><a href="https://pubs.opengroup.org/onlinepubs/009695399/functions/exec.html">[4]</a></sup>
         Under the hood, they each map to  
         a call to <em>execve()</em>.<sup><a href="https://man7.org/linux/man-pages/man3/exec.3.html">[5]</a></sup>
-        They are collectively referred to as <em>exec().</em> 
+        They, along with <em>execve()</em>, are collectively referred 
+        to as <em>exec().</em> 
     </p>
 
     <p>
@@ -299,9 +289,9 @@ shared, persistent data structure.
 
     <p>
         The <em>execve()</em> system call loads a new program into
-        a process's memory.  
+        the calling process's memory.
         During this operation, the old program and its
-        memory&mdash; that is, its state&mdash; is discarded.
+        memory&mdash; that is, its state&mdash; are discarded.
     </p>
 
     <p>
@@ -326,7 +316,7 @@ shared, persistent data structure.
         Note that there is no need to adjust other 
         process attributes, and they are preserved across
         <em>exec()</em>.
-        In particular, the PID of the process is left unchanged.
+        In particular, the PID of the calling process is left unchanged.
     </p>
 
     <h3>See Also:</h3>
@@ -342,7 +332,8 @@ shared, persistent data structure.
         Within a process, each file that the process has open is associated
         with a small nonegative integer.
         This number is called a <em>file descriptor</em>,
-        and is returned by the kernel in response to a request to open a file.
+        and is returned by the kernel in response to a request to open 
+        some file.
         Thereafter, the process uses the number to refer to the 
         file whenever it wishes to act on it.
     </p>
@@ -403,7 +394,7 @@ shared, persistent data structure.
     <h3>See Also:</h3>
     <ul>
         <li><code><a href="https://man7.org/linux/man-pages/man2/read.2.html">read(2)</a></code> - Read from a file descriptor</li>
-        <li><a href="http://www.linfo.org/unix_philosophy.html">UNIX Philosophy Description</a> by The Linux Information Project (LINFO)</li>
+        <li><a href="./assets/checks.c">checks.c</a> - Compileable, runnable checks of the code snippets in this chapter</li>
     </ul>
 </div>
 
@@ -421,9 +412,9 @@ shared, persistent data structure.
                 This is the usual (and preferred) route of process
                 termination:
                 The program finishes its job or identifies an error, 
-                and explicitly terminates itself.
-                This may be done by either calling <code>exit</code>, or by
-                returning from <em>main.</em>
+                and terminates itself.
+                This may be done by either calling <em>exit()</em>, or 
+                returning from <em>main()</em>.
             </p>
         </li>
 
@@ -482,7 +473,7 @@ shared, persistent data structure.
     <h2>Process Attributes</h2>
 
     <p>
-        Much as with files, the kernel stores a number of attributes
+        The kernel stores a number of attributes
         for each process it is hosting; we will not exhaust them here.
         The process's PID is one such piece of information; it cannot
         be changed.
@@ -493,8 +484,6 @@ shared, persistent data structure.
         Relative filenames are resolved with respect to
         this path, and a process may change it via the 
         <em>chdir()</em> system call.
-        In effect, it reflects "where" in the filesystem heirarchy 
-        the process is located.  
     </p>
 
     <p>
@@ -567,7 +556,7 @@ shared, persistent data structure.
     <p>
         For each machine, there exists a unique physical address space.
         An address in this space refers to an actual byte of memory 
-        (RAM) on the machine;
+        (RAM); 
         only the kernel has access to this address space.
         The kernel, working in conjunction with hardware, 
         imposes a layer of indirection between each process's
@@ -582,7 +571,7 @@ shared, persistent data structure.
         The kernel to assign address translations 
         (mappings from virtual addresses to physical addresses), 
         and the CPU to carry them out.
-        Each time a process references a virtual address, the
+        Each time a process references an address, the
         CPU translates it to a physical address, so that for all
         intents and purposes, virtual addresses behave exactly
         as physical ones.
@@ -593,8 +582,9 @@ shared, persistent data structure.
         each process is presented with the illusion
         that it has the entire physical address space to itself.
         By excluding physical addresses from translation,
-        the rest of the machine may be implicitly protected:
-        Other process' memory simply does not exist within the context of the
+        the rest of the machine is implicitly protected:
+        Other sections of memory (especially, other process' memory) 
+        simply do not exist within the context of the
         currently running process, and therefore cannot be read from, 
         nor written to.
     </p>
@@ -614,20 +604,20 @@ shared, persistent data structure.
         <em>User mode</em> is a proper subset of kernel mode: 
         A program running
         in user mode does not have access to all instructions, and 
-        its memory references are redirected through a translation table.
+        its memory references are redirected through the virtual
+        memory scheme mentioned above. 
         Executing programs in this mode
         is known as <em>limited direct execution.</em><sup><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/cpu-mechanisms.pdf">[3]</a></sup>
         It is <em>limited</em> in the sense that each process has access to
         only a restricted subset of the CPU's instructions, and
         it is <em>direct</em> in the sense that the program runs
         directly on hardware.
-        Like virtual memory, it is intended to make safe and efficient use 
-        of available hardware.
     </p>
 
     <p>
-        Virtual memory and limited direct execution together
-        form a sandboxed environment within which a program 
+        Virtual memory and limited direct execution are intended to 
+        make safe and efficient use of available hardware.
+        Together, they form a sandboxed environment within which a program 
         may safely be executed.
     </p>
 
