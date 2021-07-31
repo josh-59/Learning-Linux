@@ -11,53 +11,6 @@ last-updated: May 2021
     I mean, the average user is not expected to contribute, and therefore
     "how it works" is somewhat outside the scope of this work...
 
-
-
-<div class="content" id="working-in-open-source">
-    <h2>How To Contribute</h2>
-
-    <p>
-        <u>Do what you Want.</u> 
-        When one wants for a thing, it is usually the case that
-        others want for the same (like the various browsers 
-        mentioned above).
-        The consequence is both appreciation for the work, and if
-        the project is large, collaboration.
-        This is how things get built in open-source:
-        Some guy (or gal) wants some <em>thing</em> and makes it, then
-        makes it available to others, and presto, we've got it.
-    </p>
-
-    <p>
-        <u>Do one thing and do it well.</u>
-        Consistent, dilligent, long-term improvement is far more
-        important than initial quality.
-        Free software lends itself well to this largely because
-        software development is highly reiterative anyway.
-        While implicit motivation is, admittedly, slower than its
-        monetary counterparts, it has proved to 
-        produce higher-quality works in the long term:
-        Open-source code is <em>always</em> up for review, correction
-        and improvement.
-    </p>
-
-    <p>
-        <u>Release Early, Release Often.</u>
-        Many disconnected but well-meaning contributors work in parallel, 
-        not concert&mdash; 
-        they're each modifying the same sheet, essentially.
-        More, without the direction offered by a boss, 
-        open-source works in an unstructured fashion.
-        Releasing often is a friendly way to keep everyone on the
-        same sheet.
-    </p>
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://www.contributor-covenant.org/">Contributor Covenant[...] </a> by Coraline Ada Ehmke</li>
-    </ul>
-</div>
-
         Derivate works are common, as well:
         <a href="https://librewolf-community.gitlab.io/">LibreWolf</a>
         is a derivate of Mozilla Firefox focused on privacy, security and
@@ -69,12 +22,6 @@ last-updated: May 2021
 
        https://www.youtube.com/watch?v=XFrJcjCbCA8
 
-    Working In Public
-    by Nadia Eghbal
-    Notes:
-        The term <em>open source</em> describes the way that software
-        is distributed and used, not to how it is produced.
-            p 44
 
 <div class="content" id="risc-v">
     <iframe class="video" src="https://www.youtube-nocookie.com/embed/Rsyn3_PjRXw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -93,18 +40,17 @@ last-updated: May 2021
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
         <li><a href="#ownership">Ownership in Open-Source</a></li>
-        <li><a href="#collaboration">Collaborative Open Source</a></li>
-        <li><a href="#contributing">Contributing</a></li>
-        <li><a href="#motivation">Motivations</a></li>
+        <li><a href="#motivations">Motivations</a></li>
         <li><a href="#projects">Projects</a></li>
-        <li><a href="#less"><code>less</code>: A Success Story</a</li>
+        <li><a href="#collaboration">Collaboration in Open Source</a></li>
+        <li><a href="#less"><code>less</code>: A Success Story</a></li>
         <li><a href="#community">Community?</a></li>
         <li><a href="#references"> References </a></li>
     </ul>
 </div>
 
 <div id="introduction" class="content">
-    <h1>How Open Source Works</h1>
+    <h1>How It Works</h1>
 
     <div class="quote-text">
         "That's how open source works: <br>Iterate, deploy, study, repeat."
@@ -123,95 +69,16 @@ last-updated: May 2021
     </p>
 </div>
 
-<div class="content" id="collaboration">
-    <h2>Collaboration</h2>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Recall that <em>open source</em> is a synonym for
-            <em>free software.</em>
-        </p>
-    </div>
-
-    <p>
-        Properly speaking, open-source describes only how
-        software is distributed and used&mdash; Not how
-        it is produced.<sup><a href="#references" title="Eghbal p44">[a]</a></sup>
-        Notably, it requires human-readable "source" be made available 
-        alongside machine-readable instructions, and 
-        that software be redistributable by any user.
-    </p>
-
-    <p>
-        In particular, it does not restrict
-        the organizational structure adopted to produce
-        these works, and many open-source projects are <em>not</em> 
-        open to collaboration.
-    </p>
-
-    <p>
-        For example, GNU is not collaborative:
-        While users are permitted to
-        modify and redistribute the project's works, those modifications 
-        were never intended to make their way back into GNU source.
-        Hence, there is a deliberate delineation between <em>user</em> and 
-        <em>developer.</em>
-        This model is now referred to as the <em>Cathedral</em> model.
-    </p>
-
-    <h3>Collaborative Open Source</h3>
-    
-    <p>
-        When Linus Torvalds invited any interested hacker to
-        tinker on his kernel, he invented a new
-        way of making free software:
-        Changes are submitted <em>by individuals to projects,</em>
-        inspected on a case-by-case basis, and then either
-        accepted into the project or rejected&mdash; at the
-        project leader's discretion.
-    </p>
-
-    <p>
-        The result was "Accidentally Revolutionary," and has
-        dominated open-source since.
-        Project leaders take on the responsibility of their work's 
-        overall well-being, and can modify the code however they see
-        fit. 
-        they foster its development by
-        considering proposed modifications.
-    </p>
-
-    <p>
-        It should be noted that there is no "rule" that collaboration
-        is restricted to hobbyists, and being inclusive with
-        respect to organizations fosters project success.
-        Facebook, for example, has put considerable effort
-        into Linux's new <code><a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">btrfs</a></code>.<sup><a href="https://lwn.net/Articles/824855/">[h]</a></sup>
-    </p>
-
-    <p>
-        In practice, most modifications (~80%) are made by a small
-        group of people: It is not the case that open-source is
-        powered by a large collection of average users.
-        Moreover, most collaborators are "casual," offering one or 
-        two commits to a project over its life.
-        By and large, the typical project has a handful (or fewer) 
-        core developers, whom shoulder the vast majority of the
-        burden of development.
-    </p>
-    
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://www.extremetech.com/extreme/155392-international-space-station-switches-from-windows-to-linux-for-improved-reliability">International Space Station switches from Windows to Linux, for Improved Reliability</a></li>
-    </ul>
-</div>
-
 <div class="content" id="ownership">
     <h2>Ownership in Open-Source</h2>
 
+    Since source code is available whenever the runnable program
+    is available, and any user may redistribute the product, there
+    is no difference between "distributing" a piece of free software
+    and "releasing" it.
+
     <p>
-        Open-source licenses has called into question the notion
+        Open-source licenses have called into question the notion
         of ownership, with at least one economist arguing that 
         ownership in open-source is defined in terms of the right
         to distribute, as opposed to the more traditional 
@@ -279,18 +146,11 @@ last-updated: May 2021
     </ul>
 </div>
 
-
-<div class="content" id="intrinsic-motivation">
-    <h2>Intrinsic Motivation</h2>
+<div class="content" id="motivations">
+    <h2>Motivations</h2>
     // The result is chaotic, in much the same way the free
     // market is chaotic.
     // The difference is currency.
-
-    <p>
-        Compared to the market economy we all know and love, 
-        open source a strange beast:
-        Its works are carried out because what they 
-        are <em>is</em> what their creators want.
         A reasonable question to ask, is, <em>Why?</em>
         as in, <em>Why take seriously and labor for something
         without obvious monetary reward?</em>
@@ -309,22 +169,28 @@ last-updated: May 2021
     </blockquote>
 
     <p>
-        Collaborative open-source is not necessarily altruistic.
-        While the motivations of an individual are, naturally, their own,
-        and may well be strictly charitable, 
-        those projects that are most enduring satisfy some community need, 
-        and are supported in virtue of themselves.
+        Another way of saying this is that 
+        <em>Those who do the work get to make the decisions.</em>
+        Thus, the open-source community supports those projects
+        that are most important to them.
     </p>
 
     <p>
         As an example, the <em>util-linux</em> package was originally
         forked from the BSD project, and passed through
         several maintainers between versions 2.2 and 2.12.<sup><a href="https://git.kernel.org/pub/scm/utils/util-linux/util-linux.git/refs/tags">[g]</a></sup>
-        When it was clear that the project had been abandoned, it was
+        When it became clear that the project had been abandoned, it was
         <a href="https://lkml.org/lkml/2006/12/18/19">picked up again</a>
         by Karel Zak, whom continues to maintain it today.
         In this way, those projects which are of interest to the community
         are maintained, while those that are not are eventually dropped.
+    </p>
+
+    <p>
+        Compared to the market economy we all know and love, 
+        open source a strange beast:
+        Its works are carried out because what they 
+        are <em>is</em> what their creators want.
     </p>
 
     <h3>See Also:</h3>
@@ -425,6 +291,15 @@ last-updated: May 2021
     </ul>
 </div>
 
+<div class="content" id="funding">
+    <h2>Funding Open Source</h2>
+
+    <p>
+        : The "Radio Station" Model</h2>
+    </p>
+
+</div>
+
 <div class="content" id="community">
     <h2>Community?</h2>
 
@@ -434,19 +309,14 @@ last-updated: May 2021
         Nobody is collecting your data; nobody is getting rich;
         it's just good things made for their own sakes'.
     </p>
-
-    <p>
-        It is certainly the case that the project (money, good) comes
-        before the community.
-    </p>
 </div>
 
 <div class="content" id="closing-remarks">
     <h2>Closing Remarks:</h2>
-    <h4>Do one Thing and do it Well</h4>
 
     <p>
-
+        If you <em>really</em> want to know how it works, well,
+        pull up a chair! 
     </p>
 
     <p>
@@ -466,7 +336,6 @@ last-updated: May 2021
         decent set of chairs or fitted cupboards takes talent, practice, 
         and education."<sup><a href="https://queue.acm.org/detail.cfm?id=2349257">[123]</a></sup>
     </blockquote>
-
 </div>
 
 <div class="content" id="">
