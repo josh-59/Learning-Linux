@@ -1,23 +1,30 @@
 ---
 layout: default
 title: Introduction to GNU/Linux
-last-updated: July, 2021
+last-updated: August, 2021
 ---
 
 <!--
-    Unix:
-
-    GNU:
-        In the heyday of time-sharing operating system,
-        the culture that formed around them was naturally communal.
-
     Open Source: 
-        Note Netscape's decision to open-source its browser.
-        What motivated them? Why?  Was the corporate structure largely
-        retained?
-        Netscape's open-sourcing of its browser was a windfall...
+        What do these licenses mean for the user?
 
-        ...A kind of free culture...
+    The differences among licenses are of concern to developers,
+    whom, when constructing a piece of software, must ensure that
+    all parts used have licenses compatible with their desired
+    (release) license.
+    For us users, their differences are relative minutia, and we
+    are justified in ignoring the differences between 
+    <em>free software,</em> <em>open-source</em> and <em>public domain.</em>
+
+
+        - Not made strictly in the pursuit of money
+            - Ideology, as in the case of Richard Stallman
+            - Hobby, as in the case of Linus Torvalds
+            - 
+        - In particular, privacy-respecting
+        - Greater control over your computer,
+            - Which can take some time to get become confident with.
+
 -->
 
 <div id="nav_bar_2" class="nav">
@@ -488,7 +495,7 @@ last-updated: July, 2021
         Everybody was invited, if only to tinker.
         His development model&mdash; "release early and often, delegate everything you can,
         be open to the point of promiscuity"<sup><a href="http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/index.html#catbmain">[24]</a></sup>&mdash; <a href="http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/index.html#catbmain">raised eyebrows</a> at the time,
-        but has ben proven sound in virtue of its success:
+        but has proved sound in virtue of its success:
         It now dominates the open-source landscape, with most projects following
         this, rather than the "cathedral," model.
     </p>
@@ -520,7 +527,7 @@ last-updated: July, 2021
 
     <p>
         The Linux kernel is made available by its developers in source-code
-        form, and requires compilation on some separate host machine
+        form, and requires compilation on a separate host machine
         before it can be used.  
         In addition, no other software is included, so that
         creating a functional Linux-based machine requires somebody
@@ -543,12 +550,12 @@ last-updated: July, 2021
         He packaged utilities alongside the kernel and distributed the
         collection on a pair of 5.25" disks.
         Known as the <em>Boot/Root Floppies,</em>
-        it never became widely known.<sup><a href="https://www.maketecheasier.com/history-of-early-linux-distros/">[27]</a></sup><sup><a href="https://lwn.net/Articles/91371/">[28]</a></sup>
+        it was never widely known.<sup><a href="https://www.maketecheasier.com/history-of-early-linux-distros/">[27]</a></sup><sup><a href="https://lwn.net/Articles/91371/">[28]</a></sup>
     </p>
 
     <p>
         Linux's first widely used distribution was, ironically,
-        a commercial venture, <em>Soft Landing System.</em> 
+        a commercial venture, <em><a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">Soft Landing System</a>.</em> 
         Released in late 1992, it was sold under the slogan 
         "Gentle Touchdowns for DOS Bailouts,"<sup><a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">[29]</a></sup>
         but users complained that the software was buggy,<sup><a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">[28]</a><a href="https://www.linuxjournal.com/article/2750">[30]</a></sup> and when its developers
@@ -559,9 +566,10 @@ last-updated: July, 2021
 
     <p>
         In late 1992, Patrick Volkerding needed a LISP interpreter for a project
-        at school, and, having heard that <em>clisp</em> ran on SLS Linux,
+        at school, and, having heard that <code>clisp</code> ran on SLS Linux,
         downloaded them both.<sup><a href="https://www.linuxjournal.com/article/2750">[30]</a></sup>
-        His professor got wind, and asked Patrick to help him install the software
+        His professor got wind, and asked Patrick to help him install the 
+        same software
         on school computers.<sup><a href="https://www.linuxjournal.com/article/2750">[30]</a></sup>
         Volkerding walked him through installing, fixing and patching SLS, and
         afterward, his professor asked, "Is there some way we can fix the install disks so
@@ -570,7 +578,7 @@ last-updated: July, 2021
 
     <p>
         So Volkerding began improving SLS, and internally named his project
-        <em>Slackware,</em> not wanting it to be taken too 
+        <em>Slackware,</em> not wishing it to be taken too 
         seriously.<sup><a href="https://www.linuxjournal.com/article/2750">[30]</a></sup>
         By May 1993, though, the improvements were, "more than just cosmetic," and 
         his friends convinced him to release it onto the internet.
@@ -591,7 +599,7 @@ last-updated: July, 2021
     <p>
         Volkerding hadn't intended to produce a distribution,<sup><a href="https://www.linuxjournal.com/article/2750">[30]</a></sup> but still
         maintains <a href="http://www.slackware.com/">Slackware</a> today.<sup><a href="http://www.slackware.com/about">[31]</a></sup>
-        The Slackware Linux Project is aimed at producing "the most UNIX-like
+        The Slackware Linux Project is focused on producing "the most UNIX-like
         Linux distribution out there."<sup><a href="http://www.slackware.com/info/">[32]</a></sup>
     </p>
 
@@ -602,20 +610,21 @@ last-updated: July, 2021
         Purdue University.<sup><a href="https://en.wikipedia.org/wiki/Ian_Murdock">[33]</a></sup>
         He saw distributions as essential to the future of Linux, but was
         dismayed by their quality.<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[34]</a></sup>
-        The most popular distribution&mdash; SLS Linux&mdash; was also,
+        The single-person and closed-room schemes characteristic of 
+        distributions at the time had repeatedly failed to produce
+        persistent, quality products.
+        More, the most popular distribution&ndash; SLS Linux&ndash; was,
         "...quite possibly the most bug-ridden and badly maintained Linux distribution available."<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[34]</a></sup>
     </p>
 
     <p>
-        Murdoch envisioned a modular operating system, whose components were 
-        maintained by people with corresponding desires and 
+        Murdoch envisioned a distribution whose maintenance was
+        community-driven&mdash; A modular operating system whose 
+        components were maintained by people with appropriate desires and 
         specialities.
-        By making the project open, satisfaction of users'
-        requirements would be assured.
-    </p>
-
-    <p>
-        So Ian announced <a href="https://www.debian.org">Debian</a>:
+        He named the project 
+        <em><a href="https://www.debian.org">Debian</a>,</em>
+        a portmanteau of <em>Ian</em> and <em>Debra,</em> his wife:
     </p>
 
     <blockquote>
@@ -645,6 +654,7 @@ last-updated: July, 2021
     <ul>
         <li><a href="https://www.debian.org/intro/philosophy">Debian -- Our philosophy, why we do it and how we do it</a></li>
         <li><a href="https://www.linuxjournal.com/article/2841">Overview of the Debian GNU/Linux System</a> by Ian Murdock</li>
+        <li><a href="https://www.debian.org/News/2021/20210814">Debian News - Debian 11 "bullseye" released</a> (August, 2021)</li>
         <li><a href="https://www.slackbook.org/html/introduction-slackware.html">What is Slackware?</a> - Slackbook</li>
     </ul>
 </div>
@@ -684,7 +694,7 @@ last-updated: July, 2021
     </div>
 
     <p>
-        Mint offers the <em>Cinnamon</em> desktop environment;
+        Mint offers the Cinnamon desktop environment;
         Windows users will feel right at home.
         I find it to be an attractive desktop, but it's only moderately
         customizable.
@@ -723,11 +733,12 @@ last-updated: July, 2021
 
 <div class="content" id="open-source">
     <h2>Open Source</h2>
-
+    
     <p>
         Since Richard Stallman began GNU (pronounced <em>guh-nu</em>), 
         the free software landscape has seen a great deal of growth.
-        In 1998, the term <em>open source</em> was invented as
+
+        In 1998, the term <em>open source</em> was introduced as
         <a href="http://www.catb.org/~esr/open-source.html">a less abrasive synonym</a>
         for <em>free software:</em>
     </p>
@@ -754,7 +765,7 @@ last-updated: July, 2021
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            Today, the MIT open-source license is one the most popular.<sup><a href="https://github.blog/2015-03-09-open-source-license-usage-on-github-com/">[40]</a></sup>
+            Today, the MIT open-source license is very popular.<sup><a href="https://github.blog/2015-03-09-open-source-license-usage-on-github-com/">[40]</a></sup>
         </p>
     </div>
 
