@@ -1,15 +1,116 @@
 ---
 layout: default
 title: How Open Source Works
-last-updated: May 2021
+last-updated: August 2021
 ---
 
 <!--
 
-    Maybe tone this back to the slightly more (user) approachable
-    "What is Open Souce?"
-    I mean, the average user is not expected to contribute, and therefore
-    "how it works" is somewhat outside the scope of this work...
+    <p>
+        Given significant difference of opinion, individuals and
+        groups are always free to fork the source repository and lead
+        a sister project in their preferred direction;
+        thereafter, people can choose either the original or your
+        variant.
+        In practice, modifications are submitted, reviewed on a 
+        case-by-case basis, and then either accepted or rejected;
+        in a few weeks, a new version of the software is released.
+    </p>
+
+    <p>
+        While collaboration is often believed to be the purview
+        of hobbyists alone, as Greg Kroah-Hartman notes, 
+        there are compelling reasons to return <em>any</em> improvement
+        to its source.
+        First, your improvement will be maintained along with all
+        other improvements.
+        Second, you no longer have to deal with two variants of the
+        work, and will not have to merge your changes into the latest
+        release.
+        Third, the distributive production process is well-known
+        for outpacing any individual or group effort, so that if
+        you <em>don't,</em> your variant will be
+    </p>
+
+
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Historically, copies were sold to cover the expense of 
+            distribution, typically, the cost of media.
+        </p>
+    </div>
+
+    <p>
+        The classic free-software business model is to 
+        offer services and support of free software.
+        <a href="https://ubuntu.com/support">Ubuntu</a> and 
+        <a href="https://www.redhat.com/en">Red Hat</a>
+        are two modern examples.
+        While being slightly less true to the noble/hobby roots of
+        GNU/Linux, the result is a well-structured collection of 
+        software presented in a professional manner, and
+        appeals to businesses and other commercial enterprises.
+    </p>
+
+    <p>
+        More recently...
+    </p>
+
+    <p>
+        Great gig-economy opportunity here...
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://www.pcmag.com/news/linux-is-now-on-mars-thanks-to-nasas-perseverance-rover">Linux is Now on Mars, Thanks to NASA's Perseverance Rover | PCMag</a></li>
+    </ul>
+</div>
+
+
+
+        made especially notable because software is not easy to produce!
+
+    <p>
+        Since each user can redistribute free software, earning money
+        from it is typically less direct than simply selling it.
+        In the above example, Facebook has the same relationship with
+        <code>btrfs</code> as UPS has with its fleet of trucks: 
+        They profit from its use, and do not sell the work directly.
+    </p>
+
+
+
+
+        <li><a href="https://www.zdnet.com/article/spacex-weve-launched-32000-linux-computers-into-space-for-starlink-internet/">SpaceX: We've launched 32,000 Linux computers into space for Starlink Internet | ZDNet</a></li>
+
+        <li><a href="https://www.hackerrank.com/">HackerRank</a></li>
+
+    <p>
+        Computer programming is not easy because what you're trying
+        to do is not simple, and 
+        the closed development style is often preferred by individuals
+        with strong ideas of what quality code is. 
+    </p>
+
+    <blockquote>
+        "Getting hooked on computers is easy—almost anybody can make a 
+        program work, just as almost anybody can nail two pieces of wood 
+        together in a few tries. The trouble is that the market for two 
+        pieces of wood nailed together—inexpertly—is fairly small outside 
+        of the "proud grandfather" segment, and getting from there to a 
+        decent set of chairs or fitted cupboards takes talent, practice, 
+        and education."<sup><a href="https://queue.acm.org/detail.cfm?id=2349257">[123]</a></sup>
+    </blockquote>
+
+
+        For example, the <a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection#EGCS_fork">Experimental/Enhanced GNU Compiler System</a> was a fork
+        of GNU's compiler collection that included new languages 
+        in a manner more free-wheeling than the FSF 
+        found acceptable.
+    </p>
+    
 
         Derivate works are common, as well:
         <a href="https://librewolf-community.gitlab.io/">LibreWolf</a>
@@ -34,17 +135,88 @@ last-updated: May 2021
 
         <li><a href="https://press.stripe.com/">Stripe Press</a> - Ideas for progress</a></li>
 
+
+    <p>
+        To me, the magic of open-source is that it's composed of works
+        people created because they wanted to.
+        Nobody is collecting your data; nobody is getting rich;
+        it's just good things made for their own sake.
+    </p>
+
+    <p>
+        Most people can make a program work&mdash; and programming is 
+        a great hobby and a useful skill&mdash;
+        but software that is widely used is extremely sophisticated.
+        The works we use every day are shepherded by talented and educated
+        individuals, whom are professionals of their field.
+    </p>
+
+<div class="content" id="project-leadership">
+    <h2>Project Leadership</h2>
+    <p>
+        Per tradition, collaboration is clearly invited by project leaders.
+        If a work is collaborative, then there is probably 
+        some documentation containing instructions for doing so.  
+        For example, <code>fd</code>'s
+        <code><a href="https://github.com/sharkdp/fd/blob/master/CONTRIBUTING.md">CONTRIBUTING.md</a></code>
+        file.
+    </p>
+
+    <p>
+        ...neither qualification nor merit...
+        <a href="https://www.contributor-covenant.org/">Contributors' Covenant</a>
+    </p>
+
+    <p>
+        Even following the rules, collaborative projects are not the 
+        paradigms of virtue and cooperation as we might expect them to be. 
+        Notably, public desire is not uniform, and 
+        the role of project leader can quickly skew from 
+        <em>lead developer</em> to <em>modification curator.</em>
+        This is especially true of large projects with widespread
+        interest.
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Given significant difference of opinion, an individual or group
+            can always fork the source repository and 
+            lead a sister project in their preferred direction.
+        </p>
+    </div>
+
+    <p>
+        Simply put, project maintainers are endowed to reject a 
+        modification for any reason whatsoever.
+    </p>
+
+    "They're directing air traffic."
+
+    <p>
+        The ability to choose and curate 
+        successful open-source, and takes place on
+        multiple levels. 
+        Project leaders choose among proposed modification;
+        distributions implicitly curate projects in their 
+        (preferential) presentation of an operating system; and,
+        users choose among distributions, projects and source, 
+        however they see fit.
+    </p>
+</div>
+
+
 -->
 
 <div id="nav_bar_2" class="nav">
     <ul>
-        <li><a href="#introduction"> Introduction </a></li>
-        <li><a href="#ownership">Ownership in Open-Source</a></li>
-        <li><a href="#motivations">Motivations</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#collaboration">Collaboration in Open Source</a></li>
+        <li><a href="#introduction">Introduction </a></li>
+        <li><a href="#low-copy-cost">Low Copy Cost</a></li>
+        <li><a href="#intrinsic-motivation">Intrinsic Motivation</a></li>
+        <li><a href="#distributed-collaboration">Distributed Collaboration</a></li>
+        <li><a href="#modularity">Modularity</a></li>
         <li><a href="#less"><code>less</code>: A Success Story</a></li>
-        <li><a href="#community">Community?</a></li>
+        <li><a href="#how-it-fails">How Open-Source Fails</a></li>
         <li><a href="#references"> References </a></li>
     </ul>
 </div>
@@ -53,11 +225,11 @@ last-updated: May 2021
     <h1>How It Works</h1>
 
     <div class="quote-text">
-        "That's how open source works: <br>Iterate, deploy, study, repeat."
+        "Given enough eyeballs, all bugs are shallow."
     </div>
 
     <div class="quote-ref">
-        <a href="https://doc.redox-os.org/ion-manual/html/">Ion Shell manual</a>
+        Linus Torvalds
     </div>
 
     <p>
@@ -69,156 +241,215 @@ last-updated: May 2021
     </p>
 </div>
 
-<div class="content" id="ownership">
-    <h2>Ownership in Open-Source</h2>
-
-    Since source code is available whenever the runnable program
-    is available, and any user may redistribute the product, there
-    is no difference between "distributing" a piece of free software
-    and "releasing" it.
+<div class="content" id="low-copy-cost">
+    <h2>Low Copy Cost</h2>
 
     <p>
-        Open-source licenses have called into question the notion
-        of ownership, with at least one economist arguing that 
-        ownership in open-source is defined in terms of the right
-        to distribute, as opposed to the more traditional 
-        right-to-exclude.
-        His perspective is that since open-source software must
-        be redistributable by any user, it is not the case that
-        any individual or organization "owns" the code, in the sense
-        that they can stipulate what may or may not be done with it.
+        In order to portray the success of open-source with any degree
+        of honesty, we must first admit that it is dependant upon the
+        low (virtually zero) cost of reproducing a piece of software.
     </p>
 
     <p>
-        I personally don't hold with this notion: I find it
-        too far removed from our usual interpretation of <em>ownership,</em>
-        and prefer instead to identify what <em>is</em> owned in
-        open-source.
+        
+    </p>
+</div>
+
+<div class="content" id="intrinsic-motivation">
+    <h2>Intrinsic Motivation</h2>
+
+    <p>
+        Compared to the market economy we all know and love, 
+        open source a strange beast:
+        Its works are created because what they 
+        are <em>is</em> what their creators want.
+        Stated another way, the intent of all free software is 
+        the software itself.
+    </p>
+
+    <div class="aside-right">
+        <h4>Note:</h4>
+        <p>
+            Here we are adopting a (very) high-level perspective of the
+            open-source ecosystem.  
+            By analogy, money, rather than passion, enjoyment, idealism, etc., 
+            motivates work in the market economy.
+        </p>
+    </div>
+
+    <p>
+        Admittedly, contributing to open source sometimes makes 
+        sound financial sense&mdash; Facebook 
+        taking part in the development of 
+        <code><a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">btrfs</a></code> 
+        is one such example.
+        However, in this case, as in all other cases, 
+        the principal interest of Facebook is in the filesystem itself:
+        It is developed to be used, not to be sold.
     </p>
 
     <p>
-        Repository maintainer decides what goes into 
-        his (her) repository.
-        And, when (if) to release it.
+        Goods produced for their own sake are said
+        to be <em>intrinsically motivated,</em> and this, in turn, 
+        underpins the open-source ecosystem.
+        Intrinsic motivation is found in many places, from research
+        in academia to artistic works on public display.
+    </p>
+
+    <p>
+        The open-source ecosystem has naturally decomposed into
+        projects, with people working on what they want.
+        While we may like to <em>think</em> that open-source is
+        strictly the work of hobbyists, in practice this isn't the case.
+        Since the resulting software may be used for any purpose&mdash;
+        including commercial purposes&mdash; it has naturally come
+        to pass that some developers intend to profit
+        from its use.
+    </p>
+
+    <p>
+        From the above, it would follow that those projects with
+        the greatest number of use-cases garner the greatest support,
+        and this I hold to be true:
+        To date, the largest free-software organization in existence 
+        is the 
+        <a href="https://www.apache.org/">Apache Foundation</a>, 
+        whose projects underpin the world wide web.
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://hackaday.com/2021/07/17/open-source-is-choice/">Open Source is Choice</a> by Elliot Williams</li>
+    </ul>
+</div>
+
+<div class="content" id="projects">
+    <h2>Distributed Collaboration</h2>
+
+    <p>
+        The term <em>open-source</em> describes how software is 
+        distributed and used&mdash; Not how it is produced.<sup><a href="#references" title="Eghba p44">[a]</a></sup>
+        While it requires that source code be available to 
+        users for perusal, modification and redistribution,
+        it does not require that the project itself be collaborative, and
+        many open-source projects are <em>not</em> open to collaboration.
+    </p>
+
+    <p>
+        While collaboration is neither part of the 
+        <em>open-source</em> definition nor part of the original
+        intent of <em>free software,</em>
+        it is both the novel component of today's open-source ecosystem 
+        and, in the author's opinion, has been pivotal to its success.
+        Therefore, we will pursue it here.
+    <p>
+
+    <div class="aside-left">
+        <h4>Aside:</h4>
+        <p>
+            The "tools and materials" observation is owed to 
+            Dr. Weber, as well.
+        </p>
+    </div>
+
+    <p>
+        First, collaboration has been made possible:
+        Anybody with an internet connection can download and use
+        free software, and users are permitted to modify it to suit 
+        their needs.
+        Since the collection of free software includes all development 
+        tools required to make modifications, both <em>tools</em> 
+        and <em>materials</em> are made available.
+    </p>
+
+    <p>
+        Second, collaboration is supported by project leaders.
+        To make clear, a project's leader is the individual whom
+        releases the official product.
+        Notably, they alone can modify the code however they see fit.
+    </p>
+
+    <p>
+        Since each leader has the right to modify their work
+        however they see fit, they have the right to <em>decline</em>
+        a modification for any reason whatsoever. 
+        In practice, predominantly collaborative projects are led by 
+        curating proposed modifications: The direction of the project
+        is clearly stated, and the terms of acceptable modifications
+        are made plain.
+        It should be noted, however, that even in collaborative open-source,
+        the majority of contributions come from a relatively small 
+        pool of core developers; concurrently, most users do not submit 
+        modifications.
     </p>
 
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            The term <em>maintainer</em> is often used to refer to
-            the position of project leader.
+            Since collaboration is fun, you could take the view that
+            it, also, is intrinsically motivated.
         </p>
     </div>
 
     <p>
-        So, while users are in theory
-        empowered to shape a project into what they want, 
-        in practice these modifications are moderated by the project's
-        maintainers.
-        In this way, entities within the open-source ecosystem
-        retain definition, and the community does not
-        devolve into an equal-merit free-for-all.
-    </p>
-
-    <p>
-        Given significant difference of opinion, an individual or group
-        can always fork the source repository and 
-        lead a sister project in their preferred direction.
-        For example, the <a href="https://en.wikipedia.org/wiki/GNU_Compiler_Collection#EGCS_fork">Experimental/Enhanced GNU Compiler System</a> was a fork
-        of GNU's compiler collection that included new languages 
-        in a manner more free-wheeling than the FSF 
-        found acceptable.
-    </p>
-
-    <p>
-        In a nontrivial sense, the ability to choose and curate
-        is the backbone of open-source, and takes place on
-        multiple levels. 
-        A distribution implicitly curates
-        projects in their presentation of an operating system, while
-        users curate distributions, projects and source, 
-        however they see fit.
-    </p>
-   
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://www.pcmag.com/news/linux-is-now-on-mars-thanks-to-nasas-perseverance-rover">Linux is Now on Mars, Thanks to NASA's Perseverance Rover | PCMag</a></li>
-    </ul>
-</div>
-
-<div class="content" id="motivations">
-    <h2>Motivations</h2>
-    // The result is chaotic, in much the same way the free
-    // market is chaotic.
-    // The difference is currency.
-        A reasonable question to ask, is, <em>Why?</em>
-        as in, <em>Why take seriously and labor for something
-        without obvious monetary reward?</em>
-    </p>
-
-    <p>
-        Economist Steven Weber offers some insight:
-    </p>
-
-    <blockquote>
-        "Human beings often have a passionate relationship to their
-        creative endeavors and their work; they wish to share
-        their creativity with others; and value inheres in
-        things other than monetizable rewards.  Each of these
-        attitudes exists within the open source community."<sup><a href="#references" title="Weber p10">[g]</a></sup>
-    </blockquote>
-
-    <p>
-        Another way of saying this is that 
-        <em>Those who do the work get to make the decisions.</em>
-        Thus, the open-source community supports those projects
-        that are most important to them.
-    </p>
-
-    <p>
-        As an example, the <em>util-linux</em> package was originally
-        forked from the BSD project, and passed through
-        several maintainers between versions 2.2 and 2.12.<sup><a href="https://git.kernel.org/pub/scm/utils/util-linux/util-linux.git/refs/tags">[g]</a></sup>
-        When it became clear that the project had been abandoned, it was
-        <a href="https://lkml.org/lkml/2006/12/18/19">picked up again</a>
-        by Karel Zak, whom continues to maintain it today.
-        In this way, those projects which are of interest to the community
-        are maintained, while those that are not are eventually dropped.
-    </p>
-
-    <p>
-        Compared to the market economy we all know and love, 
-        open source a strange beast:
-        Its works are carried out because what they 
-        are <em>is</em> what their creators want.
-    </p>
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://www.zdnet.com/article/spacex-weve-launched-32000-linux-computers-into-space-for-starlink-internet/">SpaceX: We've launched 32,000 Linux computers into space for Starlink Internet | ZDNet</a></li>
-        <li><a href="https://hackaday.com/2021/07/17/open-source-is-choice/">Open Source is Choice</a> by Elliot Williams</li>
-        <li><a href="https://www.hackerrank.com/">HackerRank</a></li>
-    </ul>
-</div>
-
-<div class="content" id="projects">
-    // It is not the case that GNU has created the de-facto
-    // open-source operating system.
-    // What has proved to work has 
-    // *decomposed* into a puzzle of some roughly 500 pieces.
-
-    <p>
-        The open-source ecosystem has decomposed into
-        projects, with people working on what they want.
-        While we may wish to think that each project is a paradigm
-        of virtue and cooperation, this is in fact not the case.
-        Public desire is often not homogenous, and the role of project leader 
-        can quickly skew from 
-        <em>lead developer</em> to <em>modification curator.</em>
+        Finally, collaboration is just fun: There's a strong social
+        component to it, a creative component to it, challenge and
+        reward.
+        Through "social coding" websites like Github and Gitlab,
+        it has even been made convenient.
+        Although programming itself is difficult, the act of 
+        submitting a modification can be done by anyone, anywhere.
     </p>
 
 </div>
 
+<div class="content" id="modularity">
+    <h2>Modularity</h2>
+
+    <p>
+        The final piece of the open-source ecosystem puzzle is
+        <em>modularity&mdash;</em> specifically, the decomposition
+        of a large and complex whole into manageable pieces.
+        One of the truly remarkable things of modern open-source is that
+        no one person or organization is responsible for the creation of 
+        a GNU/Linux operating system.
+        Rather, collecting and assembling the pieces is a project of its
+        own, distinct from, say, shell development, itself distinct from,
+        say, kernel development.
+    </p>
+
+    <p>
+        This modularization occurred naturally as the free-software
+        ecosystem became self-supporting, and it is, in the author's
+        opinion, fundamental to the pattern of open-source success. 
+        - Working on what they want
+        - 
+        Even large organizations tend to compartmentalize by project...
+    </p>
+
+    <p>
+        <em><mark>
+            The success of any project, with respect to producing a mature
+            and polished product, is contingent principally 
+            upon its improvement through long-term evolution.
+        </mark></em>
+        The modularity of GNU/Linux has allowed it to mature by
+        allowing individual projects to come and go.
+    </p>
+
+    <p>
+        Apache is the largest free- and open-source software organization in
+        existence today, and to understand <em>how</em> to be as
+        successful as GNU intended to be, it is necessary to understand
+    </p>
+
+    <p>
+        Pleasing, at least, to the author's aesthetic, 
+        the result is distinctively decentralized:
+        There are few, if any, universal authorities, and 
+        there are an astounding number of choices for any given user.
+    </p>
+</div>
 
 <div class="content" id="less">
     <h2 style="margin-bottom: 0;"><code>less</code>:</h2>
@@ -228,7 +459,7 @@ last-updated: May 2021
         A <em>paging utility</em> is a program that displays a file on 
         the terminal one screenful at a time.
         The first widely used paging utility was <code>more</code>, written by
-        Dan Halbert as a graduate student at UC Berkley in 1978.<sup><a href="https://danhalbert.org/more.html">[aa]</a></sup>
+        Dan Halbert as a graduate student at UC Berkeley in 1978.<sup><a href="https://danhalbert.org/more.html">[aa]</a></sup>
         <code>more</code> is a simple program: It first 
         fills up the screen, then waits for user input to print the 
         next line(s).
@@ -291,52 +522,66 @@ last-updated: May 2021
     </ul>
 </div>
 
-<div class="content" id="funding">
-    <h2>Funding Open Source</h2>
+<div class="content" id="how-it-fails">
+    <h2>How it Fails</h2>
 
     <p>
-        : The "Radio Station" Model</h2>
+        By and large, the health of a project can be determined by 
+        how vigorously it is being developed: 
+        As Ken Thompson said, 
+        "Code by itself almost rots and it's gotta be rewritten.  Even when nothing has changed, for some reason it rots."<sup><a title="Interview with Ken Thompson, Coders at work, p. 460" href="#references">[e]</a></sup>
+        Simply put, if it isn't under active development, 
+        then it's been abandoned.
     </p>
 
+    <p>
+        Redox OS was a recent attempt at producing a FOSS
+        Unix clone&mdash; utilities and all&mdash; 
+        in the Rust Programming Language.
+        As of this writing, the project has been abandoned for two years.
+    </p>
+
+    <p>
+        From a technical standpoint, the 
+        However, microarchitecture-based kernels have never been 
+        adopted in production.
+    </p>
+
+    <p>
+        The
+        Without compelling reasons to adopt it, though, the project did
+        not garner support.
+    </p>
+
+    <p>
+        I don't follow the "second-system syndrome", but this project
+        made a few overarching mistakes. 1) Microarchitecture
+        2) Repeat of GNU 
+        - Did many things rather mediocrely(?)
+    </p>
 </div>
 
-<div class="content" id="community">
-    <h2>Community?</h2>
-
+<div class="content" id="preface">
+    <h2>Postscript Concerning Interpretation</h2>
     <p>
-        To me, the magic of open-source is that it's composed of works
-        people created because they wanted to.
-        Nobody is collecting your data; nobody is getting rich;
-        it's just good things made for their own sakes'.
-    </p>
-</div>
-
-<div class="content" id="closing-remarks">
-    <h2>Closing Remarks:</h2>
-
-    <p>
-        If you <em>really</em> want to know how it works, well,
-        pull up a chair! 
+        ...Not to appologize for, but to justify.
     </p>
 
     <p>
-        Most people can make a program work&mdash; and programming is 
-        a great hobby and a useful skill&mdash;
-        but software that is widely used is extremely sophisticated.
-        The works we use every day are shepherded by talented and educated
-        individuals, whom are professionals of their field.
+        Good Thing
+        Big Deal
     </p>
 
     <blockquote>
-        "Getting hooked on computers is easy—almost anybody can make a 
-        program work, just as almost anybody can nail two pieces of wood 
-        together in a few tries. The trouble is that the market for two 
-        pieces of wood nailed together—inexpertly—is fairly small outside 
-        of the "proud grandfather" segment, and getting from there to a 
-        decent set of chairs or fitted cupboards takes talent, practice, 
-        and education."<sup><a href="https://queue.acm.org/detail.cfm?id=2349257">[123]</a></sup>
+        "The purpose of [a] model is not to represent reality;
+        its purpose is to place in sharp relief particular elements
+        of reality so we can look at the model from different angles,
+        tweak it in various directions, generalize it, and then
+        come back to reality with a deeper understanding of what
+        happens there."<sup><a href="#references" title="Weber p 129">[a]</a></sup>
     </blockquote>
 </div>
+
 
 <div class="content" id="">
     <h2> Trillions and Trillions Served </h2>
@@ -352,7 +597,6 @@ last-updated: May 2021
         <li><a href="https://man7.org/tlpi/index.html">The Linux Programming Interface</a> by Michael Kerrisk</li>
         <li><a href="https://store.doverpublications.com/0486406873.html">Introduction to Logic</a> by Patrick Suppes (Bonus!)</li>
     </ul>
-
 </div>
 
 
