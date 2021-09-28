@@ -5,23 +5,19 @@ last-updated: March, 2021
 ---
 
 <!--
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://ryanstutorials.net/bash-scripting-tutorial/bash-script.php">What is a Bash Script?</a> - Bash Scripting Tutorial</a></li>
+        <li><a href="http://man.cat-v.org/unix-1st/1/sh">sh(1)</a> (First Edition)</li>
+        <li><a href="assets/simple-shell.c">simple-shell.c</a></li>
+    </ul>
+
  
 To Do:
     References, "boss"
     
     too much 'echo'
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            In the industry, we call it 
-            <em>convsersational computing.</em><sup><a href="https://multicians.org/history.html#tag2">[1]</a></sup>
-        </p>
-    </div>
-
-    Bash is the standard shell of GNU/Linux reference:
-    https://tiswww.case.edu/php/chet/bash/bashtop.html#Distributions
-
 
 -->
 
@@ -35,7 +31,7 @@ To Do:
         <li><a href="#path">PATH Environment Variable</a></li>
         <li><a href="#pwd">Working Directory</a></li>
         <li><a href="#arguments">Arguments</a></li>
-        <li><a href="#closing-remarks">Closing Remarks </a></li>
+        <li><a href="#builtins">How Builtins Began</a></li>
         <li><a href="#missing-semester">Missing Semester</a></li>
 		<li><a href="#references"> References </a></li>
 	</ul>
@@ -87,7 +83,7 @@ To Do:
 
 	<center>
 		<a title="Peter Hamer, CC BY-SA 2.0 &lt;https://creativecommons.org/licenses/by-sa/2.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Ken_Thompson_(sitting)_and_Dennis_Ritchie_at_PDP-11_(2876612463).jpg"><img width="1024" alt="Ken Thompson (sitting) and Dennis Ritchie at PDP-11 (2876612463)" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Ken_Thompson_%28sitting%29_and_Dennis_Ritchie_at_PDP-11_%282876612463%29.jpg/1024px-Ken_Thompson_%28sitting%29_and_Dennis_Ritchie_at_PDP-11_%282876612463%29.jpg"></a>
-        Ken Thompson (sitting) and Dennis Ritchie at PDP-11, in Bell Labs' <em>Unix Room</em><sup><a href="#references" title="Kernighan, p. 45">[2]</a></sup>
+        Ken Thompson (sitting) and Dennis Ritchie at PDP-11, in Bell Labs' <em>Unix Room</em><sup><a href="#references" title="Kernighan, p. 45">[1]</a></sup>
 	</center>
 
     <!--
@@ -112,7 +108,7 @@ To Do:
 	<p>
 		The monitor contained a buffer
         (on the order of a few kilobytes)
-		which maintained the text currently on-screen.<sup><a href="https://tldp.org/HOWTO/Text-Terminal-HOWTO-1.html#ss1.6">[3]</a></sup>
+		which maintained the text currently on-screen.<sup><a href="https://tldp.org/HOWTO/Text-Terminal-HOWTO-1.html#ss1.6">[2]</a></sup>
 		Using an onboard font table, it would redraw the text given to it without
 		further instruction by the computer; thus, the computer's only duties were to feed
 		the terminal characters and to draw characters from it.
@@ -192,7 +188,7 @@ To Do:
 		A shell is a program which interprets and executes our (arbitrary) commands.
 		It is a <em>shell</em> in the sense that it is the outermost layer of the
 		operating system, with which the user has direct
-        contact.<sup><a href="http://www.linfo.org/kernel.html">[4]</a></sup>
+        contact.<sup><a href="http://www.linfo.org/kernel.html">[3]</a></sup>
 		The Unix architecture entertains the shell as an ordinary user-space process.
 	</p>
 
@@ -254,7 +250,7 @@ To Do:
         <p>
             Bash additionally supports <em>aliasing</em>&mdash; 
             command expansion&mdash;
-            but recommends functions instead.<sup><a href="https://www.gnu.org/software/bash/manual/html_node/Aliases.html">[5]</a></sup>
+            but recommends functions instead.<sup><a href="https://www.gnu.org/software/bash/manual/html_node/Aliases.html">[4]</a></sup>
         </p>
     </div>
 
@@ -266,7 +262,7 @@ To Do:
 
     <p>
         <a href="https://www.gnu.org/software/bash/manual/bash.html#Shell-Functions">User-defined functions</a> are a way to group commands 
-        together.<sup><a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Functions.html#Shell-Functions">[6]</a></sup>
+        together.<sup><a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Functions.html#Shell-Functions">[5]</a></sup>
         The most common way to define one is to include it in
         one of Bash's startup files.
     </p>
@@ -477,38 +473,38 @@ To Do:
     </p>
 </div>
 
-<div class="content" id="closing-remarks">
-    <h2 style="margin-bottom: 0;">Closing Remarks</h2>
-    <h4><em>fork()</em></h4>
+<div class="content" id="builtins">
+    <h2>How Builtins Began</h2>
 
     <p>
-        The earliest versions of Unix entertained exactly two processes&mdash;
-        one for each of two terminals connected to the machine.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[7]</a></sup>
-        The shell,
+        The earliest versions of Unix entertained exactly two 
+        processes&mdash;
+        one for each of two terminals connected to the machine.
+        Thompson's shell,
         <a href="https://en.wikipedia.org/wiki/Thompson_shell"><code>sh</code></a>,
-        existed as a user-space process, but <em>fork()</em> had not been introduced.
+        existed as a user-space process, but <em>fork()</em> had not 
+        been introduced.
         To execute a command, the shell replaced itself with
         the requested program;
         the program, on calling <em>exit()</em>, replaced itself with the
-        shell once again.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[7]</a></sup>
+        shell once again.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[6]</a></sup>
     </p>
 
     <p>
         In particular, <em>change directories</em> was implemented
         as a separate command.
         When invoked, it inherited the shell's current working directory
-        and changed it, so that the shell would inherit a new
+        and changed it, so that the shell would later inherit a new
         working directory.
-        With the inclusion of the <em>fork()</em> system call, though,
-        the <code>chdir</code> command broke:
     </p>
 
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            The <code>exit</code> command is also, necessarily, built in to the shell.
-        </p>
-    </div>
+    <p>
+        The <em>fork()</em> system call promised to allow 
+        an arbitrary number of processes to coexist, and was implemented
+        with only a few lines of code.
+        With its inclusion, though,
+        the <code>chdir</code> command broke:
+    </p>
 
     <blockquote>
         "There was much reading of code and anxious introspection about how
@@ -520,19 +516,12 @@ To Do:
         but this process promptly terminated and had no effect whatsoever on
         its parent shell! It was necessary to make chdir a special command,
         executed internally within the shell. It turns out that several
-        command-like functions have the same property, for example login."<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[7]</a></sup>
+        command-like functions have the same property, for example login."<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[6]</a></sup>
     </blockquote>
 
     <p>
         And so, <em>builtins</em> began.
     </p>
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://ryanstutorials.net/bash-scripting-tutorial/bash-script.php">What is a Bash Script?</a> - Bash Scripting Tutorial</a></li>
-        <li><a href="http://man.cat-v.org/unix-1st/1/sh">sh(1)</a> (First Edition)</li>
-        <li><a href="assets/simple-shell.c">simple-shell.c</a></li>
-    </ul>
 </div>
 
 
