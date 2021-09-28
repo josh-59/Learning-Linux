@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Packages 
-last-updated: May 2021
+last-updated: September 2021
 ---
 
 <!--
@@ -119,7 +119,6 @@ last-updated: May 2021
         <li><a href="#binary-packages">Binary Packages</a></li>
         <li><a href="#package-managers">Package Managers</a></li>
         <li><a href="#distributions">Distributions</a></li>
-        <li><a href="#unix-philosophy">The Unix Philosophy</a></li>
         <li><a href="#references"> References </a></li>
     </ul>
 </div>
@@ -520,94 +519,6 @@ last-updated: May 2021
     <ul>
         <li><a href="https://linuxmint-user-guide.readthedocs.io/en/latest/snap.html"> Snap Store </a> - Linux Mint User Guide</li>
         <li><a href="https://wiki.archlinux.org/index.php/Arch_Linux">Arch Linux</a> - ArchWiki</li>
-    </ul>
-</div>
-
-<div class="content" id="unix-philosophy">
-    <h2 style='margin-bottom: 0px;'>The Unix Philosophy:</h2>
-    <h4>Modularity</h4>
-
-    <p>
-        GNU/Linux can be likened to a 500-piece puzzle with 2500 
-        available pieces:
-        For any piece of the puzzle (shell, desktop environment,
-        web browser, text editor&mdash; right down to
-        C libraries and
-        <a href="https://wiki.archlinux.org/title/kernel">kernels</a>)
-        there are around five competent options to choose from.
-    </p>
-
-    <p>
-        This is an example of modular construction, and it is 
-        left to the user to decide which software component
-        instantiates each needed piece.
-        Modular (as opposed to <em>monolithic</em><sup><a href="http://www.linfo.org/module.html">[4]</a></sup>) construction lies at the
-        heart of <a href="https://en.wikipedia.org/wiki/Unix_philosophy">the Unix Philosophy</a>: 
-    </p>
-
-    <blockquote>
-        "A serious attempt is made to apply the principle of modularity to everything on a Unix-like system, not only programs but also parts of programs, such as algorithms, and even the kernel. Thus, a Unix-like operating system generally (or at least ideally) consists of a small kernel together with a large number of small, specialized programs that can interact with each other through a variety of well-defined interfaces."<sup><a href="http://www.linfo.org/unix_philosophy.html">[5]</a></sup>
-    </blockquote>
-
-    <p>
-        In order for disparate projects to work together, it is 
-        necessary that each piece respect its relative bounds.
-        While minor changes to a <em>user</em> interface don't usually
-        cause trouble, when the interface is strictly digital, small
-        changes to it can easily break software depending on it.
-    </p>
-
-    <h3>The Linux Kernel</h3>
-
-    <p>
-        The Linux kernel began as a terminal emulator project:
-        In 1991, Linus Torvalds wished to connect his 386 to the 
-        University's new Unix system, and did so by writing a 
-        program that turned his computer into a (large) terminal emulator.<sup><a href="#reference" title="Torvalds p. 62">[6]</a></sup>
-        Although he had Minix running on his machine, he wrote the 
-        emulator to run on "bare metal" in order to explore the
-        machine.<sup><a href="#reference" title="Torvalds p. 62">[6]</a></sup>
-    </p>
-
-    <p>
-        The project grew; for some time, it was the
-        "GNU Emacs of Terminal Emulators," supporting many and
-        varied functionality.<sup><a href="#reference" title="Torvalds p. 78">[6]</a></sup>
-        Because he wanted to save files with the terminal emulator 
-        and then access them from the 
-        <a href="https://en.wikipedia.org/wiki/Minix">Minix OS</a>, 
-        he decided to implement 
-        Minix filesystem capabilities within it.<sup><a href="#reference" title="Torvalds p. 78">[6]</a></sup>  
-        This took several days, but when it was done,
-        it was clear to him that the project was on
-        its way to being a kernel; the next step was to obtain
-        the POSIX specification and implement each system call precisely.<sup><a href="#reference" title="Torvalds p. 78">[6]</a></sup>  
-    </p>
-
-    <!--
-    <p>
-        After going public, the kernel's development progressed rapidly.
-    </p>
-    -->
-
-    <p>
-        As the Linux kernel matured, Linus informally introduced
-        a single rule: <em>We do not break userspace.</em>
-        This means that, if a proposed change to the kernel breaks a
-        piece of software running on it, then the change will be rejected.
-        The consequence is that each Linux kernel 
-        is fully backwards-compatible with previous versions: 
-        Any project which depends upon it will 
-        continue to work on it.
-        While this is not the strict support of modularity per se, it
-        has helped make the Linux kernel
-        the most popular Unix-like kernel in existence.
-    </p>
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="http://www.linfo.org/unix_philosophy.html">Unix Philosophy Description</a> by The Linux Information Project (LINFO)</li>
-        <li><a href="https://frame.work/">Framework | Introducing the Framework Laptop</a></li>
     </ul>
 </div>
 
