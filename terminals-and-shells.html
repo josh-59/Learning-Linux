@@ -473,58 +473,6 @@ To Do:
     </p>
 </div>
 
-<div class="content" id="builtins">
-    <h2>How Builtins Began</h2>
-
-    <p>
-        The earliest versions of Unix entertained exactly two 
-        processes&mdash;
-        one for each of two terminals connected to the machine.
-        Thompson's shell,
-        <a href="https://en.wikipedia.org/wiki/Thompson_shell"><code>sh</code></a>,
-        existed as a user-space process, but <em>fork()</em> had not 
-        been introduced.
-        To execute a command, the shell replaced itself with
-        the requested program;
-        the program, on calling <em>exit()</em>, replaced itself with the
-        shell once again.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[6]</a></sup>
-    </p>
-
-    <p>
-        In particular, <em>change directories</em> was implemented
-        as a separate command.
-        When invoked, it inherited the shell's current working directory
-        and changed it, so that the shell would later inherit a new
-        working directory.
-    </p>
-
-    <p>
-        The <em>fork()</em> system call promised to allow 
-        an arbitrary number of processes to coexist, and was implemented
-        with only a few lines of code.
-        With its inclusion, though,
-        the <code>chdir</code> command broke:
-    </p>
-
-    <blockquote>
-        "There was much reading of code and anxious introspection about how
-        the addition of fork could have broken the chdir call. Finally the
-        truth dawned: in the old system chdir was an ordinary command; it
-        adjusted the current directory of the (unique) process attached to
-        the terminal. Under the new system, the chdir command correctly
-        changed the current directory of the process created to execute it,
-        but this process promptly terminated and had no effect whatsoever on
-        its parent shell! It was necessary to make chdir a special command,
-        executed internally within the shell. It turns out that several
-        command-like functions have the same property, for example login."<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[6]</a></sup>
-    </blockquote>
-
-    <p>
-        And so, <em>builtins</em> began.
-    </p>
-</div>
-
-
 <div class="content" id="missing-semester">
 	<h2 style="margin-bottom: 2pt;">Missing Semester</h2>
 	<h4 style="margin-bottom: 18pt;">Lecture 1: Course Overview + The Shell (2020)</h4>
