@@ -28,10 +28,8 @@ To Do:
 		<li><a href="#terminal-emulators"> Terminal Emulators </a></li>
 		<li><a href="#shells"> Shells </a></li>
         <li><a href="#commands">Commands</a></li>
-        <li><a href="#path">PATH Environment Variable</a></li>
         <li><a href="#pwd">Working Directory</a></li>
         <li><a href="#arguments">Arguments</a></li>
-        <li><a href="#builtins">How Builtins Began</a></li>
         <li><a href="#missing-semester">Missing Semester</a></li>
 		<li><a href="#references"> References </a></li>
 	</ul>
@@ -105,15 +103,6 @@ To Do:
         </p>
     </div>
 
-	<p>
-		The monitor contained a buffer
-        (on the order of a few kilobytes)
-		which maintained the text currently on-screen.<sup><a href="https://tldp.org/HOWTO/Text-Terminal-HOWTO-1.html#ss1.6">[2]</a></sup>
-		Using an onboard font table, it would redraw the text given to it without
-		further instruction by the computer; thus, the computer's only duties were to feed
-		the terminal characters and to draw characters from it.
-    </p>
-
 	<h3>See Also</h3>
 	<ul>
 		<li><a href="https://www.vt100.net/dec/vt_history">Meet the Family: Digital's Video Terminals</a></li>
@@ -124,7 +113,7 @@ To Do:
 <div id="terminal-emulators" class="content">
 	<h2> Terminal Emulators </h2>
 	<p>
-		Terminals persist today primarily in the form of
+		Terminals persist today, but primarily in the form of
         <i>terminal emulators</i>.
         A terminal emulator is a program that runs within the context of a desktop
         environment and provides the functionality of a physical terminal:
@@ -153,13 +142,6 @@ To Do:
 		These emulators are "dumb" in the sense that they do nothing except
 		display text and return text.
 		Per tradition, their input and output is handled through device files.
-	</p>
-
-	<p>
-		Terminals can become quite involved. 
-        For this introduction, and for
-        most purposes, it is sufficient to recognize that
-		terminals and shells are distinct, cooperating processes.
 	</p>
 
     <h3>See Also:</h3>
@@ -215,18 +197,13 @@ To Do:
 		<img src="assets/img/gnome-w-bash-ps.png">
         <figcaption><center><code>ps</code> command, by default listing processes owned by the current user,<br> and connected to the current terminal </center></figcaption>
 	</figure>
-
-    <p>
-        Since Bash is the default shell on most Linux distributions,
-        we will study it here.
-    </p>
 </div>
 
 <div class="content" id="commands">
     <h2>Commands</h2>
 
     <p>
-        A typical line of input to the shell has the following form:
+        A typical line of input has the following form:
     </p>
 
     <div class="code">
@@ -238,128 +215,30 @@ To Do:
         and pass it arguments <code>[arg ...]</code>.</em>
     </p>
 
+    <h3>Command Location</h3>
+
     <p>
-        Since it's kind of a big topic, we'll cover command location 
-        first.  
         There are a few places the shell looks.
         In order: 
     </p>
 
-    <div class="aside-right">
-        <h4>Note:</h4>
-        <p>
-            Bash additionally supports <em>aliasing</em>&mdash; 
-            command expansion&mdash;
-            but recommends functions instead.<sup><a href="https://www.gnu.org/software/bash/manual/html_node/Aliases.html">[4]</a></sup>
-        </p>
-    </div>
-
     <ol>
-        <li>User-defined functions</li>
-        <li>Shell builtin commands</li>
-        <li>External programs</li>
+        <li>User-defined functions - A way to group commands</li>
+        <li>Shell builtin commands - Commands hard-coded into the shell</li>
+        <li>External programs - Commands that exist as separate programs</li>
     </ol>
 
     <p>
-        <a href="https://www.gnu.org/software/bash/manual/bash.html#Shell-Functions">User-defined functions</a> are a way to group commands 
-        together.<sup><a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Functions.html#Shell-Functions">[5]</a></sup>
-        The most common way to define one is to include it in
-        one of Bash's startup files.
-    </p>
-
-    <p>
-        <a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Builtin-Commands.html#Shell-Builtin-Commands">Shell builtins</a> 
-        are hard coded into the shell.  
-        They are relatively few, and may be listed with,
-    </p>
-
-    <div class="code">
-        $ help
-    </div>
-
-    <p>
-        Most commands fall into the third category, external programs.
-        For example, <code>ls</code> is <em>not</em> a shell builtin.
-        It is found in <code>/usr/bin</code>, and the program <code>/usr/bin/ls</code>
-        is executed whenever the command <code>ls</code> is issued. 
+        Most (nearly all) commands fall into the third category, 
+        external programs.
+        For example, <code>ls</code> is <em>not</em> a shell builtin,
+        but can be found in <code>/usr/bin</code>.
     </p>
 
     <h3>See Also:</h3>
     <ul>
         <li><a href="https://fossbytes.com/basic-linux-commands-beginners/">30 Basic Linux Commands for Beginners [Linux 101]</a> - Fossbytes</li>
         <li><a href="https://www.shell-tips.com/bash/functions/">The Complete How To Guide of Bash Functions</a></li>
-    </ul>
-</div>
-
-<div class="content" id="path">
-    <h2>Path</h2>
-
-    <div class="aside-right">
-        <h4>Remember:</h4>
-        <p>
-            The shell searches the directories in <code>PATH</code> only 
-            after looking for a user-defined function and a builtin by the
-            same name.
-        </p>
-    </div>
-
-    <p>
-        So where does the shell look for external programs?
-        The <code>PATH</code> environment variable
-        contains a colon (<code>:</code>)-separated list of directories to be searched
-        when looking for a program.
-        It may look like this:
-    </p>
-
-    <div class="code">
-        $ echo $PATH<br>
-        /usr/bin:/bin:/home/josh/.local/bin
-    </div>
-
-    <p>
-        The shell searches each directory in this list, from left to right,
-        for a file whose name matches the command given.
-        It executes the first found, then abandons its search.
-        The shell does not search the current working directory
-        for a command.
-    </p>
-    
-    <p>
-        If <code><i>command</i></code> includes a forward-slash <code>/</code>, 
-        then it is interpretted as a program name.
-        For instance, we can execute precisely <code>/usr/bin/echo</code>
-        by issuing,
-    </p>
-
-    <div class="code">
-        $ /usr/bin/echo one two three four <br>
-        one two three four
-    </div>
-
-    <p>
-        This is typically done to execute a program in the current working
-        directory:
-    </p>
-
-    <div class="code">
-        $ ./<i>program</i> 
-    </div>
-
-    <p>
-        The <code>PATH</code> environment variable is one of several
-        standard environment variables.  
-        These variables are stored by the kernel on behalf of the process, 
-        and may be listed with,
-    </p>
-
-    <div class="code">
-        $ printenv
-    </div>
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://en.wikipedia.org/wiki/Environment_variable#True_environment_variables"> Environment Variables </a> - Wikipedia</li>
-        <li><a href="https://unix.stackexchange.com/questions/26047/how-to-correctly-add-a-path-to-path">bash - How to Correctly add a path to PATH?</a></li>
     </ul>
 </div>
 
@@ -393,7 +272,7 @@ To Do:
     </div>
 
     <p>
-        Its value may be changed with <code>cd</code>:
+        And we can move around with <code>cd</code>:
     </p>
 
     <div class="code">
@@ -413,14 +292,6 @@ To Do:
         /home/josh
     </div>
 
-    <p>
-        And we can jump to an arbitrary location in the directory tree by
-        giving an absolute pathname:
-    </p>
-
-    <div class="code">
-        $ cd /proc/self
-    </div>
 </div>
 
 <div class="content" id="arguments">
