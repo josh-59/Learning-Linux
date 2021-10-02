@@ -119,8 +119,9 @@ shared, persistent data structure.
         Each process has a narrowly defined role, which it is 
         expected to do well. It might copy a file, 
         display a window, provide audio services, or display the time.
-        These many small programs are used together to accomplish
-        a given task; thereby, the utility of each is compounded.
+        Many small programs are used together to accomplish
+        a given task, thereby easing the maintenance and compounding 
+        the utility of each.
     </p>
 
     <p>
@@ -147,7 +148,7 @@ shared, persistent data structure.
         <em><a href="http://www.linfo.org/root.html">root</a></em> 
         are special:
         They can change any file on the system, without qualification.
-        That is, they they by-default transcend the file 
+        That is, they by-default transcend the file 
         ownership scheme, and we often use 
         <em>superuser</em> to describe this user.
     </p>
@@ -177,7 +178,7 @@ shared, persistent data structure.
         At the end of its boot sequence, the kernel launches a single program,
         <code>/sbin/init</code>,<sup><a href="https://en.wikipedia.org/wiki/Init">[3]</a></sup>
         and in so doing creates the system's first process.
-        While init schemes
+        While <code>init</code> schemes
         <a href="https://arxiv.org/abs/0706.2748">have evolved</a>
         over the years, its purpose has not changed:
         It is a process with superuser permissions that acts as a
@@ -203,7 +204,7 @@ shared, persistent data structure.
         <code>init</code>'s first responsibility is to bring up userspace.
         It does this by launching a sequence of programs, most of which
         act in the background, some of which the user interacts with directly.
-        After this, <em>init</em> is tasked with managing available services
+        After this, it manages available services
         and logging events for administrative purposes.
         Its final responsibility is to shut the system down cleanly.
     </p>
@@ -261,29 +262,9 @@ shared, persistent data structure.
 <div class="content" id="exec">
     <h2>Executing a Different Program</h2>
 
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            <em>execvp()</em>, for example,  
-            searches the PATH environment variable for 
-            a particular file.
-        </p>
-    </div>
-
     <p>
         The <em>exec()</em> family of functions change the program
         currently being executed.  
-        Properly speaking, there is only one <em>exec()</em> system
-        call, and that is <a href="https://man7.org/linux/man-pages/man2/execve.2.html"><em>execve()</em></a>.
-        Modern C libraries offer several variants of
-        it, each with slightly different conveniences.<sup><a href="https://pubs.opengroup.org/onlinepubs/009695399/functions/exec.html">[4]</a></sup>
-        Under the hood, they each map to  
-        a call to <em>execve()</em>.<sup><a href="https://man7.org/linux/man-pages/man3/exec.3.html">[5]</a></sup>
-        They, along with <em>execve()</em>, are collectively referred 
-        to as <em>exec().</em> 
-    </p>
-
-    <p>
         A simple invocation is:
     </p>
 
@@ -295,7 +276,7 @@ shared, persistent data structure.
     </pre>
 
     <p>
-        The <em>execve()</em> system call loads a new program into
+        <em>exec()</em> simply loads a new program into
         the calling process's memory.
         During this operation, the old program and its
         memory&mdash; that is, its state&mdash; are discarded.
@@ -319,7 +300,7 @@ shared, persistent data structure.
 
     <p>
         This sequence results in one process launching another program,
-        and is traditionally referred to as <em>fork and exec.</em>
+        and is traditionally referred to as "fork and exec."
         Note that there is no need to adjust other 
         process attributes, and they are preserved across
         <em>exec()</em>.
