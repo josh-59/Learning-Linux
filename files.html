@@ -5,6 +5,16 @@ last-updated: July, 2021
 ---
 
 <!--
+
+    <p>
+        <a href="https://man7.org/">Michael Kerrisk</a> has called the 
+        Unix file interface,
+        "The Universal I/O Model," and for good reason:
+        The four file operations apply to all file types except
+        directories, whose structure (a tree) is protected by the
+        kernel through a distinct set of system calls.
+    </p>
+
     To Do:
 
     <em>table</em> is often abreviated to "tab"-
@@ -46,8 +56,7 @@ last-updated: July, 2021
 
     <p>
         The protogenesis of Unix was a filesystem.<sup><a href=#references>[1]</a><a href="http://read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[2]</a></sup>
-        Designed by the researchers of Bell Laboratories and
-        implemented primarily by Ken Thompson,
+        Designed and implemented by the researchers of Bell Laboratories,
         this piece of software became an operating system 
         when a means of interacting with its contents was
         introduced.
@@ -241,37 +250,24 @@ last-updated: July, 2021
         character devices do not.
     </p>
 
-    <h3>Using Block Special Device Files</h3>
-
-    <p>
-        Operations involving block device files are relatively rare,
-        and require superuser permissions.
-        Given a new or blank block device, the typical course is 
-        to first partition the drive with <code>fdisk</code> or 
-        <code>parted</code>, then to create a filesystem on the 
-        partition (using perhaps <code>mkfs.ext4</code>, for example), 
-        then to mount the filesystem and access the device through 
-        the directory tree.
-    </p>
-
-    <p>
-        Other uses include reading the block device to create 
-        a disk image, or writing to it to make use of a disk image.
-        Through the device file, such operations can be carried out
-        with ordinary user-space tools.
-    </p>
-
     <h3>See Also:</h3>
     <ul>
         <li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks#Introduction_to_block_devices">Introduction to Block Devices</a> (From "Preparing the Disks") - Gentoo Wiki</li>
         <li><a href="https://docs.fedoraproject.org/en-US/fedora/f28/install-guide/appendixes/Disk_Partitions/">An Introduction to Disk Partitions</a> :: Fedora Docs</a></li>
         <li><a href="https://wiki.archlinux.org/index.php/Device_file">Device File - ArchWiki</a></li>
-        <li><a href="https://nostarch.com/howlinuxworks3">How Linux Works, 3<sup>rd</sup> Edition</a> - <em>What Every Superuser Should Know</em> by Brian Ward</li>
     </ul>
 </div>
 
 <div class="content" id="pseudo-files">
     <h2>Pseudo Files</h2>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Linux is neither the only, nor the first, to maintain a 
+            <code>/proc</code> directory.
+        </p>
+    </div>
 
     <p>
         The Linux kernel augments the traditional Unix directory tree with
@@ -304,13 +300,6 @@ last-updated: July, 2021
     </div>
 
     <p>
-        When <code>cat</code> reads the file <code>/proc/meminfo</code>,
-        the kernel generates the above data and hands it back to 
-        <code>cat</code>,
-        which then prints it to <code>STDOUT</code>.
-    </p>
-
-    <p>
         <code>/proc</code> contains one directory for each 
         process (running program) on the system; therein, each directory 
         contains substantial information about its respective process.
@@ -323,25 +312,15 @@ last-updated: July, 2021
 
     <ul style="width: 70%; margin-left: 5%;">
         <li>
-            <strong>FIFO:</strong> Also known as a <em>named pipe,</em> 
-            this is a file type that connects one running program to another.
+            <strong>FIFO:</strong> 
             "FIFO" stands for <em>First in, first out</em>.
+            This is a file type that connects one running program to another.
         </li>
 
         <li>
-            <strong>Socket:</strong> A file that supports interprocess 
-            communication across networks.
+            <strong>Socket:</strong> A FIFO, but across networks.
         </li>
     </ul>
-    </p>
-
-    <p>
-        <a href="https://man7.org/">Michael Kerrisk</a> has called the 
-        Unix file interface,
-        "The Universal I/O Model," and for good reason:
-        The four file operations apply to all file types except
-        directories, whose structure (a tree) is protected by the
-        kernel through a distinct set of system calls.
     </p>
 
     <h3>See Also:</h3>
@@ -406,9 +385,6 @@ last-updated: July, 2021
         However, the directory structure is intended to be a 
         hierarchy, and some software (like <code>find</code>)
         depends upon this structure.
-    </p>
-
-    <p>
         Leaving directory contents exposed to users introduced the 
         possibility that a loop could form, or that a 
         directory subtree could be broken off without being properly 
@@ -418,11 +394,12 @@ last-updated: July, 2021
     </p>
 
     <p>
-        When a directory is created, it contains two entries: 
+        Directories start life with two entries: 
         <code>.</code> ("dot"),
         and <code>..</code> ("dot dot").
-        These entries cannot be removed, nor changed. The first,
-        <code>.</code>, is a reference to the containing directory itself,
+        These entries cannot be removed, nor changed.
+        The first, <code>.</code>, is a reference to the containing directory 
+        itself,
         and is used as a handle to the current working directory.
         <code>..</code> is a reference to the directory's 
         parent directory.
@@ -451,7 +428,7 @@ last-updated: July, 2021
     </div>
 
     <p>
-        Within any Unix-like operating system, some common themes will be found.
+        Within a Unix directory tree, some common themes will be found.
         For instance, <code>bin</code> directories are found in several places, such as
         <code>/bin</code>, <code>/sbin</code>, along with <code>/usr/bin</code>
         and often <br><code>/home/<i>user</i>/.local/bin</code> as well.
@@ -605,14 +582,8 @@ last-updated: July, 2021
         Therefore, we typically locate an empty directory in the existing
         directory tree, and use it as the to-be mounted filesystem's root
         directory.
-    </p>
-
-    <p>
-        The Filesystem Hierarchy Standard offers two places to mount such
-        temporary filesystems: <code>/mnt</code> and <code>/media/<em>user</em></code>.
-        Before mounting, the usual practice is to identify the 
-        correct partition with
-        <a href="https://man7.org/linux/man-pages/man8/lsblk.8.html"><code>lsblk</code></a>.
+        The Filesystem Hierarchy Standard offers two places to mount 
+        temporary filesystems.
     </p>
 
 
@@ -634,37 +605,32 @@ last-updated: July, 2021
     <h4>and Filenames</h4>
 
     <p>
-        A file's inode serves as the system's reference to the file.
-        On traditional Unix filesystems, each file's inode 
-        contains the file's metadata, 
-        in addition to pointers to the file's contents.
-        When a program instructs the kernel to open a file, for instance,
-        the kernel identifies the relevant inode, loads it into memory,
-        inspects it to determine if the process has sufficient permission
-        to read or write it, and returns to the process a response
-        saying so.
+        Now things get interesting.
     </p>
 
     <p>
-        Inodes themselves are the responsibility of their respective 
-        filesystem, wherein each is given a number.
-        Within a filesystem, an inode number identifies an
-        inode, and thereby identifies a file.
+        An <em>inode</em> is a data structure describing a file
+        which additionally serves as the system's reference to the
+        file.
+        Within each filesystem, inodes are arranged (conceptually)
+        in an array; the index into this array serves as a number
+        identifying the specific inode, and thereby, a specific file.
     </p>
 
     <p>
-        A directory is a file that associates filenames (strings) with 
-        inode numbers:
+        A <em>directory</em> is a file that associates filenames with 
+        inode numbers, like so:
     </p>
 
     <div class="aside-right">
         <h4>Remember:</h4>
         <p>
-            Every path on the directory tree terminates in a unique 
+            Every path on the directory tree terminates in a 
             inode reference.
         </p>
     </div>
-    
+
+
     <div class="code">
         $ ls -ia ~/Public/Learning-Linux <br>
         645278 ./<br>
@@ -754,8 +720,6 @@ last-updated: July, 2021
         including spaces in filenames.
     </p>
 
-
-
     <h3> See Also: </h3>
     <ul>
         <li><a href="http://linfo.org/hard_link.html">What is a hard link?</a> -- definition by The Linux Information Project (LINFO)</li>
@@ -764,8 +728,6 @@ last-updated: July, 2021
         <li><a href="https://en.wikipedia.org/wiki/Symbolic_link#Overview"> Symbolic Link (Overview)</a> - Wikipedia</li>
     </ul>
 </div>
-
-
 
 <div class="content" id="original-unix">
     <h2>The Original Unix Filesystem</h2>
