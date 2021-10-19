@@ -35,7 +35,7 @@ last-updated: July, 2021
         <li><a href="#basic-file-operations">Basic File Operations</a></li>
         <li><a href="#fs-heir"> Filesystem Hierarchy </a></li>
         <li><a href="#mounting"> Mounting a Filesystem</a></li>
-        <li><a href="#udacity"> Udacity </a></li>
+        <li><a href="#engineer-man">Engineer Man</a></li>
         <li><a href="#references"> References </a></li>
     </ul>
 </div>
@@ -485,7 +485,7 @@ last-updated: July, 2021
         while default configurations are typically
         stored in <code>/usr</code>, alongside their respective packages.
         As a general rule, modify <code>/etc</code>, and let your
-        distribution handle <code>/usr</code>.<sup><a href="#references" title="Ward">[9]</a></sup>
+        distribution handle <code>/usr</code>.<sup><a href="https://nostarch.com/howlinuxworks3" title="Ward">[9]</a></sup>
     </p>
 
     <p>
@@ -593,48 +593,11 @@ last-updated: July, 2021
     </ul>
 </div>
 
-<div id="udacity" class="content">
-    <!--
-        To Do:
-        <b>Exercises:</b>
+<div id="engineer-man" class="content">
+    <h2 style="margin-bottom: 2pt;">Engineer Man:</h2>
+    <h4 style="margin-bottom: 18pt;">The Linux File System ...for humans</h4>
+    <iframe class="video" src="https://www.youtube.com/embed/UFIoRLqhFpo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-        <ol>
-            <li>
-                <code>cd</code> around your machine and <code>file</code>
-                some device files.
-            </li>
-        <li>
-            Using <code>watch(1)</code>, create an ad-hoc terminal 
-            utility to monitor the system's memory.
-        </li>
-        <li>
-            Create a boot media using <code>cat</code>.
-        </li>
-        <li>
-            An <code>iso</code> disk image contains partitions and filesystems.
-            Mount one of them.
-        </li>
-        <li>
-            http://cs.smith.edu/~nhowe/262/oldlabs/ext2.html#itable
-            https://www.kernel.org/doc/html/latest/filesystems/ext4/index.html
-        </li>
-        <li>
-            What is <code>dirname</code> of <code>/</code>?
-        </li>
-        <li>
-            Character devices do not support partitioning. Why not?
-        </li>
-        </ol>
-
-        <h3>Further Reading:</h3>
-        <ul>
-            <li><a href="http://kroah.com/linux/talks/ols_2003_udev_paper/Reprint-Kroah-Hartman-OLS2003.pdf"><code>udev</code> - A Userspace Implementation of devfs</a> by Greg Kroah-Hartman</a></li>
-        </ul>
-
-    -->
-    <h2 style="margin-bottom: 2pt;">Udacity:</h2>
-    <h4 style="margin-bottom: 18pt;"> Inode Structure</h4>
-    <iframe class="video" src="https://www.youtube.com/embed/tMVj22EWg6A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 <div id="references" class="content">
@@ -642,7 +605,7 @@ last-updated: July, 2021
     <ol>
         <li> Kernighan, Brian. <i>Unix: A History and a Memoir.</i>  Published 2020, by Brian W. Kernighan via Kindle Direct Publishing. </li>
 
-        <li>Ritchie, D. M. (1984). The Evolution of the Unix Time-sharing System. <em>AT&amp;T Bell Laboratories Technical Journal,</em> 63(6), 2nd ser., 1577-1593.</li>
+        <li>Ritchie, D. M. (1984). <a href="http://read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">The Evolution of the Unix Time-sharing System</a>. <em>AT&amp;T Bell Laboratories Technical Journal,</em> 63(6), 2nd ser., 1577-1593.</li>
 
         <li> LSB Workgroup, The Linux Foundation. (2015, March 9). 3.6 /dev: Device Files. Retrieved July 17, 2020, from <a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03.html</a> </li>
 
@@ -656,14 +619,6 @@ last-updated: July, 2021
 
         <li>Nguyen, B. (2004, April 30). <em>The Linux Filesystem Heirarchy, Section 1.17. /usr. </em>/usr. <a href="https://tldp.org/LDP/Linux-Filesystem-Hierarchy/html/usr.html">https://tldp.org/LDP/Linux-Filesystem-Hierarchy/html/usr.html</a>.</li>
 
-        <li>Ward, B. (2021). <em>How Linux Works: What Every Superuser Should Know</em> (3rd ed.). No Starch Press.</li>
-
-
-        <li> Kerrisk, Michael.  <em>The Linux Programming Interface</em>. San Francisco, CA, No Starch Press, 2010.</li>
-
-        <li>Bach, M. J. (1986). Chapter 4: Internal Representation of Files. In <em>The Design of the UNIX Operating System</em> (pp. 60-90). Englewood Cliffs, NG: Prentice-Hall. </li>
-
-        <li> Overview of the Linux Virtual File System - The Linux Kernel Documentation. (n.d.). Retrieved July 17, 2020, from <a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">https://www.kernel.org/doc/html/latest/filesystems/vfs.html</a> </li>
+        <li>Ward, B. (2021). <em><a href="https://nostarch.com/howlinuxworks3">How Linux Works: What Every Superuser Should Know</a></em> (3rd ed.). No Starch Press.</li>
     </ol>
-
 </div>
