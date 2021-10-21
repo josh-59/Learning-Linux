@@ -5,114 +5,42 @@ last-updated: October 2021
 ---
 
 <!--
-
-    The purpose of this article is to describe, in broad strokes,
-    how the open-source ecosystem works. 
-
-    <p>
-        While collaboration is often believed to be the purview
-        of hobbyists alone, as Greg Kroah-Hartman notes, 
-        there are compelling reasons to return <em>any</em> improvement
-        to its source.
-        First, your improvement will be maintained along with all
-        other improvements.
-        Second, you no longer have to deal with two variants of the
-        work, and will not have to merge your changes into the latest
-        release.
-        Third, the distributive production process is well-known
-        for outpacing any individual or group effort, so that if
-        you <em>don't,</em> your variant will be
-    </p>
-
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Historically, copies were sold to cover the expense of 
-            distribution, typically, the cost of media.
-        </p>
-    </div>
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://www.pcmag.com/news/linux-is-now-on-mars-thanks-to-nasas-perseverance-rover">Linux is Now on Mars, Thanks to NASA's Perseverance Rover | PCMag</a></li>
-    </ul>
 </div>
 
         <li><a href="https://www.zdnet.com/article/spacex-weve-launched-32000-linux-computers-into-space-for-starlink-internet/">SpaceX: We've launched 32,000 Linux computers into space for Starlink Internet | ZDNet</a></li>
 
         <li><a href="https://www.hackerrank.com/">HackerRank</a></li>
 
-    
-
-<div class="content" id="risc-v">
-    <iframe class="video" src="https://www.youtube-nocookie.com/embed/Rsyn3_PjRXw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
 
 <div class="content" id="brett-cannon">
     <h2> Brett Cannon </h2>
-    <iframe class="video" src="https://www.youtube.com/embed/tzFWz5fiVKU?start=2935" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="video" src="https://www.youtube.com/embed/tzFWz5fiVKU?start=2935" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-        <li><a href="https://press.stripe.com/">Stripe Press</a> - Ideas for progress</a></li>
 
+    <h2>Suggested Reading</h2>
 
-    <p>
-        To me, the magic of open-source is that it's composed of works
-        people created because they wanted to.
-        The works we use every day are shepherded by talented and educated
-        individuals, whom are professionals of their field.
-    </p>
-
-    <p>
-        Nobody is collecting your data; nobody is getting rich;
-        it's just good things made for their own sake.
-    </p>
-
-    <p>
-        <h3>See Also:</h3>
-        <ul>
-            <li><a href="https://www.contributor-covenant.org/">Contributors' Covenant</a></li>
-        </ul>
-    </p>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-        </p>
-    </div>
-
-    <p>
-        Simply put, project maintainers are endowed to reject a 
-        modification for any reason whatsoever.
-    </p>
-
-    <p>
-        The ability to choose and curate 
-        successful open-source, and takes place on
-        multiple levels. 
-        Project leaders choose among proposed modification;
-        distributions implicitly curate projects in their 
-        (preferential) presentation of an operating system; and,
-        users choose among distributions, projects and source, 
-        however they see fit.
-    </p>
+    <ul>
+        <li><a href="https://opendatastructures.org/">Open Data Structures</a> by Pat Morin</li>
+        <li><a href="http://discrete.openmathbooks.org/dmoi3.html">Discrete Mathematics: An Open Introduction</a> by Oscar Levin</li>
+        <li><a href="https://csapp.cs.cmu.edu/">Computer Systems: A Programmer's Perspective</a> by Randal E. Bryant and David R. O'Hallaron</li>
+        <li><a href="https://man7.org/tlpi/index.html">The Linux Programming Interface</a> by Michael Kerrisk</li>
+        <li><a href="https://store.doverpublications.com/0486406873.html">Introduction to Logic</a> by Patrick Suppes (Bonus!)</li>
+    </ul>
 </div>
-
 
 -->
 
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction">Introduction </a></li>
-        <li><a href="#non-rival">Non-Rival</a></li>
-        <li><a href="#right-to-distribute">Right to Distribute</a></li>
         <li><a href="#intrinsic-motivation">Intrinsic Motivation</a></li>
+        <li><a href="#anatomy">Anatomy of a Project</a></li>
         <li><a href="#voluntary">Voluntary</a></li>
-        <li><a href="#modularity">Modularity</a></li>
-        <li><a href="#anatomy-of-a-project">Anatomy of a Project</a></li>
-        <li><a href="#less"><code>less</code>: A Success Story</a></li>
         <li><a href="#community">Community</a></li>
+        <li><a href="#less"><code style="line-height: 1;">less</code>: A Success Story</a></li>
+
+        <li><a href="#apache">Apache Foundation</a></li>
         <li><a href="#references"> References </a></li>
     </ul>
 </div>
@@ -134,48 +62,26 @@ last-updated: October 2021
         key components of the open-source ecosystem,
         from the motivations of contributors to the leadership
         style necessarily implied by them.
-        Note: This article focuses on collaborative open-source, 
-        and ignores non-collaborative (e.g., "Cathedral") 
-        organization.
-    </p>
-</div>
-
-
-<div class="content" id="non-rival">
-    <h2>Non-Rival</h2>
-
-    <p>
-        Our first task is to describe the product being distributed.
-
-    <p>
-        Software is <em>non-rival:</em>
-        This means that it can be used by many people as easily as it
-        can be used by one.
-        A good example of a non-rival good is a television broadcast:
-        It may be watched by one or it may be watched by many
-        without the broadcaster making any distinction.
-    </p>
-
-    <blockquote>
-        "The purpose of [a] model is not to represent reality;
-        its purpose is to place in sharp relief particular elements
-        of reality so we can look at the model from different angles,
-        tweak it in various directions, generalize it, and then
-        come back to reality with a deeper understanding of what
-        happens there."<sup><a href="#references" title="Weber p 129">[a]</a></sup>
-    </blockquote>
-</div>
-
-<div class="content" id="right-to-distribute">
-    <h2>Right to Distribute</h2>
-
-    <p>
-
     </p>
 </div>
 
 <div class="content" id="intrinsic-motivation">
     <h2>Intrinsic Motivation</h2>
+
+    <p>
+        Compared to the market economy we all know and love, 
+        open source is a strange beast:
+        Its works are created because what they 
+        are <em>is</em> what their creators want.
+        Stated another way, the intent of all free software is 
+        the software itself.
+        Such goods, produced for their own sake, are said
+        to be <em>intrinsically motivated,</em> and 
+        this underpins the open-source ecosystem.
+        Intrinsic motivation is found in many other places, 
+        such as academic research and artistic works set on 
+        public display.
+    </p>
 
     <div class="aside-right">
         <h4>Remember:</h4>
@@ -184,57 +90,49 @@ last-updated: October 2021
         </p>
     </div>
 
-    <p>
-        Compared to the market economy we all know and love, 
-        open source a strange beast:
-        Its works are created because what they 
-        are <em>is</em> what their creators want.
-        Stated another way, the intent of all free software is 
-        the software itself.
-        Goods produced for their own sake are said
-        to be <em>intrinsically motivated,</em> and 
-        this underpins the open-source ecosystem.
-        Intrinsic motivation is found in many other places, 
-        such as academic research and artistic works set on 
-        public display.
-    </p>
 
     <p>
-        Although it may seem minor and obvious, intrinsic
-        motivation has one important facet not yet mentioned:
-        We are not in the business of pleasing other people!
+        Admittedly, we are adopting a very high-level perspective of the
+        open-source ecosystem: 
+        By analogy, money is the singular motivating entity in the market
+        economy.
+        Although many individuals prefer think otherwise,
+        open-source is neither charitable nor altruistic.
+        Stated more plainly, 
+        We are not in the business of pleasing other people.
         We are in the 
         <em>I have an itch and I'm gonna scratch it</em> business.
     </p>
 
     <p>
-        Admittedly, we are adopting a very high-level perspective of the
-        open-source ecosystem: 
-        Many contributors to the free software ecosystem have other 
-        motivations, such as passion, enjoyment, idealism, etc..
-        Nonetheless, it is the author's opinion that intrinsic motivation 
-        serves the same fundamental purpose to the open-source ecosystem 
-        that money serves within the market economy.
-    </p>
-
-    <p>
-        Contributing to open source sometimes makes 
+        Every contributor to the free software ecosystem has their own
+        motivations, and they may well be passion, enjoyment, or idealism.
+        Contributing to open source can also make
         sound financial sense&mdash; Facebook 
         taking part in the development of 
         <code><a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">btrfs</a></code> 
         is one such example.
         However, in this case, as in most other cases, 
-        the principal interest of Facebook is in the filesystem itself:
+        the principal interest is in the software <em>per se:</em>
         It is developed to be used, not to be sold, and is therefore
         developed for its intrinsic value, rather than direct profit.
     </p>
 
     <p>
-        If intrinsic motivation indeed serves as the principle motivation
-        of open-source software, 
+        Similarly, while we may like to think that open-source is
+        strictly the work of hobbyists, in practice this isn't the case.
+        Since the resulting software may be used for any purpose&mdash;
+        including commercial purposes&mdash; it has naturally come
+        to pass that some developers intend to profit
+        from its use.
+    </p>
+
+    <p>
+        If intrinsic motivation is indeed the principle motivation
+        of the open-source ecosystem, as I believe,
         then it would follow that those projects with
         the greatest number of use-cases garner the greatest support.
-        To date, the largest free-software organization in existence 
+        In fact, the largest free-software organization to date
         is neither GNU nor Linux, but the 
         <a href="https://www.apache.org/">Apache Foundation</a>, 
         whose projects underpin the world wide web.
@@ -246,22 +144,116 @@ last-updated: October 2021
     </ul>
 </div>
 
-<div class="content" id="voluntary">
-    <h2>Voluntary</h2>
+<div class="content" id="anatomy">
+    <h2>Anatomy of a Project</h2>
+
+    <p>
+        The typical open-source project is organized around
+        a single trusted maintainer. 
+        This person is responsible for presenting the
+        project to the world, 
+        for releasing new versions as they become mature,
+        and for staging releases so that they may be worked on.
+        To give two examples, 
+        the Linux kernel is maintained by Linus Torvalds, and
+        the Bourne Again Shell is maintained by 
+        Chet Ramey.
+        These individuals work dilligently over years to earn the
+        trust of the community and to produce a mature, stable product.
+    </p>
 
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            No distinction is made between user and developer.
-            However, most users are not developers.
+            An open-source software project without a maintainer 
+            is said to be <em>unmaintained.</em> 
+            It has been effectively abandoned&mdash;
+            or is looking for a maintainer :) .
         </p>
     </div>
 
     <p>
-        The members of the open-source community work together in a
-        highly parallel and nearly unstructured fashion.
-        Weber lists this as the defining characteristic of the open-source
-        process:
+        Maintainers have the right to modify their work
+        however want.  
+        They accept modifications as they see fit,
+        and they decline
+        modifications for any reason whatsoever. 
+        Modifications are declined so often that 
+        project leadership can become a matter of curating modifications.
+    </p>
+
+    <p>
+        <em><mark>
+        The success of any project, with respect to producing a mature
+            and polished product, is contingent principally 
+            upon its improvement through long-term evolution.</mark></em>
+        It doesn't matter how clever you are, nor how talented you may
+        be; what really matters is how willing you are to make sure that
+        your job gets done right.
+    </p>
+
+    <p>
+        In practice, a discussion usually surrounds each modification;
+        these discussions can become heated, and conflict is common.
+        The accepted standard is to say what you think and to
+        not be afraid about disagreeing with others,
+        whoever they may be.<sup><a href="references" title="Weber 63">[1]</a></sup>
+        At the end of the day, the maintainer has the final say over their
+        project, and if you don't like it, you are free to fork the
+        source repository and lead a new project somewhere different.
+    </p>
+
+    <p>
+        Very large projects, like the Linux kernel or the Firefox
+        web browser, are broken down into subsystems which then
+        have maintainers of their own.
+        Modifications to the project first
+        pass through the appropriate subsystem maintainer 
+        before being proposed to the project's overarching maintainer;
+        modifications can be declined anywhere along the way.
+    </p>
+
+    <p>
+        <h3>See Also:</h3>
+        <ul>
+            <li><a href="https://www.contributor-covenant.org/">Contributors' Covenant</a>: A Code of Conduct for Open Source and other Digital Commons Communities</li>
+        </ul>
+    </p>
+</div>
+
+<div class="content" id="voluntary">
+    <h2>Voluntary Selection of Tasks</h2>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            In the Linux kernel, as in Bash and Firefox and 
+            most other open-source projects of today, each and every 
+            user is invited to submit improvements.
+            Thanks to the internet, the result has been
+            collaboration on a very large scale.
+            To describe this situation, I would like to introduce a new
+            term: Massively collaborative.
+            A project is <em>massively collaborative</em> if every user is
+            welcome to contribute.
+        </p>
+    </div>
+
+    <p>
+        The contributors of the open-source community work together in a
+        highly parallel and unstructured fashion.<sup><a href="#references" title="Weber">[1]</a></sup>
+        Each person is presented with the same core code-base&mdash;
+        the project as it exists presently&mdash;
+        and can modify it however they desire.
+        A project's maintainer may suggest things that could use improvement,
+        but no developer is obliged to make those changes, and any user
+        can make other modifications.
+    </p>
+
+    <p>
+        The result is voluntary participation and voluntary selection
+        of tasks, and as a model of production, this organizational
+        structure defines the open-source process:
     </p>
 
     <blockquote>
@@ -274,37 +266,14 @@ last-updated: October 2021
         What makes it different from the theoretical option of exit
         from a corporate organization is this: Each person is free to
         choose what he wishes to work on or to contribute.
-        There is no consciously organized or enforced division of labor.
+        There is no consciously organized or enforced division of labor.<sup><a href="#references" title="Weber">[1]</a></sup>
     </blockquote>
 
-    <p>
-        Each person is presented with the same core code-base&mdash;
-        the project as it exists presently&mdash;
-        and can modify it however they desire.
-        A project maintainer may suggest things that could use improvement,
-        but no user is obliged to make those changes, and any user
-        can make other modifications.
-    </p>
-</div>
-
-
-<div class="content" id="modularity">
-    <h2>Modularity</h2>
 
     <p>
-        Since Richard Stallman began the GNU project, the open-source 
-        ecosystem has grown, with people working on the things they want.
-        While we may like to <em>think</em> that open-source is
-        strictly the work of hobbyists, in practice this isn't the case.
-        Since the resulting software may be used for any purpose&mdash;
-        including commercial purposes&mdash; it has naturally come
-        to pass that some developers intend to profit
-        from its use.
-    </p>
-
-    <p>
-        The result is totally decentralized:
-        There are relatively few authorities over the open-source ecosystem.
+        The result is totally decentralized, with 
+        very few authorities present. 
+        Those that do exist are recognized in virtue of their merit alone.
     </p>
 
     <p>
@@ -315,59 +284,63 @@ last-updated: October 2021
         own, distinct from, say, shell development, itself distinct from,
         say, kernel development.
     </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Benevolent_dictator_for_life">Benevolent Dictator for Life</a> - Wikipedia</li>
+    </ul>
 </div>
 
-<div class="content" id="structure">
-    <h2>Anatomy of a Project</h2>
-
+<div class="content" id="community">
+    <h2>Community</h2>
     <p>
-        Can even depend upon <em>platform.</em>
-        GNU: 
-        Github/JS: Microprojects w/ one contributor
+        Open source is built by a community of like-minded
+        actors, and community is a highly underrated aspect of
+        successful open-source.
+        It is the community that produced the software, the community which
+        supports it, and the community that uses it.
     </p>
 
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            An open-source software project without a maintainer 
-            is said to be <em>unmaintained.</em> 
-            It has been effectively abandoned 
-            (and/or is looking for a maintainer :).
-        </p>
-    </div>
-
     <p>
-        Typically, though, a piece of free software will have one
-        trusted maintainer. 
-        This person is responsible for presenting the
-        project to the world, and
-        for releasing new versions as they become mature.
-        Maintainers have the right to modify their work
-        however they see fit, 
-        can accept users' modifications however they see fit,
-        and have the right to <em>decline</em>
-        a modification for any reason whatsoever. 
-        In practice, discussion usually precedes modification.
-        After modifications are submitted, they are reviewed on a 
-        case-by-case basis, and then either accepted or rejected.
+        To me, the magic of open source is that it's composed of works
+        people created because they wanted to.
+        Nobody is collecting your data, and nobody is getting rich.
+        It's just good things made for their own sake&mdash;
+        and that's enough for me.
+        These projects are shepherded by talented and educated
+        individuals, professionals of their respective fields, 
+        who volunteered their time to create these things, and
+        I think that they, and their works, are awesome.
     </p>
 
-  <em><mark>
-            The success of any project, with respect to producing a mature
-            and polished product, is contingent principally 
-            upon its improvement through long-term evolution.
-        </mark></em>
+    <p>
+        Open source is a highly social way of working.
+        Community emerges dynamically as projects get their feet under
+        them; communities grow around some shared goal, and are not born.  
+        Apache Software Foundation member Ted Dunning explains:
+    </p>
+
+    <blockquote>
+        "We as people come together; we have some communal interest.
+        As such, we build a structure together that allows us to work
+        together, allows us to communicate, allows us to bring in new people,
+        and build software together.
+        This is definitely not the fastest way to build software, but
+        it's a remarkably sustainable way."
+    </blockquote>
 </div>
+
+
 
 <div class="content" id="less">
     <h2 style="margin-bottom: 0;"><code>less</code>:</h2>
     <h4>A Success Story</h4>
 
     <p>
-        A <em>paging utility</em> is a program that displays a file on 
-        the terminal one screenful at a time.
+        A paging utility is a program that displays a file on 
+        a terminal one screenful at a time.
         The first widely used paging utility was <code>more</code>, written by
-        Dan Halbert as a graduate student at UC Berkeley in 1978.<sup><a href="https://danhalbert.org/more.html">[aa]</a></sup>
+        Dan Halbert as a graduate student at UC Berkeley in 1978.<sup><a href="https://danhalbert.org/more.html">[2]</a></sup>
         <code>more</code> is a simple program: It first 
         fills up the screen, then waits for user input to print the 
         next line(s).
@@ -418,64 +391,31 @@ last-updated: October 2021
     <p>
         Mark Nudelman continues to maintain the project today.  
         It is, at the time of this writing, in its 581<sup>st</sup> 
-        version.<sup><a href="http://www.greenwoodsoftware.com/less/faq.html#version">[q]</a></sup><sup><a href="http://www.greenwoodsoftware.com/less/index.html">[r]</a></sup>
+        version.<sup><a href="http://www.greenwoodsoftware.com/less/faq.html#version">[3]</a></sup><sup><a href="http://www.greenwoodsoftware.com/less/index.html">[4]</a></sup>
     </p>
 
     <h3>See Also:</h3>
     <ul>
-        <li><a href="https://fedoramagazine.org/5-cool-terminal-pagers-in-fedora/">5 cool terminal pagers in Fedora</a> - Fedora Magazine</li>
-        <li><a href="https://zaiste.net/posts/shell-commands-rust/">Rewritten in Rust: Modern Alternatives of Command-Line Tools</a></li>
-
-        <li><a href="https://arstechnica.com/gadgets/2021/06/sifives-brand-new-p550-is-one-of-the-worlds-fastest-risc-v-cpus/">SiFive's brand-new P550 is one of the world's fastest RISC-V CPUs</a> | Ars Technica</li>
+        <li><a href="https://www.pcmag.com/news/linux-is-now-on-mars-thanks-to-nasas-perseverance-rover">Linux is Now on Mars, Thanks to NASA's Perseverance Rover | PCMag</a></li>
     </ul>
-</div>
-
-
-<div class="content" id="community">
-    <p>
-        In ____ the term <em>open-source</em> was chosen as a less-abrasive 
-        sysnonym for Stallman's <em>free software.</em>
-        While this new term served its purpose, it is still imperfect,
-        as it connotes an ideal. 
-        In a nontrivial sense, the notions of both open-source and
-        free software are captured by, simply, <em>community.</em>
-        For, it is the community that produced it, the community which
-        supports it, and the community that uses it.
-    </p>
-
-    <p>
-        It is done for its own sake.
-    </p>
 
 </div>
 
-<div class="content" id="">
-    <h2> Trillions and Trillions Served </h2>
+
+<div class="content" id="apache">
+    <h2 style="margin-bottom: 2pt;">Apache Foundation</h2>
+    <h4 style="margin-bottom: 18pt;"> Trillions and Trillions Served </h4>
 
     <iframe class="video" src="https://www.youtube.com/embed/JUt2nb0mgwg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-    <h2>Suggested Reading</h2>
-
-    <ul>
-        <li><a href="https://opendatastructures.org/">Open Data Structures</a> by Pat Morin</li>
-        <li><a href="http://discrete.openmathbooks.org/dmoi3.html">Discrete Mathematics: An Open Introduction</a> by Oscar Levin</li>
-        <li><a href="https://csapp.cs.cmu.edu/">Computer Systems: A Programmer's Perspective</a> by Randal E. Bryant and David R. O'Hallaron</li>
-        <li><a href="https://man7.org/tlpi/index.html">The Linux Programming Interface</a> by Michael Kerrisk</li>
-        <li><a href="https://store.doverpublications.com/0486406873.html">Introduction to Logic</a> by Patrick Suppes (Bonus!)</li>
-    </ul>
 </div>
 
 
 <div id="references" class="content">
     <h2> References </h2>
     <ol>
-        <li> Required Knowledge - OSDev Wiki. (2020, January 22). Retrieved July 29, 2020, from <a href="https://wiki.osdev.org/Required_Knowledge">https://wiki.osdev.org/Required_Knowledge</a></li>
-        <li> Kernighan, Brian. <i>Unix: A History and a Memoir.</i>  Published 2020, by Brian W. Kernighan via Kindle Direct Publishing. </li>
-        <li> Kernighan, B. W., &amp; Ritchie, D. M. (1988). <i>The C Programming Language</i> (2nd ed.). Englewood Cliffs,, NJ: Prentice Hall.</li>
-        <li> Blandy, J. (n.d.). Rust and Bitter C++ Developers with Jim Blandy [Interview by A. G. Bell]. Corecursive. Retrieved July 29, 2020, from https://corecursive.com/013-rust-and-bitter-c-developers-with-jim-blandy/.</li>
-        <li> Cantrill, B. (2018). <i>Is It Time to Rewrite the Operating System in Rust?</i>. Lecture presented at QCon, San Francisco, 2018.</li>
-        <li>Turon, A., &amp; Matsakis, N. (2014, October 30).  Stability as a Deliverable:  Rust Blog.  Retrieved August 18, 2020, from
-            <a href="https://blog.rust-lang.org/2014/10/30/Stability.html">https://blog.rust-lang.org/2014/10/30/Stability.html</a></li>
-        <li> The Firefox release process. (n.d.). Retrieved August 18, 2020, from <a href="https://wiki.mozilla.org/Release_Management/Release_Process">https://wiki.mozilla.org/Release_Management/Release_Process</a></li>
+        <li>Weber, S. (2005). The success of Open source. Harvard University Press. </li>
+        <li>Halbert, D. (n.d.). The early history of the more command. The Early History of the "more" Command. Retrieved October 21, 2021, from <a href="https://danhalbert.org/more.html">https://danhalbert.org/more.html</a>. </li>
+        <li>Less FAQ. (n.d.). Retrieved October 21, 2021, from <a href="http://www.greenwoodsoftware.com/less/faq.html#version">http://www.greenwoodsoftware.com/less/faq.html#version</a>. </li>
+        <li>Less. (n.d.). Retrieved October 21, 2021, from <a href="http://www.greenwoodsoftware.com/less/index.html">http://www.greenwoodsoftware.com/less/index.html</a>. </li>
     </ol>
 </div>
