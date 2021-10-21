@@ -10,3 +10,5 @@
   link: /terminals-and-shells.html
 - name: Packages 
   link: /packages.html
+- name: How It Works
+  link: /how-it-works.html
