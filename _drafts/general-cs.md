@@ -1,11 +1,9 @@
 # General Computer Science
 
 ## Programming Languages
-    Major programming languages of our time include:
+    Programming languages you must know
     Python
-    JavaScript
     C
-    Rust
 
 ## Data Structures
 After learning a programming language or two,
@@ -53,3 +51,38 @@ but I prefer <a href="http://discrete.openmathbooks.org/dmoi3.html"> Discrete Ma
 
 <li><a href="https://www.hackerrank.com/">HackerRank</a></li>
 <li><a href="https://emkc.org/">Engineer Man Knowledge Center</a></li>
+
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            In two words: <em>Helper Functions!</em>
+        </p>
+    </div>
+
+    <p> 
+        If you do wish to contribute a modification to a project, 
+        then you have a few responsibilities:
+        <ul>
+            <li>
+                Write code that can be read easily
+                <ul>
+                    <li>Code is read much more often than it is written</li>
+                </ul>
+            </li>
+            <li>
+                Write code that can be improved
+                <ul>
+                    <li>Keep it simple</li>
+                </ul>
+            </li>
+            <li>
+                Write code that is modular
+                <ul>
+                    <li>Account for future development</li>
+                </ul>
+            </li>
+        </ul>
+        But most of all, do one thing and do it well.
+    </p>
+
