@@ -29,6 +29,7 @@ To Do:
         <li><a href="#commands">Commands</a></li>
         <li><a href="#pwd">Working Directory</a></li>
         <li><a href="#arguments">Arguments</a></li>
+        <li><a href="#redirection">Redirection</a></li>
         <li><a href="#missing-semester">Missing Semester</a></li>
 		<li><a href="#references"> References </a></li>
 	</ul>
@@ -192,6 +193,11 @@ To Do:
         When it's ready for user input, the shell will print a prompt.
         Here, that prompt is <code>josh@home:~$</code>.
     </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="assets/simple-shell.c">simple-shell.c</a> - A very simple shell, written in C</li>
+    </ul>
 </div>
 
 <div class="content" id="commands">
@@ -337,6 +343,59 @@ To Do:
     <p>
         See a command's manual page (or other documentation) for details.
     </p>
+</div>
+
+
+<div class="content" id="redirection">
+    <h2>Redirection</h2>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+
+        <p>
+            Using FIFO files, we can also direct the output of one command
+            to be the input of another. This is referred to as 
+            <em><a href="https://www.gnu.org/software/bash/manual/html_node/Pipelines.html">pipeing</a></em>.
+        </p>
+    </div>
+
+
+    <p>
+        One of the features that makes the Unix command-line interface
+        exceptionally powerful is the ability to direct output away from 
+        the terminal.
+        Since the terminal is represented as a file, 
+        the operations on it and any other file are identical.
+        Thus, we can replace the TTY file a command is going to write to 
+        with a regular file, and capture the command's output in it:
+    </p>
+
+    <div class="code">
+        $ lscpu &gt; cpu_stats
+    </div>
+
+    <p>
+        This is called <em><a href="https://www.gnu.org/software/bash/manual/html_node/Redirections.html">redirection</a>,</em>
+        and here we are redirecting <code>STDOUT</code> to the file
+        <em>cpu_stats.</em>
+        Since <code>STDERR</code> has not been changed, the terminal
+        remains the destination for any error messages.
+    </p>
+
+    <p>
+        Redirection operators <code>&lt;</code>, <code>&gt;</code>, and
+        <code>2&gt;</code> redirect <code>STDIN</code>, 
+        <code>STDOUT</code>, and <code>STDERR</code>, respectively.
+        Redirections are interpreted by the shell before the command 
+        executes, and are not passed to the command; 
+        therefore, they are not arguments.
+    </p>
+
+    <h3>See Also</h3>
+    <ul>
+        <li><a href="https://youtu.be/oB1uZf6Z27Y">Lesson 3: I/O, Redirect, & Pipe: Pipin' Ain't Easy But It Sure Is Fun</a> by Level 099 Techs (Youtube video)</li>
+    </ul>
+
 </div>
 
 <div class="content" id="missing-semester">
