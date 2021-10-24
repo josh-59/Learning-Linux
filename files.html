@@ -94,7 +94,7 @@ last-updated: July, 2021
     <h3>File Attributes</h3>
 
     <p>
-        A substantial amount of information is stored about each file
+        A substantial amount of information about each file is stored 
         on the system.
         Such information is called
         <em><a href="https://en.wikipedia.org/wiki/Metadata">metadata</a>,</em>
@@ -135,7 +135,8 @@ last-updated: July, 2021
     <h2>Regular Files</h2>
 
     <p>
-        A regular file is stored on disk or other persistent storage device.
+        A regular file is stored on a disk or other persistent storage 
+        device.
         Most files are regular files.
     </p>
 
@@ -192,7 +193,7 @@ last-updated: July, 2021
     <p>
         To simply view the contents of a file, we can use the 
         <a href="https://www.greenwoodsoftware.com/less/"><code>less</code></a>
-        paging utility, which displays one screenful of the file at a time.
+        paging utility, which displays one screenful of a file at a time.
     </p>
 </div>
 
@@ -209,22 +210,21 @@ last-updated: July, 2021
     </p>
 
     <p>
-        A <em>device file</em> represents a device connected to the system.
-        They reside in <code>/dev</code>.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[3]</a></sup>
-        Each file therein serves as a user-space handle to its
-        respective device.
+        A <em>device file</em> is a file that represents a device 
+        connected to the system.
+        Device files reside in <code>/dev</code>.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[3]</a></sup>
         For example, when a USB-stick is inserted,
         a new file appears in <code>/dev</code>, and the device may be 
-        read from or written to <em>directly</em> by passing
-        this file to tools like <code>cat</code> or <code>dd</code>.
+        read from or written to directly by passing
+        that file to tools like <code>cat</code> or <code>dd</code>.
     </p>
 
     <p>
-        Note that the essential capabilities of the USB-stick are 
-        preserved through the <em>file</em> interface: It can be 
-        written to and read from. 
+        It's interesting to note that the essential capabilities 
+        of the USB-stick are preserved through the 
+        file interface: It can be read from and written to.
         If we were to add the capacity to 
-        <a href="https://man7.org/linux/man-pages/man2/lseek.2.html"><em>seek</em></a> 
+        <a href="https://man7.org/linux/man-pages/man2/lseek.2.html">seek</a> 
         (i.e., change location) within the file, then we would be able to use the 
         device in its entirety, through the file interface alone.
     </p>
@@ -233,8 +233,8 @@ last-updated: July, 2021
 
     <p>
         Unix kernels support two kinds of device files:
-        <em>Block</em> and <em>character.</em>
-        A character device file may only be written to, or read from,
+        Block and Character.
+        A character device file may only be read from or written to
         a single byte (ASCII character) at a time.
         A terminal is one kind of device represented by a 
         character device file.
@@ -242,10 +242,10 @@ last-updated: July, 2021
 
     <p>
         Hard disks, SSD's and removable mass media are represented by
-        <em>block</em> device files:
+        block device files:
         These devices support reading and writing only
-        in blocks of bytes at a time, and the kernel must take care
-        to buffer arbitrary user-space interactions with it. 
+        in blocks of bytes at a time, and the kernel must 
+        buffer arbitrary user-space interactions with it. 
         Additionally, block device files support seeking, whereas 
         character devices do not.
     </p>
@@ -271,7 +271,7 @@ last-updated: July, 2021
 
     <p>
         The Linux kernel augments the traditional Unix directory tree with
-        <em>pseudo</em> (or "synthetic") files, in
+        pseudo (or "synthetic") files, in
         <code>/proc</code> and <code>/sys</code>.
         These files do not exist on disk, and do not exist on 
         any persistent storage. 
@@ -313,8 +313,8 @@ last-updated: July, 2021
     <ul style="width: 70%; margin-left: 5%;">
         <li>
             <strong>FIFO:</strong> 
-            "FIFO" stands for <em>First in, first out</em>.
-            This is a file type that connects one running program to another.
+            Also called a "pipe", "FIFO" stands for <em>First in, first out</em>.
+            This is file type connects one running program to another.
         </li>
 
         <li>
@@ -343,13 +343,13 @@ last-updated: July, 2021
         Can be used to create new and empty files.</li>
         <li><code>cp</code> - Copy files and directories</li>
         <li><code>rm</code> - Remove files or directories</li>
-        <li><code>mv</code> - Move (rename) files</li>
+        <li><code>mv</code> - Move (or rename) files</li>
         <li><code>chown</code> - Change file owner and group</li>
         <li><code>chmod</code> - Change access permissions</li>
     </ul>
 
     <p>
-        Utilities to manipulate file contents:
+        Utilities to display and inspect file contents:
     </p>
 
     <ul>
@@ -357,6 +357,7 @@ last-updated: July, 2021
         <li><code>head</code> - Output the first part of a file</li>
         <li><code>wc</code> - Print newline, word and byte counts</li>
         <li><code>sort</code> - Sort text files</li>
+        <li><code>readlink</code> - Print value of symlink or canonical file name</li>
     </ul>
 
     <p>
@@ -366,7 +367,6 @@ last-updated: July, 2021
     <ul>
         <li><code>mkdir</code> - Make directories</li>
         <li><code>rmdir</code> - Remove empty directories</li>
-        <li><code>readlink</code> - Print value of symlink or canonical file name</li>
     </ul>
 
     <h3>Introduction to Directories</h3>
@@ -432,10 +432,10 @@ last-updated: July, 2021
         For instance, <code>bin</code> directories are found in several places, such as
         <code>/bin</code>, <code>/sbin</code>, along with <code>/usr/bin</code>
         and often <br><code>/home/<i>user</i>/.local/bin</code> as well.
-        These contain binary executable files&ndash; programs&ndash; such as
+        These contain binary executable files&mdash; programs&mdash; such as
         <code>bash</code> and <code>ls</code>.
         Other standard directories include <code>/root</code>, the root user's home
-        directory, and <code>/proc</code>, and <code>/dev</code> as
+        directory, and <code>/proc</code> and <code>/dev</code>, as
         mentioned above.
         Some of these have been standard since Unix's inception,
         while others have become standard in more recent years.
@@ -454,9 +454,9 @@ last-updated: July, 2021
     </div>
 
     <p>
-        Let's begin at the top.
-        Each Unix-like operating system has a single directory, <code>/</code>,
-        which is the root of the directory tree.
+        Let's start at the top.
+        Each Unix-like operating system has a single root directory, 
+        <code>/</code>, which is the root of the directory tree.
         Every file on the system may be addressed in 
         absolute terms by giving its location relative to this
         directory.
@@ -481,7 +481,7 @@ last-updated: July, 2021
     </p>
 
     <p>
-        System configuration is maintained as a collection of 
+        System configuration is traditionally maintained as a collection of 
         plain-text, human-readable regular files.
         System-specific configuration is kept in <code>/etc</code>,
         while default configurations are typically
@@ -541,7 +541,7 @@ last-updated: July, 2021
         As mentioned, Unix-like operating systems maintain a single 
         directory tree for the entire system.
         When a new device is introduced to the machine, 
-        any directory tree it contains must be placed in the 
+        the directory tree it contains must be placed in the 
         system's existing directory tree before its contents can
         be accessed.
         This operation is known as <em>mounting.</em>
@@ -577,8 +577,9 @@ last-updated: July, 2021
     <p>
         Superuser privileges allow us to mount a filesystem anywhere.
         When a filesystem is mounted to a directory that is not empty,
-        those directory's contents become hidden by those of the new filesystem,
-        and are inaccessible while the filesystem is mounted.
+        the original directory's contents become hidden by those 
+        of the new filesystem,
+        and are inaccessible until the filesystem is unmounted. 
         Therefore, we typically locate an empty directory in the existing
         directory tree, and use it as the to-be mounted filesystem's root
         directory.
@@ -602,13 +603,9 @@ last-updated: July, 2021
     <h4>and Filenames</h4>
 
     <p>
-        Now things get interesting.
-    </p>
-
-    <p>
-        An <em>inode</em> is a C struct describing a file.
-        It contains all metadata of the file, and it contains
-        a sequences of references (that is, pointers) to the data
+        An <em>inode</em> is a data structure describing a file.
+        It contains all metadata of the file, as well as 
+        a sequences of references to the data
         constituting the file.
         Within a filesystem, inodes are located in an array; 
         an index into this array uniquely identifies an inode, and
@@ -650,8 +647,8 @@ last-updated: July, 2021
     </div>
 
     <p>
-        Here we have the (actual) inode numbers on the left, and associated
-        filename on the right.
+        Here we have the file's inode numbers on the left, and its
+        associated filename on the right.
         Each filename/inode number pair is called a <em>hard link.</em>
         A single hard link is created upon file creation, 
         but a given file may have more than one hard link!
@@ -665,7 +662,6 @@ last-updated: July, 2021
         <p>
             Admittedly, it is unusual for a regular file to have more
             than one hard link.
-            But it could be handy!
         </p>
     </div>
 
@@ -700,12 +696,12 @@ last-updated: July, 2021
 
     <p>
         Unix and its derivatives allow files to be named very flexibly:
-        Filenames may include any characters except <code>/</code>,
+        Filenames may include any character except <code>/</code>,
         the path separator, and <code>\NULL</code>, the
         end-of-string delimiter.
         More, it is not required that filenames terminate in any special
         postfix; in particular, a file is executable exactly when an
-        execute permission bit applies to the requesting user.
+        execute permission bit applies to the requesting program.
         As a rule, filenames are not interpreted by the kernel, 
         and exist for user interpretation alone.
     </p>
@@ -720,7 +716,7 @@ last-updated: July, 2021
 
     <p>
         By convention alone, filenames beginning with <code>.</code>
-        are considered hidden, including <code>.</code> and <code>..</code>.
+        are considered hidden (including <code>.</code> and <code>..</code>).
         They can be listed by <code>ls</code> with the <code>-a</code>
         ("all") switch:
     </p>
@@ -728,11 +724,6 @@ last-updated: July, 2021
     <div class="code">
         $ ls -a
     </div>
-
-    <p>
-        Finally, to avoid ambiguity at the command-line, we generally avoid
-        including spaces in filenames.
-    </p>
 
     <h3> See Also: </h3>
     <ul>
