@@ -4,10 +4,13 @@ title: "Appendix: Getting Your Degree"
 last-updated: October 2021
 ---
 
+<!--
+        At the end of abstraction, there is always math, it seems.
+-->
+
 <div id="nav_bar_2" class="nav">
 	<ul>
         <li><a href="#introduction">Introduction</a></li>
-        <li><a href="#scripts-and-binaries">Scripts and Binaries</a></li>
         <li><a href="#languages">Languages</a></li>
         <li><a href="#standard-courses">Standard Courses</a></li>
     </ul>
@@ -25,55 +28,14 @@ last-updated: October 2021
     </div>
 
     <p>
-        Open source is supposed to be fun&mdash; that's the whole point.
+        Programming can be a lucrative profession, and it also makes
+        a wonderful hobby.
+        It is not necessary to get a degree in computer science to
+        land a job as a programmer:
         The rule of thumb is that two good projects are worth an
         entire CS degree.
-    </p>
-</div>
-
-<div class="content" id="scripts-and-binaries">
-    <h2> Scripts and Binaries </h2>
-    <p>
-        An interpreter script, or simply "script", is a text file 
-        that is executable.
-        A script's first line must be of the form:
-    </p>
-
-    <div class="code">
-        #!/bin/python3
-    </div>
-
-    <p>
-        This line is known as <em>hash-bang,</em> 
-        and it is interpreted by the kernel when the file is 
-        executed.
-        For example, the traditional first program, <em>Hello world</em>
-        in Python is: 
-    </p>
-
-    <div class="code">
-        #!/usr/bin/python3
-
-        print("Hello World!")
-    </div>
-
-    <h3>Binary Executables</h3>
-
-    <p>
-        A binary executable is a program stored in a format that is 
-        natively executable by the host computer.
-        Such programs are not readable by humans, and requires
-        compilation before it can be executed.
-    </p>
-  
-    <p>
-        The first Unix binary executable file format was <em>a.out,</em>
-        shorthand for
-        <em>assembler output.</em><sup><a href="https://en.wikipedia.org/wiki/A.out">[5]</a></sup>
-        The binary format of our time is 
-        <a href="https://wiki.osdev.org/ELF">ELF</a>.
-        Command-line tools for peeking into such a file
-        include:<sup><a href="https://en.wikipedia.org/wiki/Executable_and_Linkable_Format#Tools">[21]</a></sup>
+        In this addendum, we will discuss what must and what should
+        be learned to become an good programmer.
     </p>
 </div>
 
@@ -85,10 +47,17 @@ last-updated: October 2021
         and you're free to do whatever you want.
         Some people find sport in writing programs in the language
         <em><a href="https://en.wikipedia.org/wiki/Brainfuck">Brainfuck</a>,</em> 
-        a language intentionally obtuse, to the extreme.
+        a language intentionally obtuse (to the extreme).
         I'm only going to cover three languages: 
         Two that I think you must know, and one that I think should know.
     </p>
+
+    <div class="aside-right">
+        <h4>Pro Tip:</h4>
+        <p>
+            Ignore C++
+        </p>
+    </div>
 
     <p>
         The C programming language is the <em>lingua franca</em> of 
@@ -108,9 +77,9 @@ last-updated: October 2021
         The second language that is essential in the modern domain
         is Python. 
         Python is a powerful, general-purpose interpreted language,
-        and can be used for everything from data analysis to accounting.
-        It's in wide use by the scientific community, and it 
-        is widely supported; it's even available on the latest
+        and makes a wonderful first language. 
+        It's in wide use by the scientific community; 
+        it's even available on the latest
         generation of TI-84 Graphing calculators!
     </p>
 
@@ -123,7 +92,7 @@ last-updated: October 2021
         is fast and memory-safe.
         It's a great language, but it is not easy to learn!
         If you stumble through learning Rust as I did, try to
-        keep in mind that <em>what you are doing is not simple.</em>
+        keep in mind that <em>What you are doing is not simple.</em>
     </p>
 
     <h3>See Also:</h3>
@@ -137,41 +106,34 @@ last-updated: October 2021
     <h2>Standard Courses</h2>
 
     <p>
-        At the end of abstraction, there is always math, it seems.
+        After learning a programming language or two,
+        data structures are the next thing to learn in becoming 
+        a developer.
+        All modern standard libraries include smart implementations of
+        common data structures, so that learning how they work is a 
+        bit of an academic exercise&mdash; but worthwhile, for sure.
+        The developer of today needs to know when to use what,
+        but by and large, does not need to know their in's and out's.
+    </p>
+
+    <p>
+        The best text on data structures that I have found is
+        <a href="https://opendatastructures.org/">Open Data Structures</a>
+        by Pat Morin.
+        Advanced studies delve further into mathematics, 
+        usually focusing on analysis of algorithms.
+        The canonical text of algorithms is <a href="https://mitpress.mit.edu/books/introduction-algorithms-third-edition">Introduction to Algorithms</a>.
+    </p>
+
+    <h3>Discrete Mathematics</h3>
+
+    <p>
         Discrete mathematics is not a difficult subject,
         on par with a first semester in calculus.  
         It will introduce enough logic to give informal proofs, 
         cover graphs and advanced counting techniques, among other thinGiven the inherently discrete nature of the bit, this
         subject founds all of computer science.
-        The canonical text for computer scientists is
-        I prefer <a href="http://discrete.openmathbooks.org/dmoi3.html"> Discrete Mathematics - An Open Introduction</a>
-    </p>
-
-    <h3>Data Structures and Algorithms</h3>
-
-    <p>
-        After learning a programming language or two,
-        data structures are the next thing to learn in becoming 
-        a developer.
-        some understanding of discrete math is a required.
-        To illustrate, the typical methodology in writing a program is to
-        <em>first select the most appropriate data structure,</em>
-        then build the rest of the program around it.
-    </p>
-
-    <p>
-        Tending towards academic, given that modern standard libraries
-        include smart implementations of common data structures.
-        As such, you're going to need to know how to use them, but
-        building them is more of an exercise than a fruitful
-        proposition.
-    </p>
-
-    <p>
-        <a href="https://opendatastructures.org/">Open Data Structures</a>
-        Advanced studies delve further into mathematics, usually focusing on analysis of 
-        algorithms.
-        The canonical text of algorithms is <a href="https://mitpress.mit.edu/books/introduction-algorithms-third-edition">Introduction to Algorithms</a>.
+        I liked <a href="http://discrete.openmathbooks.org/dmoi3.html"> Discrete Mathematics - An Open Introduction</a>
     </p>
  
     <h3>Computer Architecture</h3>
