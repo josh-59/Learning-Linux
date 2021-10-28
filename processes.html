@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Processes
-last-updated: July, 2021
+last-updated: October, 2021
 ---
 
 <!--
@@ -69,11 +69,8 @@ shared, persistent data structure.
     </div>
 
     <p>
-        A <em>program</em> is a file containing both a sequence of 
-        instructions to be carried out by a computer
-        and a description of initial memory conditions.
         A <em>process</em> is an instance of an executing 
-        program.<sup><a href="#references">[1]</a></sup><sup><a href="#references">[2]</a></sup>
+        program.
         This essay will chisel out the fundamentals of
         processes, as they exist on Unix-like platforms.
     </p>
@@ -176,7 +173,7 @@ shared, persistent data structure.
 
     <p>
         At the end of its boot sequence, the kernel launches a single program,
-        <code>/sbin/init</code>,<sup><a href="https://en.wikipedia.org/wiki/Init">[3]</a></sup>
+        <code>/sbin/init</code>,<sup><a href="https://en.wikipedia.org/wiki/Init">[1]</a></sup>
         and in so doing creates the system's first process.
         While <code>init</code> schemes
         <a href="https://arxiv.org/abs/0706.2748">have evolved</a>
@@ -420,7 +417,7 @@ shared, persistent data structure.
                 For the purposes of process termination,
                 <code>SIGINT</code> is preferred because it 
                 affords the program the oportunity to exit 
-                cleanly.<sup><a href="#references" title="Kerrisk, p389">[1]</a></sup>
+                cleanly.<sup><a href="#references" title="Kerrisk, p389">[2]</a></sup>
                 At the command line, it is created and sent to 
                 the foreground
                 process with CTRL+C.
@@ -627,19 +624,14 @@ shared, persistent data structure.
   <h2> References </h2>
   <ol>
     <li>
-        Kerrisk, Michael.  <em>The Linux Programming Interface</em>. San Francisco, CA, No Starch Press, 2010.
-    </li>
-    <li>
-        Bryant, R. E., & O'Hallaron, D. R. (2016).  Processes. In <em>Computer Systems: A Programmer's Perspective</em> (3rd ed., p. 732).  Upper Saddle River, New Jersey: Pearson.
-    </li>
-    <li>
         init - Wikipedia (3 March 2021). Retrieved March 30, 2021, from <a href="https://en.wikipedia.org/wiki/Init">https://en.wikipedia.org/wiki/Init</a>
     </li>
-
-    <li>exec. (2008). <a href="https://pubs.opengroup.org/onlinepubs/009695399/functions/exec.html">https://pubs.opengroup.org/onlinepubs/009695399/functions/exec.html</a>.</li>
-
-
-    <li>exec(3) - Linux manual page. (2021, March 22). <a href="https://man7.org/linux/man-pages/man3/exec.3.html">https://man7.org/linux/man-pages/man3/exec.3.html</a>.</li>
+    <li>
+        Kerrisk, Michael.  <em><a href="https://man7.org/tlpi/index.html">The Linux Programming Interface</a></em>. San Francisco, CA, No Starch Press, 2010.
+    </li>
+    <li>
+        Arpaci-Dusseau, R. H., &amp; Arpaci-Dusseau, A. C. (2018). <em><a href="https://pages.cs.wisc.edu/~remzi/OSTEP/">Operating systems: Three easy pieces</a>.</em> Arpaci-Dusseau Books. 
+    </li>
   </ol>
 </div>
 
