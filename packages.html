@@ -361,12 +361,20 @@ last-updated: September 2021
         A <em>package manager</eM> is a utility that obtains and installs 
         packages.
         Package managers are distribution-specific, and serve
-        as the users' interface to their repositories.
+        as users' interface to their repositories.
         Whereas Slackware leaves dependency resolution to the user, 
         most modern package management
         suites keep a dependency list in each package,
-        and resolve the list dynamically. 
+        and resolve the list automatically. 
     </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Most desktop distributions ship with a graphical 
+            package manager. Look for it in the menu.
+        </p>
+    </div>
 
     <p>
         To name a few:
@@ -376,7 +384,7 @@ last-updated: September 2021
         <li>Debian: <code><a href="https://en.wikipedia.org/wiki/APT_(software)">apt</a></code></li>
         <li>Fedora: <code><a href="https://docs.fedoraproject.org/en-US/fedora/rawhide/system-administrators-guide/RPM/">rpm</a></code></li>
         <li>openSUSE: <code><a href="https://doc.opensuse.org/documentation/leap/reference/html/book-reference/cha-sw-cl.html">zypper</a></code></li>
-        <li>Arch: <code><a href="https://wiki.archlinux.org/title/Pacman">pacman</a></code></li>
+        <li>Arch: <code><a href="https://wiki.archlinux.org/title/Pacman">pacman</a></code> <em>(Woka woka woka...)</em></li>
     </ul>
 
     <p>
@@ -385,14 +393,6 @@ last-updated: September 2021
         To update a machine utilizing Debian's packaging facilities, 
         for example, we simply,
     </p>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Most desktop distributions ship with a graphical 
-            package manager. Look for <em>Software Manager</em> in the menu.
-        </p>
-    </div>
 
     <div class="code">
         $ sudo apt update <br>
@@ -457,14 +457,14 @@ last-updated: September 2021
 
     <p>
         There are many successful methods of package distribution,
-        but they can be meaningfully divided into a few models.
-        The <em>regular release</em> deals in discrete
-        package sets: 
+        but they can be meaningfully divided into a few kinds.
+        The <em>regular release</em> or <em>static release</em>
+        deals in discrete package sets: 
         Packages are first composed into a working whole, 
         then undergo some testing period.
         The collection is then released publicly, at which point
         updates are restricted to bug fixes and security updates.
-        New features do not become available within a 
+        Do not expect new features to become available within a 
         particular release.
         The set is supported for some length of time&mdash; 
         <em>Long-Term Support</em> releases are often maintained for
@@ -488,7 +488,7 @@ last-updated: September 2021
         The <em>rolling release</em> model dispenses with any 
         versioning scheme.
         Instead, software is distributed in its "latest stable" form,
-        so that updates and features become available 
+        so that features and fixes become available 
         to users as they are released by developers.
         The result is access to cutting-edge software&mdash;
         and a constant stream of updates.
@@ -528,10 +528,6 @@ last-updated: September 2021
         <li><em>About the Gentoo Linux Installation.</em> About the Gentoo Linux Installation - Gentoo Wiki. (2015, January 1). <a href=https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/About">https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/About</a>.</li>
         <li><em>Software Series.</em> System Requirements - Slackware Linux Essentials. Available at <a href="http://www.slackbook.org/html/installation-requirements.html#INSTALLATION-SOFTWARE-SERIES">http://www.slackbook.org/html/installation-requirements.html#INSTALLATION-SOFTWARE-SERIES</a></li>
         <li>Hicks, A., Lumens, C., Cantrell, D., &amp; Johnson, L. (2005). <em>Chapter 18 Slackware Package Management.</em> Slackware Package Management. <a href="https://www.slackbook.org/html/package-management.html">https://www.slackbook.org/html/package-management.html</a>.</li>
-        <li>Module Definition by <em>The Linux Information Project.</em> (2006, March 1) Retrieved June 8, 2021, from <a href="http://www.linfo.org/module.html">http://www.linfo.org/module.html</a></li>
-        <li>Unix philosophy description.  From <em>The Linux Information Project.</em> (2006, August 6) Retrieved June 1, 2021, from <a href="http://www.linfo.org/unix_philosophy.html">http://www.linfo.org/unix_philosophy.html</a></li>
-        <li>
-            Torvalds, L., &amp; Diamond, D. (2002). <em>Just for Fun: The Story of an Accidental Revolutionary.</em> New York; London; Toronto; Sydney: Harper.
         </li>
     </ol>
 </div>
