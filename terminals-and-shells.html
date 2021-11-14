@@ -171,8 +171,8 @@ To Do:
 	<ul style="list-style: none;">
         <li><a href="https://www.gnu.org/software/bash/">Bash</a>&mdash; GNU's <em>Bourne Again Shell</em> is the standard shell in GNU/Linux.</li>
         <li><a href="http://zsh.sourceforge.net/">Zsh</a>&mdash; An extension to <em>Bash</em> with a focus on interative features.</li>  
-		<li><a href="https://fishshell.com/">Fish</a>&mdash; A Friendly Interactive Shell</li>
-        <li><a href="https://xon.sh">Xonsh</a>&mdash; A Pythonic shell, written in Python!</li>
+		<li><a href="https://fishshell.com/">Fish</a>&mdash; The Friendly Interactive Shell</li>
+        <li><a href="https://xon.sh">Xonsh</a>&mdash; A Pythonic shell, written in Python</li>
         <li><a href="https://www.nushell.sh/">Nushell</a>&mdash; An interactive shell, supporting piplines of structured data, in addition to simple text streams.</li>
         <li><a href="https://elv.sh/">Elvish</a>&mdash; An "expressive programming language and versatile interactive shell." Version 1.0 not yet released</a></li>
 	</ul>
@@ -185,13 +185,7 @@ To Do:
 
     <figure>
 		<img src="assets/img/gnome-w-bash-ps.png">
-        <figcaption><center><code>ps</code> command, by default listing processes owned by the current user,<br> and connected to the current terminal </center></figcaption>
 	</figure>
-
-    <p>
-        When it's ready for user input, the shell will print a prompt.
-        Here, that prompt is <code>josh@home:~$</code>.
-    </p>
 
     <h3>See Also:</h3>
     <ul>
@@ -229,10 +223,10 @@ To Do:
     </ol>
 
     <p>
-        Most (nearly all) commands fall into the third category, 
+        Nearly all commands fall into the third category, 
         external programs.
-        For example, <code>ls</code> is <em>not</em> a shell builtin,
-        but can be found in <code>/usr/bin</code>.
+        For example, <code>ls</code> is an external program, and
+        can be found in <code>/usr/bin</code>.
     </p>
 
     <h3>See Also:</h3>
@@ -347,17 +341,6 @@ To Do:
 
 <div class="content" id="redirection">
     <h2>Redirection</h2>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-
-        <p>
-            Using FIFO files, we can also direct the output of one command
-            to be the input of another. This is referred to as 
-            <em><a href="https://www.gnu.org/software/bash/manual/html_node/Pipelines.html">pipeing</a></em>.
-        </p>
-    </div>
-
 
     <p>
         One of the features that makes the Unix command-line interface
