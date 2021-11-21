@@ -25,7 +25,7 @@ Introduce Scripting
         <li><a href="#commands">Commands</a></li>
         <li><a href="#pwd">Working Directory</a></li>
         <li><a href="#arguments">Arguments</a></li>
-        <li><a href="#redirection">Redirection</a></li>
+        <li><a href="#redirection">Redirection and Pipeing</a></li>
         <li><a href="#closing-remarks">Closing Remarks</a></li>
         <li><a href="#missing-semester">Missing Semester</a></li>
 		<li><a href="#references"> References </a></li>
@@ -336,7 +336,8 @@ Introduce Scripting
 
 
 <div class="content" id="redirection">
-    <h2>Redirection</h2>
+    <h2 style="margin-bottom: 0;">Redirection</h2>
+    <h4>and Pipeing</h4>
 
     <p>
         One of the features that makes the Unix command-line interface
@@ -367,6 +368,84 @@ Introduce Scripting
         Redirections are interpreted by the shell before the command 
         executes, and are not passed as arguments to the command.
     </p>
+
+    <h3>Pipeing</h3>
+
+    <p>
+        Since terminals are represented as files, and terminal-bound
+        programs deal in text, we have a few other tricks up our sleeve.
+        By using the operator <code>|</code>, we can direct
+        the output (<code>STDOUT</code>) of one command to the 
+        input (<code>STDIN</code>) of another.
+        This is called a <em>pipeline,</em> and allows us to 
+        manipulate program output as a stream of text.
+    </p>
+
+    <p>
+        For example, Section 7 of the manual pages contains many
+        interesting articles, and we can get a single line summary
+        of each using <code>apropos</code>:
+    </p>
+
+    <pre class="code" style="line-height: .6;">
+$ apropos -s 7 '.*' <br>
+bpf-helpers (7)      - list of eBPF helper functions<br>
+gnupg (7)            - The GNU Privacy Guard suite of programs<br>
+RAND (7ssl)          - the OpenSSL random generator<br>
+Standards (7)        - X Window System Standards and Specifications<br>
+UPower (7)           - System-wide Power Management<br>
+utf-8 (7)            - an ASCII compatible multibyte Unicode encoding<br>
+address_families (7) - socket address families (domains)<br>
+aio (7)              - POSIX asynchronous I/O overview<br>
+armscii-8 (7)        - Armenian character set encoded in octal, decimal, and ...<br>
+arp (7)              - Linux ARP kernel module.<br>
+[...]
+    </pre>
+
+    <p>
+        By piping this output into the <code>sort</code> command, 
+        we can alphabatize this, forming something closer to an index:
+    </p>
+
+    <pre class="code" style="line-height: .6;">
+$ apropos -s 7 '.*' | sort <br>
+address_families (7) - socket address families (domains)<br>
+aio (7)              - POSIX asynchronous I/O overview<br>
+armscii-8 (7)        - Armenian character set encoded in octal, decimal, and ...<br>
+arp (7)              - Linux ARP kernel module.<br>
+ascii (7)            - ASCII character set encoded in octal, decimal, and hex...<br>
+asymmetric-key (7)   - Kernel key type for holding asymmetric keys<br>
+attributes (7)       - POSIX safety concepts<br>
+audit.rules (7)      - a set of rules loaded in the kernel audit system<br>
+backend (7)          - cups backend transmission interfaces<br>
+bio (7ssl)           - Basic I/O abstraction<br>
+[...]
+    </pre>
+
+    <p>
+        We can continue in this fashion: 
+        If we only want the first few lines, we can pipe the results into <code>head</code>:
+    </p>
+
+    <div class="code">
+        $ apropos -s 7 '.*' | sort | head
+    </div>
+
+    <p>
+        If we want only the last few lines, we can use <code>tail</code>:
+    </p>
+
+    <div class="code">
+        $ apropos -s 7 '.*' | sort | tail
+    </div>
+
+    <p>
+        And if we want to page through the results, we can pipe into <code>less</code>:
+    </p>
+
+    <div class="code">
+        $ apropos -s 7 '.*' | sort | less
+    </div>
 
     <h3>See Also</h3>
     <ul>
