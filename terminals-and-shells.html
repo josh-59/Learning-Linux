@@ -12,7 +12,6 @@ Introduce Scripting
     <h3>See Also:</h3>
     <ul>
         <li><a href="https://ryanstutorials.net/bash-scripting-tutorial/bash-script.php">What is a Bash Script?</a> - Bash Scripting Tutorial</a></li>
-        <li><a href="assets/simple-shell.c">simple-shell.c</a></li>
     </ul>
 
 -->
@@ -364,15 +363,63 @@ Introduce Scripting
         <code>2&gt;</code> redirect <code>STDIN</code>, 
         <code>STDOUT</code>, and <code>STDERR</code>, respectively.
         Redirections are interpreted by the shell before the command 
-        executes, and are not passed to the command; 
-        therefore, they are not arguments.
+        executes, and are not passed as arguments to the command.
     </p>
 
     <h3>See Also</h3>
     <ul>
         <li><a href="https://youtu.be/oB1uZf6Z27Y">Lesson 3: I/O, Redirect, & Pipe: Pipin' Ain't Easy But It Sure Is Fun</a> by Level 099 Techs (Youtube video)</li>
     </ul>
+</div>
 
+<div class="content" id="closing-remarks">
+    <h2 style="margin-bottom: 0;">Closing Remarks:</h2>
+    <h4>fork()</h4>
+
+    <p>
+        The earliest versions of UNIX entertained exactly two processes:
+        One for each of two terminals connected to the machine.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[3]</a></sup>
+        The shell,
+        <a href="https://en.wikipedia.org/wiki/Thompson_shell"><code>sh</code></a>,
+        existed as a user-space process, but <em>fork()</em> had not been introduced.
+        To execute a command, the shell replaced itself with
+        the requested program;
+        the program, on calling <em>exit()</em>, replaced itself with the
+        shell once again.<sup><a href="https://www.bell-labs.com/usr/dmr/www/hist.html">[3]</a></sup>
+    </p>
+
+    <p>
+        In particular, <em>change directories</em> was implemented
+        as a separate command.
+        When invoked, it inherited the shell's current working directory,
+        changed it, and then the shell inherited the resulting working directory.
+        With the inclusion of the <em>fork()</em> system call, though,
+        the <code>chdir</code> command broke:
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            The <code>exit</code> command is also, necessarily, built in to the shell.
+        </p>
+    </div>
+
+    <blockquote>
+        "There was much reading of code and anxious introspection about how
+        the addition of fork could have broken the chdir call. Finally the
+        truth dawned: in the old system chdir was an ordinary command; it
+        adjusted the current directory of the (unique) process attached to
+        the terminal. Under the new system, the chdir command correctly
+        changed the current directory of the process created to execute it,
+        but this process promptly terminated and had no effect whatsoever on
+        its parent shell! It was necessary to make chdir a special command,
+        executed internally within the shell. It turns out that several
+        command-like functions have the same property, for example login."
+    </blockquote>
+
+    <p>
+        And so, <em>builtins</em> began.
+    </p>
 </div>
 
 <div class="content" id="missing-semester">
