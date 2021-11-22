@@ -4,14 +4,29 @@ title: Terminals and Shells
 last-updated: November, 2021
 ---
 
+<!--
+
+<h3>Further Reading:</h3>
+
+		<li> Libes, Sol.  <i>Small Computer Systems Handbook</i>.  Published 1978, by Hayden Book Co. </li>
+		<li> Shuford, Richard S. <a href="https://invisible-mirror.net/archives/shuford/terminal/first_principles.html"><i>First Thoughts about Terminal Emulation</i></a>. </li>
+		<li> Ben-Halim, Zeyd M., Raymond, Eric S., Dickey, Thomas E. <a href="http://man7.org/linux/man-pages/man5/terminfo.5.html">man 5 terminfo</a>.  The Linux Man-Pages Project. Retrieved April 6, 2020.</li>
+		<li> Dickey, Thomas E.  <a href="https://invisible-island.net/xterm/xterm.faq.html#what_is_vt220"><i>"What is a VT220?"</i></a>. Retrieved April 6, 2020.</li>
+		<li> <a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/tty/Kconfig?id=HEAD">Kernel Driver Source</a>.  Maintained by Linux Torvalds.</li>
+		<li> <a href="https://www.kernel.org/doc/html/v5.4/admin-guide/devices.html">The Kernel Administrators Guide; Linux Allocated Devices</a>. </li>
+		<li> <a href="http://ascii-table.com/ansi-escape-sequences-vt-100.php">ANSI Escape Sequences</a>. ASCII-Table.com.  Retrieved April 6, 2020.</li>
+		<li> <a href="https://linux.die.net/man/7/x"> man 7 x </a>.  Written by X.Org Foundation, LLC.  Hosted by die.net hosting.</li>
+-->
+
+
 <div id="nav_bar_2" class="nav">
 	<ul>
 		<li><a href="#introduction"> Introduction </a></li>
 		<li><a href="#terminals"> Terminals and Terminal Emulators</a></li>
 		<li><a href="#shells"> Shells </a></li>
-        <li><a href="#commands">Commands</a></li>
+        <li><a href="#commands">Commands and Arguments</a></li>
         <li><a href="#pwd">Working Directory</a></li>
-        <li><a href="#arguments">Arguments</a></li>
+        <li><a href="#standard-file-descriptors">The Standard File Descriptors</a></li>
         <li><a href="#redirection">Redirection and Pipeing</a></li>
         <li><a href="#scripting">Scripting</a></li>
         <li><a href="#closing-remarks">Closing Remarks</a></li>
@@ -169,7 +184,8 @@ last-updated: November, 2021
 </div>
 
 <div class="content" id="commands">
-    <h2>Commands</h2>
+    <h2 style="margin-bottom: 0">Commands</h2>
+    <h4>and Arguments</h4>
 
     <p>
         A typical line of input has the following form:
@@ -182,12 +198,7 @@ last-updated: November, 2021
     <p>
         This corresponds directly to, <em>Find and execute <code>command</code>, 
         and pass it arguments <code>[arg ...]</code>.</em>
-    </p>
-
-    <h3>Command Location</h3>
-
-    <p>
-        There are a few places the shell looks.
+        There are a few places the shell looks for the command being executed.
         In order: 
     </p>
 
@@ -203,6 +214,57 @@ last-updated: November, 2021
         For example, <code>ls</code> is an external program, and
         can be found in <code>/usr/bin</code>.
     </p>
+
+    <h3>Arguments</h3>
+
+    <p>
+        Commands are the first part of a "typical line of input"; 
+        the other is arguments.
+        Like commands, arguments are supplied by the user. 
+        They are passed to each function, builtin, or program as it begins 
+        execution, and it is up to that command to interpret them.
+    </p>
+
+     <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Two tools to identify commands are
+            <code>type</code> and <code>which</code>.
+        </p>
+    </div>
+
+    <p>
+        For example, <code>echo</code> responds to arguments 
+        very simply&mdash; It prints them back out:
+    </p>
+
+    <div class="code">
+        $ echo one two three four<br>
+        one two three four<br>
+    </div>
+
+    <p>
+        Common arguments include:
+    </p>
+
+    <div class="code">
+        $ <i>command</i> --help
+    </div>
+
+    <p>
+        which typically prints a terse help message; and,
+    </p>
+
+    <div class="code">
+        $ <i>command</i> --version
+    </div>
+
+    <p>
+        which typically prints the version number of the software.
+        See a command's manual page for
+        more documentation.
+    </p>
+
 
     <h3>See Also:</h3>
     <ul>
@@ -241,7 +303,8 @@ last-updated: November, 2021
     </div>
 
     <p>
-        And we can move around with <code>cd</code>:
+        And we can change its value with <code>cd</code>, effectively
+        moving around:
     </p>
 
     <div class="code">
@@ -260,59 +323,43 @@ last-updated: November, 2021
         $ pwd<br>
         /home/josh
     </div>
-
 </div>
 
-<div class="content" id="arguments">
-    <h2>Arguments</h2>
+<div id="standard-file-descriptors" class="content">
+	<h2>Standard File Descriptors</h2>
 
-    <p>
-        Commands are the first part of a "typical line of input"; 
-        the other is arguments.
-        Like commands, arguments are supplied by the user. 
-        They are passed to each function, builtin, or program as it begins 
-        execution, and it is up to that command to interpret them.
+	<p>
+        The shell is connected to its terminal by three open files,
+        known as the <em>standard file descriptors:</em>
     </p>
 
-     <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Two tools to identify commands are
-            <code>type</code> and <code>which</code>.
-        </p>
-    </div>
+    <ul>
+        <li><code>STDIN</code> the terminal keyboard, at file descriptor 0</li>
+        <li><code>STDOUT</code> the terminal screen, buffered, at file descriptor 1</li>
+        <li><code>STDERR</code> the terminal screen, unbuffered, at file descriptor 2</li>
+    </ul>
 
     <p>
-        For example, <code>echo</code> responds to arguments 
-        very simply&mdash; It prints them back out:
+        Since open files are preserved across both <em>fork()</em> 
+        and <em>exec(),</em> 
+        each command&mdash; function, builtin or program&mdash;
+        will inherit our keyboard and terminal screen 
+        at these file descriptors.
     </p>
 
-    <div class="code">
-        $ echo one two three four<br>
-        one two three four<br>
-    </div>
-
     <p>
-        Common arguments are:
+        For example, the program <code>/usr/bin/ls</code>
+        prints to <code>STDOUT</code>, and our command
     </p>
 
     <div class="code">
-        $ <i>command</i> --help
+        $ ls
     </div>
 
     <p>
-        and
-    </p>
-
-    <div class="code">
-        $ <i>command</i> --version
-    </div>
-
-    <p>
-        See a command's manual page (or other documentation) for details.
+        runs that program in the context of the terminal.
     </p>
 </div>
-
 
 <div class="content" id="redirection">
     <h2 style="margin-bottom: 0;">Redirection</h2>
@@ -336,7 +383,7 @@ last-updated: November, 2021
         This is called <em><a href="https://www.gnu.org/software/bash/manual/html_node/Redirections.html">redirection</a>,</em>
         and here we are redirecting <code>STDOUT</code> to the file
         <em>cpu_stats.</em>
-        Since <code>STDERR</code> has not been changed, the terminal
+        <code>STDERR</code> has not been changed, and therefore the terminal
         remains the destination for any error messages.
     </p>
 
@@ -353,7 +400,7 @@ last-updated: November, 2021
     <p>
         Since terminals are represented as files, and terminal-bound
         programs deal in text, we have a few other tricks up our sleeve.
-        By using the operator <code>|</code>, we can direct
+        By using the pipe operator <code>|</code>, we can direct
         the output (<code>STDOUT</code>) of one command to the 
         input (<code>STDIN</code>) of another.
         This is called a <em>pipeline,</em> and allows us to 
@@ -435,7 +482,6 @@ bio (7ssl)           - Basic I/O abstraction<br>
 <div class="content" id="scripting">
     <h2>Scripting</h2>
 
-
     <p>
         The last trick up our sleeve is saving a sequence of commands
         into a text file, then executing the file as a program.
@@ -452,13 +498,9 @@ bio (7ssl)           - Basic I/O abstraction<br>
         and designates the program that will interpret the script.
     </p>
 
-    <p>
-        For example, if we had a file named <code>hello</code>
-        with the following contents:
-    </p>
-
     <div class="aside-right">
         <h4>Note:</h4>
+
         <p>
             A script must be stored as an executable file.
             One can change a file's mode bits using
@@ -470,6 +512,10 @@ bio (7ssl)           - Basic I/O abstraction<br>
         </div>
     </div>
 
+    <p>
+        For example, if we had a file named <code>hello</code>
+        with the following contents,
+    </p>
 
     <div class="code">
         #!/usr/bin/sh<br>
@@ -478,8 +524,18 @@ bio (7ssl)           - Basic I/O abstraction<br>
     </div>
 
     <p>
-        we could execute it with,
+        we could execute it as an external program with,
     </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+
+        <p>
+            Here we are using <code>./</code> to execute a program in the
+            current working directory.
+        </p>
+    </div>
+
 
     <div class="code">
         $ ./hello<br>
@@ -559,50 +615,6 @@ bio (7ssl)           - Basic I/O abstraction<br>
 	<h4 style="margin-bottom: 18pt;">Lecture 1: Course Overview + The Shell (2020)</h4>
 	<iframe class="video" src="https://www.youtube.com/embed/Z56Jmr9Z34Q" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
-
-<!--
-<div class="content" id="exercises">
-    <h2>Exercises:</h2>
-
-    <ol style="margin-left: 0;">
-        <li>
-            <p>
-                Terminal emulators are also processes.  From the command line, find
-                your emulator's working directory.
-            </p>
-        </li>
-        <li>
-            <p>
-                What is the difference between <code>type</code> and <code>which</code>?
-            </p>
-        </li>
-        <li>
-            <p>
-                Why would <code>cd</code> necessarily be a builtin command? 
-                Hint: How does the shell execute an external program?
-            </p>
-        <li>
-            <p>
-                Why <em>shouldn't</em> you append <code>.</code> to PATH?
-            </p>
-        </li>
-        <li>
-            Implement 'exit' builtin in simple-shell.c
-        </li>
-    </ol>
-</div>
-
-<h3>Further Reading:</h3>
-
-		<li> Libes, Sol.  <i>Small Computer Systems Handbook</i>.  Published 1978, by Hayden Book Co. </li>
-		<li> Shuford, Richard S. <a href="https://invisible-mirror.net/archives/shuford/terminal/first_principles.html"><i>First Thoughts about Terminal Emulation</i></a>. </li>
-		<li> Ben-Halim, Zeyd M., Raymond, Eric S., Dickey, Thomas E. <a href="http://man7.org/linux/man-pages/man5/terminfo.5.html">man 5 terminfo</a>.  The Linux Man-Pages Project. Retrieved April 6, 2020.</li>
-		<li> Dickey, Thomas E.  <a href="https://invisible-island.net/xterm/xterm.faq.html#what_is_vt220"><i>"What is a VT220?"</i></a>. Retrieved April 6, 2020.</li>
-		<li> <a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/tty/Kconfig?id=HEAD">Kernel Driver Source</a>.  Maintained by Linux Torvalds.</li>
-		<li> <a href="https://www.kernel.org/doc/html/v5.4/admin-guide/devices.html">The Kernel Administrators Guide; Linux Allocated Devices</a>. </li>
-		<li> <a href="http://ascii-table.com/ansi-escape-sequences-vt-100.php">ANSI Escape Sequences</a>. ASCII-Table.com.  Retrieved April 6, 2020.</li>
-		<li> <a href="https://linux.die.net/man/7/x"> man 7 x </a>.  Written by X.Org Foundation, LLC.  Hosted by die.net hosting.</li>
--->
 
 <div id="references" class="content">
 	<h2> References </h2>
