@@ -434,6 +434,20 @@ bio (7ssl)           - Basic I/O abstraction<br>
 <div class="content" id="scripting">
     <h2>Scripting</h2>
 
+    <div class="aside-left">
+        <h4>Aside:</h4>
+        <p>
+            A script must be stored in an executable file.
+            One can change a file's mode bits using
+            <code>chmod</code>:
+        </p>
+
+        <div class="code" style="padding-bottom: 10px;">
+            $ chmod +x <em>file</em>
+        </div>
+    </div>
+
+
     <p>
         The last trick up our sleeve is saving a sequence of commands
         into a text file, then executing the file as a program.
@@ -446,7 +460,7 @@ bio (7ssl)           - Basic I/O abstraction<br>
     <p>
         The first line of a script must begin with the characters
         <code>#!</code>.
-        This line is referred to as <em>hash-bang,</em>
+        This line is referred to as <em>shebang,</em>
         and designates the program that will interpret the script.
     </p>
 
@@ -455,21 +469,8 @@ bio (7ssl)           - Basic I/O abstraction<br>
         with the following contents:
     </p>
 
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            A script must be stored in an executable file.
-            One can change a file's mode bits using
-            <code>chmod</code>:
-        </p>
-
-        <div class="code" style="padding-bottom: 10px;">
-            $ chmod +x <em>hello</em>
-        </div>
-    </div>
-
     <div class="code">
-        #!/usr/bin/fish<br>
+        #!/usr/bin/sh<br>
         <br>
         echo Hello World!
     </div>
