@@ -4,19 +4,6 @@ title: Terminals and Shells
 last-updated: November, 2021
 ---
 
-<!--
-
-Todo: 
-Introduce pipelining
-Introduce Scripting
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://ryanstutorials.net/bash-scripting-tutorial/bash-script.php">What is a Bash Script?</a> - Bash Scripting Tutorial</a></li>
-    </ul>
-
--->
-
 <div id="nav_bar_2" class="nav">
 	<ul>
 		<li><a href="#introduction"> Introduction </a></li>
@@ -26,6 +13,7 @@ Introduce Scripting
         <li><a href="#pwd">Working Directory</a></li>
         <li><a href="#arguments">Arguments</a></li>
         <li><a href="#redirection">Redirection and Pipeing</a></li>
+        <li><a href="#scripting">Scripting</a></li>
         <li><a href="#closing-remarks">Closing Remarks</a></li>
         <li><a href="#missing-semester">Missing Semester</a></li>
 		<li><a href="#references"> References </a></li>
@@ -63,11 +51,6 @@ Introduce Scripting
 	<h2 style="margin-bottom: 2pt;">Terminals</h2>
 	<h4>and Terminal Emulators</h4>
 
-    <!-- 
-        Date? 
-        Hardcopy AND softcopy termminals or just softcopy? "Physical terminal"
-        seems to refer to both.
-    -->
 	<p>
 		A <i>terminal</i> is a computer peripheral similar to a typewriter.
 		The earliest examples printed output onto paper.
@@ -81,10 +64,6 @@ Introduce Scripting
         Ken Thompson (sitting) and Dennis Ritchie at PDP-11, in Bell Labs' <em>Unix Room</em><sup><a href="#references" title="Kernighan, p. 45">[1]</a></sup>
 	</center>
 
-    <!--
-        Most famous example was the DEC VT320, used in libraries
-    -->
-
     <p>
 		As technology developed and interactive computing became more popular,
 		hard-copy terminals were phased out in favor of
@@ -97,8 +76,7 @@ Introduce Scripting
 	<h3> Terminal Emulators </h3>
 	<p>
 		Terminals persist today in the form of
-        <a href="https://docs.xfce.org/apps/xfce4-terminal/introduction">
-            terminal emulators</a>.
+        <a href="https://docs.xfce.org/apps/xfce4-terminal/introduction">terminal emulators</a>.
         A terminal emulator is a program that runs within the context of a desktop
         environment and provides the functionality of a physical terminal.
         On-screen, it looks sorta like:
@@ -450,6 +428,71 @@ bio (7ssl)           - Basic I/O abstraction<br>
     <h3>See Also</h3>
     <ul>
         <li><a href="https://youtu.be/oB1uZf6Z27Y">Lesson 3: I/O, Redirect, & Pipe: Pipin' Ain't Easy But It Sure Is Fun</a> by Level 099 Techs (Youtube video)</li>
+    </ul>
+</div>
+
+<div class="content" id="scripting">
+    <h2>Scripting</h2>
+
+    <p>
+        The last trick up our sleeve is saving a sequence of commands
+        into a text file, then executing the file as a program.
+        Such programs are called <em>scripts,</em> and lend the 
+        command-line a great deal of power: Rather than repeating
+        ourselves, we can simply save commands into a file, then
+        execute the file.
+    </p>
+
+    <p>
+        The first line of a script must begin with the characters
+        <code>#!</code>.
+        This line is referred to as <em>hash-bang,</em>
+        and designates the program that will interpret the script.
+    </p>
+
+    <p>
+        For example, if we had a file named <code>hello</code>
+        with the following contents:
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            A script must be stored in an executable file.
+            One can change a file's mode bits using
+            <code>chmod</code>:
+        </p>
+
+        <div class="code" style="padding-bottom: 10px;">
+            $ chmod +x <em>hello</em>
+        </div>
+    </div>
+
+    <div class="code">
+        #!/usr/bin/fish<br>
+        <br>
+        echo Hello World!
+    </div>
+
+    <p>
+        we could execute it with,
+    </p>
+
+    <div class="code">
+        $ ./hello<br>
+        Hello world!
+    </div>
+
+    <p>
+        Shell scripts offer a quick and informal way of programming. 
+        For projects of any size whatsoever, a proper scripting language
+        (such as Python or Ruby) is recommended.
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+    <li><a href="https://automatetheboringstuff.com/">Automate the Boring Stuff with Python</a></li>
+<li><a href="https://ryanstutorials.net/bash-scripting-tutorial/bash-script.php">What is a Bash Script?</a> - Bash Scripting Tutorial</a></li>
     </ul>
 </div>
 
