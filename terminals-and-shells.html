@@ -434,19 +434,6 @@ bio (7ssl)           - Basic I/O abstraction<br>
 <div class="content" id="scripting">
     <h2>Scripting</h2>
 
-    <div class="aside-left">
-        <h4>Aside:</h4>
-        <p>
-            A script must be stored in an executable file.
-            One can change a file's mode bits using
-            <code>chmod</code>:
-        </p>
-
-        <div class="code" style="padding-bottom: 10px;">
-            $ chmod +x <em>file</em>
-        </div>
-    </div>
-
 
     <p>
         The last trick up our sleeve is saving a sequence of commands
@@ -468,6 +455,20 @@ bio (7ssl)           - Basic I/O abstraction<br>
         For example, if we had a file named <code>hello</code>
         with the following contents:
     </p>
+
+    <div class="aside-right">
+        <h4>Note:</h4>
+        <p>
+            A script must be stored as an executable file.
+            One can change a file's mode bits using
+            <code>chmod</code>:
+        </p>
+
+        <div class="code" style="padding-bottom: 10px;">
+            $ chmod +x <em>file</em>
+        </div>
+    </div>
+
 
     <div class="code">
         #!/usr/bin/sh<br>
