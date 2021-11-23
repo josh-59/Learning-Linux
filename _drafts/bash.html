@@ -1,7 +1,7 @@
 ---
 layout: default
-title: 'Bash (and stuff)'
-last-updated: July, 2021
+title: 'Bash and other stuff'
+last-updated: November, 2021
 ---
 
 <!--
@@ -117,7 +117,6 @@ Exercises:
 	<ul>
 		<li><a href="#introduction"> Introduction </a></li>
         <li><a href="#shell-expansion">Shell Expansion</a></li>
-		<li><a href="#standard-file-descriptors">Standard File Descriptors</a></li>
 		<li><a href="#random-stuff">Random Stuff</a></li>
         <li><a href="#man-pages"><code>man</code> Pages</a></li>
         <li><a href="#finding-files">Finding Files</a></li>
@@ -318,110 +317,8 @@ Exercises:
     </ul>
 </div>
 
-<div id="standard-file-descriptors" class="content">
-	<h2 style="margin-bottom: 0;">Standard File Descriptors</h2>
-    <h4>and Redirection</h4>
-
-	<p>
-        The shell is connected to its terminal by three open files,
-        known as the <em>standard file descriptors:</em>
-    </p>
-
-    <ul>
-        <li><code>STDIN</code> the terminal keyboard, at file descriptor 0</li>
-        <li><code>STDOUT</code> the terminal screen, buffered, at file descriptor 1</li>
-        <li><code>STDERR</code> the terminal screen, unbuffered, at file descriptor 2</li>
-    </ul>
-
-    <p>
-        Since open files are preserved across both <em>fork()</em> 
-        and <em>exec(),</em> 
-        each command&mdash; function, builtin or program&mdash;
-        will inherit our keyboard and terminal screen 
-        at these file descriptors.
-    </p>
-
-    <p>
-        For example, the program <code>/usr/bin/ls</code>
-        prints to <code>STDOUT</code>, and our command
-    </p>
-
-    <div class="code">
-        $ ls
-    </div>
-
-    <p>
-        runs that program in the context of the terminal.
-    </p>
-
-    <h3> Redirection </h3>
-
-    <p>
-        <em>Redirection</em> is the act of assigning a different file to 
-        a file descriptor before executing a command.
-    </p>
-
-    <p>
-        The redirection operator <code>&lt;</code> redirects 
-        <code>STDIN</code>:
-    </p>
-
-    <div class="code">
-        $ <i>command</i> [arg1 arg2 ...] &lt; <i>file</i> 
-    </div>
-
-    <p>
-        In detail: Open <code><i>file</i></code> for reading, assign to 
-        <code>STDIN</code>, then find and execute 
-        <code><em>command</em></code>.
-    </p>
-
-    <p>
-        To redirect output:
-    </p>
-
-    <div class="code">
-        $ <em>command</em> [arg1 arg2 ...] &gt; <i>file</i> 
-    </div>
-
-    <p>
-        This means, "Overwrite": Open <code><i>file</i></code>
-        for writing; set length to zero; assign to <code>STDOUT</code>.
-        Then execute command.
-    </p>
-
-    <div class="code">
-        $ <em>command</em> [arg1 arg2 ...] &gt;&gt; <i>file</i> 
-    </div>
-
-    <p>
-        "Append:" Open <code><i>file</i></code>
-        for writing; seek to end; assign to <code>STDOUT</code>.
-        Then execute command.</li>
-    </ul>
-
-    <p>
-        Neither redirection operators nor their corresponding 
-        <code><i>file</i></code>'s are arguments: Bash removes them
-        after they have been interpretted.
-        Since <code>STDERR</code> has been left unchanged, errors 
-        that the command encounters will
-        still be printed to our terminal screen. 
-    </p>
-
-    <p>
-        Redirection is a powerful and general component
-        of the shell language, allowing users to capture output, 
-        create log files, and make use of scripts, 
-        for any command.
-        After redirection, Bash finds and executes 
-        the command as mentioned in 
-        <a href="./terminals-and-shells.html#commands">Terminals and Shells</a>.
-    </p>
-
     <h3>See Also:</h3>
     <ul>
-        <li><a href="https://youtu.be/mV_8GbzwZMM">Linux Command Line Pipes and Redirection</a> by Engineer Man (Youtube Video)</li>
         <li><a href="https://wiki.bash-hackers.org/syntax/redirection">Redirection - Bash Hackers Wiki</a></li>
         <li><a href="https://www.gnu.org/software/bash/manual/html_node/Redirections.html"> Redirections - Bash Reference Manual</a></li>
     </ul>
