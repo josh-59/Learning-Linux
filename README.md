@@ -1,7 +1,7 @@
 Learning Linux:
 ===============
 
-An Introduction to GNU/Linux
+A friendly and rigorous introduction to GNU/Linux.
 
 Available at [https://josh-59.github.io/Learning-Linux/](https://josh-59.github.io/Learning-Linux/).
 
@@ -10,18 +10,15 @@ Available at [https://josh-59.github.io/Learning-Linux/](https://josh-59.github.
 Landing:
 - [X] Introduction 
 - [X] Directory
-- [X] Conventions
-- [X] About
 
 Intro:
-- [X] Multics
+- [X] History: Time Sharing
 - [X] Unix
 - [X] The UNIX Architecture
 - [X] GNU's Not Unix
 - [X] The Linux Kernel
-- [X] A Brief History of Linux Distributions
+- [X] Linux Distributions: Early History
 - [X] Linux Mint
-- [X] Closing Remarks: Open Source
 
 Files and Filesystems:
 - [x] Files
@@ -31,7 +28,7 @@ Files and Filesystems:
 - [x] Basic File Operations
 - [x] Filesystem Heirarchy
 - [x] Mounting a Filesystem
-- [X] inodes 
+- [X] inodes and Filenames
 - [x] The Original Unix Filesystem
 
 Processes:
@@ -40,17 +37,17 @@ Processes:
 - [X] Executing a Different Program
 - [X] File Descriptors
 - [X] Process Termination
-- [ ] Process Attributes
-- [X] Closing Remarks: Ya But What Is It?
+- [X] Process Attributes
+- [X] Ya But What Is It?
 
 Terminals and Shells:
-- [x] Physical Terminals
-- [x] Terminal Emulators
+- [x] Terminals and Terminal Emulators
 - [x] Shells
-- [x] Commands
-- [X] PATH Environment Variable
+- [x] Commands and Arguments
 - [X] Working Directory
-- [X] Arguments
+- [X] The Standard File Descriptors
+- [X] Redirection and Piping
+- [X] Scripting
 - [X] Closing Remarks: fork()
 
 Packages:
@@ -59,12 +56,3 @@ Packages:
 - [X] Binary Packages
 - [X] Package Managers
 - [X] Distributions
-- [X] The Unix Philosophy
-
-Appendix: Bash (and other stuff)
-- [X] Shell Expansion
-- [X] Standard File Descriptors
-- [X] Random Stuff 
-- [X] man Pages
-- [X] Finding Files 
-- [X] Closing Remarks: Make
