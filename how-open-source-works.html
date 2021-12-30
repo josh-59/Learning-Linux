@@ -1,66 +1,68 @@
 ---
 layout: default
 title: How Open Source Works
-last-updated: November 2021
+last-updated: December 2021
 ---
 
 <!--
+    I feel like the existence of these is so obvious that we might not
+    need to cover them, per se.
 
-<div class="content" id="closing-remarks">
-    <h2 style="margin-bottom: 0">Closing Remarks</h2>
-    <h4>Preconditions</h4>
+    <h3>Preconditions</h3>
 
-	<p>
-		Like any model, the above interpretation of the open-source 
-        ecosystem loses information.  
-        My purpose in presenting it is not to explain the ecosystem 
-        in exhaustive detail, but rather to highlight what seem to
-        me its most important facets; this is done to foster its generalization.
+    <p>
+        Before delving into how and why people work together, we must first
+        recognize the things they need to do so.
+        The preconditions of the open-source ecosystem can
+        be reduced to two important items: 
+    </p>
+
+    <ol>
+        <li>
+            Availability of tools and materials
+            <ul>
+                <li>Ubiquity of the Computer</li>
+                <li>Availability of Development Tools</li>
+            </ul>
+        </li>
+        <li>
+            A mechanism to support collaboration
+            <ul>
+                <li>Internet</li>
+            </ul>
+        </li>
+    </ol>
+
+    <p>
+        Today, thanks to the availability of relevant tools and materials,
+        virtually anyone on the planet can modify source
+        code to their liking. 
+        The computer is everywhere, and it does not take a powerful one
+        to edit text files.
+        Moreover, thanks to GNU and others, the necessary development tools
+        are free software.
     </p>
 
     <p>
-        Before implicit motivation is sufficient to yield 
-        spontaneous group action, tools and materials must be freely available.
-        This is seen in open-source in the availability of things like
-        compilers and text editors.
-        Following in the footsteps of GNU/Linux, 
-        there is nothing wrong with making tools and materials available
-        to one another.
+        Collaboration, in turn, has been made possible by the internet.
+        Whether it's through email channels or the more recent
+        Github/Gitlab, the internet is, and has been, at the heart of
+        open source.
     </p>
-
-    <p>
-        Collaboration
-        The internet, as a tool for fostering collaboration,
-        also cannot be forgotten.
-        Collaboration is per-project specific
-    </p>
-
-    <blockquote>
-        "What is the purpose of an open-source project/community?
-        Collaborate together as a group to maintain the project
-        and honestly to also have fun.  [...]
-        We want to keep the project going for various reasons,
-        but you want to enjoy yourself while you do it.
-    </blockquote>
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://blog.rust-lang.org/2014/10/30/Stability.html">Stability as a Deliverable</a> - Rust Blog</li>
-        <li><a href="https://www.zdnet.com/article/spacex-weve-launched-32000-linux-computers-into-space-for-starlink-internet/">SpaceX: We've launched 32,000 Linux computers into space for Starlink Internet | ZDNet</a></li>
-        <li><a href="https://www.hackerrank.com/">HackerRank</a></li>
-    </ul>
+</div>
 
 -->
+
 
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction">Introduction </a></li>
+        <li><a href="#what-is">What is GNU/Linux?</a></li>
         <li><a href="#intrinsic-value">Intrinsic Value</a></li>
-        <li><a href="#collection-of-projects">A Collection of Projects</a></li>
         <li><a href="#anatomy">Anatomy of a Project</a></li>
         <li><a href="#less"><code style="line-height: 1;">less</code>: A Success Story</a></li>
-
-        <li><a href="#apache">Apache Foundation</a></li>
+        <li><a href="#closing-remarks">Closing Remarks</a></li>
+        <li><a href="#apache">Apache<br> Foundation</a></li>
         <li><a href="#references"> References </a></li>
     </ul>
 </div>
@@ -69,11 +71,12 @@ last-updated: November 2021
     <h1>How Open Source Works</h1>
 
     <div class="quote-text">
-        "Given enough eyeballs, all bugs are shallow."
+        "This is a system by us, for us, based on the things we like."
     </div>
 
     <div class="quote-ref">
-        <a href="https://en.wikipedia.org/wiki/Linus%27s_law">Linus's Law</a>
+        Andreas Kling and Linus Groh<br>
+        <a href="https://awesomekling.github.io/I-quit-my-job-to-focus-on-SerenityOS-full-time/">SerenityOS</a>
     </div>
 
     <p>
@@ -85,160 +88,44 @@ last-updated: November 2021
     </p>
 </div>
 
-<div class="content" id="intrinsic-value">
-    <h2>Intrinsic Value</h2>
-
-    <p>
-        Compared to the market economy we all know and love, 
-        open source is a strange beast:
-        Its works are created because what they 
-        are <em>is</em> what their creators want.
-        Stated another way, the intent of all free software is 
-        the software itself.
-        Such goods, produced for their own sake, are said
-        to be <em>intrinsically motivated,</em> and 
-        this, in turn, underpins the open-source ecosystem.
-        Intrinsic motivation is found in many other places, 
-        such as academic research; it's the reason you take out the
-        trash, or plant flowers.
-    </p>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            We are not in the business of pleasing other people.
-            We are in the 
-            <em>"I have an itch and I'm gonna scratch it,"</em> business.
-        </p>
-    </div>
-
-    <p>
-        Contributing to open source can also make
-        sound financial sense&mdash; Facebook 
-        taking part in the development of 
-        Linux's new
-        <code><a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">btrfs</a></code> 
-        is one such example.
-        However, in this case, as in most other cases, 
-        the principal interest is in the software <em>per se:</em>
-        It is developed to be used, not to be sold, and is therefore
-        developed for its intrinsic value.
-    </p>
-
-    <p>
-        Admittedly, we are adopting a very high-level perspective of
-        open-source.
-        By analogy, money is the motivating entity of the market
-        economy.
-        At the macro perspective, this may hold true, yet it is certainly
-        the case that individuals are often motivated by things
-        like enjoyment, passion or idealism.
-        Nonetheless, I believe that intrinsic value is the most important
-        motivating force in the open-source ecosystem.
-    </p>
-
-    <p>
-        If intrinsic value is indeed the principle motivating force
-        of the open-source ecosystem, as I believe it is,
-        then it would follow that those projects with
-        the greatest number of use-cases garner the greatest support.
-        In support of this, the largest free-software organization to date
-        is neither GNU nor Linux, but the 
-        <a href="https://www.apache.org/">Apache Foundation</a>, 
-        whose projects underpin the world wide web.
-    </p>
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://hackaday.com/2021/07/17/open-source-is-choice/">Open Source is Choice</a> by Elliot Williams</li>
-    </ul>
-</div>
-
-<div class="content" id="collection-of-projects">
-    <h2 style="margin-bottom: 0">A Collection of Projects</h2>
-    <h4>Modularity</h4>
+<div class="content" id="what-is">
+    <h2>What is GNU/Linux?</h2>
 
     <p>
         GNU/Linux can be likened to a 500-piece puzzle with 2500 
         available pieces:
         For any piece of the puzzle&mdash; shell, desktop environment,
         web browser, right down to
-        C libraries and
+        <a href="https://en.wikipedia.org/wiki/C_standard_library#Implementations">C libraries</a> and
         <a href="https://wiki.archlinux.org/title/kernel">kernels</a>&mdash;
         there are around five competent options to choose from.
-        Each option is someone's project, and is
-        developed largely independantly of other projects.
+    </p>
+
+    <p>
+        These pieces were not created overnight, 
+        but rather through refinement and elaboration over time.
+        Moreover, the modularity that exists through the "package" concept
+        was neither planned nor intentional, but rather emerged
+        as GNU/Linux came into its own;
+        the result, ultimately, is a highly decentralized 
+        production effort, with few true authorities present. 
     </p>
 
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            It is crucial that these projects remain small enough to 
-            be manageable.
-            This has been referred to as <em>granularity.</em>
+            Every user is a potential developer.
         </p>
     </div>
 
     <p>
-        One of the truly remarkable things of modern 
-        open source is that no one person or organization is solely
-        responsible for the creation of 
-        a GNU/Linux operating system.
-        Rather, collecting and assembling the pieces 
-        <em>is a project of its own,</em> distinct from, say, 
-        shell development or kernel development.
-    </p>
-    
-    <p>
-        This is an example of modularity, and it is
-        left to the user to decide which component 
-        instantiates each needed piece.
-        Modular construction lies 
-        at the heart of GNU/Linux's success, and is 
-        central to the Unix Philosophy:
-    </p>
-
-    <blockquote>
-        "A serious attempt is made to apply the principle of modularity 
-        to everything on a Unix-like system, not only programs but also 
-        parts of programs, such as algorithms, and even the kernel. 
-        Thus, a Unix-like operating system generally (or at least ideally)
-        consists of a small kernel together with a large number of small, 
-        specialized programs that can interact with each other through a 
-        variety of well-defined interfaces."<sup><a href="http://www.linfo.org/unix_philosophy.html">[5]</a></sup>
-    </blockquote>
-    
-    <p>
-        The independance of each project means that contributors 
-        to the ecosystem work together in a highly parallel and 
-        unstructured fashion:
-        It allows each contributor to make the change they 
-        desire without affecting others.
-        The result is a largely decentralized method of production, with 
-        relatively few authorities present. 
-    </p>
-</div>
-
-<div class="content" id="anatomy">
-    <h2 style="margin-bottom: 0;">Anatomy of a Project</h2>
-    <h4>Community</h4>
-
-    <p>
-        Open-source projects are organized around
-        a small group of maintainers&mdash; often, only one. 
-        Maintainers present their project to the world, 
-        offering new versions as they become mature, and
-        have the ability to modify their work
-        however they want.
-        They accept user-born modifications as they see fit,
-        and they can decline a proposed modification for any 
-        reason whatsoever. 
-    </p>
-
-    <p>
-        The maintainers and contributors of a project have a common,
-        shared goal, and form a community.
-        Apache Software Foundation member Ted Dunning explains:
+        Open source is characterized by the collaboration
+        of <em>many</em> disparate people.
+        Most contributors to open-source projects are one-time;
+        the lion's share of modifications to a given project are, statistically,
+        made by only a small handful of developers.
+        Every contributor has their own wants and desires, 
+        yet has found cause to work together:
     </p>
 
     <blockquote>
@@ -249,18 +136,115 @@ last-updated: November 2021
         This is definitely not the fastest way to build software, but
         it's a remarkably sustainable way."
     </blockquote>
+</div>
+
+<div class="content" id="intrinsic-value">
+    <h2>Intrinsic Value</h2>
+
+    <p>
+        Compared to the market economy we all know and love, 
+        open source is a strange beast:
+        Its works are created because what they 
+        are <em>is</em> what their creators want.
+        Stated another way, the intent of free software is 
+        the software itself.
+    </p>
+
+    <p>
+        Such goods, produced for their own sake, are said
+        to be <em>intrinsically motivated,</em> and 
+        this, in turn, underpins open-source.
+        Intrinsic motivation is found in many places, 
+        such as academic research and art on public display;
+        it's the reason you take out the trash, work out, or plant flowers.
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Stated more plainly, we are not in the business of 
+            pleasing other people. 
+            We are in the <em>"I have an itch and I'm gonna scratch 
+            it,"</em> business.
+        </p>
+    </div>
+
+    <p>
+        Contributing is not necessarily altruism.
+        Rather, the typical story is that a bug is found or a feature 
+        is desired, then the modification is carried out and submitted.
+        These modifications accrue, and projects evolve to become
+        whole and polished products. 
+    </p>
+
+    <p>
+        Projects sometimes attract commercial interests. 
+        <a href="https://lwn.net/Articles/824855/">Facebook taking part</a> 
+        in the development of Linux's new
+        <code><a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">btrfs</a></code> 
+        is one such example.
+        However, in this case, as in all other cases, 
+        the principal interest is in the software <em>per se:</em>
+        It is developed to be used, not to be sold, and is therefore
+        developed for its intrinsic value.
+    </p>
+
+    <p>
+        If intrinsic value were indeed the principle motivating force
+        of the open-source ecosystem, 
+        it would follow that those projects with
+        the greatest number of use cases garner the greatest support.
+        In support of this, note that the largest free-software organization to date
+        is neither GNU nor Linux, but the 
+        <a href="https://www.apache.org/">Apache Foundation</a>, 
+        whose projects underpin the world wide web.
+    </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://awesomekling.github.io/I-quit-my-job-to-focus-on-SerenityOS-full-time/">I quit my job to focus on SerenityOS full time</a> - Andreas Kling - I like computers! </li>
+    </ul>
+</div>
+
+<div class="content" id="anatomy">
+    <h2>Anatomy of a Project</h2>
+
+    <p>
+        Open-source projects are organized around
+        a small group of maintainers&mdash; often, only one or two. 
+        Maintainers present their project to the world, 
+        offer new versions as they become mature, and
+        have the ability to modify the work
+        however they want.
+        They accept user-born modifications as they see fit,
+        and they can decline a proposed modification for any 
+        reason whatsoever. 
+    </p>
+
+    <p>
+        With a common, shared goal, the contributors of a project 
+        form a community.
+        Dr. Brett Cannon explains:
+    </p>
+
+    <blockquote>
+        "What is the purpose of an open-source project/community?
+        Collaborate together as a group to maintain the project
+        and honestly to also have fun.  [...]
+        We want to keep the project going for various reasons,
+        but you want to enjoy yourself while you do it. 
+    </blockquote>
 
     <p>
         Especially about popular projects, 
-        project leadership can become a matter of curating modifications.
+        leadership can become a matter of curating modifications.
         Very large projects, like the Linux kernel or the Firefox
-        web browser, have been broken down into subsystems, which each 
-        have maintainers of their own.
+        web browser, have been broken down into subsystems, 
+        with each subsystem having maintainer(s) of their own.
         The result is a tree, and user-born 
         modifications first
         pass through the appropriate subsystem maintainer 
-        before being proposed to the project's overarching maintainer;
-        it can be declined anywhere along the way.
+        before being proposed to the project's overarching maintainer.
     </p>
 
     <p>
@@ -268,11 +252,9 @@ last-updated: November 2021
         polished product, and have earned the trust of the community.
         They are the most important people of open-source.
         An open source software project without a maintainer 
-        is said to be <em>unmaintained.</em> 
-        It has effectively been abandoned&mdash;
+        has effectively been abandoned&mdash;
         or it is looking for a maintainer :) .
     </p>
-
 
     <h3>See Also:</h3>
     <ul>
@@ -339,17 +321,50 @@ last-updated: November 2021
 
     <p>
         Mark Nudelman continues to maintain the project today.  
-        It is, at the time of this writing, in its 581<sup>st</sup> 
-        version.<sup><a href="http://www.greenwoodsoftware.com/less/faq.html#version">[3]</a></sup><sup><a href="http://www.greenwoodsoftware.com/less/index.html">[4]</a></sup>
     </p>
 
     <h3>See Also:</h3>
     <ul>
         <li><a href="https://www.pcmag.com/news/linux-is-now-on-mars-thanks-to-nasas-perseverance-rover">Linux is Now on Mars, Thanks to NASA's Perseverance Rover | PCMag</a></li>
     </ul>
-
 </div>
 
+<div class="content" id="closing-remarks">
+    <h2 style="margin-bottom: 0;">Closing Remarks:</h2>
+    <h4>Do One Thing</h4>
+
+    <p>
+        The golden rule of open-source is that those who do the work get to make the decisions.
+        You are free to use, copy, imitate, remix, transform, or rebuild anything in the open-source realm; you are also free to create anything your heart desires.
+    </p>
+
+    <p>
+        Open collaboration is not restricted to software;
+        probably the most ubiquitous example of mass collaboration
+        is Wikipedia, the free encyclopedia.
+        Another example is the 3D Printing / Maker community,
+        which has produced an ecosystem analogous to open-source.
+    </p>
+
+    <p>
+        Within open-source, though, those projects that have become 
+        commonplace are maintained by individuals with relatively narrow foci.  
+        Be it a kernel, a paging utility or the next 
+        <code>grep</code> replacement, the trick to mainstream success 
+        is to do one thing and to do it well.
+    </p>
+
+    <p>
+        Speaking from experience, the gap between something that works
+        and a polished, finished, final product is large, 
+        and can easily take years to span.
+        So stick in there, and create what you <em>want!</em>
+    </p>
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://hackaday.com/2021/07/17/open-source-is-choice/">Open Source is Choice</a> by Elliot Williams</li>
+    </ul>
+</div>
 
 <div class="content" id="apache">
     <h2 style="margin-bottom: 2pt;">Apache Foundation</h2>
