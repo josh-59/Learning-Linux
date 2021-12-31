@@ -68,9 +68,8 @@ int main(int argc, char *argv[])
             exit(0);
 
         // Exit if command is 'exit'
-        if (is_exit(command)) {
+        if (is_exit(command)) 
             exit(0);
-        }
 
         // Is it cd? 
         if (is_cd(command)) {
