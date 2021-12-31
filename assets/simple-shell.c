@@ -30,6 +30,10 @@
 // $ gcc -o simple-shell simple-shell.c
 // $ ./simple-shell
 
+// Ideas for enhancement:
+//   - Implement `exit` command 
+//   - Capture and handle the return value of commands
+
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
@@ -44,7 +48,6 @@ void print_prompt();
 size_t count_arg_len(char *line);
 size_t count_leading_spaces(char *line);
 void get_args(char *line, char **args);
-int is_exit(char *command);
 int is_cd(char *command);
 void change_directory(char **args);
 
@@ -57,6 +60,8 @@ int main(int argc, char *argv[])
 
     while(1) {
         print_prompt();
+
+        // Exit if EOF (or other error) is found
         if (getline(&line, &line_len, stdin) < 0)
             exit(0);
 
@@ -65,10 +70,6 @@ int main(int argc, char *argv[])
 
         // Exit if line is empty 
         if (command == NULL) 
-            exit(0);
-
-        // Exit if command is 'exit'
-        if (is_exit(command)) 
             exit(0);
 
         // Is it cd? 
@@ -145,12 +146,6 @@ void get_args(char *line, char **args)
     args[args_i] = NULL;
 
     return;
-}
-
-// Return true if command is exit, false otherwise
-int is_exit(char *word)
-{
-    return strcmp(word, "exit") == 0 ? 1 : 0;
 }
 
 // Return true if command is cd, false otherwise
