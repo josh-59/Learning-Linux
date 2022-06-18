@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Introduction to GNU/Linux
-last-updated: March, 2022
+last-updated: June, 2022
 ---
 
 <!--
@@ -111,7 +111,7 @@ last-updated: March, 2022
     <h3>Multics</h3>
 
     <p>
-        The MULTICS project was born at MIT, and its development was 
+        The MULTICS project was born at MIT, with development 
         supplemented by GE and AT&amp;T.<sup><a href="https://multicians.org/history.html">[4]</a></sup>
         To address the challenges at hand, a number of 
         <a href="https://multicians.org/features.html">novel features</a> 
@@ -138,7 +138,7 @@ last-updated: March, 2022
     </p>
 
     <p>
-        To implement these ideas, Multics was 
+        To implement its ideas, Multics was 
         written in a high-level programming language, <em>PL/I.</em><sup><a href="https://multicians.org/features.html">[6]</a><a href="https://multicians.org/pl1.html">[7]</a></sup>
         Even by today's standards, PL/I was sophisticated:
         In order to future-proof the work, it was entirely
@@ -152,11 +152,11 @@ last-updated: March, 2022
     <p>
         Although Multics was working by 1968, 
         it could only support a small team of developers,
-        and as it became increasingly clear that the project would 
-        not deliver on its promise of supporting a
-        profitable information utility,
+        and it became increasingly clear that the project would 
+        never deliver on its promise of a
+        profitable information utility;
         AT&amp;T withdrew.<sup><a href="#references" title="Kernighan p 32">[2]</a></sup>
-        Multics soldiered on:
+        The Multics project soldiered on:
         1970 saw its first installation, which could support 
         35 simultaneous users. 
         One of its later installations (General Motors) could support 
@@ -193,7 +193,7 @@ last-updated: March, 2022
 
     <p>
         After finding a disused <a href="https://www.soemtron.org/pdp7.html">PDP-7</a>,
-        Ken Thompson and Dennis Ritchie decided to rewrite
+        Ken Thompson and Dennis Ritchie rewrote the game
         <em><a href="https://en.wikipedia.org/wiki/Space_Travel_(video_game)">Space Travel</a></em> 
         for it.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[10]</a></sup>
         Afterwards, Ken Thompson continued to work with the machine, 
@@ -207,19 +207,19 @@ last-updated: March, 2022
         an operating system:  All he needed was an
         assembler, a text editor, a shell and a system call to
         launch programs.<sup><a href="#references" title="Kernighan, p34">[2]</a><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[10]</a></sup>
-        The system call was "trivial", and the other three 
+        The system call was "trivial," and the other three 
         components were done in one week 
         each.<sup><a href="#references" title="Kernighan, p34">[2]</a></sup>
     </p>
 
     <p>
-        By late 1969, the software was self-supporting, and 
-        was quickly developed into a multi-user, time-sharing operating
+        By the end of that year his software was self-supporting, and 
+        it was quickly developed into a multi-user, time-sharing operating
         system, called <em>Unix.</em>
         Whereas Multics required specialized mainframe
         hardware, Unix made use of an emerging line of minicomputers.
         Whereas Multics was large, and offered many ways to
-        handle a given task, Unix was simple, and usually offered one.
+        handle a given task, Unix was simple, and offered only one.
     </p>
     <p>
         About his colleague's early work, Dennis Ritchie would later write,
@@ -259,8 +259,8 @@ last-updated: March, 2022
 <div id="unix-architecture" class="content">
     <h2>The Unix Architecture</h2>
     <p>
-        Unix had a simple, clear, well-documented architecture that
-        inspired <a href="https://en.wikipedia.org/wiki/Category:Unix_variants">many</a> operating systems.
+        Unix had a simple, clear architecture that
+        inspired many subsequent operating systems.
         It is organized as a hierarchy of layers,
         with each layer building upon the ones beneath it, and supporting
         those above it:
@@ -272,12 +272,13 @@ last-updated: March, 2022
         <strong>Hardware:</strong>
         The core of any computer is its hardware.
         Each piece of hardware has a software interface defined by the
-        engineers that created it; these interfaces are varied at best.
+        engineers that created it. 
+        These interfaces are varied at best.
     </p>
 
     <p>
         <strong>Drivers:</strong>
-        Drivers interact with hardware, and simplify its 
+        Drivers interact with hardware, and simplify their
         interface for the kernel.
         Drivers are the deepest and most remote elements
         of operating systems, and are constantly being introduced
@@ -287,7 +288,7 @@ last-updated: March, 2022
     <p>
         <strong>Kernel:</strong>
         The heart of the Unix operating system is its 
-        <a href="http://linffo.org/kernel.html">kernel</a>.
+        <a href="http://linfo.org/kernel.html">kernel</a>.
         The kernel is responsible for
         scheduling the CPU, allotting memory, 
         maintaining file integrity, and many other tasks.
@@ -311,10 +312,8 @@ last-updated: March, 2022
     <p>
         <strong>Processes:</strong>
         A <em>process</em> is an executing program.
-        Within the Unix family of operating systems, 
-        processes run the show:
-        The kernel depends entirely on processes to tell it 
-        what to do, and takes no action without explicit instruction by a process.
+        Modern Unix-like operating systems can support many processes
+        simultaneously. 
     </p>
 
     <h3>See Also:</h3>
@@ -332,10 +331,10 @@ last-updated: March, 2022
     </div>
 
     <p>
-        The first attempt at producing a deliberately free and open-source Unix clone was
-        <a href="https://www.gnu.org/gnu/initial-announcement.en.html#f1">announced</a> 
+        The first attempt at producing a deliberately free and open-source Unix clone 
+        <a href="https://www.gnu.org/gnu/initial-announcement.en.html#f1">was announced</a> 
         by Richard Stallman in 1983.
-        Stallman had been working at MIT's AI Laboratory for over a decade,
+        Stallman, at the time, had been working for MIT's AI Laboratory for over a decade,
         and had grown accustomed to its culture of sharing source code:
     </p>
 
@@ -351,7 +350,7 @@ last-updated: March, 2022
         on projects intended for profit,
         and companies going so far as to require nondisclosure agreements be 
         signed to get an executable.<sup><a href="https://www.gnu.org/gnu/thegnuproject.html">[15]</a></sup><sup><a href="https://www.gnu.org/gnu/why-programs-should-be-shared.html">[16]</a></sup>
-        On September 27, 1983, Stallman made his announcement:
+        On September 27, 1983, Stallman made an announcement:
         To produce a "complete UNIX-compatible software system," and to
         "give it away free."<a href="https://www.gnu.org/gnu/initial-announcement.en.html#f1"><sup>[17]</sup></a>
         He called the project <a href="https://gnu.org">GNU</a>, a recursive
@@ -362,7 +361,7 @@ last-updated: March, 2022
     <h3>Software Freedom</h3>
    
     <p>
-        At the time of announcement, Stallman had not yet quantified his
+        At the time, Stallman had not yet quantified his
         own intentions behind the word <em>free.</em>
         Certainly, "a free copy" did not embody the
         culture of code-sharing MIT was once home to.
@@ -430,13 +429,6 @@ last-updated: March, 2022
         which has since become famous:
     </p>
 
-    <div class="aside-right" style="font-size: 11pt;">
-        <h4>Aside:</h4>
-        <p>
-            Properly speaking, the name <em>Linux</em> refers only to the Linux kernel.
-        </p>
-    </div>
-
 
     <blockquote>
         From: torvalds@klaava.Helsinki.FI (Linus Benedict Torvalds)<br>
@@ -467,14 +459,13 @@ last-updated: March, 2022
         [...]<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[23]</a></sup> 
     </blockquote>
 
-    <div class="aside-left">
+    <div class="aside-left" style="font-size: 11pt;">
         <h4>Aside:</h4>
         <p>
-            In view of the "Bazaar" model's overwhelming dominance in
-            modern open-source, Eric Raymond's paper is, in this
-            author's opinion at least, no longer relevant.
+            Properly speaking, the name <em>Linux</em> refers only to the Linux kernel.
         </p>
     </div>
+
 
     <p>
         Interest flourished, in large part because
@@ -484,7 +475,7 @@ last-updated: March, 2022
         be open to the point of promiscuity"<sup><a href="http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/index.html#catbmain">[24]</a></sup>&mdash; <a href="http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/index.html#catbmain">raised eyebrows</a> at the time,
         but has proved sound in virtue of its success:
         It now dominates the open-source landscape, with most projects following
-        this, rather than the older "Cathedral" model.
+        this, rather than the older "Cathedral", model.
     </p>
 
     <div class="img-right">
@@ -497,7 +488,6 @@ last-updated: March, 2022
     <p>
         The kernel is released under the GNU General Public License, and 
         Linus Torvalds remains the maintainer of the Development branch.
-        He often remarks on the kernel's latest releases.
         A major figure of today's Linux development effort is 
         Greg Kroah-Hartman, who is
         lead maintainer of the stable branch, in addition to various subsystems.<sup><a href="https://en.wikipedia.org/wiki/Greg_Kroah-Hartman">[25]</a></sup>
@@ -517,7 +507,7 @@ last-updated: March, 2022
 
 <div id="distributions" class="content">
     <h2 style="margin-bottom: 0;">Linux Distributions:</h2>
-    <h4> Early History </h4>
+    <h4> An Early History </h4>
 
     <p>
         The Linux kernel is made available by its developers in source-code
@@ -527,7 +517,7 @@ last-updated: March, 2022
         creating a functional Linux-based machine requires somebody
         to obtain, compile and assemble a 
         number of disparate software components.
-        A <em>distribution</em> is a project or community that 
+        A <em>distribution</em> is a project and community that 
         fills this gap.
     </p>
         
@@ -544,12 +534,12 @@ last-updated: March, 2022
         He packaged utilities alongside the kernel and distributed the
         collection on a pair of 5.25" disks.
         Known as the <em>Boot/Root Floppies,</em>
-        it was never widely known.<sup><a href="https://www.maketecheasier.com/history-of-early-linux-distros/">[27]</a></sup><sup><a href="https://lwn.net/Articles/91371/">[28]</a></sup>
+        it was never widely known, nor used.<sup><a href="https://www.maketecheasier.com/history-of-early-linux-distros/">[27]</a></sup><sup><a href="https://lwn.net/Articles/91371/">[28]</a></sup>
     </p>
 
     <p>
         Linux's first widely used distribution was, ironically,
-        a commercial venture, <em><a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">Soft Landing System</a>.</em> 
+        a commercial venture&mdash; <em><a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">Soft Landing System</a></em> (SLS).
         Released in late 1992, it was sold under the slogan 
         "Gentle Touchdowns for DOS Bailouts,"<sup><a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">[29]</a></sup>
         but users complained that the software was buggy,<sup><a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">[28]</a><a href="https://www.linuxjournal.com/article/2750">[30]</a></sup> and when its developers
@@ -560,7 +550,7 @@ last-updated: March, 2022
 
     <p>
         In late 1992, Patrick Volkerding needed a LISP interpreter for a project
-        at school, and, having heard that <code>clisp</code> ran on SLS Linux,
+        at school, and, having heard that <code>clisp</code> ran on SLS,
         downloaded them both.<sup><a href="https://www.linuxjournal.com/article/2750">[30]</a></sup>
         His professor got wind, and asked Patrick to help him install the 
         same software
@@ -571,14 +561,14 @@ last-updated: March, 2022
     </p>
 
     <p>
-        So Volkerding began improving SLS, and internally named his project
+        So, Volkerding began improving SLS, and internally named his project
         <em>Slackware,</em> not wishing it to be taken too 
         seriously.<sup><a href="https://www.linuxjournal.com/article/2750">[30]</a></sup>
-        By May 1993, though, the improvements were, "more than just cosmetic," and 
+        By May 1993, though, his improvements were becoming substantial, and 
         his friends convinced him to release it onto the internet.
         The first release proved so popular that the
-        number of download requests crashed the system hosting it,<sup><a href="https://www.linuxjournal.com/article/2750">[30]</a></sup>
-        and Slackware would be, for several years, the de-facto Linux distribution.
+        number of download requests crashed the system hosting it,
+        and Slackware would be, for several years, the de-facto Linux distribution.<sup><a href="https://www.linuxjournal.com/article/2750">[30]</a></sup>
     </p>
 
     <div class="img-center">
@@ -591,8 +581,9 @@ last-updated: March, 2022
     </div>
 
     <p>
-        Volkerding hadn't intended to produce a distribution,<sup><a href="https://www.linuxjournal.com/article/2750">[30]</a></sup> but still
-        maintains <a href="http://www.slackware.com/">Slackware</a> today.<sup><a href="http://www.slackware.com/about">[31]</a></sup>
+        Volkerding hadn't intended to produce a distribution,
+        but still
+        maintains <a href="http://www.slackware.com/">Slackware</a> today.<sup><a href="https://www.linuxjournal.com/article/2750">[30]</a></sup><sup><a href="http://www.slackware.com/about">[31]</a></sup>
         The Slackware Linux Project is focused on producing "the most UNIX-like
         Linux distribution out there."<sup><a href="http://www.slackware.com/info/">[32]</a></sup>
     </p>
