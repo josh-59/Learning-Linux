@@ -1,31 +1,38 @@
 ---
 layout: default
 title: How Open Source Works
-last-updated: December 2021
+last-updated: July 2022
 ---
 
 <!--
 
     <blockquote>
-        "We as people come together; we have some communal interest.
-        As such, we build a structure together that allows us to work
-        together, allows us to communicate, allows us to bring in new people,
-        and build software together.
-        This is definitely not the fastest way to build software, but
-        it's a remarkably sustainable way."<sup><a href="#references">[1]</a></sup>
+        "What is the purpose of an open-source project/community?
+        Collaborate together as a group to maintain the project
+        and honestly to also have fun.  [...]
+        We want to keep the project going for various reasons,
+        but you want to enjoy yourself while you do it. 
     </blockquote>
 
--->
+    <p>
+        It could be argued that this reiterative improvement is
+        a kind of continual improvement.
+        ...is a central part of the Toyota Way...
+https://en.wikipedia.org/wiki/The_Toyota_Way#Section_II_%E2%80%94_The_right_process_will_produce_the_right_results
+    </p>
+
+    -->
 
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction">Introduction </a></li>
         <li><a href="#what-is">What is GNU/Linux?</a></li>
-        <li><a href="#intrinsic-value">Intrinsic Value</a></li>
+        <li><a href="#intrinsic-motivation">Intrinsic Motivation</a></li>
         <li><a href="#anatomy">Anatomy of a Project</a></li>
+        <li><a href="#continual-improvement">Continual Improvement</a></li>
         <li><a href="#less"><code style="line-height: 1;">less</code>: A Success Story</a></li>
         <li><a href="#closing-remarks">Closing Remarks</a></li>
-        <li><a href="#apache">Apache<br> Foundation</a></li>
+        <li><a href="#cannon">Brett Cannon</a></li>
         <li><a href="#references"> References </a></li>
     </ul>
 </div>
@@ -34,7 +41,7 @@ last-updated: December 2021
     <h1>How Open Source Works</h1>
 
     <div class="quote-text">
-        "This is a system by us, for us, based on the things we like."
+        "This is a system by us, for us,<br>based on the things we like."
     </div>
 
     <div class="quote-ref">
@@ -52,7 +59,8 @@ last-updated: December 2021
 </div>
 
 <div class="content" id="what-is">
-    <h2>What is GNU/Linux?</h2>
+    <h2 style="margin-bottom: 0">What is GNU/Linux?</h2>
+    <h4>A collection of projects</h4>
 
     <p>
         GNU/Linux can be likened to a 500-piece puzzle with 2500 
@@ -66,52 +74,40 @@ last-updated: December 2021
 
     <p>
         The operating systems built from these parts have a few
-        features in common:
+        characteristics in common:
     </p>
 
     <ol>
-        <li>Based around some variant of the Linux kernel, and </li>
-        <li>Utilize GNU core utilities</li>
+        <li>Based around some variant of the Linux kernel; and, </li>
+        <li>Utilizing GNU core utilities</li>
     </ol>
-
-    <p>
-        One of the remarkable things about GNU/Linux is that no one person
-        is responsible for the production of an entire operating system.
-        Rather, GNU/Linux exists as a collection of loosely associated projects,
-        and collecting and assembling the pieces <em>is a project of
-        its own,</em> distinct from, say, shell development.
-    </p>
 
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
-            Technically, GNU/Linux is a <em>class</em> of operating system.
+            Technically, GNU/Linux is a class of operating system.
         </p>
     </div>
 
     <p>
-        The components constituting a modern GNU/Linux system 
-        were not created overnight, 
-        but rather through elaboration and refinement over 
-        time.
-        Moreover, the modularity that exists through the "package" concept
+        The modularity that exists through the "package" concept
         was neither planned nor intentional, but emerged
-        as GNU/Linux came into its own.
-    </p>
-
-    <p>
-        The package, and in turn, the project, has become
+        as GNU/Linux matured into a fully capable platform.
+        The package, and in turn the project, has become
         a central organizing feature of GNU/Linux.
         Many smallish projects allow users to shape their system 
-        to their needs, contributors to promote modifications to a given part, 
-        and developers to reasonably introduce a new 
+        to their needs, allows
+        contributors to promote modifications to a given part, 
+        and allows developers to reasonably introduce a new 
         component, as they desire.
     </p>
 
     <p>
-        This "Many small projects" motif is unique to GNU/Linux*,
-        and potentially responsible for its preeminence within open-source
-        operating systems.
+        One of the remarkable things about GNU/Linux is that no one person
+        (or organization) is responsible for the production of an 
+        entire operating system.
+        Rather, collecting and assembling the parts <em>is a project of
+        its own,</em> distinct from, say, shell development.
     </p>
 
     <h3>See Also:</h3>
@@ -120,8 +116,8 @@ last-updated: December 2021
     </ul>
 </div>
 
-<div class="content" id="intrinsic-value">
-    <h2>Intrinsic Value</h2>
+<div class="content" id="intrinsic-motivation">
+    <h2>Intrinsic Motivation</h2>
 
     <p>
         Compared to the market economy we all know and love, 
@@ -137,8 +133,8 @@ last-updated: December 2021
         to be <em>intrinsically motivated,</em> and 
         this, in turn, underpins open source.
         Intrinsic motivation is found in many places, 
-        such as academic research and art on public display;
-        it's the reason you take out the trash, work out, or plant flowers.
+        such as academic research and art on public display.
+        It's the reason you take out the trash, go to the gym, or plant flowers.
     </p>
 
     <div class="aside-right">
@@ -152,20 +148,20 @@ last-updated: December 2021
     </div>
 
     <p>
-        Contributing is not necessarily altruism.
-        Rather, the typical story is that a bug is found or a feature 
-        is desired, then the modification is carried out and submitted.
-        These modifications accrue, and projects evolve to become
-        whole and polished. 
+        It's easy to mistake contribution for altruism, but that would be,
+        well, a mistake.
+        Rather, the existence of a bug or the absence of a feature
+        motivates modification, which then makes its way into the
+        appropriate project.
     </p>
 
     <p>
-        Projects sometimes attract commercial interests. 
+        Projects can attract commercial interests, as well. 
         <a href="https://lwn.net/Articles/824855/">Facebook taking part</a> 
         in the development of Linux's new
         <code><a href="https://btrfs.wiki.kernel.org/index.php/Main_Page">btrfs</a></code> 
         is one such example.
-        However, in this case, as in all other cases, 
+        But note that, in this case, as in most other cases, 
         the principal interest is in the software <em>per se:</em>
         It is developed to be used, not to be sold, and is therefore
         developed for its intrinsic value.
@@ -176,83 +172,133 @@ last-updated: December 2021
         of the open-source ecosystem, 
         it would follow that those projects with
         the greatest number of use-cases garner the greatest support.
-        In support of this, note that the largest free-software organization to date
-        is neither GNU nor Linux, but the 
+        In support of this, note that the largest free-software 
+        organization to date is neither GNU nor Linux, but the 
         <a href="https://www.apache.org/">Apache Foundation</a>, 
-        whose projects underpin the world wide web.
+        whose projects underpin the world wide web.<sup><a href="https://www.apache.org/">[1]</a></sup>
     </p>
 
     <h3>See Also:</h3>
     <ul>
-        <li><a href="ihttps://www.zdnet.com/article/spacex-weve-launched-32000-linux-computers-into-space-for-starlink-internet/">SpaceX: We've launched 32,000 Linux computers into space for Starlink Internet | ZDNet</a></li>
-        <li><a href="https://awesomekling.github.io/I-quit-my-job-to-focus-on-SerenityOS-full-time/">I quit my job to focus on SerenityOS full time</a> - Andreas Kling - I like computers! </li>
+        <li><a href="https://youtu.be/JUt2nb0mgwg">Trillions and Trillions Served</a> by The Apache Software Foundation</a></li>
     </ul>
 </div>
 
 <div class="content" id="anatomy">
     <h2>Anatomy of a Project</h2>
 
-    <p>
-        Open-source projects are typically organized around
-        a small group of maintainers&mdash; often, only one or two. 
-        Maintainers present their project to the world, 
-        offer new versions as they become mature, and
-        have the ability to modify the work
-        however they want.
-        They accept user-born modifications as they see fit,
-        and they can decline a proposed modification for any 
-        reason whatsoever. 
-    </p>
- 
-    <div class="aside-right">
-        <h4>Aside:</h4>
+    <div class=aside-right>
+        <h4>Aside</h4>
         <p>
-            According to open-source canon,
-            every user is a potential developer.
+            Although open-source canon states that every user is a 
+            potential developer, in practice the majority of development 
+            is thanks to a relatively small group of people.<sup><a href="#references">[2]</a></sup>
         </p>
     </div>
 
-
     <p>
-        With a common, shared goal, the contributors of a project 
-        form a community.
-        Dr. Brett Cannon explains:
-    </p>
-
-    <blockquote>
-        "What is the purpose of an open-source project/community?
-        Collaborate together as a group to maintain the project
-        and honestly to also have fun.  [...]
-        We want to keep the project going for various reasons,
-        but you want to enjoy yourself while you do it. 
-    </blockquote>
-
-    <p>
-        Especially about popular projects, 
-        leadership can become a matter of curating modifications.
-        Very large projects, like the Linux kernel or the Firefox
-        web browser, have been broken down into subsystems, 
-        with each subsystem having maintainer(s) of their own.
-        The result is a tree, and user-born 
-        modifications first
-        pass through the appropriate subsystem maintainer 
-        before being proposed to the project's overarching maintainer.
+        Open-source projects are typically organized around
+        a small group of core developers, called maintainers.
+        Maintainers have the ability to modify the work however
+        they want, and accept user-born modifications as they see fit.
+        Maintainers offer new versions as they become mature, and
+        in so doing present the work to the world.
     </p>
 
     <p>
-        Maintainers work diligently over years to present a
-        polished product, and have earned the trust of the community.
-        They are the most important people of open-source.
+        Maintainers often work diligently over years to present a
+        polished product, and have earned the trust of the community;
+        they are the most important people of open-source.
         An open source software project without a maintainer 
         has effectively been abandoned&mdash;
         or it is looking for a maintainer :) .
     </p>
 
+    <p>
+        With a common, shared goal&mdash; the project itself&mdash; the 
+        contributors to a project form a community:
+    </p>
+ 
+    <blockquote>
+        "We as people come together; we have some communal interest.
+        As such, we build a structure together that allows us to work
+        together, allows us to communicate, allows us to bring in new people,
+        and build software together.
+        This is definitely not the fastest way to build software, but
+        it's a remarkably sustainable way."<sup><a href="#references">[3]</a></sup>
+    </blockquote>
+
+    <p>
+        Especially about large and popular projects, 
+        maintainership can become a matter of curating modifications.
+        Very large projects, like the Linux kernel or the Firefox
+        web browser, have been broken down into subsystems, 
+        with each subsystem having maintainer(s) of their own.
+        The result is that user-born 
+        modifications first pass through the appropriate subsystem 
+        maintainer before being proposed to the project's 
+        overarching maintainers, before finally being accepted into the
+        work itself.
+    </p>
+
     <h3>See Also:</h3>
     <ul>
         <li><a href="https://www.contributor-covenant.org/">Contributors' Covenant</a>: A Code of Conduct for Open Source and other Digital Commons Communities</li>
-        <li><a href="https://youtu.be/tzFWz5fiVKU?t=2935">Setting Expectations for Open Source Participation</a> by Dr. Brett Cannon (Youtube Video)</a></li>
     </ul>
+</div>
+
+<div class="content" id="continual-improvement">
+    <h2>Continual Improvement</h2>
+
+    <p>
+        The components constituting a modern GNU/Linux system 
+        were not created overnight, 
+        but rather through a slow process of 
+        elaboration and refinement.
+        This gradual improvement is a kind of <a href="https://en.wikipedia.org/wiki/Continual_improvement_process">continual improvement process</a>, and
+        follows a clear pattern: Deploy, study, improve, repeat.
+    </p>
+
+    <div class='aside-right'>
+        <h4>Aside:</h4>
+        <p>
+            The Linux kernel, for example, gets re-released every six weeks.
+        </p>
+    </div>
+    
+    <p>
+        In practice, open-source software is given away for free,
+        attracting users.  Since sources are available, interested
+        parties can inspect its construction, and identify 
+        areas that could be improved.  
+        Their modification generally, but not always, work their way back to
+        source; under the guidance of maintainers, projects
+        stay on course.
+    </p>
+
+    <p>
+        Even marginal improvements accrue, and with each successive
+        iteration, the software becomes better-able to serve its
+        users.
+        Large numbers of iterations see fantastic improvement, and
+        results in products that are polished and whole.
+    </p>
+
+    <p>
+        Maintainers generally prefer small improvements to
+        radical ones&mdash;
+        Bear in mind that they have probably
+        been maintaining the work longer than you've been studying it.
+        Individual improvements usually tackle one of two items:
+        Bug fix or feature addition.
+    </p>
+
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="ihttps://www.zdnet.com/article/spacex-weve-launched-32000-linux-computers-into-space-for-starlink-internet/">SpaceX: We've launched 32,000 Linux computers into space for Starlink Internet | ZDNet</a></li>
+    </ul>
+
 </div>
 
 <div class="content" id="less">
@@ -260,13 +306,13 @@ last-updated: December 2021
     <h4>A Success Story</h4>
 
     <p>
-        A paging utility is a program that displays a file on 
+        A <em>paging utility</em> is a program that displays a file on 
         a terminal one screenful at a time.
         The first widely used paging utility was <code>more</code>, written by
-        Dan Halbert as a graduate student at UC Berkeley in 1978.<sup><a href="https://danhalbert.org/more.html">[3]</a></sup>
+        Dan Halbert as a graduate student at UC Berkeley in 1978.<sup><a href="https://danhalbert.org/more.html">[4]</a></sup>
         <code>more</code> is a simple program: It first 
         fills up the screen, then waits for user input to print the 
-        next line(s).
+        next lines.
     </p>
 
     <p>
@@ -312,7 +358,9 @@ last-updated: December 2021
     </blockquote>
 
     <p>
-        Mark Nudelman continues to maintain <code>less</code> today.  
+        Mark Nudelman continues to maintain <code>less</code> today.
+        It is, at the time of this writing, on its 590<sup>th</sup> 
+        revision.<sup><a href="http://www.greenwoodsoftware.com/less/index.html">[5]</a></sup><sup><a href="http://www.greenwoodsoftware.com/less/faq.html#version">[6]</a></sup>
     </p>
 
     <h3>See Also:</h3>
@@ -323,11 +371,11 @@ last-updated: December 2021
 
 <div class="content" id="closing-remarks">
     <h2 style="margin-bottom: 0;">Closing Remarks:</h2>
-    <h4>Do One Thing</h4>
+    <h4>Do One Thing, and Do It Well</h4>
 
     <p>
         The golden rule of open source is that those who do the work get to make the decisions.
-        As a user, you are free to copy, imitate, remix, transform, debug or rebuild anything in the open-source realm.
+        As a user, you are free to copy, remix, imitate, transform, debug or rebuild anything in the open-source realm.
         You are also free to create anything your heart desires;
         GNU/Linux is a wonderful platform to support your work.
     </p>
@@ -350,7 +398,7 @@ last-updated: December 2021
 
     <p>
         Speaking from experience, the gap between something that works
-        and a polished, finished, final product is large, 
+        and a polished, finished product is large, 
         and can take years to span.
         To span that gap, it helps if your project is deeply motivating to you&mdash;
         that is to say, it, in itself, is something that you want.
@@ -359,29 +407,25 @@ last-updated: December 2021
     <h3>See Also:</h3>
     <ul>
         <li><a href="https://hackaday.com/2021/07/17/open-source-is-choice/">Open Source is Choice</a> by Elliot Williams</li>
-        <li><a href="https://www.unixsheikh.com/articles/my-70-year-old-mother-has-been-using-linux-on-the-desktop-for-the-past-21-years.html">My 70 year old mother has been using Linux on the desktop for the past 21 years</a></li>
     </ul>
 </div>
 
-<div class="content" id="apache">
-    <h2 style="margin-bottom: 2pt;">Apache Foundation</h2>
-    <h4 style="margin-bottom: 18pt;"> Trillions and Trillions Served </h4>
+<div class="content" id="cannon">
+    <h2 style="margin-bottom: 2pt;">Brett Cannon</h2>
+    <h4 style="margin-bottom: 18pt;">Setting Expectations in Open Source</h4>
 
-    <iframe class="video" src="https://www.youtube.com/embed/JUt2nb0mgwg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe class="video" src="https://www.youtube.com/embed/tzFWz5fiVKU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 </div>
-
 
 <div id="references" class="content">
     <h2> References </h2>
     <ol>
-        <li>Dunning, Ted. ASF Member and former ASF Board Member.</li>
+        <li><em>The world's Largest Open Source foundation.</em> The Apache Software Foundation. (n.d.). Retrieved July 9, 2022, from <a href="https://www.apache.org/">https://www.apache.org/</a></li>
         <li>Eghbal, N. (2020). <em>Working in public: The making and maintenance of open source software.</em> Stripe Press. </li>
+        <li>Dunning, Ted. ASF Member and former ASF Board Member.</li>
         <li>Halbert, D. (n.d.). The early history of the more command. The Early History of the "more" Command. Retrieved October 21, 2021, from <a href="https://danhalbert.org/more.html">https://danhalbert.org/more.html</a>. </li>
+        <li>Less. (n.d.). Retrieved July 9, 2022, from <a href="http://www.greenwoodsoftware.com/less/index.html">http://www.greenwoodsoftware.com/less/index.html</a></li>
+        <li>Less FAQ. (n.d.). Retrieved July 9, 2022, from <a href="http://www.greenwoodsoftware.com/less/faq.html#version">http://www.greenwoodsoftware.com/less/faq.html#version</a></li>
     </ol>
-
-    <p>
-        *: Is unique to GNU/Linux <em>within open-source operating systems.</em>
-        The Apache Software Foundation is also organized as many-small-projects
-        (and also has been enormously successful).
-    </p>
 </div>
