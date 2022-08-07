@@ -202,7 +202,8 @@ last-updated: October, 2021
         The Unix directory tree is used as a general-purpose 
         meeting place:
         In addition to regular files, it also contains references to
-        hardware, and allows interprocess communication.
+        hardware, offers information about the running system, 
+        and allows interprocess communication.
         This mechanism is general, extensible, and allows both users 
         and programmers access to the running machine.
     </p>
@@ -227,27 +228,6 @@ last-updated: October, 2021
         device in its entirety, through the file interface alone.
     </p>
 
-    <h3> Block and Character Device Files </h3>
-
-    <p>
-        Unix kernels support two kinds of device files:
-        Block and Character.
-        A character device file may only be read from or written to
-        a single byte (ASCII character) at a time.
-        A terminal is one kind of device represented by a 
-        character device file.
-    </p>
-
-    <p>
-        Hard disks, SSD's and removable mass media are represented by
-        block device files:
-        These devices support reading and writing only
-        in blocks of bytes at a time, and the kernel must 
-        buffer arbitrary user-space interactions with it. 
-        Additionally, block device files support seeking, whereas 
-        character devices do not.
-    </p>
-
     <h3>See Also:</h3>
     <ul>
         <li><a href="https://wiki.gentoo.org/wiki/Handbook:AMD64/Installation/Disks#Introduction_to_block_devices">Introduction to Block Devices</a> (From "Preparing the Disks") - Gentoo Wiki</li>
@@ -258,14 +238,6 @@ last-updated: October, 2021
 
 <div class="content" id="pseudo-files">
     <h2>Pseudo Files</h2>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Linux is neither the only, nor the first, to maintain a 
-            <code>/proc</code> directory.
-        </p>
-    </div>
 
     <p>
         The Linux kernel augments the traditional Unix directory tree with
@@ -312,7 +284,7 @@ last-updated: October, 2021
         <li>
             <strong>FIFO:</strong> 
             Also called a "pipe", "FIFO" stands for <em>First in, first out</em>.
-            This is file type connects one running program to another.
+            This is file type is used to connect one running program to another.
         </li>
 
         <li>
