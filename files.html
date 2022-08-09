@@ -225,7 +225,28 @@ last-updated: October, 2021
         If we were to add the capacity to 
         <a href="https://man7.org/linux/man-pages/man2/lseek.2.html">seek</a> 
         (i.e., change location) within the file, then we would be able to use the 
-        device in its entirety, through the file interface alone.
+        device in its entirety.
+    </p>
+
+    <h3> Block and Character Device Files </h3>
+
+    <p>
+        Unix kernels support two kinds of device files:
+        Block and Character.
+        A character device file may only be read from or written to
+        a single byte (ASCII character) at a time.
+        A terminal is one kind of device represented by a
+        character device file.
+    </p>
+
+    <p>
+        Hard disks, SSD's and removable mass media are represented by
+        block device files:
+        These devices support reading and writing only
+        in blocks of bytes at a time, and the kernel must
+        buffer arbitrary interactions with it.
+        Additionally, block device files support seeking, whereas
+        character devices do not.
     </p>
 
     <h3>See Also:</h3>
