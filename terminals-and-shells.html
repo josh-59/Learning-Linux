@@ -57,8 +57,10 @@ last-updated: November, 2021
         As Dr. Brian Kerninghan put it, this interface forms a language unto itself,
         with files serving as the nouns of the language and commands 
         as verbs.<sup><a href="#references">[1]</a></sup>
+        Here we explore the theory behind this interface, and offer a glimpse
+        of its power and utility. 
         For a tutorial introduction, see 
-        <a href="https://effective-shell.com/">Effective Shell</a> by Dave Kerr or <a href="https://ubuntu.com/tutorials/command-line-for-beginners#1-overview">The Linux Command Line for Beginners</a>. 
+        <a href="https://effective-shell.com/">Effective Shell</a> by Dave Kerr or <a href="https://ubuntu.com/tutorials/command-line-for-beginners#1-overview">The Linux Command Line for Beginners</a> by Canonical. 
     </p>
 </div>
 
@@ -135,8 +137,8 @@ last-updated: November, 2021
 	<h2> Shells </h2>
 
 	<p>
-		A shell is a program which interprets and executes our (arbitrary) commands.
-		It is a <em>shell</em> in the sense that it is the outermost layer of the
+		A <em>shell</em> is a program which interprets and executes our (arbitrary) commands.
+		It is a "shell" in the sense that it is the outermost layer of the
 		operating system, with which the user has direct
         contact.<sup><a href="http://www.linfo.org/kernel.html">[2]</a></sup>
 		The Unix architecture entertains the shell as an ordinary user-space process.
@@ -202,6 +204,15 @@ last-updated: November, 2021
         In order: 
     </p>
 
+     <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Two tools to identify commands are
+            <code>type</code> and <code>which</code>.
+        </p>
+    </div>
+
+
     <ol>
         <li>User-defined functions - A way to group commands</li>
         <li>Shell builtin commands - Commands hard-coded into the shell</li>
@@ -225,14 +236,6 @@ last-updated: November, 2021
         execution, and it is up to that command to interpret them.
     </p>
 
-     <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Two tools to identify commands are
-            <code>type</code> and <code>which</code>.
-        </p>
-    </div>
-
     <p>
         For example, <code>echo</code> responds to arguments 
         very simply&mdash; It prints them back out:
@@ -252,7 +255,7 @@ last-updated: November, 2021
     </div>
 
     <p>
-        which typically prints a terse help message; and,
+        which prints a terse help message; and,
     </p>
 
     <div class="code">
@@ -260,7 +263,7 @@ last-updated: November, 2021
     </div>
 
     <p>
-        which typically prints the version number of the software.
+        which prints the version number of the software.
         See a command's manual page for
         more documentation.
     </p>
@@ -281,7 +284,7 @@ last-updated: November, 2021
         <a href="/processes.html#attributes">current working directory</a>.
         Since the shell is a process, it too has a current working directory.
         At the command line, this is of particular importance:
-        It reflects <em>where you are</em> in the directory tree.
+        It represents <em>where you are</em> in the directory tree.
     </p>
 
     <div class="aside-right">
@@ -294,6 +297,7 @@ last-updated: November, 2021
 
     <p>
         The shell's current working directory may be printed with 
+        the <em>print working directory</em> command, 
         <code>pwd</code>:
     </p>
 
@@ -303,8 +307,7 @@ last-updated: November, 2021
     </div>
 
     <p>
-        And we can change its value with <code>cd</code>, effectively
-        moving around:
+        And we can change its value with the <em>change directories</em> command, <code>cd</code>:
     </p>
 
     <div class="code">
@@ -315,7 +318,7 @@ last-updated: November, 2021
 
     <p>
         Since each directory refers to its parent directory as <code>..</code>,
-        we can always move <em>up</em> the tree with,
+        we can always move <em>up</em> the directory tree with,
     </p>
 
     <div class="code">
@@ -330,7 +333,7 @@ last-updated: November, 2021
 
 	<p>
         The shell is connected to its terminal by three open files,
-        known as the <em>standard file descriptors:</em>
+        known as the <em>standard files:</em>
     </p>
 
     <ul>
@@ -342,13 +345,13 @@ last-updated: November, 2021
     <p>
         Since open files are preserved across both <em>fork()</em> 
         and <em>exec(),</em> 
-        each command&mdash; function, builtin or program&mdash;
-        will inherit our keyboard and terminal screen 
+        each command inherits our keyboard and terminal screen 
         at these file descriptors.
     </p>
 
     <p>
-        For example, the program <code>/usr/bin/ls</code>
+        For example, the program <code>/usr/bin/ls</code>,
+        which lists directory contents,
         prints to <code>STDOUT</code>, and our command
     </p>
 
@@ -369,7 +372,7 @@ last-updated: November, 2021
         One of the features that makes the Unix command-line interface
         exceptionally powerful is the ability to direct output away from 
         the terminal.
-        Since the terminal is represented as a file, 
+        Since the terminal is represented as a collection of files, 
         the operations on it and any other file are identical.
         Thus, we can replace the TTY file a command is going to write to 
         with a regular file, and capture the command's output in it:
@@ -398,12 +401,11 @@ last-updated: November, 2021
     <h3>Pipeing</h3>
 
     <p>
-        Since terminals are represented as files, and terminal-bound
-        programs deal in text, we have a few other tricks up our sleeve.
-        By using the pipe operator <code>|</code>, we can direct
+        But wait, there's more!
+        The pipe operator, <code>|</code>, allows us to direct
         the output (<code>STDOUT</code>) of one command to the 
         input (<code>STDIN</code>) of another.
-        This is called a <em>pipeline,</em> and allows us to 
+        The result is called a <em>pipeline,</em> and allows us to 
         manipulate program output as a stream of text.
     </p>
 
@@ -430,7 +432,7 @@ arp (7)              - Linux ARP kernel module.<br>
 
     <p>
         By piping this output into the <code>sort</code> command, 
-        we can alphabatize this, forming something closer to an index:
+        we can alphabatize the results, forming something closer to an index:
     </p>
 
     <pre class="code" style="line-height: .6;">
@@ -466,6 +468,15 @@ bio (7ssl)           - Basic I/O abstraction<br>
     </div>
 
     <p>
+        If we wanted to save the result into a file, we could redirect the
+        output of <code>sort</code>:
+    </p>
+
+    <div class="code">
+        $ apropos -s 7 '.*' | sort &gt; index
+    </div>
+
+    <p>
         And if we want to page through the results, we can pipe into <code>less</code>:
     </p>
 
@@ -483,9 +494,24 @@ bio (7ssl)           - Basic I/O abstraction<br>
 <div class="content" id="scripting">
     <h2>Scripting</h2>
 
+    <div class="aside-right">
+        <h4>Note:</h4>
+
+        <p>
+            Scripts must be stored as executable files.
+            One can change a file's mode bits using
+            <code>chmod</code>:
+        </p>
+
+        <div class="code" style="padding-bottom: 10px;">
+            $ chmod +x <em>file</em>
+        </div>
+    </div>
+
+
     <p>
         The last trick up our sleeve is saving a sequence of commands
-        into a text file, then executing the file as a program.
+        into a file, then executing the file as a program.
         Such programs are called <em>scripts,</em> and lend the 
         command-line a great deal of power: Rather than repeating
         ourselves, we can simply save commands into a file, then
@@ -498,20 +524,6 @@ bio (7ssl)           - Basic I/O abstraction<br>
         This line is referred to as <em>shebang,</em>
         and designates the program that will interpret the script.
     </p>
-
-    <div class="aside-right">
-        <h4>Note:</h4>
-
-        <p>
-            A script must be stored as an executable file.
-            One can change a file's mode bits using
-            <code>chmod</code>:
-        </p>
-
-        <div class="code" style="padding-bottom: 10px;">
-            $ chmod +x <em>file</em>
-        </div>
-    </div>
 
     <p>
         For example, if we had a file named <code>hello</code>
@@ -545,6 +557,19 @@ bio (7ssl)           - Basic I/O abstraction<br>
 
     <p>
         Shell scripts offer a quick and informal way of programming. 
+        For example, I have a script that pairs my Bluetooth headphones
+        to my laptop:
+    </p>
+
+    <div class="code">
+#! /bin/sh<br>
+<br>
+bluetoothctl -- power on<br>
+<br>
+bluetoothctl -- connect 00:22:37:38:43:72
+    </div>
+
+    <p>
         For projects of any size whatsoever, a proper scripting language
         (such as Python or Ruby) is recommended.
     </p>
