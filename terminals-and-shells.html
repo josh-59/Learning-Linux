@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Terminals and Shells
-last-updated: November, 2021
+last-updated: August, 2022
 ---
 
 <!--
@@ -366,7 +366,7 @@ last-updated: November, 2021
 
 <div class="content" id="redirection">
     <h2 style="margin-bottom: 0;">Redirection</h2>
-    <h4>and Pipeing</h4>
+    <h4>and Pipelines</h4>
 
     <p>
         One of the features that makes the Unix command-line interface
@@ -398,10 +398,10 @@ last-updated: November, 2021
         executes, and are not passed as arguments to the command.
     </p>
 
-    <h3>Pipeing</h3>
+    <h3>Pipelines</h3>
 
     <p>
-        But wait, there's more!
+        We have a few other tricks up our sleeve:
         The pipe operator, <code>|</code>, allows us to direct
         the output (<code>STDOUT</code>) of one command to the 
         input (<code>STDIN</code>) of another.
@@ -465,15 +465,6 @@ bio (7ssl)           - Basic I/O abstraction<br>
 
     <div class="code">
         $ apropos -s 7 '.*' | sort | tail
-    </div>
-
-    <p>
-        If we wanted to save the result into a file, we could redirect the
-        output of <code>sort</code>:
-    </p>
-
-    <div class="code">
-        $ apropos -s 7 '.*' | sort &gt; index
     </div>
 
     <p>
