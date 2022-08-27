@@ -31,7 +31,6 @@
 // $ ./simple-shell
 
 // Ideas for enhancement:
-//   - Implement `exit` command 
 //   - Capture and handle the return value of commands
 
 #include <sys/types.h>
@@ -49,6 +48,7 @@ size_t count_arg_len(char *line);
 size_t count_leading_spaces(char *line);
 void get_args(char *line, char **args);
 int is_cd(char *command);
+int is_exit(char *command);
 void change_directory(char **args);
 
 int main(int argc, char *argv[]) 
@@ -70,6 +70,9 @@ int main(int argc, char *argv[])
 
         // Exit if line is empty 
         if (command == NULL) 
+            exit(0);
+
+        if (is_exit(command))
             exit(0);
 
         // Is it cd? 
@@ -152,6 +155,11 @@ void get_args(char *line, char **args)
 int is_cd(char *word)
 {
     return strcmp(word, "cd") == 0 ? 1 : 0;
+}
+
+int is_exit(char *word) 
+{
+    return strcmp(word, "exit") == 0 ? 1 : 0;
 }
 
 void change_directory(char **args )
