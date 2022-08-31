@@ -127,15 +127,15 @@ size_t count_leading_spaces(char *line)
 
 void get_args(char *line, char **args)
 {
-    size_t args_i = 0;
+    size_t i = 0;
     size_t arg_len = 0;
 
     line += count_leading_spaces(line);
 
-    while( (arg_len = count_arg_len(line)) > 0 && args_i < ARGS_LEN - 1) {
+    while( (arg_len = count_arg_len(line)) > 0 && i < ARGS_LEN - 1) {
 
-        args[args_i] = line;
-        ++args_i;
+        args[i] = line;
+        ++i;
 
         line += arg_len;
         if (*line) {
@@ -146,7 +146,7 @@ void get_args(char *line, char **args)
         line += count_leading_spaces(line);
     }
 
-    args[args_i] = NULL;
+    args[i] = NULL;
 
     return;
 }
