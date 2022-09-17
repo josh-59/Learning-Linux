@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Processes
-last-updated: October, 2021
+last-updated: September, 2022
 ---
 
 <div id="nav_bar_2" class="nav">
@@ -114,7 +114,7 @@ last-updated: October, 2021
     <p>
         In practice, root is the administrative user.
         A typical use of superuser privileges is to 
-        format a physical device to prepare it for system-wide
+        mount a physical device to prepare it for system-wide
         use.
         Superuser privileges are typically acquired
         through <code>sudo</code>.
@@ -288,7 +288,7 @@ last-updated: October, 2021
         In the following line, a process is instructing the kernel to
         open the file <em>rubber_ducky</em> for reading. 
         The process is storing the kernel's response in the 
-        variable <em>fd:</em>
+        (integer) variable <em>fd:</em>
     </p>
 
     <pre>
@@ -379,9 +379,8 @@ last-updated: October, 2021
                 <code>SIGINT</code> is preferred because it 
                 affords the program the oportunity to exit 
                 cleanly.<sup><a href="#references" title="Kerrisk, p389">[2]</a></sup>
-                At the command line, it is created and sent to 
-                the foreground
-                process with CTRL+C.
+                At the command line, it is created and sent 
+                (to the foreground process) with CTRL+C.
             </p>
 
             <p>
@@ -401,7 +400,7 @@ last-updated: October, 2021
                 a condition known in Linux as <em>segmentation fault</em>.
                 The kernel steps in, halts program execution and immediately
                 terminates the process.
-                Again, abnormal program termination.
+                Again, this is abnormal program termination.
             </p>
         </li>
     </ul>
@@ -436,8 +435,8 @@ last-updated: October, 2021
         Environment variables are <em>name=value</em> strings
         that are stored on behalf of each process. 
         The kernel does not interpret these variables directly,
-        but instead allows processes to set them, and allows
-        them to be retrieved later.
+        but instead simply allows processes to set them, and 
+        retrieve them later.
         They are preserved across both <em>fork()</em>
         and <em>exec().</em>
     </p>
@@ -456,9 +455,9 @@ last-updated: October, 2021
         SHELL=/bin/bash<br>
         COLORTERM=truecolor<br>
         XDG_CONFIG_DIRS=/etc/xdg<br>
-        XDG_MENU_PREFIX=xfce-<br>
         DESKTOP_SESSION=xfce<br>
         EDITOR=nvim<br>
+        LANG=en_US.UTF-8<br>
         [...]
     </div>
 
@@ -471,6 +470,10 @@ last-updated: October, 2021
 
 <div class="content" id="what-is">
     <h2>Ya But What Is It?</h2>
+
+    <p>
+        What is a process?
+    </p>
 
     <p>
         The short answer is, a section of memory distinct from the
@@ -529,8 +532,7 @@ last-updated: October, 2021
         that it has the entire physical address space to itself.
         By excluding physical addresses from translation,
         the rest of the machine is implicitly protected:
-        Other sections of memory (especially, other process' memory) 
-        simply do not exist within the context of the
+        Other sections of memory simply do not exist within the context of the
         currently running process, and therefore cannot be read from, 
         nor written to.
     </p>
@@ -552,7 +554,7 @@ last-updated: October, 2021
         in user mode does not have access to all instructions, and 
         its memory references are redirected through the virtual
         memory scheme mentioned above. 
-        Executing programs in this mode
+        Executing programs in User Mode
         is known as <em>limited direct execution.</em><sup><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/cpu-mechanisms.pdf">[3]</a></sup>
         It is <em>limited</em> in the sense that each process has access to
         only a restricted subset of the CPU's instructions, and
@@ -564,7 +566,7 @@ last-updated: October, 2021
         Virtual memory and limited direct execution are intended to 
         make safe and efficient use of available hardware.
         Together, they form a sandboxed environment within which a program 
-        may safely be executed.
+        may safely be executed, separate from the rest of the machine.
     </p>
 
     <h3>See Also:</h3>
