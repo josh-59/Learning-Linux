@@ -214,7 +214,7 @@ last-updated: September, 2022
         Device files reside in <code>/dev</code>.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[3]</a></sup>
         For example, when a USB-stick is inserted,
         a new file appears in <code>/dev</code>, and the device may be 
-        read from or written to directly by passing
+        read from or written to <u>directly</u> by passing
         that file to tools like <code>cat</code> or <code>dd</code>.
     </p>
 
@@ -530,7 +530,7 @@ last-updated: September, 2022
         As mentioned, Unix-like operating systems maintain a single 
         directory tree for the entire system.
         When a new device is introduced to the machine, 
-        the directory tree it contains must be placed in the 
+        the directory tree its filesystem contains must be placed in the 
         system's existing directory tree before its contents can
         be accessed.
         This operation is known as <em>mounting.</em>
@@ -541,15 +541,23 @@ last-updated: September, 2022
         Suppose we have a USB stick with some music on it. 
         When we plug it into the machine, a file representing
         the device appears in <code>/dev</code>, but
-        its contents are not yet available.
+        its contents are not yet available:
     </p>
+
+    <img style="width:80%" src="assets/img/mounting1.png">
 
     <p>
-        Assuming the device is named "<code>/dev/usb</code>",
-        we could mount it like so:
+        Assuming the device popped up as "<code>/dev/usb</code>",
+        we could mount it with,
     </p>
 
-    <img style="width:80%" src="assets/img/mounting.png">
+    <div class="code">$ sudo mount /dev/usb /mnt</div>
+
+    <p>
+        Resulting in:
+    </p>
+
+    <img style="width:80%" src="assets/img/mounting2.png">
 
     <p>
         In practice, a USB-device is 
@@ -622,13 +630,12 @@ last-updated: September, 2022
         645278 ./<br>
         384844 ../<br>
         775487 assets/<br>
-        641473 command-line-1-tutorial-introduction.html<br>
         645403 _config.yml<br>
         775449 _data/<br>
         642188 documentation.html<br>
-        642185 files-and-filesystems.html<br>
-        641460 finding-files.html<br>
-        775463 _future/<br>
+        641473 files.html<br>
+        642185 generalizing-open-source.html<br>
+        775463 how-open-source-works.html<br>
         [...]
     </div>
 
