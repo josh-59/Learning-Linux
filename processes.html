@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Processes
-last-updated: September, 2022
+last-updated: October 2022
 ---
 
 <div id="nav_bar_2" class="nav">
@@ -227,8 +227,8 @@ last-updated: September, 2022
     <pre>
         char *args[] = {"ls", "-l", NULL};
         execv("/usr/bin/ls", args); 
-                // Execution of *this* program stops here,
-                // and the process continues executing at /usr/bin/ls
+            // Execution of *this* program stops here,
+            // and the process continues executing at /usr/bin/ls
     </pre>
 
     <p>
@@ -250,7 +250,8 @@ last-updated: September, 2022
             execv("/usr/bin/ls", args); 
 
         } else if ( rv &gt; 0 ) {
-            // Execution of parent process continues within this program
+            // Execution of parent process continues within 
+            // this program
         }
     </pre>
 
