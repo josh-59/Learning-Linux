@@ -55,13 +55,10 @@ last-updated: September, 2022
         Though foreign to most users, the text-terminal is the original
         interface for interactive computing.
         As Dr. Brian Kerninghan put it, this interface forms a language unto itself,
-        with files serving as the nouns of the language and commands
+        with files serving as nouns and commands
         as verbs.<sup><a href="#references">[1]</a></sup>
         Here we explore the theory behind this interface, and offer a glimpse
         of its power and utility. 
-    </p>
-
-    <p>
         For a tutorial introduction, see 
         <a href="https://effective-shell.com/">Effective Shell</a> by Dave Kerr or <a href="https://ubuntu.com/tutorials/command-line-for-beginners#1-overview">The Linux Command Line for Beginners</a> by Canonical. 
     </p>
@@ -388,7 +385,7 @@ last-updated: September, 2022
     <p>
         This is called <em><a href="https://www.gnu.org/software/bash/manual/html_node/Redirections.html">redirection</a>,</em>
         and here we are redirecting <code>STDOUT</code> to the file
-        <em>cpu_stats.</em>
+        <em>cpu_stats</em> (the file is created if it does not exist).
         <code>STDERR</code> has not been changed, and therefore the terminal
         remains the destination for any error messages.
     </p>
@@ -398,7 +395,7 @@ last-updated: September, 2022
         <code>2&gt;</code> redirect <code>STDIN</code>, 
         <code>STDOUT</code>, and <code>STDERR</code>, respectively.
         Redirections are interpreted by the shell before the command 
-        executes, and are not passed as arguments to the command.
+        executes, and are <em>not</em> passed as arguments to the command.
     </p>
 
     <h3>Pipelines</h3>
