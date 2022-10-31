@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Files 
-last-updated: September, 2022
+last-updated: October, 2022
 ---
 
 <!--
@@ -215,7 +215,7 @@ last-updated: September, 2022
         Device files reside in <code>/dev</code>.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s06.html">[3]</a></sup>
         For example, when a USB-stick is inserted,
         a new file appears in <code>/dev</code>, and the device may be 
-        read from or written to <u>directly</u> by passing
+        read from or written to (directly) by passing
         that file to tools like <code>cat</code> or <code>dd</code>.
     </p>
 
@@ -236,7 +236,7 @@ last-updated: September, 2022
         Block and Character.
         A character device file may only be read from or written to
         a single byte (ASCII character) at a time.
-        A terminal is one kind of device represented by a
+        A keyboard is one kind of device represented by a
         character device file.
     </p>
 
@@ -273,6 +273,15 @@ last-updated: September, 2022
         For example, <code>/proc/meminfo</code> contains a 
         description of the system's current memory usage:
     </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Here we are using the <code>cat</code> command to
+            con<code>cat</code>enate the contents of the file
+            to the standard output stream (our terminal screen).
+        </p>
+    </div>
 
     <div class="code">
         $ cat /proc/meminfo<br>
@@ -330,7 +339,7 @@ last-updated: September, 2022
 
     <ul>
         <li><code><a href="https://man7.org/linux/man-pages/man1/touch.1.html">touch</a></code> - Change file timestamps.
-        Can be used to create new and empty files.</li>
+        Can be used to create new, empty files.</li>
         <li><code><a href="https://man7.org/linux/man-pages/man1/cp.1.html">cp</a></code> - Copy files and directories</li>
         <li><code><a href="https://man7.org/linux/man-pages/man1/rm.1.html">rm</a></code> - Remove files or directories</li>
         <li><code><a href="https://man7.org/linux/man-pages/man1/mv.1.html">mv</a></code> - Move (or rename) files</li>
@@ -433,12 +442,8 @@ last-updated: September, 2022
         <h4>Aside:</h4>
         <p>
             The <a href="https://refspecs.linuxfoundation.org/fhs.shtml">Filesystem Hierarchy Standard</a>
-            describes the GNU/Linux directory structure, and is maintained
+            describes the GNU/Linux directory tree. It is maintained
             by the Linux Foundation.
-            It is intended to promote inter- operability
-            among Unix-like operating systems,<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html">[6]</a></sup>
-            and was developed with help from the BSD development community.<sup><a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch07s02.html">[7]</a></sup>
-        </p>
     </div>
 
     <p>
@@ -462,7 +467,7 @@ last-updated: September, 2022
 
     <p>
         The <code>/usr</code> directory is dedicated to 
-        user-space (as opposed to kernel-space) files.<sup><a href="https://tldp.org/LDP/Linux-Filesystem-Hierarchy/html/usr.html">[8]</a></sup>
+        user-space (as opposed to kernel-space) files.<sup><a href="https://tldp.org/LDP/Linux-Filesystem-Hierarchy/html/usr.html">[6]</a></sup>
         It contains programs, libraries, manual pages, C header
         files, and other things.
         These files are shared by all system users, and are read-only. 
@@ -475,7 +480,7 @@ last-updated: September, 2022
         while distributions' default configurations are typically
         stored in <code>/usr</code>, alongside their respective packages.
         As a general rule, modify <code>/etc</code>, and let your
-        distribution handle <code>/usr</code>.<sup><a href="https://nostarch.com/howlinuxworks3" title="Ward">[9]</a></sup>
+        distribution handle <code>/usr</code>.<sup><a href="https://nostarch.com/howlinuxworks3" title="Ward">[7]</a></sup>
     </p>
 
     <p>
@@ -508,12 +513,6 @@ last-updated: September, 2022
         Such executable files are said to be <em>dynamically linked,</em>
         and cannot be expected to run properly without their dependencies.
         <code>/lib</code> holds libraries.
-    </p>
-
-    <p>
-        Several utilities exist to help locate files. One of my
-        favorites is <code><a href="https://man7.org/linux/man-pages/man1/whereis.1.html">whereis</a></code>, available in the
-        <em>util-linux</em> package.
     </p>
 
     <h3>See Also:</h3>
@@ -613,7 +612,7 @@ last-updated: September, 2022
         A <em>directory</em> is a file which associates filenames with 
         inode numbers. 
         Both literally and conceptually, a directory is a file containing
-        a simple two-column table:
+        a simple two-column table, inode number and filename:
     </p>
 
     <div class="aside-right">
@@ -642,22 +641,13 @@ last-updated: September, 2022
     <p>
         Here we have the file's inode numbers on the left, and its
         associated filename on the right.
-        Each filename/inode number pair is called a <em>hard link.</em>
+        Each inode/filename number pair is called a <em>hard link.</em>
         A file may have more than one hard link, but when it has zero,
         it is no longer accessible through the directory tree, and
-        the kernel prepares to delete it.<sup><a href="#references">[10]</a></sup>
+        the kernel prepares to delete it.<sup><a href="#references">[8]</a></sup>
     </p>
 
     <h3>Filenames</h3>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Hidden files are strictly a user-space convention, and have no
-            meaning, <i>per se,</i> with respect to the system.
-        </p>
-    </div>
-
 
     <p>
         Unix-like operating systems allow files to be named very flexibly:
@@ -668,6 +658,16 @@ last-updated: September, 2022
         postfix; in particular, a file is executable exactly when its
         permissions say so.
     </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            Hidden files are strictly a user-space convention, and have no
+            meaning, <i>per se,</i> with respect to the system.
+        </p>
+    </div>
+
+
 
     <p>
         As a rule, filenames are not interpreted by the kernel, 
@@ -703,24 +703,24 @@ last-updated: September, 2022
 
     <p>
         In the design, data blocks are of fixed size, and either free or
-        wholly consumed by a file.<sup><a href="#references">[11]</a></sup>
+        wholly consumed by a file.<sup><a href="#references">[9]</a></sup>
         The filesystem's <em>inodes</em> represent one file each,
-        contain their file's metadata, and contain pointers to data blocks.<sup><a href="#references">[11]</a></sup>
+        contain their file's metadata, and contain pointers to data blocks.<sup><a href="#references">[9]</a></sup>
         These nodes are arranged in an array, and can be identified
         by an index into this array.
     </p>
 
     <p>
         The design allows a file to grow or shrink without rearranging
-        other files.<sup><a href="#references">[11]</a></sup>
+        other files.<sup><a href="#references">[9]</a></sup>
         In addition, the inclusion of single-, double- and triple-
         indirection blocks allow the inode to remain of fixed,
         reasonable size, while supporting large
-        files.<sup><a href="#references">[11]</a></sup>
+        files.<sup><a href="#references">[9]</a></sup>
         Finally, by using direct pointers for the first bytes of a file,
         and by keeping the inode array in memory, 
         the design fosters the speedy retrieval of data in small
-        files.<sup><a href="#references">[11]</a></sup>
+        files.<sup><a href="#references">[9]</a></sup>
     </p>
 
     <p>
@@ -743,10 +743,10 @@ last-updated: September, 2022
         While each filesystem implements its own functionality,
         most functionality is common;
         the Virtual File System maps system calls 
-        to filesystem-specific functions.<sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">[12]</a></sup>
+        to filesystem-specific functions.<sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">[10]</a></sup>
         In addition, it imposes inodes on filesystems that do not
         natively employ them, thereby preserving traditional Unix file
-        semantics across all supported filesystems.<sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">[12]</a></sup>
+        semantics across all supported filesystems.<sup><a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">[10]</a></sup>
     </p>
 
     <h3>See Also:</h3>
@@ -776,10 +776,6 @@ last-updated: September, 2022
         <li>Beekmans, G. (2021, March 1). 9.3. <em>Overview of Device and Module Handling.</em> 9.3.&nbsp;Overview of Device and Module Handling. <a href="https://linuxfromscratch.org/lfs/view/stable/chapter09/udev.html">https://linuxfromscratch.org/lfs/view/stable/chapter09/udev.html</a>.</li>
 
         <li>Ritchie, D. M., &amp; Thompson, K. (n.d.). The UNIX Time-Sharing System. UNIX-Annotated.pdf. <a href="https://dsf.berkeley.edu/cs262/UNIX-annotated.pdf">https://dsf.berkeley.edu/cs262/UNIX-annotated.pdf</a>.</li>
-
-        <li>Abstract.  Filesystem Hierarchy Standard. (2015, March 15). Retrieved March 18, 2021, from <a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html">https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html</a></li>
-
-        <li>7.2. Background of the FHS. (2015, March 15). Retrieved March 18, 2021, from <a href="https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch07s02.html">https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch07s02.html</a></li>
 
         <li>Nguyen, B. (2004, April 30). <em>The Linux Filesystem Heirarchy, Section 1.17. /usr. </em>/usr. <a href="https://tldp.org/LDP/Linux-Filesystem-Hierarchy/html/usr.html">https://tldp.org/LDP/Linux-Filesystem-Hierarchy/html/usr.html</a>.</li>
 
