@@ -685,7 +685,7 @@ last-updated: October, 2022
         In the design, every file is represented by a single inode, 
         which contains the file's metadata, and contains pointers to
         data blocks, where the content of the file is kept.<sup><a href="#references">[9]</a></sup>
-        These nodes are arranged in a sequence, and can be identified
+        These nodes are arranged in an array, and can be identified
         by an index into it.
         Data blocks are of fixed size, and either free or
         wholly consumed by a file.<sup><a href="#references">[9]</a></sup>
@@ -705,14 +705,14 @@ last-updated: October, 2022
 
     <p>
         It was the most advanced filesystem of its time,
-        and, as Unix grew in popularity,
+        and as Unix grew in popularity,
         the semantics of file operations in Unix-like operating systems
         became dependant upon them.
         The design was demonstrated in the
         <a href="https://en.wikipedia.org/wiki/Minix">MINIX</a> filesystem,
         which in turn served as Linux's first filesystem.
         The <em>extended</em> filesystem, <code>ext</code>, extended
-        those filesystem's capabilities.
+        that filesystem's capabilities.
         With <code>ext</code>'s inclusion in kernel 0.96c, Linux began to use
         its new <a href="https://www.kernel.org/doc/html/latest/filesystems/vfs.html">Virtual File System</a>,
         a kernel subsystem that provides userspace with a
