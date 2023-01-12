@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Files 
-last-updated: October, 2022
+last-updated: January, 2023
 ---
 
 <!--
@@ -459,14 +459,21 @@ last-updated: October, 2022
         These files are shared by all system users, and are read-only. 
     </p>
 
+    <div class="aside-left">
+        <h4>Pro Tip:</h4>
+        <p>
+            As a general rule, modify <code>/etc</code>, and let your
+            distribution handle <code>/usr</code>.<sup><a href="https://nostarch.com/howlinuxworks3" title="Ward">[7]</a></sup>
+        </p>
+    </div>
+
+
     <p>
         System configuration is traditionally maintained as a collection of 
         plain-text, human-readable regular files.
         System-specific configuration is kept in <code>/etc</code>,
         while distributions' default configurations are typically
         stored in <code>/usr</code> (alongside their respective packages).
-        As a general rule, modify <code>/etc</code>, and let your
-        distribution handle <code>/usr</code>.<sup><a href="https://nostarch.com/howlinuxworks3" title="Ward">[7]</a></sup>
     </p>
 
     <p>
