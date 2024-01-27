@@ -138,7 +138,7 @@ last-updated: January 2024
     <p>
         A <em>package</em> is a logical unit of software.
         The obvious example is a program, but libraries are packages, too.
-        Packages may exist in either source-code or precompiled form;
+        Packages are distributed in either source-code or precompiled form;
         to configure and compile source code into usable form
         is to <em>build</em> it.
         The purpose of this article is to orient the user to the package-centric
@@ -148,33 +148,6 @@ last-updated: January 2024
 
 <div class="content" id="open-source">
     <h2>Open Source</h2>
-
-    <p>
-        The GNU GPL stipulates that licensed software be available in source-code
-        form. The GNU-way of building and installing their stuff is:
-    </p>
-
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            The ordinary user is not expected to build software from source.
-        </p>
-    </div>
-
-    <div class="code">
-        # ./configure &amp;&amp; make &amp;&amp; make install
-    </div>
-
-
-    <p>
-        Each project uses its own language and build system;
-        the above
-        <a href="https://www.gnu.org/software/bash/manual/html_node/Lists.html#Lists">list</a>
-        of commands assumes C/C++ source built via
-        GNU's <em>Autoconf.</em>
-        Most packages include documentation 
-        to build, install, or tinker.
-    </p>
 
     <p>
         The traditional UNIX package format is a compressed tarball, a file
@@ -190,6 +163,34 @@ last-updated: January 2024
         yielding a directory reflective of its original packager's.
     </p>
 
+
+    <p>
+        The GNU GPL stipulates that licensed software be available in source-code
+        form; thus, one can always obtain the source code and build the software
+        for oneself. The GNU-way of building and installing their stuff is:
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside:</h4>
+        <p>
+            The ordinary user is not expected to build software from source.
+        </p>
+    </div>
+
+    <div class="code">
+        $ cd <em>package</em> <br>
+        $ ./configure <br>
+        $ make <br>
+        $ sudo make install
+    </div>
+
+    <p>
+        Each project uses its own language and build system;
+        the above commands assume C/C++ source built via
+        GNU's <em>Autoconf.</em>
+        Most packages include documentation 
+        to build, install, and tinker.
+    </p>
 </div>
 
 <div id="building-from-source" class="content">
@@ -218,26 +219,19 @@ last-updated: January 2024
     </p>
 
     <p>
-        As a step towards speeding up the package installation process, 
+        As a step towards speeding up this process, 
         we might note that both building and 
-        installing are per-package specific.
-        Hence, we could maintain scripts describing
-        how to do these things, and let the computer do it for us.
+        installing are per-package specific. Hence,
+        we could maintain scripts describing
+        how to do these things, and let the computer do them for us.
     </p>
-
-    <div class="aside-right">
-        <h4>Note:</h4>
-        <p>
-            Gentoo additionally supports precompiled packages.
-        </p>
-    </div>
 
     <p>
         <a href="https://www.gentoo.org/">Gentoo Linux</a> 
         is an operating system built around this idea.
         The mechanized instructions to build software are kept in
         <code>ebuild</code>'s&mdash; Bash scripts which
-        additionally describe where to obtain source code.
+        obtain source code, configure it, compile it and ultimately install it.
         These are interpretted by the user's machine,
         and <a href="https://devmanual.gentoo.org/ebuild-writing/functions/">executing them</a> 
         results in a new package being installed.
@@ -327,7 +321,7 @@ last-updated: January 2024
     <p>
         The installation utility is, in this case, either
         <a href="https://www.slackbook.org/html/package-management-package-utilities.html"><code>installpkg</code> or <code>pkgtools</code></a>.
-        It must be granted root privilege.
+        It must be granted root privileges.
     </p>
 
     <p>
