@@ -143,13 +143,14 @@ last-updated: February 2024
     <div class="aside-left">
         <h4>Aside:</h4>
         <p>
-            You can check your <em>init</em> program (if it's still
-            running) with
+            You can check your <em>init</em> program with
         </p>
 
         <div class="code">
-            $ ps --pid 1
+            $ ps --pid 1<sup><a href="#references">[2]</a></sup>
         </div>
+
+        <br>
     </div>
 
     <p>
@@ -162,7 +163,7 @@ last-updated: February 2024
     </p>
 
     <p>
-        After the execution of <code>/sbin/init</code>, process creation 
+        After the the kernel launches <code>/sbin/init</code>, process creation 
         is dictated by processes themselves, and is carried 
         out through the <em>fork()</em> system call.
     </p>
@@ -374,7 +375,7 @@ last-updated: February 2024
                 For the purposes of process termination,
                 <code>SIGINT</code> is preferred because it 
                 affords the program the oportunity to exit 
-                cleanly.<sup><a href="#references" title="Kerrisk, p389">[2]</a></sup>
+                cleanly.<sup><a href="#references" title="Kerrisk, p389">[3]</a></sup>
                 At the command line, it is created and sent 
                 (to the foreground process) with CTRL+C.
             </p>
@@ -547,7 +548,7 @@ last-updated: February 2024
         its memory references are redirected through the virtual
         memory scheme mentioned above. 
         Executing programs in User Mode
-        is known as <em>limited direct execution.</em><sup><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/cpu-mechanisms.pdf">[3]</a></sup>
+        is known as <em>limited direct execution.</em><sup><a href="http://pages.cs.wisc.edu/~remzi/OSTEP/cpu-mechanisms.pdf">[4]</a></sup>
         It is <em>limited</em> in the sense that each process has access to
         only a restricted subset of the CPU's instructions, and
         it is <em>direct</em> in the sense that the program runs
@@ -581,6 +582,9 @@ last-updated: February 2024
   <ol>
     <li>
         init - Wikipedia (3 March 2021). Retrieved March 30, 2021, from <a href="https://en.wikipedia.org/wiki/Init">https://en.wikipedia.org/wiki/Init</a>
+    </li>
+    <li>
+        Comparison of init systems - Gentoo wiki.  Retrieved February 26, 2024, from <a href="https://wiki.gentoo.org/wiki/Comparison_of_init_systems">https://wiki.gentoo.org/wiki/Comparison_of_init_systems</a>
     </li>
     <li>
         Kerrisk, Michael.  <em><a href="https://man7.org/tlpi/index.html">The Linux Programming Interface</a></em>. San Francisco, CA, No Starch Press, 2010.
