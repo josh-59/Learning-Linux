@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Packages 
-last-updated: January 2024
+last-updated: March 2024
 ---
 
 <!--
@@ -171,7 +171,7 @@ last-updated: January 2024
     </p>
 
     <div class="aside-right">
-        <h4>Aside:</h4>
+        <h4>Note:</h4>
         <p>
             The ordinary user is not expected to build software from source.
         </p>
@@ -191,6 +191,11 @@ last-updated: January 2024
         Most packages include documentation 
         to build, install, and tinker.
     </p>
+
+    <h3>See Also:</h3>
+    <ul>
+        <li><a href="https://en.wikipedia.org/wiki/Tar_(computing)">tar (computing) - Wikipedia </a></li>
+    </ul>
 </div>
 
 <div id="building-from-source" class="content">
@@ -230,9 +235,9 @@ last-updated: January 2024
         <a href="https://www.gentoo.org/">Gentoo Linux</a> 
         is an operating system built around this idea.
         The mechanized instructions to build software are kept in
-        <code>ebuild</code>'s&mdash; Bash scripts which
-        obtain source code, configure it, compile it and ultimately install it.
-        These are interpretted by the user's machine,
+        <code>ebuild</code>'s&mdash; Bash scripts&mdash; which
+        obtain source code, configure it, compile it and, ultimately, install it.
+        These are interpreted by the user's machine,
         and <a href="https://devmanual.gentoo.org/ebuild-writing/functions/">executing them</a> 
         results in a new package being installed.
     </p>
@@ -248,6 +253,7 @@ last-updated: January 2024
     <h3> See Also:</h3>
     <ul>
         <li><a href="http://linuxfromscratch.org/blfs/view/stable/introduction/notes-on-building.html">Notes on Building Software</a> - Beyond Linux From Scratch</a></li>
+        <li><a href="https://tldp.org/HOWTO/Software-Building-HOWTO.html">Building and Installing Software Packages for Linux</a></li>
     </ul>
 </div>
 
@@ -255,7 +261,7 @@ last-updated: January 2024
     <h2> Binary Packages </h2>
 
     <p>
-        Packages are usually distributed in preconfigured and precompiled 
+        Usually, packages are distributed in preconfigured and precompiled 
         form.
         This yields a smaller archive, saves users the
         time-consuming step of compilation, and allows the
@@ -334,8 +340,7 @@ last-updated: January 2024
 
     <h3>See Also:</h3>
     <ul>
-        <li><a href="https://tldp.org/HOWTO/Software-Building-HOWTO.html">Building and Installing Software Packages for Linux</a></li>
-        <li><a href="https://en.wikipedia.org/wiki/Tar_(computing)">tar (computing) - Wikipedia </a></li>
+        <li><a href="http://www.slackware.com/releasenotes/packages15.0.php">Slackware 15.0 Complete Package List</a></li>
     </ul>
 </div>
 
@@ -358,7 +363,7 @@ last-updated: January 2024
 
     <ul>
         <li>Debian / Ubuntu / Mint: <code><a href="https://en.wikipedia.org/wiki/APT_(software)">apt</a></code></li>
-        <li>Fedora: <code><a href="https://docs.fedoraproject.org/en-US/fedora/rawhide/system-administrators-guide/RPM/">rpm</a></code></li>
+        <li>Fedora: <code><a href="https://docs.fedoraproject.org/en-US/fedora/rawhide/system-administrators-guide/package-management/DNF/#ch-DNF">dnf</a></code></li>
         <li>openSUSE: <code><a href="https://doc.opensuse.org/documentation/leap/reference/html/book-reference/cha-sw-cl.html">zypper</a></code></li>
         <li>Arch: <code><a href="https://wiki.archlinux.org/title/Pacman">pacman</a></code></li>
     </ul>
@@ -401,7 +406,6 @@ last-updated: January 2024
 
     <h3>See Also:</h3>
     <ul>
-        <li><a href="http://www.slackware.com/releasenotes/packages14.2.php">Slackware 14.2 Package List</a></li>
         <li><a href="https://en.opensuse.org/Package_management">Package management</a> - openSUSE Wiki</li>
     </ul>
 </div>
@@ -416,39 +420,40 @@ last-updated: January 2024
         it into useable packages, and makes the results 
         publicly available.
         Along the way, they define overarching system practices, within
-        which their packages will fit.
+        which packages will fit.
     </p>
 
     <div class="aside-right">
         <h4>Aside:</h4>
         <p>
             Here we are adopting the view that distributions focus
-            primarily on package propogation, rather than operating systems.
+            primarily on package propagation, rather than operating systems.
             This view is implemented very directly in Arch Linux.
             For example, the package <code><a href="https://archlinux.org/packages/core/x86_64/filesystem/">filesystem</a></code>
             creates the system's root directory tree,
             and initializes its core configuration files.
+            Thus, the operating system is expressed as a collection of packages.
         </p>
     </div>
 
     <p>
         There are many successful methods of package distribution,
         but they can be meaningfully divided into a few kinds.
-        The <em>regular release</em> or <em>static release</em>
-        deals in discrete package sets: 
+        The <em>regular release</em> model deals in discrete package sets: 
         Packages are first composed into a working whole, 
-        then undergo some testing period.
-        The collection is then released publicly, at which point
-        updates are restricted to bug fixes and security updates.
-        Do not expect new features to become available within a 
-        particular release.
-        The set is supported for some length of time&mdash; 
-        <em>Long-Term Support</em> releases are often maintained for
+        then undergo some testing period.  After the set is verfied to work
+        correctly, the collection is released to the public; at that point,
+        updates to packages are restricted to bug fixes and security updates.
+        Distributions following this model are known for their stability,
+        which comes at a cost: Do not expect new features to become available 
+        within a particular release.
+        The release is then supported for some length of time&mdash; 
+        "Long-Term Support" releases are often maintained for
         five years.
     </p>
 
     <p>
-        Distributions following the regular release model:
+        Some distributions following the regular release model:
     </p>
 
     <ul>
@@ -483,7 +488,7 @@ last-updated: January 2024
     </ul>
 
     <p>
-        Between the two is the <em>semi-rolling release,</em>
+        Between the two is the "semi-rolling release" model,
         best explained through example:
         <a href="https://getsol.us/home/">Solus Linux</a> is an
         up-and-coming distribution focusing on the home computing.
@@ -493,7 +498,7 @@ last-updated: January 2024
 
     <h3>See Also:</h3>
     <ul>
-        <li><a href="https://linuxmint-user-guide.readthedocs.io/en/latest/snap.html"> Snap Store </a> - Linux Mint User Guide</li>
+        <li><a href="https://linuxmint-user-guide.readthedocs.io/en/latest/snap.html"> Snap Store </a> - Linux Mint User Guide (Criticism)</li>
         <li><a href="https://wiki.archlinux.org/index.php/Arch_Linux">Arch Linux</a> - ArchWiki</li>
     </ul>
 </div>
