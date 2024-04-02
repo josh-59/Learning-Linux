@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Files 
-last-updated: January, 2023
+last-updated: April, 2024
 ---
 
 <!--
@@ -84,7 +84,7 @@ last-updated: January, 2023
         Such information is called
         <em><a href="https://en.wikipedia.org/wiki/Metadata">metadata</a>,</em>
         though within the context of Unix files, 
-        it is usually refered to as <em>file attributes.</em>
+        it is usually referred to as <em>file attributes.</em>
     </p>
 
     <p>
@@ -110,8 +110,7 @@ last-updated: January, 2023
 
     <p>
         This data is stored alongside the file, typically on-disk,
-        and its quantity can be explained by the 
-        operating system's time-sharing heritage.
+        and its quantity can be explained by Unix's time-sharing heritage.
         It is used today to compartmentalize the machine.
     </p>
 </div>
@@ -260,15 +259,6 @@ last-updated: January, 2023
         description of the system's current memory usage:
     </p>
 
-    <div class="aside-right">
-        <h4>Aside:</h4>
-        <p>
-            Here we are using the <code>cat</code> command to
-            con<code>cat</code>enate the contents of the file
-            to the standard output stream (our terminal screen).
-        </p>
-    </div>
-
     <div class="code">
         $ cat /proc/meminfo<br>
         MemTotal:        3887988 kB<br>
@@ -390,9 +380,8 @@ last-updated: January, 2023
     </p>
 
     <p>
-        Since each directory has a single parent, 
-        and creating new references to directories is not allowed, the
-        directory structure is guaranteed to be a tree.
+        Since each directory has exactly one parent, 
+        the directory structure is guaranteed to be a tree.
     </p>
 
     <h3>See Also:</h3>
