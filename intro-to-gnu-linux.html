@@ -36,7 +36,7 @@ last-updated: December, 2023
         An operating system is a piece of software which facilitates
         the use of a computer.
         To this end, its two main responsibilities are to support running
-        programs and to maintain persistent data.
+        programs and to maintain persistent data, in the form of files.
         GNU/Linux belongs to a large class of operating systems known as
         <em>UNIX-like</em>, having an architecture, design philosophy, and
         system-call interface similar to the 
@@ -54,61 +54,56 @@ last-updated: December, 2023
         To understand Unix and the origins of GNU/Linux, we have
         to step back in time, to the 1960's, when the computer industry
         was just beginning.
-        Computers then were immense&mdash;
-        and largely uncontrolled&mdash; machines, either
-        processing instructions from punched cards in
-        discrete sessions called <em><a href="https://en.wikipedia.org/wiki/Batch_processing">batches</a>,</em>
-        or supporting some lucky user for an interactive session.<sup><a href="https://multicians.org/project-mac.html">[1]</a></sup>
+        Computers then were immense machines, and did not support the 
+        controlled execution of code: The crash of
+		a user's program meant the crash of the computer.
+        They processed users' instructions from punched cards in
+        discrete sessions called <a href="https://en.wikipedia.org/wiki/Batch_processing">batches</a>,
+        or supported some lucky user for an interactive session.<sup><a href="https://multicians.org/project-mac.html">[1]</a></sup>  
     </p>
 
     <p>
         Next-generation computers were interactive,
         their use being, "...indescribably more pleasant and productive 
         than batch processing."<sup><a href="#references" title="Kernighan p. 31">[2]</a></sup>
+        Owing to the cost of the machines, though, it was necessary that they
+        support more than one user at a time, giving rise to the technique 
+        of time-sharing:  
+    </p>
+
+    <blockquote>
+        The impetus for time-sharing first arose from professional programmers 
+        because of their constant frustration in debugging programs at batch 
+        processing installations. Thus, the original goal was to time-share 
+        computers to allow simultaneous access by several persons while giving 
+        to each of them the illusion of having the whole machine at his disposal. 
+    </blockquote>
+
+    <p>
+        To that end, several operating systems were developed.
         In 1960, an operating system was devised to "steal" time 
         from batch jobs on behalf of interactive users, and thereby
         support both interactive and batch computing simultaneously.<sup><a href="https://multicians.org/project-mac.html">[1]</a></sup>
-        In 1961, a purely time-sharing operating system&mdash;
-        which could support four users simultaneously&mdash;
-        was demonstrated.<sup><a href="https://multicians.org/project-mac.html">[1]</a></sup>
+        In 1961, an operating system capable of supporting four users 
+        simultaneously was demonstrated.<sup><a href="https://multicians.org/project-mac.html">[1]</a></sup>
     </p>
 
     <p>
-        Computing's commercial future was widely believed
-        to be in offering an <a href="https://en.wikipedia.org/wiki/Utility_computing">"information utility"</a>:
+        Computing's future was widely believed
+        to be in offering an <a href="https://en.wikipedia.org/wiki/Utility_computing">"information utility"</a>.
         In a business model similar to telephone or electricity,
-        customers would connect their keyboards and monitors to a 
-        central mainframe, then pay for computation on an as-used 
+        customers would connect their keyboards and monitors (called "terminals")
+	    to a central mainframe, then pay for computation on an as-used 
         basis.<sup><a href="http://www.tnellen.com/cybereng/ebooks/greenbf.htm">[3]</a></sup>
-        Such "dial-up timesharing" presented a number of technical challenges,
-        chief among them,
+        Such "dial-up timesharing" involved three major components:
     </p>
 
     <ol>
-        <li>Creating the necessary infrastructure to distribute the service</li>
-        <li>The procurement of capable computer hardware</li>
-        <li>Allotting useful and controlled computation to individual customers</li>
+        <li>Capable computer hardware</li>
+        <li>Infrastructure to distribute the service (i.e., a network 
+            of wires)</li>
+        <li>An operating system capable of supporting many users simultaneously</li>
     </ol>
-
-    <p>
-        AT&amp;T, which dominated the country's telephone system,
-        was uniquely positioned to address the first; 
-        General Electric was willing to produce the necessary hardware;
-        and,
-        <a href="https://multicians.org/">MULTICS</a>, an operating system project that began in 1965, 
-        intended to solve the third.
-    </p>
-
-    <h3>Multics</h3>
-
-    <p>
-        The MULTICS project was born at MIT, with development 
-        supplemented by GE and AT&amp;T.<sup><a href="https://multicians.org/history.html">[4]</a></sup>
-        To address the challenges at hand, a number of 
-        <a href="https://multicians.org/features.html">novel features</a> 
-        were introduced, many of which
-        would become standard in computing.
-    </p>
 
     <div class="img-center">
         <a href="http://bitsavers.org/pdf/ge/GE-645/LSB0468_GE-645_System_Manual_Jan1968.pdf" title="Photo credit: General Electric Information Systems Equipment Division, 1968">
@@ -116,6 +111,25 @@ last-updated: December, 2023
         </a>
         <center>The Envisioned Hardware<center>
     </div>
+
+
+    <p>
+        General Electric was willing to build the computers, while
+        AT&amp;T, which dominated the country's telephone system,
+        was uniquely positioned to distribute the service.  The MULTICS operating
+        system was intended to allot the machines' time to users.
+    </p>
+
+    <h3>Multics</h3>
+
+    <p>
+        <a href="https://multicians.org/">MULTICS</a> was born at MIT, 
+        with development supplemented by GE and AT&amp;T.<sup><a href="https://multicians.org/history.html">[4]</a></sup>
+        To address the challenges at hand, a number of 
+        <a href="https://multicians.org/features.html">novel features</a> 
+        were introduced, many of which
+        would become standard in computing.
+    </p>
 
     <p>
         To support the controlled execution of customers' software, 
@@ -142,15 +156,14 @@ last-updated: December, 2023
 
     <p>
         Although Multics was working by 1968, 
-        it could only support a small team of developers,
-        and it became increasingly clear that the project would 
-        not deliver on its promise of a
-        profitable information utility;
+        it could only support a small group of users,
+        and as it became clear that the project would not deliver on its promise 
+        of a profitable information utility,
         AT&amp;T withdrew.<sup><a href="#references" title="Kernighan p 32">[2]</a></sup>
         Multics soldiered on:
         1970 saw its first installation, which could support 
         35 simultaneous users. 
-        One of its later installations (at General Motors) could support 
+        One of its later installations (at General Motors) supported
         200.<sup><a href="http://web.mit.edu/Saltzer/www/multics.html">[9]</a></sup>
     </p>
 
