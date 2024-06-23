@@ -35,8 +35,8 @@ last-updated: December, 2023
     <p>
         An operating system is a piece of software which facilitates
         the use of a computer.
-        To this end, its two main responsibilities are to support running
-        programs and to maintain persistent data, in the form of files.
+        To this end, its two main responsibilities are supporting running
+        programs, and maintaining persistent data, in the form of files.
         GNU/Linux belongs to a large class of operating systems known as
         <em>UNIX-like</em>, having an architecture, design philosophy, and
         system-call interface similar to the 
@@ -54,11 +54,9 @@ last-updated: December, 2023
         To understand Unix and the origins of GNU/Linux, we have
         to step back in time, to the 1960's, when the computer industry
         was just beginning.
-        Computers then were immense machines, and did not support the 
-        controlled execution of code: The crash of
-		a user's program meant the crash of the computer.
+        Computers then were immense, and largely uncontrolled, machines.
         They processed users' instructions from punched cards in
-        discrete sessions called <a href="https://en.wikipedia.org/wiki/Batch_processing">batches</a>,
+        sessions called <a href="https://en.wikipedia.org/wiki/Batch_processing">batches</a>,
         or supported some lucky user for an interactive session.<sup><a href="https://multicians.org/project-mac.html">[1]</a></sup>  
     </p>
 
@@ -76,16 +74,16 @@ last-updated: December, 2023
         because of their constant frustration in debugging programs at batch 
         processing installations. Thus, the original goal was to time-share 
         computers to allow simultaneous access by several persons while giving 
-        to each of them the illusion of having the whole machine at his disposal. 
+        to each of them the illusion of having the whole machine at his disposal.<sup><a href="https://web.archive.org/web/20171106131832/http://www.multicians.org/fjcc1.html">[3]</a></sup>
     </blockquote>
 
     <p>
-        To that end, several operating systems were developed.
-        In 1960, an operating system was devised to "steal" time 
+        To that end, operating systems were developed.
+        In 1960, one was devised to "steal" time 
         from batch jobs on behalf of interactive users, and thereby
         support both interactive and batch computing simultaneously.<sup><a href="https://multicians.org/project-mac.html">[1]</a></sup>
-        In 1961, an operating system capable of supporting four users 
-        simultaneously was demonstrated.<sup><a href="https://multicians.org/project-mac.html">[1]</a></sup>
+        In 1961, a system capable of supporting four users 
+        was demonstrated.<sup><a href="https://multicians.org/project-mac.html">[1]</a></sup>
     </p>
 
     <p>
@@ -94,16 +92,8 @@ last-updated: December, 2023
         In a business model similar to telephone or electricity,
         customers would connect their keyboards and monitors (called "terminals")
 	    to a central mainframe, then pay for computation on an as-used 
-        basis.<sup><a href="http://www.tnellen.com/cybereng/ebooks/greenbf.htm">[3]</a></sup>
-        Such "dial-up timesharing" involved three major components:
+        basis.<sup><a href="http://www.tnellen.com/cybereng/ebooks/greenbf.htm">[4]</a></sup>
     </p>
-
-    <ol>
-        <li>Capable computer hardware</li>
-        <li>Infrastructure to distribute the service (i.e., a network 
-            of wires)</li>
-        <li>An operating system capable of supporting many users simultaneously</li>
-    </ol>
 
     <div class="img-center">
         <a href="http://bitsavers.org/pdf/ge/GE-645/LSB0468_GE-645_System_Manual_Jan1968.pdf" title="Photo credit: General Electric Information Systems Equipment Division, 1968">
@@ -112,65 +102,41 @@ last-updated: December, 2023
         <center>The Envisioned Hardware<center>
     </div>
 
-
-    <p>
-        General Electric was willing to build the computers, while
-        AT&amp;T, which dominated the country's telephone system,
-        was uniquely positioned to distribute the service.  The MULTICS operating
-        system was intended to allot the machines' time to users.
-    </p>
-
     <h3>Multics</h3>
 
     <p>
-        <a href="https://multicians.org/">MULTICS</a> was born at MIT, 
-        with development supplemented by GE and AT&amp;T.<sup><a href="https://multicians.org/history.html">[4]</a></sup>
-        To address the challenges at hand, a number of 
-        <a href="https://multicians.org/features.html">novel features</a> 
-        were introduced, many of which
-        would become standard in computing.
+        The <a href="https://multicians.org/">MULTICS</a> operating system project 
+        was born at MIT, 
+        with development supplemented by GE and AT&amp;T.<sup><a href="https://multicians.org/history.html">[5]</a></sup>
+        Its principal goal was to offer many users access to a single computer, as in
+        the service of an information utility.<sup><a href="https://multicians.org/fjcc1.html">[3]</a></sup>
     </p>
 
     <p>
+        MULTICS introduced the world to several novel ideas, some of which have
+        become standard in computing.
         To support the controlled execution of customers' software, 
-        for example,
-        it relied on the <em>process,</em> a virtualised environment
-        within which software could safely be 
-        executed.<sup><a href="https://multicians.org/exec-env.html">[5]</a></sup>  
+        for example, they introduced the process, a virtual environment
+        within which software could safely, and privately,
+        execute.<sup><a href="https://multicians.org/exec-env.html">[7]</a></sup>  
         To support multiple users, multiple processes
-        were supported simultaneously.<sup><a href="https://multicians.org/exec-env.html">[6]</a></sup>
-        To manage these, a "supervisor" program was introduced.
-    </p>
-
-    <p>
-        To implement its ideas, Multics was 
-        written in a high-level programming language, <em>PL/I.</em><sup><a href="https://multicians.org/features.html">[6]</a><a href="https://multicians.org/pl1.html">[7]</a></sup>
-        Even by today's standards, PL/I was sophisticated:
-        In order to future-proof the work, it was entirely
-        platform-independent&mdash; it did not deal in what we would call 
-        "primitives."<sup><a href="https://multicians.org/fjcc1.html">[8]</a></sup>
-        As the project got underway, obtaining a compiler for
-        it became a significant challenge, so much so that a lesser 
-        dialect was first devised and implemented.<sup><a href="https://multicians.org/pl1.html">[7]</a></sup>
+        were supported.<sup><a href="https://multicians.org/exec-env.html">[7]</a></sup>
+        To manage these, and allot computation time to users, a "supervising" 
+        program was introduced.
     </p>
 
     <p>
         Although Multics was working by 1968, 
-        it could only support a small group of users,
+        it could only support a small number of users,
         and as it became clear that the project would not deliver on its promise 
         of a profitable information utility,
-        AT&amp;T withdrew.<sup><a href="#references" title="Kernighan p 32">[2]</a></sup>
+        AT&amp;T withdrew its support.<sup><a href="#references" title="Kernighan p 32">[2]</a></sup>
         Multics soldiered on:
-        1970 saw its first installation, which could support 
+        1970 saw its first installation, which supported
         35 simultaneous users. 
-        One of its later installations (at General Motors) supported
+        One of its later installations, at General Motors, supported
         200.<sup><a href="http://web.mit.edu/Saltzer/www/multics.html">[9]</a></sup>
     </p>
-
-    <h3>See Also:</h3>
-    <ul>
-        <li><a href="https://multicians.org/fjcc3.html">The Structure of the Multics Supervisor</a> by V. A. Vyssotsky, F. J. Corbató, and R. M. Graham </li>
-    </ul>
 </div>
 
 <div id="unix" class="content">
@@ -188,8 +154,8 @@ last-updated: December, 2023
         In the wake of AT&amp;T's withdrawal from Multics, 
         operating systems researchers working at Bell Labs
         found themselves without a clear project.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[10]</a></sup>
-        Still reeling from the disaster of Multics, management
-        refused to purchase any new computer equipment.
+        Still reeling from the disaster of MULTICS, management
+        refused to purchase new computer equipment.
         For the researchers of Bell Labs, this period was 
         frustrating: Their proposals,
         "...were never clearly and finally turned down, but yet were certainly never accepted."<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[10]</a></sup>
@@ -225,8 +191,9 @@ last-updated: December, 2023
         Where Multics was large, and offered many ways to
         handle a given task, Unix was simple, and offered only one.
     </p>
+
     <p>
-        About his colleague's early work, Dennis Ritchie would later write,
+        About his colleague's early work, Dennis Ritchie would write,
     </p>
 
     <blockquote>
@@ -731,6 +698,10 @@ last-updated: December, 2023
         </li>
 
         <li>
+            F. J. Corbató, F. J., & Vyssotsky, V. A. (1965). In <em>Fall Joint Computer Conference.</em> Las Vegas; Association for Computing Machinery. Retrieved June 23, 2024, from <a href="https://multicians.org/fjcc1.html">https://multicians.org/fjcc1.html</a>.  
+        </li>
+
+        <li>
             Greenberger, M. (1964, May). The Computers of Tomorrow. Available at <a href="http://www.tnellen.com/cybereng/ebooks/greenbf.htm">http://www.tnellen.com/cybereng/ebooks/greenbf.htm</a>.
 
         <li>
@@ -744,11 +715,6 @@ last-updated: December, 2023
 
         <li>
             Multics Features. (n.d.). <a href="https://multicians.org/features.html">https://multicians.org/features.html</a>.
-        </li>
-
-
-        <li>
-            Doug, M. I., &amp; Van, V. (2021, May 23). Multics PL/I. <a href="https://multicians.org/pl1.html">https://multicians.org/pl1.html</a>.
         </li>
 
         <li>
