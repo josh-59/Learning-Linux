@@ -157,13 +157,13 @@ last-updated: April, 2024
     </p>
 
     <div class="code">
-        $ file /bin/bash<br>
+        $ file /usr/bin/bash<br>
         /bin/bash: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), <br>
         dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, <br>
         BuildID[sha1]=a43fec47192ff49c2d3fed671f2be8df7e83784a, for <br>
         GNU/Linux 3.2.0, stripped<br><br>
-        $ stat /bin/bash<br>
-        File: /bin/bash<br>
+        $ stat /usr/bin/bash<br>
+        File: /usr/bin/bash<br>
         Size: 1183448   	Blocks: 2312       IO Block: 4096   regular file<br>
         Device: 802h/2050d	Inode: 1835042     Links: 1<br>
         Access: (0755/-rwxr-xr-x)  Uid: (    0/    root)   Gid: (    0/    root)<br>
@@ -178,7 +178,6 @@ last-updated: April, 2024
         <a href="https://www.greenwoodsoftware.com/less/"><code>less</code></a>
         paging utility, which interprets the file as text.
     </p>
-
 </div>
 
 <div id="device-files" class="content">
@@ -576,9 +575,9 @@ last-updated: April, 2024
     <p>
         An <em>inode</em> is a collection of data describing a file.
         It contains all metadata of the file, as well as
-        a sequences of references to the data
+        a sequence of references to the data
         constituting the file.
-        Within a filesystem, inodes are located in an array;
+        Within a filesystem, inodes are located in an array, so that
         an index into this array uniquely identifies an inode, and
         thereby identifies a specific file.
         These indices are referred to as <em>inode numbers.</em>
@@ -588,7 +587,7 @@ last-updated: April, 2024
         A <em>directory</em> is a file which associates filenames with
         inode numbers.
         Both literally and conceptually, a directory is a file containing
-        a simple two-column table, inode number and filename:
+        a two-column table, inode number and filename:
     </p>
 
     <div class="aside-right">
@@ -609,7 +608,6 @@ last-updated: April, 2024
         775449 _data/<br>
         642188 documentation.html<br>
         641473 files.html<br>
-        642185 generalizing-open-source.html<br>
         775463 how-open-source-works.html<br>
         [...]
     </div>
@@ -642,8 +640,6 @@ last-updated: April, 2024
             meaning, <i>per se,</i> with respect to the system.
         </p>
     </div>
-
-
 
     <p>
         As a rule, filenames are not interpreted by the kernel,
@@ -680,7 +676,7 @@ last-updated: April, 2024
     <p>
         In the design, every file is represented by a single inode, 
         which contains the file's metadata, and contains pointers to
-        data blocks, where the contents of the file is kept.<sup><a href="#references">[9]</a></sup>
+        data blocks, where the contents of the file are kept.<sup><a href="#references">[9]</a></sup>
         These nodes are arranged in an array, and can be identified
         by an index into it.
         Data blocks are of fixed size, and either free or
