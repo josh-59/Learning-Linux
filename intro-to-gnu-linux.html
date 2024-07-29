@@ -1,15 +1,15 @@
 ---
 layout: default
 title: Introduction to GNU/Linux
-last-updated: December, 2023
+last-updated: July, 2024
 ---
 
 <div id="nav_bar_2" class="nav">
     <ul>
         <li><a href="#introduction"> Introduction </a></li>
-        <li><a href="#history"> History: Time Sharing </a></li>
+        <li><a href="#history"> History: Time Sharing, Multics </a></li>
         <li><a href="#unix">Unix</a></li>
-        <li><a href="#unix-architecture"> The UNIX Architecture </a></li>
+        <li><a href="#unix-architecture"> The Unix Architecture </a></li>
         <li><a href="#gnu">GNU's Not Unix</a></li>
         <li><a href="#linux"> The Linux Kernel </a></li>
         <li><a href="#distributions"> Linux Distributions: Early History</a></li>
@@ -36,11 +36,10 @@ last-updated: December, 2023
         An operating system is a piece of software which facilitates
         the use of a computer.
         To this end, its two main responsibilities are supporting running
-        programs, and maintaining persistent data, in the form of files.
+        programs and maintaining persistent data (files).
         GNU/Linux belongs to a large class of operating systems known as
         <em>UNIX-like</em>, having an architecture, design philosophy, and
-        system-call interface similar to the 
-        70's-era operating system.
+        system-call interface similar to the 70's-era operating system.
     </p>
 </div>
 
@@ -48,14 +47,14 @@ last-updated: December, 2023
 
 <div class="content" id="history">
     <h2 style="margin-bottom: 0;">History:</h2>
-    <h4>Time Sharing</h4>
+    <h4>Time Sharing, Multics</h4>
 
     <p>
         To understand Unix and the origins of GNU/Linux, we have
         to step back in time, to the 1960's, when the computer industry
         was just beginning.
-        Computers then were immense, and largely uncontrolled, machines.
-        They processed users' instructions from punched cards in
+        Computers then were immense&mdash; and largely uncontrolled&mdash; machines.
+        They processed users' instructions from punched cards in discrete
         sessions called <a href="https://en.wikipedia.org/wiki/Batch_processing">batches</a>,
         or supported some lucky user for an interactive session.<sup><a href="https://multicians.org/project-mac.html">[1]</a></sup>  
     </p>
@@ -78,7 +77,7 @@ last-updated: December, 2023
     </blockquote>
 
     <p>
-        To that end, operating systems were developed.
+        To that end, time-sharing operating systems were developed.
         In 1960, one was devised to "steal" time 
         from batch jobs on behalf of interactive users, and thereby
         support both interactive and batch computing simultaneously.<sup><a href="https://multicians.org/project-mac.html">[1]</a></sup>
@@ -87,12 +86,23 @@ last-updated: December, 2023
     </p>
 
     <p>
-        Computing's future was widely believed
-        to be in offering an <a href="https://en.wikipedia.org/wiki/Utility_computing">"information utility"</a>.
+        Taking this notion to its limit, computer science researchers of the 
+        time believed that computing's future was 
+        in the <a href="https://en.wikipedia.org/wiki/Utility_computing">"information utility"</a>:
         In a business model similar to telephone or electricity,
-        customers would connect their keyboards and monitors (called "terminals")
+        customers would connect their keyboards and monitors 
 	    to a central mainframe, then pay for computation on an as-used 
         basis.<sup><a href="http://www.tnellen.com/cybereng/ebooks/greenbf.htm">[4]</a></sup>
+    </p>
+
+    <h3>Multics</h3>
+
+    <p>
+        The <a href="https://multicians.org/">MULTICS</a> operating system project 
+        was born at MIT, 
+        and development was supplemented by GE and AT&amp;T.<sup><a href="https://multicians.org/history.html">[5]</a></sup>
+        Its principal goal was to offer many users access to a single, powerful, 
+        computer, as in the service of an information utility.<sup><a href="https://multicians.org/fjcc1.html">[3]</a></sup>
     </p>
 
     <div class="img-center">
@@ -102,18 +112,9 @@ last-updated: December, 2023
         <center>The Envisioned Hardware<center>
     </div>
 
-    <h3>Multics</h3>
 
     <p>
-        The <a href="https://multicians.org/">MULTICS</a> operating system project 
-        was born at MIT, 
-        with development supplemented by GE and AT&amp;T.<sup><a href="https://multicians.org/history.html">[5]</a></sup>
-        Its principal goal was to offer many users access to a single computer, as in
-        the service of an information utility.<sup><a href="https://multicians.org/fjcc1.html">[3]</a></sup>
-    </p>
-
-    <p>
-        MULTICS introduced the world to several novel ideas, some of which have
+        Multics introduced the world to several novel ideas, some of which have
         become standard in computing.
         To support the controlled execution of customers' software, 
         for example, they introduced the process, a virtual environment
@@ -121,21 +122,21 @@ last-updated: December, 2023
         execute.<sup><a href="https://multicians.org/exec-env.html">[7]</a></sup>  
         To support multiple users, multiple processes
         were supported.<sup><a href="https://multicians.org/exec-env.html">[7]</a></sup>
-        To manage these, and allot computation time to users, a "supervising" 
-        program was introduced.
+        To manage these, allot computation time to users, and track each user's
+        expenditure, they introduced a "supervising" program. 
     </p>
 
     <p>
         Although Multics was working by 1968, 
-        it could only support a small number of users,
-        and as it became clear that the project would not deliver on its promise 
+        it could only support a small number of users.
+        As it became clear that the project would not deliver on its promise 
         of a profitable information utility,
         AT&amp;T withdrew its support.<sup><a href="#references" title="Kernighan p 32">[2]</a></sup>
         Multics soldiered on:
         1970 saw its first installation, which supported
         35 simultaneous users. 
         One of its later installations, at General Motors, supported
-        200.<sup><a href="http://web.mit.edu/Saltzer/www/multics.html">[9]</a></sup>
+        200 users simultaneously.<sup><a href="http://web.mit.edu/Saltzer/www/multics.html">[9]</a></sup>
     </p>
 </div>
 
@@ -152,48 +153,76 @@ last-updated: December, 2023
 
     <p>
         In the wake of AT&amp;T's withdrawal from Multics, 
-        operating systems researchers working at Bell Labs
-        found themselves without a clear project.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[10]</a></sup>
+        operating systems researchers working at Bell Laboratories
+        found themselves without a clear project.
         Still reeling from the disaster of MULTICS, management
-        refused to purchase new computer equipment.
+        refused to purchase any new computation equipment.
         For the researchers of Bell Labs, this period was 
         frustrating: Their proposals,
         "...were never clearly and finally turned down, but yet were certainly never accepted."<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[10]</a></sup>
     </p>
 
     <p>
-        After finding a disused <a href="https://www.soemtron.org/pdp7.html">PDP-7</a>,
-        Ken Thompson and Dennis Ritchie rewrote the game
+        After finding an unused 
+        <a href="https://www.soemtron.org/pdp7.html">PDP-7</a> with a nice monitor
+        and powerful disk drive,
+        Ken Thompson and Dennis Ritchie decided to port the game
         <em><a href="https://en.wikipedia.org/wiki/Space_Travel_(video_game)">Space Travel</a></em> 
-        for it.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[10]</a></sup>
-        Afterwards, Ken Thompson continued to work with the machine, 
+        to it.
+        This served, at least in part, as an introduction to the 
+        "clumsy" practice of writing a program on one machine
+        (a <a href="https://en.wikipedia.org/wiki/GE-600_series">GE 635</a>) to 
+        run on another (a PDP-7), by way of punched paper tape: Programs had
+        to be written, assembled and then punched to paper tape using the 
+        GE 635, then carried over and read into the PDP-7 to be executed.<sup><a href="references" title="Kernighan p32">[2]</a><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[10]</a><a href="https://www.bell-labs.com/usr/dmr/www/chist.html">[11]</a></sup>
+    </p>
+
+    <p>
+        Afterwards, Ken Thompson continued to work with the machines, 
         implementing a filesystem that he, Dennis Ritchie and 
-        Rudd Canaday had devised on
-        paper.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[10]</a></sup>
+        Rudd Canaday had devised on paper.
+        A filesystem without a means to interact with its contents is a 
+        "sterile proposition,"
+        and so Thompson continued working on it, implementing the functionality
+        necessary to make it useable in practice.<sup><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[10]</a></sup> 
+    </p>
+
+    <div class="aside-right">
+        <h4>Aside</h4>
+        <p>
+            These four components correspond to <a href="https://man.cat-v.org/unix-1st/2/sys-exec"><em>exec()</em></a>, 
+            <a href="https://man.cat-v.org/unix-1st/1/as"><code>as</code></a> ("assemble"),
+            <a href="https://man.cat-v.org/unix-1st/1/ed"><code>ed</code></a> ("edit"),
+            and <a href="https://man.cat-v.org/unix-1st/1/sh"><code>sh</code></a> ("shell"),
+            respectively.  
+        </p>
+    </div>
+
+    <p>
+        About mid-1969, Thompson realized he was close to
+        an operating system.  Four key pieces were needed to take what he had
+        to a self-supporting system.
+        They were: A system call to transfer the current thread of execution 
+        to the start of an arbitrary file; an assembler to translate 
+        human-readable code into machine code ("binary files"); 
+        a text editor to create and edit assembly-language files; and, 
+        a shell to execute user commands.
+        The system call was "trivial," and rudimentary 
+        implementations of the other three were done in one week 
+        each.<sup><a href="#references" title="Kernighan, p34">[2]</a><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[10]</a>
     </p>
 
     <p>
-        In mid-1969, Thompson realized that he was close to
-        an operating system:  All he needed was an
-        assembler, a text editor, a shell and a system call to
-        launch programs.<sup><a href="#references" title="Kernighan, p34">[2]</a><a href="http://www.read.seas.harvard.edu/~kohler/class/aosref/ritchie84evolution.pdf">[10]</a></sup>
-        The system call was "trivial," and the other three 
-        components were done in one week 
-        each.<sup><a href="#references" title="Kernighan, p34">[2]</a></sup>
+        By the time he was done, the software was self-supporting, in the
+        sense that one could write, assemble, and run software
+        on the PDP-7 alone.
+        He and other researchers of Bell Labs quickly improved it
+        into a multi-user/time-sharing operating
+        system, later nicknamed <em>UNIX.</em>
     </p>
 
     <p>
-        By the end of that year his software was self-supporting, and 
-        it was quickly developed into a multi-user, time-sharing operating
-        system, called <em>Unix.</em>
-        Whereas Multics required specialized mainframe
-        hardware, Unix made use of an emerging line of minicomputers.
-        Where Multics was large, and offered many ways to
-        handle a given task, Unix was simple, and offered only one.
-    </p>
-
-    <p>
-        About his colleague's early work, Dennis Ritchie would write,
+        About his colleague's work, Dennis Ritchie would later write,
     </p>
 
     <blockquote>
@@ -207,31 +236,50 @@ last-updated: December, 2023
     </blockquote>
 
     <p>
-        By offering text processing services for the
-        purpose of patent applications within the laboratory,
-        the team acquired a new PDP-11.<sup><a href="#references" title="Kernighan">[2]</a></sup>
-        They supported a sequence of versions of the software and
-        an accompanying online manual, while they themselves worked on 
-        "Research Unix."<sup><a href="#references" title="Kernighan">[2]</a></sup> 
-        By 1974, there were over fifty
-        installations, with "...many more expected."<sup><a href="https://www.tuhs.org/Archive/Distributions/Research/Dennis_v5/v5man.pdf">[12]</a></sup>
-        The first fork, <em>BSD,</em> was produced at the
-        University of California, Berkeley, in 1977.<sup><a href="https://forums.freebsd.org/threads/history-of-freebsd-part-1-unix-and-bsd.77407/">[13]</a></sup>
+        Owing to some anti-monopoly legislation imposed upon AT&amp;T at the time,
+        software generated by Bell Laboratories was available to any academic or 
+        research institution that cared to ask, given that they pay for the cost 
+        of media and shipping.
+        Thus, UNIX made its way to college campuses across the nation, to be 
+        studied by an emerging cadre of <em>computer scientists.</em><sup><a href="#references" title="Salus, p 17">[12]</a></sup>
     </p>
-
 
     <h3>See Also:</h3>
     <ul>
-        <li><a href="https://en.wikipedia.org/wiki/Ken_Thompson">Ken Thompson</a> - Wikipedia</li>
+        <li><a href="https://dsf.berkeley.edu/cs262/unix.pdf">The UNIX Time-Sharing System</a> by Dennis M. Ritchie and Ken Thompson, of Bell Laboratories</a></li>
         <li><a href="https://www.cs.princeton.edu/~bwk/memoir.html">Unix: A History and a Memoir</a> by Brian Kernighan</a></li>
     </ul>
 </div>
 
 <div id="unix-architecture" class="content">
     <h2>The Unix Architecture</h2>
+
+<!--
     <p>
-        Unix had a simple, clear architecture that 
-        inspired many operating systems.
+        In 1974, Dennis Ritchie and Ken Thompson presented 
+        <a href="https://dsf.berkeley.edu/cs262/unix.pdf">the first paper</a> on 
+        the new operating system, then in its third release.
+        In it, they wrote: 
+    </p>
+
+    <blockquote>
+        "Perhaps the most important achievement of UNIX is to
+        demonstrate that a powerful operating system for interac-
+        tive use need not be expensive either in equipment or in
+        human effort: UNIX can run on hardware costing as little as
+        $40,000, and less than two man years were spent on the
+        main system software. Yet UNIX contains a number of fea-
+        tures seldom offered even in much larger systems. It is
+        hoped, however, the users of UNIX will find that the most
+        important characteristics of the system are its simplicity,
+        elegance, and ease of use."
+    </blockquote>
+-->
+
+    <p>
+        UNIX had a simple, clear architecture that 
+        inspired <a href="https://en.wikipedia.org/wiki/Unix_wars">many</a> 
+        operating systems.
         It is organized as a hierarchy of layers,
         with each layer building upon the ones beneath it, and supporting
         those above it:
@@ -258,24 +306,24 @@ last-updated: December, 2023
 
     <p>
         <strong>Kernel:</strong>
-        The heart of the Unix operating system is its 
-        <a href="http://linfo.org/kernel.html">kernel</a>.
-        The kernel is responsible for
-        scheduling the CPU, allotting memory, 
+        The heart of any UNIX-like operating system is its kernel.
+        The kernel is responsible for implementing the filesystems
+        supported, scheduling the CPU, allotting memory, 
         maintaining file integrity, and many other tasks.
-        It is an involved piece of software&mdash;
+        To say the least, it is an involved piece of software,
         effectively, the "brains" of the operation.
     </p>
 
     <p>
         <strong>System Calls:</strong>
         The set of operations that an operating system is willing 
-        to undertake is defined by the system calls it supports.
-        The Unix architecture is characterized by six essential system 
+        to undertake on behalf of a user's process is defined by 
+        the system calls it supports.
+        The UNIX architecture is characterized by six essential system 
         calls:
         <em>fork()</em>, <em>exec()</em>, <em>open()</em>, 
         <em>close()</em>, <em>read()</em>, and
-        <em>write()</em>.<sup><a href="#references">[14]</a></sup>
+        <em>write()</em>.<sup><a href="#references">[13]</a></sup>
         Both <em>fork()</em> and <em>exec()</em> are concerned with 
         launching programs, while the other four deal with files. 
     </p>
@@ -320,20 +368,20 @@ last-updated: December, 2023
         "If you saw someone using an unfamiliar and interesting program, you
         could always ask to see the source code, so that you could read it, change
         it, or cannibalize parts of it to make a new
-        program."<sup><a href="https://www.gnu.org/gnu/thegnuproject.html">[15]</a></sup>
+        program."<sup><a href="https://www.gnu.org/gnu/thegnuproject.html">[14]</a></sup>
     </blockquote>
 
     <p>
         Yet, non-free software was becoming the norm, with students working
         on projects intended for profit,
         and companies going so far as requiring nondisclosure agreements be
-        signed to get an executable.<sup><a href="https://www.gnu.org/gnu/thegnuproject.html">[15]</a></sup><sup><a href="https://www.gnu.org/gnu/why-programs-should-be-shared.html">[16]</a></sup>
+        signed to get an executable.<sup><a href="https://www.gnu.org/gnu/thegnuproject.html">[14]</a></sup><sup><a href="https://www.gnu.org/gnu/why-programs-should-be-shared.html">[15]</a></sup>
         On September 27, 1983, Stallman announced his intent:
         To produce a "complete UNIX-compatible software system," and to
-        "give it away free."<a href="https://www.gnu.org/gnu/initial-announcement.en.html#f1"><sup>[17]</sup></a>
+        "give it away free."<a href="https://www.gnu.org/gnu/initial-announcement.en.html#f1"><sup>[16]</sup></a>
         He called the project <a href="https://gnu.org">GNU</a>, a recursive
         acronym for
-        <em>GNU's Not UNIX.</em><sup><a href="https://www.gnu.org/gnu/gnu-history.html">[18]</a></sup>
+        <em>GNU's Not UNIX.</em><sup><a href="https://www.gnu.org/gnu/gnu-history.html">[17]</a></sup>
     </p>
 
     <h3>Software Freedom</h3>
@@ -345,7 +393,7 @@ last-updated: December, 2023
         culture of code-sharing MIT was once home to.
         More, he did not wish to put the code in the public domain because
         modified versions of it it could become 
-        non-free.<sup><a href="https://en.wikipedia.org/wiki/Copyleft#History">[19]</a></sup>
+        non-free.<sup><a href="https://en.wikipedia.org/wiki/Copyleft#History">[18]</a></sup>
         By 1985, Stallman had sorted these issues out:
     </p>
 
@@ -354,7 +402,7 @@ last-updated: December, 2023
         modify and redistribute GNU, but no distributor will be allowed to
         restrict its further redistribution. That is to say, proprietary
         modifications will not be allowed. I want to make sure that all
-        versions of GNU remain free.<sup><a href="https://www.gnu.org/gnu/manifesto.html">[20]</a></sup>
+        versions of GNU remain free.<sup><a href="https://www.gnu.org/gnu/manifesto.html">[19]</a></sup>
     </blockquote>
 
     <p>
@@ -370,7 +418,7 @@ last-updated: December, 2023
     <p>
         To create an entire operating system is an enormous task, but
         by 1990, the GNU Project had
-        found or written all major components except one, the kernel.<sup><a href="https://www.gnu.org/gnu/gnu-history.html">[18]</a></sup>
+        found or written all major components except one, the kernel.<sup><a href="https://www.gnu.org/gnu/gnu-history.html">[17]</a></sup>
         Today, the <a href="https://www.gnu.org/">GNU Project</a> is 
         well-regarded for producing high-quality, well-documented free software;
         they are as "official" as the open-source community gets.
@@ -378,8 +426,8 @@ last-updated: December, 2023
         <a href="https://www.gnu.org/keepingup.html">active and prominent</a>
         among the free software community, with
         monetary support from the 
-        <a href="https://www.fsf.org">Free Software Foundation</a>.<sup><a href="https://www.gnu.org/gnu/gnu-structure.html">[22]</a></sup>
-        Richard Stallman remains Chief GNUisance.<sup><a href="https://www.gnu.org/gnu/gnu-structure.html">[22]</a></sup>
+        <a href="https://www.fsf.org">Free Software Foundation</a>.<sup><a href="https://www.gnu.org/gnu/gnu-structure.html">[20]</a></sup>
+        Richard Stallman remains Chief GNUisance.<sup><a href="https://www.gnu.org/gnu/gnu-structure.html">[20]</a></sup>
     </p>
 
     <h3> See Also: </h3>
@@ -397,14 +445,14 @@ last-updated: December, 2023
         Linus Torvalds announced his own operating system project.
         Again following the Unix architecture,
         his project was intended to be "...just a hobby, won't be big and
-        professional like GNU."<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[23]</a></sup>
+        professional like GNU."<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[21]</a></sup>
     </p>
 
     <p>
         Whereas GNU sought to produce an entire operating system, 
         Linus restricted his attention to the kernel.
         By October of 1991, he had GNU's Bash, GCC, Make and other
-        programs running on his creation.<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[23]</a></sup>
+        programs running on his creation.<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[21]</a></sup>
         That month, he sent out the following invitation, 
         which has since become famous:
     </p>
@@ -436,7 +484,7 @@ last-updated: December, 2023
     </blockquote>
 
     <blockquote>
-        [...]<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[23]</a></sup> 
+        [...]<sup><a href="https://www.cs.cmu.edu/~awb/linux.history.html">[21]</a></sup> 
     </blockquote>
 
     <div class="aside-left" style="font-size: 11pt;">
@@ -452,7 +500,7 @@ last-updated: December, 2023
         of the informality of the project:
         Everybody was invited, if only to tinker.
         His development model&mdash; "release early and often, delegate everything you can,
-        be open to the point of promiscuity"<sup><a href="http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/index.html#catbmain">[24]</a></sup>&mdash; <a href="http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/index.html#catbmain">raised eyebrows</a> at the time,
+        be open to the point of promiscuity"<sup><a href="http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/index.html#catbmain">[22]</a></sup>&mdash; <a href="http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/index.html#catbmain">raised eyebrows</a> at the time,
         but has since proved sound in virtue of its success:
         It now dominates the open-source landscape.
     </p>
@@ -469,12 +517,12 @@ last-updated: December, 2023
         Linus Torvalds remains the maintainer of the Development branch.
         A major figure of today's Linux development effort is 
         Greg Kroah-Hartman, who is maintainer 
-        of the stable branch, in addition to various subsystems.<sup><a href="https://en.wikipedia.org/wiki/Greg_Kroah-Hartman">[25]</a></sup>
+        of the stable branch, in addition to various subsystems.<sup><a href="https://en.wikipedia.org/wiki/Greg_Kroah-Hartman">[23]</a></sup>
         According to him, interest in the kernel continues to
         grow, with around 1200 new developers contributing each
-        year.<sup><a href="https://www.theregister.com/2020/10/26/linux_kernel_intel/">[26]</a></sup>
+        year.<sup><a href="https://www.theregister.com/2020/10/26/linux_kernel_intel/">[24]</a></sup>
         Their main development bottlenecks are code review and
-        maintainership.<sup><a href="https://www.theregister.com/2020/10/26/linux_kernel_intel/">[26]</a></sup>
+        maintainership.<sup><a href="https://www.theregister.com/2020/10/26/linux_kernel_intel/">[24]</a></sup>
     </p>
 
     <h3>See Also:</h3>
@@ -494,11 +542,11 @@ last-updated: December, 2023
         by its developers in source-code
         form, and requires compilation on a separate host machine
         before it can be used.  
-        Furthermore, no other software is included, so that
+        No other software is included, so that
         creating a functional Linux-based machine requires somebody
         to obtain, compile and assemble a 
         number of disparate software components.
-        A <em>distribution</em> is a project that fills this gap.
+        A distribution is a project that fills this gap.
     </p>
         
 
@@ -509,21 +557,21 @@ last-updated: December, 2023
 
     <p>
         The first distribution of GNU/Linux was undertaken by 
-        <a href="https://en.wikipedia.org/wiki/HJ_Lu">HJ Lu</a>
-        in 1992.<sup><a href="https://www.maketecheasier.com/history-of-early-linux-distros/">[27]</a></sup>
+        <a href="https://en.wikipedia.org/wiki/HJ_Lu">HJ Lu</a>,
+        in 1992.<sup><a href="https://www.maketecheasier.com/history-of-early-linux-distros/">[25]</a></sup>
         He packaged utilities alongside the kernel and distributed the
         collection on a pair of 5.25" disks.
         Known as the <em>Boot/Root Floppies,</em>
-        it was never widely known, nor used.<sup><a href="https://www.maketecheasier.com/history-of-early-linux-distros/">[27]</a></sup><sup><a href="https://lwn.net/Articles/91371/">[28]</a></sup>
+        it was never widely known, nor used.<sup><a href="https://www.maketecheasier.com/history-of-early-linux-distros/">[25]</a></sup><sup><a href="https://lwn.net/Articles/91371/">[26]</a></sup>
     </p>
 
     <p>
         Linux's first widely used distribution was, ironically,
         a commercial venture&mdash; <em><a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">Soft Landing System</a></em> ("SLS Linux").
         Released in late 1992, it was sold under the slogan 
-        "Gentle Touchdowns for DOS Bailouts,"<sup><a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">[29]</a></sup>
-        but users complained that the software was buggy,<sup><a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">[28]</a><a href="https://www.linuxjournal.com/article/2750">[30]</a></sup> and when its developers
-        decided to change the executable file format, users began to leave.<sup><a href="https://lwn.net/Articles/91371/">[28]</a></sup>
+        "Gentle Touchdowns for DOS Bailouts,"<sup><a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">[27]</a></sup>
+        but users complained that the software was buggy,<sup><a href="https://en.wikipedia.org/wiki/Softlanding_Linux_System">[26]</a><a href="https://www.linuxjournal.com/article/2750">[28]</a></sup> and when its developers
+        decided to change the executable file format, users began to leave.<sup><a href="https://lwn.net/Articles/91371/">[26]</a></sup>
     </p>
 
     <h3> Slackware </h3>
@@ -531,24 +579,24 @@ last-updated: December, 2023
     <p>
         In late 1992, Patrick Volkerding needed a LISP interpreter for a project
         at school, and, having heard that <code>clisp</code> ran on SLS,
-        downloaded them both.<sup><a href="https://www.linuxjournal.com/article/2750">[30]</a></sup>
+        downloaded them both.<sup><a href="https://www.linuxjournal.com/article/2750">[28]</a></sup>
         His professor got wind, and asked Patrick to help him install the 
         same software
-        on school computers.<sup><a href="https://www.linuxjournal.com/article/2750">[30]</a></sup>
+        on school computers.<sup><a href="https://www.linuxjournal.com/article/2750">[28]</a></sup>
         Volkerding walked him through installing, fixing and patching SLS, and
         afterward, his professor asked, "Is there some way we can fix the install disks so
-        that the new machines will have these fixes right away?"<sup><a href="https://www.linuxjournal.com/article/2750">[30]</a></sup>
+        that the new machines will have these fixes right away?"<sup><a href="https://www.linuxjournal.com/article/2750">[28]</a></sup>
     </p>
 
     <p>
         So, Volkerding began improving SLS, and internally named his project
         <em>Slackware,</em> not wishing it to be taken too 
-        seriously.<sup><a href="https://www.linuxjournal.com/article/2750">[30]</a></sup>
+        seriously.<sup><a href="https://www.linuxjournal.com/article/2750">[28]</a></sup>
         By May 1993, his improvements were becoming substantial, and 
         his friends convinced him to release it onto the internet.
         The first release proved so popular that the
         number of download requests crashed the system hosting it,
-        and Slackware would be, for several years, the de-facto Linux distribution.<sup><a href="https://www.linuxjournal.com/article/2750">[30]</a></sup>
+        and Slackware would be, for several years, the de-facto Linux distribution.<sup><a href="https://www.linuxjournal.com/article/2750">[28]</a></sup>
     </p>
 
     <div class="img-center">
@@ -564,22 +612,22 @@ last-updated: December, 2023
         Volkerding hadn't intended to produce a distribution,
         but still maintains 
         <a href="http://www.slackware.com/">Slackware</a> today;
-        it is the oldest distribution still maintained.<sup><a href="https://www.linuxjournal.com/article/2750">[30]</a></sup><sup><a href="http://www.slackware.com/about">[31]</a></sup>
+        it is the oldest distribution still maintained.<sup><a href="https://www.linuxjournal.com/article/2750">[28]</a></sup><sup><a href="http://www.slackware.com/about">[29]</a></sup>
         The Slackware Linux Project is focused on producing "the most UNIX-like
-        Linux distribution out there."<sup><a href="http://www.slackware.com/info/">[32]</a></sup>
+        Linux distribution out there."<sup><a href="http://www.slackware.com/info/">[30]</a></sup>
     </p>
 
     <h3>Debian</h3>
 
     <p>
         At about the same time, Ian Murdoch was an undergraduate at 
-        Purdue University.<sup><a href="https://en.wikipedia.org/wiki/Ian_Murdock">[33]</a></sup>
+        Purdue University.<sup><a href="https://en.wikipedia.org/wiki/Ian_Murdock">[31]</a></sup>
         He saw distributions as essential to the future of Linux, but was
-        dismayed by their quality.<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[34]</a></sup>
+        dismayed by their quality.<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[32]</a></sup>
         The single-person and closed-room schemes had consistently
         failed to produce quality products.
         More, the most popular distribution&ndash; SLS Linux&ndash; was,
-        "...quite possibly the most bug-ridden and badly maintained Linux distribution available."<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[34]</a></sup>
+        "...quite possibly the most bug-ridden and badly maintained Linux distribution available."<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[32]</a></sup>
     </p>
 
     <p>
@@ -600,7 +648,7 @@ last-updated: December, 2023
         The primary purpose of the Debian project is to finally create a 
         distribution that lives up to the Linux name. 
         Debian is being carefully and conscientiously put together and will be 
-        maintained and supported with similar care."<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[34]</a></sup>
+        maintained and supported with similar care."<sup><a href="https://www.debian.org/doc/manuals/project-history/manifesto.en.html">[32]</a></sup>
     </blockquote>
 
     <div class="img-center">
@@ -613,6 +661,15 @@ last-updated: December, 2023
         The quantity of software available through its repositories is 
         unparalleled, and 
         it is often used as a basis for derivate distributions.
+    </p>
+
+    <p>
+        These days, there are many Linux distributions.  There's one for your
+        router, one for your server, one for your desktop, one for your
+        grandmother, one for gamers.  There's one for space, one for
+        scientists, one for hackers.
+        There are Apple lookalikes and Windows
+        lookalikes and others that look like nothing you've seen before.
     </p>
  
     <h3> See Also: </h3>
@@ -660,8 +717,8 @@ last-updated: December, 2023
         With version 19, Mint began shipping with 
         <em><a href="https://github.com/linuxmint/timeshift">Timeshift</a>,</em> 
         a tool that automaticaly takes snapshots of the filesystem,
-        so that users can restore the system to some earlier date.<sup><a href="https://www.linuxmint.com/rel_tara_cinnamon_whatsnew.php">[35]</a></sup>
-        Version 20 offers automatic updates.<sup><a href="https://blog.linuxmint.com/?p=4049">[36]</a></sup>
+        so that users can restore the system to some earlier date.<sup><a href="https://www.linuxmint.com/rel_tara_cinnamon_whatsnew.php">[33]</a></sup>
+        Version 20 offers automatic updates.<sup><a href="https://blog.linuxmint.com/?p=4049">[34]</a></sup>
     </p>
 
     <p>
@@ -740,15 +797,11 @@ last-updated: December, 2023
         </li>
 
         <li>
-            Thompson, K., &amp; Ritchie, D. (1974, June). Unix Programmer's Manual: 5th Edition. v5man.pdf. <a href="https://www.tuhs.org/Archive/Distributions/Research/Dennis_v5/v5man.pdf">https://www.tuhs.org/Archive/Distributions/Research/Dennis_v5/v5man.pdf</a>.
-        </li>
-
-        <li>
-            Admin. (2020, October 21). History of FreeBSD – Part 1: Unix and BSD. The FreeBSD Forums. <a href="https://forums.freebsd.org/threads/history-of-freebsd-part-1-unix-and-bsd.77407/">https://forums.freebsd.org/threads/history-of-freebsd-part-1-unix-and-bsd.77407/</a>.
+            Salus, P. H. (2008). The Daemon, the GNU and the Penguin: How Free and Open Software is Changing the World. Reed Media Services. 
         </li>
 
 
-        <!-- End UNIX HISTORY
+        <!-- End UNIX 
 
             Begin UNIX ARCHITECTURE -->
 
@@ -781,10 +834,6 @@ last-updated: December, 2023
 
         <li>
             Stallman, R. (n.d.). The GNU Manifesto. Retrieved February 01, 2021, from <a href="https://www.gnu.org/gnu/manifesto.html">https://www.gnu.org/gnu/manifesto.html</a>
-        </li>
-
-        <li>
-            The GNU General Public License v3.0 - GNU Project - Free Software Foundation. (2007, June 29). Retrieved May 04, 2021, from <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">https://www.gnu.org/licenses/gpl-3.0.en.html</a>
         </li>
 
         <li>
