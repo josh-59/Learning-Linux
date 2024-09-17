@@ -154,12 +154,12 @@ void get_args(char *line, char **args)
 // Return true if command is cd, false otherwise
 int is_cd(char *word)
 {
-    return strcmp(word, "cd") == 0 ? 1 : 0;
+    return strcmp(word, "cd") == 0;
 }
 
 int is_exit(char *word) 
 {
-    return strcmp(word, "exit") == 0 ? 1 : 0;
+    return strcmp(word, "exit") == 0; 
 }
 
 void change_directory(char **args )
